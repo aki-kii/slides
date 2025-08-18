@@ -1,0 +1,32 @@
+
+{
+	"name": "Slide writting env.",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+    "features": {
+        "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+    },
+    "forwardPorts": [3030],
+    "mounts": [
+      "source=global-pnpm-store,target=/home/node/.pnpm-store,type=volume",
+      "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind"
+    ],
+    
+    "customizations": {
+        "vscode": {
+        "extensions": [
+            "esbenp.prettier-vscode",
+            "editorconfig.editorconfig",
+            "dbaeumer.vscode-eslint",
+            "eamodio.gitlens",
+            "vue.volar",
+            "anthropic.claude-code"
+        ],
+        "settings": {
+        "[typescript]": {
+            "editor.formatOnSave": true,
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      }
+    }
+  }
+}
