@@ -41,13 +41,24 @@ pnpm build
 
 # スライドのエクスポート (各パッケージディレクトリで)
 pnpm export
+
+# 新しいスライドデッキの作成 (ルートディレクトリで)
+pnpm new-slide <name>
 ```
 
 ## 新しいスライドデッキの作成手順
 
+`pnpm new-slide <name>` を実行すると、以下が自動で行われる:
+
 1. `packages/slides/<name>/` ディレクトリを作成
-2. `package.json` と `slides.md` を配置
-3. `pnpm install` を実行
+2. `package.json` (Slidev 依存関係付き) と `slides.md` (テンプレート) を生成
+
+作成後は以下を実行:
+
+```bash
+pnpm install
+cd packages/slides/<name> && pnpm dev
+```
 
 ## コーディング規約
 

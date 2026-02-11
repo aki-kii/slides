@@ -1,4 +1,7 @@
 {
   "name": "slides",
-  "private": true
+  "private": true,
+  "scripts": {
+    "new-slide": "node scripts/create-slide.mjs"
+  }
 }
