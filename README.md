@@ -1,11 +1,16 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Slides
 
-To start the slide show:
+pnpm monorepo for Slidev presentations.
 
-- `pnpm install`
-- `pnpm dev`
-- visit <http://localhost:3030>
+## Setup
 
-Edit the [slides.md](./slides.md) to see the changes.
+```bash
+mise install
+pnpm install
+```
 
-Learn more about Slidev at the [documentation](https://sli.dev/).
+## Adding a new slide deck
+
+1. `packages/slides/<name>/` を作成
+2. `package.json` と `slides.md` を配置
+3. `pnpm install` を実行
