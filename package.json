@@ -3,5 +3,9 @@
   "private": true,
   "scripts": {
     "new-slide": "node scripts/create-slide.mjs"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0"
   }
 }
