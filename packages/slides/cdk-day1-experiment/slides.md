@@ -179,14 +179,14 @@ transition: view-transition
   <h2>CDKで検証したくない理由もありそうです...</h2>
 </div>
 
-<ul>
+<PlainList>
   <li>❌ 検証のスピードが下がってしまいそう</li>
   <li>❌ 新しく追加されたサービス・機能は使えないじゃん</li>
   <li>❌ 検証するためだけなのにIaC管理する必要ないよね？</li>
   <div style="view-transition-name: cdk-low-experience">
     <li>❌ CDK書くのに慣れてない.....</li>
   </div>
-</ul>
+</PlainList>
 <br>
 <v-click>
   <h3>→ これらのポイントを解消するお話をさせていただきます！</h3>
