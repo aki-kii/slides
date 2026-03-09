@@ -42,7 +42,7 @@ name: アキキー | 池田 晃尚
 <ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK">
 
 - CDK Conference 2025 Speaker
-- CDK Contributer (6 merged)
+- CDK Contributer (6 & 1 merged)
 
 </ProfileItem>
 
@@ -60,7 +60,7 @@ name: アキキー | 池田 晃尚
   <h2 class="!m-0">AWS CDK とは？</h2>
 </div>
 
-**プログラミング言語**で**AWSリソース**を構築するサービス
+**プログラミング言語**を利用して**AWSリソース**を構築するサービス
 
 <img src="/public/images/typescript-logo.png" class="h-36"/>
 <img src="/public/images/icons8-aws-240.png" class="h-36"/>
@@ -124,9 +124,11 @@ class: text-left
 
 <Overlay position="center" clickStart="1">
 
-⭕️ 初学者から上級者まで親しみやすい<br>
-⭕️ 試行錯誤しやすい<br>
-⭕️ リリース当日から試せる
+<PlainList>
+  <li>⭕️ 初学者から上級者まで親しみやすい</li>
+  <li>⭕️ 試行錯誤しやすい</li>
+  <li>⭕️ リリース当日から試せる</li>
+</PlainList>
 
 </Overlay>
 
@@ -164,9 +166,11 @@ export class MyConstruct extends Construct {
 
 <Overlay position="center" clickStart="1">
 
-⭕️ 設定内容がコードとして残るので再現性が高い<br>
-⭕️ 本番のワークロードに昇華しやすい<br>
-⭕️ リソースの消し忘れが少なくなる
+<PlainList>
+  <li>⭕️ 設定内容がコードとして残るので再現性が高い</li>
+  <li>⭕️ 本番のワークロードに昇華しやすい</li>
+  <li>⭕️ リソースの消し忘れが少なくなる</li>
+</PlainList>
 
 </Overlay>
 
@@ -179,13 +183,26 @@ transition: view-transition
   ただし...
   <h2>CDKで検証したくない理由もありそうです...</h2>
 </div>
-
 <PlainList>
-  <li>❌ 検証のスピードが下がってしまいそう</li>
-  <li>❌ 新しく追加されたサービス・機能は使えないじゃん</li>
-  <li>❌ 検証するためだけなのにIaC管理する必要ないよね？</li>
+  <v-click><li>❌ アジリティが低下しそう</li></v-click>
+  <!-- NOTE: 
+    - リポジトリを作成してリソースを作り始めるまでに時間がかかる
+    - プロパティを試行錯誤するのにいちいちデプロイの手間がかかる
+  -->
+  <v-click><li>❌ 技術的な制約がある</li></v-click>
+  <!-- NOTE:
+    - 最新のリソース・プロパティに対応していない
+  -->
+  <v-click><li>❌ IaC管理は過剰ではないか</li></v-click>
+  <!-- NOTE:
+    - 検証で使い捨てるリソースをわざわざIaCにしてなくてもいいのでは？
+  -->
   <div style="view-transition-name: cdk-low-experience">
-    <li>❌ CDK書くのに慣れてない.....</li>
+    <v-click><li>❌ 学習コストがかかってしまう</li></v-click>
+    <!-- NOTE:
+      - 初学者にはコストが高い
+      - 慣れててもプロパティの設定を調べる手間がかかる
+    -->
   </div>
 </PlainList>
 <br>
@@ -195,6 +212,15 @@ transition: view-transition
 <v-click>
 ...が、1つ謝らせてください
 </v-click>
+
+<!-- TODO:
+  - 検証したくない理由を抽象化してカテゴライズする
+    - スピード感の制約
+    - 機能の制約
+    - 必要性
+    - 習熟度
+  - その上で、口頭で補足するのが良さそう
+ -->
 
 ---
 
@@ -219,6 +245,11 @@ transition: view-transition
 
 </Overlay>
 
+<!-- TODO:
+  ここでこの話をすると離れていく人も多いので最後に持っていく
+  メリット聞いた上で聞くとやってみるかの気持ちにもなりそう
+ -->
+
 ---
 layout: center
 class: text-center
@@ -227,14 +258,29 @@ class: text-center
 ## CDKで技術検証したくなる<br>**５つのプラクティス**を伝授します！
 
 ---
+layout: center
+class: text-center
 transition: view-transition
 ---
 
 ## ① 専用のリポジトリを作成するべし
 
+---
+layout: center
+---
+
+<div>
+  検証のスピードが下がってしまいそうなポイント
+  <h2>CDKで検証するとき、初期構築に手間取るため面倒くさくて諦めてしまう</h2>
+</div>
+
+---
+transition: view-transition
+---
+
 <PlainList>
-  <li>初期構築に手間取るならCDKを使いたくない</li>
   <li>あらかじめ検証用のサンドボックスリポジトリを用意しておけば解決！</li>
+  <li>プロジェクトのテンプレートリポジトリを作っておく</li>
 </PlainList>
 
 <br>
@@ -246,21 +292,6 @@ transition: view-transition
   <Kogoe>(TypeScript限定)</Kogoe>
 </v-click>
 
-<!-- TODO
-  おすすめのカスタマイズのところをv-transitionにする
--->
-<!-- NOTE:
-- CDKで一番面倒なのはリポジトリの初期構築！？
-- `cdk init`で手軽に作れるが、必要なツールを入れていると面倒
-- **あらかじめサンドボックス用リポジトリを用意**しておく
-
-最低限入れとくといいもの:
-
-- リンター、フォーマッター
-- スナップショットテスト
-- `eslint-plugin-awscdk`
--->
-
 ---
 transition: view-transition
 ---
@@ -269,19 +300,21 @@ transition: view-transition
   <h2>おすすめのカスタマイズ: Linter</h2>
 </div>
 
-- コードのスタイルを決めたルールに従って検査できる
-- ESLintにはeslint-plugin-awscdkがある
+コードのスタイルを決めたルールに従って検査できる
+
+- Linterのロゴを並べる
+- ESLintのプラグインのロゴを並べる（ロゴあるか？なければ名前でOK）
+
+---
+transition: fade
+---
+
+## eslint-plugin-awscdk
 
 <!-- TODO:
-- 「ESLint、Biome、Oxlintなどがあるが、ESLintを強くおすすめする」ロゴで示す
-- eslint-plugin-awscdkの簡単な紹介をオーバーレイで書く
+  - ロゴを名前の左に載せる
+  - 紹介文を書く（山梨さんのスライドを参考）
  -->
-
-<Overlay position="center" clickStart="1">
-
-hoge
-
-</Overlay>
 
 ---
 transition: view-transition
@@ -303,9 +336,19 @@ transition: view-transition
 - 実装したCDKのソースコードがSynthesizeできるか検証できる
 - こまめにアップデートしておけば差分が見やすい
 
+<!-- TODO:
+  - プラクティスを載せた記事を紹介する
+ -->
+
+
+---
+layout: center
+class: text-center
 ---
 
 ## ② ハイブリッドで検証するべし
+
+---
 
 <!-- NOTE:
 - 全てをCDKで定義しなくていいんです！
