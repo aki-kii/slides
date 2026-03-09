@@ -462,7 +462,7 @@ class: text-center
 transition: fade
 ---
 
-## ⑤ Coding Agent に頼るべし
+## ⑤ コーディングエージェントに頼るべし
 
 ---
 layout: center
@@ -518,8 +518,11 @@ class: cover
 style: 'background-color: #0283B2;'
 ---
 
-# 最初からAWS CDKで技術検証<br>してもいいんじゃない？
-
+<div>
+  みなさんも
+  <h2>最初からAWS CDKで技術検証<br>してもいいんじゃない？</h2>
+  と思えましたか？
+</div>
 <br><br>
 
 <div class="absolute right-8 bottom-8 flex flex-col items-center" style="color: #e0e0e0; gap: 0;">
