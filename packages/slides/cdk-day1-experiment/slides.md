@@ -259,13 +259,16 @@ transition: view-transition
 ---
 
 <div style="view-transition-name: recommended-customize">
-  <h2>おすすめのカスタマイズ: Linter</h2>
+  おすすめカスタマイズ
+  <h2>Linter</h2>
 </div>
 
-コードのスタイルを決めたルールに従って検査できる
+コードを解析してルールに従って検査するツール
 
-- Linterのロゴを並べる
-- ESLintのプラグインのロゴを並べる（ロゴあるか？なければ名前でOK）
+- ESLint(おすすめ), Biome, Oxlint
+- ESLintの例をno-uneused-varsのエラーで書く
+
+→ CDK専用のESLintプラグインがある(eslint-plugin-awscdk)
 
 ---
 transition: fade
@@ -273,6 +276,12 @@ transition: fade
 
 ## eslint-plugin-awscdk
 
+CDKのセオリー・ベストプラクティスを強制するESLintプラグイン
+
+- constructIDは必ずパスカルケースで書くのエラー画面を例示
+- メリット
+  - 落とし穴につまづきにくくなる
+  - 構文エラーを事前に解析できる
 <!-- TODO:
   - ロゴを名前の左に載せる
   - 紹介文を書く（山梨さんのスライドを参考）
