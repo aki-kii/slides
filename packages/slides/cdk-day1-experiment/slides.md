@@ -316,8 +316,10 @@ transition: view-transition
   <h2>Formatter</h2>
 </div>
 
-- コードのスタイルを決めたルールに従って自動で修正できる
-- Prittier, Biome, Oxfmtなどがある、個人的におすすめなのはoxfmt
+コードを解析してルールに従って成形するツール
+
+- Prittier, Biome, Oxfmt(おすすめ)などがある
+- TODO: 動画あったらいいね。ダメならtransitionでいい感じに見せる
 
 <!-- TODO: リンクを貼る -->
 
@@ -328,7 +330,8 @@ transition: view-transition
   <h2>Snapshot Test</h2>
 </div>
 
-- 実装したCDKのソースコードがSynthesizeできるか検証できる
+実装したCDKのソースコードからCloudFormationテンプレートを合成して想定通りになっているか検証すできる
+
 - こまめにアップデートしておけば差分が見やすい
 
 <!-- TODO:
