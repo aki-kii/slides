@@ -346,6 +346,7 @@ Error: Snapshot `Snapshot test 1` mismatched
 
 <Overlay>
   <PlainList>
+    <li>💡 意図しないプロパティを設定することを防げる</li>
     <li>💡 こまめにアップデートしておけば差分が見やすい</li>
   </PlainList>
 </Overlay>
