@@ -242,14 +242,13 @@ transition: view-transition
 
 ---
 transition: view-transition
+layout: center
+class: text-left
 ---
 
-## ① 専用のリポジトリを作成するべし
+## あらかじめ検証用のサンドボックスリポジトリを用意することで、技術検証の初動を早められます！
 
-<PlainList>
-  <li>あらかじめ検証用のサンドボックスリポジトリを用意しておけば解決！</li>
-  <li>プロジェクトのテンプレートリポジトリを作っておく</li>
-</PlainList>
+<Kogoe>リポジトリのテンプレートを作ってもよいです</Kogoe>
 
 <br>
 
