@@ -168,6 +168,7 @@ export class MyConstruct extends Construct {
   <li>⭕️ 設定内容がコードとして残るので再現性が高い</li>
   <li>⭕️ 本番のワークロードに昇華しやすい</li>
   <li>⭕️ リソースの消し忘れが少なくなる</li>
+  <li>⭕️ 簡単に作り直せるので使わない間はリソースを削除できる</li>
 </PlainList>
 
 </Overlay>
