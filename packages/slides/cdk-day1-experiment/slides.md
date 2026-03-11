@@ -413,18 +413,13 @@ layout: center
 transition: view-transition
 ---
 
-## CDKはAWSの設定を抽象化して直感的に扱いやすいようにする機能をたくさん持っています
+## CDKは複雑なAWSリソースの設定を抽象化して直感的に扱えるようにしてくれます！
 
 <div style="view-transition-name: convinient-feature">
   <v-click>
-    → CDKの便利機能を紹介します！
+    → そんなCDKの便利機能を紹介します！
   </v-click>
 </div>
-
-<!-- TODO:
-  - 表現を変更する
- -->
-
 
 ---
 transition: view-transition
