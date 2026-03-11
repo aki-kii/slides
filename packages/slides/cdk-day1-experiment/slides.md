@@ -277,8 +277,8 @@ new Bucket(this, 'my-bucket');
 
 <Overlay>
   <PlainList>
-    <li>💡 落とし穴につまづきにくくなる</li>
     <li>💡 構文エラーを事前に解析できる</li>
+    <li>💡 CDKの落とし穴につまづきにくくなる</li>
   </PlainList>
 </Overlay>
 
@@ -320,7 +320,7 @@ export class MyConstruct extends Construct {
 
 <Overlay>
   <PlainList>
-    <li>💡 hoge</li>
+    <li>💡 コードのスタイルが統一されるので読みやすくなる</li>
   </PlainList>
 </Overlay>
 
