@@ -40,7 +40,7 @@ const insideBottomLinks = inject('insideBottomLinks', false)
 .bottom-link-wrapper.standalone {
   position: absolute;
   bottom: 0.85rem;
-  left: 1.5rem;
+  left: 3.5rem;
   z-index: 100;
 }
 

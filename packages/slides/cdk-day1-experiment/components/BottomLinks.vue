@@ -14,7 +14,7 @@ provide('insideBottomLinks', true)
 .bottom-links-wrapper {
   position: absolute;
   bottom: 0.85rem;
-  left: 1.5rem;
+  left: 3.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
