@@ -11,10 +11,10 @@ fonts:
   serif: 'Noto Sans JP'
   mono: 'Fira Code'
 ---
+え
+**JAWS-UG 茨城 #12 春の推しAWSサービスLTまつり！**
 
 # 最初からAWS CDKで技術検証しても<br>いいんじゃない？
-
-**JAWS-UG 茨城 #12 春の推しAWSサービスLTまつり！**
 
 
 2026.3.11（水）\
@@ -41,7 +41,7 @@ name: アキキー | 池田 晃尚
 <ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK">
 
 - CDK Conference 2025 Speaker
-- CDK Contributer (6 & 1 merged)
+- CDK Contributor (7PRs merged)
 
 </ProfileItem>
 </div>
@@ -60,8 +60,32 @@ name: アキキー | 池田 晃尚
 
 **プログラミング言語**を利用して**AWSリソース**を構築するサービス
 
-<img src="/public/images/typescript-logo.png" class="h-36"/>
-<img src="/public/images/icons8-aws-240.png" class="h-36"/>
+<div class="flex gap-4 items-center justify-center mt-4">
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/public/images/typescript-logo.png" class="h-28"/>
+  <span class="text-gray-400 w-44 text-center text-sm">プログラミング言語で<br>AWSリソースを定義</span>
+</div>
+
+<span class="text-3xl">→</span>
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/public/images/cfn-icon.dio.png" class="h-28"/>
+  <span class="text-gray-400 w-44 text-center text-sm">AWSリソースの状態を見て<br>差分をデプロイ</span>
+</div>
+
+<span class="text-3xl">→</span>
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/public/images/icons8-aws-240.png" class="h-28"/>
+  <span class="text-gray-400 w-44 text-center text-sm">AWSリソース</span>
+</div>
+
+</div>
+
+<div class="absolute left-14 bottom-3" style="font-size: 0.7rem; color: #333333; line-height: 1; white-space: nowrap;">
+  Special Thanks! Shota Kawasaki (<a href="https://x.com/kawaaaas" target="_blank" rel="noopener noreferrer" style="color: deepskyblue; text-decoration: none;">@kawaaaas</a>)
+</div>
 
 ---
 layout: center
@@ -73,10 +97,6 @@ transition: view-transition
   <h2>AWSで技術検証してますか？</h2>
 </div>
 
-<!--
-CDK推しの自分ですがこれまでは技術検証をマネコンから行ってました。先日思い立ってCDKで検証を始めたところ、CDKで技術検証を初めてもいいんじゃない！？と思えたので、そのメリットやプラクティスを紹介させていただきます。
--->
-
 ---
 transition: view-transition
 ---
@@ -86,7 +106,12 @@ transition: view-transition
   <h2>AWSでの技術検証とは？</h2>
 </div>
 
-特定の目的のためにAWSサービスを**実際に触って**検証すること
+<div>
+  <div>特定の目的のためにAWSサービスを<strong>実際に触って</strong>検証すること</div>
+  <Kogoe>とします</Kogoe>
+</div>
+
+<br>
 
 <v-click>
 
@@ -94,7 +119,7 @@ transition: view-transition
 - 新しいサービスが公開された
 - 興味のあるサービスを理解するため
 
-などなど...
+<Kogoe>などなど...</Kogoe>
 
 </v-click>
 
@@ -173,40 +198,27 @@ export class MyConstruct extends Construct {
 
 </Overlay>
 
-<!-- TODO: コードブロックをダークテーマにしたい -->
-
 ---
 
 <div>
   ただし...
   <h2>CDKで検証したくない理由もありそうです...</h2>
 </div>
-<PlainList>
-  <v-click><li>❌ アジリティが低下しそう</li></v-click>
-  <!-- NOTE: 
-    - リポジトリを作成してリソースを作り始めるまでに時間がかかる
-    - プロパティを試行錯誤するのにいちいちデプロイの手間がかかる
-  -->
-  <v-click><li>❌ 技術的な制約がある</li></v-click>
-  <!-- NOTE:
-    - 最新のリソース・プロパティに対応していない
-  -->
-  <v-click><li>❌ IaC管理は過剰ではないか</li></v-click>
-  <!-- NOTE:
-    - 検証で使い捨てるリソースをわざわざIaCにしてなくてもいいのでは？
-  -->
-  <div style="view-transition-name: cdk-low-experience">
-    <v-click><li>❌ 学習コストがかかってしまう</li></v-click>
-    <!-- NOTE:
-      - 初学者にはコストが高い
-      - 慣れててもプロパティの設定を調べる手間がかかる
-    -->
-  </div>
-</PlainList>
+
 <br>
-<v-click>
-  <h3>→ CDKで検証したくなる<strong>５つのプラクティス</strong>を紹介します！</h3>
-</v-click>
+
+<PlainList>
+  <li>❌ 検証スピードが落ちそう</li>
+  <li>❌ 最新機能に追いついていない</li>
+  <li>❌ IaC管理は過剰ではないか</li>
+  <li>❌ 学習コストがかかってしまう</li>
+</PlainList>
+
+<br>
+
+<Overlay>
+  CDKで検証したくなる<strong>５つのプラクティス</strong>を紹介します！
+</Overlay>
 
 ---
 layout: center
@@ -218,7 +230,7 @@ layout: center
   <li>① 専用のリポジトリを作成するべし</li>
   <li>② ハイブリッドで検証するべし</li>
   <li>③ CDKの便利機能を活用するべし</li>
-  <li>④ Custom Construct を育てるべし</li>
+  <li>④ 検証用 Custom Construct を育てるべし</li>
   <li>⑤ コーディングエージェントに頼るべし</li>
 </PlainList>
 
@@ -233,38 +245,46 @@ transition: view-transition
 ---
 layout: center
 transition: view-transition
+chapter: ① 専用のリポジトリを作成するべし
 ---
 
+<ChapterLabel />
+
 <div>
-  <Tag name="アジリティの低下" color="orange" />
+  <Tag name="検証スピードの低下" color="orange" />
   <h2>CDKで検証するとき、初期構築に手間取るため面倒くさくて諦めてしまう</h2>
 </div>
+<Kogoe>というお悩みを解決します</Kogoe>
 
 ---
 transition: view-transition
 layout: center
 class: text-left
+chapter: ① 専用のリポジトリを作成するべし
 ---
 
-## 検証用のサンドボックスリポジトリをあらかじめ用意することで、技術検証の初動を早められます！
+<ChapterLabel />
+
+## 検証用のリポジトリを事前に用意することで<br>技術検証の初動を早められます！
 
 <Kogoe>リポジトリのテンプレートを作ってもよいです</Kogoe>
 
 <br>
 
-<v-click>
-  <span style="view-transition-name: recommended-customize">
-    → おすすめのカスタマイズを紹介します
-  </span>
+<Overlay>
+  <div>おすすめのカスタマイズを<strong>3つ</strong>紹介します</div>
   <Kogoe>(TypeScript限定)</Kogoe>
-</v-click>
+</Overlay>
 
 ---
 transition: view-transition
+chapter: ① 専用のリポジトリを作成するべし
 ---
 
+<ChapterLabel />
+
 <div style="view-transition-name: recommended-customize">
-  おすすめカスタマイズ
+  おすすめカスタマイズ ① Linter
   <TitledSection title="ESLint" description="コードを解析してルールに従って検査するツール" />
 </div>
 
@@ -289,11 +309,14 @@ new Bucket(this, 'my-bucket');
 
 ---
 transition: view-transition
+chapter: ① 専用のリポジトリを作成するべし
 ---
 
+<ChapterLabel />
+
 <div style="view-transition-name: recommended-customize">
-  おすすめカスタマイズ
-  <TitledSection title="Oxfmt" description="コードを解析してルールに従って成形するツール" />
+  おすすめカスタマイズ ② Formatter
+  <TitledSection title="Oxfmt" description="コードを解析してルールに従って整形するツール" />
 </div>
 
 ````md magic-move
@@ -327,20 +350,26 @@ export class MyConstruct extends Construct {
 <BottomLink href="https://oxc.rs/docs/guide/usage/formatter.html" title="Oxfmt" />
 
 ---
+chapter: ① 専用のリポジトリを作成するべし
+---
+
+<ChapterLabel />
 
 <div style="view-transition-name: recommended-customize">
-  おすすめカスタマイズ
+  おすすめカスタマイズ ③ Test
   <TitledSection title="Snapshot Test" description="CDKから生成するテンプレートの差分を検証する" />
 </div>
 
 ```diff
-FAIL test/cdk-sandbox.test.ts > Snapshot test
-Error: Snapshot `Snapshot test 1` mismatched
-...
-"Properties": {
+"Queue4A7E3555": {
+  "Type": "AWS::SQS::Queue",
+  "Properties": {
 -   "VisibilityTimeout": 30,
 +   "VisibilityTimeout": 60,
-},
+  },
+  "DeletionPolicy": "Delete",
+  "UpdateReplacePolicy": "Delete",
+}
 ```
 
 <Overlay>
@@ -363,28 +392,39 @@ transition: fade
 ---
 layout: center
 transition: fade
+chapter: ② ハイブリッドで検証するべし
 ---
 
+<ChapterLabel />
+
 <div>
-  <Tag name="アジリティの低下" color="orange" />
-  <h2>リソースの設定を試行錯誤しているとき、<br>CDKでプロパティの設定変更するのは大変...</h2>
+  <Tag name="検証スピードの低下" color="orange" />
+  <h2>リソースの設定を試行錯誤しているとき、<br>CDKでプロパティの設定を変更するのは大変...</h2>
 </div>
 
 <div>
-  <Tag name="技術的な制約" color="blue" />
+  <Tag name="最新機能に未対応" color="blue" />
   <h2>最新の機能にCDKの実装が追いついていない</h2>
 </div>
 
+<Kogoe>というお悩みを解決します</Kogoe>
+
+---
+chapter: ② ハイブリッドで検証するべし
 ---
 
-## CDKでデプロイしたリソースをマネコンから変更することで、慣れているマネコンから試行錯誤できます！
+<ChapterLabel />
 
-<img src="/public/images/hybrid.dio.png" class="h-40"/>
+## CDKでデプロイしたリソースを<br>慣れているマネコンから試行錯誤しましょう！
 
-<Overlay position="center" clickStart="2">
+<br>
+
+<img src="/public/images/hybrid.dio.png" class="h-50"/>
+
+<Overlay position="center" clickStart="1">
 
 <PlainList>
-  <li>💡 確定したタイミングでCDKを書き直せばセーブポイントになる</li>
+  <li>💡 確定したタイミングでCDKのコードに落とし込めばセーブポイントになる</li>
   <li>💡 新しく提供されたサービスもすぐに検証できる</li>
 </PlainList>
 
@@ -401,59 +441,95 @@ transition: fade
 ---
 layout: center
 transition: view-transition
+chapter: ③ CDKの便利機能を活用するべし
 ---
 
+<ChapterLabel />
+
 <div>
-  <Tag name="アジリティの低下" color="orange" />
+  <Tag name="検証スピードの低下" color="orange" />
   <h2>マネコンからリソースを作る方が簡単に作れるのではないか？</h2>
 </div>
+<Kogoe>というお悩みを解決します</Kogoe>
 
 ---
 layout: center
 transition: view-transition
+chapter: ③ CDKの便利機能を活用するべし
 ---
 
-## CDKは複雑なAWSリソースの設定を抽象化して直感的に扱えるようにしてくれます！
+<ChapterLabel />
 
-<div style="view-transition-name: convinient-feature">
-  <v-click>
-    → そんなCDKの便利機能を紹介します！
-  </v-click>
+<div>
+  AWS CDKは
+  <h2>AWSリソースの複雑な設定を抽象化して<br>直感的に扱えるようにしてくれます！</h2>
 </div>
+
+<Overlay>
+  そんなCDKの便利機能を<strong>3つ</strong>紹介します！
+</Overlay>
 
 ---
 transition: view-transition
+chapter: ③ CDKの便利機能を活用するべし
 ---
 
+<ChapterLabel />
+
 <div style="view-transition-name: convinient-feature">
-  CDKの便利機能
+  CDKの便利機能 ①
   <TitledSection title="L2 Construct" description="プロパティを扱いやすいように抽象化したコンポーネント" />
 </div>
 
+<div class="flex gap-6 items-center">
+
+<div>
+
 ```ts
-new Vpc(this, 'Vpc', { maxAzs: 2 });
+new Vpc(this, "Vpc", {
+  ipAddresses: IpAddresses.cidr("10.0.0.0/16"),
+  subnetConfiguration: [
+    {
+      cidrMask: 24,
+      name: "public",
+      subnetType: SubnetType.PUBLIC,
+    },
+  ],
+});
 ```
 
+</div>
+
+<div class="flex flex-col items-center text-sm text-gray-400 gap-1 shrink-0">
+  <span class="text-2xl">→</span>
+</div>
+
+<img src="/public/images/l2-vpc.dio.png" class="h-60 shrink-0" />
+
+</div>
+
   <BottomLink href="https://aws.amazon.com/jp/blogs/news/leverage-l2-constructs-to-reduce-the-complexity-of-your-aws-cdk-application/" title="CDK アプリケーションの複雑さを軽減する L2 Construct の活用" />
-<!-- TODO: アーキテクチャ図を作成 参考 https://speakerdeck.com/akihisaikeda/aws-cdknotui-sipointo-cloudformationtobi-jiao-sitemita?slide=17 -->
 
 ---
 transition: view-transition
+chapter: ③ CDKの便利機能を活用するべし
 ---
 
+<ChapterLabel />
+
 <div style="view-transition-name: convinient-feature">
-  CDKの便利機能
+  CDKの便利機能 ②
   <TitledSection title="Grants" description="リソース間のIAMロールの設定を直感的かつ簡単に設定できる" />
 </div>
 
 ```ts
-// DynamoDBテーブル
-const table = new Table(this, "Table", {
-  partitionKey: { name: "id", type: AttributeType.STRING },
-});
 // Lambda関数
 const func = new NodejsFunction(this, "Function", {
   entry: path.join(__dirname, "../../src/lambda/index.ts"),
+});
+// DynamoDBテーブル
+const table = new Table(this, "Table", {
+  partitionKey: { name: "id", type: AttributeType.STRING },
 });
 // Lambda関数がDynamoDBに対して読み書きできる権限を付与
 table.grants.readWriteData(func);
@@ -462,9 +538,13 @@ table.grants.readWriteData(func);
   <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/define-iam-l2.html" title="AWS CDK を使用して L2 コンストラクトのアクセス許可を定義する" />
 
 ---
+chapter: ③ CDKの便利機能を活用するべし
+---
+
+<ChapterLabel />
 
 <div style="view-transition-name: convinient-feature">
-  CDKの便利機能
+  CDKの便利機能 ③
   <TitledSection title="fromLookup" description="デプロイ済みのリソースをCDKで参照できる" />
 </div>
 
@@ -488,19 +568,29 @@ class: text-center
 transition: fade
 ---
 
-## ④ Custom Construct を育てるべし
+## ④ 検証用 Custom Construct を育てるべし
 
 ---
 layout: center
 transition: view-transition
+chapter: ④ 検証用 Custom Construct を育てるべし
 ---
+
+<ChapterLabel />
 
 <div>
   <Tag name="IaCの必要性" color="red" />
   <h2>検証で使い捨てるリソースをわざわざ<br>IaCにしてなくてもいいのでは？</h2>
 </div>
 
+<Kogoe>というお悩みを解決します</Kogoe>
+
 ---
+chapter: ④ 検証用 Custom Construct を育てるべし
+transition: fade
+---
+
+<ChapterLabel />
 
 ## Custom Construct？
 
@@ -508,31 +598,47 @@ transition: view-transition
   <li>AWSリソースをレゴブロックのように組み合わせられるコンポーネント</li>
 </PlainList>
 
-→ 繰り返し使う構成や、理解しやすい構成でコンポーネント化して自分だけのConstructを作ろう！
+<img src="/public/images/custom-construct.dio.png" class="h-50 shrink-0" />
+
+→ 繰り返し使う構成や、理解しやすい構成でコンポーネント化して<br>自分だけのConstructを作れます！
 
 <Overlay>
-  💡 技術検証する時に<strong>よく使う構成</strong>を育てることで<br>素早く検証できるようになる
+  最近作った検証用Custom Constructを紹介します！
 </Overlay>
 
 ---
+chapter: ④ 検証用 Custom Construct を育てるべし
+transition: fade
+---
+
+<ChapterLabel />
 
 <div>
   最近作ったCustom Construct ①<br>
-  <Kogoe>アラームを継続的に発生させたかったので作りました</Kogoe>
   <h2>数分おきにCloudWatchアラームを発生させるConstruct</h2>
+  <Kogoe>アラームを継続的に発生させたかったので作りました</Kogoe>
 </div>
 
-- Lambda関数を3分おきに実行 → Lambda関数の呼び出し回数が1回以上の場合アラーム状態とする
+<br>
+
+<img src="/public/images/frequency-alarm-construct.dio.png" class="shrink-0" />
 
 ---
+chapter: ④ 検証用 Custom Construct を育てるべし
+transition: fade
+---
+
+<ChapterLabel />
 
 <div>
   最近作ったCustom Construct ②<br>
-  <Kogoe>構成要素が多くて面倒だったので作りました</Kogoe>
   <h2>SNSトピックからStep Functionsを実行するConstruct</h2>
+  <Kogoe>構成要素が多くて面倒だったので作りました</Kogoe>
 </div>
 
-- SNSトピック → SQSキュー → EventBridgeパイプス → Step Functions
+<br>
+
+<img src="/public/images/invoke-statemachine-construct.dio.png" class="shrink-0" />
 
 <!-- NOTE:
 Constructはレゴブロックのように組み合わせられ、自分でも作れる
@@ -556,15 +662,18 @@ transition: fade
 ---
 layout: center
 transition: view-transition
+chapter: ⑤ コーディングエージェントに頼るべし
 ---
 
+<ChapterLabel />
+
 <div>
-  <Tag name="アジリティの低下" color="orange" />
+  <Tag name="検証スピードの低下" color="orange" />
   <h2>デプロイ失敗時のトライ＆エラーに骨が折れる</h2>
 </div>
 
 <div>
-  <Tag name="アジリティの低下" color="orange" />
+  <Tag name="検証スピードの低下" color="orange" />
   <h2>プロパティを変更するためにドキュメントを<br>調べるのは大変</h2>
 </div>
 
@@ -573,46 +682,53 @@ transition: view-transition
   <h2>初心者が理解するために手間がかかってしまう</h2>
 </div>
 
----
-
-## ⑤ コーディングエージェントに頼るべし
-
-コーディングエージェントはCDKのソースコードをコンテキストとして扱えるため相性がいい！
-
-<!-- TODO: コメントを含めたいい感じの意図が伝わるソースコード -->
+<Kogoe>というお悩みを解決します</Kogoe>
 
 ---
+chapter: ⑤ コーディングエージェントに頼るべし
+transition: fade
+---
+
+<ChapterLabel />
+
+<div>
+  コーディングエージェントは
+  <h2>ソースコードをコンテキストとして扱えるためCDKと相性がいい！</h2>
+</div>
+
+<br>
+
+- CDK本体のコードからプロパティの実装方法がわかる
+- 自分のCDKコードから作成したリソースの設定がわかる
+- 変数名・コメントから設定の意図がわかる
+
+<Overlay>
+  CDKをもっと扱いやすくしてくれるMCPサーバーを紹介します！
+</Overlay>
+
+---
+chapter: ⑤ コーディングエージェントに頼るべし
+---
+
+<ChapterLabel />
 
 ## AWS Infrastructure as Code MCP Server
 
-- CDK ドキュメントの検索
-- 複雑な処理をとりあえず書いてもらえる（Step Functionsのワークフローとか）
-- CDK のベストプラクティスに沿った
-- ベストプラクティス
+<div>
+  <div>AWS の IaC に関連する機能をたくさん提供している</div>
+  <Kogoe><a href="https://awslabs.github.io/mcp/servers/cdk-mcp-server">AWS CDK MCP Server</a>は非推奨になり、こちらが推奨されています</Kogoe>
+</div>
 
-<!-- NOTE:
-CDKはソースコードで全てを語るのでエージェントとの相性がいい
+<br>
 
-- 変数やコメントで意図をコンテキストに含めやすい
-- ドキュメントを見てもわからないプロパティの設定方法を聞ける
-- 複雑な処理をとりあえず書いてもらえる（Step Functionsのワークフローとか）
-- サンプルコードをインプットとして渡すのもよい
-- MCPサーバーもある
--->
+- デプロイ失敗のトラブルシューティング
+- CloudFormationテンプレートの検証
+- CDK ドキュメントの検索（CDK/CloudFormation/サンプルコード）
+- ベストプラクティスに沿った実装
+- コンプライアンスチェック（cfn-guard）
+<Kogoe>...などなど</Kogoe>
 
 <BottomLink href="https://awslabs.github.io/mcp/servers/aws-iac-mcp-server" title="AWS IaC MCP Server"/>
-
-
----
-
-## CDKで検証しない理由は解消できそう？
-
-<PlainList>
-  <li>❌ 検証のスピードが下がってしまいそう</li>
-  <li>❌ 新しく追加されたサービス・機能は使えないじゃん</li>
-  <li>❌ 検証するためだけなのにIaC管理する必要ないよね？</li>
-  <li>❌ CDK書くのに慣れてない.....</li>
-</PlainList>
 
 ---
 layout: center
@@ -628,7 +744,7 @@ style: 'background-color: #0283B2;'
 
 <br><br>
 
-<div class="absolute right-8 bottom-8 flex flex-col items-center" style="color: #e0e0e0; gap: 0;">
-  <v-click>＼ ご静聴ありがとうございました！ ／</v-click>
+<div class="absolute right-8 bottom-8 flex flex-col items-center print:hidden" style="color: #e0e0e0; gap: 0;">
+  ＼ ご静聴ありがとうございました！ ／
   <img src="/public/images/aboutme/eye-catch.png" class="h-32" />
 </div>

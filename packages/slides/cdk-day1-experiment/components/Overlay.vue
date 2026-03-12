@@ -35,7 +35,7 @@ const getPositionStyle = () => {
   return {
     position: 'absolute',
     ...basePosition,
-    background: 'rgba(180, 180, 180, 0.55)',
+    background: 'rgba(180, 180, 180, 0.9)',
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
     color: '#1a1a1a',
