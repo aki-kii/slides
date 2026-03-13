@@ -34,6 +34,18 @@ importers:
         specifier: ^1.58.2
         version: 1.58.2
 
+  packages/slides/test-slide:
+    dependencies:
+      '@slidev/cli':
+        specifier: ^52.1.0
+        version: 52.11.5(@nuxt/kit@3.21.1)(@types/markdown-it@14.1.2)(@types/node@22.19.11)(@vue/compiler-sfc@3.5.28)(markdown-it-async@2.2.0)(playwright-chromium@1.58.2)(postcss@8.5.6)
+      '@slidev/theme-default':
+        specifier: latest
+        version: 0.25.0
+      '@slidev/theme-seriph':
+        specifier: latest
+        version: 0.25.0
+
   packages/slides/whats-cloud-assembly:
     dependencies:
       '@slidev/cli':
