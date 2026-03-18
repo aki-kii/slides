@@ -1,11 +1,19 @@
 <template>
   <div class="screen-share-wrapper">
     <div class="screen-share-frame">
-      <video v-show="isSharing" ref="videoEl" autoplay playsinline class="screen-share-video" />
+      <video
+        v-show="isSharing"
+        ref="videoEl"
+        autoplay
+        playsinline
+        class="screen-share-video"
+      />
       <div v-if="!isSharing" class="placeholder">
-        <button class="start-button" @click="startShare">デモを開始</button>
+        <button class="start-button" @click="startShare">Start</button>
       </div>
-      <button v-if="isSharing" class="stop-button" @click="stopShare">✕ 停止</button>
+      <button v-if="isSharing" class="stop-button" @click="stopShare">
+        ✕ 停止
+      </button>
       <div class="stopwatch-overlay">
         <Stopwatch ref="stopwatchRef" />
       </div>
@@ -17,7 +25,9 @@
 import { ref, onUnmounted } from 'vue';
 
 const videoEl = ref<HTMLVideoElement | null>(null);
-const stopwatchRef = ref<InstanceType<typeof import('./Stopwatch.vue').default> | null>(null);
+const stopwatchRef = ref<InstanceType<
+  typeof import('./Stopwatch.vue').default
+> | null>(null);
 const isSharing = ref(false);
 let stream: MediaStream | null = null;
 
@@ -80,7 +90,7 @@ onUnmounted(() => {
   border: 3px solid #22c55e;
   border-radius: 12px;
   overflow: hidden;
-  background: #0f172a;
+  background: #f8fafc;
   box-shadow:
     0 0 0 1px #16a34a,
     0 8px 32px rgba(34, 197, 94, 0.2);
