@@ -103,9 +103,9 @@ class: text-left
 
 <img src="/images/app-server-error.png" />
 
-<Underline x="686px" y="418px" width="155px" color="#ef4444" :stroke-width="3" />
+<Underline x="686px" y="418px" width="155px" color="#ef4444" :stroke-width="3" clickStart=1 />
 
-<Overlay>
+<Overlay clickStart=1>
   /api/events へのGETリクエストが失敗している<br>
   (500 Internal Server Error)
 </Overlay>
@@ -133,14 +133,14 @@ const steps = [
     label: 'スナップショットテストを実行',
     desc: 'terminal',
     image: '/images/owl-asset/owl-smile.png',
-    tips: "スナップショットテストのTIPS",
+    tips: "こまめにスナップショットを取ることで意図しないリソースの混入も防げるし、リファクタリングにも強くなります！",
     code: 'pnpm test'
   },
   {
-    label: 'Lxambda関数を実装',
+    label: 'Lambda関数を実装',
     desc: 'lib/usecases/api.ts',
     image: '/images/owl-asset/owl-smile.png',
-    tips: 'NodejsFunctionコンストラクトはTypeScriptのソースコードをビルドなしにLambda関数へデプロイできちゃう優れもの！',
+    tips: 'NodejsFunctionコンストラクトは、TypeScriptのソースコードをビルドなしにLambda関数へデプロイできちゃう優れもの！',
     code: [
       'const listEventFunction = new NodejsFunction(this, "ListEventsFunction", {', 
       '  entry: path.join(__dirname, "../../src/lambda/list-events.ts"),', 
@@ -154,14 +154,14 @@ const steps = [
     label: 'Lambda関数に権限を付与',
     desc: 'lib/usecases/api.ts',
     image: '/images/owl-asset/owl-inspiration.png',
-    tips: 'Grantsメソッドは、複雑なIAM Policyの権限付与を1行で書けてとても便利です',
+    tips: 'Grantsメソッドは、複雑なIAM Policyの権限付与を1行で書けてとても便利！',
     code: 'props.eventsTable.grants.readData(listEventFunction);'
   },
   { 
     label: 'API Gatewayにメソッドを登録',
     desc: 'lib/usecases/api.ts',
     image: '/images/owl-asset/owl-cry.png',
-    tips: '本当はCloudFrontディストリビューションにAPI Gatewayのビヘイビアを追加するところから始めたかった…けどデプロイに時間がかかりすぎるので泣く泣く省略しました',
+    tips: '本当はAPI Gatewayも作りたかったです...（構成、デプロイ時間の都合上泣く泣く断念）',
     code: [
       'const events = api.addResource("events");',
       'events.addMethod("GET", new LambdaIntegration(listEventFunction));'
@@ -178,7 +178,7 @@ const steps = [
     label: 'デプロイ',
     desc: 'terminal',
     image: '/images/owl-asset/owl-smile.png',
-    tips: 'cdk deployのTIPS',
+    tips: 'CDKのソースコードがCloudFormationテンプレートに変換されてデプロイされます！CDKはCloudFormationのラッパーなんですね〜',
     code: 'pnpm cdk deploy --yes'
   },
 ]
@@ -205,7 +205,7 @@ const steps = [
 layout: full
 ---
 
-<LazyIframe url="https://dk5jnepkz2uee.cloudfront.net/index.html" />
+<LazyIframe url="https://d38ri7oxfsi05v.cloudfront.net/index.html" />
 
 ---
 layout: center
