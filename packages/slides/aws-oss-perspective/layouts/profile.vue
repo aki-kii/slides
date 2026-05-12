@@ -13,9 +13,9 @@ const props = defineProps({
 
 <template>
   <!-- padding:0 でテーマのデフォルトpadding を無効化し、自前で制御する -->
-  <div class="slidev-layout profile flex flex-col h-full" style="padding:0;">
+  <div class="slidev-layout profile flex flex-col h-full justify-center" style="padding:0;">
     <!-- 上段: 写真 + コンテンツ -->
-    <div class="flex items-start flex-1 min-h-0" style="padding:30px 40px 0 80px; gap:64px;">
+    <div class="flex items-start" style="padding:30px 40px 0 80px; gap:64px;">
       <img
         :src="props.image"
         class="rounded-xl shadow-lg object-cover flex-shrink-0"
@@ -31,7 +31,7 @@ const props = defineProps({
     <div
       v-if="$slots.footer"
       class="footer-slot flex items-center"
-      style="height:162px; padding:12px 40px 20px 80px; gap:32px; border-top:1px solid #e0d8cc;"
+      style="height:162px; padding:32px 40px 20px 80px; gap:16px;"
     >
       <slot name="footer" />
     </div>
