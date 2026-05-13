@@ -1,16 +1,36 @@
 <script setup lang="ts">
-defineProps<{
+import { computed, ref, watch } from 'vue'
+import { useNav } from '@slidev/client'
+
+const props = defineProps<{
   tag: string
   title: string
   featured?: boolean
+  clickAt?: number
 }>()
+
+const { clicks } = useNav()
+const activated = ref(false)
+
+watch(() => clicks.value, (val) => {
+  if (props.clickAt === undefined) return
+  if (val >= props.clickAt) {
+    activated.value = true
+  } else if (activated.value && val > 0) {
+    // スライド内で戻った場合（clicks が段階的に減少）のみリセット
+    // val === 0 はスライド遷移時の一括リセットなので無視
+    activated.value = false
+  }
+}, { immediate: true })
+
+const isFeatured = computed(() => props.featured || activated.value)
 </script>
 
 <template>
-  <div class="pillar" :class="{ featured }">
+  <div class="pillar" :class="{ featured: isFeatured }">
     <span class="tag">{{ tag }}</span>
     <h3 v-html="title" />
-    <p><slot /></p>
+    <div class="body"><slot /></div>
   </div>
 </template>
 
@@ -56,14 +76,30 @@ h3 {
   color: white;
 }
 
-p {
+.body {
   font-size: 0.9rem;
   color: var(--ink-soft);
   line-height: 1.6;
   margin: 0;
 }
 
-.pillar.featured p {
+.pillar.featured .body {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.pillar :deep(li) {
+  color: var(--ink-soft);
+}
+
+.pillar :deep(li::marker) {
+  color: var(--ink-soft);
+}
+
+.pillar.featured :deep(li) {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.pillar.featured :deep(li::marker) {
   color: rgba(255, 255, 255, 0.92);
 }
 </style>

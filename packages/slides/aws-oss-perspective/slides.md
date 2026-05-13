@@ -50,12 +50,13 @@ name: アキキー | 池田 晃尚
 
 ---
 
+
 <Eyebrow text="はじめに" />
 <h2 class="slide-title">このテーマを選んだ理由</h2>
 
 AWS Community Buildersプログラムメンバーになるための条件は何ですか？
 <blockquote>
-ブログ記事、動画、<strong style="background:var(--brand-tint); color:var(--brand-deep); padding:2px 8px; border-radius:4px;">オープンソースへの貢献</strong>、プレゼンテーションなど、他のAWS利用者の助けとなる技術コンテンツの根拠や正確さが最も重視されます。
+ブログ記事、動画、<Hl>オープンソースへの貢献</Hl>、プレゼンテーションなど、他のAWS利用者の助けとなる技術コンテンツの根拠や正確さが最も重視されます。
 </blockquote>
 
 <BottomLinks>
@@ -67,179 +68,79 @@ AWS Community Buildersプログラムメンバーになるための条件は何�
 </BottomLinks>
 
 <p style="margin-top:2.5rem; font-size:1.4rem; color:var(--ink-soft); line-height:1.7;">
-<span style="color:var(--brand); font-family:'JetBrains Mono',monospace; font-size:1.6rem;">→</span>
-筆者は <strong>AWS CDK へのコントリビュート</strong> をCBs応募に提出。<br>
-選考基準にOSSが含まれている <strong>＝ AWSはOSSをどう捉えているのか</strong> を整理したい。
+    <PlainList>
+        <li>→ <Hl>AWSはOSSをどのように考えているか？</Hl> を整理したい</li>
+    </PlainList>
 </p>
 
 ---
-
-<Eyebrow text="はじめに" />
-<h2 class="slide-title">Agenda</h2>
-
-<div style="display:flex; flex-direction:column;">
-  <AgendaItem num="01" title="OSSとは" sub="用語の確認・身近な例" />
-  <AgendaItem num="02" title="AWSとOSS — 3つの関わり方" sub="貢献／公開／活用した価値提供" />
-  <AgendaItem num="03" title="OSSを活用した価値提供 — 3つの視点" sub="ユーザービジネス／AWS基盤／AWS利用支援" />
-</div>
-
+clicks: 1
 ---
 
 <Eyebrow text="OSSとは" />
 <h2 class="slide-title">OSSとは</h2>
 
-<p style="font-size:1.1rem; line-height:1.5; margin-bottom:1rem;">
-<strong style="color:var(--brand-deep);">オープンソースソフトウェア（OSS）</strong> — ソースコードが公開され、誰でも <strong>閲覧・利用・改変・再配布</strong> できるソフトウェア。身近なところに溢れている。
-</p>
+<PlainList>
+    <li>OSS = オープンソースソフトウェア</li>
+    <li><Hl>ソースコードが公開</Hl>されていて、誰でも<Hl>閲覧・利用・改変・再配布</Hl>できるライセンスのもとで提供されているソフトウェア</li>
+</PlainList>
 
-<div style="display:flex; flex-wrap:wrap; gap:0.35rem; align-content:flex-start;">
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Linux</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Python</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Node.js</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Go</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Rust</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Ruby</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">PHP</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">TypeScript</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">OpenJDK</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Kotlin</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Swift</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Scala</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Elixir</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">LLVM / Clang</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">React</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Vue.js</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Angular</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Next.js</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Svelte</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Vite</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">webpack</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Tailwind CSS</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Django</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Flask</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">FastAPI</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Ruby on Rails</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Spring Boot</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Laravel</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Express.js</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">NestJS</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">MySQL</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">PostgreSQL</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">MongoDB</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Redis</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">SQLite</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">MariaDB</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Elasticsearch</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">ClickHouse</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Cassandra</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Docker</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Kubernetes</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Terraform</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Ansible</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Helm</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Argo CD</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Prometheus</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Grafana</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">OpenTelemetry</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Jaeger</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Nginx</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">HAProxy</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Envoy</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Istio</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Traefik</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Apache Kafka</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">RabbitMQ</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">NATS</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">TensorFlow</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">PyTorch</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">scikit-learn</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Apache Spark</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Apache Airflow</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">dbt</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Git</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">VS Code</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Vim / Neovim</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">curl</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">OpenSSL</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">gRPC</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">WordPress</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Keycloak</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Valkey</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Cilium</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Flux</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">CockroachDB</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">FreeBSD</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Zsh</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">tmux</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">GCC</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">GNU Make</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Pandas</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">NumPy</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Jupyter</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Matplotlib</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Hugging Face</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">LangChain</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">ONNX</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Apache Flink</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Trino</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Apache Superset</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Loki</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Fluentd</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Fluent Bit</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Logstash</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">etcd</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Consul</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Vault</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">MinIO</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">containerd</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Podman</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Trivy</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Falco</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">OPA</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Velero</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">K3s</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Rancher</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Gitea</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">GitLab</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Playwright</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Selenium</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Jest</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">pytest</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">GraphQL</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">OpenAPI</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Protocol Buffers</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">FFmpeg</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">ImageMagick</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Caddy</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Apache Pulsar</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Nuxt.js</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Astro</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Remix</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Prisma</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">SQLAlchemy</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Hibernate</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Dagster</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Prefect</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Linkerd</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Kyverno</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">cert-manager</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Longhorn</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Rook / Ceph</span>
-  <span style="border:1.5px solid var(--line); border-radius:999px; padding:0.25rem 0.7rem; font-size:0.82rem; font-weight:600; color:var(--ink); white-space:nowrap;">Crossplane</span>
-</div>
+<br>
 
+<SequentialReveal :items="[
+  'Linux', 'Python', 'Node.js', 'Go', 'Rust', 'Ruby', 'PHP', 'TypeScript', 'OpenJDK', 'Kotlin',
+  'Swift', 'Scala', 'Elixir', 'LLVM / Clang',
+  'React', 'Vue.js', 'Angular', 'Next.js', 'Svelte', 'Vite', 'webpack', 'Tailwind CSS',
+  'Django', 'Flask', 'FastAPI', 'Ruby on Rails', 'Spring Boot', 'Laravel', 'Express.js', 'NestJS',
+  'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'SQLite', 'MariaDB', 'Elasticsearch', 'ClickHouse', 'Cassandra',
+  'Docker', 'Kubernetes', 'Terraform', 'Ansible', 'Helm', 'Argo CD',
+  'Prometheus', 'Grafana', 'OpenTelemetry', 'Jaeger',
+  'Nginx', 'HAProxy', 'Envoy', 'Istio', 'Traefik',
+  'Apache Kafka', 'RabbitMQ', 'NATS',
+  'TensorFlow', 'PyTorch', 'scikit-learn', 'Apache Spark', 'Apache Airflow', 'dbt',
+  'Git', 'VS Code', 'Vim / Neovim', 'curl', 'OpenSSL', 'gRPC',
+  'WordPress', 'Keycloak', 'Valkey', 'Cilium', 'Flux', 'CockroachDB', 'FreeBSD',
+  'Zsh', 'tmux', 'GCC', 'GNU Make',
+  'Pandas', 'NumPy', 'Jupyter', 'Matplotlib', 'Hugging Face', 'LangChain', 'ONNX',
+  'Apache Flink', 'Trino', 'Apache Superset',
+  'Loki', 'Fluentd', 'Fluent Bit', 'Logstash',
+  'etcd', 'Consul', 'Vault', 'MinIO', 'containerd', 'Podman',
+  'Trivy', 'Falco', 'OPA', 'Velero', 'K3s', 'Rancher',
+  'Gitea', 'GitLab', 'Playwright', 'Selenium', 'Jest', 'pytest',
+  'GraphQL', 'OpenAPI', 'Protocol Buffers',
+  'FFmpeg', 'ImageMagick', 'Caddy', 'Apache Pulsar',
+  'Nuxt.js', 'Astro', 'Remix', 'Prisma', 'SQLAlchemy', 'Hibernate',
+  'Dagster', 'Prefect', 'Linkerd', 'Kyverno', 'cert-manager', 'Longhorn', 'Rook / Ceph', 'Crossplane',
+]" direction="wrap">
+  <template #item="{ item }"><Tag>{{ item }}</Tag></template>
+</SequentialReveal>
+
+---
+clicks: 4
 ---
 
 <div style="display:flex; flex-direction:column; height:100%;">
 <Eyebrow text="AWSとOSS" />
 <h2 class="slide-title">AWSとOSSの<span class="accent">関わり方</span></h2>
-<blockquote style="font-size:1.1rem; line-height:1.5; padding:0.7rem 0 0.7rem 1.5rem;">
-AWS は、オープンソースは <em>すべての人にとって良いもの</em> であると信じています。<br>私たちは、オープンソースの価値をお客様に提供し、AWSの運用上の優秀性をオープンソースコミュニティにもたらすことに取り組んでいます。
+<p style="margin:0 0 0.6rem;">AWS はオープンソースソフトウェアにどのように貢献していますか?</p>
+<blockquote style="font-size:1.1rem; line-height:1.8; padding:0.7rem 0 0.7rem 1.5rem; margin:0 0 1.5rem;">
+AWS は、オープンソースは <Hl>すべての人にとって良いもの</Hl> であると信じています。<br>私たちは、<Hl>オープンソースの価値をお客様に提供</Hl>し、AWSの運用上の優秀性をオープンソースコミュニティにもたらすことに取り組んでいます。
 </blockquote>
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; flex:1; min-height:0; margin-top:1rem; padding-bottom:2.5rem;">
-  <Pillar tag="01 — CONTRIBUTE" title="OSSへの貢献">AWSメンバーによるコントリビュート。OSSプロジェクトや財団への寄付。</Pillar>
-  <Pillar tag="02 — RELEASE" title="OSSの公開">AWSの社内知見・技術を、コミュニティが使える形でオープンに公開する。</Pillar>
-  <Pillar tag="03 — DELIVER VALUE" title="OSSを活用した<br>価値提供" :featured="true">ユーザービジネスの最大化、AWS基盤、AWS利用支援にOSSを活かす。</Pillar>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; flex:1; min-height:0; padding-bottom:2.5rem;">
+  <Pillar v-click="1" title="OSSへの貢献">
+    <ul>
+      <li>AWSからOSSへの寄付</li>
+      <li>AWSメンバーからのOSSコントリビュート</li>
+    </ul>
+  </Pillar>
+  <Pillar v-click="2" title="OSSの公開">AWSの知見や技術をOSSとして公開</Pillar>
+  <Pillar v-click="3" title="OSSを活用した<br>価値提供" :clickAt="4">
+    <ul>
+      <li>ユーザーのビジネスを最大化</li>
+      <li>AWSの基盤を支える</li>
+      <li>AWS活用を支援する</li>
+    </ul>
+  </Pillar>
 </div>
 <BottomLinks>
   <BottomLink href="https://aws.amazon.com/jp/what-is/open-source/" title="引用元" label="AWS — オープンソースとは？" />
@@ -252,25 +153,24 @@ AWS は、オープンソースは <em>すべての人にとって良いもの</
 <Eyebrow text="AWSを活量した価値提供" />
 <h2 class="slide-title">ユーザービジネスを <span class="accent">最大化</span> させるOSS</h2>
 
-<p style="font-size:1.1rem; color:var(--ink-soft); margin:-0.5rem 0 1rem;">
-<span style="background:var(--brand-tint); color:var(--brand-deep); padding:0.2rem 0.6rem; border-radius:4px; font-weight:700;">差別化につながらない作業に手をかけない</span>
-— OSSを <strong>マネージドサービス</strong> として提供。
-</p>
+<SlideDesc>
+ユーザーが<Hl>undifferentiated heavy lifting</Hl>（差別化に繋がらない手間のかかる作業）にコストをかけるのをやめるために、AWSはOSSを<Hl>扱いやすくするサービスとして提供</Hl>
+</SlideDesc>
 
-<div style="display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:1fr; gap:0.6rem; flex:1; min-height:0; padding-bottom:2rem; margin:0 -2rem;">
-  <OssCard color="#3334B9" icon="R" iconUrl="https://labs.mysql.com/common/logos/mysql-logo.svg" name="MySQL" desc="広く使われるRDB。運用負荷を肩代わり。">
+<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.6rem; flex:1; min-height:0; align-content:start; margin:0 -2rem;">
+  <OssCard color="#3334B9" icon="R" iconUrl="https://labs.mysql.com/common/logos/mysql-logo.svg" name="MySQL" desc="広く利用されているRDBのOSS">
     <template #arrow><AwsService icon="/images/aws-icons/rds.svg" name="RDS / Aurora" /></template>
   </OssCard>
-  <OssCard color="#E7157B" icon="K" iconUrl="https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg" name="Kubernetes" desc="コンテナオーケストレーション。">
+  <OssCard color="#E7157B" icon="K" iconUrl="https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg" name="Kubernetes" desc="コンテナ化されたアプリを管理するためのOSS">
     <template #arrow><AwsService icon="/images/aws-icons/eks.svg" name="Amazon EKS" /></template>
   </OssCard>
-  <OssCard color="#C7252A" icon="M" iconUrl="https://kafka.apache.org/logos/kafka-logo-tall.png" name="Apache Kafka" desc="ストリーミング基盤。">
+  <OssCard color="#C7252A" icon="M" iconUrl="https://kafka.apache.org/logos/kafka-logo-tall.png" name="Apache Kafka" desc="大量データをリアルタイムに処理するストリーミング基盤OSS">
     <template #arrow><AwsService icon="/images/aws-icons/msk.svg" name="Amazon MSK" /></template>
   </OssCard>
-  <OssCard color="#F46800" icon="G" iconUrl="https://raw.githubusercontent.com/grafana/grafana/main/public/img/grafana_icon.svg" name="Grafana" desc="メトリクス・ログ可視化。">
+  <OssCard color="#F46800" icon="G" iconUrl="https://raw.githubusercontent.com/grafana/grafana/main/public/img/grafana_icon.svg" name="Grafana" desc="メトリクスやログを可視化するためのOSS">
     <template #arrow><AwsService icon="/images/aws-icons/managed-grafana.svg" name="Managed Grafana" /></template>
   </OssCard>
-  <OssCard color="#C7252A" icon="V" iconUrl="https://raw.githubusercontent.com/valkey-io/valkey-io.github.io/main/static/img/Valkey-logo.svg" name="Valkey" desc="Redis互換のインメモリストア。">
+  <OssCard color="#C7252A" icon="V" iconUrl="https://raw.githubusercontent.com/valkey-io/valkey-io.github.io/main/static/img/Valkey-logo.svg" name="Valkey" desc="Redis互換のインメモリデータストアOSS">
     <template #arrow><AwsService icon="/images/aws-icons/elasticache.svg" name="ElastiCache" /></template>
   </OssCard>
 </div>
@@ -282,25 +182,28 @@ AWS は、オープンソースは <em>すべての人にとって良いもの</
 <Eyebrow text="AWSを活量した価値提供" />
 <h2 class="slide-title">AWSの <span class="accent">基盤を支える</span> OSS</h2>
 
-<p style="font-size:1.1rem; color:var(--ink-soft); margin:-0.5rem 0 1rem;">
-AWS自身もOSSを使い、<strong>フィードバック</strong> と <strong>コントリビュート</strong> で改善ループを回している。
-</p>
+<SlideDesc>
+    <PlainList>
+        <li>AWS基盤にOSSを利用することで、 AWSも<Hl>undifferentiated heavy lifting</Hl>をやめることを実現</li>
+        <li>AWSがフィードバックやコントリビュートすることで<Hl>OSSエコシステムの改善ループ</Hl>を回している</li>
+    </PlainList>
+</SlideDesc>
 
-<div style="display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:1fr; gap:0.6rem; flex:1; min-height:0; padding-bottom:2rem; margin:0 -2rem;">
-  <OssCard color="#4a5560" icon="L" iconUrl="https://raw.githubusercontent.com/torvalds/linux/master/Documentation/images/logo.svg" name="Linux" desc="サービス基盤の多くで稼働。Kernelにも貢献。">
+<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.6rem; flex:1; min-height:0; align-content:start; margin:0 -2rem;">
+  <OssCard color="#4a5560" icon="L" iconUrl="https://raw.githubusercontent.com/torvalds/linux/master/Documentation/images/logo.svg" name="Linux" desc="多くのサーバーやクラウド基盤で利用されているOSのOSS">
     <template #arrow><AwsService icon="/images/aws-icons/ec2.svg" name="AWS services 全般" /></template>
   </OssCard>
-  <OssCard color="#1d3a82" icon="c" iconUrl="https://raw.githubusercontent.com/cncf/artwork/main/projects/containerd/icon/color/containerd-icon-color.svg" name="containerd" desc="Container Runtime。コミュニティへ貢献。">
+  <OssCard color="#1d3a82" icon="c" iconUrl="https://raw.githubusercontent.com/cncf/artwork/main/projects/containerd/icon/color/containerd-icon-color.svg" name="containerd" desc="コンテナの実行を担うContainer RuntimeのOSS">
     <template #arrow><AwsService icon="/images/aws-icons/eks.svg" name="EKS" /><AwsService icon="/images/aws-icons/fargate.svg" name="Fargate" /></template>
   </OssCard>
-  <OssCard color="#F46800" icon="F" iconUrl="https://firecracker-microvm.github.io/img/logo-icon@3x.png" :isAws="true" name="Firecracker" desc="軽量MicroVM。AWSが公開。">
+  <OssCard color="#F46800" icon="F" iconUrl="https://firecracker-microvm.github.io/img/logo-icon@3x.png" :isAws="true" name="Firecracker" desc="軽量VM(MicroVM)を実現するOSS">
     <template #arrow><AwsService icon="/images/aws-icons/lambda.svg" name="Lambda" /><AwsService icon="/images/aws-icons/fargate.svg" name="Fargate" /></template>
   </OssCard>
-  <OssCard color="#2c7a3f" icon="B" iconUrl="/images/aws-icons/bottlerocket.svg" :isAws="true" name="Bottlerocket" desc="コンテナ特化Linux。AWSが公開。">
+  <OssCard color="#2c7a3f" icon="B" iconUrl="/images/aws-icons/bottlerocket.svg" :isAws="true" name="Bottlerocket" desc="コンテナ実行に特化したLinuxベースのOSS">
     <template #arrow><AwsService icon="/images/aws-icons/eks.svg" name="EKS" /><AwsService icon="/images/aws-icons/ecs.svg" name="ECS" /></template>
   </OssCard>
-  <OssCard color="#425CC7" icon="OT" iconUrl="https://raw.githubusercontent.com/cncf/artwork/main/projects/opentelemetry/icon/color/opentelemetry-icon-color.svg" name="OpenTelemetry" desc="可観測性の標準仕様。AWSもコントリビュート。">
-    <template #arrow><AwsService icon="/images/aws-icons/xray.svg" name="X-Ray" /><AwsService icon="/images/aws-icons/cloudwatch.svg" name="App Signals" /></template>
+  <OssCard color="#425CC7" icon="OT" iconUrl="https://raw.githubusercontent.com/cncf/artwork/main/projects/opentelemetry/icon/color/opentelemetry-icon-color.svg" name="OpenTelemetry" desc="テレメトリデータを管理するためのオブザーバビリティフレームワークOSS">
+    <template #arrow><AwsService icon="/images/aws-icons/xray.svg" name="X-Ray" /><AwsService icon="/images/aws-icons/cloudwatch.svg" name="Application Signals" /></template>
   </OssCard>
 </div>
 </div>
@@ -311,21 +214,24 @@ AWS自身もOSSを使い、<strong>フィードバック</strong> と <strong>�
 <Eyebrow text="AWSを活量した価値提供" />
 <h2 class="slide-title">AWS利用を <span class="accent">支援</span> するOSS</h2>
 
-<p style="font-size:1.1rem; color:var(--ink-soft); margin:-0.5rem 0 1rem;">
-セキュリティ・運用・開発体験を上げるためのOSSを公開・活用。エコシステム全体で改善ループを回す。
-</p>
+<SlideDesc>
+    <PlainList>
+        <li>AWSの<Hl>セキュリティや運用、開発体験を向上</Hl>させるために様々なOSSが提供されている</li>
+        <li>ユーザーのフィードバックやコントリビュートを受け入れ、<Hl>AWSエコシステムの改善ループ</Hl>を回している</li>
+    </PlainList>
+</SlideDesc>
 
-<div style="display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:1fr; gap:0.6rem; flex:1; min-height:0; padding-bottom:2rem; margin:0 -2rem;">
-  <OssCard color="#C7252A" icon="C" iconUrl="/images/aws-icons/cdk.svg" :isAws="true" :dense="true" name="AWS CDK" desc="言語でAWSを記述するIaC。" />
-  <OssCard color="#232F3E" icon="SDK" iconUrl="/images/aws-icons/sdk.svg" :isAws="true" :dense="true" name="AWS SDK" desc="各言語からAWSを操作するSDK。" />
-  <OssCard color="#232F3E" icon="$_" iconUrl="/images/aws-icons/cli.svg" :isAws="true" :dense="true" name="AWS CLI" desc="AWS操作と自動化のCLI。" />
-  <OssCard color="#E7157B" icon="A" iconUrl="/images/aws-icons/amplify.svg" :isAws="true" :dense="true" name="AWS Amplify" desc="Web / モバイル開発支援。" />
-  <OssCard color="#7d3cf0" icon="S" iconUrl="https://strandsagents.com/latest/assets/logo-github.svg" :isAws="true" :dense="true" name="Strands Agents" desc="AI Agent開発支援。" />
-  <OssCard color="#F46800" icon="λ" iconUrl="/images/aws-icons/lambda.svg" :isAws="true" :dense="true" name="Powertools" desc="Lambdaのベストプラクティス。" />
-  <OssCard color="#7B42BC" icon="T" iconUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg" :dense="true" name="Terraform" desc="マルチクラウドIaC。" />
-  <OssCard color="#0c1a24" icon="M" iconUrl="https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/docs/mcp.png" :dense="true" name="MCP Servers" desc="AIエージェント連携。" />
-  <OssCard color="#1d3a82" icon="Tv" iconUrl="https://raw.githubusercontent.com/aquasecurity/trivy/main/docs/imgs/logo.png" :dense="true" name="Trivy" desc="脆弱性スキャナ。" />
-  <OssCard color="#EF7B4D" icon="Ar" iconUrl="https://raw.githubusercontent.com/cncf/artwork/main/projects/argo/icon/color/argo-icon-color.svg" :dense="true" name="Argo CD" desc="KubernetesのGitOps CD。EKSと相性抜群。" />
+<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0.6rem; flex:1; min-height:0; align-content:start; margin:0 -2rem;">
+  <OssCard color="#232F3E" icon="SDK" iconUrl="/images/aws-icons/sdk.svg" :isAws="true" :dense="true" name="AWS SDK" desc="各言語からAWSを操作するSDK" />
+  <OssCard color="#232F3E" icon="$_" iconUrl="/images/aws-icons/cli.svg" :isAws="true" :dense="true" name="AWS CLI" desc="AWSを操作するCLIツール" />
+  <OssCard color="#C7252A" icon="C" iconUrl="/images/aws-icons/cdk.svg" :isAws="true" :dense="true" name="AWS CDK" desc="プログラミング言語でAWSを定義するIaCツール" />
+  <OssCard color="#E7157B" icon="A" iconUrl="/images/aws-icons/amplify.svg" :isAws="true" :dense="true" name="AWS Amplify" desc="Web / モバイル開発を支援するツール" />
+  <OssCard color="#7d3cf0" icon="S" iconUrl="https://strandsagents.com/latest/assets/logo-github.svg" :isAws="true" :dense="true" name="Strands Agents" desc="AI Agent開発を支援するツール" />
+  <OssCard color="#F46800" icon="λ" iconUrl="/images/aws-icons/lambda.svg" :isAws="true" :dense="true" name="Powertools" desc="Lambdaのベストプラクティスを手軽に扱えるツール" />
+  <OssCard color="#7B42BC" icon="T" iconUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/terraform/terraform-original.svg" :dense="true" name="Terraform" desc="マルチクラウドのIaCツール" />
+  <OssCard color="#0c1a24" icon="M" iconUrl="https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/docs/mcp.png" :dense="true" name="MCP Servers" desc="AI Agentが連携するためのプロトコル" />
+  <OssCard color="#1d3a82" icon="Tv" iconUrl="https://raw.githubusercontent.com/aquasecurity/trivy/main/docs/imgs/logo.png" :dense="true" name="Trivy" desc="アプリの脆弱性を検出するツール" />
+  <OssCard color="#EF7B4D" icon="Ar" iconUrl="https://raw.githubusercontent.com/cncf/artwork/main/projects/argo/icon/color/argo-icon-color.svg" :dense="true" name="Argo CD" desc="KubernetesのGitOps CD" />
 </div>
 </div>
 
@@ -335,20 +241,17 @@ AWS自身もOSSを使い、<strong>フィードバック</strong> と <strong>�
 <h2 class="slide-title">Summary</h2>
 
 <ol style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0;">
-  <SummaryItem num="00" sub="Contribute / Release / Deliver Value">
-    AWSはOSSを <strong>「すべての人にとって良いもの」</strong> と考え、積極的に関わる。
+  <SummaryItem num="00" sub="OSSへの貢献 / OSSの公開 / OSSを活用した価値提供">
+    AWSはOSSを <strong>「すべての人にとって良いもの」</strong> と考え、積極的に関わる
   </SummaryItem>
-  <SummaryItem num="01" sub="RDS · EKS · MSK · Managed Grafana · ElastiCache">
-    <strong>ユーザービジネスを最大化</strong> — OSSをマネージドサービスとして提供。
+  <SummaryItem num="01" sub="MySQL · Kubernetis · Apache Kafka · Grafana · Valkey...">
+      ユーザーが<strong>ビジネス価値の提供に注力</strong>できるよう、OSSをマネージドサービスとして提供
   </SummaryItem>
-  <SummaryItem num="02" sub="Linux · containerd · Firecracker · Bottlerocket · OpenTelemetry">
-    <strong>AWSの基盤を支える</strong> — OSSを活用しフィードバックで改善。
+  <SummaryItem num="02" sub="Linux · containerd · Firecracker · Bottlerocket · OpenTelemetry...">
+    <strong>AWSの基盤を支える</strong>ためにOSSを活用し、OSSエコシステムの改善ループを回している
   </SummaryItem>
-  <SummaryItem num="03" sub="CDK · SDK · CLI · Amplify · Powertools · Argo CD …">
-    <strong>AWS利用を支援</strong> — OSSを公開しコミュニティと共に発展。
-  </SummaryItem>
-  <SummaryItem num="→" sub="Contribute back, and join the loop.">
-    だから <strong>OSSへの貢献はCBs選考基準にも含まれる</strong>。
+  <SummaryItem num="03" sub="CDK · SDK · CLI · Amplify · Powertools · Argo CD ...">
+    <strong>AWS利用を支援</strong>するOSSを公開し、AWSエコシステムの改善ループを回している
   </SummaryItem>
 </ol>
 
@@ -377,16 +280,13 @@ AWS自身もOSSを使い、<strong>フィードバック</strong> と <strong>�
 class: cover
 ---
 
-<!-- キャッチーなメッセージ（左側） -->
-<div style="position:absolute; left:5rem; top:50%; transform:translateY(-55%);">
-  <p style="font-size:1.3rem; color:rgba(255,255,255,0.75); margin:0 0 0.6rem; font-weight:400;">みなさんも</p>
+<div style="position:absolute; left:10rem; top:50%; transform:translateY(-55%);">
+    
   <h1 style="font-size:2.8rem; font-weight:900; color:white; line-height:1.25; margin:0 0 1rem; letter-spacing:-0.01em;">
-    OSSへの貢献が<br>CBsへの近道かも？
+      Thank You!
   </h1>
-  <p style="font-size:1.3rem; color:rgba(255,255,255,0.8);">と気づいてもらえましたか？</p>
 </div>
 
-<!-- 吹き出し＋フクロウ（右下） -->
 <div style="position:absolute; right:3rem; bottom:1.5rem; text-align:center;">
   <p style="color:white; font-size:1.15rem; margin:0 0 0.5rem; font-weight:500;">
     ＼ ご清聴ありがとうございました！ ／

@@ -38,7 +38,6 @@ defineProps<{
   gap: 0.25rem;
   font-size: 1rem;
   min-width: 0;
-  height: 100%;
   box-sizing: border-box;
 }
 

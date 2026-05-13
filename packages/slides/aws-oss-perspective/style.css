@@ -57,7 +57,7 @@
 
 .slidev-layout ul li {
   color: var(--ink);
-  line-height: 1.6;
+  line-height: 1.8;
   &::marker { color: var(--brand); }
 }
 
