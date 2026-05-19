@@ -1,11 +1,15 @@
 <script setup>
 import { provide } from 'vue'
 
+defineProps({
+  bottom: { type: String, default: '1.2rem' },
+})
+
 provide('insideBottomLinks', true)
 </script>
 
 <template>
-  <div class="bottom-links-wrapper">
+  <div class="bottom-links-wrapper" :style="{ bottom }">
     <slot />
   </div>
 </template>
@@ -13,7 +17,6 @@ provide('insideBottomLinks', true)
 <style scoped>
 .bottom-links-wrapper {
   position: absolute;
-  bottom: 0.85rem;
   left: 3.5rem;
   display: flex;
   flex-direction: column;

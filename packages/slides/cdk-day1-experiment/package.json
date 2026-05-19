@@ -10,7 +10,8 @@
   "dependencies": {
     "@slidev/cli": "^52.1.0",
     "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest"
+    "@slidev/theme-seriph": "latest",
+    "@slides/ui": "workspace:*"
   },
   "devDependencies": {
     "playwright-chromium": "^1.58.2"

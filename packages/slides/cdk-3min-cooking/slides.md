@@ -6,6 +6,8 @@ drawings:
 transition: slide-left
 title: AWS CDK 3分クッキング
 mdc: true
+addons:
+  - '@slides/ui'
 fonts:
   sans: 'Noto Sans JP'
   serif: 'Noto Sans JP'

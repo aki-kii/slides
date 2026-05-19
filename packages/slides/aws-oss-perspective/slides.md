@@ -6,6 +6,8 @@ drawings:
 transition: slide-left
 title: AWSはOSSをどのように思っているのか？
 mdc: true
+addons:
+  - '@slides/ui'
 fonts:
   sans: 'Noto Sans JP'
   serif: 'Noto Sans JP'

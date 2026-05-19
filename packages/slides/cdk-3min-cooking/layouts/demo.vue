@@ -1,6 +1,4 @@
 <script setup>
-import QrCode from '../components/QrCode.vue';
-
 defineProps({
   qrUrl: {
     type: String,
