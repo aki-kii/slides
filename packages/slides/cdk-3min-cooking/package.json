@@ -11,6 +11,6 @@
     "@slidev/cli": "^52.1.0",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
-    "qrcode": "^1.5.4"
+    "@slides/ui": "workspace:*"
   }
 }

@@ -6,6 +6,8 @@ drawings:
 transition: slide-left
 title: 最初からAWS CDKで技術検証してもいいんじゃない？
 mdc: true
+addons:
+  - '@slides/ui'
 fonts:
   sans: 'Noto Sans JP'
   serif: 'Noto Sans JP'

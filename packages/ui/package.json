@@ -1,0 +1,11 @@
+{
+  "name": "@slides/ui",
+  "type": "module",
+  "private": true,
+  "slidev": {
+    "id": "@slides/ui"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
