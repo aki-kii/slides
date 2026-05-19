@@ -1,0 +1,273 @@
+/* =====================================================
+   Cloud Design System — Variables
+   ===================================================== */
+:root {
+  --ink: #0c1a24;
+  --ink-soft: #38505c;
+  --ink-mute: #6a808b;
+  --paper: #ffffff;
+  --line: #d8d0bf;
+  --brand: #0283B2;
+  --brand-deep: #015d7d;
+  --brand-tint: #e3f1f5;
+  --accent-warm: #e9844b;
+  font-size: 16px;
+}
+
+/* =====================================================
+   Base Layout
+   ===================================================== */
+.slidev-layout {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', 'Inter', -apple-system, sans-serif;
+}
+
+.slidev-layout h2 {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.slidev-layout h3,
+.slidev-layout h4 {
+  color: var(--ink);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.slidev-layout p {
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.slidev-layout strong {
+  color: inherit;
+  font-weight: 700;
+}
+
+.slidev-layout em {
+  color: var(--brand-deep);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.slidev-layout ul li {
+  color: var(--ink);
+  line-height: 1.8;
+  &::marker { color: var(--brand); }
+}
+
+.slidev-layout ol li {
+  color: var(--ink);
+  line-height: 1.6;
+  &::marker { color: var(--brand); font-weight: 600; }
+}
+
+.slidev-layout a {
+  color: var(--brand);
+  text-decoration: none;
+  &:hover { color: var(--brand-deep); }
+  &:has(img) { text-decoration: none !important; border: none !important; }
+}
+
+.slidev-layout blockquote {
+  border-left: 6px solid var(--brand);
+  background: transparent;
+  padding: 1rem 0 1rem 2rem;
+  margin: 0;
+  border-radius: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink);
+
+  p {
+    color: var(--ink);
+    font-style: normal;
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+}
+
+/* Cover layout */
+.slidev-layout.cover {
+  background: linear-gradient(155deg, #015d7d 0%, #0283B2 60%, #1aa9d1 100%) !important;
+  color: white;
+  padding: 5rem 6rem !important;
+}
+
+.slidev-layout.cover h1 {
+  color: white;
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.slidev-layout.cover p,
+.slidev-layout.cover a,
+.slidev-layout.cover strong,
+.slidev-layout.cover li {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Dark layout */
+.slidev-layout.dark {
+  background: #0c1a24 !important;
+  color: white;
+}
+
+.slidev-layout.dark p,
+.slidev-layout.dark li {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.slidev-layout.dark strong {
+  color: white;
+}
+
+/* =====================================================
+   Typography Helpers
+   ===================================================== */
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand);
+  font-weight: 500;
+  margin: 0 0 0.8rem;
+  display: block;
+}
+
+.slidev-layout.dark .eyebrow {
+  color: #6fc7e1;
+}
+
+.slide-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 2rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.slide-title .accent {
+  color: var(--brand);
+}
+
+.slidev-layout.dark .slide-title {
+  color: white;
+}
+
+/* =====================================================
+   Icon Utilities
+   ===================================================== */
+.svc-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.aws-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+}
+
+/* =====================================================
+   Profile layout — rem クラスをピクセル値で上書き
+   (root font-size 変更の影響を受けないよう固定)
+   ===================================================== */
+.slidev-layout.profile .text-sm  { font-size: 15px; }
+.slidev-layout.profile .text-xl  { font-size: 22px; }
+.slidev-layout.profile .text-base { font-size: 19px; }
+.slidev-layout.profile .h-6      { height: 28px; }
+
+/* =====================================================
+   Code Blocks
+   ===================================================== */
+.slidev-layout pre {
+  background: var(--shiki-dark-bg, #282a36) !important;
+  border: 1px solid #44475a !important;
+  padding: 1.5rem !important;
+  border-radius: 8px !important;
+  overflow-y: auto !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+
+  code {
+    font-size: 1.3em !important;
+    line-height: 1.6;
+  }
+}
+
+.slidev-layout :not(pre) > code {
+  background: #44475a;
+  color: #ff79c6;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+/* =====================================================
+   Shiki Magic Move
+   ===================================================== */
+.shiki-magic-move-container {
+  background: var(--shiki-dark-bg, #282a36) !important;
+  border: 1px solid #44475a !important;
+  padding: 1.5rem !important;
+  border-radius: 8px !important;
+  overflow-y: auto !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+
+  .shiki-magic-move-item {
+    font-size: 1.3em !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* =====================================================
+   Animations
+   ===================================================== */
+@keyframes fade-in-clean {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slidev-layout .slidev-vclick-target {
+  animation: fade-in-clean 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slidev-layout .slidev-vclick-target,
+  .slidev-layout img,
+  .slidev-layout button {
+    animation: none !important;
+    transition: none !important;
+  }
+}
