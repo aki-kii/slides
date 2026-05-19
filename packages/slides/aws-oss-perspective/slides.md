@@ -34,13 +34,20 @@ image: /images/aboutme/me.jpeg
 name: アキキー | 池田 晃尚
 ---
 
-<ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ（2025.9〜）">
+<ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ">
 
 - バックエンドエンジニア / SRE
 
 </ProfileItem>
 
-<ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK" />
+<ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK" >
+
+
+
+- AWS CDKへのコントリビュート 8件
+- JAWS-UG CDK支部運営
+
+</ProfileItem>
 
 ::footer::
 
@@ -50,31 +57,96 @@ name: アキキー | 池田 晃尚
 
 ---
 
-
-<Eyebrow text="はじめに" />
-<h2 class="slide-title">このテーマを選んだ理由</h2>
-
-AWS Community Buildersプログラムメンバーになるための条件は何ですか？
-<blockquote>
-ブログ記事、動画、<Hl>オープンソースへの貢献</Hl>、プレゼンテーションなど、他のAWS利用者の助けとなる技術コンテンツの根拠や正確さが最も重視されます。
-</blockquote>
+<h2 class="slide-title">2026 AWS <span class="accent">Community Builders</span> になりました！</h2>
 
 <BottomLinks>
-  <BottomLink
-    href="https://builder.aws.com/community/community-builders"
-    title="引用元"
-    label="AWS Community Builders — よくある質問（FAQ）"
-  />
+  <BottomLink href="https://builder.aws.com/community/@akikii?tab=badges" label="builder.aws.com/community/@akikii" />
 </BottomLinks>
 
-<p style="margin-top:2.5rem; font-size:1.4rem; color:var(--ink-soft); line-height:1.7;">
-    <PlainList>
-        <li>→ <Hl>AWSはOSSをどのように考えているか？</Hl> を整理したい</li>
-    </PlainList>
-</p>
+<div style="display:flex; flex-direction:column; gap:1rem;">
+  <img src="/images/cbs-devtools.png" style="width:100%; max-height:200px; object-fit:contain; object-position:left; border-radius:8px;" />
+
+  <div v-click>
+    <p style="font-size:1.05rem; font-weight:700; margin:0 0 0.2rem; color:var(--brand-deep);">Dev Tools とは？</p>
+    <p style="margin:0 0 0.15rem; font-size:1rem;">ソフトウェア開発をより<Hl>迅速かつ効率的</Hl>にするテクノロジー</p>
+    <p style="font-size:0.85rem; color:var(--ink-soft); margin:0 0 0.8rem;">IaC / CI/CD / IDE / テスト / 静的解析 など</p>
+    <div style="display:flex; gap:1.5rem;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+        <img src="/images/aws-icons/cdk.svg" style="width:40px; height:40px;" />
+        <span style="font-size:0.7rem; color:var(--ink-soft);">AWS CDK</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+        <img src="/images/aws-icons/cloudformation.svg" style="width:40px; height:40px;" />
+        <span style="font-size:0.7rem; color:var(--ink-soft);">CloudFormation</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+        <img src="/images/aws-icons/sdk.svg" style="width:40px; height:40px;" />
+        <span style="font-size:0.7rem; color:var(--ink-soft);">AWS SDK</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+        <img src="/images/aws-icons/amplify.svg" style="width:40px; height:40px;" />
+        <span style="font-size:0.7rem; color:var(--ink-soft);">AWS Amplify</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+        <img src="/images/aws-icons/codepipeline.svg" style="width:40px; height:40px;" />
+        <span style="font-size:0.7rem; color:var(--ink-soft);">CodePipeline</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+        <img src="/images/aws-icons/codebuild.svg" style="width:40px; height:40px;" />
+        <span style="font-size:0.7rem; color:var(--ink-soft);">CodeBuild</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+        <img src="/images/aws-icons/kiro.png" style="width:40px; height:40px;" />
+        <span style="font-size:0.7rem; color:var(--ink-soft);">Kiro</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 ---
-clicks: 1
+layout: center
+class: text-left
+transition: fade
+---
+
+## AWS Community Buildersプログラムメンバーに<br>なるための条件は何ですか？
+
+---
+
+<div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;">
+  <div style="position:relative; display:inline-block;">
+    <img src="/images/cbs-boshu-youkou.png" style="height:440px; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,0.12);" />
+    <div style="position:absolute; top:53%; left:3%; width:42%; height:6%; background:rgba(255,220,0,0.5); border-radius:2px; pointer-events:none;"></div>
+  </div>
+  <BottomLinks>
+    <BottomLink
+      href="https://builder.aws.com/community/community-builders"
+      title="引用元"
+      label="AWS Community Builders — よくある質問（FAQ）"
+    />
+  </BottomLinks>
+</div>
+
+---
+
+<div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;">
+  <div style="position:relative; display:inline-block;">
+    <img src="/images/cbs-boshu-youkou.png" style="height:440px; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,0.12);" />
+    <div style="position:absolute; top:53%; left:3%; width:42%; height:6%; background:rgba(255,220,0,0.5); border-radius:2px; pointer-events:none;"></div>
+  </div>
+  <BottomLinks>
+    <BottomLink
+      href="https://builder.aws.com/community/community-builders"
+      title="引用元"
+      label="AWS Community Builders — よくある質問（FAQ）"
+    />
+  </BottomLinks>
+</div>
+<div style="position:absolute; inset:0; background:rgba(255,255,255,0.6); z-index:99;"></div>
+<Overlay position="center" fontSize="1.5rem">
+  AWSはCommunity Buildersの評価基準にするほど<br>OSSを大事にしている
+</Overlay>
+
 ---
 
 <Eyebrow text="OSSとは" />
@@ -87,33 +159,31 @@ clicks: 1
 
 <br>
 
-<SequentialReveal :items="[
-  'Linux', 'Python', 'Node.js', 'Go', 'Rust', 'Ruby', 'PHP', 'TypeScript', 'OpenJDK', 'Kotlin',
-  'Swift', 'Scala', 'Elixir', 'LLVM / Clang',
-  'React', 'Vue.js', 'Angular', 'Next.js', 'Svelte', 'Vite', 'webpack', 'Tailwind CSS',
-  'Django', 'Flask', 'FastAPI', 'Ruby on Rails', 'Spring Boot', 'Laravel', 'Express.js', 'NestJS',
-  'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'SQLite', 'MariaDB', 'Elasticsearch', 'ClickHouse', 'Cassandra',
-  'Docker', 'Kubernetes', 'Terraform', 'Ansible', 'Helm', 'Argo CD',
-  'Prometheus', 'Grafana', 'OpenTelemetry', 'Jaeger',
-  'Nginx', 'HAProxy', 'Envoy', 'Istio', 'Traefik',
-  'Apache Kafka', 'RabbitMQ', 'NATS',
-  'TensorFlow', 'PyTorch', 'scikit-learn', 'Apache Spark', 'Apache Airflow', 'dbt',
-  'Git', 'VS Code', 'Vim / Neovim', 'curl', 'OpenSSL', 'gRPC',
-  'WordPress', 'Keycloak', 'Valkey', 'Cilium', 'Flux', 'CockroachDB', 'FreeBSD',
-  'Zsh', 'tmux', 'GCC', 'GNU Make',
-  'Pandas', 'NumPy', 'Jupyter', 'Matplotlib', 'Hugging Face', 'LangChain', 'ONNX',
-  'Apache Flink', 'Trino', 'Apache Superset',
-  'Loki', 'Fluentd', 'Fluent Bit', 'Logstash',
-  'etcd', 'Consul', 'Vault', 'MinIO', 'containerd', 'Podman',
-  'Trivy', 'Falco', 'OPA', 'Velero', 'K3s', 'Rancher',
-  'Gitea', 'GitLab', 'Playwright', 'Selenium', 'Jest', 'pytest',
-  'GraphQL', 'OpenAPI', 'Protocol Buffers',
-  'FFmpeg', 'ImageMagick', 'Caddy', 'Apache Pulsar',
-  'Nuxt.js', 'Astro', 'Remix', 'Prisma', 'SQLAlchemy', 'Hibernate',
-  'Dagster', 'Prefect', 'Linkerd', 'Kyverno', 'cert-manager', 'Longhorn', 'Rook / Ceph', 'Crossplane',
-]" direction="wrap">
-  <template #item="{ item }"><Tag>{{ item }}</Tag></template>
-</SequentialReveal>
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+  <Tag>Linux</Tag><Tag>Python</Tag><Tag>Node.js</Tag><Tag>Go</Tag><Tag>Rust</Tag><Tag>Ruby</Tag><Tag>PHP</Tag><Tag>TypeScript</Tag><Tag>OpenJDK</Tag><Tag>Kotlin</Tag>
+  <Tag>Swift</Tag><Tag>Scala</Tag><Tag>Elixir</Tag><Tag>LLVM / Clang</Tag>
+  <Tag>React</Tag><Tag>Vue.js</Tag><Tag>Angular</Tag><Tag>Next.js</Tag><Tag>Svelte</Tag><Tag>Vite</Tag><Tag>webpack</Tag><Tag>Tailwind CSS</Tag>
+  <Tag>Django</Tag><Tag>Flask</Tag><Tag>FastAPI</Tag><Tag>Ruby on Rails</Tag><Tag>Spring Boot</Tag><Tag>Laravel</Tag><Tag>Express.js</Tag><Tag>NestJS</Tag>
+  <Tag>MySQL</Tag><Tag>PostgreSQL</Tag><Tag>MongoDB</Tag><Tag>Redis</Tag><Tag>SQLite</Tag><Tag>MariaDB</Tag><Tag>Elasticsearch</Tag><Tag>ClickHouse</Tag><Tag>Cassandra</Tag>
+  <Tag>Docker</Tag><Tag>Kubernetes</Tag><Tag>Terraform</Tag><Tag>Ansible</Tag><Tag>Helm</Tag><Tag>Argo CD</Tag>
+  <Tag>Prometheus</Tag><Tag>Grafana</Tag><Tag>OpenTelemetry</Tag><Tag>Jaeger</Tag>
+  <Tag>Nginx</Tag><Tag>HAProxy</Tag><Tag>Envoy</Tag><Tag>Istio</Tag><Tag>Traefik</Tag>
+  <Tag>Apache Kafka</Tag><Tag>RabbitMQ</Tag><Tag>NATS</Tag>
+  <Tag>TensorFlow</Tag><Tag>PyTorch</Tag><Tag>scikit-learn</Tag><Tag>Apache Spark</Tag><Tag>Apache Airflow</Tag><Tag>dbt</Tag>
+  <Tag>Git</Tag><Tag>VS Code</Tag><Tag>Vim / Neovim</Tag><Tag>curl</Tag><Tag>OpenSSL</Tag><Tag>gRPC</Tag>
+  <Tag>WordPress</Tag><Tag>Keycloak</Tag><Tag>Valkey</Tag><Tag>Cilium</Tag><Tag>Flux</Tag><Tag>CockroachDB</Tag><Tag>FreeBSD</Tag>
+  <Tag>Zsh</Tag><Tag>tmux</Tag><Tag>GCC</Tag><Tag>GNU Make</Tag>
+  <Tag>Pandas</Tag><Tag>NumPy</Tag><Tag>Jupyter</Tag><Tag>Matplotlib</Tag><Tag>Hugging Face</Tag><Tag>LangChain</Tag><Tag>ONNX</Tag>
+  <Tag>Apache Flink</Tag><Tag>Trino</Tag><Tag>Apache Superset</Tag>
+  <Tag>Loki</Tag><Tag>Fluentd</Tag><Tag>Fluent Bit</Tag><Tag>Logstash</Tag>
+  <Tag>etcd</Tag><Tag>Consul</Tag><Tag>Vault</Tag><Tag>MinIO</Tag><Tag>containerd</Tag><Tag>Podman</Tag>
+  <Tag>Trivy</Tag><Tag>Falco</Tag><Tag>OPA</Tag><Tag>Velero</Tag><Tag>K3s</Tag><Tag>Rancher</Tag>
+  <Tag>Gitea</Tag><Tag>GitLab</Tag><Tag>Playwright</Tag><Tag>Selenium</Tag><Tag>Jest</Tag><Tag>pytest</Tag>
+  <Tag>GraphQL</Tag><Tag>OpenAPI</Tag><Tag>Protocol Buffers</Tag>
+  <Tag>FFmpeg</Tag><Tag>ImageMagick</Tag><Tag>Caddy</Tag><Tag>Apache Pulsar</Tag>
+  <Tag>Nuxt.js</Tag><Tag>Astro</Tag><Tag>Remix</Tag><Tag>Prisma</Tag><Tag>SQLAlchemy</Tag><Tag>Hibernate</Tag>
+  <Tag>Dagster</Tag><Tag>Prefect</Tag><Tag>Linkerd</Tag><Tag>Kyverno</Tag><Tag>cert-manager</Tag><Tag>Longhorn</Tag><Tag>Rook / Ceph</Tag><Tag>Crossplane</Tag>
+</div>
 
 ---
 clicks: 4
@@ -256,11 +326,18 @@ AWS は、オープンソースは <Hl>すべての人にとって良いもの</
 </ol>
 
 ---
+layout: center
+class: text-center
+transition: fade
+---
+
+## 宣伝
+
+---
 
 <div style="position:absolute; inset:32px; display:flex; align-items:center; justify-content:center;">
   <div style="display:flex; flex-direction:column; gap:1.4rem;">
     <div>
-      <Eyebrow text="告知" />
       <h2 class="slide-title" style="margin-bottom:0;"><span class="accent">AWS CDK Conference</span> Japan 2026</h2>
     </div>
     <div style="display:flex; align-items:center; gap:2.5rem;">
@@ -268,10 +345,46 @@ AWS は、オープンソースは <Hl>すべての人にとって良いもの</
       <div>
         <div style="font-size:3.2rem; font-weight:900; color:var(--brand-deep); font-family:'JetBrains Mono',monospace; line-height:1.1;">7.18<span style="font-size:2rem; font-family:'Noto Sans JP',sans-serif;">（土）</span></div>
         <div style="font-size:2rem; font-weight:700; color:var(--brand-deep); margin-bottom:0.8rem;">開催決定！</div>
-        <p style="font-size:1.2rem; color:var(--ink-soft); margin:0; line-height:1.8;">
+        <p style="font-size:1.2rem; color:var(--ink-soft); margin:0 0 1.2rem; line-height:1.8;">
           JAWS-UG CDK支部 主催<br>詳細は近日公開予定
         </p>
+        <div style="display:flex; align-items:center; gap:1rem; padding:0.8rem 1rem; border-radius:0.75rem; border:2px solid var(--accent-warm); background:rgba(233,132,75,0.06);">
+          <img src="/images/cfp-qr.png" style="width:72px; height:72px; flex-shrink:0;" />
+          <div>
+            <div style="font-size:1.1rem; font-weight:800; color:var(--accent-warm);">Call for Proposal</div>
+            <div style="font-size:0.9rem; color:var(--ink-soft); line-height:1.5;">登壇者募集中！<br>（5/31 23:59まで）</div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
+
+---
+layout: none
+---
+
+<div style="position:absolute; inset:0; display:flex; flex-direction:column;">
+  <div style="flex:0 0 53%; overflow:hidden;">
+    <img src="/images/mates-hero.png" style="width:100%; height:100%; object-fit:cover; object-position:left top;" />
+  </div>
+  <div style="flex:1; background:white; padding:1.4rem 3rem; display:flex; align-items:center; justify-content:center;">
+    <div style="flex:0 0 auto; margin-right:48px;">
+      <p style="color:#888; font-size:0.95rem; margin:0 0 0.3rem;">リードエンジニア（バックエンド/フロントエンド/SRE)</p>
+      <p style="font-size:3rem; font-weight:900; margin:0 0 1rem; line-height:1.1;">
+        <span style="color:#0283B2;">積極</span><span style="color:#1a1a1a;">採用中</span>
+      </p>
+      <div style="display:flex; align-items:center; gap:0.8rem;">
+        <img src="/images/aboutme/mates-logo.png" style="height:40px;" />
+        <div>
+          <div style="font-size:0.95rem; font-weight:600; color:#333;">株式会社メイツ</div>
+          <div style="font-size:0.85rem; color:#888;">Mates Inc.</div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+      <img src="/images/mates-pitta-qr-code.png" style="width:120px; height:120px; display:block;" />
+      <p style="font-size:0.8rem; color:#888; margin:0;">カジュアル面談はこちら</p>
     </div>
   </div>
 </div>
