@@ -1,12 +1,12 @@
 {
-  "name": "@slides/oss-contribution-cbs-criteria",
+  "name": "@slides/ecr-sbom-supply-chain-investigation",
   "type": "module",
   "private": true,
   "scripts": {
     "dev": "slidev",
     "build": "slidev build",
-    "export": "slidev export",
-    "export:png": "slidev export --format png --output ./export"
+    "export": "slidev export --output ./export -c",
+    "export:png": "slidev export --format png --output ./export -c"
   },
   "dependencies": {
     "@slidev/cli": "^52.1.0",

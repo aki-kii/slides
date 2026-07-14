@@ -13,7 +13,7 @@ fonts:
   serif: 'Noto Sans JP'
   mono: 'Fira Code'
 ---
-え
+
 **JAWS-UG 茨城 #12 春の推しAWSサービスLTまつり！**
 
 # 最初からAWS CDKで技術検証しても<br>いいんじゃない？

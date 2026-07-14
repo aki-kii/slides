@@ -1,5 +1,5 @@
 {
-  "name": "@slides/oss-contribution-cbs-criteria",
+  "name": "@slides/failed-ecs-log-cost-reduction",
   "type": "module",
   "private": true,
   "scripts": {
@@ -11,7 +11,6 @@
   "dependencies": {
     "@slidev/cli": "^52.1.0",
     "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest",
-    "@slides/ui": "workspace:*"
+    "@slidev/theme-seriph": "latest"
   }
 }

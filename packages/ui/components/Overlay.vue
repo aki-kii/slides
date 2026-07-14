@@ -52,19 +52,28 @@ const getPositionStyle = () => {
 <template>
   <template v-if="clickEnd !== undefined">
     <div v-click.hide="clickEnd">
-      <div v-click="clickStart" :style="getPositionStyle()">
-        <slot />
+      <div v-click="clickStart">
+        <div class="overlay-backdrop" />
+        <div :style="getPositionStyle()"><slot /></div>
       </div>
     </div>
   </template>
   <template v-else>
-    <div v-click="clickStart" :style="getPositionStyle()">
-      <slot />
+    <div v-click="clickStart">
+      <div class="overlay-backdrop" />
+      <div :style="getPositionStyle()"><slot /></div>
     </div>
   </template>
 </template>
 
 <style scoped>
+.overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 99;
+}
+
 div :deep(*) {
   font-size: v-bind(fontSize) !important;
 }
