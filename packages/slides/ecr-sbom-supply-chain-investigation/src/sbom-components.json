@@ -1,0 +1,18 @@
+{
+  ...
+  "components": [
+    {
+      "type": "library",
+      "name": "axios",
+      "version": "1.15.0",
+      "purl": "pkg:npm/axios@1.15.0",
+      "properties": [
+        {
+          "name": "amazon:inspector:path",
+          "value": "/var/runtime/node_modules/axios/package.json"
+        }
+      ]
+    }
+  ],
+  ...
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@slides/ecr-sbom-supply-chain-investigation",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "export": "slidev export --output ./export -c",
+    "export:png": "slidev export --format png --output ./export -c"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.1.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "@slides/ui": "workspace:*"
+  }
+}
