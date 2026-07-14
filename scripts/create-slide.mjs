@@ -27,6 +27,7 @@ const packageJson = {
     dev: 'slidev',
     build: 'slidev build',
     export: 'slidev export',
+    'export:png': 'slidev export --format png --output ./export',
   },
   dependencies: {
     '@slidev/cli': '^52.1.0',
