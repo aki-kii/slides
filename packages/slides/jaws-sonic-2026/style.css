@@ -1,0 +1,123 @@
+/* =====================================================
+   Fonts
+   ===================================================== */
+/*
+ * JAWS SONIC 2026 のタイトル用フォント。2 段構えで解決する。
+ *
+ * 1. Neuropol X Light (本命 / 商用フォントなので同梱していない)
+ *      - Adobe Fonts でアクティベート済みなら local() が拾う
+ *      - Webfont ライセンス購入時は public/fonts/ に配置すれば url() が拾う
+ * 2. Neuropol Regular (CC0 / public/fonts/neuropol-regular.otf に同梱済み)
+ *      - 1 が無い場合のフォールバック。ウェイトは Regular のみ
+ *
+ * どちらも Latin のみなので、和文は Noto Sans JP にフォールバックする。
+ * 詳細は public/fonts/README.md を参照。
+ */
+@font-face {
+  font-family: 'Neuropol X Light';
+  src:
+    local('Neuropol X Light'),
+    local('NeuropolX-Light'),
+    local('Neuropol X Lt'),
+    local('NeuropolX-Lt'),
+    url('/fonts/neuropol-x-light.woff2') format('woff2'),
+    url('/fonts/neuropol-x-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuropol';
+  src:
+    local('Neuropol X'),
+    local('NeuropolX-Regular'),
+    local('Neuropol Nova Light'),
+    local('NeuropolNova-Light'),
+    local('Neuropol-Regular'),
+    url('/fonts/neuropol-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-display: 'Neuropol X Light', 'Neuropol', 'Noto Sans JP', sans-serif;
+}
+
+/* =====================================================
+   通常ページの背景
+   ===================================================== */
+/*
+ * title / profile は各レイアウトが自前の背景を持つので、
+ * ここでは本文用のレイアウトにだけ bg-content.png を敷く。
+ */
+.slidev-layout.default,
+.slidev-layout.center,
+.slidev-layout.full {
+  background-image: url('/images/theme/bg-content.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 背景がうっすら透けるように、コードブロックの地を少し透過させる */
+.slidev-layout.default .slidev-code,
+.slidev-layout.center .slidev-code {
+  background-color: rgba(255, 255, 255, 0.62);
+}
+
+/* =====================================================
+   文字サイズ
+   ===================================================== */
+/*
+ * 他のスライド (zero-drift-cdk-ops) と同じくルートを 20px にして、本文を大きくする。
+ * 見出しとコードはこのデッキ固有の事情 (右上のロゴ帯を避ける / 出力をコードに畳んでいる)
+ * があるので、はみ出さないところまで落としている。
+ */
+:root {
+  font-size: 20px;
+}
+
+.slidev-layout h1 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+/* AgentTitle もこれ。ロゴ帯に被らない範囲に収める */
+.slidev-layout h2 {
+  font-size: 1.7rem;
+  line-height: 1.3;
+}
+
+.slidev-layout h3,
+.slidev-layout h4 {
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.slidev-layout p {
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.slidev-layout ul li,
+.slidev-layout ol li {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+/* 入れ子のリストは説明文なので、親より一段落とす */
+.slidev-layout ul ul li,
+.slidev-layout ol ul li {
+  font-size: 1.05rem;
+}
+
+.slidev-layout pre code {
+  font-size: 1.3em;
+  line-height: 1.6;
+}
+
+.slidev-layout :not(pre) > code {
+  font-size: 1em;
+}
