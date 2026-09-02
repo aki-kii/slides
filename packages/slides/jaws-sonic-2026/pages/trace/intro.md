@@ -1,4 +1,5 @@
 ---
+layout: section
 transition: slide-left
 ---
 
@@ -6,7 +7,7 @@ transition: slide-left
 
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
 ## 音声botに機能追加
 

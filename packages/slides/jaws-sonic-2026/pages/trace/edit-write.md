@@ -8,7 +8,7 @@ transition: fade
 
 <PipelineStage rail="1-file-edit">
 
-ファイルを編集した後のhookで、次のセンサーが動作します
+ファイル編集後に実行されるチェック
 
 - **Linter**
   - ソースコードを静的解析して、プログラミング言語やCDKのルール違反を検証
