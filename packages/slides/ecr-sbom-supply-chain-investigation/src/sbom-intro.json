@@ -1,0 +1,114 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-05-18T08:29:10Z",
+    "component": {
+      "type": "operating-system",
+      "name": "AMAZON_LINUX_2023",
+      "version": "27.4.0"
+    },
+    "properties": [
+      {
+        "name": "amazon:inspector:image_id",
+        "value": "sha256:0dd89a5758b3dfeb9cb0bb83ca5f71178b4065a54a1de226d0d25eb9f5326930"
+      },
+      {
+        "name": "amazon:inspector:architecture",
+        "value": "arm64"
+      },
+      {
+        "name": "amazon:inspector:account_id",
+        "value": "xxxxxxxxxxxx"
+      },
+      {
+        "name": "amazon:inspector:resource_type",
+        "value": "AWS_ECR_CONTAINER_IMAGE"
+      },
+      {
+        "name": "amazon:inspector:repository_arn",
+        "value": "arn:aws:ecr:ap-northeast-1:xxxxxxxxxxxx:repository/todostack-todoapifunctionimagerepo0a827791-ybn9ivl0xd8b"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "@aws-sdk/client-controltower",
+      "purl": "pkg:npm/%40aws-sdk/client-controltower@3.895.0",
+      "version": "3.895.0",
+      "properties": [
+        {
+          "name": "amazon:inspector:path",
+          "value": "/var/runtime/node_modules/@aws-sdk/client-controltower/package.json"
+        }
+      ],
+      "bom-ref": "165a45fff681a439d8d00bd08f5fdce8"
+    },
+    {
+      "type": "library",
+      "name": "@aws-sdk/client-bcm-data-exports",
+      "purl": "pkg:npm/%40aws-sdk/client-bcm-data-exports@3.895.0",
+      "version": "3.895.0",
+      "properties": [
+        {
+          "name": "amazon:inspector:path",
+          "value": "/var/runtime/node_modules/@aws-sdk/client-bcm-data-exports/package.json"
+        }
+      ],
+      "bom-ref": "5be6e31de00f4bafb8d80386e80cf9f2"
+    },
+    {
+      "type": "library",
+      "name": "@aws-sdk/util-base64-node",
+      "purl": "pkg:npm/%40aws-sdk/util-base64-node@3.209.0",
+      "version": "3.209.0",
+      "properties": [
+        {
+          "name": "amazon:inspector:path",
+          "value": "/var/runtime/node_modules/@aws-sdk/util-base64-node/package.json"
+        }
+      ],
+      "bom-ref": "d2a61fe9109c67453a4a3697eb5f1738"
+    },
+    {
+      "type": "library",
+      "name": "core-util-is",
+      "purl": "pkg:npm/core-util-is@1.0.3",
+      "version": "1.0.3",
+      "properties": [
+        {
+          "name": "amazon:inspector:path",
+          "value": "/var/runtime/node_modules/@aws-sdk/node_modules/core-util-is/package.json"
+        }
+      ],
+      "bom-ref": "9e4d4f696c0f96d92acb002424ab9b00"
+    },
+    {
+      "type": "library",
+      "name": "@aws-sdk/client-iam",
+      "purl": "pkg:npm/%40aws-sdk/client-iam@3.895.0",
+      "version": "3.895.0",
+      "properties": [
+        {
+          "name": "amazon:inspector:path",
+          "value": "/var/runtime/node_modules/@aws-sdk/client-iam/package.json"
+        }
+      ],
+      "bom-ref": "751db40c4ac45910c74001fc7dfbe4f6"
+    },
+    {
+      "type": "library",
+      "name": "axios",
+      "version": "1.15.0",
+      "purl": "pkg:npm/axios@1.15.0",
+      "properties": [
+        {
+          "name": "amazon:inspector:path",
+          "value": "/var/runtime/node_modules/axios/package.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps({
   clickStart: {
     type: Number,
@@ -14,6 +16,13 @@ const props = defineProps({
     type: String,
     default: '1.25rem',
   },
+  // エクスポート（PDF/PNG）でこのオーバーレイを出さない。
+  // Slidev の export は media: 'screen' でレンダリングするため @media print が
+  // 効かず、印刷レイアウトでは絶対配置が崩れる。崩れるページに個別で付ける。
+  hideOnExport: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const presetPositions = {
@@ -26,7 +35,24 @@ const presetPositions = {
   'center-right': { right: '12rem', top: '5rem' },
 };
 
+const isCenter = computed(() => props.position === 'center');
+
 const getPositionStyle = () => {
+  const boxStyle = {
+    // backdrop-filter は Chromium の PDF 出力でラスタライズされず、
+    // 中身のテキストごと消えるため使わない。背景は 90% 不透明で十分見える。
+    background: 'rgba(180, 180, 180, 0.95)',
+    color: '#1a1a1a',
+    padding: '1rem 2rem',
+    borderRadius: '1rem',
+    maxWidth: '95%',
+    lineHeight: '2rem',
+  };
+
+  // 中央配置は flex に任せる。absolute + translate だと
+  // 印刷レイアウト（#print-container）でスケールが変わり位置がずれるため。
+  if (isCenter.value) return boxStyle;
+
   const basePosition =
     typeof props.position === 'string'
       ? presetPositions[props.position]
@@ -35,36 +61,78 @@ const getPositionStyle = () => {
   return {
     position: 'absolute',
     ...basePosition,
-    background: 'rgba(180, 180, 180, 0.9)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    color: '#1a1a1a',
-    padding: '1rem 3rem',
-    borderRadius: '1rem',
-    width: 'fit-content',
-    whiteSpace: 'nowrap',
-    zIndex: 100,
-    lineHeight: '2rem',
+    ...boxStyle,
   };
 };
 </script>
 
 <template>
   <template v-if="clickEnd !== undefined">
-    <div v-click.hide="clickEnd">
-      <div v-click="clickStart" :style="getPositionStyle()">
-        <slot />
+    <div
+      v-click.hide="clickEnd"
+      class="print-hidden"
+      :class="{ 'overlay-hide-on-export': hideOnExport }"
+    >
+      <div v-click="clickStart">
+        <div class="overlay-backdrop" />
+        <div class="overlay-root" :class="{ 'overlay-center': isCenter }">
+          <div :style="getPositionStyle()"><slot /></div>
+        </div>
       </div>
     </div>
   </template>
   <template v-else>
-    <div v-click="clickStart" :style="getPositionStyle()">
-      <slot />
+    <div
+      v-click="clickStart"
+      class="print-hidden"
+      :class="{ 'overlay-hide-on-export': hideOnExport }"
+    >
+      <div class="overlay-backdrop" />
+      <div class="overlay-root" :class="{ 'overlay-center': isCenter }">
+        <div :style="getPositionStyle()"><slot /></div>
+      </div>
     </div>
   </template>
 </template>
 
 <style scoped>
+.overlay-root {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+}
+
+.overlay-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 99;
+}
+
+@media print {
+  .overlay-backdrop {
+    display: none;
+  }
+}
+
+.print-hidden {
+  display: block;
+}
+
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+}
+
 div :deep(*) {
   font-size: v-bind(fontSize) !important;
 }
