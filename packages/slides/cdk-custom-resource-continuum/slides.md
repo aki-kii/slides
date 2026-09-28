@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: slide-left
-title: CDK のカスタムリソースで Continuum（旧 Security Agent）を実装した話
+title: AWS CDK のカスタムリソースで Continuum（旧 Security Agent）を実装した話
 mdc: true
 addons:
   - '@slides/ui'
@@ -17,7 +17,7 @@ fonts:
 
 <div class="text-xl font-bold opacity-90 mt-6">CloudFormation 未対応でも諦めない！</div>
 
-# <span style="font-size: 0.72em; line-height: 1.4; display: inline-block">CDK のカスタムリソースで<br>Continuum（旧 Security Agent）を実装した話</span>
+# <span style="font-size: 0.72em; line-height: 1.4; display: inline-block">AWS CDK のカスタムリソースで<br>Continuum（旧 Security Agent）を実装した話</span>
 
 2026.9.30（水）\
 池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
