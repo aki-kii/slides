@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" width="100%" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif">
+  <defs>
+    <marker id="mCreate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E8A6E"/></marker>
+    <marker id="mUpdate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B8680A"/></marker>
+    <marker id="mDelete" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C8394A"/></marker>
+    <marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker>
+    <marker id="mSub" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b7684"/></marker>
+  </defs>
+
+  <!-- カスタムリソース -->
+  <rect x="305" y="30" width="455" height="340" rx="14" fill="#e9f5f1" stroke="#0E8A6E" stroke-width="2"/>
+  <text x="325" y="60" font-size="17" font-weight="700" fill="#0E8A6E">カスタムリソース</text>
+
+  <rect x="325" y="80" width="140" height="270" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
+  <svg x="363" y="150" width="64" height="64" viewBox="0 0 80 80"><title>Icon-Architecture/64/Arch_AWS-CloudFormation_64</title>
+    <g id="cf-Icon-Architecture/64/Arch_AWS-CloudFormation_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="cf-Icon-Architecture-BG/64/Management-Governance" fill="#E7157B">
+            <rect id="cf-Rectangle" x="0" y="0" width="80" height="80"></rect>
+        </g>
+        <path d="M53,39.9632039 L58,39.9632039 L58,37.9601375 L53,37.9601375 L53,39.9632039 Z M28,51.9816019 L33,51.9816019 L33,49.9785356 L28,49.9785356 L28,51.9816019 Z M18,51.9816019 L25,51.9816019 L25,49.9785356 L18,49.9785356 L18,51.9816019 Z M18,45.9724029 L30,45.9724029 L30,43.9693366 L18,43.9693366 L18,45.9724029 Z M18,33.9540048 L27,33.9540048 L27,31.9509385 L18,31.9509385 L18,33.9540048 Z M18,39.9632039 L51,39.9632039 L51,37.9601375 L18,37.9601375 L18,39.9632039 Z M37,61.9969337 L14,61.9969337 L14,27.9448058 L37,27.9448058 L37,35.9570712 L39,35.9570712 L39,26.9432726 C39,26.3904263 38.552,25.9417395 38,25.9417395 L13,25.9417395 C12.447,25.9417395 12,26.3904263 12,26.9432726 L12,62.9984668 C12,63.5513131 12.447,64 13,64 L38,64 C38.552,64 39,63.5513131 39,62.9984668 L39,42.9678034 L37,42.9678034 L37,61.9969337 Z M68,36.9586044 C68,43.4305117 62.173,45.6819583 59.092,45.9683968 L43,45.9724029 L43,43.9693366 L59,43.9693366 C59.195,43.9463013 66,43.2121775 66,36.9586044 C66,31.2638867 60.863,30.1081175 59.834,29.9338507 C59.321,29.8467173 58.96,29.3820059 59.004,28.8632117 C59.005,28.8441826 59.007,28.826155 59.009,28.8081274 C58.954,25.5902013 56.981,24.584662 56.126,24.3002266 C54.53,23.769414 52.751,24.2771913 51.81,25.5391231 C51.591,25.8355769 51.229,25.9868085 50.861,25.9307226 C50.497,25.8756383 50.192,25.625255 50.068,25.2767214 C49.447,23.5360568 48.546,22.4083304 47.293,21.1534094 C44.159,18.0386412 39.905,17.1783242 35.925,18.8528877 C33.837,19.7332353 32.012,21.7282894 30.922,24.327268 L29.078,23.5500782 C30.37,20.4743699 32.584,18.0887179 35.15,17.007062 C39.905,15.0049972 44.971,16.0255595 48.704,19.7342369 C49.774,20.8068789 50.66,21.851478 51.35,23.2035478 C52.843,22.0978551 54.857,21.7673492 56.757,22.3993166 C59.189,23.2085554 60.727,25.3207889 60.975,28.1290879 C64.381,28.9884034 68,31.7115721 68,36.9586044 L68,36.9586044 Z" id="cf-AWS-CloudFormation_Icon_64_Squid" fill="#FFFFFF"></path>
+    </g></svg>
+  <text x="395" y="245" text-anchor="middle" font-size="14" font-weight="700" fill="#2c3e50">CloudFormation</text>
+  <text x="395" y="265" text-anchor="middle" font-size="14" font-weight="700" fill="#2c3e50">のリソース</text>
+
+  <rect x="590" y="80" width="150" height="270" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
+  <svg x="633" y="150" width="64" height="64" viewBox="0 0 80 80"><title>Icon-Architecture/64/Arch_AWS-Lambda_64</title>
+    <g id="la-Icon-Architecture/64/Arch_AWS-Lambda_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="la-Icon-Architecture-BG/64/Compute" fill="#ED7100">
+            <rect id="la-Rectangle" x="0" y="0" width="80" height="80"></rect>
+        </g>
+        <path d="M28.0075352,66 L15.5907274,66 L29.3235885,37.296 L35.5460249,50.106 L28.0075352,66 Z M30.2196674,34.553 C30.0512768,34.208 29.7004629,33.989 29.3175745,33.989 L29.3145676,33.989 C28.9286723,33.99 28.5778583,34.211 28.4124746,34.558 L13.097944,66.569 C12.9495999,66.879 12.9706487,67.243 13.1550766,67.534 C13.3374998,67.824 13.6582439,68 14.0020416,68 L28.6420072,68 C29.0299071,68 29.3817234,67.777 29.5481094,67.428 L37.563706,50.528 C37.693006,50.254 37.6920037,49.937 37.5586944,49.665 L30.2196674,34.553 Z M64.9953491,66 L52.6587274,66 L32.866809,24.57 C32.7014253,24.222 32.3486067,24 31.9617091,24 L23.8899822,24 L23.8990031,14 L39.7197081,14 L59.4204149,55.429 C59.5857986,55.777 59.9386172,56 60.3255148,56 L64.9953491,56 L64.9953491,66 Z M65.9976745,54 L60.9599868,54 L41.25928,12.571 C41.0938963,12.223 40.7410777,12 40.3531778,12 L22.89768,12 C22.3453987,12 21.8963569,12.447 21.8953545,12.999 L21.884329,24.999 C21.884329,25.265 21.9885708,25.519 22.1780103,25.707 C22.3654452,25.895 22.6200358,26 22.8866544,26 L31.3292417,26 L51.1221625,67.43 C51.2885485,67.778 51.6393624,68 52.02626,68 L65.9976745,68 C66.5519605,68 67,67.552 67,67 L67,55 C67,54.448 66.5519605,54 65.9976745,54 L65.9976745,54 Z" id="la-AWS-Lambda_Icon_64_Squid" fill="#FFFFFF"></path>
+    </g></svg>
+  <text x="665" y="245" text-anchor="middle" font-size="15" font-weight="700" fill="#2c3e50">Lambda 関数</text>
+
+  <!-- API -->
+  <line x1="760" y1="215" x2="856" y2="215" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#mInk)"/>
+  <text x="808" y="203" text-anchor="middle" font-size="12" fill="#6b7684">API を呼ぶ</text>
+  <rect x="860" y="80" width="130" height="270" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
+  <rect x="893" y="150" width="64" height="64" rx="10" fill="#232f3e"/>
+  <text x="925" y="191" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff" font-family="'Fira Code', monospace">API</text>
+  <text x="925" y="245" text-anchor="middle" font-size="14" font-weight="700" fill="#2c3e50">AWS・外部の API</text>
+
+  <rect x="10" y="92" width="262" height="56" rx="10" fill="#ffffff" stroke="#0E8A6E" stroke-width="2"/>
+  <text x="28" y="126" font-size="15" font-weight="700" fill="#2c3e50">Stack / Construct の作成</text>
+  <line x1="276" y1="120" x2="301" y2="120" stroke="#0E8A6E" stroke-width="2.5" marker-end="url(#mCreate)"/>
+  <line x1="465" y1="120" x2="586" y2="120" stroke="#0E8A6E" stroke-width="2.5" marker-end="url(#mCreate)"/>
+  <rect x="482" y="104" width="82" height="32" rx="16" fill="#0E8A6E"/>
+  <text x="523" y="125" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="'Fira Code', monospace">Create</text>
+  <rect x="10" y="182" width="262" height="56" rx="10" fill="#ffffff" stroke="#B8680A" stroke-width="2"/>
+  <text x="28" y="216" font-size="15" font-weight="700" fill="#2c3e50">Construct のプロパティ変更</text>
+  <line x1="276" y1="210" x2="301" y2="210" stroke="#B8680A" stroke-width="2.5" marker-end="url(#mUpdate)"/>
+  <line x1="465" y1="210" x2="586" y2="210" stroke="#B8680A" stroke-width="2.5" marker-end="url(#mUpdate)"/>
+  <rect x="482" y="194" width="82" height="32" rx="16" fill="#B8680A"/>
+  <text x="523" y="215" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="'Fira Code', monospace">Update</text>
+  <rect x="10" y="272" width="262" height="56" rx="10" fill="#ffffff" stroke="#C8394A" stroke-width="2"/>
+  <text x="28" y="306" font-size="15" font-weight="700" fill="#2c3e50">Stack / Construct の削除</text>
+  <line x1="276" y1="300" x2="301" y2="300" stroke="#C8394A" stroke-width="2.5" marker-end="url(#mDelete)"/>
+  <line x1="465" y1="300" x2="586" y2="300" stroke="#C8394A" stroke-width="2.5" marker-end="url(#mDelete)"/>
+  <rect x="482" y="284" width="82" height="32" rx="16" fill="#C8394A"/>
+  <text x="523" y="305" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="'Fira Code', monospace">Delete</text>
+
+  <!-- 応答 -->
+  <rect x="435" y="400" width="190" height="56" rx="10" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
+  <svg x="447" y="410" width="36" height="36" viewBox="0 0 80 80"><title>Icon-Architecture/64/Arch_Amazon-Simple-Storage-Service_64</title>
+    <g id="s3-Icon-Architecture/64/Arch_Amazon-Simple-Storage-Service_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="s3-Icon-Architecture-BG/64/Storage" fill="#7AA116">
+            <rect id="s3-Rectangle" x="0" y="0" width="80" height="80"></rect>
+        </g>
+        <g id="s3-Icon-Service/64/Amazon-Simple-Storage-Service_64" transform="translate(12.999900, 11.999600)" fill="#FFFFFF">
+            <path d="M47.836,30.893 L48.22,28.189 C51.761,30.31 51.807,31.186 51.8060132,31.21 C51.8,31.215 51.196,31.719 47.836,30.893 L47.836,30.893 Z M45.893,30.353 C39.773,28.501 31.25,24.591 27.801,22.961 C27.801,22.947 27.805,22.934 27.805,22.92 C27.805,21.595 26.727,20.517 25.401,20.517 C24.077,20.517 22.999,21.595 22.999,22.92 C22.999,24.245 24.077,25.323 25.401,25.323 C25.983,25.323 26.511,25.106 26.928,24.761 C30.986,26.682 39.443,30.535 45.608,32.355 L43.17,49.561 C43.163,49.608 43.16,49.655 43.16,49.702 C43.16,51.217 36.453,54 25.494,54 C14.419,54 7.641,51.217 7.641,49.702 C7.641,49.656 7.638,49.611 7.632,49.566 L2.538,12.359 C6.947,15.394 16.43,17 25.5,17 C34.556,17 44.023,15.4 48.441,12.374 L45.893,30.353 Z M2,8.478 C2.072,7.162 9.634,2 25.5,2 C41.364,2 48.927,7.161 49,8.478 L49,8.927 C48.13,11.878 38.33,15 25.5,15 C12.648,15 2.843,11.868 2,8.913 L2,8.478 Z M51,8.5 C51,5.035 41.066,0 25.5,0 C9.934,0 0,5.035 0,8.5 L0.094,9.254 L5.642,49.778 C5.775,54.31 17.861,56 25.494,56 C34.966,56 45.029,53.822 45.159,49.781 L47.555,32.884 C48.888,33.203 49.985,33.366 50.866,33.366 C52.049,33.366 52.849,33.077 53.334,32.499 C53.732,32.025 53.884,31.451 53.77,30.84 C53.511,29.456 51.868,27.964 48.522,26.055 L50.898,9.293 L51,8.5 Z" id="s3-Amazon-Simple-Storage-Service-Icon_64_Squid"></path>
+        </g>
+    </g></svg>
+  <text x="493" y="434" font-size="15" font-weight="700" fill="#2c3e50">S3 オブジェクト</text>
+  <path d="M665,370 L665,428 L631,428" fill="none" stroke="#6b7684" stroke-width="2" stroke-linejoin="round" marker-end="url(#mSub)"/>
+  <text x="675" y="400" font-size="13" fill="#6b7684">実行結果を書き込む</text>
+  <path d="M435,428 L395,428 L395,376" fill="none" stroke="#6b7684" stroke-width="2" stroke-linejoin="round" marker-end="url(#mSub)"/>
+  <text x="385" y="400" text-anchor="end" font-size="13" fill="#6b7684">CloudFormation が応答を待ち受ける</text>
+</svg>

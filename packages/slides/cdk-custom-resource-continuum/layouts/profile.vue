@@ -12,30 +12,39 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="slidev-layout profile flex flex-col h-full pl-20 pr-12">
+  <!-- padding:0 でテーマのデフォルトpadding を無効化し、自前で制御する -->
+  <div class="slidev-layout profile flex flex-col h-full justify-center" style="padding:0;">
     <!-- 上段: 写真 + コンテンツ -->
-    <div class="flex items-center justify-start flex-1 gap-12">
-      <!-- 左: 写真 -->
-      <div class="flex-shrink-0 flex flex-col items-center">
-        <img
-          :src="props.image"
-          class="w-64 h-64 rounded-xl shadow-lg object-cover"
-        />
-      </div>
-
-      <!-- 右: 名前 + コンテンツ -->
-      <div class="flex flex-col justify-center">
-        <h2 class="text-4xl font-bold mb-6">{{ props.name }}</h2>
+    <div class="flex items-start" style="padding:30px 40px 0 80px; gap:64px;">
+      <img
+        :src="props.image"
+        class="rounded-xl shadow-lg object-cover flex-shrink-0"
+        style="width:300px; height:300px;"
+      />
+      <div class="flex flex-col justify-center" style="flex:1; height:300px;">
+        <h2 class="font-bold" style="font-size:40px; margin-bottom:24px; color:#1a2a3a; line-height:1.15; white-space:nowrap;">{{ props.name }}</h2>
         <slot />
       </div>
     </div>
 
-    <!-- 下段 -->
-    <div v-if="$slots.footer" class="footer-slot flex items-center gap-8 border-t border-white/20 pt-2 h-32 pb-8">
+    <!-- 下段フッター -->
+    <div
+      v-if="$slots.footer"
+      class="footer-slot flex items-center"
+      style="height:162px; padding:32px 40px 20px 80px; gap:16px;"
+    >
       <slot name="footer" />
     </div>
   </div>
 </template>
+
+<style>
+/* rem クラスをピクセル値で上書き (root font-size 変更の影響を受けないよう固定) */
+.slidev-layout.profile .text-sm  { font-size: 15px; }
+.slidev-layout.profile .text-xl  { font-size: 22px; }
+.slidev-layout.profile .text-base { font-size: 19px; }
+.slidev-layout.profile .h-6      { height: 28px; }
+</style>
 
 <style scoped>
 .footer-slot :deep(img) {
