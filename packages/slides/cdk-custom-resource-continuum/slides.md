@@ -150,13 +150,13 @@ layout: center
 
 <div class="text-lg mt-2">リソース構成</div>
 
-<InlineSvg src="continuum-code-review.svg" label="Integration が GitLab のアクセストークンで GitLab と接続し、Agent Space の中の CodeReview が GitLab のリポジトリをスキャンする構成図。Agent Space は CloudFormation 対応、Integration と CodeReview は CloudFormation 未対応" class="mx-auto mt-6" style="width: 800px" />
+<InlineSvg src="continuum-code-review.svg" label="Integration が GitLab のアクセストークンで GitLab と接続し、AgentSpace の中の CodeReview が GitLab のリポジトリをスキャンする構成図。AgentSpace は CloudFormation 対応、Integration と CodeReview は CloudFormation 未対応" class="mx-auto mt-6" style="width: 800px" />
 
 <!--
 1. Continuum コードスキャニングを使うときは、こんな構成になります
 2. Integration は、GitLab のアクセストークンを使って GitLab と接続します
-3. Agent Space は、Continuum が管理するアプリの単位です。この中に CodeReview を作ると、CodeReview が対象のリポジトリをスキャンします
-4. このうち CloudFormation に対応しているのは Agent Space だけで、Integration と CodeReview は、2026年9月27日時点では CloudFormation で作れません
+3. AgentSpace は、Continuum が管理するアプリの単位です。この中に CodeReview を作ると、CodeReview が対象のリポジトリをスキャンします
+4. このうち CloudFormation に対応しているのは AgentSpace だけで、Integration と CodeReview は、2026年9月27日時点では CloudFormation で作れません
 -->
 
 ---
@@ -321,7 +321,7 @@ layout: center
   <h2 class="!m-0"><span style="font-size: 0.85em">Continuum コードスキャニングのリソース構成</span></h2>
 </div>
 
-<InlineSvg src="continuum-code-review.svg" label="Integration が GitLab のアクセストークンで GitLab と接続し、Agent Space の中の CodeReview が GitLab のリポジトリをスキャンする構成図。Agent Space は CloudFormation 対応、Integration と CodeReview は CloudFormation 未対応" class="mx-auto mt-6" style="width: 800px" />
+<InlineSvg src="continuum-code-review.svg" label="Integration が GitLab のアクセストークンで GitLab と接続し、AgentSpace の中の CodeReview が GitLab のリポジトリをスキャンする構成図。AgentSpace は CloudFormation 対応、Integration と CodeReview は CloudFormation 未対応" class="mx-auto mt-6" style="width: 800px" />
 
 <!--
 1. もう一度、Continuum コードスキャニングのリソース構成です
