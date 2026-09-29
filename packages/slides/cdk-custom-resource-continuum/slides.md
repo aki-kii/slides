@@ -317,7 +317,7 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 <div class="text-lg mt-4">CodeReviewの定義例</div>
 
-<InlineSvg src="awscr-codereview.svg" label="AwsCustomResourceのカスタムリソースで、CreateにCreateCodeReview、UpdateにUpdateCodeReview、DeleteにBatchDeleteCodeReviewsを割り当て、AwsCustomResourceが作成するLambda関数がCodeReviewを操作する図" class="mx-auto mt-4" style="width: 840px" />
+<InlineSvg src="awscr-codereview.svg" label="プロパティにonCreate・onUpdate・onDeleteのAWS SDKの呼び出しを渡すと、AwsCustomResourceのカスタムリソースで、CreateにCreateCodeReview、UpdateにUpdateCodeReview、DeleteにBatchDeleteCodeReviewsを割り当て、AwsCustomResourceが作成するLambda関数がCodeReviewを操作する図" class="mx-auto mt-4" style="width: 860px" />
 
 ---
 
@@ -384,7 +384,7 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 <div class="text-sm opacity-70 mt-1">※ 簡素化のためCreateイベントのみに省略</div>
 
-<InlineSvg src="provider-integration.svg" label="プロバイダーフレームワークのカスタムリソースが、プロパティでSecrets ManagerのARNを受け取り、フレームワークが作成するフレームワーク用のLambda関数から自前の処理用Lambda関数にCreateを渡し、Secrets Managerからアクセストークンを取得してCreateIntegrationを呼び出す図" class="mx-auto mt-4" style="width: 840px" />
+<InlineSvg src="provider-integration.svg" label="プロバイダーフレームワークのカスタムリソースが、プロパティのsecretArnでSecrets ManagerのARNを受け取り、フレームワークが作成するフレームワーク用のLambda関数から自前の処理用Lambda関数にCreateを渡し、Secrets Managerからアクセストークンを取得してCreateIntegrationを呼び出す図" class="mx-auto mt-4" style="width: 860px" />
 
 ---
 transition: slide-left

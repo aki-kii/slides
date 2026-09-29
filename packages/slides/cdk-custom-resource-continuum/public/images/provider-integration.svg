@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" width="100%" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif">
-  <defs><marker id="mCreate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E8A6E"/></marker><marker id="mUpdate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B8680A"/></marker><marker id="mDelete" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C8394A"/></marker><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 380" width="100%" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif"><defs><marker id="mCreate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E8A6E"/></marker><marker id="mUpdate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B8680A"/></marker><marker id="mDelete" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C8394A"/></marker><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker></defs><rect x="20" y="140" width="212" height="130" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/><text x="36" y="168" font-size="15" font-weight="700" fill="#2c3e50">プロパティ</text><text x="36" y="188" font-size="11" fill="#6b7684">自分で決めた値を渡す</text><text x="36" y="216" font-size="11.5" fill="#2c3e50" font-family="'Fira Code', monospace">secretArn</text><text x="36" y="238" font-size="12" fill="#6b7684">など…</text><g transform="translate(250,0)">
+  
   <rect x="20" y="20" width="600" height="340" rx="14" fill="#e9f5f1" stroke="#0E8A6E" stroke-width="2"/>
   <text x="40" y="50" font-size="16" font-weight="700" fill="#0E8A6E">カスタムリソース（プロバイダーフレームワーク）</text>
 
@@ -13,8 +13,7 @@
     </g></svg>
   <text x="108" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#2c3e50">CloudFormation</text>
   <text x="108" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="#2c3e50">のリソース</text>
-  <text x="108" y="278" text-anchor="middle" font-size="11" fill="#6b7684">プロパティ:</text>
-  <text x="108" y="294" text-anchor="middle" font-size="11" fill="#6b7684">Secrets ManagerのARN</text>
+  
 
   <line x1="175" y1="205" x2="276" y2="205" stroke="#0E8A6E" stroke-width="2.5" marker-end="url(#mCreate)"/>
   <rect x="184" y="189" width="82" height="32" rx="16" fill="#0E8A6E"/>
@@ -76,4 +75,4 @@
   <line x1="620" y1="275" x2="786" y2="275" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#mInk)"/>
   <text x="703" y="263" text-anchor="middle" font-size="13" font-weight="700" fill="#2c3e50">② トークンを指定</text>
   <text x="703" y="295" text-anchor="middle" font-size="13" fill="#6b7684" font-family="'Fira Code', monospace">CreateIntegration</text>
-</svg>
+</g><line x1="232" y1="205" x2="288" y2="205" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#mInk)"/></svg>
