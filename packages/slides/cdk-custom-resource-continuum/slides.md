@@ -293,11 +293,12 @@ layout: center
   <h2 class="!m-0">AwsCustomResourceとは？</h2>
 </div>
 
-<br>
+CDKが提供しているカスタムリソースの作り方の1つ
 
-- CloudFormationイベントごとにAWS SDKを1つだけ呼べる
-- プロパティを渡すだけでカスタムリソースを作れるので<br>めちゃくちゃ簡単
-- 呼び出すAWS SDKからIAMポリシーを自動で作れる
+- CloudFormationイベントごとにAWS SDKを1つだけ実行できる
+- プロパティを渡すだけで簡単にカスタムリソースを作成できる
+- 指定したAWS SDKからIAMポリシーを自動で作成できる
+  - <Kogoe>権限が足りない場合は自分で指定する必要あり</Kogoe>
 
 <BottomLink href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources.AwsCustomResource.html" title="class AwsCustomResource (construct) · AWS CDK" />
 
