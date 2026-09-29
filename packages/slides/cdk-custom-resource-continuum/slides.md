@@ -77,7 +77,7 @@ transition: view-transition
   <img src="/public/images/cfn-icon.dio.png" class="h-28"/>
   <div class="flex flex-col items-center gap-1 w-52 text-center">
     <span class="font-bold" style="font-size:1rem">CloudFormation</span>
-    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">前回との差分を<br>デプロイ</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">リソースの状態と比較して<br>差分をデプロイ</span>
   </div>
 </div>
 
@@ -158,7 +158,7 @@ layout: center
   <img src="/public/images/cfn-icon.dio.png" class="h-28"/>
   <div class="flex flex-col items-center gap-1 w-52 text-center">
     <span class="font-bold" style="font-size:1rem">CloudFormation</span>
-    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">前回との差分を<br>デプロイ</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">リソースの状態と比較して<br>差分をデプロイ</span>
   </div>
 </div>
 
@@ -218,7 +218,7 @@ transition: view-transition
   <h2 class="!m-0">カスタムリソースとは？</h2>
 </div>
 
-<div class="text-lg mt-4">e.g. S3 バケットを空にするカスタムリソース（autoDeleteObjects）</div>
+<div class="text-lg mt-4">e.g. S3 バケットを空にするカスタムリソース</div>
 
 <div class="text-sm opacity-70 mt-1">Bucket（L2 Construct）で <code>autoDeleteObjects: true</code> にすると作られる</div>
 
