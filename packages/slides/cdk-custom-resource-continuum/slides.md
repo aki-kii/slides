@@ -220,6 +220,8 @@ transition: view-transition
 
 <div class="text-lg mt-4">e.g. S3 バケットを空にするカスタムリソース（autoDeleteObjects）</div>
 
+<div class="text-sm opacity-70 mt-1">Bucket（L2 Construct）で <code>autoDeleteObjects: true</code> にすると作られる</div>
+
 <InlineSvg src="custom-resource-s3.svg" label="カスタムリソースの Lambda 関数が、Create と Update では何もせず、Delete で S3 バケットのオブジェクトを全て削除する図" class="mx-auto mt-4" style="width: 780px" />
 
 ---
