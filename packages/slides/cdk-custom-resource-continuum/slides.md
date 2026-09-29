@@ -140,34 +140,42 @@ layout: center
   <h2 class="!m-0">AWS CDK とは？（再）</h2>
 </div>
 
-CDK は CloudFormation テンプレートを生成してデプロイする
+**プログラミング言語**で**AWS リソース**を定義する IaC フレームワーク
 
-<div class="flex gap-4 items-center justify-center mt-6">
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/public/images/typescript-logo.png" class="h-24"/>
-  <span class="text-gray-400 w-44 text-center text-sm">CDK のコード</span>
-</div>
-
-<span class="text-3xl">→</span>
+<div class="flex gap-4 items-start justify-center mt-4">
 
 <div class="flex flex-col items-center gap-2">
-  <img src="/public/images/cfn-icon.dio.png" class="h-24"/>
-  <span class="text-gray-400 w-44 text-center text-sm">CloudFormation<br>テンプレート</span>
+  <img src="/public/images/typescript-logo.png" class="h-28"/>
+  <div class="flex flex-col items-center gap-1 w-52 text-center">
+    <span class="font-bold" style="font-size:1rem">プログラミング言語</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">コードから CloudFormation<br>テンプレートを合成</span>
+  </div>
 </div>
 
-<span class="text-3xl">→</span>
+<span class="text-3xl" style="margin-top:2.6rem">→</span>
 
 <div class="flex flex-col items-center gap-2">
-  <img src="/public/images/icons8-aws-240.png" class="h-24"/>
-  <span class="text-gray-400 w-44 text-center text-sm">AWS リソース</span>
+  <img src="/public/images/cfn-icon.dio.png" class="h-28"/>
+  <div class="flex flex-col items-center gap-1 w-52 text-center">
+    <span class="font-bold" style="font-size:1rem">CloudFormation</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">前回との差分を<br>デプロイ</span>
+  </div>
+</div>
+
+<span class="text-3xl" style="margin-top:2.6rem">→</span>
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/public/images/icons8-aws-240.png" class="h-28"/>
+  <div class="flex flex-col items-center gap-1 w-52 text-center">
+    <span class="font-bold" style="font-size:1rem">AWS リソース</span>
+  </div>
 </div>
 
 </div>
 
-<div class="text-center text-xl mt-10">
+<Overlay>
   CloudFormation が対応していないリソースは<br><strong>CDK でも標準の方法では定義できない</strong>
-</div>
+</Overlay>
 
 ---
 layout: center
