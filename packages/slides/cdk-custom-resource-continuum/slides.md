@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: slide-left
-title: AWS CDK のカスタムリソースで Continuum（旧 Security Agent）を実装した話
+title: AWS CDKのカスタムリソースでContinuum（旧Security Agent）を実装した話
 mdc: true
 addons:
   - '@slides/ui'
@@ -15,9 +15,9 @@ fonts:
 
 **JAWS-UG 茨城 #17 秋の推しAWSサービスLTまつり！**
 
-<div class="text-xl font-bold opacity-90 mt-6">CloudFormation 未対応でも諦めない！</div>
+<div class="text-xl font-bold opacity-90 mt-6">CloudFormation未対応でも諦めない！</div>
 
-# <span style="font-size: 0.72em; line-height: 1.4; display: inline-block">AWS CDK のカスタムリソースで<br>Continuum（旧 Security Agent）を実装した話</span>
+# <span style="font-size: 0.72em; line-height: 1.4; display: inline-block">AWS CDKのカスタムリソースで<br>Continuum（旧Security Agent）を実装した話</span>
 
 2026.9.30（水）\
 池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
@@ -56,10 +56,10 @@ transition: view-transition
 
 <div style="view-transition-name: cdk-icon" class="flex items-center gap-4">
   <img src="/public/images/aboutme/awscdk.dio.png" class="h-12" />
-  <h2 class="!m-0">AWS CDK とは？</h2>
+  <h2 class="!m-0">AWS CDKとは？</h2>
 </div>
 
-**プログラミング言語**で**AWS リソース**を定義する IaC フレームワーク
+**プログラミング言語**で**AWSリソース**を定義するIaCフレームワーク
 
 <div class="flex gap-4 items-start justify-center mt-4">
 
@@ -67,7 +67,7 @@ transition: view-transition
   <img src="/public/images/typescript-logo.png" class="h-28"/>
   <div class="flex flex-col items-center gap-1 w-52 text-center">
     <span class="font-bold" style="font-size:1rem">プログラミング言語</span>
-    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">コードから CloudFormation<br>テンプレートを合成</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">コードからCloudFormation<br>テンプレートを合成</span>
   </div>
 </div>
 
@@ -86,7 +86,7 @@ transition: view-transition
 <div class="flex flex-col items-center gap-2">
   <img src="/public/images/icons8-aws-240.png" class="h-28"/>
   <div class="flex flex-col items-center gap-1 w-52 text-center">
-    <span class="font-bold" style="font-size:1rem">AWS リソース</span>
+    <span class="font-bold" style="font-size:1rem">AWSリソース</span>
   </div>
 </div>
 
@@ -102,23 +102,23 @@ layout: center
 
 <div>
   プロジェクトで
-  <h2><strong>Continuum コードスキャニング</strong>を<br>導入したときの話をします</h2>
+  <h2><strong>Continuumコードスキャニング</strong>を<br>導入したときの話をします</h2>
 </div>
 
 ---
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/security-agent.svg" class="h-12" />
-  <h2 class="!m-0">Continuum コードスキャニングとは？</h2>
+  <h2 class="!m-0">Continuumコードスキャニングとは？</h2>
 </div>
 
 <div class="mt-3" style="font-size: 1.2rem; line-height: 1.7">
-  <div>Continuum（Security Agent が改名）の機能の1つ</div>
-  <div><strong>AI エージェント</strong>がソースコードをスキャンして脆弱性を検出する機能</div>
+  <div>Continuum（Security Agentが改名）の機能の1つ</div>
+  <div><strong>AIエージェント</strong>がソースコードをスキャンして脆弱性を検出する機能</div>
   <div class="mt-3">フルリポジトリスキャン</div>
 </div>
 
-<InlineSvg src="code-scanning.svg" label="Continuum コードスキャニングがリポジトリ全体を読み、見つかった脆弱性と修正案をスキャン結果として出す図" class="mx-auto mt-1" style="width: 620px" />
+<InlineSvg src="code-scanning.svg" label="Continuumコードスキャニングがリポジトリ全体を読み、見つかった脆弱性と修正案をスキャン結果として出す図" class="mx-auto mt-1" style="width: 620px" />
 
 <BottomLink href="https://docs.aws.amazon.com/securityagent/latest/userguide/perform-code-review-scan.html" title="Create a code review - AWS Security Agent (now part of AWS Continuum)" />
 
@@ -126,21 +126,21 @@ layout: center
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/security-agent.svg" class="h-12" />
-  <h2 class="!m-0">Continuum コードスキャニングとは？</h2>
+  <h2 class="!m-0">Continuumコードスキャニングとは？</h2>
 </div>
 
 <div class="text-lg mt-2">リソース構成</div>
 
-<InlineSvg src="continuum-code-review.svg" label="Integration が GitLab のアクセストークンで GitLab と接続し、AgentSpace の中の CodeReview が GitLab のリポジトリをスキャンする構成図。AgentSpace は CloudFormation 対応、Integration と CodeReview は CloudFormation 未対応" class="mx-auto mt-6" style="width: 800px" />
+<InlineSvg src="continuum-code-review.svg" label="IntegrationがGitLabのアクセストークンでGitLabと接続し、AgentSpaceの中のCodeReviewがGitLabのリポジトリをスキャンする構成図。AgentSpaceはCloudFormation対応、IntegrationとCodeReviewはCloudFormation未対応" class="mx-auto mt-6" style="width: 800px" />
 
 ---
 
 <div class="flex items-center gap-4">
   <img src="/public/images/aboutme/awscdk.dio.png" class="h-12" />
-  <h2 class="!m-0">AWS CDK とは？（再）</h2>
+  <h2 class="!m-0">AWS CDKとは？（再）</h2>
 </div>
 
-**プログラミング言語**で**AWS リソース**を定義する IaC フレームワーク
+**プログラミング言語**で**AWSリソース**を定義するIaCフレームワーク
 
 <div class="flex gap-4 items-start justify-center mt-4">
 
@@ -148,7 +148,7 @@ layout: center
   <img src="/public/images/typescript-logo.png" class="h-28"/>
   <div class="flex flex-col items-center gap-1 w-52 text-center">
     <span class="font-bold" style="font-size:1rem">プログラミング言語</span>
-    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">コードから CloudFormation<br>テンプレートを合成</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">コードからCloudFormation<br>テンプレートを合成</span>
   </div>
 </div>
 
@@ -167,14 +167,14 @@ layout: center
 <div class="flex flex-col items-center gap-2">
   <img src="/public/images/icons8-aws-240.png" class="h-28"/>
   <div class="flex flex-col items-center gap-1 w-52 text-center">
-    <span class="font-bold" style="font-size:1rem">AWS リソース</span>
+    <span class="font-bold" style="font-size:1rem">AWSリソース</span>
   </div>
 </div>
 
 </div>
 
 <Overlay>
-  CloudFormation 未対応のリソースは<br><strong>標準的な方法では</strong> CDK で定義できない
+  CloudFormation未対応のリソースは<br><strong>標準的な方法では</strong>CDKで定義できない
 </Overlay>
 
 ---
@@ -183,7 +183,7 @@ transition: view-transition
 ---
 
 <div style="view-transition-name: cfn-unsupported">
-  Continuum コードスキャニングを CDK で管理するため
+  ContinuumコードスキャニングをCDKで管理するため
   <h2><strong>カスタムリソース</strong>で定義しました！</h2>
 </div>
 
@@ -194,9 +194,9 @@ transition: view-transition
   <h2 class="!m-0">カスタムリソースとは？</h2>
 </div>
 
-<div class="text-lg">CloudFormation のライフサイクルに合わせて<strong>カスタムの処理を実行する</strong>仕組み</div>
+<div class="text-lg">CloudFormationのライフサイクルに合わせて<strong>カスタムの処理を実行する</strong>仕組み</div>
 
-<InlineSvg src="custom-resource-lifecycle.svg" label="Stack や Construct の作成・プロパティ変更・削除に応じて、カスタムリソースの中で CloudFormation のリソースから Lambda 関数へ Create・Update・Delete のイベントが届き、Lambda 関数が API を呼んで実行結果を S3 オブジェクトに書き込み、CloudFormation がその応答を待ち受ける図" class="mx-auto mt-2" style="width: 700px" />
+<InlineSvg src="custom-resource-lifecycle.svg" label="StackやConstructの作成・プロパティ変更・削除に応じて、カスタムリソースの中でCloudFormationのリソースからLambda関数へCreate・Update・Deleteのイベントが届き、Lambda関数がAPIを呼んで実行結果をS3オブジェクトに書き込み、CloudFormationがその応答を待ち受ける図" class="mx-auto mt-2" style="width: 700px" />
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/template-custom-resources.html" title="カスタムリソースを使用してカスタムプロビジョニングロジックを作成する" />
 
@@ -207,9 +207,9 @@ transition: view-transition
   <h2 class="!m-0">カスタムリソースとは？</h2>
 </div>
 
-<div class="text-lg mt-4">e.g. DynamoDB にマスターデータを投入するカスタムリソース</div>
+<div class="text-lg mt-4">e.g. DynamoDBにマスターデータを投入するカスタムリソース</div>
 
-<InlineSvg src="custom-resource-dynamodb.svg" label="カスタムリソースの Lambda 関数が、Create で DynamoDB テーブルにマスターデータを投入し、Update で変更されたレコードを更新し、Delete で投入したデータを削除する図" class="mx-auto mt-4" style="width: 780px" />
+<InlineSvg src="custom-resource-dynamodb.svg" label="カスタムリソースのLambda関数が、CreateでDynamoDBテーブルにマスターデータを投入し、Updateで変更されたレコードを更新し、Deleteで投入したデータを削除する図" class="mx-auto mt-4" style="width: 780px" />
 
 ---
 
@@ -218,29 +218,29 @@ transition: view-transition
   <h2 class="!m-0">カスタムリソースとは？</h2>
 </div>
 
-<div class="text-lg mt-4">e.g. S3 バケットを空にするカスタムリソース</div>
+<div class="text-lg mt-4">e.g. S3バケットを空にするカスタムリソース</div>
 
 <div class="text-sm opacity-70 mt-1">Bucket（L2 Construct）で <code>autoDeleteObjects: true</code> にすると作られる</div>
 
-<InlineSvg src="custom-resource-s3.svg" label="カスタムリソースの Lambda 関数が、Create と Update では何もせず、Delete で S3 バケットのオブジェクトを全て削除する図" class="mx-auto mt-4" style="width: 780px" />
+<InlineSvg src="custom-resource-s3.svg" label="カスタムリソースのLambda関数が、CreateとUpdateでは何もせず、DeleteでS3バケットのオブジェクトを全て削除する図" class="mx-auto mt-4" style="width: 780px" />
 
 ---
 
-## 何故そこまでして CDK で定義したかったの？
+## 何故そこまでしてCDKで定義したかったの？
 
 <br>
 
-- CloudFormation のライフサイクルで管理できる
+- CloudFormationのライフサイクルで管理できる
 - 定義したリソースを複製しやすい
-  - e.g. リポジトリごとに CodeReview を作れる
+  - e.g. リポジトリごとにCodeReviewを作れる
 - 設定を設計意図と一緒にソースコードに残せる
   - マネコンで作ると設計意図は別途ドキュメントが必要
 
 <div class="mt-8 opacity-70">
   <div style="font-size: 1rem">ほかにも</div>
   <ul class="!mt-1">
-    <li style="font-size: 1.05rem">他のリソースと合わせて CDK で統一できる</li>
-    <li style="font-size: 1.05rem">CloudFormation が対応したら L1 Construct に取り込みやすい</li>
+    <li style="font-size: 1.05rem">他のリソースと合わせてCDKで統一できる</li>
+    <li style="font-size: 1.05rem">CloudFormationが対応したらL1 Constructに取り込みやすい</li>
   </ul>
 </div>
 
@@ -249,35 +249,39 @@ layout: center
 ---
 
 <div>
-  <h2>Continuum コードスキャニングを<br>カスタムリソースを使って CDK で定義します</h2>
+  <h2>Continuumコードスキャニングを<br>CDKのカスタムリソースを使って定義します</h2>
 </div>
 
 ---
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/security-agent.svg" class="h-12" />
-  <h2 class="!m-0"><span style="font-size: 0.85em">Continuum コードスキャニングのリソース構成</span></h2>
+  <h2 class="!m-0"><span style="font-size: 0.85em">Continuumコードスキャニングのリソース構成</span></h2>
 </div>
 
-<InlineSvg src="continuum-code-review.svg" label="Integration が GitLab のアクセストークンで GitLab と接続し、AgentSpace の中の CodeReview が GitLab のリポジトリをスキャンする構成図。AgentSpace は CloudFormation 対応、Integration と CodeReview は CloudFormation 未対応" class="mx-auto mt-6" style="width: 800px" />
+<InlineSvg src="continuum-code-review.svg" label="IntegrationがGitLabのアクセストークンでGitLabと接続し、AgentSpaceの中のCodeReviewがGitLabのリポジトリをスキャンする構成図。AgentSpaceはCloudFormation対応、IntegrationとCodeReviewはCloudFormation未対応" class="mx-auto mt-6" style="width: 800px" />
+
+<Overlay>
+  Integration・CodeReviewをカスタムリソースで定義します
+</Overlay>
 
 ---
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/security-agent.svg" class="h-12" />
-  <h2 class="!m-0">CodeReview のポイント</h2>
+  <h2 class="!m-0">CodeReviewのポイント</h2>
 </div>
 
 <br>
 
 - 連携したリポジトリをコードスキャンするためのリソース
-- CloudFormation のイベントに対応した API が揃っている
+- CloudFormationのイベントに対応したAPIが揃っている
   - Create: `CreateCodeReview`
   - Update: `UpdateCodeReview`
   - Delete: `BatchDeleteCodeReviews`
 
 <div v-click class="mt-8 text-xl">
-  → <strong>AwsCustomResource</strong> を利用する
+  → <strong>AwsCustomResource</strong>を利用する
 </div>
 
 <BottomLink href="https://docs.aws.amazon.com/securityagent/latest/APIReference/API_Operations.html" title="AWS Security Agent API Reference - Actions" />
@@ -286,37 +290,37 @@ layout: center
 
 <div class="flex items-center gap-4">
   <img src="/public/images/aboutme/awscdk.dio.png" class="h-12" />
-  <h2 class="!m-0">AwsCustomResource とは？</h2>
+  <h2 class="!m-0">AwsCustomResourceとは？</h2>
 </div>
 
 <br>
 
-- CloudFormation イベントごとに AWS SDK を1つだけ呼べる
+- CloudFormationイベントごとにAWS SDKを1つだけ呼べる
 - 処理を書かずに、プロパティを渡すだけで済む
-- 呼び出す AWS SDK から IAM ポリシーを自動で作れる
+- 呼び出すAWS SDKからIAMポリシーを自動で作れる
 
 <BottomLink href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources.AwsCustomResource.html" title="class AwsCustomResource (construct) · AWS CDK" />
 
 ---
 
-## CodeReview のための AwsCustomResource
+## CodeReviewのためのAwsCustomResource
 
-<InlineSvg src="awscr-codereview.svg" label="AwsCustomResource のカスタムリソースで、Create に CreateCodeReview、Update に UpdateCodeReview、Delete に BatchDeleteCodeReviews を割り当て、CDK が自動で作る Lambda 関数が CodeReview を操作する図" class="mx-auto mt-4" style="width: 840px" />
+<InlineSvg src="awscr-codereview.svg" label="AwsCustomResourceのカスタムリソースで、CreateにCreateCodeReview、UpdateにUpdateCodeReview、DeleteにBatchDeleteCodeReviewsを割り当て、CDKが自動で作るLambda関数がCodeReviewを操作する図" class="mx-auto mt-4" style="width: 840px" />
 
 ---
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/security-agent.svg" class="h-12" />
-  <h2 class="!m-0">Integration のポイント</h2>
+  <h2 class="!m-0">Integrationのポイント</h2>
 </div>
 
 <br>
 
-- GitLab のアクセストークンと Continuum を連携するリソース
+- GitLabのアクセストークンとContinuumを連携するリソース
 - プロパティにアクセストークンを渡す必要がある
   - テンプレートやログにアクセストークンが流出してしまう
-- Secrets Manager の ARN だけ渡し、処理の中でトークンを取得する
-  - API 呼び出しが2回必要
+- Secrets ManagerのARNだけ渡し、処理の中でトークンを取得する
+  - API呼び出しが2回必要
 
 <div v-click class="mt-6 text-xl">
   → <strong>カスタムリソースプロバイダーフレームワーク</strong>を利用する
@@ -331,10 +335,10 @@ layout: center
 
 <div class="text-sm opacity-70 mt-1">カスタムリソースプロバイダーフレームワーク</div>
 
-- CloudFormation イベントに合わせた処理を Lambda 関数で書ける
+- CloudFormationイベントに合わせた処理をLambda関数で書ける
 - 処理はソースコードで書くので、複雑な処理も任せられる
 - カスタムリソースに必要な機能を簡単に使える
-  - CloudFormation への応答
+  - CloudFormationへの応答
   - エラーハンドリング
   - 非同期処理のポーリング
 - 呼び出す処理に必要な権限は自分で付与する必要がある
@@ -343,15 +347,15 @@ layout: center
 
 ---
 
-<h2><span style="font-size: 0.85em">Integration のためのプロバイダーフレームワーク</span></h2>
+<h2><span style="font-size: 0.85em">Integrationのためのプロバイダーフレームワーク</span></h2>
 
-<div class="text-sm opacity-70 mt-1">※ 省略のため Create イベントのみ記載</div>
+<div class="text-sm opacity-70 mt-1">※ 省略のためCreateイベントのみ記載</div>
 
-<InlineSvg src="provider-integration.svg" label="プロバイダーフレームワークのカスタムリソースが、プロパティで Secrets Manager の ARN を受け取り、CDK が作るフレームワーク用の Lambda 関数から自前の処理用 Lambda 関数に Create を渡し、Secrets Manager からアクセストークンを取得して CreateIntegration を呼び出す図" class="mx-auto mt-4" style="width: 840px" />
+<InlineSvg src="provider-integration.svg" label="プロバイダーフレームワークのカスタムリソースが、プロパティでSecrets ManagerのARNを受け取り、CDKが作るフレームワーク用のLambda関数から自前の処理用Lambda関数にCreateを渡し、Secrets Managerからアクセストークンを取得してCreateIntegrationを呼び出す図" class="mx-auto mt-4" style="width: 840px" />
 
 ---
 
-<h2>AwsCustomResource と<br>プロバイダーフレームワークの使い分け</h2>
+<h2>AwsCustomResourceと<br>プロバイダーフレームワークの使い分け</h2>
 
 <div class="grid grid-cols-2 gap-6 mt-6">
   <div class="rounded-xl border-2 border-gray-300 p-5">
@@ -360,7 +364,7 @@ layout: center
       <span class="font-bold" style="font-size: 1.2rem; white-space: nowrap">AwsCustomResource</span>
     </div>
     <ul>
-      <li style="font-size: 1.1rem">AWS SDK の呼び出し1回で済む</li>
+      <li style="font-size: 1.1rem">AWS SDKの呼び出し1回で済む</li>
       <li style="font-size: 1.1rem">機密情報を扱わない</li>
       <li style="font-size: 1.1rem">処理の完了を待たなくていい</li>
     </ul>
@@ -374,7 +378,7 @@ layout: center
       <li style="font-size: 1.1rem">複数の処理が必要</li>
       <li style="font-size: 1.1rem">機密情報を扱う</li>
       <li style="font-size: 1.1rem">処理の完了を待ちたい</li>
-      <li style="font-size: 1.1rem">AWS 以外の API を呼びたい</li>
+      <li style="font-size: 1.1rem">AWS以外のAPIを呼びたい</li>
     </ul>
   </div>
 </div>
@@ -385,14 +389,14 @@ layout: center
 
 <div>
   <Kogoe>おわりに</Kogoe>
-  <h2><span style="font-size: 0.82em">カスタムリソースを使えば<br>CloudFormation 未対応のサービスも<br>CDK で管理できる！</span></h2>
+  <h2><span style="font-size: 0.82em">カスタムリソースを使えば<br>CloudFormation未対応のサービスも<br>CDKで管理できる！</span></h2>
 </div>
 
 <br>
 
 <div class="text-lg">その他カスタムリソースを使いたくなるタイミング</div>
 
-- CloudFormation で定義できないものを管理したい
+- CloudFormationで定義できないものを管理したい
 - デプロイしたリソースにデータを投入したい
 - デプロイフローに処理を差し込みたい
 - デプロイ時に外部から情報を取得したい

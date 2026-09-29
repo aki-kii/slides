@@ -42,7 +42,7 @@
 <rect width="80" height="80" fill="white"/>
 </clipPath>
 </defs></svg>
-  <text x="374" y="50" font-size="17" font-weight="700" fill="#DD344C">AWS Continuum<tspan dx="8" font-size="13" font-weight="400" fill="#6b7684">（旧 AWS Security Agent）</tspan></text>
+  <text x="374" y="50" font-size="17" font-weight="700" fill="#DD344C">AWS Continuum<tspan dx="8" font-size="13" font-weight="400" fill="#6b7684">（旧AWS Security Agent）</tspan></text>
 
   <rect x="345" y="88" width="195" height="94" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
   <svg x="359" y="117" width="36" height="36" viewBox="0 0 80 80"><g clip-path="url(#sa1-clip0_184_173)">
@@ -55,7 +55,7 @@
 </clipPath>
 </defs></svg>
   <text x="405" y="132" font-size="18" font-weight="700" fill="#2c3e50">Integration</text>
-  <text x="405" y="154" font-size="12" fill="#6b7684">GitLab と接続する</text>
+  <text x="405" y="154" font-size="12" fill="#6b7684">GitLabと接続する</text>
 
   <rect x="575" y="75" width="380" height="235" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
   <svg x="595" y="95" width="36" height="36" viewBox="0 0 80 80"><g clip-path="url(#sa2-clip0_184_173)">
@@ -68,7 +68,7 @@
 </clipPath>
 </defs></svg>
   <text x="641" y="111" font-size="18" font-weight="700" fill="#2c3e50">AgentSpace</text>
-  <text x="641" y="131" font-size="12" fill="#6b7684">Continuum が管理するアプリの単位</text>
+  <text x="641" y="131" font-size="12" fill="#6b7684">Continuumが管理するアプリの単位</text>
   <rect x="605" y="205" width="320" height="80" rx="12" fill="#fdecee" stroke="#DD344C" stroke-width="2"/>
   <svg x="620" y="222" width="36" height="36" viewBox="0 0 80 80"><g clip-path="url(#sa3-clip0_184_173)">
 <rect width="80" height="80" fill="#DD344C"/>
@@ -81,13 +81,13 @@
 </defs></svg>
   <text x="664" y="243" font-size="18" font-weight="700" fill="#2c3e50">CodeReview</text>
 
-  <!-- CloudFormation の対応状況 -->
+  <!-- CloudFormationの対応状況 -->
   <rect x="372" y="192" width="140" height="22" rx="11" fill="#ffffff" stroke="#DD344C" stroke-width="1.5"/>
-  <text x="442.0" y="207" text-anchor="middle" font-size="10" font-weight="700" fill="#DD344C">CloudFormation 未対応</text>
+  <text x="442.0" y="207" text-anchor="middle" font-size="10" font-weight="700" fill="#DD344C">CloudFormation未対応</text>
   <rect x="805" y="88" width="140" height="22" rx="11" fill="#f3f5f7" stroke="#c9d0d9" stroke-width="1.5"/>
-  <text x="875.0" y="103" text-anchor="middle" font-size="10" font-weight="700" fill="#6b7684">CloudFormation 対応</text>
+  <text x="875.0" y="103" text-anchor="middle" font-size="10" font-weight="700" fill="#6b7684">CloudFormation対応</text>
   <rect x="664" y="252" width="140" height="22" rx="11" fill="#ffffff" stroke="#DD344C" stroke-width="1.5"/>
-  <text x="734.0" y="267" text-anchor="middle" font-size="10" font-weight="700" fill="#DD344C">CloudFormation 未対応</text>
+  <text x="734.0" y="267" text-anchor="middle" font-size="10" font-weight="700" fill="#DD344C">CloudFormation未対応</text>
 
   <!-- 接続 -->
   <line x1="251" y1="135" x2="339" y2="135" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#mInk)" marker-end="url(#mInk)"/>
@@ -96,5 +96,5 @@
 
   <!-- スキャン -->
   <line x1="605" y1="250" x2="251" y2="250" stroke="#DD344C" stroke-width="2.5" marker-end="url(#mRed)"/>
-  <text x="428" y="237" text-anchor="middle" font-size="13" font-weight="700" fill="#DD344C">CodeReview がスキャンする</text>
+  <text x="428" y="237" text-anchor="middle" font-size="13" font-weight="700" fill="#DD344C">CodeReviewがスキャンする</text>
 </svg>
