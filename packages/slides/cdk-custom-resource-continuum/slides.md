@@ -62,25 +62,33 @@ transition: view-transition
 
 **プログラミング言語**で**AWS リソース**を定義する IaC フレームワーク
 
-<div class="flex gap-4 items-center justify-center mt-4">
+<div class="flex gap-4 items-start justify-center mt-4">
 
 <div class="flex flex-col items-center gap-2">
   <img src="/public/images/typescript-logo.png" class="h-28"/>
-  <span class="text-gray-400 w-44 text-center text-sm">プログラミング言語で<br>AWSリソースを定義</span>
+  <div class="flex flex-col items-center gap-1 w-52 text-center">
+    <span class="font-bold" style="font-size:1rem">プログラミング言語</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">コードから CloudFormation<br>テンプレートを合成</span>
+  </div>
 </div>
 
-<span class="text-3xl">→</span>
+<span class="text-3xl" style="margin-top:2.6rem">→</span>
 
 <div class="flex flex-col items-center gap-2">
   <img src="/public/images/cfn-icon.dio.png" class="h-28"/>
-  <span class="text-gray-400 w-44 text-center text-sm">前回との差分を<br>デプロイ</span>
+  <div class="flex flex-col items-center gap-1 w-52 text-center">
+    <span class="font-bold" style="font-size:1rem">CloudFormation</span>
+    <span class="text-gray-400 text-center text-sm" style="line-height:1.5">前回との差分を<br>デプロイ</span>
+  </div>
 </div>
 
-<span class="text-3xl">→</span>
+<span class="text-3xl" style="margin-top:2.6rem">→</span>
 
 <div class="flex flex-col items-center gap-2">
   <img src="/public/images/icons8-aws-240.png" class="h-28"/>
-  <span class="text-gray-400 w-44 text-center text-sm">AWSリソース</span>
+  <div class="flex flex-col items-center gap-1 w-52 text-center">
+    <span class="font-bold" style="font-size:1rem">AWS リソース</span>
+  </div>
 </div>
 
 </div>
