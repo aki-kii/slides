@@ -41,19 +41,19 @@
   <text x="925" y="245" text-anchor="middle" font-size="14" font-weight="700" fill="#2c3e50">AWS・外部の API</text>
 
   <rect x="10" y="92" width="262" height="56" rx="10" fill="#ffffff" stroke="#0E8A6E" stroke-width="2"/>
-  <text x="28" y="126" font-size="15" font-weight="700" fill="#2c3e50">Stack / Construct の作成</text>
+  <text x="22" y="125" font-size="13" font-weight="700" fill="#2c3e50">カスタムリソースを新規作成</text>
   <line x1="276" y1="120" x2="301" y2="120" stroke="#0E8A6E" stroke-width="2.5" marker-end="url(#mCreate)"/>
   <line x1="465" y1="120" x2="586" y2="120" stroke="#0E8A6E" stroke-width="2.5" marker-end="url(#mCreate)"/>
   <rect x="482" y="104" width="82" height="32" rx="16" fill="#0E8A6E"/>
   <text x="523" y="125" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="'Fira Code', monospace">Create</text>
   <rect x="10" y="182" width="262" height="56" rx="10" fill="#ffffff" stroke="#B8680A" stroke-width="2"/>
-  <text x="28" y="216" font-size="15" font-weight="700" fill="#2c3e50">Construct のプロパティ変更</text>
+  <text x="22" y="215" font-size="13" font-weight="700" fill="#2c3e50">カスタムリソースのプロパティを更新</text>
   <line x1="276" y1="210" x2="301" y2="210" stroke="#B8680A" stroke-width="2.5" marker-end="url(#mUpdate)"/>
   <line x1="465" y1="210" x2="586" y2="210" stroke="#B8680A" stroke-width="2.5" marker-end="url(#mUpdate)"/>
   <rect x="482" y="194" width="82" height="32" rx="16" fill="#B8680A"/>
   <text x="523" y="215" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="'Fira Code', monospace">Update</text>
   <rect x="10" y="272" width="262" height="56" rx="10" fill="#ffffff" stroke="#C8394A" stroke-width="2"/>
-  <text x="28" y="306" font-size="15" font-weight="700" fill="#2c3e50">Stack / Construct の削除</text>
+  <text x="22" y="305" font-size="13" font-weight="700" fill="#2c3e50">カスタムリソースを削除</text>
   <line x1="276" y1="300" x2="301" y2="300" stroke="#C8394A" stroke-width="2.5" marker-end="url(#mDelete)"/>
   <line x1="465" y1="300" x2="586" y2="300" stroke="#C8394A" stroke-width="2.5" marker-end="url(#mDelete)"/>
   <rect x="482" y="284" width="82" height="32" rx="16" fill="#C8394A"/>

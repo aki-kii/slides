@@ -18,6 +18,8 @@
     </g></svg>
   <text x="112" y="245" text-anchor="middle" font-size="14" font-weight="700" fill="#2c3e50">CloudFormation</text>
   <text x="112" y="265" text-anchor="middle" font-size="14" font-weight="700" fill="#2c3e50">のリソース</text>
+  <text x="112" y="300" text-anchor="middle" font-size="11" fill="#6b7684">プロパティ:</text>
+  <text x="112" y="316" text-anchor="middle" font-size="11" fill="#6b7684">登録するデータ</text>
   <rect x="300" y="80" width="150" height="270" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
   <svg x="343" y="150" width="64" height="64" viewBox="0 0 80 80"><title>Icon-Architecture/64/Arch_AWS-Lambda_64</title>
     <g id="la-Icon-Architecture/64/Arch_AWS-Lambda_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
