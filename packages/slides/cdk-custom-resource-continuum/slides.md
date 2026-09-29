@@ -230,6 +230,8 @@ layout: center
 transition: slide-left
 ---
 
+<div class="text-sm opacity-70">実装が複雑になりそうだけど…</div>
+
 ## 何故そこまでしてCDKで定義したかったの？
 
 <br>
@@ -238,7 +240,7 @@ transition: slide-left
 - 定義したリソースを複製しやすい
   - e.g. リポジトリごとにCodeReviewを作れる
 - 設定を設計意図と一緒にソースコードに残せる
-  - マネコンで作ると設計意図は別途ドキュメントが必要
+  - <Kogoe>マネコンから作ると設計意図を残すには別途ドキュメントが必要</Kogoe>
 
 <div class="mt-8 opacity-70">
   <div style="font-size: 1rem">ほかにも</div>
@@ -253,7 +255,7 @@ layout: center
 ---
 
 <div>
-  <h2>Continuumコードスキャニングを<br>CDKのカスタムリソースを使って定義します</h2>
+  <h2>Continuumコードスキャニングを<br><strong>CDKのカスタムリソース</strong>を使って定義します</h2>
 </div>
 
 ---
@@ -326,11 +328,19 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 <br>
 
-- GitLabのアクセストークンとContinuumを連携するリソース
-- プロパティにアクセストークンを渡す必要がある
-  - テンプレートやログにアクセストークンが流出してしまう
-- Secrets ManagerのARNだけ渡し、処理の中でトークンを取得する
-  - API呼び出しが2回必要
+<div class="compact-list">
+
+- リポジトリとContinuumを連携するためのリソース
+- プロパティにアクセストークン（シークレット）を指定する必要がある
+  - テンプレートやログからシークレットが流出してしまう
+- 回避しようとすると単一のAWS SDK呼び出しでは実現できない
+  - AwsCustomResourceは利用できない
+
+</div>
+
+<style>
+.compact-list li { font-size: 1.2rem !important; }
+</style>
 
 <div v-click class="mt-6 text-xl">
   → <strong>カスタムリソースプロバイダーフレームワーク</strong>を利用する
@@ -343,15 +353,23 @@ CDKが提供しているカスタムリソースの作り方の1つ
   <h2 class="!m-0">プロバイダーフレームワークとは？</h2>
 </div>
 
-<div class="text-sm opacity-70 mt-1">カスタムリソースプロバイダーフレームワーク</div>
+CDKが提供しているカスタムリソースの作り方の1つ
+
+<div class="tight-list">
 
 - CloudFormationイベントに合わせた処理をLambda関数で書ける
 - 処理はソースコードで書くので、複雑な処理も任せられる
 - カスタムリソースに必要な機能を簡単に使える
-  - CloudFormationへの応答
+  - CloudFormationとのやり取り
   - エラーハンドリング
-  - 非同期処理のポーリング
+  - 非同期処理のポーリング <Kogoe>など…</Kogoe>
 - 呼び出す処理に必要な権限は自分で付与する必要がある
+
+</div>
+
+<style>
+.tight-list li { font-size: 1.15rem !important; line-height: 1.5 !important; margin-top: 0.1rem !important; margin-bottom: 0.1rem !important; }
+</style>
 
 <BottomLink href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources-readme.html#provider-framework" title="Provider Framework · AWS CDK" />
 
@@ -364,7 +382,7 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 <div class="text-lg mt-4">Integrationの定義例</div>
 
-<div class="text-sm opacity-70 mt-1">※ 省略のためCreateイベントのみ記載</div>
+<div class="text-sm opacity-70 mt-1">※ 簡素化のためCreateイベントのみに省略</div>
 
 <InlineSvg src="provider-integration.svg" label="プロバイダーフレームワークのカスタムリソースが、プロパティでSecrets ManagerのARNを受け取り、フレームワークが作成するフレームワーク用のLambda関数から自前の処理用Lambda関数にCreateを渡し、Secrets Managerからアクセストークンを取得してCreateIntegrationを呼び出す図" class="mx-auto mt-4" style="width: 840px" />
 
@@ -374,28 +392,33 @@ transition: slide-left
 
 <h2>AwsCustomResourceと<br>プロバイダーフレームワークの使い分け</h2>
 
-<div class="grid grid-cols-2 gap-6 mt-6">
-  <div class="rounded-xl border-2 border-gray-300 p-5">
+<div class="text-lg mt-2">基本は<strong>AwsCustomResource</strong>を使い、<br>実現できない要件があるときだけ<strong>プロバイダーフレームワーク</strong>を使う</div>
+
+<div class="flex items-stretch gap-3 mt-5">
+  <div class="rounded-xl border-2 border-gray-300 px-4 py-3" style="flex: 0 0 40%">
     <div class="flex items-center gap-3 mb-2">
-      <img src="/public/images/aboutme/awscdk.dio.png" class="h-9" />
-      <span class="font-bold" style="font-size: 1.2rem; white-space: nowrap">AwsCustomResource</span>
+      <img src="/public/images/aboutme/awscdk.dio.png" class="h-8" />
+      <span class="font-bold" style="font-size: 1.1rem; white-space: nowrap">AwsCustomResource</span>
     </div>
+    <div class="font-bold" style="font-size: 1rem">基本はこちら</div>
     <ul>
-      <li style="font-size: 1.1rem">AWS SDKの呼び出し1回で済む</li>
-      <li style="font-size: 1.1rem">機密情報を扱わない</li>
-      <li style="font-size: 1.1rem">処理の完了を待たなくていい</li>
+      <li style="font-size: 1rem; white-space: nowrap">AWS SDKの呼び出し1回で済む</li>
     </ul>
   </div>
-  <div class="rounded-xl border-2 border-gray-300 p-5">
+  <div class="flex flex-col items-center justify-center" style="flex: 0 0 auto">
+    <span class="text-xs text-gray-500 text-center" style="line-height: 1.4">実現<br>できない</span>
+    <span class="text-3xl">→</span>
+  </div>
+  <div class="rounded-xl border-2 border-gray-300 px-4 py-3" style="flex: 1">
     <div class="flex items-center gap-3 mb-2">
-      <img src="/public/images/aboutme/awscdk.dio.png" class="h-9" />
-      <span class="font-bold" style="font-size: 1.2rem; white-space: nowrap">プロバイダーフレームワーク</span>
+      <img src="/public/images/aboutme/awscdk.dio.png" class="h-8" />
+      <span class="font-bold" style="font-size: 1.1rem; white-space: nowrap">プロバイダーフレームワーク</span>
     </div>
+    <div class="font-bold" style="font-size: 1rem">こんな要件があるとき</div>
     <ul>
-      <li style="font-size: 1.1rem">複数の処理が必要</li>
-      <li style="font-size: 1.1rem">機密情報を扱う</li>
-      <li style="font-size: 1.1rem">処理の完了を待ちたい</li>
-      <li style="font-size: 1.1rem">AWS以外のAPIを呼びたい</li>
+      <li style="font-size: 1rem">APIの呼び出しが1回に収まらない</li>
+      <li style="font-size: 1rem">非同期処理の完了を待ちたい</li>
+      <li style="font-size: 1rem">AWS SDKではできない処理をしたい</li>
     </ul>
   </div>
 </div>
@@ -412,7 +435,7 @@ transition: slide-left
 
 <br>
 
-<div class="text-lg">その他カスタムリソースを使いたくなるタイミング</div>
+<div class="text-lg">その他カスタムリソースの使い道</div>
 
 - CloudFormationで定義できないものを管理したい
 - デプロイしたリソースにデータを投入したい

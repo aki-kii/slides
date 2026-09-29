@@ -1,3 +1,7 @@
+<script lang="ts">
+let count = 0
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 
@@ -12,7 +16,18 @@ const svgs = import.meta.glob('../public/images/*.svg', {
   eager: true,
 }) as Record<string, string>
 
-const svg = computed(() => svgs[`../public/images/${props.src}`] ?? '')
+// 埋め込むと id がページ全体で共有される。Slidev は前後のスライドも DOM に残すので、
+// 別のスライドの矢じり（marker）と id がぶつかり、そのスライドが隠れると矢じりが消える。
+// 埋め込むたびに id へ接頭辞を付けて、ぶつからないようにする。
+const prefix = `isvg${++count}-`
+
+const svg = computed(() => {
+  const raw = svgs[`../public/images/${props.src}`] ?? ''
+  return raw
+    .replace(/\bid="([^"]+)"/g, `id="${prefix}$1"`)
+    .replace(/url\(#([^)]+)\)/g, `url(#${prefix}$1)`)
+    .replace(/href="#([^"]+)"/g, `href="#${prefix}$1"`)
+})
 </script>
 
 <template>
