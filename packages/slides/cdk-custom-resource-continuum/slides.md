@@ -296,7 +296,7 @@ layout: center
 <br>
 
 - CloudFormationイベントごとにAWS SDKを1つだけ呼べる
-- 処理を書かずに、プロパティを渡すだけで済む
+- プロパティを渡すだけでカスタムリソースを作れるので<br>めちゃくちゃ簡単
 - 呼び出すAWS SDKからIAMポリシーを自動で作れる
 
 <BottomLink href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources.AwsCustomResource.html" title="class AwsCustomResource (construct) · AWS CDK" />
