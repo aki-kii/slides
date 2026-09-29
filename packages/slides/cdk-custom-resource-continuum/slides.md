@@ -49,7 +49,6 @@ name: アキキー | 池田 晃尚
 
 <img src="/images/aboutme/jawsug-cdk-logo.png" />
 <img src="/images/aboutme/aws-community-builders-logo.png" />
-<AwsCertBadges dir="/images/aboutme/awscerts/enabled" :per-row="8" :gap="0" class="h-full" />
 
 ---
 transition: view-transition
@@ -121,10 +120,7 @@ layout: center
 
 <InlineSvg src="code-scanning.svg" label="Continuum コードスキャニングがリポジトリ全体を読み、見つかった脆弱性と修正案をスキャン結果として出す図" class="mx-auto mt-1" style="width: 620px" />
 
-<BottomLinks>
-  <BottomLink href="https://aws.amazon.com/about-aws/whats-new/2026/05/aws-security-agent-full-repository-code-review/" title="AWS Security Agent now supports full repository code reviews" />
-  <BottomLink href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-continuum/" title="Introducing AWS Continuum for security at machine speed" />
-</BottomLinks>
+<BottomLink href="https://docs.aws.amazon.com/securityagent/latest/userguide/perform-code-review-scan.html" title="Create a code review - AWS Security Agent (now part of AWS Continuum)" />
 
 ---
 
