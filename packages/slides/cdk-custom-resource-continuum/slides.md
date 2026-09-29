@@ -2,7 +2,7 @@
 layout: title
 drawings:
   persist: false
-transition: slide-left
+transition: fade
 title: AWS CDKのカスタムリソースでContinuum（旧Security Agent）を実装した話
 mdc: true
 addons:
@@ -30,6 +30,7 @@ fonts:
 layout: profile
 image: /images/aboutme/me.jpeg
 name: アキキー | 池田 晃尚
+transition: slide-left
 ---
 
 <ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ（2025.9〜）">
@@ -51,10 +52,10 @@ name: アキキー | 池田 晃尚
 <img src="/images/aboutme/aws-community-builders-logo.png" />
 
 ---
-transition: view-transition
+transition: slide-left
 ---
 
-<div style="view-transition-name: cdk-icon" class="flex items-center gap-4">
+<div class="flex items-center gap-4">
   <img src="/public/images/aboutme/awscdk.dio.png" class="h-12" />
   <h2 class="!m-0">AWS CDKとは？</h2>
 </div>
@@ -134,6 +135,8 @@ layout: center
 <InlineSvg src="continuum-code-review.svg" label="IntegrationがGitLabのアクセストークンでGitLabと接続し、AgentSpaceの中のCodeReviewがGitLabのリポジトリをスキャンする構成図。AgentSpaceはCloudFormation対応、IntegrationとCodeReviewはCloudFormation未対応" class="mx-auto mt-6" style="width: 800px" />
 
 ---
+transition: slide-left
+---
 
 <div class="flex items-center gap-4">
   <img src="/public/images/aboutme/awscdk.dio.png" class="h-12" />
@@ -179,10 +182,9 @@ layout: center
 
 ---
 layout: center
-transition: view-transition
 ---
 
-<div style="view-transition-name: cfn-unsupported">
+<div>
   ContinuumコードスキャニングをCDKで管理するため
   <h2><strong>カスタムリソース</strong>で定義しました！</h2>
 </div>
@@ -224,6 +226,8 @@ transition: view-transition
 
 <InlineSvg src="custom-resource-s3.svg" label="カスタムリソースのLambda関数が、CreateとUpdateでは何もせず、DeleteでS3バケットのオブジェクトを全て削除する図" class="mx-auto mt-4" style="width: 780px" />
 
+---
+transition: slide-left
 ---
 
 ## 何故そこまでしてCDKで定義したかったの？
@@ -269,7 +273,7 @@ layout: center
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/security-agent.svg" class="h-12" />
-  <h2 class="!m-0">CodeReviewのポイント</h2>
+  <h2 class="!m-0">CodeReviewを定義するためのポイント</h2>
 </div>
 
 <br>
@@ -317,7 +321,7 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/security-agent.svg" class="h-12" />
-  <h2 class="!m-0">Integrationのポイント</h2>
+  <h2 class="!m-0">Integrationを定義するためのポイント</h2>
 </div>
 
 <br>
@@ -353,12 +357,19 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 ---
 
-<h2><span style="font-size: 0.85em">Integrationのためのプロバイダーフレームワーク</span></h2>
+<div class="flex items-center gap-4">
+  <img src="/public/images/aboutme/awscdk.dio.png" class="h-12" />
+  <h2 class="!m-0">プロバイダーフレームワークとは？</h2>
+</div>
+
+<div class="text-lg mt-4">Integrationの定義例</div>
 
 <div class="text-sm opacity-70 mt-1">※ 省略のためCreateイベントのみ記載</div>
 
-<InlineSvg src="provider-integration.svg" label="プロバイダーフレームワークのカスタムリソースが、プロパティでSecrets ManagerのARNを受け取り、CDKが作るフレームワーク用のLambda関数から自前の処理用Lambda関数にCreateを渡し、Secrets Managerからアクセストークンを取得してCreateIntegrationを呼び出す図" class="mx-auto mt-4" style="width: 840px" />
+<InlineSvg src="provider-integration.svg" label="プロバイダーフレームワークのカスタムリソースが、プロパティでSecrets ManagerのARNを受け取り、フレームワークが作成するフレームワーク用のLambda関数から自前の処理用Lambda関数にCreateを渡し、Secrets Managerからアクセストークンを取得してCreateIntegrationを呼び出す図" class="mx-auto mt-4" style="width: 840px" />
 
+---
+transition: slide-left
 ---
 
 <h2>AwsCustomResourceと<br>プロバイダーフレームワークの使い分け</h2>
@@ -391,6 +402,7 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 ---
 layout: center
+transition: slide-left
 ---
 
 <div>
@@ -417,6 +429,7 @@ transition: fade
 
 ---
 src: ./pages/pr/mates/index.md
+transition: slide-left
 ---
 
 ---
