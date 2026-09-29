@@ -174,7 +174,7 @@ layout: center
 </div>
 
 <Overlay>
-  CloudFormation が対応していないリソースは<br><strong>標準的な方法では CDK で定義できない</strong>
+  CloudFormation が対応していないリソースは<br><strong>標準的な方法では</strong> CDK で定義できない
 </Overlay>
 
 ---
