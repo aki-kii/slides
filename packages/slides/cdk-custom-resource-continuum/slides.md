@@ -297,16 +297,21 @@ CDKが提供しているカスタムリソースの作り方の1つ
 
 - CloudFormationイベントごとにAWS SDKを1つだけ実行できる
 - プロパティを渡すだけで簡単にカスタムリソースを作成できる
-- 指定したAWS SDKからIAMポリシーを自動で作成できる
+- 指定したAWS SDKからIAMポリシーを自動で生成する
   - <Kogoe>権限が足りない場合は自分で指定する必要あり</Kogoe>
 
 <BottomLink href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources.AwsCustomResource.html" title="class AwsCustomResource (construct) · AWS CDK" />
 
 ---
 
-## CodeReviewのためのAwsCustomResource
+<div class="flex items-center gap-4">
+  <img src="/public/images/aboutme/awscdk.dio.png" class="h-12" />
+  <h2 class="!m-0">AwsCustomResourceとは？</h2>
+</div>
 
-<InlineSvg src="awscr-codereview.svg" label="AwsCustomResourceのカスタムリソースで、CreateにCreateCodeReview、UpdateにUpdateCodeReview、DeleteにBatchDeleteCodeReviewsを割り当て、CDKが自動で作るLambda関数がCodeReviewを操作する図" class="mx-auto mt-4" style="width: 840px" />
+<div class="text-lg mt-4">CodeReviewの定義例</div>
+
+<InlineSvg src="awscr-codereview.svg" label="AwsCustomResourceのカスタムリソースで、CreateにCreateCodeReview、UpdateにUpdateCodeReview、DeleteにBatchDeleteCodeReviewsを割り当て、AwsCustomResourceが作成するLambda関数がCodeReviewを操作する図" class="mx-auto mt-4" style="width: 840px" />
 
 ---
 
