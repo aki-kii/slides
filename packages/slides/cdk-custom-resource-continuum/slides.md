@@ -424,7 +424,7 @@ transition: slide-left
 
 <br>
 
-<div class="text-lg">その他カスタムリソースの使い道</div>
+<div class="text-lg">その他にも...</div>
 
 - CloudFormationで定義できないものを管理したい
 - デプロイしたリソースにデータを投入したい
