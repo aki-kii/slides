@@ -2,98 +2,89 @@
 transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle>PullRequest作ったよ</AgentTitle>
+<ChatMessage from="agent" heading>プルリクエスト作ったよ</ChatMessage>
 
-<PipelineStage rail="4-create-pr">
+<PipelineStage stage="pr">
 
-PullRequest作成後のCIで、次のセンサーが動作します
-
-- **`cdk validate`**
-  - <Kogoe>CloudFormationの事前検証で、AWS本体と矛盾しないかを検証</Kogoe>
-- **`cdk drift`**
-  - <Kogoe>デプロイ済みのリソースに手で変更された形跡がないかを検証</Kogoe>
-- **Linter / 型チェック / 単体テスト**
-  - <Kogoe>ここまでで回したものを、クリーンな環境で回し直す</Kogoe>
+**プルリクエスト作成後**の検証（CI）
+- cdk validate
+  - オフライン：ルールセットに照らして検証
+  - オンライン：AWSの状態を見てデプロイ可能か検証
+- cdk drift
+  - デプロイ済みのリソースに手で変更された形跡がないかを検証
+- Lint / 型チェック / 単体テスト
 
 </PipelineStage>
-
-<!--
-1. PullRequestを作成しました
-2. PR作成時に起動するGitHub ActionsでCIが回ります
-3. cdk validate は synth してチェンジセットを作り、
-   CloudFormationのサーバー側の事前検証を叩きます。ここで初めてAWS本体に問い合わせます
--->
 
 ---
 transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle :texts="['CIの`cdk validate`が失敗してる']" />
+<ChatMessage from="agent" heading :texts="['`cdk validate`が失敗してる']" />
 
-<PipelineStage rail="4-create-pr-failed">
+<PipelineStage stage="pr" status="failed">
 
-```ts [ソースコード]
-const bucket = new s3.Bucket(this, 'Bucket', {
-  bucketName: 'akikii-conversation-log',
-//            ^^^^^^^^^^^^^^^^^^^^^^^^^
-//            同名のS3バケットが既に存在していた
-  autoDeleteObjects: true,
-  removalPolicy: RemovalPolicy.DESTROY,
-});
-```
-
-```text [cdk validate結果]
+```bash [cdk validate結果]
 $ cdk validate BotStack --unstable=validate
 
 FATAL Resource of type 'AWS::S3::Bucket'
   with identifier 'akikii-conversation-log'
   already exists.
+# AWSに同名のS3バケットが既に存在していた
 ```
 
 </PipelineStage>
 
-<!--
-4. バケット名は他から参照できるように固定してありました
-5. その名前はもう使われている、と言われました。
-   前に手で作って試したバケットが残っていたんです
-6. どのconstructが問題かまで返るので、エージェントはそのまま直せます
-7. 同じコードで cdk diff を回しても、バケットが増えるとしか言いません。
-   diff が見ているのは自分のスタックの中身だけで、アカウントに他に何があるかは見ていない
-8. ここが5つの層のなかで一番大きな分かれ目です。
-   従来ならデプロイして数分待って、失敗してロールバックして初めて分かる類の失敗でした
--->
+---
+transition: fade
+---
+
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
+
+<ChatMessage from="agent" heading :texts="['修正するよ', '修正したよ']" />
+
+<PipelineStage stage="edit" :status="$clicks < 1 ? 'running' : 'done'">
+
+<!-- 既定 (500ms) だと変形が間延びするので短めにする -->
+````md magic-move [ソースコード] {duration: 300}
+```ts
+const bucket = new s3.Bucket(this, 'LogBucket', {
+  bucketName: 'akikii-conversation-log',
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^
+//         AWSに同名のS3バケットが既に存在していた
+  removalPolicy: cdk.RemovalPolicy.RETAIN,
+});
+```
+
+```ts
+const bucket = new s3.Bucket(this, 'LogBucket', {
+  // ✅ bucketNameは指定せず、CDKに一意な名前を付けさせる
+  removalPolicy: cdk.RemovalPolicy.RETAIN,
+});
+```
+````
+
+</PipelineStage>
 
 ---
 transition: slide-left
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle :texts="['修正したよ！', '`cdk validate`通った！CIも成功したよ']" />
+<ChatMessage from="agent" heading :texts="['`cdk validate` 通った！CIも成功したよ']" />
 
-<PipelineStage :rail="$clicks < 1 ? '4-create-pr' : '4-create-pr-done'">
+<PipelineStage stage="pr" status="done">
 
-```ts [ソースコード]
-const bucket = new s3.Bucket(this, 'Bucket', {
-  // bucketNameは指定せず、CDKに一意な名前を付けさせる
-  autoDeleteObjects: true,
-  removalPolicy: RemovalPolicy.DESTROY,
-});
-```
-
-<div v-click>
-
-```text [cdk validateの出力]
+```bash [cdk validate結果]
 $ cdk validate BotStack --unstable=validate
 
 ✨  Validation passed (1 stack)
 ```
-
-</div>
 
 </PipelineStage>
 

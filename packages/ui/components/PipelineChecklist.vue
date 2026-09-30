@@ -28,6 +28,16 @@ const props = defineProps({
   iconSize: { type: Number, default: 34 },
   /** 手順同士の間隔 (px) */
   gap: { type: Number, default: 16 },
+  /**
+   * ラベルの最小幅 (CSS の長さ)。
+   * 指定すると全部の pill が同じ幅になり、右に置いた説明文が縦に揃う。
+   */
+  labelWidth: { type: String, default: null },
+  /**
+   * 左のレール (状態アイコンと接続線) を出すか。
+   * false にすると pill だけが縦に並ぶので、順序ではなく対応関係を見せたいときに使う。
+   */
+  showRail: { type: Boolean, default: true },
 });
 
 const { resolved, cycle } = usePipelineStatuses(props);
@@ -37,7 +47,11 @@ const { resolved, cycle } = usePipelineStatuses(props);
   <ol
     class="pipeline"
     :class="{ 'is-mono': mono, 'no-animate': !animate }"
-    :style="{ '--icon-size': `${iconSize}px`, '--gap': `${gap}px` }"
+    :style="{
+      '--icon-size': `${iconSize}px`,
+      '--gap': `${gap}px`,
+      '--label-width': labelWidth ?? '0',
+    }"
   >
     <li
       v-for="(step, index) in resolved"
@@ -46,7 +60,7 @@ const { resolved, cycle } = usePipelineStatuses(props);
       :class="[`is-${step.status}`, { 'is-interactive': interactive }]"
       @click="cycle(index)"
     >
-      <div class="rail">
+      <div v-if="showRail" class="rail">
         <!-- 前後の手順とをつなぐ線。完了済みの手順から伸びる線だけ色を付ける -->
         <span
           v-if="index > 0"
@@ -87,6 +101,13 @@ const { resolved, cycle } = usePipelineStatuses(props);
       <div class="label">
         <slot :name="`step-${index}`" :step="step" :index="index">
           {{ step.label }}
+        </slot>
+      </div>
+
+      <!-- pill の右に置く説明文。steps に desc を持たせるか、スロットで差し込む -->
+      <div v-if="step.desc || $slots[`desc-${index}`]" class="desc">
+        <slot :name="`desc-${index}`" :step="step" :index="index">
+          {{ step.desc }}
         </slot>
       </div>
     </li>
@@ -210,13 +231,33 @@ const { resolved, cycle } = usePipelineStatuses(props);
   border: 1.5px solid var(--color);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 1px 4px rgba(20, 30, 60, 0.12);
+  /*
+   * ぼかし付きの box-shadow は使わない。Chromium の PDF 出力が影を角丸を無視した
+   * 灰色の矩形として焼き込むため、書き出すと pill の背後に四角が並ぶ。
+   * (opacity が掛かる is-pending だけは正常に出るので画面では気付きにくい)
+   * 枠線と不透明に近い地があるので、影が無くても pill として読める。
+   */
   color: #1f1e24;
   line-height: 1.5;
   white-space: nowrap;
   transition:
     border-color 0.25s ease,
     opacity 0.25s ease;
+}
+
+.label {
+  min-width: var(--label-width);
+  text-align: center;
+}
+
+/* pill の右の説明文。pill と違って本文のフォントで読ませる */
+.desc {
+  color: #3a3941;
+  line-height: 1.5;
+}
+
+.pipeline-step.is-pending .desc {
+  opacity: 0.85;
 }
 
 .pipeline.is-mono .label {

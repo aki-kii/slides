@@ -1,15 +1,10 @@
 ---
 layout: profile
-transition: slide-left
-image: /images/aboutme/me.jpeg
+# 前ページのアイコン、次ページのランニングと繋ぐ
+transition: view-transition
+image: /images/cdk-chapter/akikii__.jpg
 name: アキキー | 池田 晃尚
 ---
-
-<ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ">
-
-- バックエンドエンジニア / SRE
-
-</ProfileItem>
 
 <ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK" >
 
@@ -19,7 +14,7 @@ name: アキキー | 池田 晃尚
 
 <ProfileItem title="最近の趣味">
 
-- ランニング 🏃
+- <span style="view-transition-name: running-text">ランニング 🏃</span>
 
 </ProfileItem>
 

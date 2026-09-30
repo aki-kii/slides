@@ -1,30 +1,91 @@
 ---
-layout: center
-transition: slide-left
+transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<div class="text-center">
+<br>
 
-<div class="text-xl opacity-70">人間がコードを1行も読んでいなくても</div>
+<ChatMessage from="user">コード見なくても全然うまくいくもんだな〜</ChatMessage>
 
-<h2 class="mt-2">CDKはこの階段の<br>全段に道具を持っている</h2>
+<v-clicks>
 
-<div v-click class="mt-8 text-xl">
+<ChatMessage from="agent">...</ChatMessage>
 
-`cdk validate` は<strong>どのconstructが問題か</strong>を、<br>
-`cdk diagnose` は<strong>自分の書いたコードの場所</strong>を指して返る
+</v-clicks>
+
+---
+layout: default
+title: caught
+transition: slide-left
+clicks: 1
+---
+
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
+
+<script setup>
+/**
+ * 直前の「コード見なくても全然うまくいくもんだな〜」への答え合わせ。
+ * 実際は5回転んでいて、そのすべてをエージェントが自分で直している。
+ *
+ * desc は「何を直したか」ではなく「どんな事象を検出したか」で書く。
+ * 個別のエラー内容はトレースで見せ終わっているので、ここでは
+ * 5つが別々の種類の問題であることが伝わればよい。
+ *
+ * 層の並びは devWorkflow.js と同じ (下の層から) なので、
+ * 3章で配った地図をそのまま埋め戻したものとして読める。
+ * 下に行くほど「本来なら気付くのが遅い問題」になる。
+ */
+const CAUGHT = [
+  { label: 'Linter', desc: '型検査は通ってしまう、CDK特有の書き方', status: 'done' },
+  { label: 'cdk synth', desc: '組み合わせが成立していないプロパティ', status: 'done' },
+  { label: 'cdk diff', desc: '意図しないリソースの作り直し', status: 'done' },
+  { label: 'cdk validate', desc: 'AWSアカウントの状態との衝突', status: 'done' },
+  { label: 'cdk diagnose', desc: 'デプロイして初めて分かる権限不足', status: 'done' },
+];
+</script>
+
+## エージェントが自分で潰したもの
+
+<div class="recap">
+
+<PipelineChecklist
+  mono
+  :interactive="false"
+  :steps="CAUGHT"
+  :gap="18"
+  label-width="9.5em"
+/>
 
 </div>
 
-</div>
+<div class="recap-point" v-click="1">壊れているところは、どれも<strong>機械がコードの場所まで</strong>教えてくれた</div>
+
+<style>
+.recap {
+  margin-top: 1.4rem;
+}
+
+.recap :deep(.pipeline-step) {
+  font-size: 0.98rem;
+}
+
+/* 説明は等幅にすると行が長くなるので、本文と同じサンセリフで置く */
+.recap :deep(.desc) {
+  color: #3a3941;
+}
+
+.recap-point {
+  margin-top: 1.6rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+</style>
 
 <!--
-1. 人間がやったのは、依頼を1つ出したことと、PRの要約を聞いたことだけでした
-2. 5つの層は、それぞれ違うものを照らしていました。下の層では原理的に出せないものだけを担当しています
-3. CDKはこの階段の全段に道具を持っています。
-   しかも返ってくるものが、エージェントがそのまま読んで直せる形になっている
-4. だから、IaC、特にCDKは、
-   コーディングエージェントでAWSインフラを構築する検証サイクルを回すのに向いています
+1. 「うまくいく」と言いましたが、実際は5回転んでいます
+2. エージェントの開発フローを下から登りながら、5つの層で検証が鳴りました
+3. しかも下に行くほど、本来なら気付くのが遅い問題です
+4. （クリック）どれも自分ではコードを読まずに、機械がコードの場所まで教えてくれました
 -->

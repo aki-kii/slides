@@ -2,18 +2,18 @@
 transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle>実装するよー</AgentTitle>
+<ChatMessage from="agent" heading>ファイルを編集するよ〜</ChatMessage>
 
-<PipelineStage rail="1-file-edit">
+<PipelineStage stage="edit">
 
-ファイル編集後に実行されるチェック
+**ファイル編集後**に検証する仕組み
 
-- **Linter**
+- Linter
   - ソースコードを静的解析して、プログラミング言語やCDKのルール違反を検証
-- **型チェック**
-  - 定義されている型に矛盾がないかを検証
+- 型チェッカー
+  - ソースコードで定義している型に矛盾がないかを検証
 
 </PipelineStage>
 
@@ -27,61 +27,72 @@ transition: fade
 transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle>Lintエラーが出ちゃった</AgentTitle>
+<ChatMessage from="agent" heading>Lintエラーが出ちゃった</ChatMessage>
 
-<PipelineStage rail="1-file-edit-failed">
+<PipelineStage stage="edit" status="failed">
 
-```ts [ソースコード]
-export interface ConversationLogProps {
-  readonly taskRole: iam.Role;
-  /**                    ^^^^
-  * oxlint-plugin-awscdk/no-construct-in-interface
-  * InterfaceのPropsにはInterface型の指定を推奨
-  */
-}
+```bash [Lint結果]
+$ pnpm lint
+
+  × awscdk/pascal-case-construct-id
+    Construct IDはPascalCaseで指定してください
+
+Found 0 warnings and 1 error.
 ```
+
+- awscdk-lint<Kogoe> (eslint-plugin-awscdk/oxlint-plugin-awscdk)</Kogoe>
+  - CDKのセオリーに基づくコーディング規約を提供するLintプラグイン
 
 </PipelineStage>
 
-<br>
-
-- **awscdk-lint**
-  - CDKのルールを扱うLintプラグイン（ESLint/Oxlint）
-  - CDKにおけるセオリーをコーディング規則として取り入れられる
-
 <BottomLink href="https://awscdk-lint.dev/" label="awscdk-lint Lint plugins for AWS CDK" />
 
-<br>
+---
+transition: fade
+---
+
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
+
+<ChatMessage from="agent" heading :texts="['修正するよ', '修正したよ']" />
+
+<PipelineStage stage="edit" :status="$clicks < 1 ? 'running' : 'done'">
+
+````md magic-move [ソースコード] {duration: 300}
+```ts
+const bucket = new s3.Bucket(this, 'log-bucket', {
+  //                               ^^^^^^^^^^^^
+  // ❌ Construct IDがPascalCaseになっていない
+  removalPolicy: cdk.RemovalPolicy.RETAIN,
+});
+```
+
+```ts
+// ✅ Construct IDをPascalCaseに修正
+const bucket = new s3.Bucket(this, 'LogBucket', {
+  removalPolicy: cdk.RemovalPolicy.RETAIN,
+});
+```
+````
+
+</PipelineStage>
 
 <!--
-4. 会話ログの置き場をConstructに切り出して、書き込む相手のタスクロールを外から受け取る形にしました
-5. ここでLinterがエラーを出しました。引っかかったのはCDKのルール違反です
-6. Role は「CDKがこれから作るロール」、IRole は「ロールならなんでも」。
-   Role で受けると、別のスタックで作ったロールやインポートしたロールを渡せなくなります
+6. Construct IDはPascalCaseで書くのがCDKの流儀。エージェントはケバブケースで書いていました
+7. Lintは違反したルール名と、コードの場所まで教えてくれます。
+   なのでエージェントはそれを読んで自分で直せます。ここで人間は何もしていません
 -->
 
 ---
 transition: slide-left
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle :texts="['修正したよ！', 'Lintエラー消えた！']" />
+<ChatMessage from="agent" heading>Lintエラーなくなった！</ChatMessage>
 
-<PipelineStage :rail="$clicks < 1 ? '1-file-edit' : '1-file-edit-done'">
-
-```ts [ソースコード]
-export interface ConversationLogProps {
-  readonly taskRole: iam.IRole;
-  // ✅ インタフェース型(IRole)を渡すように修正
-}
-```
-
-<div v-click>
-
-<br>
+<PipelineStage stage="edit" status="done">
 
 ```bash [Lint結果]
 $ pnpm lint
@@ -89,13 +100,11 @@ $ pnpm lint
 Found 0 warnings and 0 errors.
 ```
 
-</div>
-
 </PipelineStage>
 
 <!--
-7. 直りました。ここで押さえておきたいのは、
+8. 直りました。ここで押さえておきたいのは、
    このコードは型チェックも通るし、この後に出てくる synth も diff も通るということです
-8. 編集のたびに鳴るので、書いている最中にエージェントが直せました。
+9. 編集のたびに鳴るので、書いている最中にエージェントが直せました。
    一番回数の多い層を、待ち時間ゼロで潰せます
 -->

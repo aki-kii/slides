@@ -25,16 +25,37 @@ fonts:
 2026/9/5 sat.<br>
 JAWS-UG CDK支部 / アキキー（[@akikii\_\_](https://x.com/akikii__)）
 
+
+---
+src: ./pages/cdk-chapter.md
+---
+
 ---
 src: ./pages/profile.md
 ---
 
 ---
-src: ./pages/dev-workflow.md
+src: ./pages/intro/index.md
 ---
 
 ---
-src: ./pages/trace/intro.md
+src: ./pages/cdk-and-coding-agent/index.md
+---
+
+---
+src: ./pages/trace/intro.md#1
+---
+
+---
+src: ./pages/dev-workflow/dev-workflow.md#2
+---
+
+---
+src: ./pages/dev-workflow/cdk-sensors.md
+---
+
+---
+src: ./pages/trace/intro.md#2
 ---
 
 ---
@@ -42,11 +63,11 @@ src: ./pages/trace/edit-write.md
 ---
 
 ---
-src: ./pages/trace/commit.md
+src: ./pages/trace/commit.md#1
 ---
 
 ---
-src: ./pages/trace/push.md
+src: ./pages/trace/push.md#1
 ---
 
 ---
@@ -58,5 +79,17 @@ src: ./pages/trace/merge-deploy.md
 ---
 
 ---
-src: ./pages/trace/summary.md
+src: ./pages/trace/sensors-recap.md
+---
+
+---
+src: ./pages/conclusion/index.md
+---
+
+---
+src: ./pages/conclusion/promo.md
+---
+
+---
+src: ./pages/ending.md
 ---

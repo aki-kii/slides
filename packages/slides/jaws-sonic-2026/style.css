@@ -61,12 +61,6 @@
   background-repeat: no-repeat;
 }
 
-/* 背景がうっすら透けるように、コードブロックの地を少し透過させる */
-.slidev-layout.default .slidev-code,
-.slidev-layout.center .slidev-code {
-  background-color: rgba(255, 255, 255, 0.62);
-}
-
 /* =====================================================
    文字サイズ
    ===================================================== */
@@ -84,7 +78,7 @@
   line-height: 1.2;
 }
 
-/* AgentTitle もこれ。ロゴ帯に被らない範囲に収める */
+/* AgentChat もこれ。ロゴ帯に被らない範囲に収める */
 .slidev-layout h2 {
   font-size: 1.7rem;
   line-height: 1.3;
@@ -113,11 +107,253 @@
   font-size: 1.05rem;
 }
 
-.slidev-layout pre code {
-  font-size: 1.3em;
+/* =====================================================
+   コードブロック
+   ===================================================== */
+/*
+ * cdk-day1-experiment と同じく、暗い地の上にコードを置く。配色は
+ * setup/shiki.ts (vitesse-dark) 由来なので、ここでは地・枠・余白だけを決める。
+ *
+ * 通常のコードブロックも magic-move も、Slidev は
+ *   .slidev-code-wrapper > (.slidev-code-block-title) + pre.slidev-code
+ * という同じ構造で描く。違いは pre の中身が <code> か
+ * .shiki-magic-move-item の並びかだけなので、外側は共通のルールで揃えて、
+ * 文字サイズだけ両方に効くよう個別に指定する。
+ */
+
+.slidev-layout .slidev-code {
+  background: var(--shiki-dark-bg, #121212) !important;
+  /*
+   * 縦は詰めている。このデッキはコードブロックを 2 つ縦に並べるページ
+   * (push / create-pr / merge-deploy) があり、上下に余白を足すと画面下から
+   * はみ出すため。横だけ広げて窮屈に見えないようにする。
+   */
+  padding: 0.4rem 1.25rem !important;
+  border-radius: 8px !important;
+  overflow-y: auto !important;
+}
+
+/* ファイル名ラベル (```ts [ソースコード]) はコードの地より一段明るく */
+.slidev-layout .slidev-code-block-title {
+  background: #2b2b2b;
+  color: #dbd7caee;
+  border-radius: 8px 8px 0 0;
+  padding: 0.4rem 1.25rem;
+  font-size: 0.6rem; /* = 12px。コード本体 (15.6px) より一回り小さく */
+  box-shadow: none;
+}
+
+/* ラベルが付くときは、コード側の上辺の角を落として continuous に見せる */
+.slidev-layout .slidev-code-block-title + .slidev-code {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/*
+ * 文字サイズ。通常ブロックは <code>、magic-move は .shiki-magic-move-item が
+ * テキストを持つので、同じ倍率を両方に掛けて見た目を合わせる。
+ * (--slidev-code-font-size が !important なので、こちらも !important が要る)
+ */
+.slidev-layout .slidev-code code,
+.slidev-layout .shiki-magic-move-item {
+  font-size: 1.3em !important;
+  line-height: 1.6 !important;
+}
+
+/* コピーボタンは暗い地の上だと見えないので、明るい色に振る */
+.slidev-layout .slidev-code-copy {
+  color: #dbd7caee;
+}
+
+/* スクロールバーも暗い地に寄せる */
+.slidev-layout .slidev-code::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.slidev-layout .slidev-code::-webkit-scrollbar-track {
+  background: #2f2f2f;
+  border-radius: 0.25rem;
+}
+
+.slidev-layout .slidev-code::-webkit-scrollbar-thumb {
+  background: #4b4b4b;
+  border-radius: 0.25rem;
+}
+
+.slidev-layout .slidev-code::-webkit-scrollbar-thumb:hover {
+  background: #6a6a6a;
+}
+
+/*
+ * 強調 (**...**)。
+ * 明るい地の上なので、暗い地に載るインラインコードの #d97c8a より一段濃くする。
+ */
+.slidev-layout strong {
+  color: #c0392b;
+}
+
+/* インラインコード */
+.slidev-layout :not(pre) > code {
+  background: #2b2b2b;
+  color: #d97c8a;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* =====================================================
+   イントロ (pages/intro) の文字組み
+   ===================================================== */
+/*
+ * 「小さい前置き → 大きい主張」を繰り返す構成のページ。見出しではなく
+ * 本文の大小で語りたいので、h1/h2 は使わずにここで文字サイズを決める。
+ *
+ * 配置はフローに任せる。行頭は全部 1 本の左端にそろえ、縦の隙間は
+ * --intro-gap の 1 / 2 / 3 倍だけで組む。md 側に mt-* や pl-* を書き足すと
+ * すぐ隙間もインデントもばらつくので、余白は必ずこちらで決める。
+ */
+.intro-body {
+  --intro-gap: 0.9rem;
+
+  display: flex;
+  flex-direction: column;
+  /* ブロック同士は 3 倍あけて、かたまりの切れ目を見せる */
+  gap: calc(var(--intro-gap) * 3);
+}
+
+/* 話が切り替わるページ向け。3 倍よりさらにあけて、かたまり同士を切り離す */
+.intro-body--wide {
+  gap: calc(var(--intro-gap) * 4);
+}
+
+/* 前置きと主張のような、ひとかたまりの数行 */
+.intro-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--intro-gap);
+}
+
+/* 前置き・補足。本文 (1.25rem) より一段小さくして主張を目立たせる */
+.intro-note {
+  font-size: 1.05rem;
   line-height: 1.6;
 }
 
-.slidev-layout :not(pre) > code {
-  font-size: 1em;
+/* 言い切りの一行 */
+.intro-lead {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/*
+ * 1 行が長いページ用の言い切り。2rem だと 24 文字の行が折り返してしまうので、
+ * 本文幅 (約 840px) に 25 文字が 1 行で収まる上限まで落としている。
+ */
+.intro-lead--md {
+  font-size: 1.6rem;
+}
+
+/* 距離の数字。ラテン字は同じ font-size でも和文より小さく見えるので気持ち上げる */
+.intro-figure {
+  font-size: 2.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/*
+ * 「最初は 3〜4km くらい〜」の 2 行。1 つのグリッドに 6 セル並べることで、
+ * 数字とその前後の文が 2 行で縦にそろう (列幅は中身なりに決まる)。
+ * 行の高さが 2rem 級なので、行間だけは 2 倍にしてつぶれないようにする。
+ */
+.intro-stats {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: start;
+  align-items: baseline;
+  column-gap: var(--intro-gap);
+  row-gap: calc(var(--intro-gap) * 2);
+}
+
+/*
+ * Q. / A. のぶら下がり。マーカーを 1 列目、質問文とその補足をまとめて
+ * 2 列目に置くので、補足もマーカーではなく本文の左端にそろう。
+ *
+ *   Q. なぜ走る距離が伸びたの？
+ *      気合い？根性？執念？
+ */
+.intro-qa {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--intro-gap);
+  align-items: baseline;
+}
+
+/*
+ * Q と A はグリッドが別なので、列幅を中身任せにすると字形の差 (Q の方が広い)
+ * のぶんだけ本文の開始位置がページ間でずれる。下限を決めて両方そろえる。
+ */
+.intro-mark {
+  min-width: 1.2em;
+}
+
+/* =====================================================
+   音声でやりとりする仕組みの構成図 (pages/voiceio)
+   ===================================================== */
+/*
+ * 図で見せるページ。流れの説明は口頭でするので、画面には見出しだけ置く。
+ *
+ * viewBox が 1430x570 (約 2.5:1) の横長なので、幅いっぱいに広げても縦は余る。
+ * その余りを上下に散らしたいが、layout: center は grid place-content-center で
+ * トラック幅が中身依存になり、図の width: 100% が効かなくなる (中身なりに縮む)。
+ * なので layout: default のまま、ここで高さいっぱいの flex を作って縦に中央
+ * 寄せる。default の幅は確定しているので図は素直に広がる。
+ */
+.voiceio {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+}
+
+/* 図の見出し。h2 (1.7rem) だと図より目立つので、一段落とす */
+.voiceio-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.voiceio-arch {
+  display: block;
+  width: 100%;
+}
+
+/* =====================================================
+   音声でやりとりする制約 (pages/intro/constraints.md)
+   ===================================================== */
+/*
+ * イントロと同じ文字組み (StatementList / Statement) の上に、「制約」を
+ * 2 かたまりで言い切るページ。見出しも前置きも言い切りも、左端は 1 本にそろえる。
+ */
+.constraint-page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 見出し。h2 のサイズ (1.7rem) はそのままに、下の間だけ足す */
+.constraint-title {
+  margin-bottom: 2.6rem;
+}
+
+/* =====================================================
+   Export (PDF / PNG)
+   ===================================================== */
+/*
+ * Slidev の export は media: 'screen' でレンダリングするため @media print が効かない。
+ * エクスポート時は #print-container 配下になるので、こちらで判定して
+ * <Overlay hide-on-export> を消す。図を隠したくないページに個別で付ける。
+ */
+#print-container .overlay-hide-on-export {
+  display: none !important;
 }

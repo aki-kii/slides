@@ -2,142 +2,44 @@
 transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle>実装したよ！ニンゲン、これでいい？</AgentTitle>
+<ChatMessage from="agent" heading>実装完了したよ！ニンゲン、これでいい？</ChatMessage>
 
-<PipelineStage rail="5-merge-pr">
+<PipelineStage stage="deploy" :status="$clicks < 1 ? 'pending' : 'running'">
 
-<div class="chat">
+<ChatMessage from="agent" no-icon>
 
-<div class="bubble bubble--agent">
+- 会話ログ用のS3バケット追加
+- 会話を書込むようアプリ修正
 
-- 会話ログ用のS3バケットを追加
-- タスクロールに書き込み権限を付与
+</ChatMessage>
 
-</div>
-
-<div class="turn-human">
-
-<div class="turn-human-row">
-
-<div class="bubble bubble--human">おk、マージしといて</div>
-
-<img class="human-icon" src="/images/aboutme/me-icon.png" />
-
-</div>
-
-</div>
-
-</div>
+<ChatMessage from="user">おk、マージするね</ChatMessage>
 
 <div v-click>
 
-PRをマージするとCI/CDからデプロイされます
-
-```bash
+```bash [マージすると走るデプロイ]
 $ cdk deploy --no-rollback
+# --no-rollabackをつけるとデプロイ失敗してもリソースを切り戻さない
+# 開発環境のような失敗しても問題ない環境で検証する
 ```
 
 </div>
 
 </PipelineStage>
 
-<br>
 
-- `--no-rollback`オプション
-  - デプロイに失敗してもリソースを削除しない
-
-<style scoped>
-.chat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.bubble {
-  position: relative;
-  width: fit-content;
-  max-width: 92%;
-  padding: 0.4rem 0.9rem;
-  border-radius: 0.6rem;
-}
-
-.bubble ul {
-  margin: 0;
-}
-
-/* エージェント側。タイトルの吹き出しと揃える */
-.bubble--agent {
-  background: rgba(217, 119, 87, 0.14);
-}
-
-/* ニンゲン側。右のアイコンから吹き出しが生えて、ひと言だけ返ってくる */
-.turn-human {
-  align-self: flex-end;
-  text-align: right;
-}
-
-.turn-human-row {
-  display: flex;
-  align-items: center;
-  /* しっぽ (0.5rem) がアイコンに刺さらないだけの間隔をとる */
-  gap: 1.1rem;
-}
-
-.bubble--human {
-  background: rgba(31, 117, 203, 0.12);
-  font-size: 1.6rem;
-  font-weight: 600;
-  padding: 0.3rem 1.4rem;
-}
-
-/* 吹き出しのしっぽ。アイコンの方 (右) を向かせる */
-.bubble--human::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-  border: 0.5rem solid transparent;
-  border-left-color: rgba(31, 117, 203, 0.12);
-}
-
-.human-icon {
-  flex: none;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 1px 6px rgba(20, 30, 60, 0.18);
-}
-
-.who {
-  margin-top: 0.2rem;
-  margin-right: 3.7rem;
-  font-size: 0.85rem;
-  opacity: 0.55;
-}
-</style>
-
-<!--
-1. ここで初めて人間が出てきます
-2. エージェントが「こんな方向性で実装した」と要約を出してきて、
-   人間はノータイムで「おk」と返しただけです
-3. 見ているのは「要件と合っているか」だけ。
-   壊れていないかは、ここまでの4つの層が既に言ってくれています
-4. マージすると開発環境にデプロイされます。--no-rollback を付けているのがポイントです
--->
 
 ---
 transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle>デプロイが失敗しちゃった...</AgentTitle>
+<ChatMessage from="agent" heading>デプロイが失敗しちゃった...</ChatMessage>
 
-<PipelineStage rail="5-merge-pr-failed">
+<PipelineStage stage="deploy" status="failed">
 
 ```bash [デプロイログ]
 BotStack | UPDATE_FAILED | AWS::ECS::Service
@@ -146,29 +48,22 @@ Resource handler returned message:
 # タスクが起動できずデプロイ失敗
 ```
 
-コンテナの起動に失敗した理由が残っていない
+デプロイログからはタスク起動に失敗した理由がわからない
 
 </PipelineStage>
-
-<!--
-4. エージェントは最小権限にしようとして、L2の grant を使わず自分でポリシーを書いていました
-5. デプロイが落ちました。返ってくるのは、暗号みたいな名前と素っ気ない一文だけです
-6. これを見ても根本原因は分かりません。しかもCIのログはもう手元にありません
--->
 
 ---
 transition: fade
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle :texts="['`cdk diagnose`で原因を調べるね']" />
+<ChatMessage from="agent" heading :texts="['`cdk diagnose` で原因を調べるね']" />
 
-<PipelineStage rail="5-merge-pr-failed">
+<PipelineStage stage="deploy" status="failed">
 
-```bash [cdk diagnoseの出力]
+```bash [cdk diagnose結果]{1,7-10}
 $ cdk diagnose BotStack --unstable=diagnose
-
 Source Location:
   new ConversationLog (lib/conversation-log.ts:31:5)
 
@@ -181,36 +76,59 @@ Source Location:
   on resource: "arn:aws:s3:::botstack-.../run.log"
 ```
 
-</PipelineStage>
+ロールバックされずに残ったECSログから原因判明
 
-- cdk diagnoseコマンドはロググループも見てくれる
+</PipelineStage>
 
 <!--
 7. 失敗したデプロイの記録をCloudFormationから引き直して、
    暗号みたいな名前を、自分が書いたコードの場所に翻訳してくれます
 8. さらにECSの停止したタスクとコンテナのログまで辿って、真の原因を出しました
-9. バケット本体と、中に入っているものは別の名前で指します。
-   書き込む先は中身なのに、バケット本体のARNに権限を付けていました
+9. バケットは作ったのに、タスクロールに書き込み権限を付けるのを忘れていました。
+   権限が足りないことは、実際にデプロイして動かすまで誰も気付けません
 -->
+
+---
+transition: fade
+---
+
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
+
+<ChatMessage from="agent" heading :texts="['修正するよ', '修正したよ']" />
+
+<PipelineStage stage="edit" :status="$clicks < 1 ? 'running' : 'done'">
+
+<!-- 既定 (500ms) だと変形が間延びするので短めにする -->
+````md magic-move [ソースコード] {duration: 300}
+```ts
+const bucket = new s3.Bucket(this, 'LogBucket', {
+  removalPolicy: cdk.RemovalPolicy.RETAIN,
+});
+// ❌ タスクロールに書き込み権限を付与していない
+```
+
+```ts
+const bucket = new s3.Bucket(this, 'LogBucket', {
+  removalPolicy: cdk.RemovalPolicy.RETAIN,
+});
+// ✅ Grantsクラスで書き込み権限を付与
+bucket.grants.write(props.taskRole);
+```
+````
+
+</PipelineStage>
 
 ---
 transition: slide-left
 ---
 
-<ChapterLabel label="4章 トレース"/>
+<ChapterLabel label="エージェントの動きをトレースしてみよう"/>
 
-<AgentTitle :texts="['修正して再デプロイするね', 'デプロイ成功した！']" />
+<ChatMessage from="agent" heading>再デプロイしたら成功した！</ChatMessage>
 
-<PipelineStage :rail="$clicks < 1 ? '5-merge-pr' : '6-all-done'">
+<PipelineStage stage="deploy" status="done">
 
-```ts [ソースコード]
-// S3バケットへ書き込み権限を付与
-conversationLog.grants.write(taskRole);
-```
-
-<div v-click>
-
-```text [デプロイログ]
+```bash [デプロイログ]
 BotStack | UPDATE_COMPLETE | AWS::CloudFormation::Stack
 
  ✅  BotStack
@@ -218,14 +136,4 @@ BotStack | UPDATE_COMPLETE | AWS::CloudFormation::Stack
 Deployment time: 274.4s
 ```
 
-</div>
-
 </PipelineStage>
-
-<!--
-10. 自前のポリシーを grants.write の1行に置き換えました。
-    L2 の grant を使えば、バケット本体と中身の両方に正しく権限が付きます
-11. --no-rollback にしていたので、失敗した所から再開できました
-12. 一番高い層の失敗が、エージェントの読める形で返ってきました。
-    人間が原因を探す時間が乗りません
--->

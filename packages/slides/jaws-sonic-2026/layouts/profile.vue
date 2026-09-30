@@ -19,7 +19,7 @@ const props = defineProps({
       <img
         :src="props.image"
         class="rounded-xl shadow-lg object-cover flex-shrink-0"
-        style="width:300px; height:300px;"
+        style="width:300px; height:300px; view-transition-name:akikii-icon;"
       />
       <div class="flex flex-col justify-center" style="flex:1; height:300px;">
         <h2 class="font-bold" style="font-size:40px; margin-bottom:24px; color:#1a2a3a; line-height:1.15; white-space:nowrap;">{{ props.name }}</h2>

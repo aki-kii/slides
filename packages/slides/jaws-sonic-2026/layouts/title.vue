@@ -48,10 +48,16 @@
 </style>
 
 <style>
+/*
+ * 白文字は背景写真の上にそのまま置く。
+ *
+ * 読みやすさのために text-shadow を足さないこと。ぼかし付きの影は Chromium の
+ * PDF 出力がベクタで表現できず、テキストの塊ごとにビットマップ化するため、
+ * 書き出すと文字の背後に灰色の矩形が並ぶ。
+ */
 .slidev-layout.title :is(h1, h2, h3, p, a, div) {
   font-family: var(--font-display);
   color: #ffffff;
-  text-shadow: 0 2px 12px rgba(10, 20, 60, 0.55);
 }
 
 .slidev-layout.title h1 {
@@ -62,17 +68,22 @@
   margin: 0;
 }
 
+/*
+ * サブタイトルは和文が主。Neuropol は Latin しか持たないので和文は Noto Sans JP に
+ * 落ちるが、読み込んでいるウェイトが 200/400/600 なので 300 を指定すると 200 が
+ * 選ばれて極細になる。和文が潰れないよう 400 を指定する (Latin 側の見た目は変わらない)。
+ */
 .slidev-layout.title h2 {
   font-size: 1.28rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.4;
   letter-spacing: 0.04em;
   margin: 1.2rem 0 0;
-  opacity: 0.92;
 }
 
 .slidev-layout.title .title-meta p {
   font-size: 0.92rem;
+  font-weight: 400;
   line-height: 1.6;
   letter-spacing: 0.04em;
   margin: 0;
