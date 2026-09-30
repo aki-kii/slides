@@ -7,7 +7,7 @@ transition: fade
   <img src="./mates-hero.png" class="mates-hero w-full object-cover object-left-top" />
   <div class="flex-1 bg-white flex items-center justify-center gap-12 px-12">
     <div>
-      <p class="mates-role mb-1">リードエンジニア（バックエンド/フロントエンド/SRE)</p>
+      <p class="mates-role mb-1">バックエンド/フロントエンド/SRE</p>
       <p class="mates-hiring font-black mb-4 leading-tight">
         <span class="mates-hiring-accent">積極</span><span class="text-gray-900">採用中</span>
       </p>
