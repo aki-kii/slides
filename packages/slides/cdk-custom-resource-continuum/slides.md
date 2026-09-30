@@ -204,17 +204,6 @@ layout: center
   <h2 class="!m-0">カスタムリソースとは？</h2>
 </div>
 
-<div class="text-lg mt-4">e.g. DynamoDBにマスターデータを投入するカスタムリソース</div>
-
-<InlineSvg src="custom-resource-dynamodb.svg" label="カスタムリソースのLambda関数が、CreateでDynamoDBテーブルにマスターデータを投入し、Updateで変更されたレコードを更新し、Deleteで投入したデータを削除する図" class="mx-auto mt-4" style="width: 780px" />
-
----
-
-<div class="flex items-center gap-4">
-  <img src="/public/images/cfn-icon.dio.png" class="h-12" />
-  <h2 class="!m-0">カスタムリソースとは？</h2>
-</div>
-
 <div class="text-lg mt-4">e.g. S3バケットを空にするカスタムリソース</div>
 
 <div class="text-sm opacity-70 mt-1">Bucket（L2 Construct）で <code>autoDeleteObjects: true</code> にすると作られる</div>
