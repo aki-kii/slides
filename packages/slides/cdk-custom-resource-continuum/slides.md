@@ -41,15 +41,10 @@ transition: slide-left
 
 <ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK">
 
-- CDK Conference 2025 Speaker
-- CDK Contributor (7PRs merged)
+- CDK支部運営
+- <span style="white-space:nowrap">Community Builders<span style="font-size:0.7em">（Dev Tools, 2026〜）</span></span>
 
 </ProfileItem>
-
-::footer::
-
-<img src="/images/aboutme/jawsug-cdk-logo.png" />
-<img src="/images/aboutme/aws-community-builders-logo.png" />
 
 ---
 transition: slide-left
