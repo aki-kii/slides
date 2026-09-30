@@ -33,7 +33,7 @@ name: アキキー | 池田 晃尚
 transition: slide-left
 ---
 
-<ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ（2025.9〜）">
+<ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ">
 
 - バックエンドエンジニア / SRE
 
