@@ -252,9 +252,7 @@ layout: center
 
 <InlineSvg src="continuum-code-review.svg" label="IntegrationがGitLabのアクセストークンでGitLabと接続し、AgentSpaceの中のCodeReviewがGitLabのリポジトリをスキャンする構成図。AgentSpaceはCloudFormation対応、IntegrationとCodeReviewはCloudFormation未対応" class="mx-auto mt-6" style="width: 800px" />
 
-<Overlay>
-  Integration・CodeReviewをカスタムリソースで定義します
-</Overlay>
+<div class="text-lg mt-4">→ <strong>Integration・CodeReview</strong>をカスタムリソースで定義します！</div>
 
 ---
 
