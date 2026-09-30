@@ -239,6 +239,7 @@ layout: center
 ---
 
 <div>
+  <Kogoe>それでは...</Kogoe>
   <h2>Continuumコードスキャニングを<br><strong>CDKのカスタムリソース</strong>を使って定義します</h2>
 </div>
 
