@@ -395,21 +395,15 @@ transition: slide-left
       <img src="/public/images/aboutme/awscdk.dio.png" class="h-8" />
       <span class="font-bold" style="font-size: 1.1rem; white-space: nowrap">AwsCustomResource</span>
     </div>
-    <div class="font-bold" style="font-size: 1rem">基本はこちら</div>
     <ul>
       <li style="font-size: 1rem; white-space: nowrap">AWS SDKの呼び出し1回で済む</li>
     </ul>
-  </div>
-  <div class="flex flex-col items-center justify-center" style="flex: 0 0 auto">
-    <span class="text-xs text-gray-500 text-center" style="line-height: 1.4">実現<br>できない</span>
-    <span class="text-3xl">→</span>
   </div>
   <div class="rounded-xl border-2 border-gray-300 px-4 py-3" style="flex: 1">
     <div class="flex items-center gap-3 mb-2">
       <img src="/public/images/aboutme/awscdk.dio.png" class="h-8" />
       <span class="font-bold" style="font-size: 1.1rem; white-space: nowrap">プロバイダーフレームワーク</span>
     </div>
-    <div class="font-bold" style="font-size: 1rem">こんな要件があるとき</div>
     <ul>
       <li style="font-size: 1rem">APIの呼び出しが1回に収まらない</li>
       <li style="font-size: 1rem">非同期処理の完了を待ちたい</li>
