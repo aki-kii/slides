@@ -41,7 +41,7 @@ transition: slide-left
 
 <ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK">
 
-- CDK支部運営
+- JAWS-UG CDK支部
 - <span style="white-space:nowrap">Community Builders<span style="font-size:0.7em">（Dev Tools, 2026〜）</span></span>
 
 </ProfileItem>
