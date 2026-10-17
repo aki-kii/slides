@@ -61,7 +61,7 @@ layout: center
 
 ## voiceioの構成
 
-<img src="/images/voiceio-overview.svg" class="mx-auto mt-4" style="max-height: 380px" />
+<InlineSvg src="voiceio-overview.svg" label="Discordのボイスチャットとテキストチャットを、読み上げと文字起こしでClaude Codeとつなぐvoiceioの構成図" class="mx-auto mt-4" style="width: 820px" />
 
 ---
 
@@ -97,110 +97,224 @@ layout: center
 </div>
 
 ---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/lambda.svg" class="h-12" />
   <h2 class="!m-0">Lambda MicroVMsとは？</h2>
 </div>
 
-<div class="text-lg mt-4">小さな仮想マシンを好きなときに立てて、止めて、再開できるサービス（2026年6月〜）</div>
+<div class="text-lg mt-2">小さな<strong>仮想マシン</strong>を好きなときに立てて、止めて、再開できるサービス（2026年6月〜）</div>
 
-<div class="grid grid-cols-2 gap-4 mt-8" style="font-size: 1.1rem">
-  <div class="feature">VMレベルの隔離</div>
-  <div class="feature">起動が速い</div>
-  <div class="feature">状態を保ったまま一時停止と再開</div>
-  <div class="feature">最大8時間動かせる</div>
+<div class="flex gap-6 items-start justify-center mt-10">
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/shield.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-44 text-center">
+    <span class="font-bold" style="font-size:1rem">VMレベルの隔離</span>
+    <span class="text-gray-400 text-sm" style="line-height:1.5">仮想マシンごとに<br>分かれている</span>
+  </div>
 </div>
 
-<style>
-.feature { border: 1px solid #dee2e6; border-radius: 8px; padding: 0.8rem 1rem; }
-</style>
-
----
-
-<div class="flex items-center gap-4">
-  <img src="/images/aws/lambda.svg" class="h-12" />
-  <h2 class="!m-0">Lambda Event Functionsとの違い</h2>
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/lambda-function.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-44 text-center">
+    <span class="font-bold" style="font-size:1rem">起動が速い</span>
+    <span class="text-gray-400 text-sm" style="line-height:1.5">スナップショットから<br>再開する</span>
+  </div>
 </div>
 
-<table class="mt-6 diff">
-  <thead><tr><th></th><th>Event Functions</th><th>MicroVMs</th></tr></thead>
-  <tbody>
-    <tr><td>イベント</td><td>イベントが来たら動く</td><td>使いたいときに自分で立ち上げて、止めるまで動き続ける</td></tr>
-    <tr><td>関数</td><td>呼ばれるたびに処理して結果を返す、関数の形で書く</td><td>どんなアプリケーションでも動かせる実行環境</td></tr>
-  </tbody>
-</table>
-
-<style>
-.diff td, .diff th { padding: 0.6rem 0.8rem; font-size: 1rem; }
-.diff td:first-child { font-weight: bold; white-space: nowrap; }
-</style>
-
----
-layout: center
----
-
-<div>
-  起動しきった状態を<strong>スナップショット</strong>に取っておき
-  <h2>そこから再開するので<strong>速い</strong></h2>
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/recover.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-44 text-center">
+    <span class="font-bold" style="font-size:1rem">一時停止と再開</span>
+    <span class="text-gray-400 text-sm" style="line-height:1.5">状態を保ったまま<br>止めて再開できる</span>
+  </div>
 </div>
 
----
-layout: center
----
-
-<div>
-  <Kogoe>試してみたら…</Kogoe>
-  <h2>ボイスチャットに入ったように見えて<br>接続が切れる</h2>
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/server.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-44 text-center">
+    <span class="font-bold" style="font-size:1rem">最大8時間</span>
+    <span class="text-gray-400 text-sm" style="line-height:1.5">一時停止を含めて<br>最大8時間動かせる</span>
+  </div>
 </div>
 
----
-
-## 原因はUDP
-
-<div class="text-lg mt-6" style="line-height: 2">
-  <div>Discordのボイスチャットは<strong>UDP</strong>で通信している</div>
-  <div>Lambda MicroVMsの標準のネット接続では、外向きのUDPが通らない</div>
-  <div>VPC経由で外に出れば、UDPが通る</div>
 </div>
 
+<BottomLink href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-lambda-microvms/" title="AWS introduces Lambda MicroVMs for isolated execution of user and AI-generated code" />
+
 ---
-layout: center
+chapter: Lambda MicroVMsを試す
 ---
 
-<div>
-  VPCに入れたら
-  <h2>約<strong>10秒</strong>で起動！</h2>
+<ChapterLabel />
+
+<div class="text-sm opacity-70">Lambda関数は「Event Functions」と呼ばれるようになった</div>
+
+## Lambda Event Functionsとの違い
+
+<div class="flex gap-10 justify-center mt-8">
+
+<div class="flex flex-col items-center gap-3 w-96">
+  <img src="/images/aws/lambda-function.svg" class="h-16"/>
+  <span class="font-bold" style="font-size:1.1rem">Event Functions</span>
+  <div class="text-center" style="line-height:1.8">
+    <div><strong>イベント</strong>が来たら動く</div>
+    <div class="text-gray-400 text-sm">呼ばれるたびに処理して結果を返す、<br><strong>関数</strong>の形で書く</div>
+  </div>
 </div>
 
+<div class="flex flex-col items-center gap-3 w-96">
+  <img src="/images/aws/server.svg" class="h-16"/>
+  <span class="font-bold" style="font-size:1.1rem">MicroVMs</span>
+  <div class="text-center" style="line-height:1.8">
+    <div>使いたいときに<strong>自分で立ち上げて</strong>、止めるまで動き続ける</div>
+    <div class="text-gray-400 text-sm">どんな<strong>アプリケーション</strong>でも動かせる実行環境</div>
+  </div>
+</div>
+
+</div>
+
+<BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
+
 ---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">なぜ起動が速いのか</div>
+
+## 起動しきった状態から再開する
+
+- イメージを作るときに、アプリを起動しきった状態を<strong>スナップショット</strong>に取っておく
+- 立てるたびに、そのスナップショットから再開するので<strong>速い</strong>
+
+<BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/microvms-images.html" title="Lambda MicroVM images" />
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">試してみたら…</div>
+
+## ボイスチャットに入ったように見えて接続が切れる
+
+<br>
+
+- Discordのボイスチャットは<strong>UDP</strong>で通信している
+- Lambda MicroVMsの標準のネット接続では、外向きのUDPが通らない
+- VPC経由で外に出れば、UDPが通る
+
+<Overlay>
+  VPCに入れたら約10秒で起動！
+</Overlay>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">VPCに置くなら、インターネットへの出方が問題に</div>
 
 ## Fargateはどうしていたか
 
-<div class="text-lg mt-6" style="line-height: 2">
-  <div>パブリックサブネットに置いて、パブリックIPで外に出る</div>
-  <div>セキュリティグループはアウトバウンドだけ許可して守る</div>
+<div class="flex gap-4 items-start justify-center mt-8">
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/fargate.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-48 text-center">
+    <span class="font-bold">Fargateのタスク</span>
+    <span class="text-gray-400 text-sm" style="line-height:1.5">パブリックサブネット<br>パブリックIPを持つ</span>
+  </div>
 </div>
+
+<span class="text-3xl" style="margin-top:2rem">→</span>
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/internet-gateway.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-48 text-center">
+    <span class="font-bold">Internet Gateway</span>
+  </div>
+</div>
+
+<span class="text-3xl" style="margin-top:2rem">→</span>
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/internet.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-48 text-center">
+    <span class="font-bold">インターネット</span>
+  </div>
+</div>
+
+</div>
+
+<div class="text-center mt-6">セキュリティグループはアウトバウンドだけ許可して守る</div>
 
 <Overlay>
   本当はプライベートサブネットが定石。個人利用なのでコストを優先
 </Overlay>
 
 ---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
 
 ## Lambda MicroVMsは同じ手が使えない
 
-<div class="text-lg mt-6" style="line-height: 2">
-  <div>Lambda MicroVMsは<strong>パブリックIPを持てない</strong></div>
-  <div>パブリックサブネットに置いても、インターネットに出られない</div>
-  <div>→ プライベートサブネットに置いて<strong>NAT</strong>で外に出るしかない</div>
+<div class="flex gap-4 items-start justify-center mt-8">
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/lambda.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-48 text-center">
+    <span class="font-bold">Lambda MicroVMs</span>
+    <span class="text-gray-400 text-sm" style="line-height:1.5">プライベートサブネット<br>パブリックIPを持てない</span>
+  </div>
 </div>
 
+<span class="text-3xl" style="margin-top:2rem">→</span>
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/nat-gateway.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-48 text-center">
+    <span class="font-bold">NAT</span>
+    <span class="text-gray-400 text-sm" style="line-height:1.5">NAT Gateway<br>またはNATインスタンス</span>
+  </div>
+</div>
+
+<span class="text-3xl" style="margin-top:2rem">→</span>
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/internet.svg" class="h-20"/>
+  <div class="flex flex-col items-center gap-1 w-48 text-center">
+    <span class="font-bold">インターネット</span>
+  </div>
+</div>
+
+</div>
+
+- パブリックサブネットに置いても、インターネットに出られない
+- プライベートサブネットに置いて<strong>NAT</strong>で外に出るしかない
+
 ---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">NATを置くと</div>
 
 ## コストを比べると
 
-<div class="text-sm opacity-70">月20時間使う場合（東京リージョン、オンデマンドの単価で計算）</div>
+<Kogoe>月20時間使う場合（東京リージョン、オンデマンドの単価で計算）</Kogoe>
 
 <div class="mt-8 flex flex-col gap-4">
   <div class="bar-row"><span class="bar-name">ECS Fargate（今）</span><span class="bar" style="width: 19px"></span><span>約2.6ドル</span></div>
@@ -208,7 +322,9 @@ layout: center
   <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NAT Gateway</span><span class="bar" style="width: 400px"></span><span>約55ドル</span></div>
 </div>
 
-<div class="text-lg mt-10">NATは使っていない間もずっと置いておく<strong>固定費</strong></div>
+<div class="mt-8">NATは使っていない間もずっと置いておく<strong>固定費</strong></div>
+
+<BottomLink href="https://aws.amazon.com/lambda/pricing/" title="AWS Lambda pricing" />
 
 <style>
 .bar-row { display: flex; align-items: center; gap: 0.8rem; font-size: 1rem; white-space: nowrap; }
@@ -234,61 +350,71 @@ layout: center
 </div>
 
 ---
+chapter: Fargateの起動を速くする
+---
+
+<ChapterLabel />
 
 ## 起動にかかる時間を見てみました
 
-<img src="/images/charts/breakdown.png" class="mx-auto mt-6" style="max-width: 100%" />
+<InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto mt-10" style="width: 960px" />
 
 ---
+chapter: Fargateの起動を速くする
+---
+
+<ChapterLabel />
 
 ## 改善したいのは2つ
 
-<div class="text-lg mt-6" style="line-height: 2.2">
-  <div>① イメージの取得に時間がかかっている</div>
-  <div>② Discord botがほかのコンテナの起動を待っているから遅い</div>
-  <div class="ml-8"><Kogoe>しかもほかのコンテナはヘルスチェック（30秒おき）を待っている</Kogoe></div>
+<br>
+
+- ① イメージの取得に時間がかかっている
+- ② Discord botがほかのコンテナの起動を待っているから遅い
+  - <Kogoe>しかもほかのコンテナはヘルスチェック（30秒おき）を待っている</Kogoe>
+
+---
+chapter: Fargateの起動を速くする
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">① イメージの取得に時間がかかっている</div>
+
+## イメージが大きいのかな？
+
+<div class="flex gap-10 items-start justify-center mt-8">
+
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/ecs-container.svg" class="h-16"/>
+  <span class="font-bold">読み上げ</span>
+  <span class="text-gray-400 text-sm">約1.9GB</span>
 </div>
 
----
-layout: center
----
-
-<div>
-  ① イメージの取得に時間がかかっている
-  <h2>イメージが<strong>大きい</strong>のかな？</h2>
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/ecs-container.svg" class="h-16"/>
+  <span class="font-bold">Discord bot</span>
+  <span class="text-gray-400 text-sm">約390MB</span>
 </div>
 
----
-
-## コンテナイメージの大きさ
-
-<table class="mt-6 size">
-  <thead><tr><th>コンテナ</th><th>イメージの大きさ（圧縮後）</th></tr></thead>
-  <tbody>
-    <tr><td>読み上げ（VOICEVOX）</td><td>約1.9GB</td></tr>
-    <tr><td>Discord bot</td><td>約390MB</td></tr>
-    <tr><td>文字起こし</td><td>約90MB</td></tr>
-  </tbody>
-</table>
-
-<div class="text-lg mt-8">読み上げはVOICEVOXが提供しているイメージなので<br>仕組み上この大きさで、削りようがない</div>
-
-
-
-<style>
-.size td, .size th { padding: 0.5rem 1rem; font-size: 1.05rem; }
-</style>
-
----
-layout: center
----
-
-<div>
-  調べてみたら
-  <h2><strong>SOCIインデックス</strong>が使える！</h2>
+<div class="flex flex-col items-center gap-2">
+  <img src="/images/aws/ecs-container.svg" class="h-16"/>
+  <span class="font-bold">文字起こし</span>
+  <span class="text-gray-400 text-sm">約90MB</span>
 </div>
 
+</div>
+
+<div class="text-center mt-8">読み上げはVOICEVOXが提供しているイメージなので、仕組み上この大きさ</div>
+<div class="text-center"><Kogoe>削りようがない</Kogoe></div>
+
 ---
+chapter: Fargateの起動を速くする
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">調べてみたら、SOCIインデックスが使える！</div>
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/ecr.svg" class="h-12" />
@@ -297,71 +423,80 @@ layout: center
 
 <div class="text-lg mt-2">コンテナイメージを<strong>遅延読み込み</strong>できる仕組み（AWSが作ったOSS）</div>
 
-<div class="mt-6" style="font-size: 1.05rem; line-height: 2">
-  <div>イメージをダウンロードするとき、起動に必要なファイルだけ取得して起動を早くする</div>
-  <div>その他のファイルは、順次もしくは必要になったタイミングでダウンロードする</div>
+<InlineSvg src="soci-concept.svg" label="ふつうはイメージを全部ダウンロードしてから起動する。SOCIインデックスがあると起動に必要な分だけ取って起動し、残りのファイルはあとで取ってくる" class="mx-auto mt-6" style="width: 640px" />
+
+<div class="mt-4 text-sm" style="line-height:1.8">
   <div>コンテナイメージとは別にECRリポジトリにSOCIインデックスを置くので、イメージの中身を作り直さずに使える</div>
+  <Kogoe>サイズが大きいコンテナイメージで効果的。起動直後に多くのファイルを読むコンテナには不向き</Kogoe>
 </div>
 
-<div class="mt-6 opacity-70" style="font-size: 1rem">サイズが大きいコンテナイメージで効果的。起動直後に多くのファイルを読むコンテナには不向き</div>
+<BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
 
 ---
+chapter: Fargateの起動を速くする
+---
+
+<ChapterLabel />
 
 ## 読み上げコンテナはSOCIと相性がいい
 
-<div class="text-lg mt-6" style="line-height: 2">
-  <div>VOICEVOXには話者ごとの音声モデルが入っているので<strong>大きい</strong></div>
-  <div>起動のときは、モデルの本体は読まない</div>
-  <div><Kogoe>ただし、全部のモデルのファイルに少しずつ触るので、そのぶん起動は延びる</Kogoe></div>
-</div>
+<br>
+
+- VOICEVOXには話者ごとの音声モデルが入っているので<strong>大きい</strong>
+- 起動のときは、モデルの本体は読まない
+  - <Kogoe>ただし、全部のモデルのファイルに少しずつ触るので、そのぶん起動は延びる</Kogoe>
 
 ---
+chapter: Fargateの起動を速くする
+---
+
+<ChapterLabel />
 
 ## SOCIインデックスを入れた結果
 
-<img src="/images/charts/soci-simple.png" class="mx-auto mt-2" style="max-height: 400px" />
+<InlineSvg src="chart-soci.svg" label="SOCIなしはイメージの取得37.5秒で全部立ち上がるまで約64秒。SOCIありは取得3.3秒で約37秒。ただしDiscord botの起動は1.5秒から4.7秒、読み上げの起動は0.8秒から9.1秒に延びた" class="mx-auto" style="width: 700px" />
 
 <Overlay>
   取得は37.5秒→3.3秒。ただし起動は延びた
 </Overlay>
 
 ---
-layout: center
+chapter: Fargateの起動を速くする
 ---
 
-<div>
-  ② Discord botがほかのコンテナの起動を待っている
-  <h2>読み上げの準備が遅くなったのに<br><strong>待っている</strong></h2>
-</div>
+<ChapterLabel />
+
+<div class="text-sm opacity-70">② Discord botがほかのコンテナの起動を待っている</div>
+
+## 読み上げの準備が遅くなったのに待っている
+
+<br>
+
+- Discord botがボイスチャットに入るだけなら、読み上げは<strong>まだいらない</strong>
 
 ---
-layout: center
+chapter: Fargateの起動を速くする
 ---
 
-<div>
-  Discord botがボイスチャットに入るだけなら
-  <h2>読み上げは<strong>まだいらない</strong></h2>
-</div>
-
----
+<ChapterLabel />
 
 ## コンテナを待たずに起動する
 
-<img src="/images/charts/nowait2.png" class="mx-auto mt-2" style="max-height: 360px" />
+<InlineSvg src="chart-nowait.svg" label="全部のコンテナを待つと、Discord botは読み上げのヘルスチェック合格まで30.0秒待ってから起動して約66秒。Discord botだけ待つと約36秒" class="mx-auto" style="width: 940px" />
 
-<div class="text-center mt-2" style="font-size: 1rem">準備ができていなくても声や文章はためておいて、準備できたら流す</div>
+<div class="text-center mt-2">準備ができていなくても声や文章はためておいて、準備できたら流す</div>
 
 ---
 
 ## まとめ
 
 <div class="text-2xl mt-8 text-center">約105秒 → 約65秒 → <strong>約35秒</strong></div>
-<div class="text-sm opacity-70 text-center mt-1">（約65秒はSOCIインデックスだけを入れた場合の推測）</div>
+<div class="text-center mt-1"><Kogoe>約65秒はSOCIインデックスだけを入れた場合の推測</Kogoe></div>
 
-<div class="mt-10" style="font-size: 1.1rem; line-height: 2">
-  <div>Lambda MicroVMsは起動が速いが、UDPとNATのコストで断念</div>
-  <div>Fargateのまま、SOCIインデックスとコンテナを待たずに起動で短縮</div>
-</div>
+<br>
+
+- Lambda MicroVMsは起動が速いが、UDPとNATのコストで断念
+- Fargateのまま、SOCIインデックスとコンテナを待たずに起動で短縮
 
 ---
 
@@ -369,10 +504,12 @@ layout: center
 
 ## 調べてるうちに見つけたCDKの便利な部品
 
-<div class="mt-6" style="font-size: 1.1rem; line-height: 2.2">
-  <div><code>ec2.NatInstanceProviderV2</code>：NATインスタンスを作れる（aws-cdk-lib）</div>
-  <div><code>SociIndexV2Build</code>：SOCIインデックスを作れるビルド環境（@cdklabs/deploy-time-build）</div>
-</div>
+<br>
+
+- `ec2.NatInstanceProviderV2`
+  - <Kogoe>NATインスタンスを作れる（aws-cdk-lib）</Kogoe>
+- `SociIndexV2Build`
+  - <Kogoe>SOCIインデックスを作れるビルド環境（@cdklabs/deploy-time-build）</Kogoe>
 
 
 ---
