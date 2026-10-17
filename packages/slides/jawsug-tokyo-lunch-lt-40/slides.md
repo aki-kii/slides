@@ -119,41 +119,22 @@ chapter: Lambda MicroVMsを試す
 
 <Kogoe>今年の6月に出た新しいサービス</Kogoe>
 
-<div class="flex gap-6 items-start justify-center mt-8">
+<div class="tight-list">
 
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/shield.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-44 text-center">
-    <span class="font-bold" style="font-size:1rem">仮想マシンごとの隔離</span>
-    <span class="text-gray-400 text-sm" style="line-height:1.5">仮想マシンごとに<br>分かれている</span>
-  </div>
-</div>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/lambda-function.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-44 text-center">
-    <span class="font-bold" style="font-size:1rem">起動が速い</span>
-    <span class="text-gray-400 text-sm" style="line-height:1.5">スナップショットから<br>再開する</span>
-  </div>
-</div>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/recover.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-44 text-center">
-    <span class="font-bold" style="font-size:1rem">一時停止と再開</span>
-    <span class="text-gray-400 text-sm" style="line-height:1.5">状態を保ったまま<br>止めて再開できる</span>
-  </div>
-</div>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/server.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-44 text-center">
-    <span class="font-bold" style="font-size:1rem">最大8時間</span>
-    <span class="text-gray-400 text-sm" style="line-height:1.5">一時停止を含めて<br>最大8時間動かせる</span>
-  </div>
-</div>
+- 仮想マシンごとの隔離
+  - <Kogoe>仮想マシンごとに分かれている</Kogoe>
+- 起動が速い
+  - <Kogoe>スナップショットから再開する</Kogoe>
+- 一時停止と再開
+  - <Kogoe>状態を保ったまま止めて再開できる</Kogoe>
+- 最大8時間
+  - <Kogoe>一時停止を含めて最大8時間動かせる</Kogoe>
 
 </div>
+
+<style>
+.tight-list li { font-size: 1.1rem !important; line-height: 1.4 !important; margin-top: 0.05rem !important; margin-bottom: 0.05rem !important; }
+</style>
 
 <BottomLink href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-lambda-microvms/" title="AWS introduces Lambda MicroVMs for isolated execution of user and AI-generated code" />
 
@@ -167,26 +148,12 @@ chapter: Lambda MicroVMsを試す
 
 ## Lambda Event Functionsとの違い：イベント
 
-<div class="flex gap-10 justify-center mt-10">
+<br>
 
-<div class="flex flex-col items-center gap-3 w-96">
-  <img src="/images/aws/lambda-function.svg" class="h-16"/>
-  <span class="font-bold" style="font-size:1.1rem">Event Functions</span>
-  <div class="text-center" style="line-height:1.8">
-    <div><strong>イベント</strong>が来たら動く</div>
-  </div>
-</div>
-
-<div class="flex flex-col items-center gap-3 w-96">
-  <img src="/images/aws/server.svg" class="h-16"/>
-  <span class="font-bold" style="font-size:1.1rem">MicroVMs</span>
-  <div class="text-center" style="line-height:1.8">
-    <div>使いたいときに<strong>自分で立ち上げて</strong></div>
-    <div>止めるまで動き続ける</div>
-  </div>
-</div>
-
-</div>
+- Event Functions
+  - <strong>イベント</strong>が来たら動く
+- MicroVMs
+  - 使いたいときに<strong>自分で立ち上げて</strong>、止めるまで動き続ける
 
 <BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
 
@@ -200,27 +167,13 @@ chapter: Lambda MicroVMsを試す
 
 ## Lambda Event Functionsとの違い：関数
 
-<div class="flex gap-10 justify-center mt-10">
+<br>
 
-<div class="flex flex-col items-center gap-3 w-96">
-  <img src="/images/aws/lambda-function.svg" class="h-16"/>
-  <span class="font-bold" style="font-size:1.1rem">Event Functions</span>
-  <div class="text-center" style="line-height:1.8">
-    <div>呼ばれるたびに処理をして結果を返す</div>
-    <div><strong>関数</strong>の形で書く</div>
-  </div>
-</div>
-
-<div class="flex flex-col items-center gap-3 w-96">
-  <img src="/images/aws/server.svg" class="h-16"/>
-  <span class="font-bold" style="font-size:1.1rem">MicroVMs</span>
-  <div class="text-center" style="line-height:1.8">
-    <div>関数の形に縛られない</div>
-    <div>どんな<strong>アプリケーション</strong>でも動かせる実行環境</div>
-  </div>
-</div>
-
-</div>
+- Event Functions
+  - 呼ばれるたびに処理をして結果を返す、<strong>関数</strong>の形で書く
+- MicroVMs
+  - 関数の形に縛られない
+  - どんな<strong>アプリケーション</strong>でも動かせる実行環境
 
 <BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
 
@@ -405,7 +358,7 @@ chapter: Fargateの起動を速くする
 
 ## 起動にかかる時間を見てみました
 
-<InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto mt-10" style="width: 960px" />
+<InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto mt-10" style="width: 880px" />
 
 ---
 chapter: Fargateの起動を速くする
@@ -432,27 +385,11 @@ chapter: Fargateの起動を速くする
 
 ## イメージが大きいのかな？
 
-<div class="flex gap-10 items-start justify-center mt-8">
+<br>
 
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/ecs-container.svg" class="h-16"/>
-  <span class="font-bold">読み上げ</span>
-  <span class="text-gray-400 text-sm">約1.9GB</span>
-</div>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/ecs-container.svg" class="h-16"/>
-  <span class="font-bold">Discord bot</span>
-  <span class="text-gray-400 text-sm">約390MB</span>
-</div>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/ecs-container.svg" class="h-16"/>
-  <span class="font-bold">文字起こし</span>
-  <span class="text-gray-400 text-sm">約90MB</span>
-</div>
-
-</div>
+- 読み上げが<strong>約1.9GB</strong>
+- Discord botが約390MB
+- 文字起こしが約90MB
 
 <br>
 
@@ -474,7 +411,7 @@ chapter: Fargateの起動を速くする
 
 <div class="text-lg mt-2">コンテナイメージを<strong>遅延読み込み</strong>できる仕組み<Kogoe>（AWSが作ったOSS）</Kogoe></div>
 
-<InlineSvg src="soci-concept.svg" label="ふつうはイメージを全部ダウンロードしてから起動する。SOCIインデックスがあると起動に必要な分だけ取って起動し、残りのファイルはあとで取ってくる" class="mx-auto mt-2" style="width: 520px" />
+<InlineSvg src="soci-concept.svg" label="ふつうはイメージを全部ダウンロードしてから起動する。SOCIインデックスがあると起動に必要な分だけ取って起動し、残りのファイルはあとで取ってくる" class="mx-auto mt-2" style="width: 640px" />
 
 <div class="tight-list">
 
@@ -532,7 +469,7 @@ chapter: Fargateの起動を速くする
 
 ## SOCIインデックスを入れた結果
 
-<InlineSvg src="chart-soci.svg" label="SOCIなしはイメージの取得37.5秒で全部立ち上がるまで約64秒。SOCIありは取得3.3秒で約37秒。ただしDiscord botの起動は1.5秒から4.7秒、読み上げの起動は0.8秒から9.1秒に延びた" class="mx-auto" style="width: 640px" />
+<InlineSvg src="chart-soci.svg" label="SOCIなしはイメージの取得37.5秒で全部立ち上がるまで約64秒。SOCIありは取得3.3秒で約37秒。ただしDiscord botの起動は1.5秒から4.7秒、読み上げの起動は0.8秒から9.1秒に延びた" class="mx-auto" style="width: 780px" />
 
 <div class="text-center text-lg">イメージの取得は37.5秒から<strong>3.3秒</strong>になった</div>
 
@@ -591,9 +528,9 @@ chapter: Fargateの起動を速くする
 
 ## コンテナを待たずに起動した結果
 
-<InlineSvg src="chart-nowait.svg" label="全部のコンテナを待つと、Discord botは読み上げのヘルスチェック合格まで30.0秒待ってから起動して約66秒。Discord botだけ待つと約36秒" class="mx-auto" style="width: 900px" />
+<InlineSvg src="chart-nowait.svg" label="全部のコンテナを待つと、Discord botは読み上げのヘルスチェック合格まで30.0秒待ってから起動して約66秒。Discord botだけ待つと約36秒" class="mx-auto" style="width: 720px" />
 
-<div class="text-center text-lg mt-2">全部のコンテナを待つと約66秒、Discord botだけなら<strong>約36秒</strong></div>
+<div class="text-center text-lg">全部のコンテナを待つと約66秒、Discord botだけなら<strong>約36秒</strong></div>
 
 ---
 
