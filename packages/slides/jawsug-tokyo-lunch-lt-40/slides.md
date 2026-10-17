@@ -13,14 +13,16 @@ fonts:
   mono: 'Fira Code'
 ---
 
-**JAWS-UG東京 ランチタイムLT会 #40 〜Sales支部編〜**
+<div class="text-3xl font-bold opacity-90">Discord音声botを</div>
 
-<div class="text-xl font-bold opacity-90 mt-6">Discord音声botを</div>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に乗り換えず<br><span style="color:#ffd54f">Fargate</span>のまま起動を速めた話</span>
 
-# <span style="font-size: 0.72em; line-height: 1.4; display: inline-block">Lambda MicroVMsに乗り換えず<br>Fargateのまま起動を速めた話</span>
+<div class="opacity-70">
 
 2026.10.21（水）\
 池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
+
+</div>
 
 <div class="absolute right-8 bottom-8">
   <img src="/public/images/aboutme/eye-catch.png" class="h-36" />
