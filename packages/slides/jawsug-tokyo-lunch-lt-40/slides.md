@@ -128,42 +128,61 @@ chapter: Lambda MicroVMsを試す
 
 ---
 chapter: Lambda MicroVMsを試す
+clicks: 3
 ---
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</div>
+## Lambda Functionsとの違い
 
-## Lambda Event Functionsとの違い：イベント
+<div class="names">
+  <div class="fn">
+    <span :class="{ dim: $clicks >= 2 }">Lambda</span>
+    <span class="ev" :class="{ show: $clicks >= 1, pick: $clicks >= 2 }">Event</span>
+    <span :class="{ pick: $clicks >= 2 }">Functions</span>
+  </div>
+  <div class="vs">と</div>
+  <div class="mv">Lambda MicroVMs</div>
+</div>
 
-<br>
+<div class="h-6 mt-1 text-center"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
 
-- Event Functions
-  - <strong>イベント</strong>が来たら動く
-- MicroVMs
-  - 使いたいときに<strong>自分で立ち上げて</strong>、止めるまで動き続ける
+<div class="diff grid grid-cols-2 gap-10 mt-2">
+<div v-click="2">
+
+### <span class="pickc">Event</span>
+
+- Event Functionsは、<strong>イベント</strong>が来たら動く
+- MicroVMsは、使いたいときに<strong>自分で立ち上げて</strong>、止めるまで動き続ける
+
+</div>
+<div v-click="3">
+
+### <span class="pickc">Function</span>
+
+- Event Functionsは、呼ばれるたびに処理をして結果を返す<strong>関数</strong>の形で書く
+- MicroVMsは、関数の形に縛られず、どんな<strong>アプリケーション</strong>でも動かせる
+
+</div>
+</div>
 
 <BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
 
----
-chapter: Lambda MicroVMsを試す
----
-
-<ChapterLabel />
-
-<div class="text-sm opacity-70">もう一つの「関数」</div>
-
-## Lambda Event Functionsとの違い：関数
-
-<br>
-
-- Event Functions
-  - 呼ばれるたびに処理をして結果を返す、<strong>関数</strong>の形で書く
-- MicroVMs
-  - 関数の形に縛られない
-  - どんな<strong>アプリケーション</strong>でも動かせる実行環境
-
-<BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
+<style>
+.names { display: flex; align-items: baseline; justify-content: center; gap: 1.5rem; margin-top: 0.5rem; font-size: 1.65rem; font-weight: bold; white-space: nowrap; }
+.names .fn { display: flex; align-items: baseline; }
+.names .fn > span + span { margin-left: 0.3em; }
+.names .fn > .ev:not(.show) + span { margin-left: 0; }
+.diff li { font-size: 0.95rem !important; line-height: 1.5 !important; }
+.diff h3 { margin-bottom: 0.3rem !important; }
+.names .vs { font-size: 1.4rem; opacity: 0.5; }
+.names .fn span { transition: all 0.5s ease; }
+.names .ev { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; color: #e74c3c; }
+.names .ev.show { max-width: 5em; opacity: 1; }
+.names .dim { opacity: 0.25; }
+.names .pick { color: #e74c3c; text-decoration: underline; text-underline-offset: 0.2em; }
+.pickc { color: #e74c3c; }
+</style>
 
 ---
 chapter: Lambda MicroVMsを試す
