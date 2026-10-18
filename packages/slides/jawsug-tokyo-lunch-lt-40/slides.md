@@ -190,6 +190,44 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
+## Lambda Event Functionsとの違い
+
+<div class="text-lg mt-2">
+Event Functionsは<strong>イベント</strong>が来たら<strong>関数</strong>を動かし、<br>
+MicroVMsは<strong>自分で立ち上げて</strong>、どんな<strong>アプリケーション</strong>でも動かせる
+</div>
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="card">
+<div class="card-title"><img src="/images/aws/lambda.svg" class="h-9" />Lambda Event Functions</div>
+
+- イベントが来たら動く
+- 呼ばれるたびに処理をして結果を返す、関数の形で書く
+
+</div>
+<div class="card">
+<div class="card-title"><img src="/images/aws/lambda.svg" class="h-9" />Lambda MicroVMs</div>
+
+- 使いたいときに自分で立ち上げて、止めるまで動き続ける
+- 関数の形に縛られず、どんなアプリケーションでも動かせる
+
+</div>
+</div>
+
+<BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
+
+<style>
+.card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; min-height: 11rem; }
+.card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; }
+.card li { font-size: 0.95rem !important; line-height: 1.5 !important; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
 <div class="text-sm opacity-70">そして何より、起動が速い。今回ほしかったのはこの速さ</div>
 
 ## 起動しきった状態から再開する
