@@ -82,15 +82,8 @@ layout: center
 
 <div>
   ただ、/vcを打ってからボイスチャットに入るまで
-  <h2>約<strong>105秒</strong>かかっていました</h2>
-</div>
-
----
-layout: center
----
-
-<div>
-  <Kogoe>今すぐ話したいのに</Kogoe>
+  <h2><strong>100秒以上</strong>かかっていました</h2>
+  <Kogoe class="mt-8">今すぐ話したいのに</Kogoe>
   <h2>そんなに待ってられるか！</h2>
   <div class="mt-6">ということで、速くすることにしました</div>
 </div>
