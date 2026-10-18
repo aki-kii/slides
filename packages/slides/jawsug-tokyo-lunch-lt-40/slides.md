@@ -186,40 +186,59 @@ clicks: 3
 
 ---
 chapter: Lambda MicroVMsを試す
+clicks: 4
 ---
 
 <ChapterLabel />
 
-## Lambda Event Functionsとの違い
+## Lambda Functionsとの違い
 
-<div class="text-lg mt-2">
+<div class="lead text-lg mt-2" :class="{ off: $clicks < 4 }">
 Event Functionsは<strong>イベント</strong>が来たら<strong>関数</strong>を動かし、<br>
 MicroVMsは<strong>自分で立ち上げて</strong>、どんな<strong>アプリケーション</strong>でも動かせる
 </div>
 
-<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="ecards grid grid-cols-2 gap-6 mt-4" :class="{ 'on-ev': $clicks === 2, 'on-fn': $clicks === 3 }">
 <div class="card">
-<div class="card-title"><img src="/images/aws/lambda.svg" class="h-9" />Lambda Event Functions</div>
-
-- イベントが来たら動く
-- 呼ばれるたびに処理をして結果を返す、関数の形で書く
-
+<div class="card-title">
+  <img src="/images/aws/lambda.svg" class="h-9" />
+  <span class="nm"><span>Lambda</span><span class="ev" :class="{ show: $clicks >= 1, red: $clicks <= 2 }">Event</span><span class="fnw">Functions</span></span>
+</div>
+<ul>
+  <li class="row-ev" :class="{ off: $clicks < 2 }"><strong>イベント</strong>が来たら動く</li>
+  <li class="row-fn" :class="{ off: $clicks < 3 }">呼ばれるたびに処理をして結果を返す、<strong>関数</strong>の形で書く</li>
+</ul>
 </div>
 <div class="card">
-<div class="card-title"><img src="/images/aws/lambda.svg" class="h-9" />Lambda MicroVMs</div>
-
-- 使いたいときに自分で立ち上げて、止めるまで動き続ける
-- 関数の形に縛られず、どんなアプリケーションでも動かせる
-
+<div class="card-title"><img src="/images/aws/lambda.svg" class="h-9" /><span>Lambda MicroVMs</span></div>
+<ul>
+  <li class="row-ev" :class="{ off: $clicks < 2 }">使いたいときに<strong>自分で立ち上げて</strong>、止めるまで動き続ける</li>
+  <li class="row-fn" :class="{ off: $clicks < 3 }">関数の形に縛られず、どんな<strong>アプリケーション</strong>でも動かせる</li>
+</ul>
 </div>
 </div>
+
+<div class="h-6 mt-2 text-center"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
 
 <BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
 
 <style>
+.lead { transition: opacity 0.4s; }
+.lead.off { opacity: 0; }
 .card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; min-height: 11rem; }
-.card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; }
-.card li { font-size: 0.95rem !important; line-height: 1.5 !important; }
+.card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
+.card-title span { transition: all 0.5s ease; }
+.card-title .nm span + span { margin-left: 0.3em; }
+.card-title .ev { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; }
+.card-title .nm .ev:not(.show) { margin-left: 0; }
+.card-title .ev.show { max-width: 6em; opacity: 1; }
+.card-title .ev.red { color: #e74c3c; }
+.ecards.on-ev .ev, .ecards.on-fn .fnw { color: #e74c3c; text-decoration: underline; text-underline-offset: 0.2em; }
+.card li { font-size: 0.95rem !important; line-height: 1.5 !important; transition: opacity 0.4s; }
+.card li.off { opacity: 0; }
+.card li strong { color: inherit; font-weight: normal; transition: color 0.3s; }
+.ecards.on-ev .row-ev strong, .ecards.on-fn .row-fn strong, .ecards:not(.on-ev):not(.on-fn) li:not(.off) strong { color: #e74c3c; font-weight: bold; }
+.ecards.on-ev .row-fn, .ecards.on-fn .row-ev { opacity: 0.35; }
 </style>
 
 ---
