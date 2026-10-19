@@ -80,8 +80,7 @@ layout: center
 <div>
   必要なときだけ起動するので
   <h2>起動に<strong>100秒以上</strong>かかってしまいます</h2>
-  <Kogoe class="mt-8">早くClaude Codeとやりとりしたいのに</Kogoe>
-  <h2>そんなに待ってられません</h2>
+  <h2 class="mt-6">待っている間が<strong>辛い</strong></h2>
 </div>
 
 ---
