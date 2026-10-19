@@ -194,17 +194,15 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">調べてみると</div>
-
-## 標準のネット接続ではUDPが通らない
+## 悩みポイント① UDP接続が失敗する<span style="font-size: 0.5em; opacity: 0.6">（INTERNET_EGRESS）</span>
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
 <div class="net-note">
 
-- Discordのボイスチャットは、音声を<strong>UDP</strong>で送受信している
-- Lambda MicroVMsの標準のネット接続（INTERNET_EGRESS）では、外向きの<strong>UDPが通らない</strong>
-- だから、botはDiscordにつながるけど音声が届かずに切れていた
+- Discordのボイスチャットにbotを入れてみたら、<strong>接続に失敗</strong>した
+- 原因をたどると、音声を送受信する<strong>UDP</strong>の接続が失敗していた
+- 標準のネット接続（INTERNET_EGRESS）では、外向きのUDPが通らない
 
 </div>
 </div>
