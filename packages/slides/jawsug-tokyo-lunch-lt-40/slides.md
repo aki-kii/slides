@@ -185,12 +185,8 @@ layout: center
 
 <div>
   <h2>Discord botをLambda MicroVMsに<br>載せ替えてみると…</h2>
-  <h2 v-click class="mt-6">100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
+  <h2 v-click class="mt-6">ボイスチャットに入ったように見えて<br><strong>接続が切れる</strong>………</h2>
 </div>
-
-<Overlay>
-  しかしLambda MicroVMsは採用しませんでした
-</Overlay>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -198,17 +194,17 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">ところが、ボイスチャットに入ったように見えて接続が切れる</div>
+<div class="text-sm opacity-70">調べてみると</div>
 
-## 問題① ボイスチャットにbotが接続できない
+## 標準のネット接続ではUDPが通らない
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
 <div class="net-note">
 
-- botはDiscordにつながるけど、音声が届かずに接続が切れる
 - Discordのボイスチャットは、音声を<strong>UDP</strong>で送受信している
-- 原因: Lambda MicroVMsの標準のネット接続（INTERNET_EGRESS）では、外向きの<strong>UDPが通らない</strong>
+- Lambda MicroVMsの標準のネット接続（INTERNET_EGRESS）では、外向きの<strong>UDPが通らない</strong>
+- だから、botはDiscordにつながるけど音声が届かずに切れていた
 
 </div>
 </div>
@@ -239,9 +235,15 @@ chapter: Lambda MicroVMsを試す
 </div>
 </div>
 
-<Overlay>
-  けど、NAT Gatewayってコストがかさむよね…
-</Overlay>
+---
+layout: center
+---
+
+<div>
+  しかも
+  <h2>100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
+  <h2 v-click class="mt-6">でも、VPCから外に出るには<br><strong>NAT Gateway</strong>が要る。NAT Gatewayは高い…</h2>
+</div>
 
 <style>
 .net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
@@ -256,14 +258,26 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">NAT Gatewayを使わない方法はないか。Fargateではどうしていたかというと</div>
+<div class="text-sm opacity-70">NAT Gatewayを使わずに済まないか。Fargateではどうしていたかというと</div>
 
 ## Fargateはどうしていたか
 
-<div class="flex items-center justify-center gap-8 mt-2">
-  <img src="/images/net/netv-fargate.svg" style="height: 340px" />
-  <div class="w-64"><Kogoe>本当はプライベートサブネットに置くのが定石。個人で使うツールなので、コストを優先している</Kogoe></div>
+<div class="net-side">
+<img src="/images/net/netv-fargate.svg" style="height: 340px" />
+<div class="net-note">
+
+- パブリックサブネットに置いて、<strong>パブリックIP</strong>で外に出ていた（NATなし）
+- アウトバウンドだけ許す<strong>セキュリティグループ</strong>で守っていた
+  - <Kogoe>本当はプライベートサブネットに置くのが定石。個人で使うツールなので、コストを優先している</Kogoe>
+
 </div>
+</div>
+
+<style>
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
+.net-note { width: 22rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+</style>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -271,7 +285,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">Lambda MicroVMsも同じようにパブリックサブネットに置こうとしたけど</div>
+<div class="text-sm opacity-70">Lambda MicroVMsも同じ手でいこうと思ったら</div>
 
 ## Lambda MicroVMsはパブリックIPを持てない
 
@@ -299,7 +313,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.8em">問題② NAT Gatewayが高すぎてコストに合わない</span></h2>
+## コストを比べると
 
 <Kogoe>月20時間使う場合</Kogoe>
 
