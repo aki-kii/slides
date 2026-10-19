@@ -196,16 +196,13 @@ chapter: Lambda MicroVMsを試す
 ## 問題① UDPで接続できない
 
 <div class="net-cmp">
-  <div class="net-label">VPCに置かない</div>
-  <img src="/images/net/net-egress.svg" />
-  <div class="net-label">VPCに置く</div>
-  <img src="/images/net/net-nat-gateway.svg" />
+  <div><div class="net-label">VPCに置かない</div><img src="/images/net/netv-egress.svg" style="height: 225px" /></div>
+  <div><div class="net-label">VPCに置く</div><img src="/images/net/netv-nat-gateway.svg" style="height: 330px" /></div>
 </div>
 
 <style>
-.net-cmp { display: grid; grid-template-columns: 9rem 1fr; align-items: center; gap: 0.6rem 1rem; margin-top: 0.8rem; }
-.net-cmp img { width: 78%; }
-.net-label { font-weight: bold; font-size: 0.95rem; line-height: 1.4; }
+.net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 3rem; margin-top: 0.4rem; }
+.net-label { font-weight: bold; font-size: 0.95rem; margin-bottom: 0.2rem; }
 </style>
 
 <Overlay>
@@ -222,9 +219,10 @@ chapter: Lambda MicroVMsを試す
 
 ## Fargateはどうしていたか
 
-<img src="/images/net/net-fargate.svg" class="mx-auto mt-4" style="width: 88%" />
-
-<div class="text-center mt-2"><Kogoe>本当はプライベートサブネットに置くのが定石。個人で使うツールなので、コストを優先している</Kogoe></div>
+<div class="flex items-center justify-center gap-8 mt-2">
+  <img src="/images/net/netv-fargate.svg" style="height: 330px" />
+  <div class="w-64"><Kogoe>本当はプライベートサブネットに置くのが定石。個人で使うツールなので、コストを優先している</Kogoe></div>
+</div>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -236,10 +234,15 @@ chapter: Lambda MicroVMsを試す
 
 ## 問題② パブリックIPを付けられない
 
-<div class="relative mt-4" style="height: 300px">
-  <img v-click-hide src="/images/net/net-microvms-public.svg" class="absolute inset-x-0 mx-auto" style="width: 92%" />
-  <img v-after src="/images/net/net-nat.svg" class="absolute inset-x-0 mx-auto" style="width: 92%" />
+<div class="net-cmp">
+  <div><div class="net-label">パブリックサブネットに置く</div><img src="/images/net/netv-microvms-public.svg" style="height: 277px" /></div>
+  <div v-click><div class="net-label">NATを通す</div><img src="/images/net/netv-nat.svg" style="height: 330px" /></div>
 </div>
+
+<style>
+.net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 3rem; margin-top: 0.4rem; }
+.net-label { font-weight: bold; font-size: 0.95rem; margin-bottom: 0.2rem; }
+</style>
 
 ---
 chapter: Lambda MicroVMsを試す
