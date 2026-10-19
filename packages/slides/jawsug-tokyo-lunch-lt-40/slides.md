@@ -78,10 +78,14 @@ layout: center
 ---
 
 <div>
-  必要なときだけ起動するので
-  <h2>起動に<strong>100秒以上</strong>かかってしまいます</h2>
-  <h2 class="mt-6">待っている間が<strong>辛い</strong></h2>
+  ただ…
+  <h2>必要なときだけ起動するので<br>使う前に起動を待つ必要があります</h2>
+  <h2 v-click class="mt-6">この起動には<strong>100秒以上</strong>かかるため<br>待つのが<strong>辛い</strong></h2>
 </div>
+
+<Overlay>
+  起動時間を縮めるために改善していきます
+</Overlay>
 
 ---
 layout: center
