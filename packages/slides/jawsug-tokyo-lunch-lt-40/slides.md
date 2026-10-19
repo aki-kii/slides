@@ -109,13 +109,13 @@ chapter: Lambda MicroVMsとは？
 
 <div class="text-lg mt-2">状態を保ったまま止めて、また再開できる<strong>隔離された実行環境</strong></div>
 
-<Kogoe>今年の6月に出た新しいサービス</Kogoe>
+<img src="/images/microvm-lifecycle.svg" class="mx-auto mt-6" style="width: 820px" />
 
 <div class="tight-list">
 
-- 起動しきった状態のスナップショットから再開するので、すぐ動き出せる
-- 状態を保ったまま一時停止して、あとで続きから再開できる
-- 一時停止している時間も含めて、最大8時間動かせる
+- 起動しきった状態から始まるので、<strong>すぐ動き出せる</strong>
+- 一時停止しても、<strong>止めたところから続けられる</strong>
+- 一時停止も含めて、<strong>最大8時間</strong>使える
 
 </div>
 
