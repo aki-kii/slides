@@ -194,7 +194,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2>悩みポイント①<br><span style="font-size: 0.8em">UDP接続が失敗する（INTERNET_EGRESS）</span></h2>
+<h2><span style="font-size: 0.6em">悩みポイント①</span><br>UDP接続が失敗する（INTERNET_EGRESS）</h2>
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
@@ -219,21 +219,18 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2>悩みポイント①<br><span style="font-size: 0.8em">UDP接続が失敗する</span></h2>
+<h2><span style="font-size: 0.6em">悩みポイント①</span><br>UDP接続が失敗する（INTERNET_EGRESS）</h2>
 
-<div class="net-side">
-<img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
-<div class="net-note">
-
-- <strong>VPC_EGRESS</strong>なら、UDP接続ができる
-
+<div class="net-cmp">
+<div><div class="net-label">INTERNET_EGRESS（標準）</div><img src="/images/net/netv-egress.svg" style="height: 270px" /></div>
+<div><div class="net-label">VPC_EGRESS</div><img src="/images/net/netv-nat-gateway.svg" style="height: 270px" /></div>
 </div>
-</div>
+
+<div class="text-center text-xl mt-2"><strong>VPC_EGRESS</strong>なら、UDP接続ができる</div>
 
 <style>
-.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
-.net-note { width: 22rem; }
-.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+.net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; margin-top: 0.4rem; }
+.net-label { font-weight: bold; font-size: 0.95rem; margin-bottom: 0.2rem; }
 </style>
 
 ---
