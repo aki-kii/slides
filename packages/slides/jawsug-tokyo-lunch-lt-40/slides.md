@@ -151,7 +151,7 @@ clicks: 2
   <li><strong>イベント</strong>が来たら動く</li>
   <li><strong>関数</strong>の形で書く</li>
   <li>最大<strong>15分</strong></li>
-  <li>止めて再開はできない</li>
+  <li><strong>使い捨て</strong>の実行環境</li>
 </ul>
 </div>
 <div class="card">
@@ -160,7 +160,7 @@ clicks: 2
   <li><strong>自分で立ち上げて</strong>、止めるまで動く</li>
   <li>どんな<strong>アプリケーション</strong>でも動かせる</li>
   <li>最大<strong>8時間</strong>（一時停止を含む）</li>
-  <li>状態を保ったまま<strong>止めて再開</strong>できる</li>
+  <li>止めても、<strong>同じ環境にまた戻れる</strong></li>
 </ul>
 </div>
 </div>
