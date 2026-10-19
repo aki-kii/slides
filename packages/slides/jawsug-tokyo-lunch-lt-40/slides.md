@@ -53,28 +53,60 @@ layout: center
 ---
 
 <div>
-  ぼく、最近Discordのボイスチャットで
-  <h2>Claude Codeと<strong>通話</strong>してるんです</h2>
-  <div class="mt-6">走りながらでも、画面の前にいなくても<br>声で話しかけたらClaude Codeが返事して、読み上げてくれるんです</div>
+  自作のDiscord音声bot（ECS Fargate）の
+  <h2><strong>起動時間を縮める</strong>ために<br>試行錯誤した時の話をします</h2>
 </div>
 
 ---
 
-<div class="text-sm opacity-70">これを動かしているのが、voiceioというDiscord bot</div>
+## 自作のDiscord音声bot
 
-## voiceioの構成
+<div class="mt-2" style="font-size: 1rem; white-space: nowrap">ボイスチャットで話した内容を<strong>文字起こし</strong>して、テキストチャンネルのメッセージを<strong>読み上げる</strong></div>
 
-<div class="text-lg mt-2">ボイスチャットの声を<strong>文字起こし</strong>して、返ってきた文章を<strong>読み上げる</strong></div>
+<div class="bot-flow">
+  <div class="bf-box"><img src="/images/discord.svg" class="h-12" /><div class="bf-name">ボイスチャット</div><Kogoe>声で話す・聞く</Kogoe></div>
+  <div class="bf-arrows">
+    <div class="bf-arrow">話した声 →</div>
+    <div class="bf-arrow">← 読み上げ</div>
+  </div>
+  <div class="bf-box bf-bot"><img src="/images/aws/fargate.svg" class="h-12" /><div class="bf-name">Discord bot</div><Kogoe>ECS Fargate</Kogoe></div>
+  <div class="bf-arrows">
+    <div class="bf-arrow">文字起こし →</div>
+    <div class="bf-arrow">← 書かれたメッセージ</div>
+  </div>
+  <div class="bf-box"><img src="/images/discord.svg" class="h-12" /><div class="bf-name">テキストチャンネル</div><Kogoe>文字で読む・書く</Kogoe></div>
+</div>
 
-<InlineSvg src="voiceio-overview.svg" label="Discordのボイスチャットとテキストチャットを、読み上げと文字起こしでClaude Codeとつなぐvoiceioの構成図" class="mx-auto mt-4" style="width: 760px" />
+<style>
+.bot-flow { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 3.5rem; }
+.bf-box { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 11rem; white-space: nowrap; padding: 1.2rem 0.5rem; border: 2px solid #d5d8dc; border-radius: 14px; }
+.bf-bot { border-color: #e67e22; }
+.bf-name { font-weight: bold; font-size: 1.05rem; }
+.bf-arrows { display: flex; flex-direction: column; gap: 1.4rem; font-size: 0.85rem; font-weight: bold; color: #555; white-space: nowrap; }
+</style>
 
 ---
 
-## Discord botの構成
+## 使うときだけ起動する
 
-<div class="mt-2" style="font-size: 0.95rem; white-space: nowrap">ECSのFargateで動いていて、/vcというスラッシュコマンドを打ったときだけ起動する</div>
+<div class="mt-2" style="font-size: 1rem; white-space: nowrap">お金を抑えるため、<strong>/vc</strong>で呼んだときだけFargateのタスクを起動して、使い終わったら止める</div>
 
-<img src="/images/voiceio-bot.png" class="mx-auto mt-2" style="max-height: 360px" />
+<div class="on-flow">
+  <div class="of-step"><img src="/images/discord.svg" class="h-12" /><div class="of-name">/vc</div><Kogoe>スラッシュコマンド</Kogoe></div>
+  <div class="of-arrow">→</div>
+  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" /><div class="of-name">タスクを起動</div><Kogoe>ECS Fargate</Kogoe></div>
+  <div class="of-arrow">→</div>
+  <div class="of-step"><img src="/images/discord.svg" class="h-12" /><div class="of-name">ボイスチャットに参加</div><Kogoe>ここで話せるように</Kogoe></div>
+  <div class="of-arrow">→</div>
+  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" style="filter: grayscale(1); opacity: 0.6" /><div class="of-name">タスクを停止</div><Kogoe>使い終わったら</Kogoe></div>
+</div>
+
+<style>
+.on-flow { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-top: 3.5rem; }
+.of-step { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 10.5rem; text-align: center; white-space: nowrap; }
+.of-name { font-weight: bold; font-size: 1.05rem; white-space: nowrap; }
+.of-arrow { font-size: 2rem; color: #888; }
+</style>
 
 ---
 layout: center
@@ -83,7 +115,7 @@ layout: center
 <div>
   でも、/vcを打ってからボイスチャットに入るまで
   <h2><strong>100秒以上</strong>かかってたんです</h2>
-  <Kogoe class="mt-8">今すぐ話したいのに</Kogoe>
+  <Kogoe class="mt-8">ボイスチャットに入るのを待ってる間が、すごくつらい</Kogoe>
   <h2>そんなに待ってられるか！</h2>
   <div class="mt-6">ってことで、速くすることにしました</div>
 </div>
