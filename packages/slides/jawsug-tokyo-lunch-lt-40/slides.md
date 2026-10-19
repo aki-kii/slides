@@ -173,7 +173,6 @@ clicks: 3
 .sub-title .ev.show { max-width: 6em; opacity: 1; }
 .card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; min-height: 11rem; }
 .card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
-.ecards.on-ev .evw, .ecards.on-fn .fnw { color: #e74c3c; text-decoration: underline; text-underline-offset: 0.2em; }
 .card li { font-size: 0.95rem !important; line-height: 1.5 !important; transition: opacity 0.4s; }
 .card li.off { opacity: 0; }
 .card li strong { color: inherit; font-weight: normal; transition: color 0.3s; }
@@ -187,6 +186,25 @@ layout: center
 <div>
   さっそく
   <h2>Discordのbotを<strong>Lambda MicroVMs</strong>に<br>載せ替えてみました</h2>
+</div>
+
+---
+layout: center
+---
+
+<div>
+  そしたら
+  <h2><strong>100秒以上</strong>かかってたのが<br><strong>約10秒</strong>で起動するように！</h2>
+</div>
+
+---
+layout: center
+---
+
+<div>
+  でも…
+  <h2>Lambda MicroVMsを<strong>選ばなかった</strong>んです</h2>
+  <div class="mt-6">その理由を2つ話します</div>
 </div>
 
 ---
@@ -242,9 +260,6 @@ chapter: Lambda MicroVMsを試す
 .net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
 </style>
 
-<Overlay>
-  VPCの中に入れたら約10秒で起動！
-</Overlay>
 
 ---
 chapter: Lambda MicroVMsを試す
