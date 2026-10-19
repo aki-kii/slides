@@ -53,9 +53,9 @@ layout: center
 ---
 
 <div>
-  ぼくは今、Discordのボイスチャットで
-  <h2>Claude Codeと<strong>通話</strong>しています</h2>
-  <div class="mt-6">走りながらでも、画面の前にいなくても<br>声で話しかけるとClaude Codeが返事をして、それを読み上げてくれる</div>
+  ぼく、最近Discordのボイスチャットで
+  <h2>Claude Codeと<strong>通話</strong>してるんです</h2>
+  <div class="mt-6">走りながらでも、画面の前にいなくても<br>声で話しかけたらClaude Codeが返事して、読み上げてくれるんです</div>
 </div>
 
 ---
@@ -81,11 +81,11 @@ layout: center
 ---
 
 <div>
-  ただ、/vcを打ってからボイスチャットに入るまで
-  <h2><strong>100秒以上</strong>かかっていました</h2>
+  でも、/vcを打ってからボイスチャットに入るまで
+  <h2><strong>100秒以上</strong>かかってたんです</h2>
   <Kogoe class="mt-8">今すぐ話したいのに</Kogoe>
   <h2>そんなに待ってられるか！</h2>
-  <div class="mt-6">ということで、速くすることにしました</div>
+  <div class="mt-6">ってことで、速くすることにしました</div>
 </div>
 
 ---
@@ -93,7 +93,7 @@ layout: center
 ---
 
 <div>
-  真っ先に取り組んだのは
+  まず真っ先に試したのが
   <h2>起動が速いと噂の<strong>Lambda MicroVMs</strong></h2>
 </div>
 
@@ -182,7 +182,7 @@ layout: center
 
 <div>
   さっそく
-  <h2>Discordのbotを<strong>Lambda MicroVMs</strong>に<br>載せ替えて試した</h2>
+  <h2>Discordのbotを<strong>Lambda MicroVMs</strong>に<br>載せ替えてみました</h2>
 </div>
 
 ---
@@ -323,8 +323,8 @@ layout: center
 ---
 
 <div>
-  Lambda MicroVMsはコストに見合わなかった。けど
-  <h2>そもそも<strong>コンテナの起動</strong>を<br>速くできないの？</h2>
+  Lambda MicroVMsはコストに見合わなかったけど…
+  <h2>そもそも<strong>コンテナの起動</strong>って<br>速くできないの？</h2>
 </div>
 
 ---
