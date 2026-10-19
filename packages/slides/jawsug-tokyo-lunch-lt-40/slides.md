@@ -98,7 +98,7 @@ layout: center
 </div>
 
 ---
-chapter: Lambda MicroVMsを試す
+chapter: Lambda MicroVMsとは？
 ---
 
 <ChapterLabel />
@@ -127,7 +127,7 @@ chapter: Lambda MicroVMsを試す
 <BottomLink href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-lambda-microvms/" title="AWS introduces Lambda MicroVMs for isolated execution of user and AI-generated code" />
 
 ---
-chapter: Lambda MicroVMsを試す
+chapter: Lambda MicroVMsとは？
 clicks: 3
 ---
 
@@ -185,7 +185,7 @@ clicks: 3
 </style>
 
 ---
-chapter: Lambda MicroVMsを試す
+chapter: Lambda MicroVMsとは？
 clicks: 4
 ---
 
@@ -242,21 +242,13 @@ MicroVMsは<strong>自分で立ち上げて</strong>、どんな<strong>アプ�
 </style>
 
 ---
-chapter: Lambda MicroVMsを試す
+layout: center
 ---
 
-<ChapterLabel />
-
-<div class="text-sm opacity-70">そして何より、起動が速い。今回ほしかったのはこの速さ</div>
-
-## 起動しきった状態から再開する
-
-<br>
-
-- 起動しきった状態を<strong>スナップショット</strong>に取っておく
-- そこから再開するので<strong>速い</strong>
-
-<BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/microvms-images.html" title="Lambda MicroVM images" />
+<div>
+  さっそく
+  <h2>Discordのbotを<strong>Lambda MicroVMs</strong>に<br>載せ替えて試した</h2>
+</div>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -264,9 +256,9 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">ところが、Discordのbotを動かしてみたら</div>
+<div class="text-sm opacity-70">ところが、ボイスチャットに入ったように見えて接続が切れる</div>
 
-<h2><span style="font-size: 0.85em">ボイスチャットに入ったように見えて接続が切れる</span></h2>
+## 問題① UDPで接続できない
 
 <br>
 
@@ -284,7 +276,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">でも、この構成にはNAT Gatewayが入っている。NAT Gatewayは高いので、ほかの方法を考えた</div>
+<div class="text-sm opacity-70">でも、VPCの中からインターネットに出るにはNATが要る。NATは高いので、Fargateと同じ方法を考えた</div>
 
 ## Fargateはどうしていたか
 
@@ -329,7 +321,7 @@ chapter: Lambda MicroVMsを試す
 
 <div class="text-sm opacity-70">Lambda MicroVMsも同じようにパブリックサブネットに置こうとしたけど</div>
 
-## Lambda MicroVMsは同じ手が使えない
+## 問題② パブリックIPを付けられない
 
 <div class="flex gap-4 items-start justify-center mt-8">
 
@@ -413,7 +405,7 @@ layout: center
 </div>
 
 ---
-chapter: Fargateの起動を速くする
+chapter: 起動にかかる時間を見る
 ---
 
 <ChapterLabel />
@@ -425,7 +417,7 @@ chapter: Fargateの起動を速くする
 <InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto mt-10" style="width: 880px" />
 
 ---
-chapter: Fargateの起動を速くする
+chapter: 起動にかかる時間を見る
 ---
 
 <ChapterLabel />
@@ -440,7 +432,7 @@ chapter: Fargateの起動を速くする
   - <Kogoe>しかも、ほかのコンテナはヘルスチェックを待っている</Kogoe>
 
 ---
-chapter: Fargateの起動を速くする
+chapter: イメージの取得を速くする
 ---
 
 <ChapterLabel />
@@ -461,7 +453,7 @@ chapter: Fargateの起動を速くする
   - <Kogoe>削りようがない</Kogoe>
 
 ---
-chapter: Fargateの起動を速くする
+chapter: イメージの取得を速くする
 ---
 
 <ChapterLabel />
@@ -491,7 +483,7 @@ chapter: Fargateの起動を速くする
 <BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
 
 ---
-chapter: Fargateの起動を速くする
+chapter: イメージの取得を速くする
 ---
 
 <ChapterLabel />
@@ -511,7 +503,7 @@ chapter: Fargateの起動を速くする
 <BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
 
 ---
-chapter: Fargateの起動を速くする
+chapter: イメージの取得を速くする
 ---
 
 <ChapterLabel />
@@ -524,7 +516,7 @@ chapter: Fargateの起動を速くする
 - 起動のときは、モデルの本体は読まない
 
 ---
-chapter: Fargateの起動を速くする
+chapter: イメージの取得を速くする
 ---
 
 <ChapterLabel />
@@ -538,7 +530,7 @@ chapter: Fargateの起動を速くする
 <div class="text-center text-lg">イメージの取得は37.5秒から<strong>3.3秒</strong>になった</div>
 
 ---
-chapter: Fargateの起動を速くする
+chapter: イメージの取得を速くする
 ---
 
 <ChapterLabel />
@@ -554,7 +546,7 @@ chapter: Fargateの起動を速くする
 - 足りないファイルを、起動しながら取りに行くから
 
 ---
-chapter: Fargateの起動を速くする
+chapter: ほかのコンテナを待たない
 ---
 
 <ChapterLabel />
@@ -570,7 +562,7 @@ chapter: Fargateの起動を速くする
 - 読み上げがいるのは、誰かが話して、それを読み上げるときだけ
 
 ---
-chapter: Fargateの起動を速くする
+chapter: ほかのコンテナを待たない
 ---
 
 <ChapterLabel />
@@ -585,7 +577,7 @@ chapter: Fargateの起動を速くする
 - 準備ができていなくても、声や文章はためておいて、準備できたら流す
 
 ---
-chapter: Fargateの起動を速くする
+chapter: ほかのコンテナを待たない
 ---
 
 <ChapterLabel />
