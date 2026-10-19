@@ -274,7 +274,7 @@ chapter: Lambda MicroVMsを試す
 - Lambda MicroVMsは<strong>パブリックIPを持てない</strong>
   - <Kogoe>Lambda関数ではENIにElastic IPを付ける非推奨の方法があったけど、MicroVMsはENIがアカウントから見えず、それもできない</Kogoe>
 - パブリックサブネットに置いても、インターネットに出られない
-- だから<strong>NAT</strong>は外せない
+- インターネットにアクセスするために<strong>NAT</strong>が必要になる
 
 </div>
 </div>
