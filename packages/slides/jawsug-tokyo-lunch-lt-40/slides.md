@@ -127,7 +127,6 @@ chapter: Lambda MicroVMsとは？
 
 ---
 chapter: Lambda MicroVMsとは？
-clicks: 2
 ---
 
 <ChapterLabel />
@@ -137,30 +136,25 @@ clicks: 2
   <h2 class="!m-0">Lambda MicroVMsとは？</h2>
 </div>
 
-<div class="sub-title"><span class="nm"><span>Lambda</span><span class="ev" :class="{ show: $clicks >= 1 }">Event</span><span>Functions</span></span>との違い</div>
+<div class="sub-title">Lambda <span class="u-ev">Event</span> <span class="u-fn">Functions</span>との違い</div>
 
-<div class="h-6"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
-
-<div v-if="$clicks >= 2" class="ecards grid grid-cols-2 gap-6 mt-1">
+<div class="ecards grid grid-cols-2 gap-6 mt-6">
 <div class="card">
-<div class="card-title">
-  <img src="/images/aws/lambda.svg" class="h-9" />
-  <span class="nm"><span>Lambda</span><span>Event</span><span>Functions</span></span>
-</div>
+<div class="card-title">Lambda Event Functions</div>
 <ul>
-  <li><strong>イベント</strong>が来たら動く</li>
-  <li><strong>関数</strong>の形で書く</li>
-  <li>最大<strong>15分</strong></li>
-  <li><strong>使い捨て</strong>の実行環境</li>
+  <li><span class="u-ev">イベントが来たら動く</span></li>
+  <li><span class="u-fn">関数の形で書く</span></li>
+  <li>最大15分</li>
+  <li>使い捨ての実行環境</li>
 </ul>
 </div>
 <div class="card">
-<div class="card-title"><img src="/images/aws/lambda.svg" class="h-9" /><span>Lambda MicroVMs</span></div>
+<div class="card-title">Lambda MicroVMs</div>
 <ul>
-  <li><strong>自分で立ち上げて</strong>、止めるまで動く</li>
-  <li>どんな<strong>アプリケーション</strong>でも動かせる</li>
-  <li>最大<strong>8時間</strong>（一時停止を含む）</li>
-  <li>止めても、<strong>同じ環境にまた戻れる</strong></li>
+  <li><span class="u-ev">自分で立ち上げて、止めるまで動く</span></li>
+  <li><span class="u-fn">どんなアプリケーションでも動かせる</span></li>
+  <li>最大8時間（一時停止を含む）</li>
+  <li>止めても、同じ環境にまた戻れる</li>
 </ul>
 </div>
 </div>
@@ -169,16 +163,11 @@ clicks: 2
 
 <style>
 .sub-title { font-size: 1.4rem; font-weight: bold; margin-top: 1rem; white-space: nowrap; }
-.nm span { transition: all 0.5s ease; }
-.nm span + span { margin-left: 0.3em; }
-.sub-title .ev { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; color: #e74c3c; }
-.sub-title .nm .ev:not(.show) { margin-left: 0; }
-.sub-title .ev.show { max-width: 6em; opacity: 1; }
-.card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; min-height: 11rem; }
-.card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
-.card li { font-size: 0.95rem !important; line-height: 1.5 !important; transition: opacity 0.4s; }
-.card li.off { opacity: 0; }
-
+.u-ev { text-decoration: underline; text-decoration-color: #2F6FB3; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
+.u-fn { text-decoration: underline; text-decoration-color: #E67E22; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
+.card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; }
+.card-title { font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
+.card li { font-size: 0.95rem !important; line-height: 1.7 !important; }
 </style>
 ---
 layout: center
