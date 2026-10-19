@@ -61,44 +61,22 @@ layout: center
 
 ## 自作のDiscord音声bot
 
-<div class="mt-2" style="font-size: 1rem; white-space: nowrap">ボイスチャットで話した内容を<strong>文字起こし</strong>して、テキストチャンネルのメッセージを<strong>読み上げる</strong></div>
+<div class="text-lg mt-2">Discordのボイスチャットで、<strong>Claude Codeと通話</strong>している</div>
 
-<div class="bot-flow">
-  <div class="bf-box"><img src="/images/discord.svg" class="h-12" /><div class="bf-name">ボイスチャット</div><Kogoe>声で話す・聞く</Kogoe></div>
-  <div class="bf-arrows">
-    <div class="bf-arrow">話した声 →</div>
-    <div class="bf-arrow">← 読み上げ</div>
-  </div>
-  <div class="bf-box bf-bot"><img src="/images/aws/fargate.svg" class="h-12" /><div class="bf-name">Discord bot</div><Kogoe>ECS Fargate</Kogoe></div>
-  <div class="bf-arrows">
-    <div class="bf-arrow">文字起こし →</div>
-    <div class="bf-arrow">← 書かれたメッセージ</div>
-  </div>
-  <div class="bf-box"><img src="/images/discord.svg" class="h-12" /><div class="bf-name">テキストチャンネル</div><Kogoe>文字で読む・書く</Kogoe></div>
-</div>
-
-<style>
-.bot-flow { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 3.5rem; }
-.bf-box { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 11rem; white-space: nowrap; padding: 1.2rem 0.5rem; border: 2px solid #d5d8dc; border-radius: 14px; }
-.bf-bot { border-color: #e67e22; }
-.bf-name { font-weight: bold; font-size: 1.05rem; }
-.bf-arrows { display: flex; flex-direction: column; gap: 1.4rem; font-size: 0.85rem; font-weight: bold; color: #555; white-space: nowrap; }
-</style>
+<img src="/images/bot-overview.svg" class="mx-auto mt-4" style="width: 800px" />
 
 ---
 
 ## 使うときだけ起動する
 
-<div class="mt-2" style="font-size: 1rem; white-space: nowrap">お金を抑えるため、<strong>/vc</strong>で呼んだときだけFargateのタスクを起動して、使い終わったら止める</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">お金を抑えるために、<strong>必要なときだけ起動</strong>して、ボイスチャットが不要になったら停止する</div>
 
 <div class="on-flow">
-  <div class="of-step"><img src="/images/discord.svg" class="h-12" /><div class="of-name">/vc</div><Kogoe>スラッシュコマンド</Kogoe></div>
+  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" /><div class="of-name">タスクを起動</div><Kogoe>必要なとき</Kogoe></div>
   <div class="of-arrow">→</div>
-  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" /><div class="of-name">タスクを起動</div><Kogoe>ECS Fargate</Kogoe></div>
+  <div class="of-step"><img src="/images/discord.svg" class="h-12" /><div class="of-name">ボイスチャットで話す</div><Kogoe>Claude Codeと通話</Kogoe></div>
   <div class="of-arrow">→</div>
-  <div class="of-step"><img src="/images/discord.svg" class="h-12" /><div class="of-name">ボイスチャットに参加</div><Kogoe>ここで話せるように</Kogoe></div>
-  <div class="of-arrow">→</div>
-  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" style="filter: grayscale(1); opacity: 0.6" /><div class="of-name">タスクを停止</div><Kogoe>使い終わったら</Kogoe></div>
+  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" style="filter: grayscale(1); opacity: 0.6" /><div class="of-name">タスクを停止</div><Kogoe>不要になったら</Kogoe></div>
 </div>
 
 <style>
