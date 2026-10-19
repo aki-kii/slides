@@ -194,7 +194,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-## 悩みポイント① UDP接続が失敗する<span style="font-size: 0.5em; opacity: 0.6">（INTERNET_EGRESS）</span>
+<h2>悩みポイント①<br><span style="font-size: 0.8em">UDP接続が失敗する（INTERNET_EGRESS）</span></h2>
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
@@ -219,19 +219,22 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">調べているうちに、VPCに入れたらUDPが通ることが分かった</div>
-
-## VPCに置けばUDPで接続できる
+<h2>悩みポイント①<br><span style="font-size: 0.8em">UDP接続が失敗する</span></h2>
 
 <div class="net-side">
 <img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
 <div class="net-note">
 
-- VPC_EGRESSでVPCのプライベートサブネットに置くと、<strong>UDPも通る</strong>
-- VPCの中からインターネットに出るので、<strong>NAT Gateway</strong>を通す
+- <strong>VPC_EGRESS</strong>なら、UDP接続ができる
 
 </div>
 </div>
+
+<style>
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
+.net-note { width: 22rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+</style>
 
 ---
 layout: center
