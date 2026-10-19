@@ -127,7 +127,7 @@ chapter: Lambda MicroVMsとは？
 
 ---
 chapter: Lambda MicroVMsとは？
-clicks: 3
+clicks: 2
 ---
 
 <ChapterLabel />
@@ -141,22 +141,26 @@ clicks: 3
 
 <div class="h-6"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
 
-<div v-if="$clicks >= 2" class="ecards grid grid-cols-2 gap-6 mt-1" :class="{ 'on-ev': $clicks === 2, 'on-fn': $clicks === 3 }">
+<div v-if="$clicks >= 2" class="ecards grid grid-cols-2 gap-6 mt-1">
 <div class="card">
 <div class="card-title">
   <img src="/images/aws/lambda.svg" class="h-9" />
-  <span class="nm"><span>Lambda</span><span class="evw">Event</span><span class="fnw">Functions</span></span>
+  <span class="nm"><span>Lambda</span><span>Event</span><span>Functions</span></span>
 </div>
 <ul>
-  <li class="row-ev"><strong>イベント</strong>が来たら動く</li>
-  <li class="row-fn" :class="{ off: $clicks < 3 }">呼ばれるたびに処理をして結果を返す、<strong>関数</strong>の形で書く</li>
+  <li><strong>イベント</strong>が来たら動く</li>
+  <li><strong>関数</strong>の形で書く</li>
+  <li>最大<strong>15分</strong></li>
+  <li>止めて再開はできない</li>
 </ul>
 </div>
 <div class="card">
 <div class="card-title"><img src="/images/aws/lambda.svg" class="h-9" /><span>Lambda MicroVMs</span></div>
 <ul>
-  <li class="row-ev">使いたいときに<strong>自分で立ち上げて</strong>、止めるまで動き続ける</li>
-  <li class="row-fn" :class="{ off: $clicks < 3 }">関数の形に縛られず、どんな<strong>アプリケーション</strong>でも動かせる</li>
+  <li><strong>自分で立ち上げて</strong>、止めるまで動く</li>
+  <li>どんな<strong>アプリケーション</strong>でも動かせる</li>
+  <li>最大<strong>8時間</strong>（一時停止を含む）</li>
+  <li>状態を保ったまま<strong>止めて再開</strong>できる</li>
 </ul>
 </div>
 </div>
@@ -174,9 +178,7 @@ clicks: 3
 .card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
 .card li { font-size: 0.95rem !important; line-height: 1.5 !important; transition: opacity 0.4s; }
 .card li.off { opacity: 0; }
-.card li strong { color: inherit; font-weight: normal; transition: color 0.3s; }
-.ecards.on-ev .row-ev strong, .ecards.on-fn .row-fn strong { color: #e74c3c; font-weight: bold; }
-.ecards.on-fn .row-ev { opacity: 0.35; }
+
 </style>
 ---
 layout: center
