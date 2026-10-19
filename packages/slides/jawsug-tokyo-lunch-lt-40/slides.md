@@ -67,23 +67,25 @@ layout: center
 
 ---
 
-## 使うときだけ起動する
+## 自作のDiscord音声bot
 
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">お金を抑えるために、<strong>必要なときだけ起動</strong>して、ボイスチャットが不要になったら停止する</div>
+<div class="net-side">
+<img src="/images/bot-task.svg" style="height: 360px" />
+<div class="net-note">
 
-<div class="on-flow">
-  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" /><div class="of-name">タスクを起動</div><Kogoe>必要なとき</Kogoe></div>
-  <div class="of-arrow">→</div>
-  <div class="of-step"><img src="/images/discord.svg" class="h-12" /><div class="of-name">ボイスチャットで話す</div><Kogoe>Claude Codeと通話</Kogoe></div>
-  <div class="of-arrow">→</div>
-  <div class="of-step"><img src="/images/aws/fargate.svg" class="h-12" style="filter: grayscale(1); opacity: 0.6" /><div class="of-name">タスクを停止</div><Kogoe>不要になったら</Kogoe></div>
+- <strong>必要なときだけ起動</strong>する
+- ECS Fargateで<strong>コンテナを3つ</strong>使っている
+  - Discord bot: botとしての処理
+  - 読み上げ: VOICEVOX
+  - 文字起こし: Transcribe Streamingにつなぐ
+
+</div>
 </div>
 
 <style>
-.on-flow { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-top: 3.5rem; }
-.of-step { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; width: 10.5rem; text-align: center; white-space: nowrap; }
-.of-name { font-weight: bold; font-size: 1.05rem; white-space: nowrap; }
-.of-arrow { font-size: 2rem; color: #888; }
+.net-side { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+.net-note { width: 27rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
 </style>
 
 ---
