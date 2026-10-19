@@ -193,16 +193,49 @@ chapter: Lambda MicroVMsを試す
 
 <div class="text-sm opacity-70">ところが、ボイスチャットに入ったように見えて接続が切れる</div>
 
-## 問題① UDPで接続できない
+## 問題① VPCレスではUDPで接続できない
 
-<div class="net-cmp">
-  <div><div class="net-label">VPCに置かない</div><img src="/images/net/netv-egress.svg" style="height: 340px" /></div>
-  <div><div class="net-label">VPCに置く</div><img src="/images/net/netv-nat-gateway.svg" style="height: 340px" /></div>
+<div class="net-side">
+<img src="/images/net/netv-egress.svg" style="height: 340px" />
+<div class="net-note">
+
+- Discordのボイスチャットは、音声を<strong>UDP</strong>で送受信している
+- Lambda MicroVMsの標準のネット接続では、外向きのUDPが通らない
+- botはDiscordにつながるけど、音声が届かずに接続が切れる
+
+</div>
 </div>
 
 <style>
-.net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; margin-top: 0.2rem; }
-.net-label { font-weight: bold; font-size: 0.95rem; margin-bottom: 0.2rem; }
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
+.net-note { width: 22rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">調べているうちに、VPCに入れたらUDPが通ることが分かった</div>
+
+## VPCに置けばUDPで接続できる
+
+<div class="net-side">
+<img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
+<div class="net-note">
+
+- Lambda MicroVMsをVPCのプライベートサブネットに置くと、<strong>UDPも通る</strong>
+- VPCの中からインターネットに出るので、<strong>NAT Gateway</strong>を通す
+
+</div>
+</div>
+
+<style>
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
+.net-note { width: 22rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
 </style>
 
 <Overlay>
