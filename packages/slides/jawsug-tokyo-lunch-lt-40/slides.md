@@ -296,22 +296,17 @@ chapter: 起動にかかる時間を見る
 
 ## 起動にかかる時間を見てみました
 
-<InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto mt-10" style="width: 880px" />
+<InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto" style="width: 780px" />
 
----
-chapter: 起動にかかる時間を見る
----
+<div class="kaizen">
+  <div v-click>① <strong>イメージの取得</strong>に時間がかかっている</div>
+  <div v-click>② Discord botが<strong>ほかのコンテナの起動を待っている</strong>から遅い</div>
+  <div v-after class="pl-8"><Kogoe>しかも、ほかのコンテナはヘルスチェックを待っている</Kogoe></div>
+</div>
 
-<ChapterLabel />
-
-## 改善したいのは2つ
-
-<br>
-
-- ① イメージの取得に時間がかかっている
-- ② ヘルスチェックも込みで、起動までにすごく時間がかかっている
-  - ヘルスチェックが問題というより、Discord botがほかのコンテナの起動を待っているから遅い
-  - <Kogoe>しかも、ほかのコンテナはヘルスチェックを待っている</Kogoe>
+<style>
+.kaizen { margin-top: 0.6rem; font-size: 1.1rem; line-height: 1.7; }
+</style>
 
 ---
 chapter: イメージの取得を速くする
