@@ -136,11 +136,11 @@ chapter: Lambda MicroVMsとは？
   <h2 class="!m-0">Lambda MicroVMsとは？</h2>
 </div>
 
-<div class="sub-title">Lambda <span class="u-ev">Event</span> <span class="u-fn">Functions</span>との違い</div>
+<div class="sub-title">Lambda<span class="u-ev">イベント</span><span class="u-fn">関数</span>（Lambda関数）との違い</div>
 
 <div class="ecards grid grid-cols-2 gap-6 mt-6">
 <div class="card">
-<div class="card-title">Lambda Event Functions</div>
+<div class="card-title">Lambdaイベント関数</div>
 <ul>
   <li><span class="u-ev">イベントが来たら動く</span></li>
   <li><span class="u-fn">関数の形で書く</span></li>
