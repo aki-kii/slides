@@ -135,69 +135,6 @@ clicks: 3
 
 ## Lambda Functionsとの違い
 
-<div class="names">
-  <div class="fn">
-    <span :class="{ dim: $clicks >= 2 }">Lambda</span>
-    <span class="ev" :class="{ show: $clicks >= 1, pick: $clicks >= 2 }">Event</span>
-    <span :class="{ pick: $clicks >= 2 }">Functions</span>
-  </div>
-  <div class="vs">と</div>
-  <div class="mv">Lambda MicroVMs</div>
-</div>
-
-<div class="h-6 mt-1 text-center"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
-
-<div class="diff grid grid-cols-2 gap-10 mt-2">
-<div v-click="2">
-
-### <span class="pickc">Event</span>
-
-- Event Functionsは、<strong>イベント</strong>が来たら動く
-- MicroVMsは、使いたいときに<strong>自分で立ち上げて</strong>、止めるまで動き続ける
-
-</div>
-<div v-click="3">
-
-### <span class="pickc">Function</span>
-
-- Event Functionsは、呼ばれるたびに処理をして結果を返す<strong>関数</strong>の形で書く
-- MicroVMsは、関数の形に縛られず、どんな<strong>アプリケーション</strong>でも動かせる
-
-</div>
-</div>
-
-<BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
-
-<style>
-.names { display: flex; align-items: baseline; justify-content: center; gap: 1.5rem; margin-top: 0.5rem; font-size: 1.65rem; font-weight: bold; white-space: nowrap; }
-.names .fn { display: flex; align-items: baseline; }
-.names .fn > span + span { margin-left: 0.3em; }
-.names .fn > .ev:not(.show) + span { margin-left: 0; }
-.diff li { font-size: 0.95rem !important; line-height: 1.5 !important; }
-.diff h3 { margin-bottom: 0.3rem !important; }
-.names .vs { font-size: 1.4rem; opacity: 0.5; }
-.names .fn span { transition: all 0.5s ease; }
-.names .ev { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; color: #e74c3c; }
-.names .ev.show { max-width: 5em; opacity: 1; }
-.names .dim { opacity: 0.25; }
-.names .pick { color: #e74c3c; text-decoration: underline; text-underline-offset: 0.2em; }
-.pickc { color: #e74c3c; }
-</style>
-
----
-chapter: Lambda MicroVMsとは？
-clicks: 4
----
-
-<ChapterLabel />
-
-## Lambda Functionsとの違い
-
-<div class="lead text-lg mt-2" :class="{ off: $clicks < 4 }">
-Event Functionsは<strong>イベント</strong>が来たら<strong>関数</strong>を動かし、<br>
-MicroVMsは<strong>自分で立ち上げて</strong>、どんな<strong>アプリケーション</strong>でも動かせる
-</div>
-
 <div class="ecards grid grid-cols-2 gap-6 mt-4" :class="{ 'on-ev': $clicks === 2, 'on-fn': $clicks === 3 }">
 <div class="card">
 <div class="card-title">
@@ -223,8 +160,6 @@ MicroVMsは<strong>自分で立ち上げて</strong>、どんな<strong>アプ�
 <BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
 
 <style>
-.lead { transition: opacity 0.4s; }
-.lead.off { opacity: 0; }
 .card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; min-height: 11rem; }
 .card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
 .card-title span { transition: all 0.5s ease; }
@@ -260,11 +195,18 @@ chapter: Lambda MicroVMsを試す
 
 ## 問題① UDPで接続できない
 
-<br>
+<div class="net-cmp">
+  <div class="net-label">VPCに置かない</div>
+  <img src="/images/net/net-egress.svg" />
+  <div class="net-label">VPCに置く</div>
+  <img src="/images/net/net-nat-gateway.svg" />
+</div>
 
-- Discordのボイスチャットは<strong>UDP</strong>で通信している
-- Lambda MicroVMsの標準のネット接続では、UDPが通っていなかった
-- 調べているうちに、VPCに入れたらUDPが通ることが分かった
+<style>
+.net-cmp { display: grid; grid-template-columns: 9rem 1fr; align-items: center; gap: 0.6rem 1rem; margin-top: 0.8rem; }
+.net-cmp img { width: 78%; }
+.net-label { font-weight: bold; font-size: 0.95rem; line-height: 1.4; }
+</style>
 
 <Overlay>
   VPCの中に入れたら約10秒で起動！
@@ -280,38 +222,9 @@ chapter: Lambda MicroVMsを試す
 
 ## Fargateはどうしていたか
 
-<div class="flex gap-4 items-start justify-center mt-8">
+<img src="/images/net/net-fargate.svg" class="mx-auto mt-4" style="width: 88%" />
 
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/fargate.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-48 text-center">
-    <span class="font-bold">Fargateのタスク</span>
-    <span class="text-gray-400 text-sm" style="line-height:1.5">パブリックサブネット<br>パブリックIPを持つ</span>
-  </div>
-</div>
-
-<span class="text-3xl" style="margin-top:2rem">→</span>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/internet-gateway.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-48 text-center">
-    <span class="font-bold">Internet Gateway</span>
-  </div>
-</div>
-
-<span class="text-3xl" style="margin-top:2rem">→</span>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/internet.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-48 text-center">
-    <span class="font-bold">インターネット</span>
-  </div>
-</div>
-
-</div>
-
-- パブリックサブネットに置いて、アウトバウンドだけ許すセキュリティグループで守っていた
-  - <Kogoe>本当はプライベートサブネットに置くのが定石。個人で使うツールなので、コストを優先している</Kogoe>
+<div class="text-center mt-2"><Kogoe>本当はプライベートサブネットに置くのが定石。個人で使うツールなので、コストを優先している</Kogoe></div>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -323,39 +236,10 @@ chapter: Lambda MicroVMsを試す
 
 ## 問題② パブリックIPを付けられない
 
-<div class="flex gap-4 items-start justify-center mt-8">
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/lambda.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-48 text-center">
-    <span class="font-bold">Lambda MicroVMs</span>
-    <span class="text-gray-400 text-sm" style="line-height:1.5">パブリックIPを持てない</span>
-  </div>
+<div class="relative mt-4" style="height: 300px">
+  <img v-click-hide src="/images/net/net-microvms-public.svg" class="absolute inset-x-0 mx-auto" style="width: 92%" />
+  <img v-after src="/images/net/net-nat.svg" class="absolute inset-x-0 mx-auto" style="width: 92%" />
 </div>
-
-<span class="text-3xl" style="margin-top:2rem">→</span>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/nat-gateway.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-48 text-center">
-    <span class="font-bold">NAT</span>
-    <span class="text-gray-400 text-sm" style="line-height:1.5">NAT Gateway<br>またはNATインスタンス</span>
-  </div>
-</div>
-
-<span class="text-3xl" style="margin-top:2rem">→</span>
-
-<div class="flex flex-col items-center gap-2">
-  <img src="/images/aws/internet.svg" class="h-20"/>
-  <div class="flex flex-col items-center gap-1 w-48 text-center">
-    <span class="font-bold">インターネット</span>
-  </div>
-</div>
-
-</div>
-
-- Lambda MicroVMsはパブリックIPを持てないので、インターネットに出られない
-- だから<strong>NAT</strong>が必要
 
 ---
 chapter: Lambda MicroVMsを試す
