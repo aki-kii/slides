@@ -175,8 +175,12 @@ layout: center
 
 <div>
   <h2>Discord botをLambda MicroVMsに<br>載せ替えてみると…</h2>
-  <h2 v-click class="mt-6">ボイスチャットに入ったように見えて<br><strong>接続が切れる</strong>………</h2>
+  <h2 v-click class="mt-6">100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
 </div>
+
+<Overlay>
+  でも悩みポイントがあって、Lambda MicroVMsへの置き換えは諦めました
+</Overlay>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -228,9 +232,8 @@ layout: center
 ---
 
 <div>
-  しかも
-  <h2>100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
-  <h2 v-click class="mt-6">でも、VPCから外に出るには<br><strong>NAT Gateway</strong>が要る。NAT Gatewayは高い…</h2>
+  でも
+  <h2>VPCから外に出るには<br><strong>NAT Gateway</strong>が要る。NAT Gatewayは高い…</h2>
 </div>
 
 <style>
