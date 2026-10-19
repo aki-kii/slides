@@ -200,15 +200,15 @@ chapter: Lambda MicroVMsを試す
 
 <div class="text-sm opacity-70">ところが、ボイスチャットに入ったように見えて接続が切れる</div>
 
-## 問題① VPCレスではUDPで接続できない
+## 問題① ボイスチャットにbotが接続できない
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
 <div class="net-note">
 
-- Discordのボイスチャットは、音声を<strong>UDP</strong>で送受信している
-- Lambda MicroVMsの標準のネット接続では、外向きのUDPが通らない
 - botはDiscordにつながるけど、音声が届かずに接続が切れる
+- Discordのボイスチャットは、音声を<strong>UDP</strong>で送受信している
+- 原因: Lambda MicroVMsの標準のネット接続（INTERNET_EGRESS）では、外向きの<strong>UDPが通らない</strong>
 
 </div>
 </div>
@@ -233,11 +233,15 @@ chapter: Lambda MicroVMsを試す
 <img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
 <div class="net-note">
 
-- Lambda MicroVMsをVPCのプライベートサブネットに置くと、<strong>UDPも通る</strong>
+- VPC_EGRESSでVPCのプライベートサブネットに置くと、<strong>UDPも通る</strong>
 - VPCの中からインターネットに出るので、<strong>NAT Gateway</strong>を通す
 
 </div>
 </div>
+
+<Overlay>
+  けど、NAT Gatewayってコストがかさむよね…
+</Overlay>
 
 <style>
 .net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
@@ -252,7 +256,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">でも、VPCの中からインターネットに出るにはNATが要る。NATは高いので、Fargateと同じ方法を考えた</div>
+<div class="text-sm opacity-70">NAT Gatewayを使わない方法はないか。Fargateではどうしていたかというと</div>
 
 ## Fargateはどうしていたか
 
@@ -269,7 +273,7 @@ chapter: Lambda MicroVMsを試す
 
 <div class="text-sm opacity-70">Lambda MicroVMsも同じようにパブリックサブネットに置こうとしたけど</div>
 
-## 問題② パブリックIPを付けられない
+## Lambda MicroVMsはパブリックIPを持てない
 
 <div class="net-side">
 <img src="/images/net/netv-microvms-public.svg" style="height: 340px" />
@@ -295,20 +299,23 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-## コストを比べると
+<h2><span style="font-size: 0.8em">問題② NAT Gatewayが高すぎてコストに合わない</span></h2>
 
 <Kogoe>月20時間使う場合</Kogoe>
 
-<div class="mt-8 flex flex-col gap-4">
+<div class="mt-3 flex flex-col gap-2">
   <div class="bar-row"><span class="bar-name">ECS Fargate（今）</span><span class="bar" style="width: 19px"></span><span>約2.6ドル</span></div>
   <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NATインスタンス</span><span class="bar" style="width: 102px"></span><span>約14ドル</span></div>
   <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NAT Gateway</span><span class="bar" style="width: 400px"></span><span>約55ドル</span></div>
 </div>
 
-<br>
+<div class="cost-note">
 
 - Lambda MicroVMs自体は少し高いくらい
 - NATはいつ呼ばれてもいいように、一か月ずっと立てておく<strong>固定費</strong>になる
+  - <Kogoe>必要なときだけNATを立てると起動が遅くなる。使う時間を絞っても、本当に使わないのは寝ている2:00〜7:00くらい</Kogoe>
+
+</div>
 
 <BottomLink href="https://aws.amazon.com/lambda/pricing/" title="AWS Lambda pricing" />
 
@@ -317,7 +324,10 @@ chapter: Lambda MicroVMsを試す
 </Overlay>
 
 <style>
-.bar-row { display: flex; align-items: center; gap: 0.8rem; font-size: 1rem; white-space: nowrap; }
+.bar-row { display: flex; align-items: center; gap: 0.8rem; font-size: 0.95rem; white-space: nowrap; }
+.cost-note { margin-top: 0.8rem; padding-left: 1.6rem; }
+.cost-note ul ul { padding-left: 1.6rem; }
+.cost-note li { font-size: 0.95rem !important; line-height: 1.5 !important; margin: 0.1rem 0 !important; }
 .bar-name { width: 18rem; flex: none; }
 .bar { display: inline-block; height: 1.4rem; background: #3498db; border-radius: 3px; flex: none; }
 </style>
