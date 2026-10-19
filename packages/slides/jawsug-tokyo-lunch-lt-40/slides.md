@@ -267,14 +267,21 @@ chapter: Lambda MicroVMsを試す
 
 ## 問題② パブリックIPを付けられない
 
-<div class="net-cmp">
-  <div><div class="net-label">パブリックサブネットに置く</div><img src="/images/net/netv-microvms-public.svg" style="height: 340px" /></div>
-  <div v-click><div class="net-label">NATを通す</div><img src="/images/net/netv-nat.svg" style="height: 340px" /></div>
+<div class="net-side">
+<img src="/images/net/netv-microvms-public.svg" style="height: 340px" />
+<div class="net-note">
+
+- Lambda MicroVMsは<strong>パブリックIPを持てない</strong>
+- パブリックサブネットに置いても、インターネットに出られない
+- だから<strong>NAT</strong>は外せない
+
+</div>
 </div>
 
 <style>
-.net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; margin-top: 0.2rem; }
-.net-label { font-weight: bold; font-size: 0.95rem; margin-bottom: 0.2rem; }
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
+.net-note { width: 22rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
 </style>
 
 ---
