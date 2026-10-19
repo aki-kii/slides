@@ -137,11 +137,11 @@ clicks: 3
 
 <div v-if="$clicks < 2" class="vs-row">
   <div class="vs-name">
-    <img src="/images/aws/lambda.svg" class="h-11" />
+    <img src="/images/aws/lambda.svg" class="h-14" />
     <span class="nm"><span>Lambda</span><span class="ev" :class="{ show: $clicks >= 1 }">Event</span><span>Functions</span></span>
   </div>
   <div class="vs">vs</div>
-  <div class="vs-name"><img src="/images/aws/lambda.svg" class="h-11" /><span>Lambda MicroVMs</span></div>
+  <div class="vs-name"><img src="/images/aws/lambda.svg" class="h-14" /><span>Lambda MicroVMs</span></div>
 </div>
 
 <div v-if="$clicks < 2" class="h-6 text-center"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
@@ -169,8 +169,8 @@ clicks: 3
 <BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
 
 <style>
-.vs-row { display: flex; align-items: center; justify-content: center; gap: 1.6rem; margin-top: 4rem; margin-bottom: 1.5rem; font-size: 1.4rem; font-weight: bold; white-space: nowrap; }
-.vs-name { display: flex; align-items: center; gap: 0.7rem; flex: none; }
+.vs-row { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; margin-top: 1.8rem; margin-bottom: 1rem; font-size: 1.7rem; font-weight: bold; white-space: nowrap; }
+.vs-name { display: flex; align-items: center; gap: 0.8rem; flex: none; width: 24rem; }
 .vs { font-size: 1.2rem; opacity: 0.5; }
 .nm span { transition: all 0.5s ease; }
 .nm span + span { margin-left: 0.3em; }
