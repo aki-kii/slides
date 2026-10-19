@@ -69,35 +69,19 @@ layout: center
 
 ## 自作のDiscord音声bot
 
-<div class="net-side">
-<img src="/images/bot-task.svg" style="height: 360px" />
-<div class="net-note">
+<img src="/images/bot-task.svg" class="mx-auto mt-6" style="width: 800px" />
 
-- <strong>必要なときだけ起動</strong>する
-- ECS Fargateで<strong>コンテナを3つ</strong>使っている
-  - Discord bot: botとしての処理
-  - 読み上げ: VOICEVOX
-  - 文字起こし: Transcribe Streamingにつなぐ
-
-</div>
-</div>
-
-<style>
-.net-side { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
-.net-note { width: 27rem; }
-.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
-</style>
+<div class="text-center text-lg mt-6">コストを抑えるため、botは<strong>必要なときだけ起動する</strong>仕組みにしています</div>
 
 ---
 layout: center
 ---
 
 <div>
-  でも、/vcを打ってからボイスチャットに入るまで
-  <h2><strong>100秒以上</strong>かかってたんです</h2>
-  <Kogoe class="mt-8">ボイスチャットに入るのを待ってる間が、すごくつらい</Kogoe>
-  <h2>そんなに待ってられるか！</h2>
-  <div class="mt-6">ってことで、速くすることにしました</div>
+  必要なときだけ起動するので
+  <h2>起動に<strong>100秒以上</strong>かかってしまいます</h2>
+  <Kogoe class="mt-8">早くClaude Codeとやりとりしたいのに</Kogoe>
+  <h2>そんなに待ってられません</h2>
 </div>
 
 ---
