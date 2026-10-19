@@ -63,7 +63,7 @@ layout: center
 
 <div class="text-lg mt-2">Discordのボイスチャットで、<strong>Claude Codeと通話</strong>している</div>
 
-<img src="/images/bot-overview.svg" class="mx-auto mt-4" style="width: 800px" />
+<img src="/images/bot-overview.svg" class="mx-auto mt-2" style="width: 720px" />
 
 ---
 
