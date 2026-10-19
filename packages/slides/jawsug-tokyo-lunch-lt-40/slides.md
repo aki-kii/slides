@@ -107,7 +107,7 @@ chapter: Lambda MicroVMsとは？
   <h2 class="!m-0">Lambda MicroVMsとは？</h2>
 </div>
 
-<div class="text-lg mt-2">小さな<strong>仮想マシン</strong>を好きなときに立てて、止めて、また再開できるサービス</div>
+<div class="text-lg mt-2">状態を保ったまま止めて、また再開できる<strong>隔離された実行環境</strong></div>
 
 <Kogoe>今年の6月に出た新しいサービス</Kogoe>
 
