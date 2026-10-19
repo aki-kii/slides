@@ -194,7 +194,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.6em">悩みポイント①</span><br>UDP接続が失敗する（INTERNET_EGRESS）</h2>
+<h2><span style="font-size: 0.85em">悩みポイント① 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
@@ -219,11 +219,11 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.6em">悩みポイント①</span><br>UDP接続が失敗する（INTERNET_EGRESS）</h2>
+<h2><span style="font-size: 0.85em">悩みポイント① 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-cmp">
-<div><div class="net-label">INTERNET_EGRESS（標準）</div><img src="/images/net/netv-egress.svg" style="height: 270px" /></div>
-<div><div class="net-label">VPC_EGRESS</div><img src="/images/net/netv-nat-gateway.svg" style="height: 270px" /></div>
+<div><div class="net-label">INTERNET_EGRESS（標準）</div><img src="/images/net/netv-egress.svg" style="height: 320px" /></div>
+<div><div class="net-label">VPC_EGRESS</div><img src="/images/net/netv-nat-gateway.svg" style="height: 320px" /></div>
 </div>
 
 <div class="text-center text-xl mt-2"><strong>VPC_EGRESS</strong>なら、UDP接続ができる</div>
