@@ -92,8 +92,8 @@ layout: center
 ---
 
 <div>
-  まず真っ先に試したのが
-  <h2>起動が速いと噂の<strong>Lambda MicroVMs</strong></h2>
+  起動が速いと噂の
+  <h2><strong>Lambda MicroVMs</strong>に載せ替えてみた</h2>
 </div>
 
 ---
