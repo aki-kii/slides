@@ -264,20 +264,15 @@ chapter: Lambda MicroVMsを試す
 
 <BottomLink href="https://aws.amazon.com/lambda/pricing/" title="AWS Lambda pricing" />
 
+<Overlay>
+  ということでLambda MicroVMsを<strong>断念</strong>！
+</Overlay>
+
 <style>
 .bar-row { display: flex; align-items: center; gap: 0.8rem; font-size: 1rem; white-space: nowrap; }
 .bar-name { width: 18rem; flex: none; }
 .bar { display: inline-block; height: 1.4rem; background: #3498db; border-radius: 3px; flex: none; }
 </style>
-
----
-layout: center
----
-
-<div>
-  <Kogoe>ということで</Kogoe>
-  <h2>Lambda MicroVMsは<strong>断念</strong>！</h2>
-</div>
 
 ---
 layout: center
