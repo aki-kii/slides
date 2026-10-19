@@ -133,20 +133,16 @@ clicks: 3
 
 <ChapterLabel />
 
-## Lambda Functionsとの違い
-
-<div v-if="$clicks < 2" class="vs-row">
-  <div class="vs-name">
-    <img src="/images/aws/lambda.svg" class="h-14" />
-    <span class="nm"><span>Lambda</span><span class="ev" :class="{ show: $clicks >= 1 }">Event</span><span>Functions</span></span>
-  </div>
-  <div class="vs">vs</div>
-  <div class="vs-name"><img src="/images/aws/lambda.svg" class="h-14" /><span>Lambda MicroVMs</span></div>
+<div class="flex items-center gap-4">
+  <img src="/images/aws/lambda.svg" class="h-12" />
+  <h2 class="!m-0">Lambda MicroVMsとは？</h2>
 </div>
 
-<div v-if="$clicks < 2" class="h-6 text-center"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
+<div class="sub-title"><span class="nm"><span>Lambda</span><span class="ev" :class="{ show: $clicks >= 1 }">Event</span><span>Functions</span></span>との違い</div>
 
-<div v-if="$clicks >= 2" class="ecards grid grid-cols-2 gap-6 mt-4" :class="{ 'on-ev': $clicks === 2, 'on-fn': $clicks === 3 }">
+<div class="h-6"><Kogoe v-if="$clicks === 1">Lambdaの関数は、最近「Event Functions」と呼ばれるようになった</Kogoe></div>
+
+<div v-if="$clicks >= 2" class="ecards grid grid-cols-2 gap-6 mt-1" :class="{ 'on-ev': $clicks === 2, 'on-fn': $clicks === 3 }">
 <div class="card">
 <div class="card-title">
   <img src="/images/aws/lambda.svg" class="h-9" />
@@ -169,14 +165,12 @@ clicks: 3
 <BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
 
 <style>
-.vs-row { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; margin-top: 1.8rem; margin-bottom: 1rem; font-size: 1.7rem; font-weight: bold; white-space: nowrap; }
-.vs-name { display: flex; align-items: center; gap: 0.8rem; flex: none; width: 24rem; }
-.vs { font-size: 1.2rem; opacity: 0.5; }
+.sub-title { font-size: 1.4rem; font-weight: bold; margin-top: 1rem; white-space: nowrap; }
 .nm span { transition: all 0.5s ease; }
 .nm span + span { margin-left: 0.3em; }
-.vs-name .ev { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; color: #e74c3c; }
-.vs-name .nm .ev:not(.show) { margin-left: 0; }
-.vs-name .ev.show { max-width: 6em; opacity: 1; }
+.sub-title .ev { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; color: #e74c3c; }
+.sub-title .nm .ev:not(.show) { margin-left: 0; }
+.sub-title .ev.show { max-width: 6em; opacity: 1; }
 .card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; min-height: 11rem; }
 .card-title { display: flex; align-items: center; gap: 0.8rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
 .ecards.on-ev .evw, .ecards.on-fn .fnw { color: #e74c3c; text-decoration: underline; text-underline-offset: 0.2em; }
