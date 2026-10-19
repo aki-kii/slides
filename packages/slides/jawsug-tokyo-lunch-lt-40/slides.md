@@ -184,10 +184,8 @@ layout: center
 ---
 
 <div>
-  さっそく
-  <h2>Discordのbotを<strong>Lambda MicroVMs</strong>に<br>載せ替えてみました</h2>
-  <div class="mt-8">そしたら</div>
-  <h2><strong>100秒以上</strong>かかってたのが<br><strong>約10秒</strong>で起動するように！</h2>
+  Discord botをLambda MicroVMsに載せ替えてみると…
+  <h2 v-click>100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
 </div>
 
 ---
