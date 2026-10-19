@@ -113,8 +113,8 @@ chapter: Lambda MicroVMsとは？
 
 <div class="tight-list">
 
-- 起動しきった状態から始まるので、<strong>すぐ動き出せる</strong>
-- 一時停止しても、<strong>止めたところから続けられる</strong>
+- スナップショットから起動するので、<strong>起動時間が短い</strong>
+- 一時停止して、<strong>止めたところから再開できる</strong>
 - 一時停止も含めて、<strong>最大8時間</strong>使える
 
 </div>
@@ -136,7 +136,7 @@ chapter: Lambda MicroVMsとは？
   <h2 class="!m-0">Lambda MicroVMsとは？</h2>
 </div>
 
-<div class="sub-title">Lambda <span class="u-ev">Event</span> <span class="u-fn">Functions</span>との違い</div>
+<div class="sub-title">Lambda <span class="u-ev">Event</span> <span class="u-fn">Functions</span><span style="font-size: 0.7em; font-weight: normal">（旧Lambda Functions）</span>との違い</div>
 
 <div class="ecards grid grid-cols-2 gap-6 mt-6">
 <div class="card">
