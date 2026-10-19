@@ -188,15 +188,9 @@ layout: center
   <h2 v-click>100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
 </div>
 
----
-layout: center
----
-
-<div>
-  でも…
-  <h2>Lambda MicroVMsを<strong>選ばなかった</strong>んです</h2>
-  <div class="mt-6">その理由を2つ話します</div>
-</div>
+<Overlay>
+  しかしLambda MicroVMsは採用しませんでした
+</Overlay>
 
 ---
 chapter: Lambda MicroVMsを試す
