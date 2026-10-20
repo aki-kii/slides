@@ -171,7 +171,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント1 コンテナを1つにまとめた</span></h2>
+<h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
 
 <div class="mg-side">
 <div class="mg-diagram">
@@ -195,6 +195,9 @@ chapter: Lambda MicroVMsを試す
 
 - Lambda MicroVMsで動かせるのは、<strong>1つのコンテナだけ</strong>
 - なので、3つのコンテナを<strong>1つにまとめた</strong>
+- 読み上げ（VOICEVOX）のイメージは、公式が配布しているもので<strong>いじれない</strong>
+  - <Kogoe>なので、ベースイメージに指定して、その上にほかを載せた</Kogoe>
+- <strong>無理矢理感</strong>があって、あまり好きじゃない
 
 </div>
 </div>
@@ -220,7 +223,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント1 コンテナを1つにまとめた</span></h2>
+<h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
 
 <div class="qa-body">
 <div class="qa">
@@ -279,7 +282,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント1 コンテナを1つにまとめた</span></h2>
+<h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
 
 <div class="qa-body">
 <div class="qa">
@@ -317,7 +320,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント2 標準ではUDP接続が失敗していた</span></h2>
+<h2><span style="font-size: 0.85em">ポイント② 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
@@ -342,7 +345,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント2 標準ではUDP接続が失敗していた</span></h2>
+<h2><span style="font-size: 0.85em">ポイント② 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-cmp">
 <div><div class="net-label">INTERNET_EGRESS（標準）</div><img src="/images/net/netv-egress.svg" style="height: 320px" /></div>
@@ -372,7 +375,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-## 検証ポイント3 コストが見合わない
+## ポイント③ コストが見合わない
 
 <div class="net-side">
 <img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
