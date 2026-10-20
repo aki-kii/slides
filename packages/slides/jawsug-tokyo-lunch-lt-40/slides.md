@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: 自作Discord音声botをLambda MicroVMsに移行してみた話
+title: 自作Discord音声botをLambda MicroVMsに移行した話
 mdc: true
 addons:
   - '@slides/ui'
@@ -15,7 +15,7 @@ fonts:
 
 <div class="text-3xl font-bold opacity-90">自作Discord音声botを</div>
 
-# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に<br>移行してみた話</span>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に移行した話</span>
 
 <div class="opacity-70">
 
@@ -78,8 +78,10 @@ layout: center
 ---
 
 <div>
-  起動に<strong>100秒以上</strong>かかるので待つのがつらい…！
-  <h2 class="mt-6">起動が速い<br><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
+  しかし現状は
+  <h2>起動に<strong>100秒以上</strong>かかってしまうので<br>待つのがつらい…！</h2>
+  <div class="mt-8">起動が早いと噂の</div>
+  <h2><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
 </div>
 
 <Overlay>
