@@ -242,13 +242,15 @@ chapter: Lambda MicroVMsを試す
 </div>
 </div>
 </div>
+<img src="/images/microservice.svg" class="qa-fig" style="height: 130px" />
 
 <style>
-.qa-body { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
-.qa { display: flex; gap: 1rem; align-items: flex-start; }
-.qa-mark { font-size: 2rem; font-weight: bold; width: 3rem; flex: none; }
-.qa-lead { font-size: 1.6rem; line-height: 1.5; }
-.qa-note { font-size: 1rem; opacity: 0.7; line-height: 1.6; margin-top: 0.2rem; }
+.qa-body { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.8rem; }
+.qa { display: flex; gap: 0.8rem; align-items: flex-start; }
+.qa-mark { font-size: 1.6rem; font-weight: bold; width: 2.4rem; flex: none; }
+.qa-lead { font-size: 1.3rem; line-height: 1.5; }
+.qa-note { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; margin-top: 0.1rem; }
+.qa-fig { display: block; margin: 0.6rem auto 0; }
 </style>
 
 ---
@@ -278,12 +280,15 @@ chapter: Lambda MicroVMsを試す
 </div>
 </div>
 
+<img src="/images/microvm-snapshot.svg" class="qa-fig" style="height: 170px" />
+
 <style>
-.qa-body { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
-.qa { display: flex; gap: 1rem; align-items: flex-start; }
-.qa-mark { font-size: 2rem; font-weight: bold; width: 3rem; flex: none; }
-.qa-lead { font-size: 1.6rem; line-height: 1.5; }
-.qa-note { font-size: 1rem; opacity: 0.7; line-height: 1.6; margin-top: 0.2rem; }
+.qa-body { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.8rem; }
+.qa { display: flex; gap: 0.8rem; align-items: flex-start; }
+.qa-mark { font-size: 1.6rem; font-weight: bold; width: 2.4rem; flex: none; }
+.qa-lead { font-size: 1.3rem; line-height: 1.5; }
+.qa-note { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; margin-top: 0.1rem; }
+.qa-fig { display: block; margin: 0.6rem auto 0; }
 </style>
 
 ---
