@@ -357,14 +357,6 @@ chapter: Lambda MicroVMsを試す
 </style>
 
 ---
-layout: center
----
-
-<div>
-  <h2>VPC_EGRESSにすると、<br>ボイスチャットに入れました</h2>
-</div>
-
----
 chapter: Lambda MicroVMsを試す
 ---
 
