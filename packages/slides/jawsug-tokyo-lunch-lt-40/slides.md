@@ -233,7 +233,7 @@ chapter: Lambda MicroVMsを試す
 <div class="qa">
 <span class="qa-mark">Q.</span>
 <div>
-<div class="qa-lead">bot以外は別サービスにすればよかったのでは？</div>
+<div class="qa-lead">コンテナごとに別サービスに切り出してもよいのでは？</div>
 <div class="qa-note">Discord bot、読み上げ、文字起こしはもともと別のコンテナ</div>
 <div class="qa-note">マイクロサービスにして、別々に動かすこともできそう</div>
 </div>
