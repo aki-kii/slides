@@ -73,16 +73,13 @@ layout: center
 
 <div class="text-center text-2xl mt-6">→ コストを抑えるため、botは<strong>必要なときだけ起動する</strong>仕組み</div>
 
-<Overlay>
-  起動に<strong>100秒以上</strong>かかるので待つのがつらい…！
-</Overlay>
-
 ---
 layout: center
 ---
 
 <div>
-  <h2><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
+  起動に<strong>100秒以上</strong>かかるので待つのがつらい…！
+  <h2 class="mt-6"><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
 </div>
 
 <Overlay>
@@ -120,7 +117,6 @@ chapter: Lambda MicroVMsとは？
 
 ---
 chapter: Lambda MicroVMsとは？
-hide: true
 ---
 
 <ChapterLabel />
@@ -163,6 +159,16 @@ hide: true
 .card-title { font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
 .card li { font-size: 0.95rem !important; line-height: 1.7 !important; }
 </style>
+
+---
+layout: center
+---
+
+<div>
+  Discord botを載せ替えるときに
+  <h2><strong>気になったポイント</strong>を紹介します</h2>
+</div>
+
 ---
 chapter: Lambda MicroVMsを試す
 ---
@@ -181,7 +187,7 @@ chapter: Lambda MicroVMsを試す
 <div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>文字起こし</span></div>
 </div>
 </div>
-<div class="mg-between">1つのコンテナにまとめる</div>
+<div class="mg-between">&nbsp;</div>
 <div class="mg-frame">
 <div class="mg-title"><img src="/images/aws/lambda.svg" class="mg-ico" />Lambda MicroVMs</div>
 <div class="mg-row">
