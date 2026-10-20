@@ -84,10 +84,6 @@ layout: center
   <h2><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
 </div>
 
-<Overlay>
-  ということで検証していきます！
-</Overlay>
-
 ---
 chapter: Lambda MicroVMsとは？
 ---
@@ -167,8 +163,9 @@ layout: center
 ---
 
 <div>
-  Discord botを載せ替えるときに
-  <h2><strong>気になったポイント</strong>を紹介します</h2>
+  Lambda MicroVMsに移行すると
+  <h2>起動時間が<strong>100秒以上</strong>かかっていたものが<br><strong>約10秒</strong>ほどに短縮されました！</h2>
+  <div class="mt-8">移行する上で気になったポイントを紹介します！</div>
 </div>
 
 ---
@@ -371,7 +368,7 @@ layout: center
 
 <div>
   <h2>VPC_EGRESSにすると、<br>ボイスチャットに入れました</h2>
-  <h2 v-click class="mt-6">100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2></div>
+</div>
 
 ---
 chapter: Lambda MicroVMsを試す
