@@ -171,42 +171,47 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント① 使えるコンテナは1つだけ</span></h2>
+<h2><span style="font-size: 0.85em">検証ポイント1 コンテナを1つにまとめた</span></h2>
 
-<div class="text-lg mt-2">Lambda MicroVMsで動かせるのは、<strong>1つのコンテナだけ</strong></div>
+<div class="mg-side">
+<div class="mg-diagram">
+<div class="mg-frame">
+<div class="mg-title"><img src="/images/aws/fargate.svg" class="mg-ico" />ECS Fargate（今）</div>
+<div class="mg-row">
+<div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>Discord bot</span></div>
+<div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>読み上げ</span></div>
+<div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>文字起こし</span></div>
+</div>
+</div>
+<div class="mg-between">1つのコンテナにまとめる</div>
+<div class="mg-frame">
+<div class="mg-title"><img src="/images/aws/lambda.svg" class="mg-ico" />Lambda MicroVMs</div>
+<div class="mg-row">
+<div class="mg-card mg-wide"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>Discord bot ＋ 読み上げ ＋ 文字起こし</span></div>
+</div>
+</div>
+</div>
+<div class="mg-note">
 
-<div class="one-cmp">
-<div>
-<div class="one-label">ECS Fargate（今）</div>
-<div class="one-frame">
-<div class="one-box">Discord bot</div>
-<div class="one-box">読み上げ</div>
-<div class="one-box">文字起こし</div>
-</div>
-<div class="one-cap">1つのタスクに<br>コンテナが3つ</div>
-</div>
-<div class="one-arrow">→</div>
-<div>
-<div class="one-label">Lambda MicroVMs</div>
-<div class="one-frame">
-<div class="one-box one-big">Discord bot<br>＋ 読み上げ<br>＋ 文字起こし</div>
-</div>
-<div class="one-cap"><strong>1つのコンテナ</strong>にまとめる</div>
-</div>
-</div>
+- Lambda MicroVMsで動かせるのは、<strong>1つのコンテナだけ</strong>
+- なので、3つのコンテナを<strong>1つにまとめた</strong>
 
-<div class="text-center mt-4">
-別のサービスに切り出す案もあったけど、<strong>ネットワークの遅延</strong>が大きい
+</div>
 </div>
 
 <style>
-.one-cmp { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
-.one-label { font-weight: bold; font-size: 0.85rem; margin-bottom: 0.3rem; text-align: center; }
-.one-frame { border: 2px dashed #7f8c8d; border-radius: 12px; padding: 0.5rem; display: flex; gap: 0.35rem; justify-content: center; }
-.one-box { border: 2px solid #3498db; border-radius: 8px; padding: 0.45rem 0.55rem; font-size: 0.8rem; background: rgba(52,152,219,0.1); white-space: nowrap; }
-.one-big { padding: 1rem 0.8rem; white-space: normal; text-align: center; width: 9.5rem; }
-.one-arrow { font-size: 1.6rem; }
-.one-cap { text-align: center; font-size: 0.9rem; margin-top: 0.4rem; }
+.mg-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.6rem; }
+.mg-diagram { width: 27rem; }
+.mg-frame { border: 2.5px solid #E67E22; background: #FEF5EC; border-radius: 12px; padding: 0.5rem 0.7rem 0.7rem; }
+.mg-title { display: flex; align-items: center; gap: 0.5rem; font-weight: bold; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.mg-ico { height: 1.5rem; }
+.mg-row { display: flex; gap: 0.5rem; }
+.mg-card { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: #fff; border: 2px solid #d5d8dc; border-radius: 10px; padding: 0.55rem 0.4rem; font-weight: bold; font-size: 0.8rem; white-space: nowrap; }
+.mg-wide { padding: 0.7rem 0.4rem; }
+.mg-cico { height: 1.4rem; }
+.mg-between { text-align: center; font-size: 0.9rem; font-weight: bold; margin: 0.35rem 0; }
+.mg-note { width: 19rem; }
+.mg-note li { font-size: 1rem !important; line-height: 1.6 !important; }
 </style>
 
 ---
@@ -215,16 +220,33 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント① 使えるコンテナは1つだけ</span></h2>
+<h2><span style="font-size: 0.85em">検証ポイント1 コンテナを1つにまとめた</span></h2>
 
-<div class="text-lg mt-6">3つを1つにまとめたら、<strong>起動が遅くなるのでは？</strong></div>
-
-<div v-click class="mt-8 text-lg">
-
-- スナップショットは、<strong>起動した状態</strong>で撮っている
-- だから、コンテナが増えても、<strong>起動に時間はかからない</strong>
-
+<div class="qa-body">
+<div class="qa">
+<span class="qa-mark">Q.</span>
+<div>
+<div class="qa-lead">bot以外は別サービスにすればよかったのでは？</div>
+<div class="qa-note">コンテナが分かれているので、マイクロサービスにできそう</div>
 </div>
+</div>
+<div class="qa">
+<span class="qa-mark"><strong>A.</strong></span>
+<div>
+<div class="qa-lead"><strong>ネットワークの遅延</strong>が大きかった</div>
+<div class="qa-note">以前は、読み上げと文字起こしを別のLambdaにしていました</div>
+<div class="qa-note">同じタスクにまとめて、localhostでやりとりしたら速くなりました</div>
+</div>
+</div>
+</div>
+
+<style>
+.qa-body { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
+.qa { display: flex; gap: 1rem; align-items: flex-start; }
+.qa-mark { font-size: 2rem; font-weight: bold; width: 3rem; flex: none; }
+.qa-lead { font-size: 1.6rem; line-height: 1.5; }
+.qa-note { font-size: 1rem; opacity: 0.7; line-height: 1.6; margin-top: 0.2rem; }
+</style>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -232,7 +254,40 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント② 標準ではUDP接続が失敗していた</span></h2>
+<h2><span style="font-size: 0.85em">検証ポイント1 コンテナを1つにまとめた</span></h2>
+
+<div class="qa-body">
+<div class="qa">
+<span class="qa-mark">Q.</span>
+<div>
+<div class="qa-lead">1つにまとめたら、起動が遅くなるのでは？</div>
+<div class="qa-note">読み上げ（VOICEVOX）のコンテナイメージは、サイズが大きい</div>
+</div>
+</div>
+<div class="qa">
+<span class="qa-mark"><strong>A.</strong></span>
+<div>
+<div class="qa-lead">スナップショットは、<strong>起動した状態</strong>で撮っている</div>
+<div class="qa-note">そこから再開するので、起動は速い</div>
+</div>
+</div>
+</div>
+
+<style>
+.qa-body { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
+.qa { display: flex; gap: 1rem; align-items: flex-start; }
+.qa-mark { font-size: 2rem; font-weight: bold; width: 3rem; flex: none; }
+.qa-lead { font-size: 1.6rem; line-height: 1.5; }
+.qa-note { font-size: 1rem; opacity: 0.7; line-height: 1.6; margin-top: 0.2rem; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">検証ポイント2 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
@@ -257,7 +312,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">検証ポイント② 標準ではUDP接続が失敗していた</span></h2>
+<h2><span style="font-size: 0.85em">検証ポイント2 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-cmp">
 <div><div class="net-label">INTERNET_EGRESS（標準）</div><img src="/images/net/netv-egress.svg" style="height: 320px" /></div>
@@ -287,7 +342,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-## 悩みどころ コストが見合わない
+## 検証ポイント3 コストが見合わない
 
 <div class="net-side">
 <img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
