@@ -49,15 +49,6 @@ transition: slide-left
 </ProfileItem>
 
 ---
-layout: center
----
-
-<div>
-  自作のDiscord音声bot（ECS Fargate）の
-  <h2><strong>起動時間を縮める</strong>ために<br>試行錯誤した時の話をします</h2>
-</div>
-
----
 
 ## 自作のDiscord音声bot
 
@@ -71,7 +62,7 @@ layout: center
 
 <img src="/images/bot-task.svg" class="mx-auto mt-6" style="width: 800px" />
 
-<div class="text-center text-2xl mt-6">→ コストを抑えるため、botは<strong>必要なときだけ起動する</strong>仕組み</div>
+<div class="text-center text-xl mt-6">→ コストを抑えるため、ECSタスクは<strong>必要なタイミングで起動する</strong>仕組み</div>
 
 ---
 layout: center
@@ -165,8 +156,11 @@ layout: center
 <div>
   Lambda MicroVMsに移行すると
   <h2>起動時間が<strong>100秒以上</strong>かかっていたものが<br><strong>約10秒</strong>ほどに短縮されました！</h2>
-  <div class="mt-8">移行する上で気になったポイントを紹介します！</div>
 </div>
+
+<Overlay>
+  移行する上で気になったポイントを紹介します！
+</Overlay>
 
 ---
 chapter: Lambda MicroVMsを試す
