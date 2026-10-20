@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: Discord音声botをLambda MicroVMsに乗り換えずFargateのまま起動を速めた話
+title: Discord音声botをLambda MicroVMsに乗り換えずFargateのまま起動時間を縮めた話
 mdc: true
 addons:
   - '@slides/ui'
@@ -15,7 +15,7 @@ fonts:
 
 <div class="text-3xl font-bold opacity-90">Discord音声botを</div>
 
-# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に乗り換えず<br><span style="color:#ffd54f">Fargate</span>のまま起動を速めた話</span>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に乗り換えず<br><span style="color:#ffd54f">Fargate</span>のまま起動時間を縮めた話</span>
 
 <div class="opacity-70">
 
@@ -71,21 +71,16 @@ layout: center
 
 <img src="/images/bot-task.svg" class="mx-auto mt-6" style="width: 800px" />
 
-<div class="text-center text-lg mt-6">コストを抑えるため、botは<strong>必要なときだけ起動する</strong>仕組みにしています</div>
+<div class="text-center text-lg mt-6">コストを抑えるため、botは<strong>必要なときだけ起動する</strong>仕組み</div>
 
 ---
 layout: center
 ---
 
 <div>
-  ただ…
   <h2>必要なときだけ起動するので<br>使う前に起動を待つ必要があります</h2>
-  <h2 v-click class="mt-6">この起動には<strong>100秒以上</strong>かかるため<br>待つのが<strong>辛い</strong></h2>
+  <h2 v-click class="mt-6">起動に<strong>100秒以上</strong>かかるのがとてもツラかったので<br>起動時間を縮めるため改善していきます</h2>
 </div>
-
-<Overlay>
-  起動時間を縮めるために改善していきます
-</Overlay>
 
 ---
 layout: center
