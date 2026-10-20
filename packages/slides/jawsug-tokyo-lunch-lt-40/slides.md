@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: Discord音声botをLambda MicroVMsに乗り換えずFargateのまま起動時間を縮めた話
+title: 自作Discord音声botをLambda MicroVMsに移行できなかった話
 mdc: true
 addons:
   - '@slides/ui'
@@ -13,9 +13,9 @@ fonts:
   mono: 'Fira Code'
 ---
 
-<div class="text-3xl font-bold opacity-90">Discord音声botを</div>
+<div class="text-3xl font-bold opacity-90">自作Discord音声botを</div>
 
-# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に乗り換えず<br><span style="color:#ffd54f">Fargate</span>のまま起動時間を縮めた話</span>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に<br>移行できなかった話</span>
 
 <div class="opacity-70">
 
@@ -365,12 +365,24 @@ layout: center
 ---
 
 <div>
+  Fargateのままチューニングしたら
+  <h2><strong>100秒以上</strong> → <strong>約30秒</strong>に！</h2>
+  <Kogoe class="mt-6">その話はまたどこかで</Kogoe>
+</div>
+
+---
+layout: center
+hide: true
+---
+
+<div>
   Lambda MicroVMsはコストに見合わなかったけど…
   <h2>そもそも<strong>コンテナの起動</strong>って<br>速くできないの？</h2>
 </div>
 
 ---
 chapter: 起動にかかる時間を見る
+hide: true
 ---
 
 <ChapterLabel />
@@ -393,6 +405,7 @@ chapter: 起動にかかる時間を見る
 
 ---
 chapter: イメージの取得を速くする
+hide: true
 ---
 
 <ChapterLabel />
@@ -414,6 +427,7 @@ chapter: イメージの取得を速くする
 
 ---
 chapter: イメージの取得を速くする
+hide: true
 ---
 
 <ChapterLabel />
@@ -444,6 +458,7 @@ chapter: イメージの取得を速くする
 
 ---
 chapter: イメージの取得を速くする
+hide: true
 ---
 
 <ChapterLabel />
@@ -464,6 +479,7 @@ chapter: イメージの取得を速くする
 
 ---
 chapter: イメージの取得を速くする
+hide: true
 ---
 
 <ChapterLabel />
@@ -477,6 +493,7 @@ chapter: イメージの取得を速くする
 
 ---
 chapter: イメージの取得を速くする
+hide: true
 ---
 
 <ChapterLabel />
@@ -491,6 +508,7 @@ chapter: イメージの取得を速くする
 
 ---
 chapter: イメージの取得を速くする
+hide: true
 ---
 
 <ChapterLabel />
@@ -507,6 +525,7 @@ chapter: イメージの取得を速くする
 
 ---
 chapter: ほかのコンテナを待たない
+hide: true
 ---
 
 <ChapterLabel />
@@ -523,6 +542,7 @@ chapter: ほかのコンテナを待たない
 
 ---
 chapter: ほかのコンテナを待たない
+hide: true
 ---
 
 <ChapterLabel />
@@ -538,6 +558,7 @@ chapter: ほかのコンテナを待たない
 
 ---
 chapter: ほかのコンテナを待たない
+hide: true
 ---
 
 <ChapterLabel />
