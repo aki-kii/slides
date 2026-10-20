@@ -71,25 +71,23 @@ layout: center
 
 <img src="/images/bot-task.svg" class="mx-auto mt-6" style="width: 800px" />
 
-<div class="text-center text-lg mt-6">コストを抑えるため、botは<strong>必要なときだけ起動する</strong>仕組み</div>
+<div class="text-center text-2xl mt-6">→ コストを抑えるため、botは<strong>必要なときだけ起動する</strong>仕組み</div>
+
+<Overlay>
+  起動に<strong>100秒以上</strong>かかるので待つのがつらい…！
+</Overlay>
 
 ---
 layout: center
 ---
 
 <div>
-  <h2>必要なときだけ起動するので<br>使う前に起動を待つ必要があります</h2>
-  <h2 v-click class="mt-6">起動に<strong>100秒以上</strong>かかるのがとてもツラかったので<br>起動時間を縮めるため改善していきます</h2>
+  <h2><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
 </div>
 
----
-layout: center
----
-
-<div>
-  起動が速いと噂の
-  <h2><strong>Lambda MicroVMs</strong>を検証してみた</h2>
-</div>
+<Overlay>
+  ということで検証していきます！
+</Overlay>
 
 ---
 chapter: Lambda MicroVMsとは？
