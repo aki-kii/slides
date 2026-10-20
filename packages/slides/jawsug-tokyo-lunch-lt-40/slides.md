@@ -79,7 +79,7 @@ layout: center
 
 <div>
   起動に<strong>100秒以上</strong>かかるので待つのがつらい…！
-  <h2 class="mt-6"><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
+  <h2 class="mt-6">起動が速い<br><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
 </div>
 
 <Overlay>
@@ -369,9 +369,7 @@ layout: center
 
 <div>
   <h2>VPC_EGRESSにすると、<br>ボイスチャットに入れました</h2>
-  <h2 v-click class="mt-6">100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
-  <h2 v-click class="mt-6">でも、<img src="/images/aws/nat-gateway.svg" class="inline h-12 align-middle" /> <strong>NAT Gateway</strong>が高すぎて…</h2>
-</div>
+  <h2 v-click class="mt-6">100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2></div>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -450,7 +448,6 @@ chapter: Lambda MicroVMsを試す
 <div class="net-note">
 
 - Lambda MicroVMsは<strong>パブリックIPを持てない</strong>
-  - <Kogoe>Lambda関数ではENIにElastic IPを付ける非推奨の方法があったけど、MicroVMsはENIがアカウントから見えず、それもできない</Kogoe>
 - パブリックサブネットに置いても、インターネットに出られない
 - インターネットにアクセスするために<strong>NAT</strong>が必要になる
 
