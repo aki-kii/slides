@@ -227,9 +227,37 @@ layout: center
 ---
 
 <div>
-  でも
-  <h2>VPCから外に出るには<br><strong>NAT Gateway</strong>が要る。NAT Gatewayは高い…</h2>
+  <h2>VPC_EGRESSにすることで<br>悩みポイント①は解決しました</h2>
+  <h2 v-click class="mt-6">でも、<img src="/images/aws/nat-gateway.svg" class="inline h-12 align-middle" /> <strong>NAT Gateway</strong>が高すぎて…</h2>
 </div>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+## 悩みポイント② コストが見合わない
+
+<div class="net-side">
+<img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
+<div class="net-note">
+
+- NAT Gatewayは、いつ呼ばれてもいいように<strong>1か月ずっと置いておく</strong>
+- 1か月のコスト
+  - (0.062 ＋ パブリックIPv4 0.005) ドル × 730時間
+  - ≒ <strong>約49ドル</strong>（＋通信量）
+- 今のFargateは月約2.6ドル。個人で使うには<strong>高すぎる</strong>
+  - <Kogoe>東京リージョン、オンデマンドの単価</Kogoe>
+
+</div>
+</div>
+
+<style>
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
+.net-note { width: 24rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+</style>
 
 <style>
 .net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
