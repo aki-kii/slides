@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: 自作Discord音声botをLambda MicroVMsに移行できなかった話
+title: 自作Discord音声botをLambda MicroVMsに移行してみた話
 mdc: true
 addons:
   - '@slides/ui'
@@ -15,7 +15,7 @@ fonts:
 
 <div class="text-3xl font-bold opacity-90">自作Discord音声botを</div>
 
-# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に<br>移行できなかった話</span>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に<br>移行してみた話</span>
 
 <div class="opacity-70">
 
@@ -122,6 +122,7 @@ chapter: Lambda MicroVMsとは？
 
 ---
 chapter: Lambda MicroVMsとは？
+hide: true
 ---
 
 <ChapterLabel />
@@ -165,17 +166,48 @@ chapter: Lambda MicroVMsとは？
 .card li { font-size: 0.95rem !important; line-height: 1.7 !important; }
 </style>
 ---
-layout: center
+chapter: Lambda MicroVMsを試す
 ---
 
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">検証ポイント① 使えるコンテナは1つだけ</span></h2>
+
+<div class="text-lg mt-2">Lambda MicroVMsで動かせるのは、<strong>1つのコンテナだけ</strong></div>
+
+<div class="one-cmp">
 <div>
-  <h2>Discord botをLambda MicroVMsに<br>載せ替えてみると…</h2>
-  <h2 v-click class="mt-6">100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
+<div class="one-label">ECS Fargate（今）</div>
+<div class="one-frame">
+<div class="one-box">Discord bot</div>
+<div class="one-box">読み上げ</div>
+<div class="one-box">文字起こし</div>
+</div>
+<div class="one-cap">1つのタスクに<br>コンテナが3つ</div>
+</div>
+<div class="one-arrow">→</div>
+<div>
+<div class="one-label">Lambda MicroVMs</div>
+<div class="one-frame">
+<div class="one-box one-big">Discord bot<br>＋ 読み上げ<br>＋ 文字起こし</div>
+</div>
+<div class="one-cap"><strong>1つのコンテナ</strong>にまとめる</div>
+</div>
 </div>
 
-<Overlay>
-  でも悩みポイントがあって、Lambda MicroVMsへの置き換えは諦めました
-</Overlay>
+<div class="text-center mt-4">
+別のサービスに切り出す案もあったけど、<strong>ネットワークの遅延</strong>が大きい
+</div>
+
+<style>
+.one-cmp { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
+.one-label { font-weight: bold; font-size: 0.85rem; margin-bottom: 0.3rem; text-align: center; }
+.one-frame { border: 2px dashed #7f8c8d; border-radius: 12px; padding: 0.5rem; display: flex; gap: 0.35rem; justify-content: center; }
+.one-box { border: 2px solid #3498db; border-radius: 8px; padding: 0.45rem 0.55rem; font-size: 0.8rem; background: rgba(52,152,219,0.1); white-space: nowrap; }
+.one-big { padding: 1rem 0.8rem; white-space: normal; text-align: center; width: 9.5rem; }
+.one-arrow { font-size: 1.6rem; }
+.one-cap { text-align: center; font-size: 0.9rem; margin-top: 0.4rem; }
+</style>
 
 ---
 chapter: Lambda MicroVMsを試す
@@ -183,7 +215,24 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">悩みポイント① 標準ではUDP接続が失敗していた</span></h2>
+<h2><span style="font-size: 0.85em">検証ポイント① 使えるコンテナは1つだけ</span></h2>
+
+<div class="text-lg mt-6">3つを1つにまとめたら、<strong>起動が遅くなるのでは？</strong></div>
+
+<div v-click class="mt-8 text-lg">
+
+- スナップショットは、<strong>起動した状態</strong>で撮っている
+- だから、コンテナが増えても、<strong>起動に時間はかからない</strong>
+
+</div>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">検証ポイント② 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-side">
 <img src="/images/net/netv-egress.svg" style="height: 340px" />
@@ -208,7 +257,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<h2><span style="font-size: 0.85em">悩みポイント① 標準ではUDP接続が失敗していた</span></h2>
+<h2><span style="font-size: 0.85em">検証ポイント② 標準ではUDP接続が失敗していた</span></h2>
 
 <div class="net-cmp">
 <div><div class="net-label">INTERNET_EGRESS（標準）</div><img src="/images/net/netv-egress.svg" style="height: 320px" /></div>
@@ -227,7 +276,8 @@ layout: center
 ---
 
 <div>
-  <h2>VPC_EGRESSにすることで<br>悩みポイント①は解決しました</h2>
+  <h2>VPC_EGRESSにすると、<br>ボイスチャットに入れました</h2>
+  <h2 v-click class="mt-6">100秒以上かかっていたbotの起動時間が<br><strong>約10秒</strong>に………！</h2>
   <h2 v-click class="mt-6">でも、<img src="/images/aws/nat-gateway.svg" class="inline h-12 align-middle" /> <strong>NAT Gateway</strong>が高すぎて…</h2>
 </div>
 
@@ -237,7 +287,7 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-## 悩みポイント② コストが見合わない
+## 悩みどころ コストが見合わない
 
 <div class="net-side">
 <img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
@@ -348,7 +398,7 @@ chapter: Lambda MicroVMsを試す
 <BottomLink href="https://aws.amazon.com/lambda/pricing/" title="AWS Lambda pricing" />
 
 <Overlay>
-  ということでLambda MicroVMsを<strong>断念</strong>！
+  ということで、<strong>コストで悩んでいます</strong>…
 </Overlay>
 
 <style>
@@ -362,6 +412,7 @@ chapter: Lambda MicroVMsを試す
 
 ---
 layout: center
+hide: true
 ---
 
 <div>
@@ -573,15 +624,17 @@ hide: true
 
 ## まとめ
 
-<div class="text-2xl mt-6 text-center">約105秒が、<strong>約35秒</strong>になりました</div>
+<div class="text-2xl mt-6 text-center">起動が<strong>100秒以上から約10秒</strong>になりました</div>
 
 <br>
 
-- Lambda MicroVMsは起動がめちゃくちゃ速くていい
-  - <Kogoe>けど、制約が多くてお金がかかりそうなので断念した</Kogoe>
-- Fargateの起動時間のチューニングをやると、かなり短縮できる
-  - <Kogoe>特にSOCIインデックスはすごかった</Kogoe>
+- 使えるコンテナは1つだけなので、3つを1つにまとめた
+  - <Kogoe>スナップショットは起動した状態で撮るので、起動は遅くならない</Kogoe>
+- UDPはVPC_EGRESSにすれば通る
+- ただ、NAT Gatewayが高くて、コストで悩んでいる
 
+---
+hide: true
 ---
 
 <div class="text-sm opacity-70">余談</div>
