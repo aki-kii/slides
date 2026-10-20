@@ -227,14 +227,17 @@ chapter: Lambda MicroVMsを試す
 <span class="qa-mark">Q.</span>
 <div>
 <div class="qa-lead">bot以外は別サービスにすればよかったのでは？</div>
-<div class="qa-note">コンテナが分かれているので、マイクロサービスにできそう</div>
+<div class="qa-note">Discord bot、読み上げ、文字起こしはもともと別のコンテナ</div>
+<div class="qa-note">マイクロサービスにして、別々に動かすこともできそう</div>
 </div>
 </div>
 <div class="qa">
 <span class="qa-mark"><strong>A.</strong></span>
 <div>
 <div class="qa-lead"><strong>ネットワークの遅延</strong>が大きかった</div>
-<div class="qa-note">以前は、読み上げと文字起こしを別のLambdaにしていました</div>
+<div class="qa-note">実は、読み上げと文字起こしを別のサービスにしていた時期がありました</div>
+<div class="qa-note">サービスをまたぐので、やりとりのたびにネットワークの遅延が乗る</div>
+<div class="qa-note">読み上げや文字起こしは、遅延がそのまま会話のもたつきになる</div>
 <div class="qa-note">同じタスクにまとめて、localhostでやりとりしたら速くなりました</div>
 </div>
 </div>
@@ -261,14 +264,16 @@ chapter: Lambda MicroVMsを試す
 <span class="qa-mark">Q.</span>
 <div>
 <div class="qa-lead">1つにまとめたら、起動が遅くなるのでは？</div>
-<div class="qa-note">読み上げ（VOICEVOX）のコンテナイメージは、サイズが大きい</div>
+<div class="qa-note">読み上げ（VOICEVOX）のコンテナイメージは、サイズがとても大きい</div>
+<div class="qa-note">大きいコンテナと一緒にまとめると、全体の起動が遅くなりそう</div>
 </div>
 </div>
 <div class="qa">
 <span class="qa-mark"><strong>A.</strong></span>
 <div>
 <div class="qa-lead">スナップショットは、<strong>起動した状態</strong>で撮っている</div>
-<div class="qa-note">そこから再開するので、起動は速い</div>
+<div class="qa-note">イメージの読み込みや、コンテナの起動は、撮る前に終わっている</div>
+<div class="qa-note">スナップショットから再開するだけなので、サイズが大きくても起動は速い</div>
 </div>
 </div>
 </div>
