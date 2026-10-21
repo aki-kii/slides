@@ -62,7 +62,7 @@ transition: slide-left
 
 <img src="/images/bot-task.svg" class="mx-auto mt-6" style="width: 800px" />
 
-<div class="text-center text-xl mt-6">→ コストを抑えるため、ECSタスクは<strong>必要なタイミングで起動する</strong>仕組み</div>
+<div class="text-xl mt-6">→ コストを抑えるため、ECSタスクは<strong>必要なタイミングで起動する</strong>仕組み</div>
 
 ---
 layout: center
@@ -349,7 +349,7 @@ chapter: Lambda MicroVMsを試す
 <div><div class="net-label">VPC_EGRESS</div><img src="/images/net/netv-nat-gateway.svg" style="height: 320px" /></div>
 </div>
 
-<div class="text-center text-xl mt-2">→ <strong>VPC_EGRESS</strong>ならUDP接続ができる</div>
+<div class="text-xl mt-2">→ <strong>VPC_EGRESS</strong>ならUDP接続ができる</div>
 
 <style>
 .net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; margin-top: 0.4rem; }
