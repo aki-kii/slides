@@ -190,11 +190,8 @@ chapter: Lambda MicroVMsを試す
 </div>
 <div class="mg-note">
 
-- Lambda MicroVMsで動かせるのは、<strong>1つのコンテナだけ</strong>
-- なので、3つのコンテナを<strong>1つにまとめた</strong>
-- 読み上げ（VOICEVOX）のイメージは、公式が配布しているもので<strong>いじれない</strong>
-  - <Kogoe>なので、ベースイメージに指定して、その上にほかを載せた</Kogoe>
-- <strong>無理矢理感</strong>があって、あまり好きじゃない
+- Lambda MicroVMsは<strong>1つのコンテナイメージ</strong>から実行環境をセットアップするので、<strong>複数のコンテナを扱えない</strong>
+- 読み上げ（VOICEVOX）はコンテナイメージで配布されているので、<strong>しぶしぶベースイメージにした</strong>
 
 </div>
 </div>
@@ -210,7 +207,7 @@ chapter: Lambda MicroVMsを試す
 .mg-wide { padding: 0.7rem 0.4rem; }
 .mg-cico { height: 1.4rem; }
 .mg-between { text-align: center; font-size: 0.9rem; font-weight: bold; margin: 0.35rem 0; }
-.mg-note { width: 19rem; }
+.mg-note { width: 21rem; }
 .mg-note li { font-size: 1rem !important; line-height: 1.6 !important; }
 </style>
 
