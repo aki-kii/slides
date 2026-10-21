@@ -421,9 +421,17 @@ chapter: Lambda MicroVMsを試す
 <Kogoe>月20時間使う場合</Kogoe>
 
 <div class="mt-3 flex flex-col gap-2">
-  <div class="bar-row"><span class="bar-name">ECS Fargate（今）</span><span class="bar" style="width: 19px"></span><span>約2.6ドル</span></div>
-  <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NATインスタンス</span><span class="bar" style="width: 102px"></span><span>約14ドル</span></div>
-  <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NAT Gateway</span><span class="bar" style="width: 400px"></span><span>約55ドル</span></div>
+  <div class="bar-row"><span class="bar-name">ECS Fargate（今）</span><span class="bars"><span class="seg" style="width: 18px; background: #E67E22"></span><span class="seg" style="width: 3px; background: #95a5a6"></span></span><span>約2.6ドル</span></div>
+  <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NATインスタンス</span><span class="bars"><span class="seg" style="width: 43px; background: #3498db"></span><span class="seg" style="width: 34px; background: #16a085"></span><span class="seg" style="width: 27px; background: #95a5a6"></span></span><span>約14ドル</span></div>
+  <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NAT Gateway</span><span class="bars"><span class="seg" style="width: 43px; background: #3498db"></span><span class="seg" style="width: 329px; background: #8C4FFF"></span><span class="seg" style="width: 27px; background: #95a5a6"></span></span><span>約55ドル</span></div>
+</div>
+
+<div class="legend">
+  <span><i style="background: #E67E22"></i>Fargate</span>
+  <span><i style="background: #3498db"></i>Lambda MicroVMs</span>
+  <span><i style="background: #8C4FFF"></i>NAT Gateway</span>
+  <span><i style="background: #16a085"></i>NATインスタンス</span>
+  <span><i style="background: #95a5a6"></i>パブリックIPv4</span>
 </div>
 
 <div class="cost-note">
@@ -446,6 +454,10 @@ chapter: Lambda MicroVMsを試す
 .cost-note ul ul { padding-left: 1.6rem; }
 .cost-note li { font-size: 0.95rem !important; line-height: 1.5 !important; margin: 0.1rem 0 !important; }
 .bar-name { width: 18rem; flex: none; }
+.bars { display: inline-flex; flex: none; }
+.seg { display: inline-block; height: 1.4rem; }
+.legend { display: flex; gap: 1.2rem; margin-top: 0.6rem; font-size: 0.85rem; padding-left: 0.2rem; }
+.legend i { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 2px; margin-right: 0.35rem; vertical-align: -0.1rem; }
 .bar { display: inline-block; height: 1.4rem; background: #3498db; border-radius: 3px; flex: none; }
 </style>
 
