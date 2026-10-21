@@ -245,20 +245,22 @@ chapter: Lambda MicroVMsを試す
 <div class="qa-note">しかし、ネットワークの遅延が大きく通話体験が損なわれたため、1つのECSタスクにまとめてタスク内（localhost）で通信するようにした</div>
 </div>
 </div>
-<svg viewBox="0 0 720 150" class="qa-fig" style="order: 1; height: 130px; font-family: 'Noto Sans JP', sans-serif">
+<svg viewBox="0 0 860 150" class="qa-fig" style="order: 1; height: 130px; font-family: 'Noto Sans JP', sans-serif">
 <defs>
 <marker id="ms-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50" /></marker>
 <marker id="ms-b" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#2c3e50" /></marker>
 </defs>
 <image href="/images/aws/lambda.svg" x="50" y="25" width="64" height="64" />
-<text x="82" y="112" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#2c3e50">Discord bot</text>
-<text x="82" y="132" text-anchor="middle" style="font-size:12px" fill="#6b7684">Lambda MicroVMs</text>
+<text x="82" y="112" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#2c3e50">Lambda MicroVMs</text>
+<text x="82" y="132" text-anchor="middle" style="font-size:14px" font-weight="700" fill="#2c3e50">(Discord bot)</text>
 <image href="/images/aws/api-gateway.svg" x="318" y="25" width="64" height="64" />
 <text x="350" y="112" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#2c3e50">API Gateway</text>
 <image href="/images/aws/lambda-function.svg" x="560" y="0" width="56" height="56" />
-<text x="626" y="33" style="font-size:16px" font-weight="700" fill="#2c3e50">読み上げ</text>
+<text x="626" y="26" style="font-size:16px" font-weight="700" fill="#2c3e50">Lambda Event Functions</text>
+<text x="626" y="46" style="font-size:14px" font-weight="700" fill="#2c3e50">(読み上げ)</text>
 <image href="/images/aws/lambda-function.svg" x="560" y="90" width="56" height="56" />
-<text x="626" y="123" style="font-size:16px" font-weight="700" fill="#2c3e50">文字起こし</text>
+<text x="626" y="116" style="font-size:16px" font-weight="700" fill="#2c3e50">Lambda Event Functions</text>
+<text x="626" y="136" style="font-size:14px" font-weight="700" fill="#2c3e50">(文字起こし)</text>
 <line x1="128" y1="57" x2="312" y2="57" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
 <line x1="392" y1="50" x2="552" y2="28" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
 <line x1="392" y1="64" x2="552" y2="118" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
