@@ -86,7 +86,7 @@ chapter: Lambda MicroVMsとは？
   <h2 class="!m-0">Lambda MicroVMsとは？</h2>
 </div>
 
-<div class="text-lg mt-2">状態を保ったまま止めて、また再開できる<strong>隔離された実行環境</strong></div>
+<div class="text-lg mt-2">素早く起動して状態を保ったまま停止・再開できる<strong>隔離された実行環境</strong></div>
 
 <img src="/images/microvm-lifecycle.svg" class="mx-auto mt-4" style="width: 740px" />
 
