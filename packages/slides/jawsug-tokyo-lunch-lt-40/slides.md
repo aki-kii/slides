@@ -235,8 +235,6 @@ chapter: Lambda MicroVMsを試す
 <span class="qa-mark">Q.</span>
 <div>
 <div class="qa-lead">コンテナごとに別サービスに切り出してもよいのでは？</div>
-<div class="qa-note">Discord bot、読み上げ、文字起こしはもともと別のコンテナ</div>
-<div class="qa-note">マイクロサービスにして、別々に動かすこともできそう</div>
 </div>
 </div>
 <div class="qa" style="order: 3">
@@ -272,7 +270,7 @@ chapter: Lambda MicroVMsを試す
 .qa { display: flex; gap: 0.8rem; align-items: flex-start; }
 .qa-mark { font-size: 1.6rem; font-weight: bold; width: 2.4rem; flex: none; }
 .qa-lead { font-size: 1.3rem; line-height: 1.5; }
-.qa-note { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; margin-top: 0.1rem; }
+.qa-note { font-size: 1.05rem; opacity: 0.85; line-height: 1.5; margin-top: 0.2rem; }
 .qa-fig { display: block; margin: 0.6rem auto 0; }
 </style>
 
@@ -288,17 +286,15 @@ chapter: Lambda MicroVMsを試す
 <div class="qa">
 <span class="qa-mark">Q.</span>
 <div>
-<div class="qa-lead">1つにまとめたら、起動が遅くなるのでは？</div>
-<div class="qa-note">読み上げ（VOICEVOX）のコンテナイメージは、サイズがとても大きい</div>
-<div class="qa-note">大きいコンテナと一緒にまとめると、全体の起動が遅くなりそう</div>
+<div class="qa-lead">1つにまとめたらbotの起動が遅くなるのでは？</div>
+<div class="qa-note">VOICEVOXのコンテナイメージは<strong>約2GB</strong>なので起動に時間がかかりそう</div>
 </div>
 </div>
 <div class="qa">
 <span class="qa-mark"><strong>A.</strong></span>
 <div>
-<div class="qa-lead">スナップショットは、<strong>起動した状態</strong>で撮っている</div>
-<div class="qa-note">イメージの読み込みや、コンテナの起動は、撮る前に終わっている</div>
-<div class="qa-note">スナップショットから再開するだけなので、サイズが大きくても起動は速い</div>
+<div class="qa-lead"><strong>スナップショットから起動する</strong>ので素早い</div>
+<div class="qa-note">スナップショットは重いVOICEVOXの起動が大体終わった状態を保持している</div>
 </div>
 </div>
 </div>
@@ -310,7 +306,7 @@ chapter: Lambda MicroVMsを試す
 .qa { display: flex; gap: 0.8rem; align-items: flex-start; }
 .qa-mark { font-size: 1.6rem; font-weight: bold; width: 2.4rem; flex: none; }
 .qa-lead { font-size: 1.3rem; line-height: 1.5; }
-.qa-note { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; margin-top: 0.1rem; }
+.qa-note { font-size: 1.05rem; opacity: 0.85; line-height: 1.5; margin-top: 0.2rem; }
 .qa-fig { display: block; margin: 0.6rem auto 0; }
 </style>
 
