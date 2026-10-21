@@ -239,18 +239,15 @@ chapter: Lambda MicroVMsを試す
 <div class="qa-note">マイクロサービスにして、別々に動かすこともできそう</div>
 </div>
 </div>
-<div class="qa">
+<div class="qa" style="order: 3">
 <span class="qa-mark"><strong>A.</strong></span>
 <div>
 <div class="qa-lead"><strong>ネットワークの遅延</strong>が大きかった</div>
-<div class="qa-note">実は、読み上げと文字起こしを別のサービスにしていた時期がありました</div>
-<div class="qa-note">サービスをまたぐので、やりとりのたびにネットワークの遅延が乗る</div>
-<div class="qa-note">読み上げや文字起こしは、遅延がそのまま会話のもたつきになる</div>
-<div class="qa-note">同じタスクにまとめて、localhostでやりとりしたら速くなりました</div>
+<div class="qa-note">読み上げ・文字起こしコンテナをAPIとして提供するようにしていたこともあった</div>
+<div class="qa-note">しかし、ネットワークの遅延が大きく通話体験が損なわれたため、1つのECSタスクにまとめてタスク内（localhost）で通信するようにした</div>
 </div>
 </div>
-</div>
-<svg viewBox="0 0 720 150" class="qa-fig" style="height: 130px; font-family: 'Noto Sans JP', sans-serif">
+<svg viewBox="0 0 720 150" class="qa-fig" style="order: 1; height: 130px; font-family: 'Noto Sans JP', sans-serif">
 <defs>
 <marker id="ms-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50" /></marker>
 <marker id="ms-b" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#2c3e50" /></marker>
@@ -267,10 +264,8 @@ chapter: Lambda MicroVMsを試す
 <line x1="128" y1="57" x2="312" y2="57" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
 <line x1="392" y1="50" x2="552" y2="28" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
 <line x1="392" y1="64" x2="552" y2="118" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
-<text x="220" y="46" text-anchor="middle" style="font-size:14px" font-weight="700" fill="#e74c3c">遅延</text>
-<text x="472" y="28" text-anchor="middle" style="font-size:14px" font-weight="700" fill="#e74c3c">遅延</text>
-<text x="472" y="112" text-anchor="middle" style="font-size:14px" font-weight="700" fill="#e74c3c">遅延</text>
 </svg>
+</div>
 
 <style>
 .qa-body { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.8rem; }
