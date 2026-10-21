@@ -399,10 +399,10 @@ chapter: Lambda MicroVMsを試す
 - Fargateはパブリックサブネットに置くことで、NATを利用せずにインターネットアクセスしていた※
 - Lambda MicroVMsはパブリックIPを持てないので、NATを利用してプライベートサブネットからアクセスする方法しか残されていない
 
-</div>
-</div>
+<Kogoe>※ インバウンドアクセスをブロックするセキュリティグループを設定することで、パブリックサブネットに置くことを許容している</Kogoe>
 
-<div class="absolute bottom-5 left-14" style="max-width: 50rem"><Kogoe>※ インバウンドアクセスをブロックするセキュリティグループを設定することで、<br>パブリックサブネットに置くことを許容している</Kogoe></div>
+</div>
+</div>
 
 <style>
 .net-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.2rem; }
