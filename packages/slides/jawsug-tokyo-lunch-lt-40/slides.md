@@ -463,6 +463,216 @@ chapter: Lambda MicroVMsを試す
 </style>
 
 ---
+layout: center
+hide: true
+---
+
+<div>
+  Fargateのままチューニングしたら
+  <h2><strong>100秒以上</strong> → <strong>約30秒</strong>に！</h2>
+  <Kogoe class="mt-6">その話はまたどこかで</Kogoe>
+</div>
+
+---
+layout: center
+hide: true
+---
+
+<div>
+  Lambda MicroVMsはコストに見合わなかったけど…
+  <h2>そもそも<strong>コンテナの起動</strong>って<br>速くできないの？</h2>
+</div>
+
+---
+chapter: 起動にかかる時間を見る
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">そこで</div>
+
+## 起動にかかる時間を見てみました
+
+<InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto" style="width: 780px" />
+
+<div class="kaizen">
+  <div v-click>① <strong>イメージの取得</strong>に時間がかかっている</div>
+  <div v-click>② Discord botが<strong>ほかのコンテナの起動を待っている</strong>から遅い</div>
+  <div v-after class="pl-8"><Kogoe>しかも、ほかのコンテナはヘルスチェックを待っている</Kogoe></div>
+</div>
+
+<style>
+.kaizen { margin-top: 0.6rem; font-size: 1.1rem; line-height: 1.7; }
+</style>
+
+---
+chapter: イメージの取得を速くする
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">まず、① イメージの取得</div>
+
+## イメージが大きいのかな？
+
+<br>
+
+- 読み上げが<strong>約1.9GB</strong>
+- Discord botが約390MB
+- 文字起こしが約90MB
+
+<br>
+
+- 読み上げはVOICEVOXが提供しているイメージを使っているので、仕組み上この大きさ
+  - <Kogoe>削りようがない</Kogoe>
+
+---
+chapter: イメージの取得を速くする
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">調べてみたら、重いコンテナイメージのダウンロードを改善するのに、SOCIインデックスが使える！</div>
+
+<div class="flex items-center gap-4">
+  <img src="/images/aws/ecr.svg" class="h-12" />
+  <h2 class="!m-0">SOCIインデックスとは？</h2>
+</div>
+
+<div class="text-lg mt-2">コンテナイメージを<strong>遅延読み込み</strong>できる仕組み<Kogoe>（AWSが作ったOSS）</Kogoe></div>
+
+<InlineSvg src="soci-concept.svg" label="ふつうはイメージを全部ダウンロードしてから起動する。SOCIインデックスがあると起動に必要な分だけ取って起動し、残りのファイルはあとで取ってくる" class="mx-auto mt-2" style="width: 640px" />
+
+<div class="tight-list">
+
+- ダウンロードするときに、起動に必要なファイルだけ取得して、起動を早くできる
+- その他のファイルは、順次、もしくは必要になったタイミングでダウンロードする
+
+</div>
+
+<style>
+.tight-list li { font-size: 1.05rem !important; line-height: 1.5 !important; margin-top: 0.1rem !important; margin-bottom: 0.1rem !important; }
+</style>
+
+<BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
+
+---
+chapter: イメージの取得を速くする
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="flex items-center gap-4">
+  <img src="/images/aws/ecr.svg" class="h-12" />
+  <h2 class="!m-0">SOCIインデックスとは？</h2>
+</div>
+
+<br>
+
+- コンテナイメージとは別に、ECRリポジトリにSOCIインデックスを置く
+  - イメージの中身を作り直さずに使える
+- サイズが大きいコンテナイメージで効果的
+  - <Kogoe>起動直後に多くのファイルを読むコンテナには不向き</Kogoe>
+
+<BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
+
+---
+chapter: イメージの取得を速くする
+hide: true
+---
+
+<ChapterLabel />
+
+## 読み上げコンテナはSOCIと相性がいい
+
+<br>
+
+- 読み上げのVOICEVOXには、話者ごとの音声モデルが入っているので<strong>大きい</strong>
+- 起動のときは、モデルの本体は読まない
+
+---
+chapter: イメージの取得を速くする
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">入れてみると</div>
+
+## SOCIインデックスを入れた結果
+
+<InlineSvg src="chart-soci.svg" label="SOCIなしはイメージの取得37.5秒で全部立ち上がるまで約64秒。SOCIありは取得3.3秒で約37秒。ただしDiscord botの起動は1.5秒から4.7秒、読み上げの起動は0.8秒から9.1秒に延びた" class="mx-auto" style="width: 780px" />
+
+<div class="text-center text-lg">イメージの取得は37.5秒から<strong>3.3秒</strong>になった</div>
+
+---
+chapter: イメージの取得を速くする
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">ただし</div>
+
+## 起動は延びた
+
+<br>
+
+- 読み上げは0.8秒から<strong>9.1秒</strong>
+- Discord botは1.5秒から<strong>4.7秒</strong>
+- 足りないファイルを、起動しながら取りに行くから
+
+---
+chapter: ほかのコンテナを待たない
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">次に、② Discord botがほかのコンテナの起動を待っている</div>
+
+## 読み上げの準備が遅くなったのに待っている
+
+<br>
+
+- 読み上げの準備が遅くなったのに、Discord botはそれを待っている
+- でも、Discord botがボイスチャットに入るだけなら、読み上げは<strong>まだいらない</strong>
+- 読み上げがいるのは、誰かが話して、それを読み上げるときだけ
+
+---
+chapter: ほかのコンテナを待たない
+hide: true
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">ヘルスチェックを5秒にする手もあるけど、そもそも待たなければいい</div>
+
+## Discord botだけ先に起動する
+
+<br>
+
+- Discord botだけ先に起動して、ボイスチャットに入るようにした
+- 準備ができていなくても、声や文章はためておいて、準備できたら流す
+
+---
+chapter: ほかのコンテナを待たない
+hide: true
+---
+
+<ChapterLabel />
+
+## コンテナを待たずに起動した結果
+
+<InlineSvg src="chart-nowait.svg" label="全部のコンテナを待つと、Discord botは読み上げのヘルスチェック合格まで30.0秒待ってから起動して約66秒。Discord botだけ待つと約36秒" class="mx-auto" style="width: 720px" />
+
+<div class="text-center text-lg">全部のコンテナを待つと約66秒、Discord botだけなら<strong>約36秒</strong></div>
+
+---
 
 ## まとめ
 
@@ -477,6 +687,21 @@ chapter: Lambda MicroVMsを試す
 <style>
 .summary-list li { font-size: 1.3rem !important; line-height: 1.6 !important; margin-bottom: 0.6rem !important; }
 </style>
+
+---
+hide: true
+---
+
+<div class="text-sm opacity-70">余談</div>
+
+## 調べてるうちに見つけたCDKの便利な部品
+
+<br>
+
+- `NatInstanceProviderV2`
+  - <Kogoe>NATインスタンスを作れる</Kogoe>
+- `SociIndexV2Build`
+  - <Kogoe>SOCIインデックスを作れる（@cdklabs/deploy-time-build）</Kogoe>
 
 ---
 layout: ending
