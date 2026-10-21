@@ -70,7 +70,7 @@ layout: center
 
 <div>
   しかし現状は
-  <h2>起動に<strong>100秒以上</strong>かかってしまうので<br>待つのがつらい…！</h2>
+  <h2>起動に<strong>約30秒</strong>かかってしまうので<br>待つのがつらい…！</h2>
   <div class="mt-8">起動が早いと噂の</div>
   <h2><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
 </div>
@@ -155,7 +155,7 @@ layout: center
 
 <div>
   Lambda MicroVMsに移行すると
-  <h2>起動時間が<strong>100秒以上</strong>かかっていたものが<br><strong>約10秒</strong>ほどに短縮されました！</h2>
+  <h2>起動時間が<strong>約30秒</strong>かかっていたものが<br><strong>10秒前後</strong>に短縮されました！</h2>
 </div>
 
 <Overlay>
@@ -698,7 +698,7 @@ hide: true
 
 ## まとめ
 
-<div class="text-2xl mt-6 text-center">起動が<strong>100秒以上から約10秒</strong>になりました</div>
+<div class="text-2xl mt-6 text-center">起動が<strong>約30秒から10秒前後</strong>になりました</div>
 
 <br>
 
