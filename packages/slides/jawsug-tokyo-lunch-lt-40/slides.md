@@ -362,60 +362,25 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-## ポイント③ コストが見合わない
+<h2 class="!mb-1">ポイント③ コストが増加してしまう</h2>
+<div class="text-xl mb-1">NATの固定費が高い</div>
 
 <div class="net-side">
-<img src="/images/net/netv-nat-gateway.svg" style="height: 340px" />
+<img src="/images/net/netv-nat-gateway.svg" style="height: 320px" />
 <div class="net-note">
 
-- NAT Gatewayは、いつ呼ばれてもいいように<strong>1か月ずっと置いておく</strong>
-- 1か月のコスト
-  - (0.062 ＋ パブリックIPv4 0.005) ドル × 730時間
-  - ≒ <strong>約49ドル</strong>（＋通信量）
-- 今のFargateは月約2.6ドル。個人で使うには<strong>高すぎる</strong>
-  - <Kogoe>東京リージョン、オンデマンドの単価</Kogoe>
+- Lambda MicroVMsをVPCに置くとNATを利用する必要があるが、常に配置していないといけないのでコストがかかる
+- NAT Gatewayだと固定費だけで1か月あたり<strong>約49USD</strong>かかる
+  - <Kogoe>(0.062 ＋ パブリックIPv4 0.005) USD × 730時間（東京、オンデマンド）</Kogoe>
+- Fargateだと月に<strong>約3USD</strong>程度しかかかっていないので、コストが大幅に増加してしまう
 
 </div>
 </div>
 
 <style>
-.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
-.net-note { width: 24rem; }
-.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
-</style>
-
-<style>
-.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
-.net-note { width: 22rem; }
-.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
-</style>
-
-
----
-chapter: Lambda MicroVMsを試す
----
-
-<ChapterLabel />
-
-<div class="text-sm opacity-70">NAT Gatewayを使わずに済まないか。Fargateではどうしていたかというと</div>
-
-## Fargateはどうしていたか
-
-<div class="net-side">
-<img src="/images/net/netv-fargate.svg" style="height: 340px" />
-<div class="net-note">
-
-- パブリックサブネットに置いて、<strong>パブリックIP</strong>で外に出ていた（NATなし）
-- アウトバウンドだけ許す<strong>セキュリティグループ</strong>で守っていた
-  - <Kogoe>本当はプライベートサブネットに置くのが定石。個人で使うツールなので、コストを優先している</Kogoe>
-
-</div>
-</div>
-
-<style>
-.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
-.net-note { width: 22rem; }
-.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.2rem; }
+.net-note { width: 26rem; }
+.net-note li { font-size: 1.05rem !important; line-height: 1.6 !important; }
 </style>
 
 ---
@@ -424,25 +389,25 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">Lambda MicroVMsも同じ手でいこうと思ったら</div>
-
-## Lambda MicroVMsはパブリックIPを持てない
+<h2 class="!mb-1">ポイント③ コストが増加してしまう</h2>
+<div class="text-xl mb-1">パブリックサブネットに配置できないか考える</div>
 
 <div class="net-side">
-<img src="/images/net/netv-microvms-public.svg" style="height: 340px" />
+<img src="/images/net/netv-public.svg" style="height: 300px" />
 <div class="net-note">
 
-- Lambda MicroVMsは<strong>パブリックIPを持てない</strong>
-- パブリックサブネットに置いても、インターネットに出られない
-- インターネットにアクセスするために<strong>NAT</strong>が必要になる
+- Fargateはパブリックサブネットに置くことで、NATを利用せずにインターネットアクセスしていた※
+- Lambda MicroVMsはパブリックIPを持てないので、NATを利用してプライベートサブネットからアクセスする方法しか残されていない
 
 </div>
 </div>
+
+<div class="absolute bottom-5 left-14" style="max-width: 50rem"><Kogoe>※ インバウンドアクセスをブロックするセキュリティグループを設定することで、<br>パブリックサブネットに置くことを許容している</Kogoe></div>
 
 <style>
-.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
-.net-note { width: 22rem; }
-.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.2rem; }
+.net-note { width: 26rem; }
+.net-note li { font-size: 1.05rem !important; line-height: 1.6 !important; }
 </style>
 
 ---
