@@ -52,7 +52,7 @@ transition: slide-left
 
 ## 自作のDiscord音声bot
 
-<div class="text-lg mt-2">Discordのボイスチャットで、<strong>Claude Codeと通話</strong>している</div>
+<div class="text-lg mt-2">DiscordのボイスチャンネルでClaude Codeと<strong>通話する仕組み</strong>を作りました</div>
 
 <img src="/images/bot-overview.svg" class="mx-auto mt-2" style="width: 720px" />
 
