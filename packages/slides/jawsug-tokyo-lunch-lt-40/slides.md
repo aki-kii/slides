@@ -191,7 +191,7 @@ chapter: Lambda MicroVMsを試す
 <div class="mg-note">
 
 - Lambda MicroVMsは<strong>1つのコンテナイメージ</strong>から実行環境をセットアップするので、<strong>複数のコンテナを扱えない</strong>
-- 読み上げ（VOICEVOX）はコンテナイメージで配布されているので、<strong>しぶしぶベースイメージにした</strong>
+- 読み上げ（VOICEVOX）はコンテナイメージで配布されているので、<strong>仕方なくベースイメージとして扱うことにした</strong>
 
 </div>
 </div>
