@@ -173,25 +173,30 @@ chapter: Lambda MicroVMsを試す
 <div class="mg-side">
 <div class="mg-diagram">
 <div class="mg-frame">
-<div class="mg-title"><img src="/images/aws/fargate.svg" class="mg-ico" />ECS Fargate（今）</div>
+<div class="mg-title"><img src="/images/aws/fargate.svg" class="mg-ico" />ECS Fargate</div>
 <div class="mg-row">
 <div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>Discord bot</span></div>
 <div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>読み上げ</span></div>
 <div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>文字起こし</span></div>
 </div>
 </div>
-<div class="mg-between">&nbsp;</div>
+<div style="height: 0.5rem"></div>
 <div class="mg-frame">
 <div class="mg-title"><img src="/images/aws/lambda.svg" class="mg-ico" />Lambda MicroVMs</div>
-<div class="mg-row">
-<div class="mg-card mg-wide"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>Discord bot ＋ 読み上げ ＋ 文字起こし</span></div>
+<div class="mg-stack">
+<div class="mg-stack-head"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>1つのコンテナイメージ</span></div>
+<div class="mg-layer mg-added">Discord bot</div>
+<div class="mg-layer mg-added">文字起こし</div>
+<div class="mg-layer mg-base"><span>VOICEVOX（読み上げ）</span><span class="mg-tag">ベースイメージ</span></div>
 </div>
 </div>
 </div>
 <div class="mg-note">
 
 - Lambda MicroVMsは<strong>1つのコンテナイメージ</strong>から実行環境をセットアップするので、<strong>複数のコンテナを扱えない</strong>
-- 読み上げ（VOICEVOX）はコンテナイメージで配布されているので、<strong>仕方なくベースイメージとして扱うことにした</strong>
+- 読み上げ（VOICEVOX）はコンテナイメージで配布されている
+  - <Kogoe>ずんだもんの声などを合成できる</Kogoe>
+- <strong>仕方なくベースイメージとして扱うことにした</strong>
 
 </div>
 </div>
@@ -205,6 +210,12 @@ chapter: Lambda MicroVMsを試す
 .mg-row { display: flex; gap: 0.5rem; }
 .mg-card { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: #fff; border: 2px solid #d5d8dc; border-radius: 10px; padding: 0.55rem 0.4rem; font-weight: bold; font-size: 0.8rem; white-space: nowrap; }
 .mg-wide { padding: 0.7rem 0.4rem; }
+.mg-stack { background: #fff; border: 2px solid #d5d8dc; border-radius: 10px; padding: 0.4rem 0.6rem 0.5rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.mg-stack-head { display: flex; align-items: center; gap: 0.4rem; font-weight: bold; font-size: 0.85rem; }
+.mg-layer { display: flex; justify-content: space-between; align-items: center; border-radius: 8px; padding: 0.2rem 0.7rem; font-weight: bold; font-size: 0.8rem; }
+.mg-added { background: rgba(52,152,219,0.12); border: 2px solid #3498db; }
+.mg-base { background: #eef0f2; border: 2px dashed #95a5a6; color: #4a5560; }
+.mg-tag { font-size: 0.7rem; background: #95a5a6; color: #fff; border-radius: 999px; padding: 0.05rem 0.55rem; }
 .mg-cico { height: 1.4rem; }
 .mg-between { text-align: center; font-size: 0.9rem; font-weight: bold; margin: 0.35rem 0; }
 .mg-note { width: 21rem; }
