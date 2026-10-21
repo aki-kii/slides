@@ -663,14 +663,17 @@ hide: true
 
 ## まとめ
 
-<div class="text-2xl mt-6 text-center">起動が<strong>30〜40秒ほどから10秒前後</strong>になりました</div>
+<div class="mt-8 summary-list">
 
-<br>
+- FargateからLambda MicroVMsに移行することで、<br>起動時間が<strong>30〜40秒 → 10秒前後</strong>に収まった！
+- Fargateから構成を変える必要はあったものの、問題なく動作した
+- コストがかなり高くなってしまったので、<br>今後どのように運用しようか<strong>迷う</strong>
 
-- 使えるコンテナは1つだけなので、3つを1つにまとめた
-  - <Kogoe>スナップショットは起動した状態で撮るので、起動は遅くならない</Kogoe>
-- UDPはVPC_EGRESSにすれば通る
-- ただ、NAT Gatewayが高くて、コストで悩んでいる
+</div>
+
+<style>
+.summary-list li { font-size: 1.3rem !important; line-height: 1.6 !important; margin-bottom: 0.6rem !important; }
+</style>
 
 ---
 hide: true
