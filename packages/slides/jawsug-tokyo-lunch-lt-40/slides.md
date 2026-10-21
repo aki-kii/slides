@@ -187,19 +187,20 @@ chapter: Lambda MicroVMsを試す
 <div class="mg-stack-head"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>1つのコンテナイメージ</span></div>
 <div class="mg-layer mg-added">Discord bot</div>
 <div class="mg-layer mg-added">文字起こし</div>
-<div class="mg-layer mg-base"><span>VOICEVOX（読み上げ）</span><span class="mg-tag">ベースイメージ</span></div>
+<div class="mg-layer mg-base"><span>読み上げ（VOICEVOX）</span><span class="mg-tag">ベースイメージ</span></div>
 </div>
 </div>
 </div>
 <div class="mg-note">
 
 - Lambda MicroVMsは<strong>1つのコンテナイメージ</strong>から実行環境をセットアップするので、<strong>複数のコンテナを扱えない</strong>
-- 読み上げ（VOICEVOX）はコンテナイメージで配布されている
-  - <Kogoe>ずんだもんの声などを合成できる</Kogoe>
+- 読み上げとして利用しているVOICEVOX※はコンテナイメージで配布されている
 - <strong>仕方なくベースイメージとして扱うことにした</strong>
 
 </div>
 </div>
+
+<div class="absolute bottom-6 left-14"><Kogoe>※ VOICEVOX…ずんだもん等の声で読み上げられる音声合成ソフトウェア</Kogoe></div>
 
 <style>
 .mg-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.6rem; }
