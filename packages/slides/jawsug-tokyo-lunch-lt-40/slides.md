@@ -241,8 +241,7 @@ chapter: Lambda MicroVMsを試す
 <span class="qa-mark"><strong>A.</strong></span>
 <div>
 <div class="qa-lead"><strong>ネットワークの遅延</strong>が大きかった</div>
-<div class="qa-note">読み上げ・文字起こしコンテナをAPIとして提供するようにしていたこともあった</div>
-<div class="qa-note">しかし、ネットワークの遅延が大きく通話体験が損なわれたため、1つのECSタスクにまとめてタスク内（localhost）で通信するようにした</div>
+<div class="qa-note">ネットワークの遅延が大きく通話体験が損なわれたため、1つのECSタスクにまとめてlocalhostで通信するようにした</div>
 </div>
 </div>
 <svg viewBox="0 0 860 150" class="qa-fig" style="order: 1; height: 130px; font-family: 'Noto Sans JP', sans-serif">
