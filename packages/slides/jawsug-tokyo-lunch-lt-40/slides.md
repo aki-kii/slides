@@ -416,7 +416,8 @@ chapter: Lambda MicroVMsを試す
 
 <ChapterLabel />
 
-## コストを比べると
+<h2 class="!mb-1">ポイント③ コストが増加してしまう</h2>
+<div class="text-xl mb-1">コストを比較してみる</div>
 
 <Kogoe>月20時間使う場合</Kogoe>
 
