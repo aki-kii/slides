@@ -349,7 +349,7 @@ chapter: Lambda MicroVMsを試す
 <div><div class="net-label">VPC_EGRESS</div><img src="/images/net/netv-nat-gateway.svg" style="height: 320px" /></div>
 </div>
 
-<div class="text-center text-xl mt-2"><strong>VPC_EGRESS</strong>なら、UDP接続ができる</div>
+<div class="text-center text-xl mt-2">→ <strong>VPC_EGRESS</strong>ならUDP接続ができる</div>
 
 <style>
 .net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; margin-top: 0.4rem; }
