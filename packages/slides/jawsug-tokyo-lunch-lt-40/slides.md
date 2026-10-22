@@ -458,9 +458,7 @@ chapter: Lambda MicroVMsを試す
 .bars { display: inline-flex; flex: none; }
 .seg { display: inline-block; height: 1.4rem; }
 .legend { display: flex; gap: 1.2rem; margin-top: 0.6rem; font-size: 0.85rem; padding-left: 0.2rem; }
-.legend i { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 2px; margin-right: 0.35rem; vertical-align: -0.1rem; }
-.bar { display: inline-block; height: 1.4rem; background: #3498db; border-radius: 3px; flex: none; }
-</style>
+.legend i { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 2px; margin-right: 0.35rem; vertical-align: -0.1rem; }</style>
 
 ---
 
