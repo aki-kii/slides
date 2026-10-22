@@ -230,21 +230,9 @@ chapter: Lambda MicroVMsを試す
 
 <h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
 
-<div class="qa-body">
-<div class="qa">
-<span class="qa-mark">Q.</span>
-<div>
-<div class="qa-lead">コンテナごとに別サービスに切り出してもよいのでは？</div>
-</div>
-</div>
-<div class="qa" style="order: 3">
-<span class="qa-mark"><strong>A.</strong></span>
-<div>
-<div class="qa-lead"><strong>ネットワークの遅延</strong>が大きかった</div>
-<div class="qa-note">ネットワークの遅延が大きく通話体験が損なわれたため、1つのECSタスクにまとめてlocalhostで通信するようにした</div>
-</div>
-</div>
-<svg viewBox="0 0 860 150" class="qa-fig" style="order: 1; height: 130px; font-family: 'Noto Sans JP', sans-serif">
+<QaItem mark="Q">コンテナごとに別サービスに切り出してもよいのでは？</QaItem>
+
+<svg viewBox="0 0 860 150" class="qa-fig" style="height: 130px; font-family: 'Noto Sans JP', sans-serif">
 <defs>
 <marker id="ms-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50" /></marker>
 <marker id="ms-b" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#2c3e50" /></marker>
@@ -264,14 +252,10 @@ chapter: Lambda MicroVMsを試す
 <line x1="392" y1="50" x2="552" y2="28" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
 <line x1="392" y1="64" x2="552" y2="118" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
 </svg>
-</div>
+
+<QaItem mark="A" :notes="['ネットワークの遅延が大きく通話体験が損なわれたため、1つのECSタスクにまとめてlocalhostで通信するようにした']"><strong>ネットワークの遅延</strong>が大きかった</QaItem>
 
 <style>
-.qa-body { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.8rem; }
-.qa { display: flex; gap: 0.8rem; align-items: flex-start; }
-.qa-mark { font-size: 1.6rem; font-weight: bold; width: 2.4rem; flex: none; }
-.qa-lead { font-size: 1.3rem; line-height: 1.5; }
-.qa-note { font-size: 1.05rem; opacity: 0.85; line-height: 1.5; margin-top: 0.2rem; }
 .qa-fig { display: block; margin: 0.6rem auto 0; }
 </style>
 
@@ -283,31 +267,13 @@ chapter: Lambda MicroVMsを試す
 
 <h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
 
-<div class="qa-body">
-<div class="qa">
-<span class="qa-mark">Q.</span>
-<div>
-<div class="qa-lead">1つにまとめたらbotの起動が遅くなるのでは？</div>
-<div class="qa-note">VOICEVOXのコンテナイメージは<strong>約2GB</strong>なので起動に時間がかかりそう</div>
-</div>
-</div>
-<div class="qa">
-<span class="qa-mark"><strong>A.</strong></span>
-<div>
-<div class="qa-lead"><strong>スナップショットから起動する</strong>ので素早い</div>
-<div class="qa-note">スナップショットは重いVOICEVOXの起動が大体終わった状態を保持している</div>
-</div>
-</div>
-</div>
+<QaItem mark="Q" :notes="['VOICEVOXのコンテナイメージは<strong>約2GB</strong>なので起動に時間がかかりそう']">1つにまとめたらbotの起動が遅くなるのでは？</QaItem>
+
+<QaItem mark="A" :notes="['スナップショットは重いVOICEVOXの起動が大体終わった状態を保持している']"><strong>スナップショットから起動する</strong>ので素早い</QaItem>
 
 <img src="/images/microvm-snapshot.svg" class="qa-fig" style="height: 170px" />
 
 <style>
-.qa-body { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.8rem; }
-.qa { display: flex; gap: 0.8rem; align-items: flex-start; }
-.qa-mark { font-size: 1.6rem; font-weight: bold; width: 2.4rem; flex: none; }
-.qa-lead { font-size: 1.3rem; line-height: 1.5; }
-.qa-note { font-size: 1.05rem; opacity: 0.85; line-height: 1.5; margin-top: 0.2rem; }
 .qa-fig { display: block; margin: 0.6rem auto 0; }
 </style>
 
