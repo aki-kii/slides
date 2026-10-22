@@ -1,9 +1,15 @@
 <script setup lang="ts">
-defineProps<{ label: string }>()
+import { computed } from 'vue'
+import { useSlideContext } from '@slidev/client'
+
+// label を渡さなければ、ページの frontmatter の chapter を表示する
+const props = defineProps<{ label?: string }>()
+const { $frontmatter } = useSlideContext()
+const text = computed(() => props.label ?? $frontmatter.chapter)
 </script>
 
 <template>
-  <div class="chapter-label">{{ label }}</div>
+  <div v-if="text" class="chapter-label">{{ text }}</div>
 </template>
 
 <style scoped>

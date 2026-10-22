@@ -1,0 +1,455 @@
+---
+layout: title
+drawings:
+  persist: false
+transition: fade
+title: 自作Discord音声botをLambda MicroVMsに移行した話
+mdc: true
+addons:
+  - '@slides/ui'
+fonts:
+  sans: 'Noto Sans JP'
+  serif: 'Noto Sans JP'
+  mono: 'Fira Code'
+---
+
+<div class="text-3xl font-bold opacity-90">自作Discord音声botを</div>
+
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">Lambda MicroVMs</span>に移行した話</span>
+
+<div class="opacity-70">
+
+2026.10.21（水）\
+池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
+
+</div>
+
+<div class="absolute right-8 bottom-8">
+  <img src="/public/images/aboutme/eye-catch.png" class="h-36" />
+</div>
+
+---
+layout: profile
+image: /images/aboutme/me.jpeg
+name: アキキー | 池田 晃尚
+transition: slide-left
+---
+
+<ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ">
+
+- バックエンドエンジニア / SRE
+
+</ProfileItem>
+
+<ProfileItem title="推しサービス" icon="/images/aboutme/awscdk.dio.png" name="AWS CDK">
+
+- JAWS-UG CDK支部
+- AWS Community Builders<br><span style="font-size:0.7em">Dev Tools, 2026〜</span>
+
+</ProfileItem>
+
+---
+
+## 自作のDiscord音声bot
+
+<div class="text-lg mt-2">DiscordのボイスチャンネルでClaude Codeと<strong>通話する仕組み</strong>を作りました</div>
+
+<img src="/images/bot-overview.svg" class="mx-auto mt-2" style="width: 720px" />
+
+---
+
+## 自作のDiscord音声bot
+
+<img src="/images/bot-task.svg" class="mx-auto mt-6" style="width: 800px" />
+
+<div class="text-xl mt-6">→ コストを抑えるため、ECSタスクは<strong>必要なタイミングで起動する</strong>仕組み</div>
+
+---
+layout: center
+---
+
+<div>
+  しかし現状は
+  <h2>起動に<strong>30〜40秒ほど</strong>かかってしまうので<br>待つのがつらい…！</h2>
+  <div class="mt-8">起動が早いと噂の</div>
+  <h2><strong>Lambda MicroVMs</strong>に移行することで<br>起動時間を縮められるのでは！？</h2>
+</div>
+
+---
+chapter: Lambda MicroVMsとは？
+---
+
+<ChapterLabel />
+
+<div class="flex items-center gap-4">
+  <img src="/images/aws/lambda.svg" class="h-12" />
+  <h2 class="!m-0">Lambda MicroVMsとは？</h2>
+</div>
+
+<div class="text-lg mt-2">素早く起動して状態を保ったまま停止・再開できる<strong>隔離された実行環境</strong></div>
+
+<img src="/images/microvm-lifecycle.svg" class="mx-auto mt-4" style="width: 740px" />
+
+<div class="tight-list">
+
+- スナップショットから起動するので、<strong>起動時間が短い</strong>
+- 一時停止して、<strong>止めたところから再開できる</strong>
+- 一時停止も含めて、<strong>最大8時間</strong>使える
+
+</div>
+
+<style>
+.tight-list li { font-size: 1.1rem !important; line-height: 1.4 !important; margin-top: 0.05rem !important; margin-bottom: 0.05rem !important; }
+</style>
+
+<BottomLink href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-lambda-microvms/" title="AWS introduces Lambda MicroVMs for isolated execution of user and AI-generated code" />
+
+---
+chapter: Lambda MicroVMsとは？
+---
+
+<ChapterLabel />
+
+<div class="flex items-center gap-4">
+  <img src="/images/aws/lambda.svg" class="h-12" />
+  <h2 class="!m-0">Lambda MicroVMsとは？</h2>
+</div>
+
+<div class="sub-title">Lambda <span class="u-ev">Event</span> <span class="u-fn">Functions</span><span style="font-size: 0.7em; font-weight: normal">（旧Lambda Functions）</span>との違い</div>
+
+<div class="ecards grid grid-cols-2 gap-6 mt-6">
+<div class="card">
+<div class="card-title">Lambda Event Functions</div>
+<ul>
+  <li><span class="u-ev">イベントが来たら動く</span></li>
+  <li><span class="u-fn">関数の形で書く</span></li>
+  <li>最大15分</li>
+  <li>使い捨ての実行環境</li>
+</ul>
+</div>
+<div class="card">
+<div class="card-title">Lambda MicroVMs</div>
+<ul>
+  <li><span class="u-ev">自分で立ち上げて、止めるまで動く</span></li>
+  <li><span class="u-fn">どんなアプリケーションでも動かせる</span></li>
+  <li>最大8時間（一時停止を含む）</li>
+  <li>止めても、同じ環境にまた戻れる</li>
+</ul>
+</div>
+</div>
+
+<BottomLink href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html" title="What is AWS Lambda? - How Lambda compute primitives compare" />
+
+<style>
+.sub-title { font-size: 1.4rem; font-weight: bold; margin-top: 1rem; white-space: nowrap; }
+.u-ev { text-decoration: underline; text-decoration-color: #2F6FB3; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
+.u-fn { text-decoration: underline; text-decoration-color: #E67E22; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
+.card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.8rem 1.2rem; }
+.card-title { font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
+.card li { font-size: 0.95rem !important; line-height: 1.7 !important; }
+</style>
+
+---
+layout: center
+---
+
+<div>
+  Lambda MicroVMsに移行すると
+  <h2>起動時間が<strong>30〜40秒ほど</strong>かかっていたものが<br><strong>10秒前後</strong>に短縮されました！</h2>
+</div>
+
+<Overlay>
+  移行する上で気になったポイントを紹介します！
+</Overlay>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
+
+<div class="mg-side">
+<div class="mg-diagram">
+<div class="mg-frame">
+<div class="mg-title"><img src="/images/aws/fargate.svg" class="mg-ico" />ECS Fargate</div>
+<div class="mg-row">
+<div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>Discord bot</span></div>
+<div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>読み上げ</span></div>
+<div class="mg-card"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>文字起こし</span></div>
+</div>
+</div>
+<div style="height: 0.5rem"></div>
+<div class="mg-frame">
+<div class="mg-title"><img src="/images/aws/lambda.svg" class="mg-ico" />Lambda MicroVMs</div>
+<div class="mg-stack">
+<div class="mg-stack-head"><img src="/images/aws/ecs-container.svg" class="mg-cico" /><span>1つのコンテナイメージ</span></div>
+<div class="mg-layer mg-added">Discord bot</div>
+<div class="mg-layer mg-added">文字起こし</div>
+<div class="mg-layer mg-base"><span>読み上げ（VOICEVOX）</span><span class="mg-tag">ベースイメージ</span></div>
+</div>
+</div>
+</div>
+<div class="mg-note">
+
+- Lambda MicroVMsは<strong>1つのコンテナイメージ</strong>から実行環境をセットアップするので、<strong>複数のコンテナを扱えない</strong>
+- 読み上げとして利用している<br>VOICEVOX<span style="font-size: 0.6em">※</span>はコンテナイメージで<br>配布されているため、<strong>仕方なくベースイメージとして扱うことにした</strong>
+
+</div>
+</div>
+
+<div class="absolute bottom-6 left-14"><Kogoe>※ VOICEVOX…ずんだもん等の声で読み上げられる音声合成ソフトウェア</Kogoe></div>
+
+<style>
+.mg-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.6rem; }
+.mg-diagram { width: 27rem; }
+.mg-frame { border: 2.5px solid #E67E22; background: #FEF5EC; border-radius: 12px; padding: 0.5rem 0.7rem 0.7rem; }
+.mg-title { display: flex; align-items: center; gap: 0.5rem; font-weight: bold; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.mg-ico { height: 1.5rem; }
+.mg-row { display: flex; gap: 0.5rem; }
+.mg-card { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: #fff; border: 2px solid #d5d8dc; border-radius: 10px; padding: 0.55rem 0.4rem; font-weight: bold; font-size: 0.8rem; white-space: nowrap; }
+.mg-wide { padding: 0.7rem 0.4rem; }
+.mg-stack { background: #fff; border: 2px solid #d5d8dc; border-radius: 10px; padding: 0.4rem 0.6rem 0.5rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.mg-stack-head { display: flex; align-items: center; gap: 0.4rem; font-weight: bold; font-size: 0.85rem; }
+.mg-layer { display: flex; justify-content: space-between; align-items: center; border-radius: 8px; padding: 0.2rem 0.7rem; font-weight: bold; font-size: 0.8rem; }
+.mg-added { background: rgba(52,152,219,0.12); border: 2px solid #3498db; }
+.mg-base { background: #eef0f2; border: 2px dashed #95a5a6; color: #4a5560; }
+.mg-tag { font-size: 0.7rem; background: #95a5a6; color: #fff; border-radius: 999px; padding: 0.05rem 0.55rem; }
+.mg-cico { height: 1.4rem; }
+.mg-between { text-align: center; font-size: 0.9rem; font-weight: bold; margin: 0.35rem 0; }
+.mg-note { width: 21rem; }
+.mg-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
+
+<QaItem mark="Q">コンテナごとに別サービスに切り出してもよいのでは？</QaItem>
+
+<svg viewBox="0 0 860 150" class="qa-fig" style="height: 130px; font-family: 'Noto Sans JP', sans-serif">
+<defs>
+<marker id="ms-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50" /></marker>
+<marker id="ms-b" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#2c3e50" /></marker>
+</defs>
+<image href="/images/aws/lambda.svg" x="50" y="25" width="64" height="64" />
+<text x="82" y="112" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#2c3e50">Lambda MicroVMs</text>
+<text x="82" y="132" text-anchor="middle" style="font-size:14px" font-weight="700" fill="#2c3e50">(Discord bot)</text>
+<image href="/images/aws/api-gateway.svg" x="318" y="25" width="64" height="64" />
+<text x="350" y="112" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#2c3e50">API Gateway</text>
+<image href="/images/aws/lambda-function.svg" x="560" y="0" width="56" height="56" />
+<text x="626" y="26" style="font-size:16px" font-weight="700" fill="#2c3e50">Lambda Event Functions</text>
+<text x="626" y="46" style="font-size:14px" font-weight="700" fill="#2c3e50">(読み上げ)</text>
+<image href="/images/aws/lambda-function.svg" x="560" y="90" width="56" height="56" />
+<text x="626" y="116" style="font-size:16px" font-weight="700" fill="#2c3e50">Lambda Event Functions</text>
+<text x="626" y="136" style="font-size:14px" font-weight="700" fill="#2c3e50">(文字起こし)</text>
+<line x1="128" y1="57" x2="312" y2="57" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
+<line x1="392" y1="50" x2="552" y2="28" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
+<line x1="392" y1="64" x2="552" y2="118" stroke="#2c3e50" stroke-width="2.5" marker-start="url(#ms-b)" marker-end="url(#ms-a)" />
+</svg>
+
+<QaItem mark="A" :notes="['ネットワークの遅延が大きく通話体験が損なわれたため、1つのECSタスクにまとめてlocalhostで通信するようにした']"><strong>ネットワークの遅延</strong>が大きかった</QaItem>
+
+<style>
+.qa-fig { display: block; margin: 0.6rem auto 0; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">ポイント① コンテナを1つにまとめる必要があった</span></h2>
+
+<QaItem mark="Q" :notes="['VOICEVOXのコンテナイメージは<strong>約2GB</strong>なので起動に時間がかかりそう']">1つにまとめたらbotの起動が遅くなるのでは？</QaItem>
+
+<QaItem mark="A" :notes="['スナップショットは重いVOICEVOXの起動が大体終わった状態を保持している']"><strong>スナップショットから起動する</strong>ので素早い</QaItem>
+
+<img src="/images/microvm-snapshot.svg" class="qa-fig" style="height: 170px" />
+
+<style>
+.qa-fig { display: block; margin: 0.6rem auto 0; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">ポイント② 標準ではUDP接続が失敗していた</span></h2>
+
+<div class="net-side">
+<img src="/images/net/netv-egress.svg" style="height: 340px" />
+<div class="net-note">
+
+- Discordのボイスチャットにbotを入れてみたら、<strong>接続に失敗</strong>した
+- 原因をたどると、音声を送受信する<strong>UDP</strong>の接続が失敗していた
+- 標準のネット接続（INTERNET_EGRESS）では、外向きのUDPが通らない
+
+</div>
+</div>
+
+<style>
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 0.2rem; }
+.net-note { width: 22rem; }
+.net-note li { font-size: 1rem !important; line-height: 1.6 !important; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2><span style="font-size: 0.85em">ポイント② 標準ではUDP接続が失敗していた</span></h2>
+
+<div class="net-cmp">
+<div><div class="net-label">INTERNET_EGRESS（標準）</div><img src="/images/net/netv-egress.svg" style="height: 320px" /></div>
+<div><div class="net-label">VPC_EGRESS</div><img src="/images/net/netv-nat-gateway.svg" style="height: 320px" /></div>
+</div>
+
+<div class="text-xl mt-2">→ <strong>VPC_EGRESS</strong>ならUDP接続ができる</div>
+
+<style>
+.net-cmp { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; margin-top: 0.4rem; }
+.net-label { font-weight: bold; font-size: 0.95rem; margin-bottom: 0.2rem; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2 class="!mb-1">ポイント③ コストが増加してしまう</h2>
+<div class="text-xl mb-1">NATの固定費が高い</div>
+
+<div class="net-side">
+<img src="/images/net/netv-nat-gateway.svg" style="height: 320px" />
+<div class="net-note">
+
+- Lambda MicroVMsをVPCに置くとNATを利用する必要があるが、常に配置していないといけないのでコストがかかる
+- NAT Gatewayだと固定費だけで1か月あたり<strong>約49USD</strong>かかる
+  - <Kogoe>(0.062 ＋ パブリックIPv4 0.005) USD × 730時間（東京、オンデマンド）</Kogoe>
+- Fargateだと月に<strong>約3USD</strong>程度しかかかっていないので、コストが大幅に増加してしまう
+
+</div>
+</div>
+
+<style>
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.2rem; }
+.net-note { width: 26rem; }
+.net-note li { font-size: 1.05rem !important; line-height: 1.6 !important; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2 class="!mb-1">ポイント③ コストが増加してしまう</h2>
+<div class="text-xl mb-1">パブリックサブネットに配置できないか考える</div>
+
+<div class="net-side">
+<img src="/images/net/netv-public.svg" style="height: 300px" />
+<div class="net-note">
+
+- Fargateはパブリックサブネットに置くことで、NATを利用せずにインターネットアクセスしていた※
+- Lambda MicroVMsはパブリックIPを持てないので、NATを利用してプライベートサブネットからアクセスする方法しか残されていない
+
+<Kogoe>※ インバウンドアクセスをブロックするセキュリティグループを設定することで、パブリックサブネットに置くことを許容している</Kogoe>
+
+</div>
+</div>
+
+<style>
+.net-side { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 0.2rem; }
+.net-note { width: 26rem; }
+.net-note li { font-size: 1.05rem !important; line-height: 1.6 !important; }
+</style>
+
+---
+chapter: Lambda MicroVMsを試す
+---
+
+<ChapterLabel />
+
+<h2 class="!mb-1">ポイント③ コストが増加してしまう</h2>
+<div class="text-xl mb-1">コストを比較してみる</div>
+
+<Kogoe>月20時間使う場合</Kogoe>
+
+<div class="mt-3 flex flex-col gap-2">
+  <div class="bar-row"><span class="bar-name">ECS Fargate（今）</span><span class="bars"><span class="seg" style="width: 18px; background: #E67E22"></span><span class="seg" style="width: 3px; background: #95a5a6"></span></span><span>約2.6ドル</span></div>
+  <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NATインスタンス</span><span class="bars"><span class="seg" style="width: 43px; background: #3498db"></span><span class="seg" style="width: 34px; background: #16a085"></span><span class="seg" style="width: 27px; background: #95a5a6"></span></span><span>約14ドル</span></div>
+  <div class="bar-row"><span class="bar-name">Lambda MicroVMs＋NAT Gateway</span><span class="bars"><span class="seg" style="width: 43px; background: #3498db"></span><span class="seg" style="width: 329px; background: #8C4FFF"></span><span class="seg" style="width: 27px; background: #95a5a6"></span></span><span>約55ドル</span></div>
+</div>
+
+<div class="legend">
+  <span><i style="background: #E67E22"></i>Fargate</span>
+  <span><i style="background: #3498db"></i>Lambda MicroVMs</span>
+  <span><i style="background: #8C4FFF"></i>NAT Gateway</span>
+  <span><i style="background: #16a085"></i>NATインスタンス</span>
+  <span><i style="background: #95a5a6"></i>パブリックIPv4</span>
+</div>
+
+<div class="cost-note">
+
+- Lambda MicroVMs自体は少し高いくらい
+- NATはいつ呼ばれてもいいように、一か月ずっと立てておく<strong>固定費</strong>になる
+  - <Kogoe>必要なときだけNATを立てると起動が遅くなる。使う時間を絞っても、本当に使わないのは寝ている2:00〜7:00くらい</Kogoe>
+
+</div>
+
+<BottomLink href="https://aws.amazon.com/lambda/pricing/" title="AWS Lambda pricing" />
+
+<Overlay>
+  ということで、<strong>コストで悩んでいます</strong>…
+</Overlay>
+
+<style>
+.bar-row { display: flex; align-items: center; gap: 0.8rem; font-size: 0.95rem; white-space: nowrap; }
+.cost-note { margin-top: 0.8rem; padding-left: 1.6rem; }
+.cost-note ul ul { padding-left: 1.6rem; }
+.cost-note li { font-size: 0.95rem !important; line-height: 1.5 !important; margin: 0.1rem 0 !important; }
+.bar-name { width: 18rem; flex: none; }
+.bars { display: inline-flex; flex: none; }
+.seg { display: inline-block; height: 1.4rem; }
+.legend { display: flex; gap: 1.2rem; margin-top: 0.6rem; font-size: 0.85rem; padding-left: 0.2rem; }
+.legend i { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 2px; margin-right: 0.35rem; vertical-align: -0.1rem; }</style>
+
+---
+
+## まとめ
+
+<div class="mt-8 summary-list">
+
+- FargateからLambda MicroVMsに移行することで、<br>起動時間が<strong>30〜40秒 → 10秒前後</strong>に収まった！
+- Fargateから構成を変える必要はあったものの、問題なく動作した
+- コストがかなり高くなってしまったので、<br>今後どのように運用しようか<strong>迷う</strong>
+
+</div>
+
+<style>
+.summary-list li { font-size: 1.3rem !important; line-height: 1.6 !important; margin-bottom: 0.6rem !important; }
+</style>
+
+---
+layout: ending
+---
+
+# Thank You!
+
+<div class="absolute right-8 bottom-8 flex flex-col items-center gap-2">
+  <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin: 0;">＼ ご清聴ありがとうございました！ ／</p>
+  <img src="/images/aboutme/eye-catch.png" class="h-36" />
+</div>
+

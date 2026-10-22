@@ -10,7 +10,8 @@ import { computed } from 'vue'
 // Noto Sans JP で描かせる。
 const props = defineProps<{ src: string; label?: string }>()
 
-const svgs = import.meta.glob('../public/images/*.svg', {
+// ui は各デッキから読み込まれるので、デッキのルート（Vite の root）からの絶対パスで探す
+const svgs = import.meta.glob('/public/images/*.svg', {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -22,7 +23,7 @@ const svgs = import.meta.glob('../public/images/*.svg', {
 const prefix = `isvg${++count}-`
 
 const svg = computed(() => {
-  const raw = svgs[`../public/images/${props.src}`] ?? ''
+  const raw = svgs[`/public/images/${props.src}`] ?? ''
   return raw
     .replace(/\bid="([^"]+)"/g, `id="${prefix}$1"`)
     .replace(/url\(#([^)]+)\)/g, `url(#${prefix}$1)`)
