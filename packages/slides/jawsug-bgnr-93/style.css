@@ -449,7 +449,8 @@
 .pd-card.pd-iac { border-color: #0E8A6E; background: #e9f5f1; }
 .pd-title { font-weight: bold; font-size: 1.3rem; }
 .pd-sub { font-size: 0.85rem; color: #6b7684; margin-bottom: 0.4rem; }
-.pd-card li { font-size: 0.92rem !important; line-height: 1.9 !important; white-space: nowrap; }
+/* 左右のカードで行ごとに対比できるよう、各行の高さをそろえる */
+.pd-card li { font-size: 0.92rem !important; line-height: 1.6 !important; min-height: 3.6em; margin-bottom: 0.3rem !important; }
 .u-a { text-decoration: underline; text-decoration-color: #2F6FB3; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
 .u-b { text-decoration: underline; text-decoration-color: #E67E22; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
 
@@ -489,3 +490,7 @@
 .manual-card-head { font-weight: bold; color: #6b7684; margin-bottom: 0.4rem; }
 .shot-anno { position: absolute; margin-bottom: 0.15rem; color: #DD344C; font-weight: bold; font-size: 0.85rem; white-space: nowrap; }
 .shot-note { margin-top: 0.3rem; color: #DD344C; font-size: 0.8rem; }
+
+/* 特徴②④：2つの図を左右に並べ、それぞれに小さい見出しを付ける */
+.fig-pair { display: grid; grid-template-columns: 360px 360px; gap: 4rem; justify-content: center; }
+.fig-head { font-size: 0.95rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.4rem; white-space: nowrap; }

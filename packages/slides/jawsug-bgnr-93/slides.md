@@ -169,8 +169,6 @@ class: text-center
 chapter: IaCとは？
 ---
 
-<ChapterLabel />
-
 ## AWSリソースをデプロイする主な選択肢
 
 <div class="dm-grid mt-4">
@@ -210,19 +208,14 @@ layout: center
 
 <div>
   IaC（Infrastructure as Code）とは？
-  <h2>インフラの<span style="color: var(--accent-warm)">あるべき姿</span>をコードで宣言して、<br><span style="color: var(--accent-warm)">現状との差分</span>を元にリソースをあるべき姿に合わせる仕組み</h2>
+  <h2>インフラの<span style="color: var(--accent-warm)">あるべき姿</span>をコードで宣言して、<br><span style="color: var(--accent-warm)">現在の状態との差分</span>を元に<br>リソースをあるべき姿に合わせる仕組み</h2>
 </div>
 
 ---
 chapter: IaCとは？
 ---
 
-<ChapterLabel />
-
-<div class="flex items-center gap-4">
-  <img src="/images/tools/code.svg" class="h-12" />
-  <h2 class="!m-0">手続き型 vs 宣言型</h2>
-</div>
+<h2>手続き型 vs 宣言型</h2>
 
 <div class="mt-3" style="font-size: 1.2rem; line-height: 1.7">リソースのデプロイ方法には、手続き型と宣言型があります</div>
 
@@ -231,16 +224,18 @@ chapter: IaCとは？
 <div class="pd-title">手続き型</div>
 <div class="pd-sub">マネコン、CLI、SDK</div>
 <ul>
-  <li>現在のリソースに対して</li>
-  <li>設定を作成・更新して変更する</li>
+  <li>「どうやるか」の設定手順を1つずつ指示するデプロイ方法</li>
+  <li>現在のリソースに対して、作成・変更・削除の操作を都度実行する</li>
+  <li>例：マネコンからLambda関数のメモリサイズを変更して、環境変数を追加した</li>
 </ul>
 </div>
 <div class="pd-card pd-iac">
 <div class="pd-title">宣言型</div>
 <div class="pd-sub">IaC</div>
 <ul>
-  <li>リソースの<span style="color: var(--accent-warm)">あるべき姿</span>を</li>
-  <li>宣言して設定を決める</li>
+  <li>リソースの「<span style="color: var(--accent-warm)">あるべき姿</span>」を宣言するデプロイ方法</li>
+  <li>作成・変更・削除の操作は書かず、最終的な設定だけを書く</li>
+  <li>例：コードにメモリサイズと環境変数を書いてデプロイした</li>
 </ul>
 </div>
 </div>
@@ -249,11 +244,9 @@ chapter: IaCとは？
 chapter: IaCとは？
 ---
 
-<ChapterLabel />
-
 ## IaCのデプロイの仕組み
 
-<div class="text-lg mt-2">あるべき姿をコードで定義し、現在の状態との差分をデプロイする</div>
+<div class="text-lg mt-2">あるべき姿をコードで定義し、<span style="color: var(--accent-warm); font-weight: bold">現在の状態との差分</span>をデプロイする</div>
 
 <InlineSvg src="iac-diff.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする" class="mx-auto mt-6" style="width: 900px" />
 
@@ -270,8 +263,6 @@ chapter: IaCとは？
 transition: view-transition
 ---
 
-<ChapterLabel />
-
 <div style="view-transition-name: iac-feature">
   IaCの特徴 ①
   <h2>再現性の高さ</h2>
@@ -279,40 +270,35 @@ transition: view-transition
 
 <div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">コードに定義されている通りにデプロイされるため、誰が何回やっても同じ結果になる</div>
 
-<div class="feature-grid mt-3" style="grid-template-columns: 430px 1fr">
-<InlineSvg src="feature-reproducibility.svg" label="手作業では1回のデプロイの中で設定変更を繰り返すのでどこかで間違えるが、IaCは誰がやっても同じ結果になる" />
-<div class="feature-list">
-
-- 設定を一つ一つ手で変えていくと<br>どこかで間違える
-- 新人でもベテランでも<br>同じ結果になる
-
-<Kogoe>状態に依存するので、<br>絶対ではない</Kogoe>
-
-</div>
-</div>
+<InlineSvg src="feature-reproducibility.svg" label="手作業では1回のデプロイの中で設定変更を繰り返すのでどこかで間違えるが、IaCは誰がやっても同じ結果になる" class="mx-auto mt-3" style="width: 470px" />
 
 ---
 chapter: IaCとは？
 transition: view-transition
 ---
-
-<ChapterLabel />
 
 <div style="view-transition-name: iac-feature">
   IaCの特徴 ②
   <h2>変更管理ができること</h2>
 </div>
 
-<div class="text-lg mt-2">IaCはコードで定義するためGit管理ができる</div>
+<div class="text-lg mt-2">IaCはコードで定義するためGitで変更管理ができる</div>
 
-<InlineSvg src="feature-change-management.svg" label="レビューしたソースコードをデプロイし、戻したくなったら前のコミットを戻して再度デプロイする" class="mx-auto mt-4" style="width: 560px" />
+<div class="fig-pair mt-4">
+  <div>
+    <div class="fig-head">レビューしたソースコードをデプロイ</div>
+    <InlineSvg src="feature-cm-deploy.svg" label="レビューしたソースコードを、WAF・ALB・ECSへデプロイする" />
+  </div>
+  <div>
+    <div class="fig-head">戻すときは、前のコミットに戻して再度デプロイ</div>
+    <InlineSvg src="feature-cm-rollback.svg" label="戻すときは、前のコミットに戻して、WAF・ALB・ECSへ再度デプロイする" />
+  </div>
+</div>
 
 ---
 chapter: IaCとは？
 transition: view-transition
 ---
-
-<ChapterLabel />
 
 <div style="view-transition-name: iac-feature">
   IaCの特徴 ③
@@ -321,13 +307,11 @@ transition: view-transition
 
 <div class="text-lg mt-2">構成はコードに全部書かれているので、コードを見れば全体像と関連が分かる</div>
 
-<InlineSvg src="feature-structure.svg" label="WAF・ALB・ECSの関連が分かる構成と、ALBを定義したAWS CDKのコード。あえてHTTPを許可する設定に、その意図をコメントで残している" class="mx-auto mt-4" style="width: 540px" />
+<InlineSvg src="feature-structure.svg" label="WAF・ALB・ECSの関連が分かる構成と、ALBを定義したAWS CDKのコード。あえてHTTPを許可する設定に、その意図をコメントで残している" class="mx-auto mt-3" style="width: 660px" />
 
 ---
 chapter: IaCとは？
 ---
-
-<ChapterLabel />
 
 <div style="view-transition-name: iac-feature">
   IaCの特徴 ④
@@ -336,13 +320,20 @@ chapter: IaCとは？
 
 <div class="text-lg mt-2">同じコードのまま、別の環境にもデプロイできる</div>
 
-<InlineSvg src="feature-reuse.svg" label="同じコードでWAF・ALB・ECSの構成を開発環境と本番環境にデプロイでき、ALBとECSの共通パターンを他の構成に組み込める" class="mx-auto mt-4" style="width: 460px" />
+<div class="fig-pair mt-4">
+  <div>
+    <div class="fig-head">同じコードのまま、別の環境にもデプロイ</div>
+    <InlineSvg src="feature-reuse-envs.svg" label="同じコードのまま、WAF・ALB・ECSの構成を開発環境と本番環境にデプロイする" />
+  </div>
+  <div>
+    <div class="fig-head">共通する部分を切り出して、他の構成に組み込む</div>
+    <InlineSvg src="feature-reuse-parts.svg" label="ALBとECSの共通する部分を切り出して、DynamoDBを使う他の構成に組み込む" />
+  </div>
+</div>
 
 ---
 chapter: IaCとは？
 ---
-
-<ChapterLabel />
 
 <div class="flex items-center gap-4">
   <img src="/images/tools/code.svg" class="h-12" />
@@ -401,8 +392,6 @@ layout: center
 chapter: AIとIaC
 ---
 
-<ChapterLabel />
-
 <div>
   <h2>どんな仕事もAIに任せられるようになってきた</h2>
   <div class="mt-8">IaCも例外ではない</div>
@@ -412,8 +401,6 @@ chapter: AIとIaC
 ---
 chapter: AIとIaC
 ---
-
-<ChapterLabel />
 
 ## なぜIaCはAIに向いているのか
 
@@ -431,8 +418,6 @@ chapter: AIとIaC
 transition: view-transition
 ---
 
-<ChapterLabel />
-
 <div style="view-transition-name: ai-reason">
   IaCがAIに向いている理由 ①
   <h2>コンテキストを渡しやすい</h2>
@@ -447,8 +432,6 @@ chapter: AIとIaC
 transition: view-transition
 ---
 
-<ChapterLabel />
-
 <div style="view-transition-name: ai-reason">
   IaCがAIに向いている理由 ②
   <h2>変更を検証できる仕組みがある</h2>
@@ -462,8 +445,6 @@ transition: view-transition
 chapter: AIとIaC
 transition: view-transition
 ---
-
-<ChapterLabel />
 
 <div style="view-transition-name: ai-reason">
   IaCがAIに向いている理由 ③
@@ -480,8 +461,6 @@ transition: view-transition
 chapter: AIとIaC
 ---
 
-<ChapterLabel />
-
 <div style="view-transition-name: ai-reason">
   IaCがAIに向いている理由 ④
   <h2>AIにデプロイ権限を渡さなくて済む</h2>
@@ -494,8 +473,6 @@ chapter: AIとIaC
 ---
 chapter: AIとIaC
 ---
-
-<ChapterLabel />
 
 ## IaCのツールもAI向けに進化している
 
@@ -514,8 +491,6 @@ class: text-center
 layout: center
 chapter: IaCの学習
 ---
-
-<ChapterLabel />
 
 <div>
   IaCも今後はAIが書くとしたら
@@ -536,8 +511,6 @@ chapter: IaCの学習
 chapter: IaCの学習
 ---
 
-<ChapterLabel />
-
 ## まずはAIと一緒に触ってみる
 
 <div class="text-lg mt-2">例として、サーバーレスアーキテクチャをAIと一緒に組んでみる</div>
@@ -548,8 +521,6 @@ chapter: IaCの学習
 chapter: IaCの学習
 hide: true
 ---
-
-<ChapterLabel />
 
 ## ハンズオンや書籍もおすすめ
 

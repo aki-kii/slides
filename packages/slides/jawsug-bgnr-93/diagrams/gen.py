@@ -366,47 +366,47 @@ def feature_reproducibility():
     write("feature-reproducibility.svg", svg(600, 410, b, "手作業では1回のデプロイの中で設定変更を繰り返すのでどこかで間違えるが、IaCは誰がやっても同じ結果になる"))
 
 
+def resources_row(x, y, size=36, gap=58):
+    o = []
+    for i, k in enumerate(["waf", "elb", "ecs"]):
+        o.append(inner(k, x + i * gap, y, size))
+        if i < 2:
+            o.append(arrow(f"M{x + i * gap + size + 3},{y + size // 2} L{x + (i + 1) * gap - 4},{y + size // 2}"))
+    return o
+
+
 def feature_change_management():
+    # 左：レビューしたソースコードをデプロイ（見出しはスライド側）
     b = []
+    b += service("user", 60, 56, "レビュー", size=44, fs=15)
+    b.append(arrow("M92,56 L166,56", GREEN))
+    b += service("code", 210, 56, "ソースコード", size=48, fs=15)
+    b.append(arrow("M210,112 L210,176", GREEN))
+    b.append(t(222, 150, "デプロイ", 15, "bold", GREEN, "start"))
+    b += resources_row(134, 186)
+    write("feature-cm-deploy.svg", svg(330, 232, b, "レビューしたソースコードを、WAF・ALB・ECSへデプロイする"))
 
-    def resources(x, y):
-        o = []
-        for i, k in enumerate(["waf", "elb", "ecs"]):
-            o.append(inner(k, x + i * 58, y, 36))
-            if i < 2:
-                o.append(arrow(f"M{x + i * 58 + 39},{y + 18} L{x + (i + 1) * 58 - 4},{y + 18}"))
-        return o
-
-    # 1. レビューしたソースコードをデプロイ
-    b.append(t(10, 28, "1. レビューしたソースコードをデプロイ", 18, "bold", anchor="start"))
-    b += service("user", 60, 88, "レビュー", size=44, fs=15)
-    b.append(arrow("M92,88 L156,88", GREEN))
-    b += service("code", 196, 88, "ソースコード", size=48, fs=15)
-    b.append(arrow("M232,88 L380,88", GREEN))
-    b.append(t(306, 78, "デプロイ", 15, "bold", GREEN))
-    b += resources(400, 70)
-    # 2. 戻したくなったら、前のコミットを戻して再度デプロイ
-    b.append(f'<line x1="10" y1="160" x2="590" y2="160" stroke="{LINE}" stroke-width="2"/>')
-    b.append(t(10, 196, "2. 戻すときは、前のコミットに戻して再度デプロイ", 18, "bold", anchor="start"))
-    y = 270
-    b.append(inner("git", 14, y - 24, 48))
-    b.append(f'<line x1="96" y1="{y}" x2="216" y2="{y}" stroke="{INK}" stroke-width="2.5"/>')
+    # 右：戻すときは、前のコミットに戻して再度デプロイ
+    b = []
+    y = 60
+    b.append(inner("git", 10, y - 24, 48))
+    b.append(f'<line x1="96" y1="{y}" x2="236" y2="{y}" stroke="{INK}" stroke-width="2.5"/>')
     b.append(f'<circle cx="96" cy="{y}" r="11" fill="#ffffff" stroke="{GREEN}" stroke-width="3"/>')
-    b.append(f'<circle cx="216" cy="{y}" r="11" fill="#ffffff" stroke="{GRAY}" stroke-width="3"/>')
+    b.append(f'<circle cx="236" cy="{y}" r="11" fill="#ffffff" stroke="{GRAY}" stroke-width="3"/>')
     b.append(t(96, y + 34, "前のコミット", 15, "bold", GREEN))
-    b.append(t(216, y + 34, "今のコミット", 15, color=GRAY))
-    b.append(arrow(f"M216,{y - 16} C200,{y - 52} 112,{y - 52} 98,{y - 18}", GRAY))
-    b.append(t(156, y - 46, "戻す", 15, color=SUB))
-    b.append(arrow(f"M232,{y} L380,{y}", GREEN))
-    b.append(t(306, y - 10, "再度デプロイ", 15, "bold", GREEN))
-    b += resources(400, y - 18)
-    write("feature-change-management.svg", svg(600, 320, b, "レビューしたソースコードをデプロイし、戻したくなったら前のコミットを戻して再度デプロイする"))
+    b.append(t(236, y + 34, "今のコミット", 15, color=GRAY))
+    b.append(arrow(f"M236,{y - 16} C220,{y - 42} 112,{y - 42} 98,{y - 18}", GRAY))
+    b.append(t(166, y - 40, "戻す", 15, color=SUB))
+    b.append(arrow(f"M96,{y + 44} L96,204 L126,204", GREEN))
+    b.append(t(108, 150, "再度デプロイ", 15, "bold", GREEN, "start"))
+    b += resources_row(134, 186)
+    write("feature-cm-rollback.svg", svg(330, 232, b, "戻すときは、前のコミットに戻して、WAF・ALB・ECSへ再度デプロイする"))
 
 
 def feature_structure():
     b = []
     # リソースの関連（左・メイン）
-    b.append(t(110, 30, "リソース同士の関連を追える", 16))
+    b.append(t(8, 30, "リソース同士の関連を追える", 16, anchor="start"))
     for i, (k, n) in enumerate([("waf", "AWS WAF"), ("elb", "ALB"), ("ecs", "Amazon ECS")]):
         y = 62 + i * 118
         b.append(inner(k, 24, y, 56))
@@ -414,10 +414,10 @@ def feature_structure():
         if i < 2:
             b.append(arrow(f"M52,{y + 60} L52,{y + 114}"))
     # コード（右・CDK）
-    b.append(arrow("M244,210 L218,210"))
-    b.append(f'<rect x="250" y="40" width="462" height="350" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
-    b.append(inner("code", 264, 52, 36))
-    b.append(t(310, 78, "コード（AWS CDK）", 18, "bold", anchor="start"))
+    b.append(arrow("M214,210 L198,210"))
+    b.append(f'<rect x="220" y="40" width="600" height="360" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
+    b.append(inner("code", 234, 52, 36))
+    b.append(t(280, 78, "コード（AWS CDK）", 18, "bold", anchor="start"))
     rows = [
         (INK, "const alb = new ApplicationLoadBalancer(this, 'Alb', {"),
         (INK, "  vpc,"),
@@ -430,22 +430,19 @@ def feature_structure():
         (INK, "  protocol: ApplicationProtocol.HTTP,"),
         (INK, "});"),
     ]
-    y = 140
+    y = 128
     for c, line in rows:
         if c == GREEN:
             # 日本語のコメントは等幅フォントだと字形が崩れるので、本文のフォントで描く（字下げぶんだけずらす）
-            indent = (len(line) - len(line.lstrip())) * 7.8
-            b.append(t(266 + indent, y, line.strip(), 13, color=c, anchor="start"))
+            indent = (len(line) - len(line.lstrip())) * 10.2
+            b.append(t(238 + indent, y, line.strip(), 17, color=c, anchor="start"))
         elif line:
-            b.append(t(266, y, line.replace(" ", "&#160;"), 13, color=c, anchor="start", mono=True))
-        y += 19.5
-    b.append(t(481, 414, "構成の唯一の記録", 16, "bold"))
-    write("feature-structure.svg", svg(720, 424, b, "WAF・ALB・ECSの関連が分かる構成と、ALBを定義したAWS CDKのコード。あえてHTTPを許可する設定に、その意図をコメントで残している"))
+            b.append(t(238, y, line.replace(" ", "&#160;"), 17, color=c, anchor="start", mono=True))
+        y += 25.5
+    write("feature-structure.svg", svg(830, 410, b, "WAF・ALB・ECSの関連が分かる構成と、ALBを定義したAWS CDKのコード。あえてHTTPを許可する設定に、その意図をコメントで残している"))
 
 
 def feature_reuse():
-    b = []
-
     def chain(keys, x, y, size=32, gap=58):
         o = []
         for i, k in enumerate(keys):
@@ -454,34 +451,33 @@ def feature_reuse():
                 o.append(arrow(f"M{x + i * gap + size + 3},{y + size // 2} L{x + (i + 1) * gap - 4},{y + size // 2}"))
         return o
 
-    # 同じコードで複数環境
-    b += service("code", 52, 92, "同じコード", size=52, fs=15)
+    # 左：同じコードのまま、別の環境にもデプロイ（見出しはスライド側）
+    b = []
+    b += service("code", 40, 136, "同じコード", size=48, fs=14)
     for i, env in enumerate(["開発環境", "本番環境"]):
-        y = 26 + i * 96
-        b.append(f'<rect x="280" y="{y}" width="300" height="78" rx="12" fill="#ffffff" stroke="#232F3E" stroke-width="2"/>')
-        b.append(inner("cloud", 280, y, 24))
-        b.append(t(312, y + 18, env, 14, "bold", "#232F3E", "start"))
-        b += chain(["waf", "elb", "ecs"], 340, y + 34)
-        b.append(arrow(f"M90,92 L180,92 L272,{y + 46}", GREEN))
-    b.append(t(176, 80, "デプロイ", 15, color=GREEN))
-    b.append(t(430, 226, "同じコードのまま、別の環境にもデプロイ", 14, "bold", GREEN))
-    # 共通パターンを他の構成に組み込む
-    b.append(f'<line x1="10" y1="246" x2="590" y2="246" stroke="{LINE}" stroke-width="2"/>')
-    b.append(f'<rect x="16" y="268" width="150" height="110" rx="12" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
-    b.append(t(91, 292, "共通する部分", 15, "bold", GREEN))
-    b += chain(["elb", "ecs"], 46, 312, size=36, gap=56)
-    b.append(t(91, 368, "切り出す", 13, color=GREEN))
-    b.append(arrow("M172,322 L272,322", GREEN))
-    b.append(t(222, 310, "組み込む", 15, color=GREEN))
-    b.append(f'<rect x="280" y="262" width="300" height="122" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
-    b.append(t(296, 286, "他の構成", 15, "bold", anchor="start"))
-    b.append(f'<rect x="294" y="300" width="132" height="64" rx="10" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2" stroke-dasharray="7 5"/>')
-    b += chain(["elb", "ecs"], 308, 314, size=36, gap=58)
-    b.append(arrow("M426,332 L470,332"))
-    b.append(inner("dynamodb", 478, 312, 40))
-    b.append(t(437, 398, "共通する部分を切り出して、他の構成に組み込む", 14, "bold", GREEN))
-    b.append(t(498, 374, "Amazon DynamoDB", 12, color=SUB))
-    write("feature-reuse.svg", svg(600, 410, b, "同じコードでWAF・ALB・ECSの構成を開発環境と本番環境にデプロイでき、ALBとECSの共通パターンを他の構成に組み込める"))
+        y = 34 + i * 112
+        b.append(f'<rect x="112" y="{y}" width="210" height="84" rx="12" fill="#ffffff" stroke="#232F3E" stroke-width="2"/>')
+        b.append(inner("cloud", 112, y, 24))
+        b.append(t(144, y + 18, env, 14, "bold", "#232F3E", "start"))
+        b += chain(["waf", "elb", "ecs"], 140, y + 38)
+        b.append(arrow(f"M68,136 L86,136 L104,{y + 50}", GREEN))
+    write("feature-reuse-envs.svg", svg(330, 240, b, "同じコードのまま、WAF・ALB・ECSの構成を開発環境と本番環境にデプロイする"))
+
+    # 右：共通する部分を切り出して、他の構成に組み込む
+    b = []
+    b.append(f'<rect x="90" y="6" width="150" height="88" rx="12" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
+    b.append(t(165, 30, "共通する部分", 15, "bold", GREEN))
+    b += chain(["elb", "ecs"], 119, 46, size=36, gap=56)
+    b.append(arrow("M165,98 L165,128", GREEN))
+    b.append(t(177, 118, "組み込む", 15, "bold", GREEN, "start"))
+    b.append(f'<rect x="14" y="134" width="302" height="106" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
+    b.append(t(30, 158, "他の構成", 15, "bold", anchor="start"))
+    b.append(f'<rect x="28" y="168" width="132" height="60" rx="10" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2" stroke-dasharray="7 5"/>')
+    b += chain(["elb", "ecs"], 42, 180, size=36, gap=58)
+    b.append(arrow("M160,198 L204,198"))
+    b.append(inner("dynamodb", 212, 176, 40))
+    b.append(t(232, 232, "Amazon DynamoDB", 11, color=SUB))
+    write("feature-reuse-parts.svg", svg(330, 248, b, "ALBとECSの共通する部分を切り出して、DynamoDBを使う他の構成に組み込む"))
 
 
 # ---------------------------------------------------------------- 2部: AI に向いている理由
