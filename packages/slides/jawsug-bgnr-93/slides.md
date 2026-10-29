@@ -506,14 +506,6 @@ chapter: IaCの学習
 </div>
 
 ---
-chapter: IaCの学習
-hide: true
----
-
-## ハンズオンや書籍もおすすめ
-
-
----
 
 ## まとめ
 
