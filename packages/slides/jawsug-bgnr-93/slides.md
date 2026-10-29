@@ -556,6 +556,19 @@ chapter: IaCの学習
 
 ---
 chapter: IaCの学習
+---
+
+<!-- Bパターン（比較用）：直前のサーバーレス4枚（Aパターン）と見比べるために置く -->
+<h2>AIに聞きながら、自分で触って覚える</h2>
+
+<div class="mt-3" style="font-size: 1.05rem; line-height: 1.7; white-space: nowrap">「何ができるの？」をAIに聞いて、設定を変えたりコマンドを打ったりしてみる。<br>わからなかったら、またAIに聞く</div>
+
+<InlineSvg src="learning-loop.svg" label="AIに聞くことと、自分で設定や操作を触ることをくり返す" class="mx-auto mt-6" style="width: 560px" />
+
+<div class="learn-step">手順はハンズオンで。ここでは「聞く→触る」をくり返すのがコツ</div>
+
+---
+chapter: IaCの学習
 hide: true
 ---
 

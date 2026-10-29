@@ -325,6 +325,18 @@ def learning_arch(name, built, label):
     write(name, svg(760, 234, b, label))
 
 
+def learning_loop():
+    """B パターン：「AIに聞く」⇄「自分で触る（設定・操作）」のループ。手順やコマンドは書かない。"""
+    b = []
+    b += ai_badge(120, 100, size=64)
+    b.append(t(120, 166, "AIに聞く", 18, "bold"))
+    b.append(inner("user", 408, 68, 64))
+    b.append(t(440, 166, "自分で触る（設定・操作）", 18, "bold"))
+    b.append(arrow("M162,86 L396,86", GREEN, width=3))
+    b.append(arrow("M396,114 L162,114", GREEN, width=3))
+    write("learning-loop.svg", svg(560, 186, b, "AIに聞くことと、自分で設定や操作を触ることをくり返す"))
+
+
 def learning_steps():
     learning_arch("learning-arch.svg", {"apigw", "lambda", "dynamodb"},
                   "サーバーレスアーキテクチャの全体像。Amazon API Gateway から AWS Lambda、Amazon DynamoDB へつながる")
@@ -660,6 +672,7 @@ if __name__ == "__main__":
     iac_diff()
     ai_updates()
     learning_steps()
+    learning_loop()
     feature_reproducibility()
     feature_change_management()
     feature_structure()
