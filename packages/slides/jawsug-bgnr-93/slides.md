@@ -131,9 +131,9 @@ transition: fade
 transition: fade
 ---
 
-<InlineSvg src="story-lost.svg" label="手順4で控えるはずだった元の値が、どこにも残っていない" class="mx-auto mt-2" style="width: 900px" />
+<InlineSvg src="story-lost.svg" label="IPセットの編集画面。A社の旧と新のIPアドレスが両方残り、B社の行が消えている。手順4で控えるはずだったB社の元の値は、どこにも残っていない" class="mx-auto mt-2" style="width: 900px" />
 
-<div class="subtitle-band">消したのはB社の行だった！<br>元の値ってなんだったっけ…控えるの飛ばしてた………</div>
+<div class="subtitle-band">改めて設定を見ると、A社のIPアドレスが新旧どちらも残っていて、<br>B社のIPアドレスが消えてました<br>元の値ってどこに載ってたかな……</div>
 
 ---
 layout: center

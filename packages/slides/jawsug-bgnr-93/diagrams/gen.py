@@ -171,36 +171,27 @@ A_NEW = "198.51.100.200/32"
 AFTER = ROWS[:6] + [None, A_NEW]
 
 
-def after_rows(x, y, w, gone, note=None):
-    """消した行は赤い点線で残し、gone の文字を入れる。note は本文のフォントで前に添える。"""
-    o = []
-    for i, ip in enumerate(AFTER):
-        yy = y + i * 31
-        if ip is None:
-            o.append(f'<rect x="{x}" y="{yy}" width="{w}" height="26" rx="6" fill="{RED_BG}" stroke="{RED}" stroke-width="1.5" stroke-dasharray="6 4"/>')
-            gx = x + 16
-            if note:
-                o.append(t(gx, yy + 19, note, 15, color=RED, anchor="start"))
-                gx += 110
-            o.append(t(gx, yy + 19, gone, 17, color=RED, mono=True, anchor="start"))
-        else:
-            o += ip_rows(x, yy, [ip], w)
-    return o
-
-
 CONSOLE_BLUE = "#0972d3"
 
 
-def edit_rows(x, y, rows):
-    """7枚目の実スクショ（IP セットを編集）と同じ形：入力欄＋「削除」ボタン、下に「IP アドレスの追加」。"""
+def edit_rows(x, y, rows, step=34, marks=None):
+    """7枚目の実スクショ（IP セットを編集）と同じ形：入力欄＋「削除」ボタン、下に「IP アドレスの追加」。
+    rows の None は消えた行（赤い点線の空欄）。marks は {行番号: (印, 色)} で、行の右に添える。"""
+    marks = marks or {}
     o = [t(x, y + 16, "IP アドレス (CIDR 表記)", 14, "bold", anchor="start")]
     for i, ip in enumerate(rows):
-        yy = y + 28 + i * 34
-        o.append(f'<rect x="{x}" y="{yy}" width="400" height="26" rx="6" fill="#ffffff" stroke="{GRAY}" stroke-width="1.5"/>')
-        o.append(t(x + 12, yy + 18, ip, 15, anchor="start"))
-        o.append(f'<rect x="{x + 414}" y="{yy}" width="64" height="26" rx="13" fill="#ffffff" stroke="{CONSOLE_BLUE}" stroke-width="2"/>')
-        o.append(t(x + 446, yy + 18, "削除", 13, "bold", CONSOLE_BLUE))
-    yy = y + 28 + len(rows) * 34 + 2
+        yy = y + 28 + i * step
+        if ip is None:
+            o.append(f'<rect x="{x}" y="{yy}" width="478" height="26" rx="6" fill="{RED_BG}" stroke="{RED}" stroke-width="2" stroke-dasharray="6 4"/>')
+        else:
+            o.append(f'<rect x="{x}" y="{yy}" width="400" height="26" rx="6" fill="#ffffff" stroke="{GRAY}" stroke-width="1.5"/>')
+            o.append(t(x + 12, yy + 18, ip, 15, anchor="start"))
+            o.append(f'<rect x="{x + 414}" y="{yy}" width="64" height="26" rx="13" fill="#ffffff" stroke="{CONSOLE_BLUE}" stroke-width="2"/>')
+            o.append(t(x + 446, yy + 18, "削除", 13, "bold", CONSOLE_BLUE))
+        if i in marks:
+            label, color = marks[i]
+            o.append(t(x + 488, yy + 18, label, 14, "bold", color, "start"))
+    yy = y + 28 + len(rows) * step + 2
     o.append(f'<rect x="{x}" y="{yy}" width="150" height="26" rx="13" fill="#ffffff" stroke="{CONSOLE_BLUE}" stroke-width="2"/>')
     o.append(t(x + 75, yy + 18, "IP アドレスの追加", 13, "bold", CONSOLE_BLUE))
     return o
@@ -221,14 +212,16 @@ def story_screens():
 
     # ⑥ 元の値が分からない
     b = pane(20, 6, 600, 350, "マネジメントコンソール　IP セットを編集", "console")
-    b += after_rows(48, 66, 540, "？")
+    # A社の旧と新が両方残り、B社の行が消えている
+    b += edit_rows(48, 52, AFTER, step=31, marks={
+        4: ("A社（旧）", INK), 6: ("B社（削除）", RED), 7: ("A社（新）", INK)})
     b += pane(680, 14, 300, 220, "手順書", "doc")
     b.append(t(704, 92, "B社の元の値", 16, color=SUB, anchor="start"))
     b.append(f'<rect x="704" y="104" width="252" height="40" rx="8" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
     b.append(t(830, 131, "？", 20, "bold", RED))
     b.append(t(704, 176, "4. 現在の設定値を控える", 15, color=SUB, anchor="start"))
     b.append(t(704, 204, "→ 未実施", 15, "bold", RED, "start"))
-    write("story-lost.svg", svg(1000, 360, b, "手順4で控えるはずだった元の値が、どこにも残っていない"))
+    write("story-lost.svg", svg(1000, 360, b, "IPセットの編集画面。A社の旧と新のIPアドレスが両方残り、B社の行が消えている。手順4で控えるはずだったB社の元の値は、どこにも残っていない"))
 
 
 # ---------------------------------------------------------------- 1部: デプロイの仕組み（差分）
