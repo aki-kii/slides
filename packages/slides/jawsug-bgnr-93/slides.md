@@ -55,7 +55,7 @@ transition: fade
 
 <!-- 話し言葉ルールの例外：本人の指定で、この1枚だけは字幕帯を使わず画面全体に大きく出す -->
 <div class="w-full text-center">
-  <h2 style="font-size: 2.2rem; line-height: 1.4; white-space: nowrap; text-align: center">これから本番リリースを始めます（？）</h2>
+  <h2 style="font-size: 2.2rem; line-height: 1.4; white-space: nowrap; text-align: center">これから本番リリース（？）を始めます</h2>
 </div>
 
 ---
@@ -214,7 +214,7 @@ layout: center
 chapter: IaCとは？
 ---
 
-<h2>手続き型 vs 宣言型</h2>
+<h2>手続き型 vs 宣言型のデプロイ手段</h2>
 
 <div class="pd-cards grid grid-cols-2 gap-6 mt-6">
 <div class="pd-card">
