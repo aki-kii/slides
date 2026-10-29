@@ -483,8 +483,8 @@
 .shot-pair figure { margin: 0; }
 .shot-pair figcaption { font-size: 0.95rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.3rem; }
 .shot-pair .shot { width: 100%; }
-.shot-edit { display: grid; grid-template-columns: 560px 1fr; gap: 1.4rem; width: 880px; margin-left: auto; margin-right: auto; align-items: start; }
+.shot-edit { display: grid; grid-template-columns: 380px 1fr; gap: 1.4rem; width: 880px; margin-left: auto; margin-right: auto; align-items: start; }
 .shot-edit .shot { width: 100%; }
 .manual-card { border: 2px solid #c9d0d9; border-radius: 12px; padding: 0.8rem 1rem; font-size: 0.85rem; line-height: 1.6; background: #ffffff; }
 .manual-card-head { font-weight: bold; color: #6b7684; margin-bottom: 0.4rem; }
-.manual-card-oops { margin-top: 1rem; color: #DD344C; font-weight: bold; font-size: 1.1rem; }
+.manual-card-note { margin-top: 0.8rem; color: #DD344C; font-weight: bold; font-size: 0.9rem; }

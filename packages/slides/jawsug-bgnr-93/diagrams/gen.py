@@ -192,9 +192,9 @@ def story_screens():
     # ⑤ 事件
     b = pane(20, 6, 600, 350, "マネジメントコンソール　IP セットを編集", "console")
     b += after_rows(48, 66, 540, "203.0.113.128/28", "（消した行）")
-    b.append(t(48, 340, "消したのは、似ていたB社の行だった", 19, "bold", RED, anchor="start"))
-    for i, (who, msg, c, bg) in enumerate([("A社", "つながりました！", GREEN, GREEN_BG),
-                                           ("B社", "急につながらなくなりました！", RED, RED_BG)]):
+    b.append(t(48, 340, "削除したのはB社の行（203.0.113.128/28）", 19, "bold", RED, anchor="start"))
+    for i, (who, msg, c, bg) in enumerate([("A社", "接続できる", GREEN, GREEN_BG),
+                                           ("B社", "接続できない", RED, RED_BG)]):
         y = 40 + i * 120
         b.append(inner("office", 670, y + 6, 40))
         b.append(t(690, y + 66, who, 13, "bold"))
@@ -210,7 +210,7 @@ def story_screens():
     b.append(f'<rect x="704" y="104" width="252" height="40" rx="8" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
     b.append(t(830, 131, "？", 20, "bold", RED))
     b.append(t(704, 176, "4. 現在の設定値を控える", 15, color=SUB, anchor="start"))
-    b.append(t(704, 204, "→ 画面探しで飛ばしていた", 15, "bold", RED, "start"))
+    b.append(t(704, 204, "→ 未実施", 15, "bold", RED, "start"))
     write("story-lost.svg", svg(1000, 360, b, "手順4で控えるはずだった元の値が、どこにも残っていない"))
 
 
@@ -377,7 +377,7 @@ def feature_change_management():
     b += resources(400, 70)
     # 2. 戻したくなったら、前のコミットを戻して再度デプロイ
     b.append(f'<line x1="10" y1="160" x2="590" y2="160" stroke="{LINE}" stroke-width="2"/>')
-    b.append(t(10, 196, "2. 戻したくなったら、前のコミットを戻して再度デプロイ", 18, "bold", anchor="start"))
+    b.append(t(10, 196, "2. 戻すときは、前のコミットに戻して再度デプロイ", 18, "bold", anchor="start"))
     y = 270
     b.append(inner("git", 14, y - 24, 48))
     b.append(f'<line x1="96" y1="{y}" x2="216" y2="{y}" stroke="{INK}" stroke-width="2.5"/>')
@@ -543,7 +543,7 @@ def ai_context():
     b.append(arrow("M656,140 L826,140", GRAY, dash="7 5"))
     b.append(f'<circle cx="741" cy="140" r="16" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
     b.append(f'<path d="M734,133 L748,147 M748,133 L734,147" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
-    b.append(t(741, 98, "MCPやCLIで読みに行くと", 14, color=SUB))
+    b.append(t(741, 98, "MCPやCLIでAWSを読み取ると", 14, color=SUB))
     b.append(t(741, 118, "時間もトークンもかかる", 14, color=SUB))
     write("ai-context.svg", svg(940, 330, b, "CDKのコードにはアーキテクチャ全体と設定の意図が書いてあり、AIにはコードを渡せば伝わる。AWSをMCPやCLIで読みに行くと時間もトークンもかかる"))
 
@@ -561,13 +561,13 @@ def ai_validation():
     b.append(arrow("M232,130 L294,130"))
     b.append(inner("toolkit", 300, 102, 56))
     b.append(t(328, 186, "検証", 16, "bold"))
-    b.append(t(328, 208, "lint・validate・SASTなど", 13, color=SUB))
+    b.append(t(328, 208, "lint・validateなど", 13, color=SUB))
     # エラーを返して AI が直す
     b.append(arrow("M328,222 L328,256 L70,256 L70,166", RED))
     b.append(t(199, 246, "エラー → AIが自分で直す", 15, "bold", RED))
     # 通ったら、人間が差分を見る
     b.append(arrow("M362,130 L582,130"))
-    b.append(t(472, 116, "通ったら", 15))
+    b.append(t(472, 116, "検証を通過", 15))
     b.append(inner("user", 590, 102, 56))
     b.append(t(618, 186, "人間", 16, "bold"))
     b.append(t(618, 208, "デプロイ前に差分を見る", 13, color=SUB))
@@ -576,7 +576,40 @@ def ai_validation():
     b.append(inner("cloud", 774, 102, 56))
     b.append(t(802, 186, "AWS", 16, "bold"))
     b.append(t(802, 208, "壊れたものが届かない", 13, color=SUB))
-    write("ai-validation.svg", svg(880, 300, b, "AIが書いたコードをlint・validate・SASTなどで検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする"))
+    write("ai-validation.svg", svg(880, 300, b, "AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする"))
+
+
+SG_CODE = [
+    (INK, "const sg = new ec2.SecurityGroup(this, 'BastionSg', {"),
+    (INK, "  vpc,"),
+    (INK, "  allowAllOutbound: true,"),
+    (INK, "});"),
+    (INK, ""),
+    (RED, "sg.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(22));"),
+]
+
+
+def ai_safety():
+    b = []
+    # 危うい行の下地（コードより先に描いて、文字の下に敷く）
+    b.append(f'<rect x="22" y="{20 + 80 + 5 * 19.5 - 15}" width="526" height="22" rx="4" fill="{RED_BG}"/>')
+    b += cdk_code(10, 20, 550, SG_CODE)
+    hl_y = 20 + 80 + 5 * 19.5 - 4
+    # スキャン結果の吹き出し
+    b.append(f'<path d="M560,{hl_y} L592,{hl_y - 14} L592,{hl_y + 14} z" fill="{RED_BG}" stroke="{RED}" stroke-width="2" stroke-linejoin="round"/>')
+    b.append(f'<rect x="590" y="{hl_y - 40}" width="340" height="80" rx="14" fill="{RED_BG}" stroke="{RED}" stroke-width="2"/>')
+    b.append(f'<rect x="588" y="{hl_y - 12}" width="6" height="24" fill="{RED_BG}"/>')
+    b.append(t(760, hl_y - 6, "全世界からのSSHを許可しています", 18, "bold", RED))
+    b.append(t(760, hl_y + 22, "受信元 0.0.0.0/0 → TCP 22", 13, color=RED, mono=True))
+    # 同じコードを、2つのタイミングでスキャンする
+    for x, when, how, tool in ((60, "書いているとき", "cdk synth のときにルールでチェック", "cdk-nag"),
+                               (320, "あとでレビュー", "リポジトリ全体をまとめてスキャン", "Checkov など")):
+        b.append(arrow(f"M{x + 110},244 L{x + 110},220", GREEN))
+        b.append(f'<rect x="{x}" y="248" width="220" height="70" rx="12" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
+        b.append(t(x + 110, 271, when, 16, "bold", GREEN))
+        b.append(t(x + 110, 290, how, 12, color=INK))
+        b.append(t(x + 110, 308, tool, 12, color=SUB))
+    write("ai-safety.svg", svg(940, 324, b, "セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、書いているときはcdk-nag、あとでレビューするときはCheckovなどでスキャンし、全世界からのSSHを許可していると指摘される"))
 
 
 def ai_permission():
@@ -616,4 +649,5 @@ if __name__ == "__main__":
     feature_reuse()
     ai_context()
     ai_validation()
+    ai_safety()
     ai_permission()

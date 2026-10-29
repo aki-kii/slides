@@ -54,8 +54,10 @@ transition: fade
 ---
 
 <div>
-  <h2>これから本番リリースを始めます（？）</h2>
+  <h2>本番リリース：WAFのIPセット変更</h2>
 </div>
+
+<div class="subtitle-band">これから本番リリースを始めます（？）</div>
 
 ---
 transition: fade
@@ -69,7 +71,7 @@ transition: fade
 transition: fade
 ---
 
-<img src="/images/story/manual-sheet.png" alt="本番作業手順書（WAF IPセット変更）。手順1〜8と切り戻し手順" class="mx-auto shot" style="height: 440px" />
+<img src="/images/story/manual-steps-console.png" alt="本番作業手順書の作業手順。No.1 作業開始の連絡から No.5 IPアドレスの書き換えまで。手順3にIPセットの画面が貼ってある" class="mx-auto shot" style="height: 430px" />
 
 <div class="subtitle-band">手順書通りに進めていきたいと思います</div>
 
@@ -103,12 +105,12 @@ transition: fade
 <div class="shot-edit mt-2">
   <div class="shot-wrap">
     <img src="/images/story/new-ipset-edit.png" alt="新コンソールのIPセットを編集の画面。IPアドレスが7行並んでいる" class="shot" />
-    <span class="shot-mark" style="left: 1%; top: 77%; width: 58.5%; height: 8.6%"></span>
+    <span class="shot-mark" style="left: 1.6%; top: 76.8%; width: 97.4%; height: 9.2%"></span>
   </div>
   <div class="manual-card">
     <div class="manual-card-head">手順書の手順5</div>
-    <div>A社の行（<b>203.0.113.12/32</b>）にチェックを入れて「Delete」で削除し、「Add IP address」で新しいIPアドレス（198.51.100.200/32）を追加する</div>
-    <div class="manual-card-oops">「203.0.113.12…」<br>これだ！</div>
+    <img src="/images/story/manual-step5.png" alt="A社の行（203.0.113.12/32）にチェックを入れてDeleteで削除し、Add IP addressで新しいIPアドレス（198.51.100.200/32）を追加する" class="shot" style="width: 100%" />
+    <div class="manual-card-note">赤枠：A社の行として選んだ行</div>
   </div>
 </div>
 
@@ -135,13 +137,14 @@ layout: center
 ---
 
 <div>
-  恐怖ですね…
-  <h2>みなさんもどこかドキッとしたところは<br>ありませんでしたか？</h2>
+  <h2>ドキッとしたところは？</h2>
 </div>
+
+<div class="subtitle-band">恐怖ですね…<br>みなさんもどこかドキッとしたところはありませんでしたか？</div>
 
 ---
 
-<h2 class="pain-head">このリリースには辛いポイントが何個もありました</h2>
+<h2 class="pain-head">このリリースの辛いポイント</h2>
 
 <div class="mt-8 pain-list">
 
@@ -151,7 +154,7 @@ layout: center
 
 </div>
 
-<div class="mt-10 pain-close">IaCならこれらの間違いが起こらないような安全なデプロイができます！</div>
+<div class="mt-10 pain-close">IaCなら、これらの間違いが起こらない安全なデプロイができる</div>
 
 <style>
 .pain-head { white-space: nowrap; font-size: 1.9rem !important; }
@@ -165,9 +168,10 @@ class: text-center
 ---
 
 <div>
-  それでは
-  <h2>IaCについて解説していきます</h2>
+  <h2>IaCについて</h2>
 </div>
+
+<div class="subtitle-band">それでは、IaCについて解説していきます</div>
 
 ---
 chapter: IaCとは？
@@ -290,7 +294,7 @@ transition: view-transition
 - 設定を一つ一つ手で変えていくと<br>どこかで間違える
 - 新人でもベテランでも<br>同じ結果になる
 
-<Kogoe>状態に依存するので、<br>絶対とは言い切れません</Kogoe>
+<Kogoe>状態に依存するので、<br>絶対ではない</Kogoe>
 
 </div>
 </div>
@@ -408,11 +412,12 @@ chapter: AIとIaC
 <ChapterLabel />
 
 <div>
-  ところで最近は
-  <h2>どんな仕事でもAIに任せられるように<br>なってきましたね</h2>
-  <div class="mt-8">IaCも例外ではありません</div>
-  <h2>むしろ、他のデプロイ方法と比べても<br>AIに任せるのが得意とも言えます</h2>
+  <h2>どんな仕事もAIに任せられるようになってきた</h2>
+  <div class="mt-8">IaCも例外ではない</div>
+  <h2>むしろ、他のデプロイ方法と比べても<br>AIに任せやすい</h2>
 </div>
+
+<div class="subtitle-band">ところで最近は、どんな仕事でもAIに任せられるようになってきましたね</div>
 
 ---
 chapter: AIとIaC
@@ -420,13 +425,14 @@ chapter: AIとIaC
 
 <ChapterLabel />
 
-## 何でIaCはAIに向いてるの？
+## なぜIaCはAIに向いているのか
 
 <div class="mt-8 reason-list">
 
 1. コンテキストを渡しやすい
 2. 変更を検証できる仕組みがある
-3. AIにデプロイ権限を渡さなくて済む
+3. インフラの安全性を検証できる
+4. AIにデプロイ権限を渡さなくて済む
 
 </div>
 
@@ -460,9 +466,25 @@ transition: view-transition
 
 <div class="text-lg mt-2">AIが検証して自分で直せて、人間もデプロイ前に差分を見られる</div>
 
-<InlineSvg src="ai-validation.svg" label="AIが書いたコードをlint・validate・SASTなどで検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする" class="mx-auto mt-6" style="width: 800px" />
+<InlineSvg src="ai-validation.svg" label="AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする" class="mx-auto mt-6" style="width: 800px" />
 
-<div class="text-base mt-4 text-center">インフラ構成がコードに乗るので、SASTでネットワークや権限の穴もスキャンできる</div>
+---
+chapter: AIとIaC
+transition: view-transition
+---
+
+<ChapterLabel />
+
+<div style="view-transition-name: ai-reason">
+  IaCがAIに向いている理由 ③
+  <h2>インフラの安全性を検証できる</h2>
+</div>
+
+<div class="text-lg mt-2">コードスキャン（静的解析）で、インフラの危うい設定を見つけられる</div>
+
+<InlineSvg src="ai-safety.svg" label="セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、書いているときはcdk-nag、あとでレビューするときはCheckovなどでスキャンし、全世界からのSSHを許可していると指摘される" class="mx-auto mt-3" style="width: 740px" />
+
+<div class="text-base mt-2 text-center">→ マネコンの環境は画面で一つずつ見るしかないが、コードならまとめてスキャンできる</div>
 
 ---
 chapter: AIとIaC
@@ -471,7 +493,7 @@ chapter: AIとIaC
 <ChapterLabel />
 
 <div style="view-transition-name: ai-reason">
-  IaCがAIに向いている理由 ③
+  IaCがAIに向いている理由 ④
   <h2>AIにデプロイ権限を渡さなくて済む</h2>
 </div>
 
@@ -506,16 +528,16 @@ chapter: IaCの学習
 <ChapterLabel />
 
 <div>
-  IaCも今後全部AIで書くと思うけど
-  <h2>本当に学んだ方がいいの？</h2>
+  IaCも今後はAIが書くとしたら
+  <h2>本当に学ぶ必要はあるのか？</h2>
 </div>
 
 <v-click>
 
 <div class="mt-8">
-  個人の一意見として
-  <h2>何ができるかを知るために<br>一度試してみるのがよさそう</h2>
-  <Kogoe>IaCの書き方・読み方を理解しなくてもいい世界には近づいてきている</Kogoe>
+  個人の意見
+  <h2>何ができるかを知るために<br>一度試してみるのがよい</h2>
+  <Kogoe>IaCの書き方・読み方を理解しなくてもよい世界には近づいている</Kogoe>
 </div>
 
 </v-click>
@@ -550,7 +572,7 @@ hide: true
 
 - IaCとは、インフラのあるべき姿をコードで宣言して、<br>現状との差分を元にリソースをあるべき姿に合わせる仕組み
 - IaCはAIから利用しやすい形式で、<br>最近はAIのための機能開発も行われている
-- AIと一緒にIaCを学習してみようー
+- まずはAIと一緒にIaCを学習してみる
 
 </div>
 
