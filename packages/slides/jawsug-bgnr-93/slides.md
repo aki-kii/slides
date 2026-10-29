@@ -136,7 +136,7 @@ transition: fade
 
 ---
 
-<h2 class="pain-head">リリースの振り返り</h2>
+<h2 class="pain-head">リリースの問題点</h2>
 
 <div class="mt-8 pain-list">
 
