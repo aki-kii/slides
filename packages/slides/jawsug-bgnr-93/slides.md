@@ -216,8 +216,6 @@ chapter: IaCとは？
 
 <h2>手続き型 vs 宣言型</h2>
 
-<div class="mt-3" style="font-size: 1.2rem; line-height: 1.7">リソースのデプロイ方法には、手続き型と宣言型がある</div>
-
 <div class="pd-cards grid grid-cols-2 gap-6 mt-6">
 <div class="pd-card">
 <div class="pd-title">手続き型</div>
@@ -382,7 +380,7 @@ chapter: AIとIaC
 <div>
   最近は
   <h2>どんな仕事もAIに任せられるように<br>なってきましたね</h2>
-  <h2 v-click class="mt-8">IaCも例外ではなく、<br>むしろ他のデプロイ方法より<br>AIに任せやすいです！</h2>
+  <h2 v-click class="mt-8">IaCも例外ではなく、<br>むしろ他のデプロイ方法より<br><span style="color: var(--accent-warm)">AIに任せやすい</span>です！</h2>
 </div>
 
 ---
@@ -560,7 +558,13 @@ chapter: IaCの学習
 <!-- Cパターン（比較用）：A（サーバーレス4枚）と B（聞く⇄触る）を1枚にまとめた案 -->
 <h2>AIと一緒にIaCを学んでみよう</h2>
 
-<div class="mt-3" style="font-size: 1.05rem; line-height: 1.7; white-space: nowrap">いきなり全部作らず、少しずつ作る範囲を広げていく<br>どんな設定や操作ができるかをAIに聞きながら、<br>実際に設定を変えたりコマンドを打ったりすると理解が深まる</div>
+<div class="learn-c-list mt-3">
+
+- いきなり全部作らず、少しずつ作る範囲を広げていく
+- どんな設定や操作ができるかをAIに聞く
+- 実際に設定を変えたりコマンドを打ったりして理解を深める
+
+</div>
 
 <div class="learn-c mt-8">
 <InlineSvg src="learning-progress.svg" label="Lambdaだけを作り、API Gateway、DynamoDBと、作る範囲を少しずつ広げる" />

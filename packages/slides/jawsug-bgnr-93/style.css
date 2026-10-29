@@ -511,3 +511,5 @@
 
 /* 3部 Cパターン：左に「作る範囲を少しずつ広げる」、右に「聞く⇄触る」のループ */
 .learn-c { display: grid; grid-template-columns: 420px 360px; gap: 2.5rem; justify-content: center; align-items: center; }
+.learn-c-list ul { margin-top: 0 !important; }
+.learn-c-list li { font-size: 1.05rem !important; line-height: 1.6 !important; margin-bottom: 0.3rem !important; white-space: nowrap; }
