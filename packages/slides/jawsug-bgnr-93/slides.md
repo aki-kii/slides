@@ -69,7 +69,7 @@ transition: fade
 transition: fade
 ---
 
-<InlineSvg src="story-manual.svg" label="手順書を開いて、手順書通りに進める" class="mx-auto mt-2" style="width: 900px" />
+<img src="/images/story/manual-sheet.png" alt="本番作業手順書（WAF IPセット変更）。手順1〜8と切り戻し手順" class="mx-auto shot" style="height: 440px" />
 
 <div class="subtitle-band">手順書通りに進めていきたいと思います</div>
 
@@ -77,7 +77,22 @@ transition: fade
 transition: fade
 ---
 
-<InlineSvg src="story-old-manual.svg" label="手順書のDeleteとAdd IP addressが、今のコンソールの画面に見当たらない" class="mx-auto mt-2" style="width: 900px" />
+<div class="shot-pair mt-2">
+  <figure>
+    <figcaption>手順書の画面（旧コンソール）</figcaption>
+    <div class="shot-wrap">
+      <img src="/images/story/old-ipset-detail.png" alt="旧コンソールのIPセット詳細。DeleteとAdd IP addressのボタンがある" class="shot" />
+      <span class="shot-mark" style="left: 72.5%; top: 46.5%; width: 23%; height: 7%"></span>
+    </div>
+  </figure>
+  <figure>
+    <figcaption>今の画面（新コンソール）</figcaption>
+    <div class="shot-wrap">
+      <img src="/images/story/new-ipset-detail.png" alt="新コンソールのIPセット詳細。IPセットを編集のボタンがある" class="shot" />
+      <span class="shot-mark" style="left: 82%; top: 0.3%; width: 16.8%; height: 6.6%"></span>
+    </div>
+  </figure>
+</div>
 
 <div class="subtitle-band">WAFのコンソールを開いて…あれ？<br>手順書の「Delete」も「Add IP address」も見当たりませんね…？</div>
 
@@ -85,7 +100,17 @@ transition: fade
 transition: fade
 ---
 
-<InlineSvg src="story-ip-set.svg" label="IPセットの編集画面で、A社の203.0.113.12と似た行をA社の行だと思って消す" class="mx-auto mt-2" style="width: 900px" />
+<div class="shot-edit mt-2">
+  <div class="shot-wrap">
+    <img src="/images/story/new-ipset-edit.png" alt="新コンソールのIPセットを編集の画面。IPアドレスが7行並んでいる" class="shot" />
+    <span class="shot-mark" style="left: 1%; top: 77%; width: 58.5%; height: 8.6%"></span>
+  </div>
+  <div class="manual-card">
+    <div class="manual-card-head">手順書の手順5</div>
+    <div>A社の行（<b>203.0.113.12/32</b>）にチェックを入れて「Delete」で削除し、「Add IP address」で新しいIPアドレス（198.51.100.200/32）を追加する</div>
+    <div class="manual-card-oops">「203.0.113.12…」<br>これだ！</div>
+  </div>
+</div>
 
 <div class="subtitle-band">「IP セットを編集」から書き換えるみたいですね。203.0.113.12…これだ！<br>この行を消して、手順書からコピーした新しい値を足しちゃいましょう</div>
 

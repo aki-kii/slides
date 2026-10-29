@@ -474,3 +474,17 @@
 /* 2部の理由の一覧 */
 .reason-list li { font-size: 1.4rem !important; line-height: 1.6 !important; margin-bottom: 0.8rem !important; }
 .dm-shot { display: block; width: 100%; height: auto; }
+
+/* 導入の紙芝居：本物のスクショと、その上に重ねる赤枠 */
+.shot { border: 1px solid #c9d0d9; border-radius: 6px; display: block; }
+.shot-wrap { position: relative; }
+.shot-mark { position: absolute; border: 3px solid #DD344C; border-radius: 8px; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8); }
+.shot-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; width: 880px; margin-left: auto; margin-right: auto; }
+.shot-pair figure { margin: 0; }
+.shot-pair figcaption { font-size: 0.95rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.3rem; }
+.shot-pair .shot { width: 100%; }
+.shot-edit { display: grid; grid-template-columns: 560px 1fr; gap: 1.4rem; width: 880px; margin-left: auto; margin-right: auto; align-items: start; }
+.shot-edit .shot { width: 100%; }
+.manual-card { border: 2px solid #c9d0d9; border-radius: 12px; padding: 0.8rem 1rem; font-size: 0.85rem; line-height: 1.6; background: #ffffff; }
+.manual-card-head { font-weight: bold; color: #6b7684; margin-bottom: 0.4rem; }
+.manual-card-oops { margin-top: 1rem; color: #DD344C; font-weight: bold; font-size: 1.1rem; }
