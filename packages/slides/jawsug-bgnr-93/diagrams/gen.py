@@ -304,27 +304,6 @@ def ai_updates():
 
 
 # ---------------------------------------------------------------- 3部: 学び方
-def learning_arch(name, built, label):
-    """サーバーレス構成（API Gateway → Lambda → DynamoDB）。built にないサービスはグレーで薄く出す。"""
-    svcs = [("apigw", "Amazon API Gateway", 150), ("lambda", "AWS Lambda", 380), ("dynamodb", "Amazon DynamoDB", 610)]
-    b = ['<defs><filter id="gs"><feColorMatrix type="saturate" values="0"/></filter></defs>']
-    b.append(f'<rect x="10" y="10" width="740" height="214" rx="4" fill="none" stroke="#232F3E" stroke-width="2"/>')
-    b.append(inner("cloud", 10, 10, 30))
-    b.append(t(50, 31, "AWS Cloud", 15, "bold", "#232F3E", "start"))
-    for key, name_, cx in svcs:
-        g = service(key, cx, 112, name_, size=80, fs=17)
-        if key in built:
-            b += g
-        else:
-            b.append('<g filter="url(#gs)" opacity="0.3">' + "".join(g) + '</g>')
-    for (k1, _, x1), (k2, _, x2) in zip(svcs, svcs[1:]):
-        if k1 in built and k2 in built:
-            b.append(arrow(f"M{x1 + 50},112 L{x2 - 50},112"))
-        else:
-            b.append(arrow(f"M{x1 + 50},112 L{x2 - 50},112", GRAY, dash="7 5"))
-    write(name, svg(760, 234, b, label))
-
-
 def learning_loop():
     """B パターン：「AIに聞く」⇄「自分で触る（設定・操作）」のループ。手順やコマンドは書かない。"""
     b = []
@@ -352,15 +331,6 @@ def learning_progress():
         if i < len(stages) - 1:
             b.append(arrow(f"M{x0 + 108},61 L{x0 + step - 6},61", GREEN))
     write("learning-progress.svg", svg(400, 116, b, "Lambdaだけを作り、API Gateway、DynamoDBと、作る範囲を少しずつ広げる"))
-
-
-def learning_steps():
-    learning_arch("learning-arch.svg", {"apigw", "lambda", "dynamodb"},
-                  "サーバーレスアーキテクチャの全体像。Amazon API Gateway から AWS Lambda、Amazon DynamoDB へつながる")
-    learning_arch("learning-step1.svg", {"lambda"},
-                  "まず AWS Lambda だけを作る。API Gateway と DynamoDB はまだ作っていない")
-    learning_arch("learning-step2.svg", {"apigw", "lambda"},
-                  "API Gateway を追加して、Lambda につなぐ。DynamoDB はまだ作っていない")
 
 
 # ---------------------------------------------------------------- 1部: 特徴
@@ -675,7 +645,6 @@ if __name__ == "__main__":
     story_screens()
     iac_diff()
     ai_updates()
-    learning_steps()
     learning_loop()
     learning_progress()
     feature_reproducibility()

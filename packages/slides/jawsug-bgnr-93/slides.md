@@ -487,75 +487,9 @@ chapter: IaCの学習
 
 ---
 chapter: IaCの学習
-transition: fade
 ---
 
-## AIと一緒にIaCを学んでみよう
-
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
-<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
-
-<InlineSvg src="learning-arch.svg" label="サーバーレスアーキテクチャの全体像。Amazon API Gateway から AWS Lambda、Amazon DynamoDB へつながる" class="mx-auto mt-6" style="width: 760px" />
-
----
-chapter: IaCの学習
-transition: fade
----
-
-## AIと一緒にIaCを学んでみよう
-
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
-<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
-
-<InlineSvg src="learning-step1.svg" label="まず AWS Lambda だけを作る。API Gateway と DynamoDB はまだ作っていない" class="mx-auto mt-6" style="width: 760px" />
-
-<div class="learn-step">① まずLambda関数だけ作る</div>
-
----
-chapter: IaCの学習
-transition: fade
----
-
-## AIと一緒にIaCを学んでみよう
-
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
-<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
-
-<InlineSvg src="learning-step2.svg" label="API Gateway を追加して、Lambda につなぐ。DynamoDB はまだ作っていない" class="mx-auto mt-6" style="width: 760px" />
-
-<div class="learn-step">② API Gatewayを追加</div>
-
----
-chapter: IaCの学習
----
-
-## AIと一緒にIaCを学んでみよう
-
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
-<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
-
-<InlineSvg src="learning-arch.svg" label="DynamoDB を追加して、全体ができあがる" class="mx-auto mt-6" style="width: 760px" />
-
-<div class="learn-step">③ DynamoDBを追加</div>
-
----
-chapter: IaCの学習
----
-
-<!-- Bパターン（比較用）：直前のサーバーレス4枚（Aパターン）と見比べるために置く -->
-<h2>AIに聞きながら、自分で触って覚える</h2>
-
-<div class="mt-3" style="font-size: 1.05rem; line-height: 1.7; white-space: nowrap">「何ができるの？」をAIに聞いて、設定を変えたりコマンドを打ったりしてみる。<br>わからなかったら、またAIに聞く</div>
-
-<InlineSvg src="learning-loop.svg" label="AIに聞くことと、自分で設定や操作を触ることをくり返す" class="mx-auto mt-6" style="width: 560px" />
-
-<div class="learn-step">手順はハンズオンで。ここでは「聞く→触る」をくり返すのがコツ</div>
-
----
-chapter: IaCの学習
----
-
-<!-- Cパターン（比較用）：A（サーバーレス4枚）と B（聞く⇄触る）を1枚にまとめた案 -->
+<!-- 学習方法は1ページで話す（本人決定のCパターン）：左に作る範囲を少しずつ広げる図、右に聞く⇄触るのループ -->
 <h2>AIと一緒にIaCを学んでみよう</h2>
 
 <div class="learn-c-list mt-3">
