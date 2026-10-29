@@ -92,6 +92,7 @@ transition: fade
       <img src="/images/story/new-ipset-detail.png" alt="新コンソールのIPセット詳細。日本語の画面で、ボタンの名前は削除とアドレスを追加。上にIPセットを編集のボタンもある" class="shot" />
       <span class="shot-mark" style="left: 82%; top: 0.3%; width: 16.8%; height: 6.6%"></span>
       <span class="shot-mark" style="left: 72.4%; top: 60%; width: 24%; height: 6.6%"></span>
+      <span class="shot-anno" style="right: 1%; bottom: 100%">ここから書き換える ↓</span>
     </div>
   </figure>
 </div>
@@ -103,18 +104,20 @@ transition: fade
 ---
 
 <div class="shot-edit mt-2">
-  <div class="shot-wrap">
-    <img src="/images/story/new-ipset-edit.png" alt="新コンソールのIPセットを編集の画面。IPアドレスが7行並んでいる" class="shot" />
-    <span class="shot-mark" style="left: 1.6%; top: 76.8%; width: 97.4%; height: 9.2%"></span>
+  <div>
+    <div class="shot-wrap">
+      <img src="/images/story/new-ipset-edit.png" alt="新コンソールのIPセットを編集の画面。IPアドレスが7行並んでいる" class="shot" />
+      <span class="shot-mark" style="left: 1.6%; top: 76.8%; width: 97.4%; height: 9.2%"></span>
+    </div>
+    <div class="shot-note">※ 間違った値を書き換えています</div>
   </div>
   <div class="manual-card">
-    <div class="manual-card-head">手順書の手順5</div>
+    <div class="manual-card-head">手順書</div>
     <img src="/images/story/manual-step5.png" alt="A社の行（203.0.113.12/32）にチェックを入れてDeleteで削除し、Add IP addressで新しいIPアドレス（198.51.100.200/32）を追加する" class="shot" style="width: 100%" />
-    <div class="manual-card-note">赤枠：A社の行として選んだ行</div>
   </div>
 </div>
 
-<div class="subtitle-band">「IP セットを編集」から書き換えるみたいですね。203.0.113.12…これだ！<br>この行を消して、手順書からコピーした新しい値を足しちゃいましょう</div>
+<div class="subtitle-band">対応したIPアドレスがあったので、手順書の値に書き換えます</div>
 
 ---
 transition: fade
