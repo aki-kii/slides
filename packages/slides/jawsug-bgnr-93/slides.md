@@ -555,6 +555,20 @@ chapter: IaCの学習
 
 ---
 chapter: IaCの学習
+---
+
+<!-- Cパターン（比較用）：A（サーバーレス4枚）と B（聞く⇄触る）を1枚にまとめた案 -->
+<h2>AIと一緒にIaCを学んでみよう</h2>
+
+<div class="mt-3" style="font-size: 1.05rem; line-height: 1.7; white-space: nowrap">いきなり全部作らず、少しずつ作る範囲を広げていく<br>どんな設定や操作ができるかをAIに聞きながら、<br>実際に設定を変えたりコマンドを打ったりすると理解が深まる</div>
+
+<div class="learn-c mt-8">
+<InlineSvg src="learning-progress.svg" label="Lambdaだけを作り、API Gateway、DynamoDBと、作る範囲を少しずつ広げる" />
+<InlineSvg src="learning-loop.svg" label="AIに聞くことと、自分で設定や操作を触ることをくり返す" />
+</div>
+
+---
+chapter: IaCの学習
 hide: true
 ---
 

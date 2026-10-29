@@ -337,6 +337,23 @@ def learning_loop():
     write("learning-loop.svg", svg(560, 186, b, "AIに聞くことと、自分で設定や操作を触ることをくり返す"))
 
 
+def learning_progress():
+    """C パターン：作る範囲を少しずつ広げる（Lambda → ＋API Gateway → ＋DynamoDB）を小さく1行で。作った部分だけ色を付ける。"""
+    b = ['<defs><filter id="gs"><feColorMatrix type="saturate" values="0"/></filter></defs>']
+    b.append(t(200, 20, "作る範囲を少しずつ広げる", 17, "bold"))
+    stages = [({"lambda"}, "Lambda"), ({"apigw", "lambda"}, "＋API Gateway"), ({"apigw", "lambda", "dynamodb"}, "＋DynamoDB")]
+    size, gap, step = 30, 6, 136
+    for i, (built, name) in enumerate(stages):
+        x0 = 14 + i * step
+        for j, key in enumerate(["apigw", "lambda", "dynamodb"]):
+            icon = inner(key, x0 + j * (size + gap), 46, size)
+            b.append(icon if key in built else f'<g filter="url(#gs)" opacity="0.3">{icon}</g>')
+        b.append(t(x0 + 51, 104, name, 14, "bold"))
+        if i < len(stages) - 1:
+            b.append(arrow(f"M{x0 + 108},61 L{x0 + step - 6},61", GREEN))
+    write("learning-progress.svg", svg(400, 116, b, "Lambdaだけを作り、API Gateway、DynamoDBと、作る範囲を少しずつ広げる"))
+
+
 def learning_steps():
     learning_arch("learning-arch.svg", {"apigw", "lambda", "dynamodb"},
                   "サーバーレスアーキテクチャの全体像。Amazon API Gateway から AWS Lambda、Amazon DynamoDB へつながる")
@@ -661,6 +678,7 @@ if __name__ == "__main__":
     ai_updates()
     learning_steps()
     learning_loop()
+    learning_progress()
     feature_reproducibility()
     feature_change_management()
     feature_structure()
