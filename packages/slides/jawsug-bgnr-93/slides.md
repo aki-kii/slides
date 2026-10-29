@@ -461,9 +461,9 @@ transition: view-transition
   <h2>AIにデプロイ権限を渡さなくて済む</h2>
 </div>
 
-<div class="text-lg mt-2">AIにはコードを書いてもらうだけにして、デプロイはCI/CDに任せられる</div>
+<div class="text-lg mt-2">デプロイの権限をAIから分離できるので、AIに強い権限を与えずに済む</div>
 
-<InlineSvg src="ai-permission.svg" label="AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む" class="mx-auto mt-8" style="width: 760px" />
+<InlineSvg src="ai-permission.svg" label="AIはコードを実装するだけで、デプロイはCI/CDが行う。AIにはAWSの読み取り権限は渡すが、書き込み・デプロイ権限は渡さない" class="mx-auto mt-6" style="width: 760px" />
 
 ---
 chapter: AIとIaC

@@ -621,7 +621,7 @@ def ai_permission():
     b = []
     b += ai_badge(50, 70)
     b.append(arrow("M82,70 L170,70"))
-    b.append(t(126, 56, "書く", 15))
+    b.append(t(126, 56, "実装", 15))
     b.append(inner("code", 176, 42, 56))
     b.append(t(204, 126, "コード", 16, "bold"))
     b.append(arrow("M238,70 L326,70"))
@@ -634,12 +634,17 @@ def ai_permission():
     b.append(t(610, 56, "デプロイ", 15, "bold", GREEN))
     b.append(inner("cloud", 676, 42, 56))
     b.append(t(704, 126, "AWS", 16, "bold"))
-    # AI から AWS へは直接さわらない
-    b.append(arrow("M50,102 L50,180 L704,180 L704,142", GRAY, dash="7 5"))
-    b.append(f'<circle cx="377" cy="180" r="20" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
-    b.append(f'<path d="M368,171 L386,189 M386,171 L368,189" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
-    b.append(t(377, 228, "AIにAWSの権限は渡さない", 16, "bold"))
-    write("ai-permission.svg", svg(760, 240, b, "AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む"))
+    # AI から AWS へ：読み取り権限は渡す（緑・実線）
+    b.append(arrow("M56,102 L56,168 L698,168 L698,142", GREEN))
+    b.append(f'<circle cx="377" cy="168" r="17" fill="#ffffff" stroke="{GREEN}" stroke-width="3"/>')
+    b.append(f'<path d="M369,168 L375,175 L386,161" fill="none" stroke="{GREEN}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>')
+    b.append(t(377, 206, "読み取り権限は渡す", 16, "bold", GREEN))
+    # 書き込み・デプロイ権限は渡さない（赤・点線）
+    b.append(arrow("M44,102 L44,236 L710,236 L710,142", RED, dash="7 5"))
+    b.append(f'<circle cx="377" cy="236" r="17" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
+    b.append(f'<path d="M369,228 L385,244 M385,228 L369,244" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
+    b.append(t(377, 274, "書き込み・デプロイ権限は渡さない", 16, "bold", RED))
+    write("ai-permission.svg", svg(760, 284, b, "AIはコードを実装するだけで、デプロイはCI/CDが行う。AIにはAWSの読み取り権限は渡すが、書き込み・デプロイ権限は渡さない"))
 
 
 if __name__ == "__main__":
