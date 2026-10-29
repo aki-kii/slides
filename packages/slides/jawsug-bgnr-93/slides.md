@@ -401,21 +401,6 @@ chapter: AIとIaC
 
 ---
 chapter: AIとIaC
----
-
-## なぜIaCはAIに向いているのか
-
-<div class="mt-8 reason-list">
-
-1. コンテキストを渡しやすい
-2. 変更を検証できる仕組みがある
-3. AIにデプロイ権限を渡さなくて済む
-4. インフラの安全性を検証できる
-
-</div>
-
----
-chapter: AIとIaC
 transition: view-transition
 ---
 

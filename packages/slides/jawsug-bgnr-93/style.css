@@ -473,7 +473,6 @@
 .dm-btn { position: absolute; right: 0.7rem; bottom: 0.5rem; background: #ff9900; color: #232f3e; font-weight: bold; border-radius: 12px; padding: 0.1rem 0.7rem; }
 
 /* 2部の理由の一覧 */
-.reason-list li { font-size: 1.4rem !important; line-height: 1.6 !important; margin-bottom: 0.8rem !important; }
 .dm-shot { display: block; width: 100%; height: auto; }
 
 /* 導入の紙芝居：本物のスクショと、その上に重ねる赤枠 */
