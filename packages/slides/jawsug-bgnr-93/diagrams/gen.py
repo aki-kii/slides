@@ -470,19 +470,7 @@ def feature_reuse():
                 o.append(arrow(f"M{x + i * gap + size + 3},{y + size // 2} L{x + (i + 1) * gap - 4},{y + size // 2}"))
         return o
 
-    # 左：同じコードのまま、別の環境にもデプロイ（見出しはスライド側）
-    b = []
-    b += service("code", 40, 136, "同じコード", size=48, fs=14)
-    for i, env in enumerate(["開発環境", "本番環境"]):
-        y = 34 + i * 112
-        b.append(f'<rect x="112" y="{y}" width="210" height="84" rx="12" fill="#ffffff" stroke="#232F3E" stroke-width="2"/>')
-        b.append(inner("cloud", 112, y, 24))
-        b.append(t(144, y + 18, env, 14, "bold", "#232F3E", "start"))
-        b += chain(["waf", "elb", "ecs"], 140, y + 38)
-        b.append(arrow(f"M68,136 L86,136 L104,{y + 50}", GREEN))
-    write("feature-reuse-envs.svg", svg(330, 240, b, "同じコードのまま、WAF・ALB・ECSの構成を開発環境と本番環境にデプロイする"))
-
-    # 右：共通する部分を切り出して、他の構成に組み込む
+    # 共通する部分を切り出して、他の構成に組み込む（スライドのリード「インフラの共通部分を切り出して再利用できる」の図）
     b = []
     b.append(f'<rect x="90" y="6" width="150" height="88" rx="12" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
     b.append(t(165, 30, "共通する部分", 15, "bold", GREEN))
