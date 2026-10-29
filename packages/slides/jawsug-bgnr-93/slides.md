@@ -339,44 +339,45 @@ chapter: IaCとは？
   <h2 class="!m-0">IaCのツールとは？</h2>
 </div>
 
-<div class="tc-sub">TerraformとAWS CDK</div>
-
-<div class="tc-cards grid grid-cols-2 gap-6 mt-3">
+<div class="tc-cards grid grid-cols-2 gap-6 mt-5">
 <div class="tc-card">
 <div class="tc-title"><img src="/images/tools/terraform.svg" />Terraform</div>
 <ul>
-  <li>HashiCorp社が出しているツール</li>
-  <li>HCLという独自の言語で<br>リソースを定義する</li>
-  <li>AWS以外のクラウドにも対応している</li>
+  <li>HashiCorp社のIaCツール</li>
+  <li>HCLという独自の言語で<br>リソースを定義できる
+    <div class="tc-box">
+      <div class="tc-box-title">state</div>
+      <div>作ったリソースの記録を<br>自分で持つファイル</div>
+      <div>置き場所や管理は自分たちで決める</div>
+    </div>
+  </li>
+  <li>AWS以外のクラウドやSaaSも<br>まとめて管理できる</li>
 </ul>
 </div>
 <div class="tc-card">
 <div class="tc-title"><img src="/images/tools/cdk.svg" />AWS CDK</div>
 <ul>
   <li>AWS公式のOSSツール</li>
-  <li>CloudFormationの設定を<br>プログラミング言語で書ける</li>
-  <li>よく使う設定をまとめた部品がある</li>
+  <li>CloudFormationを<br>プログラミング言語で書ける
+    <div class="tc-box">
+      <div class="tc-box-title"><img src="/images/tools/cloudformation.svg" />CloudFormation</div>
+      <div>AWSのマネージドなIaCツール</div>
+      <div>リソースのデプロイの安定性が高い</div>
+    </div>
+  </li>
+  <li>よく使う構成が部品として<br>用意されていて、<br>少ないコードで書ける</li>
 </ul>
-<div class="tc-cfn">
-<div class="tc-cfn-title"><img src="/images/tools/cloudformation.svg" />CloudFormation</div>
-<ul>
-  <li>リソースの記録はAWS側が持つ</li>
-  <li>失敗したときは前の状態に戻る</li>
-</ul>
-</div>
 </div>
 </div>
 
 <style>
-.tc-sub { font-size: 1.4rem; font-weight: bold; margin-top: 0.5rem; white-space: nowrap; }
-.tc-card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.6rem 1.2rem; }
-.tc-title { display: flex; align-items: center; gap: 0.6rem; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.4rem; white-space: nowrap; }
-.tc-title img { height: 2rem; }
-.tc-card li { font-size: 0.95rem !important; line-height: 1.6 !important; }
-.tc-cfn { margin-top: 0.5rem; padding: 0.4rem 0.8rem; border-radius: 10px; background: #f3f4f6; }
-.tc-cfn-title { display: flex; align-items: center; gap: 0.5rem; font-weight: bold; font-size: 0.95rem; }
-.tc-cfn-title img { height: 1.4rem; }
-.tc-cfn li { font-size: 0.85rem !important; line-height: 1.5 !important; }
+.tc-card { border: 2px solid #d5d8dc; border-radius: 14px; padding: 0.7rem 1.1rem; }
+.tc-title { display: flex; align-items: center; gap: 0.6rem; font-weight: bold; font-size: 1.3rem; margin-bottom: 0.3rem; white-space: nowrap; }
+.tc-title img { height: 2.1rem; }
+.tc-card li { font-size: 1rem !important; line-height: 1.55 !important; margin-bottom: 0.35rem !important; }
+.tc-box { margin: 0.35rem 0 0.1rem; padding: 0.35rem 0.8rem; border-radius: 10px; background: #f3f4f6; font-size: 0.9rem; line-height: 1.55; }
+.tc-box-title { display: flex; align-items: center; gap: 0.45rem; font-weight: bold; }
+.tc-box-title img { height: 1.3rem; }
 </style>
 
 ---
