@@ -385,7 +385,7 @@ layout: center
 class: text-center
 ---
 
-## AIとIaC
+## AI時代のIaCについて
 
 ---
 layout: center
