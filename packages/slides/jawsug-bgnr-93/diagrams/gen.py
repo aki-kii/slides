@@ -25,6 +25,7 @@ I = {
     "cli": f"{ARCH}/Arch_Developer-Tools/64/Arch_AWS-Command-Line-Interface_64.svg",
     "sdk": f"{ARCH}/Arch_Developer-Tools/64/Arch_AWS-Tools-and-SDKs_64.svg",
     "lambda": f"{ARCH}/Arch_Compute/64/Arch_AWS-Lambda_64.svg",
+    "apigw": f"{ARCH}/Arch_Networking-Content-Delivery/64/Arch_Amazon-API-Gateway_64.svg",
     "dynamodb": f"{ARCH}/Arch_Databases/64/Arch_Amazon-DynamoDB_64.svg",
     "cloud": f"{GROUP}/AWS-Cloud-logo_32.svg",
     "office": f"{GEN}/Res_Office-building_48_Light.svg",
@@ -303,25 +304,34 @@ def ai_updates():
 
 
 # ---------------------------------------------------------------- 3部: 学び方
+def learning_arch(name, built, label):
+    """サーバーレス構成（API Gateway → Lambda → DynamoDB）。built にないサービスはグレーで薄く出す。"""
+    svcs = [("apigw", "Amazon API Gateway", 150), ("lambda", "AWS Lambda", 380), ("dynamodb", "Amazon DynamoDB", 610)]
+    b = ['<defs><filter id="gs"><feColorMatrix type="saturate" values="0"/></filter></defs>']
+    b.append(f'<rect x="10" y="10" width="740" height="214" rx="4" fill="none" stroke="#232F3E" stroke-width="2"/>')
+    b.append(inner("cloud", 10, 10, 30))
+    b.append(t(50, 31, "AWS Cloud", 15, "bold", "#232F3E", "start"))
+    for key, name_, cx in svcs:
+        g = service(key, cx, 112, name_, size=80, fs=17)
+        if key in built:
+            b += g
+        else:
+            b.append('<g filter="url(#gs)" opacity="0.3">' + "".join(g) + '</g>')
+    for (k1, _, x1), (k2, _, x2) in zip(svcs, svcs[1:]):
+        if k1 in built and k2 in built:
+            b.append(arrow(f"M{x1 + 50},112 L{x2 - 50},112"))
+        else:
+            b.append(arrow(f"M{x1 + 50},112 L{x2 - 50},112", GRAY, dash="7 5"))
+    write(name, svg(760, 234, b, label))
+
+
 def learning_steps():
-    b = []
-    steps = [("toolkit", ["環境のセットアップ"], "AIに任せてもよい"),
-             ("lambda", ["Lambda関数を作る"], "新規作成"),
-             ("lambda", ["ソースコードや", "設定を変更する"], "設定変更"),
-             ("dynamodb", ["DynamoDBから", "値を取得する"], "他リソースとの連携")]
-    xs = [110, 370, 630, 890]
-    for (k, names, sub), x in zip(steps, xs):
-        b.append(inner(k, x - 36, 44, 72))
-        y = 144
-        for n in names:
-            b.append(t(x, y, n, 20, "bold"))
-            y += 26
-        b.append(t(x, y - 2, sub, 16, color=SUB))
-    for a, c in zip(xs, xs[1:]):
-        b.append(arrow(f"M{a + 56},80 L{c - 56},80", GREEN))
-    b.append(f'<path d="M300,228 L300,240 L960,240 L960,228" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round"/>')
-    b.append(t(630, 272, "最小限のリソースから、少しずつ範囲を広げる", 20, "bold", GREEN))
-    write("learning-steps.svg", svg(1000, 286, b, "AIと一緒にサーバーレス構成を少しずつ育てる"))
+    learning_arch("learning-arch.svg", {"apigw", "lambda", "dynamodb"},
+                  "サーバーレスアーキテクチャの全体像。Amazon API Gateway から AWS Lambda、Amazon DynamoDB へつながる")
+    learning_arch("learning-step1.svg", {"lambda"},
+                  "まず AWS Lambda だけを作る。API Gateway と DynamoDB はまだ作っていない")
+    learning_arch("learning-step2.svg", {"apigw", "lambda"},
+                  "API Gateway を追加して、Lambda につなぐ。DynamoDB はまだ作っていない")
 
 
 # ---------------------------------------------------------------- 1部: 特徴

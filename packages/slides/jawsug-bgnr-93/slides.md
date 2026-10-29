@@ -529,13 +529,56 @@ chapter: IaCの学習
 
 ---
 chapter: IaCの学習
+transition: fade
 ---
 
-## まずはAIと一緒に触ってみる
+## AIと一緒にIaCを学んでみよう
 
-<div class="text-lg mt-2">例として、サーバーレスアーキテクチャをAIと一緒に組んでみる</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
 
-<InlineSvg src="learning-steps.svg" label="AIと一緒にサーバーレス構成を少しずつ育てる" class="mx-auto mt-6" style="width: 900px" />
+<InlineSvg src="learning-arch.svg" label="サーバーレスアーキテクチャの全体像。Amazon API Gateway から AWS Lambda、Amazon DynamoDB へつながる" class="mx-auto mt-6" style="width: 760px" />
+
+---
+chapter: IaCの学習
+transition: fade
+---
+
+## AIと一緒にIaCを学んでみよう
+
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
+
+<InlineSvg src="learning-step1.svg" label="まず AWS Lambda だけを作る。API Gateway と DynamoDB はまだ作っていない" class="mx-auto mt-6" style="width: 760px" />
+
+<div class="learn-step">① まずLambda関数だけ作る</div>
+
+---
+chapter: IaCの学習
+transition: fade
+---
+
+## AIと一緒にIaCを学んでみよう
+
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
+
+<InlineSvg src="learning-step2.svg" label="API Gateway を追加して、Lambda につなぐ。DynamoDB はまだ作っていない" class="mx-auto mt-6" style="width: 760px" />
+
+<div class="learn-step">② API Gatewayを追加</div>
+
+---
+chapter: IaCの学習
+---
+
+## AIと一緒にIaCを学んでみよう
+
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
+
+<InlineSvg src="learning-arch.svg" label="DynamoDB を追加して、全体ができあがる" class="mx-auto mt-6" style="width: 760px" />
+
+<div class="learn-step">③ DynamoDBを追加</div>
 
 ---
 chapter: IaCの学習

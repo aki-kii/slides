@@ -507,3 +507,6 @@
 .qa-mark { min-width: 1.2em; }
 .qa-note { font-size: 1.05rem; line-height: 1.6; }
 .qa-lead { font-size: 2rem; font-weight: 700; line-height: 1.35; }
+
+/* 3部：作る範囲を広げていくステップの見出し（図の下） */
+.learn-step { margin-top: 0.8rem; text-align: center; font-size: 1.15rem; font-weight: bold; color: #0E8A6E; }
