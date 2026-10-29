@@ -538,8 +538,8 @@ def cdk_code(x, y, w, rows, title="コード（AWS CDK）"):
     yy = y + 80
     for c, line in rows:
         if c == GREEN:
-            o.append(f'<rect x="{x + 8}" y="{yy - 16}" width="{w - 16}" height="24" rx="6" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
-            o.append(t(x + 16, yy, line.strip(), 13, "bold", c, "start"))
+            # 日本語のコメントは等幅フォントだと字形が崩れるので、本文のフォントで描く
+            o.append(t(x + 16, yy, line.strip(), 13, color=c, anchor="start"))
         elif line:
             o.append(t(x + 16, yy, line.replace(" ", "&#160;"), 13, color=c, anchor="start", mono=True))
         yy += 19.5
@@ -548,44 +548,51 @@ def cdk_code(x, y, w, rows, title="コード（AWS CDK）"):
 
 def ai_context():
     b = cdk_code(10, 20, 470, ALB_CODE)
-    b.append(t(245, 316, "構成も、設定の意図も書いてある", 15, "bold"))
+    b.append(t(245, 316, "アーキテクチャ全体と、設定の意図", 15, "bold"))
     b += ai_badge(620, 140)
     b.append(arrow("M488,140 L584,140", GREEN))
     b.append(t(536, 126, "コードを渡す", 15, color=GREEN))
     b.append(t(620, 200, "現状と意図が伝わる", 15, "bold", GREEN))
-    # AWS を見に行く（コンテキストを食う）
+    # AWS を読みに行く（時間とトークンがかかる）
     b.append(inner("cloud", 836, 116, 48))
     b.append(t(860, 188, "AWSのリソース", 15, "bold"))
     b.append(arrow("M656,140 L826,140", GRAY, dash="7 5"))
-    b.append(t(741, 104, "AWSを見に行くと", 14, color=SUB))
-    b.append(t(741, 124, "コンテキストを食って遅い", 14, color=SUB))
-    write("ai-context.svg", svg(940, 330, b, "ALBのCDKコードに、HTTPを許可する理由がコメントで書いてある。AIにはコードを渡せば構成と意図が伝わる。AWSを見に行くとコンテキストを食って遅い"))
+    b.append(f'<circle cx="741" cy="140" r="16" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
+    b.append(f'<path d="M734,133 L748,147 M748,133 L734,147" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
+    b.append(t(741, 98, "MCPやCLIで読みに行くと", 14, color=SUB))
+    b.append(t(741, 118, "時間もトークンもかかる", 14, color=SUB))
+    write("ai-context.svg", svg(940, 330, b, "CDKのコードにはアーキテクチャ全体と設定の意図が書いてあり、AIにはコードを渡せば伝わる。AWSをMCPやCLIで読みに行くと時間もトークンもかかる"))
 
 
 def ai_validation():
     b = []
     # 自己フィードバックのハーネス
-    b.append(f'<rect x="10" y="20" width="560" height="270" rx="16" fill="none" stroke="{GREEN}" stroke-width="2" stroke-dasharray="8 6"/>')
+    b.append(f'<rect x="10" y="20" width="420" height="270" rx="16" fill="none" stroke="{GREEN}" stroke-width="2" stroke-dasharray="8 6"/>')
     b.append(t(30, 48, "自己フィードバックするハーネス", 16, "bold", GREEN, "start"))
-    b += ai_badge(90, 130)
-    b.append(arrow("M122,130 L222,130"))
-    b.append(t(172, 116, "書く", 15))
-    b.append(inner("code", 228, 102, 56))
-    b.append(t(256, 186, "コード", 16, "bold"))
-    b.append(arrow("M290,130 L390,130"))
-    b.append(inner("toolkit", 396, 102, 56))
-    b.append(t(424, 186, "検証", 16, "bold"))
-    b.append(t(424, 208, "lint・validateなど", 13, color=SUB))
+    b += ai_badge(70, 130)
+    b.append(arrow("M102,130 L164,130"))
+    b.append(t(133, 116, "書く", 15))
+    b.append(inner("code", 170, 102, 56))
+    b.append(t(198, 186, "コード", 16, "bold"))
+    b.append(arrow("M232,130 L294,130"))
+    b.append(inner("toolkit", 300, 102, 56))
+    b.append(t(328, 186, "検証", 16, "bold"))
+    b.append(t(328, 208, "lint・validateなど", 13, color=SUB))
     # エラーを返して AI が直す
-    b.append(arrow("M424,222 L424,256 L90,256 L90,166", RED))
-    b.append(t(257, 246, "エラーを返す → AIが自分で直す", 15, "bold", RED))
-    # 通ったものだけデプロイ
-    b.append(arrow("M458,130 L726,130", GREEN))
-    b.append(t(584, 116, "通ったらデプロイ", 15, "bold", GREEN, "start"))
-    b.append(inner("cloud", 734, 102, 56))
-    b.append(t(762, 186, "AWS", 16, "bold"))
-    b.append(t(762, 208, "壊れたものが届かない", 14, color=SUB))
-    write("ai-validation.svg", svg(860, 300, b, "AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったものだけがデプロイされる"))
+    b.append(arrow("M328,222 L328,256 L70,256 L70,166", RED))
+    b.append(t(199, 246, "エラー → AIが自分で直す", 15, "bold", RED))
+    # 通ったら、人間が差分を見る
+    b.append(arrow("M362,130 L582,130"))
+    b.append(t(472, 116, "通ったら", 15))
+    b.append(inner("user", 590, 102, 56))
+    b.append(t(618, 186, "人間", 16, "bold"))
+    b.append(t(618, 208, "デプロイ前に差分を見る", 13, color=SUB))
+    b.append(arrow("M652,130 L766,130", GREEN))
+    b.append(t(709, 116, "デプロイ", 15, "bold", GREEN))
+    b.append(inner("cloud", 774, 102, 56))
+    b.append(t(802, 186, "AWS", 16, "bold"))
+    b.append(t(802, 208, "壊れたものが届かない", 13, color=SUB))
+    write("ai-validation.svg", svg(880, 300, b, "AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする"))
 
 
 def ai_permission():

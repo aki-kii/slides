@@ -417,9 +417,9 @@ transition: view-transition
   <h2>コンテキストを渡しやすい</h2>
 </div>
 
-<div class="text-lg mt-2">構成も設定の意図もコードにあるので、コードを渡せばAIに現状が伝わる</div>
+<div class="text-lg mt-2">アーキテクチャ全体も設定の意図もコードにあるので、渡すだけでAIに伝わる</div>
 
-<InlineSvg src="ai-context.svg" label="ALBのCDKコードに、HTTPを許可する理由がコメントで書いてある。AIにはコードを渡せば構成と意図が伝わる。AWSを見に行くとコンテキストを食って遅い" class="mx-auto mt-6" style="width: 820px" />
+<InlineSvg src="ai-context.svg" label="CDKのコードにはアーキテクチャ全体と設定の意図が書いてあり、AIにはコードを渡せば伝わる。AWSをMCPやCLIで読みに行くと時間もトークンもかかる" class="mx-auto mt-6" style="width: 820px" />
 
 ---
 chapter: AIとIaC
@@ -433,9 +433,9 @@ transition: view-transition
   <h2>変更を検証できる仕組みがある</h2>
 </div>
 
-<div class="text-lg mt-2">AIが書いたコードを検証できるので、AIが自分で直してからデプロイできる</div>
+<div class="text-lg mt-2">AIが検証して自分で直せて、人間もデプロイ前に差分を見られる</div>
 
-<InlineSvg src="ai-validation.svg" label="AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったものだけがデプロイされる" class="mx-auto mt-4" style="width: 740px" />
+<InlineSvg src="ai-validation.svg" label="AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする" class="mx-auto mt-6" style="width: 800px" />
 
 ---
 chapter: AIとIaC
