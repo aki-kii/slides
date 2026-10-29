@@ -317,7 +317,16 @@ chapter: IaCとは？
 
 <div class="text-lg mt-2">インフラの共通部分を切り出して再利用できる</div>
 
-<InlineSvg src="feature-reuse-parts.svg" label="ALBとECSの共通する部分を切り出して、DynamoDBを使う他の構成に組み込む" class="mx-auto mt-4" style="width: 420px" />
+<div class="fig-pair mt-4">
+  <div>
+    <div class="fig-head">共通する部分を切り出して、他の構成に組み込む</div>
+    <InlineSvg src="feature-reuse-parts.svg" label="ALBとECSの共通する部分を切り出して、DynamoDBを使う他の構成に組み込む" />
+  </div>
+  <div>
+    <div class="fig-head">同じコードのまま、別の環境にもデプロイ</div>
+    <InlineSvg src="feature-reuse-envs.svg" label="同じコードのまま、WAF・ALB・ECSの構成を開発環境と本番環境にデプロイする" />
+  </div>
+</div>
 
 ---
 chapter: IaCとは？
