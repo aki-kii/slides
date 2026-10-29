@@ -505,10 +505,8 @@ chapter: IaCの学習
 <!-- Q&A 形式（jaws-sonic-2026 の intro の Q&A と同じ見せ方：Q. / A. と、前置き（小）・言い切り（大）・補足（小）） -->
 <div class="qa-body">
   <div class="qa-row">
-    <span></span>
-    <div class="qa-note">今後もIaCはAIが書くのであれば、</div>
     <span class="qa-mark qa-lead">Q.</span>
-    <div class="qa-lead">本当にIaCについて学ぶ必要はある？</div>
+    <div class="qa-lead">今後もIaCはAIが書くのであれば、<br>本当にIaCについて学ぶ必要はある？</div>
   </div>
   <div class="qa-row" v-click>
     <span class="qa-mark qa-lead"><strong>A.</strong></span>
