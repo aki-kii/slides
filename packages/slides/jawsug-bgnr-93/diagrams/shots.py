@@ -1,8 +1,9 @@
-"""導入のスクショを切り出し、IDやARNを黒塗りして public/images/story/ に置く。"""
+"""導入のスクショを切り出し、IDやARNを黒塗りして public/images/story/ に置く。
 
   python3 diagrams/shots.py /workspace/bgnr93/console-shots public/images/story
 
 new-03 の ID・ARN（アカウント ID を含む）・ロックトークンは黒塗りしてから切り出す。
+"""
 import sys
 from PIL import Image, ImageDraw
 SRC, OUT = sys.argv[1], sys.argv[2]
