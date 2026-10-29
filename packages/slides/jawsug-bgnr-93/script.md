@@ -120,7 +120,6 @@ IaCではリソースのあるべき姿をコードとして定義します。�
 ### TerraformとAWS CDK（CloudFormation を含む・約 60 秒）
 
 TerraformはHashiCorp社のIaCツールです。HCLという独自の言語でリソースを定義できます。
-stateという、作ったリソースの記録を自分で持つファイルがあり、置き場所や管理は自分たちで決めます。
 AWS以外のクラウドやSaaSも、まとめて管理できます。
 
 AWS CDKはAWS公式のOSSツールです。CloudFormationをプログラミング言語で書けます。

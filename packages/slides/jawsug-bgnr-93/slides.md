@@ -343,7 +343,6 @@ chapter: IaCとは？
 <ul>
   <li>HashiCorp社のIaCツール</li>
   <li>HCLという独自の言語で<br>リソースを定義できる</li>
-  <li>stateという作ったリソースの記録を<br>自分で持つファイルがあり、<br>置き場所や管理は自分たちで決める</li>
   <li>AWS以外のクラウドやSaaSも<br>まとめて管理できる</li>
 </ul>
 </div>
