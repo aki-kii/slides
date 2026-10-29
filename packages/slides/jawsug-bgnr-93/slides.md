@@ -136,16 +136,6 @@ transition: fade
 <div class="subtitle-band">改めて設定を見ると、A社のIPアドレスが新旧どちらも残っていて、<br>B社のIPアドレスが消えてました<br>元の値ってどこに載ってたかな……</div>
 
 ---
-layout: center
----
-
-<div>
-  <h2>ドキッとしたところは？</h2>
-</div>
-
-<div class="subtitle-band">恐怖ですね…<br>みなさんもどこかドキッとしたところはありませんでしたか？</div>
-
----
 
 <h2 class="pain-head">このリリースの辛いポイント</h2>
 
