@@ -418,8 +418,8 @@ chapter: AIとIaC
 
 1. コンテキストを渡しやすい
 2. 変更を検証できる仕組みがある
-3. インフラの安全性を検証できる
-4. AIにデプロイ権限を渡さなくて済む
+3. AIにデプロイ権限を渡さなくて済む
+4. インフラの安全性を検証できる
 
 </div>
 
@@ -458,6 +458,19 @@ transition: view-transition
 
 <div style="view-transition-name: ai-reason">
   IaCがAIに向いている理由 ③
+  <h2>AIにデプロイ権限を渡さなくて済む</h2>
+</div>
+
+<div class="text-lg mt-2">AIにはコードを書いてもらうだけにして、デプロイはCI/CDに任せられる</div>
+
+<InlineSvg src="ai-permission.svg" label="AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む" class="mx-auto mt-8" style="width: 760px" />
+
+---
+chapter: AIとIaC
+---
+
+<div style="view-transition-name: ai-reason">
+  IaCがAIに向いている理由 ④
   <h2>インフラの安全性を検証できる</h2>
 </div>
 
@@ -466,19 +479,6 @@ transition: view-transition
 <InlineSvg src="ai-safety.svg" label="セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、書いているときはcdk-nag、あとでレビューするときはCheckovなどでスキャンし、全世界からのSSHを許可していると指摘される" class="mx-auto mt-3" style="width: 740px" />
 
 <div class="text-base mt-2 text-center">→ マネコンの環境は画面で一つずつ見るしかないが、コードならまとめてスキャンできる</div>
-
----
-chapter: AIとIaC
----
-
-<div style="view-transition-name: ai-reason">
-  IaCがAIに向いている理由 ④
-  <h2>AIにデプロイ権限を渡さなくて済む</h2>
-</div>
-
-<div class="text-lg mt-2">AIにはコードを書いてもらうだけにして、デプロイはCI/CDに任せられる</div>
-
-<InlineSvg src="ai-permission.svg" label="AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む" class="mx-auto mt-8" style="width: 760px" />
 
 ---
 chapter: AIとIaC
