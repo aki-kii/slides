@@ -1,14 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" width="100%" role="img" aria-label="手順書を開いて、手順書通りに進める">
 <!-- AWS Architecture Icons 2026-07-31 版（Icon-package_07312026） -->
 <defs><marker id="a-i" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E8A6E"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DD344C"/></marker><marker id="a-x" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a94a3"/></marker></defs>
-<rect x="250" y="14" width="500" height="330" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
-<line x1="250" y1="60" x2="750" y2="60" stroke="#c9d0d9" stroke-width="2"/>
-<svg x="264" y="22" width="30" height="30" viewBox="0 0 48 48"><g id="doc8-Icon-Resource/General-Resource/Res_Document_48" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<rect x="220" y="14" width="560" height="340" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
+<line x1="220" y1="60" x2="780" y2="60" stroke="#c9d0d9" stroke-width="2"/>
+<svg x="234" y="22" width="30" height="30" viewBox="0 0 48 48"><g id="doc8-Icon-Resource/General-Resource/Res_Document_48" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <path d="M15,20 L28,20 L28,18 L15,18 L15,20 Z M15,34 L28,34 L28,32 L15,32 L15,34 Z M15,27 L32,27 L32,25 L15,25 L15,27 Z M10,44 L10.007,4 L28,4 L28,13 C28,13.552 28.447,14 29,14 L38,14 L38.025,44 L10,44 Z M30,5.414 L36.586,12 L30,12 L30,5.414 Z M39.707,12.293 L29.707,2.293 C29.52,2.105 29.266,2 29,2 L10,2 C8.822,2 8,2.822 8,4 L8,44 C8,45.14 8.859,46 10,46 L38.025,46 C39.151,46 40,45.14 40,44 L40,13 C40,12.735 39.895,12.48 39.707,12.293 L39.707,12.293 Z" id="doc8-Fill-1" fill="#232F3D"></path>
     </g></svg>
-<text x="304" y="44" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="bold" fill="#2c3e50" text-anchor="start">手順書</text>
-<text x="280" y="98" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="20" font-weight="normal" fill="#2c3e50" text-anchor="start">1. WAFのコンソールを開く</text>
-<text x="280" y="138" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="20" font-weight="normal" fill="#2c3e50" text-anchor="start">2. IPセットを選ぶ</text>
-<text x="280" y="178" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="20" font-weight="normal" fill="#2c3e50" text-anchor="start">3. 「編集」を押す</text>
-<text x="280" y="218" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="20" font-weight="normal" fill="#2c3e50" text-anchor="start">4. A社の行を書き換える</text>
+<text x="274" y="44" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="bold" fill="#2c3e50" text-anchor="start">本番作業手順書（WAF IPセット変更）</text>
+<text x="256" y="92" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">1</text>
+<text x="280" y="92" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">作業開始の連絡</text>
+<text x="256" y="125" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">2</text>
+<text x="280" y="125" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">マネジメントコンソールへログイン</text>
+<text x="256" y="158" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">3</text>
+<text x="280" y="158" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">IPセットを開く</text>
+<text x="256" y="191" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">4</text>
+<text x="280" y="191" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">現在の設定値を控える</text>
+<text x="256" y="224" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">5</text>
+<text x="280" y="224" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">IPアドレスの書き換え</text>
+<text x="256" y="257" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">6</text>
+<text x="280" y="257" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">保存</text>
+<text x="256" y="290" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">7</text>
+<text x="280" y="290" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">疎通確認</text>
+<text x="256" y="323" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="bold" fill="#6b7684" text-anchor="middle">8</text>
+<text x="280" y="323" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="18" font-weight="normal" fill="#2c3e50" text-anchor="start">作業完了の連絡</text>
 </svg>

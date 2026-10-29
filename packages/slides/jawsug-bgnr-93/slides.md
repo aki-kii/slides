@@ -77,33 +77,33 @@ transition: fade
 transition: fade
 ---
 
-<InlineSvg src="story-old-manual.svg" label="手順書の画面と今のコンソールの画面が違う" class="mx-auto mt-2" style="width: 900px" />
+<InlineSvg src="story-old-manual.svg" label="手順書のDeleteとAdd IP addressが、今のコンソールの画面に見当たらない" class="mx-auto mt-2" style="width: 900px" />
 
-<div class="subtitle-band">WAFのコンソールを開いて…あれ？<br>手順書と画面が違うので、IPセットの編集がありませんね…？</div>
-
----
-transition: fade
----
-
-<InlineSvg src="story-ip-set.svg" label="IPセットの編集画面で、A社だと思った行を置き換える" class="mx-auto mt-2" style="width: 900px" />
-
-<div class="subtitle-band">たくさんIPアドレスが並んでるけど…これっぽいかな<br>手順書からコピーした値で、元のIPアドレスを置き換えちゃいましょう</div>
+<div class="subtitle-band">WAFのコンソールを開いて…あれ？<br>手順書の「Delete」も「Add IP address」も見当たりませんね…？</div>
 
 ---
 transition: fade
 ---
 
-<InlineSvg src="story-incident.svg" label="A社からもB社からも、つながらないと連絡が来る" class="mx-auto mt-2" style="width: 900px" />
+<InlineSvg src="story-ip-set.svg" label="IPセットの編集画面で、A社の203.0.113.12と似た行をA社の行だと思って消す" class="mx-auto mt-2" style="width: 900px" />
 
-<div class="subtitle-band">完了！めでたしめでたし…っと、、、あれ？<br>A社からもB社からも、連絡が…！？</div>
+<div class="subtitle-band">「IP セットを編集」から書き換えるみたいですね。203.0.113.12…これだ！<br>この行を消して、手順書からコピーした新しい値を足しちゃいましょう</div>
 
 ---
 transition: fade
 ---
 
-<InlineSvg src="story-lost.svg" label="元の値も経緯も、どこにも記録がない" class="mx-auto mt-2" style="width: 900px" />
+<InlineSvg src="story-incident.svg" label="A社はつながったが、B社からつながらなくなったと連絡が来る" class="mx-auto mt-2" style="width: 900px" />
 
-<div class="subtitle-band">置き換え元が間違えてる！<br>元の値ってなんだったっけ…どこで設定してたっけな………</div>
+<div class="subtitle-band">完了！A社もつながった、めでたしめでたし…っと、、、あれ？<br>B社から、急につながらなくなったって連絡が…！？</div>
+
+---
+transition: fade
+---
+
+<InlineSvg src="story-lost.svg" label="手順4で控えるはずだった元の値が、どこにも残っていない" class="mx-auto mt-2" style="width: 900px" />
+
+<div class="subtitle-band">消したのはB社の行だった！<br>元の値ってなんだったっけ…控えるの飛ばしてた………</div>
 
 ---
 layout: center

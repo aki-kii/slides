@@ -137,7 +137,7 @@ def story_architecture():
     x0, y0 = 226, 196
     b.append(f'<rect x="{x0}" y="{y0}" width="300" height="118" rx="10" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
     b.append(t(x0 + 14, y0 + 24, "IPセット", 14, "bold", SUB, "start"))
-    for i, (who, ip) in enumerate([("A社", "203.xxx.xxx.10/32"), ("B社", "198.xxx.xxx.7/32"), ("C社", "192.xxx.xxx.45/32")]):
+    for i, (who, ip) in enumerate([("A社", "203.0.113.12/32"), ("B社", "203.0.113.128/28"), ("C社", "192.0.2.45/32")]):
         yy = y0 + 52 + i * 24
         b.append(t(x0 + 22, yy, who, 16, anchor="start"))
         b.append(t(x0 + 80, yy, ip, 16, mono=True, anchor="start"))
@@ -164,70 +164,99 @@ def ip_rows(x, y, rows, w=380):
     return o
 
 
-ROWS = ["192.xxx.xxx.45/32", "198.xxx.xxx.7/32", "203.xxx.xxx.10/32", "192.xxx.xxx.88/32", "198.xxx.xxx.61/32"]
+ROWS = ["192.0.2.45/32", "203.0.113.128/28", "203.0.113.80/32", "203.0.113.12/32", "198.51.100.61/32"]
+A_NEW = "198.51.100.200/32"
+# A社（203.0.113.12）と見間違えてB社の行（203.0.113.128/28）を消し、A社の新しい値を足した後の一覧
+AFTER = [ROWS[0], None, ROWS[2], ROWS[3], ROWS[4], A_NEW]
+STEPS = ["作業開始の連絡", "マネジメントコンソールへログイン", "IPセットを開く", "現在の設定値を控える",
+         "IPアドレスの書き換え", "保存", "疎通確認", "作業完了の連絡"]
+
+
+def after_rows(x, y, w, gone, note=None):
+    """消した行は赤い点線で残し、gone の文字を入れる。note は本文のフォントで前に添える。"""
+    o = []
+    for i, ip in enumerate(AFTER):
+        yy = y + i * 34
+        if ip is None:
+            o.append(f'<rect x="{x}" y="{yy}" width="{w}" height="26" rx="6" fill="{RED_BG}" stroke="{RED}" stroke-width="1.5" stroke-dasharray="6 4"/>')
+            gx = x + 16
+            if note:
+                o.append(t(gx, yy + 19, note, 15, color=RED, anchor="start"))
+                gx += 110
+            o.append(t(gx, yy + 19, gone, 17, color=RED, mono=True, anchor="start"))
+        else:
+            o += ip_rows(x, yy, [ip], w)
+    return o
 
 
 def story_screens():
     # ③ 手順書を開く（手順書通りに進める）
-    b = pane(250, 14, 500, 330, "手順書", "doc")
-    for i, st in enumerate(["1. WAFのコンソールを開く", "2. IPセットを選ぶ", "3. 「編集」を押す", "4. A社の行を書き換える"]):
-        b.append(t(280, 98 + i * 40, st, 20, anchor="start"))
+    b = pane(220, 14, 560, 340, "本番作業手順書（WAF IPセット変更）", "doc")
+    for i, st in enumerate(STEPS):
+        b.append(t(256, 92 + i * 33, str(i + 1), 18, "bold", SUB))
+        b.append(t(280, 92 + i * 33, st, 18, anchor="start"))
     write("story-manual.svg", svg(1000, 360, b, "手順書を開いて、手順書通りに進める"))
 
     # ③ 手順書が古い
     b = pane(20, 14, 440, 330, "手順書", "doc")
-    for i, s in enumerate(["1. WAFのコンソールを開く", "2. IPセットを選ぶ", "3. 「編集」を押す", "4. A社の行を書き換える"]):
-        b.append(t(44, 92 + i * 32, s, 18, anchor="start"))
-    b.append(f'<rect x="44" y="220" width="392" height="104" rx="8" fill="#f5f7f9" stroke="{LINE}" stroke-width="1.5"/>')
-    b.append(t(60, 244, "（手順書に貼ってある画面）", 12, color=SUB, anchor="start"))
-    b.append(f'<rect x="330" y="262" width="86" height="34" rx="6" fill="#ffffff" stroke="{SUB}" stroke-width="1.5"/>')
-    b.append(t(373, 284, "編集", 14, "bold"))
-    b.append(f'<rect x="322" y="254" width="102" height="50" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
+    b.append(t(44, 88, "5. IPアドレスの書き換え", 18, "bold", anchor="start"))
+    b.append(t(44, 116, "A社の行（203.0.113.12/32）にチェックを入れて", 14, anchor="start"))
+    b.append(t(44, 138, "「Delete」で削除し、「Add IP address」で", 14, anchor="start"))
+    b.append(t(44, 160, f"新しいIPアドレス（{A_NEW}）を追加する", 14, anchor="start"))
+    b.append(t(44, 194, "6. 保存：「Add」を押す（本番へ反映）", 18, "bold", anchor="start"))
+    b.append(f'<rect x="44" y="212" width="392" height="112" rx="8" fill="#f5f7f9" stroke="{LINE}" stroke-width="1.5"/>')
+    b.append(t(60, 234, "（手順書に貼ってある画面）", 12, color=SUB, anchor="start"))
+    b.append(f'<rect x="196" y="264" width="80" height="34" rx="6" fill="#ffffff" stroke="{SUB}" stroke-width="1.5"/>')
+    b.append(t(236, 286, "Delete", 14, "bold"))
+    b.append(f'<rect x="286" y="264" width="134" height="34" rx="6" fill="#ffffff" stroke="{SUB}" stroke-width="1.5"/>')
+    b.append(t(353, 286, "Add IP address", 14, "bold"))
+    b.append(f'<rect x="188" y="256" width="240" height="50" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
     b += pane(520, 14, 460, 330, "マネジメントコンソール", "console")
-    for i, s in enumerate(["概要", "ルール", "IPセット", "設定"]):
-        b.append(f'<rect x="{544 + i * 104}" y="78" width="94" height="30" rx="6" fill="#f5f7f9" stroke="{LINE}" stroke-width="1.5"/>')
-        b.append(t(591 + i * 104, 99, s, 15))
-    b.append(t(750, 232, "「編集」が見当たらない…？", 20, "bold", RED))
+    b.append(t(544, 98, "partner-allowed-ips", 16, "bold", mono=True, anchor="start"))
+    b.append(f'<rect x="818" y="74" width="138" height="34" rx="6" fill="#ffffff" stroke="{SUB}" stroke-width="1.5"/>')
+    b.append(t(887, 96, "IP セットを編集", 14, "bold"))
+    b.append(t(750, 214, "「Delete」も「Add IP address」も", 18, "bold", RED))
+    b.append(t(750, 244, "見当たらない…？", 20, "bold", RED))
     b.append(f'<rect x="544" y="128" width="412" height="196" rx="9" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
-    write("story-old-manual.svg", svg(1000, 360, b, "手順書の画面と今のコンソールの画面が違う"))
+    write("story-old-manual.svg", svg(1000, 360, b, "手順書のDeleteとAdd IP addressが、今のコンソールの画面に見当たらない"))
 
     # ④ IP セットの編集画面
-    b = pane(20, 14, 600, 330, "マネジメントコンソール　IPセットの編集", "console")
+    b = pane(20, 14, 600, 330, "マネジメントコンソール　IP セットを編集", "console")
     b += ip_rows(48, 76, ROWS, 540)
     b.append(f'<rect x="40" y="102" width="556" height="38" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
     b.append(t(48, 278, "どれが誰のIPかは書いていない", 17, color=SUB, anchor="start"))
     b += pane(680, 14, 300, 200, "手順書", "doc")
-    b.append(t(704, 96, "新しいA社のIP", 16, color=SUB, anchor="start"))
-    b.append(t(704, 128, "203.xxx.xxx.24/32", 18, "bold", mono=True, anchor="start"))
-    b.append(arrow("M690,122 L604,122", RED))
-    b.append(t(704, 170, "コピーして置き換える", 16, "bold", RED, "start"))
-    write("story-ip-set.svg", svg(1000, 360, b, "IPセットの編集画面で、A社だと思った行を置き換える"))
+    b.append(t(704, 88, "消す：A社の行", 15, color=SUB, anchor="start"))
+    b.append(t(704, 114, "203.0.113.12/32", 18, "bold", mono=True, anchor="start"))
+    b.append(t(704, 150, "足す：新しいIPアドレス", 15, color=SUB, anchor="start"))
+    b.append(t(704, 176, A_NEW, 18, "bold", mono=True, anchor="start"))
+    b.append(arrow("M690,108 L604,121", RED))
+    b.append(t(704, 258, "「203.0.113.12…」これだ！", 17, "bold", RED, "start"))
+    write("story-ip-set.svg", svg(1000, 360, b, "IPセットの編集画面で、A社の203.0.113.12と似た行をA社の行だと思って消す"))
 
     # ⑤ 事件
-    b = pane(20, 14, 600, 330, "マネジメントコンソール　IPセットの編集", "console")
-    rows = ROWS[:]
-    rows[1] = "203.xxx.xxx.24/32"
-    b += ip_rows(48, 76, rows, 540)
-    b.append(f'<rect x="40" y="102" width="556" height="38" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
-    b.append(t(48, 278, "書き換えたのはB社の行だった", 19, "bold", RED, anchor="start"))
-    for i, (who, msg) in enumerate([("A社", "まだ繋がらないです"), ("B社", "急につながらなくなりました！")]):
+    b = pane(20, 14, 600, 340, "マネジメントコンソール　IP セットを編集", "console")
+    b += after_rows(48, 76, 540, "203.0.113.128/28", "（消した行）")
+    b.append(t(48, 324, "消したのは、似ていたB社の行だった", 19, "bold", RED, anchor="start"))
+    for i, (who, msg, c, bg) in enumerate([("A社", "つながりました！", GREEN, GREEN_BG),
+                                           ("B社", "急につながらなくなりました！", RED, RED_BG)]):
         y = 40 + i * 120
         b.append(inner("office", 670, y + 6, 40))
         b.append(t(690, y + 66, who, 13, "bold"))
-        b.append(f'<rect x="724" y="{y}" width="256" height="52" rx="14" fill="{RED_BG}" stroke="{RED}" stroke-width="2"/>')
-        b.append(t(852, y + 33, msg, 16, "bold", RED))
-    write("story-incident.svg", svg(1000, 360, b, "A社からもB社からも、つながらないと連絡が来る"))
+        b.append(f'<rect x="724" y="{y}" width="256" height="52" rx="14" fill="{bg}" stroke="{c}" stroke-width="2"/>')
+        b.append(t(852, y + 33, msg, 16, "bold", c))
+    write("story-incident.svg", svg(1000, 360, b, "A社はつながったが、B社からつながらなくなったと連絡が来る"))
 
     # ⑥ 元の値が分からない
-    b = pane(20, 14, 600, 330, "マネジメントコンソール　IPセットの編集", "console")
-    b += ip_rows(48, 76, rows, 540)
-    b.append(f'<rect x="40" y="102" width="556" height="38" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
-    b += pane(680, 14, 300, 200, "手順書", "doc")
-    b.append(t(704, 96, "B社の元の値", 16, color=SUB, anchor="start"))
-    b.append(f'<rect x="704" y="110" width="252" height="40" rx="8" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
-    b.append(t(830, 137, "？", 20, "bold", RED))
-    b.append(t(704, 188, "どこにも残っていない", 17, color=SUB, anchor="start"))
-    write("story-lost.svg", svg(1000, 360, b, "元の値も経緯も、どこにも記録がない"))
+    b = pane(20, 14, 600, 340, "マネジメントコンソール　IP セットを編集", "console")
+    b += after_rows(48, 76, 540, "？")
+    b += pane(680, 14, 300, 220, "手順書", "doc")
+    b.append(t(704, 92, "B社の元の値", 16, color=SUB, anchor="start"))
+    b.append(f'<rect x="704" y="104" width="252" height="40" rx="8" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
+    b.append(t(830, 131, "？", 20, "bold", RED))
+    b.append(t(704, 176, "4. 現在の設定値を控える", 15, color=SUB, anchor="start"))
+    b.append(t(704, 204, "→ 画面探しで飛ばしていた", 15, "bold", RED, "start"))
+    write("story-lost.svg", svg(1000, 360, b, "手順4で控えるはずだった元の値が、どこにも残っていない"))
 
 
 # ---------------------------------------------------------------- 1部: デプロイの仕組み（差分）
