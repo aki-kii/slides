@@ -433,7 +433,7 @@ transition: view-transition
   <h2>コンテキストを渡しやすい</h2>
 </div>
 
-<div class="text-lg mt-2">アーキテクチャ全体も設定の意図もコードにあるので、渡すだけでAIに伝わる</div>
+<div class="text-lg mt-2">ソースコードにインフラ設定・設計意図が含まれているため、<br>AIにとっても必要な情報が揃っている</div>
 
 <InlineSvg src="ai-context.svg" label="CDKのコードにはアーキテクチャ全体と設定の意図が書いてあり、AIにはコードを渡せば伝わる。AWSをMCPやCLIで読みに行くと時間もトークンもかかる" class="mx-auto mt-6" style="width: 820px" />
 

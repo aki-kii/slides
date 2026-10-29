@@ -538,7 +538,6 @@ def cdk_code(x, y, w, rows, title="コード（AWS CDK）"):
 
 def ai_context():
     b = cdk_code(10, 20, 470, ALB_CODE)
-    b.append(t(245, 316, "アーキテクチャ全体と、設定の意図", 15, "bold"))
     b += ai_badge(620, 140)
     b.append(arrow("M488,140 L584,140", GREEN))
     b.append(t(536, 126, "コードを渡す", 15, color=GREEN))
@@ -551,7 +550,7 @@ def ai_context():
     b.append(f'<path d="M734,133 L748,147 M748,133 L734,147" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
     b.append(t(741, 98, "MCPやCLIでAWSを読み取ると", 14, color=SUB))
     b.append(t(741, 118, "時間もトークンもかかる", 14, color=SUB))
-    write("ai-context.svg", svg(940, 330, b, "CDKのコードにはアーキテクチャ全体と設定の意図が書いてあり、AIにはコードを渡せば伝わる。AWSをMCPやCLIで読みに行くと時間もトークンもかかる"))
+    write("ai-context.svg", svg(940, 300, b, "CDKのコードにはアーキテクチャ全体と設定の意図が書いてあり、AIにはコードを渡せば伝わる。AWSをMCPやCLIで読みに行くと時間もトークンもかかる"))
 
 
 def ai_validation():
