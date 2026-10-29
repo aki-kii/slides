@@ -72,7 +72,7 @@ transition: fade
 
 <img src="/images/story/manual-steps-console.png" alt="本番作業手順書の作業手順。No.1 作業開始の連絡から No.5 IPアドレスの書き換えまで。手順3にIPセットの画面が貼ってある" class="mx-auto shot" style="height: 395px" />
 
-<div class="subtitle-band">手順書通りに進めていきたいと思います<br>それではWAFのコンソールでIPセットを開きます…</div>
+<div class="subtitle-band">手順書通りに進めていきたいと思います。<br>それではWAFのコンソールでIPセットを開きます…</div>
 
 ---
 transition: fade
@@ -97,7 +97,7 @@ transition: fade
   </figure>
 </div>
 
-<div class="subtitle-band">開いてみると…あれ？手順書の画面と見た目が全然違いますね…<br>ボタンの名前も場所も違うし、どこから書き換えればいいんだろう…？</div>
+<div class="subtitle-band">開いてみると…あれ？手順書の画面と見た目が全然違いますね…</div>
 
 ---
 transition: fade
@@ -109,7 +109,6 @@ transition: fade
       <img src="/images/story/new-ipset-edit.png" alt="新コンソールのIPセットを編集の画面。IPアドレスが7行並んでいる" class="shot" />
       <span class="shot-mark" style="left: 1.6%; top: 76.8%; width: 97.4%; height: 9.2%"></span>
     </div>
-    <div class="shot-note">※ 間違った値を書き換えています</div>
   </div>
   <div class="manual-card">
     <div class="manual-card-head">手順書</div>
@@ -117,7 +116,7 @@ transition: fade
   </div>
 </div>
 
-<div class="subtitle-band">対応したIPアドレスがあったので、手順書の値に書き換えます</div>
+<div class="subtitle-band">対応したIPアドレスがあったので(嘘)、手順書の値に書き換えます<br>※ 間違った値を書き換えています</div>
 
 ---
 transition: fade
@@ -133,7 +132,7 @@ transition: fade
 
 <InlineSvg src="story-lost.svg" label="IPセットの編集画面。A社の旧と新のIPアドレスが両方残り、B社の行が消えている。手順4で控えるはずだったB社の元の値は、どこにも残っていない" class="mx-auto mt-2" style="width: 900px" />
 
-<div class="subtitle-band">改めて設定を見ると、A社のIPアドレスが新旧どちらも残っていて、<br>B社のIPアドレスが消えてました<br>元の値ってどこに載ってたかな……</div>
+<div class="subtitle-band" style="font-size: 0.92rem">改めて設定を見ると、A社のIPアドレスが新旧どちらも残っていて、B社のIPアドレスが消えてました<br>元の値ってどこに載ってたかな……</div>
 
 ---
 

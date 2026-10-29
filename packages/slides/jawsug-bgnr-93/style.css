@@ -489,7 +489,6 @@
 .manual-card { border: 2px solid #c9d0d9; border-radius: 12px; padding: 0.8rem 1rem; font-size: 0.85rem; line-height: 1.6; background: #ffffff; }
 .manual-card-head { font-weight: bold; color: #6b7684; margin-bottom: 0.4rem; }
 .shot-anno { position: absolute; margin-bottom: 0.15rem; color: #DD344C; font-weight: bold; font-size: 0.85rem; white-space: nowrap; }
-.shot-note { margin-top: 0.3rem; color: #DD344C; font-size: 0.8rem; }
 
 /* 特徴②④：2つの図を左右に並べ、それぞれに小さい見出しを付ける */
 .fig-pair { display: grid; grid-template-columns: 360px 360px; gap: 4rem; justify-content: center; }
