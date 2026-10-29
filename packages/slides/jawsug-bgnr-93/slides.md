@@ -511,20 +511,21 @@ layout: center
 chapter: IaCの学習
 ---
 
-<div>
-  IaCも今後はAIが書くとしたら
-  <h2>本当に学ぶ必要はあるのか？</h2>
+<!-- Q&A 形式（jaws-sonic-2026 の intro の Q&A と同じ見せ方：Q. / A. と、前置き（小）・言い切り（大）・補足（小）） -->
+<div class="qa-body">
+  <div class="qa-row">
+    <span></span>
+    <div class="qa-note">今後もIaCはAIが書くのであれば、</div>
+    <span class="qa-mark qa-lead">Q.</span>
+    <div class="qa-lead">本当にIaCについて学ぶ必要はある？</div>
+  </div>
+  <div class="qa-row" v-click>
+    <span class="qa-mark qa-lead"><strong>A.</strong></span>
+    <div class="qa-lead">IaCで何ができるかを知るためにも<br>学んでおいた方がよさそう</div>
+    <span></span>
+    <div class="qa-note">※ 個人の意見です</div>
+  </div>
 </div>
-
-<v-click>
-
-<div class="mt-8">
-  個人の意見
-  <h2>何ができるかを知るために<br>一度試してみるのがよい</h2>
-  <Kogoe>IaCの書き方・読み方を理解しなくてもよい世界には近づいている</Kogoe>
-</div>
-
-</v-click>
 
 ---
 chapter: IaCの学習

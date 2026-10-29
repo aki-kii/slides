@@ -500,3 +500,10 @@
 .update-card { border: 2px solid #0E8A6E; background: #e9f5f1; border-radius: 14px; padding: 0.9rem 1rem; }
 .update-card-title { font-weight: bold; font-size: 1.05rem; color: #0E8A6E; margin-bottom: 0.4rem; white-space: nowrap; }
 .update-card li { font-size: 0.86rem !important; line-height: 1.6 !important; white-space: nowrap; }
+
+/* 3部：Q&A（jaws-sonic-2026 の .intro-qa と同じ組み方） */
+.qa-body { --qa-gap: 0.9rem; display: flex; flex-direction: column; gap: calc(var(--qa-gap) * 3); }
+.qa-row { display: grid; grid-template-columns: auto 1fr; column-gap: var(--qa-gap); row-gap: var(--qa-gap); align-items: baseline; }
+.qa-mark { min-width: 1.2em; }
+.qa-note { font-size: 1.05rem; line-height: 1.6; }
+.qa-lead { font-size: 2rem; font-weight: 700; line-height: 1.35; }
