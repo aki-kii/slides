@@ -97,7 +97,7 @@ transition: fade
   </figure>
 </div>
 
-<div class="subtitle-band">開いてみると…あれ？手順書の画面と見た目が全然違いますね…</div>
+<div class="subtitle-band">開いてみると…手順書の画面と見た目が全然違いますね…</div>
 
 ---
 transition: fade
@@ -130,7 +130,7 @@ transition: fade
 transition: fade
 ---
 
-<InlineSvg src="story-lost.svg" label="IPセットの編集画面。A社の旧と新のIPアドレスが両方残り、B社の行が消えている。手順4で控えるはずだったB社の元の値は、どこにも残っていない" class="mx-auto mt-2" style="width: 900px" />
+<InlineSvg src="story-lost.svg" label="IPセットの編集画面。A社の旧と新のIPアドレスが両方残り、B社の行が消えている" class="mx-auto mt-2" style="width: 576px" />
 
 <div class="subtitle-band" style="font-size: 0.92rem">改めて設定を見ると、A社のIPアドレスが新旧どちらも残っていて、B社のIPアドレスが消えてました<br>元の値ってどこに載ってたかな……</div>
 
@@ -146,7 +146,7 @@ transition: fade
 
 </div>
 
-<div class="mt-10 pain-close">→ IaCでデプロイすればこのような間違いが起こらず、<br>&emsp;より安全なデプロイができます！</div>
+<div class="mt-10 pain-close">→ IaCでデプロイすればこのような間違いが起きづらく、<br>&emsp;より安全なデプロイができます！</div>
 
 <style>
 .pain-head { white-space: nowrap; font-size: 1.9rem !important; }
@@ -216,7 +216,7 @@ chapter: IaCとは？
 
 <h2>手続き型 vs 宣言型</h2>
 
-<div class="mt-3" style="font-size: 1.2rem; line-height: 1.7">リソースのデプロイ方法には、手続き型と宣言型があります</div>
+<div class="mt-3" style="font-size: 1.2rem; line-height: 1.7">リソースのデプロイ方法には、手続き型と宣言型がある</div>
 
 <div class="pd-cards grid grid-cols-2 gap-6 mt-6">
 <div class="pd-card">
@@ -497,7 +497,7 @@ chapter: IaCの学習
     <span class="qa-mark qa-lead"><strong>A.</strong></span>
     <div class="qa-lead">IaCで何ができるかを知るためにも<br>学んでおいた方がよさそう</div>
     <span></span>
-    <div class="qa-note">※ 個人の意見です</div>
+    <div class="qa-note">※ 個人の意見</div>
   </div>
 </div>
 
@@ -508,7 +508,7 @@ transition: fade
 
 ## AIと一緒にIaCを学んでみよう
 
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
 <div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
 
 <InlineSvg src="learning-arch.svg" label="サーバーレスアーキテクチャの全体像。Amazon API Gateway から AWS Lambda、Amazon DynamoDB へつながる" class="mx-auto mt-6" style="width: 760px" />
@@ -520,7 +520,7 @@ transition: fade
 
 ## AIと一緒にIaCを学んでみよう
 
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
 <div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
 
 <InlineSvg src="learning-step1.svg" label="まず AWS Lambda だけを作る。API Gateway と DynamoDB はまだ作っていない" class="mx-auto mt-6" style="width: 760px" />
@@ -534,7 +534,7 @@ transition: fade
 
 ## AIと一緒にIaCを学んでみよう
 
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
 <div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
 
 <InlineSvg src="learning-step2.svg" label="API Gateway を追加して、Lambda につなぐ。DynamoDB はまだ作っていない" class="mx-auto mt-6" style="width: 760px" />
@@ -547,7 +547,7 @@ chapter: IaCの学習
 
 ## AIと一緒にIaCを学んでみよう
 
-<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめです</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">いきなり作り始めるのではなく、少しづつ作る範囲を広げていくのがおすすめ</div>
 <div class="mt-1" style="font-size: 0.95rem; color: #6b7684">例: サーバーレスアーキテクチャ</div>
 
 <InlineSvg src="learning-arch.svg" label="DynamoDB を追加して、全体ができあがる" class="mx-auto mt-6" style="width: 760px" />

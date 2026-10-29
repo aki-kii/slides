@@ -54,11 +54,11 @@
 <rect x="226" y="196" width="300" height="118" rx="10" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
 <text x="240" y="220" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="14" font-weight="bold" fill="#6b7684" text-anchor="start">IPセット</text>
 <text x="248" y="248" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">A社</text>
-<text x="306" y="248" font-family="'Fira Code', monospace" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">203.0.113.12/32</text>
+<text x="306" y="248" font-family="'Fira Code', monospace" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">203.■.■.12/32</text>
 <text x="248" y="272" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">B社</text>
-<text x="306" y="272" font-family="'Fira Code', monospace" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">203.0.113.128/28</text>
+<text x="306" y="272" font-family="'Fira Code', monospace" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">203.■.■.128/28</text>
 <text x="248" y="296" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">C社</text>
-<text x="306" y="296" font-family="'Fira Code', monospace" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">192.0.2.10/32</text>
+<text x="306" y="296" font-family="'Fira Code', monospace" font-size="16" font-weight="normal" fill="#2c3e50" text-anchor="start">192.■.■.10/32</text>
 <rect x="236" y="229" width="280" height="25" rx="6" fill="none" stroke="#DD344C" stroke-width="2.5"/>
 <text x="542" y="248" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="bold" fill="#DD344C" text-anchor="start">A社のIPアドレスを変更する</text>
 </svg>

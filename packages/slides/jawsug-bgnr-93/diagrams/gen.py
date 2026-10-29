@@ -141,7 +141,7 @@ def story_architecture():
     for i, (who, ip) in enumerate([("A社", "203.0.113.12/32"), ("B社", "203.0.113.128/28"), ("C社", "192.0.2.10/32")]):
         yy = y0 + 52 + i * 24
         b.append(t(x0 + 22, yy, who, 16, anchor="start"))
-        b.append(t(x0 + 80, yy, ip, 16, mono=True, anchor="start"))
+        b.append(t(x0 + 80, yy, mask_ip(ip), 16, mono=True, anchor="start"))
     b.append(f'<rect x="{x0 + 10}" y="{y0 + 33}" width="280" height="25" rx="6" fill="none" stroke="{RED}" stroke-width="2.5"/>')
     b.append(t(x0 + 316, y0 + 52, "A社のIPアドレスを変更する", 17, "bold", RED, "start"))
     write("story-architecture.svg", svg(1000, 340, b, "取引先からのアクセスをWAFのIPセットで許可している構成"))
@@ -175,6 +175,12 @@ AFTER = ROWS[:6] + [None, A_NEW]
 CONSOLE_BLUE = "#0972d3"
 
 
+def mask_ip(ip):
+    """見ると不安になるので、第2・第3オクテットを伏せる（第1・第4オクテットとプレフィックスは残す）。"""
+    a, _, _, rest = ip.split(".", 3)
+    return f"{a}.■.■.{rest}"
+
+
 def edit_rows(x, y, rows, step=34, marks=None):
     """7枚目の実スクショ（IP セットを編集）と同じ形：入力欄＋「削除」ボタン、下に「IP アドレスの追加」。
     rows の None は消えた行（赤い点線の空欄）。marks は {行番号: (印, 色)} で、行の右に添える。"""
@@ -186,7 +192,7 @@ def edit_rows(x, y, rows, step=34, marks=None):
             o.append(f'<rect x="{x}" y="{yy}" width="478" height="26" rx="6" fill="{RED_BG}" stroke="{RED}" stroke-width="2" stroke-dasharray="6 4"/>')
         else:
             o.append(f'<rect x="{x}" y="{yy}" width="400" height="26" rx="6" fill="#ffffff" stroke="{GRAY}" stroke-width="1.5"/>')
-            o.append(t(x + 12, yy + 18, ip, 15, anchor="start"))
+            o.append(t(x + 12, yy + 18, mask_ip(ip), 15, anchor="start"))
             o.append(f'<rect x="{x + 414}" y="{yy}" width="64" height="26" rx="13" fill="#ffffff" stroke="{CONSOLE_BLUE}" stroke-width="2"/>')
             o.append(t(x + 446, yy + 18, "削除", 13, "bold", CONSOLE_BLUE))
         if i in marks:
@@ -202,8 +208,8 @@ def story_screens():
     # ⑤ 事件
     b = pane(20, 6, 600, 350, "マネジメントコンソール　IP セットを編集", "console")
     b += edit_rows(48, 58, [ip for ip in AFTER if ip])
-    for i, (who, msg, c, bg) in enumerate([("A社", "接続できる", GREEN, GREEN_BG),
-                                           ("B社", "接続できない", RED, RED_BG)]):
+    for i, (who, msg, c, bg) in enumerate([("A社", "接続できるようになりました！", GREEN, GREEN_BG),
+                                           ("B社", "急に接続できなくなった！", RED, RED_BG)]):
         y = 40 + i * 120
         b.append(inner("office", 670, y + 6, 40))
         b.append(t(690, y + 66, who, 13, "bold"))
@@ -216,13 +222,7 @@ def story_screens():
     # A社の旧と新が両方残り、B社の行が消えている
     b += edit_rows(48, 52, AFTER, step=31, marks={
         4: ("A社（旧）", INK), 6: ("B社（削除）", RED), 7: ("A社（新）", INK)})
-    b += pane(680, 14, 300, 220, "手順書", "doc")
-    b.append(t(704, 92, "B社の元の値", 16, color=SUB, anchor="start"))
-    b.append(f'<rect x="704" y="104" width="252" height="40" rx="8" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
-    b.append(t(830, 131, "？", 20, "bold", RED))
-    b.append(t(704, 176, "4. 現在の設定値を控える", 15, color=SUB, anchor="start"))
-    b.append(t(704, 204, "→ 未実施", 15, "bold", RED, "start"))
-    write("story-lost.svg", svg(1000, 360, b, "IPセットの編集画面。A社の旧と新のIPアドレスが両方残り、B社の行が消えている。手順4で控えるはずだったB社の元の値は、どこにも残っていない"))
+    write("story-lost.svg", svg(640, 360, b, "IPセットの編集画面。A社の旧と新のIPアドレスが両方残り、B社の行が消えている"))
 
 
 # ---------------------------------------------------------------- 1部: デプロイの仕組み（差分）
