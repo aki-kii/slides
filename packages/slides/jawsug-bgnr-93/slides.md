@@ -484,11 +484,20 @@ chapter: AIとIaC
 chapter: AIとIaC
 ---
 
-## IaCのツールもAI向けに進化している
+## IaCツールもAI向けに進化している
 
-<div class="text-lg mt-2">AIがIaCのツールを使いやすくなるアップデートが、これだけ続いている</div>
+<div class="text-lg mt-2">AIが自分で書いたコードを、自分で検証できる範囲が広がってきている</div>
 
-<InlineSvg src="ai-updates.svg" label="AIがIaCのツールを使いやすくなるアップデート" class="mx-auto mt-6" style="width: 900px" />
+<div class="update-grid mt-6">
+<InlineSvg src="ai-updates.svg" label="IaCのツールのアップデートを古い順に並べた年表。cdk diagnose（プレビュー）を強調している" />
+<div class="update-card">
+  <div class="update-card-title">cdk diagnose（プレビュー）</div>
+  <ul>
+    <li>デプロイに失敗した理由が確認できるコマンド</li>
+    <li>理由をもとにAIが修正しやすくなった</li>
+  </ul>
+</div>
+</div>
 
 ---
 layout: center

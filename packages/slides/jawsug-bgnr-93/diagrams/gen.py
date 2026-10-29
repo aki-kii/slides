@@ -278,31 +278,28 @@ def iac_diff():
 
 # ---------------------------------------------------------------- 2部: アップデート
 def ai_updates():
-    items = [("2025-11", ["CloudFormation", "早期バリデーション"]),
-             ("2025-11", ["CloudFormation", "Language Server"]),
-             ("2025-11", ["AWS IaC", "MCP Server"]),
-             ("2026-04", ["cdk diagnose", "（プレビュー）"]),
-             ("2026-06", ["cdk validate", "（プレビュー）"]),
-             ("2026-06", ["Terraform MCP Server", "GA"]),
-             ("2026-07", ["cdk lsp", "（プレビュー）"])]
+    # 上から古い順。cdk diagnose はスライドのカードで取り上げるので強調する
+    items = [("2025-11", "CloudFormation 早期バリデーション"),
+             ("2025-11", "CloudFormation Language Server"),
+             ("2025-11", "AWS IaC MCP Server"),
+             ("2026-04", "cdk diagnose（プレビュー）"),
+             ("2026-06", "cdk validate（プレビュー）"),
+             ("2026-06", "Terraform MCP Server GA"),
+             ("2026-07", "cdk lsp（プレビュー）")]
+    pick = "cdk diagnose（プレビュー）"
     b = []
-    y = 160
-    b.append(arrow(f"M10,{y} L990,{y}", INK))
-    xs = [90 + i * 136 for i in range(len(items))]
-    for i, ((ym, lines), x) in enumerate(zip(items, xs)):
-        up = i % 2 == 0
-        b.append(f'<circle cx="{x}" cy="{y}" r="7" fill="#ffffff" stroke="{GREEN}" stroke-width="3"/>')
-        if up:
-            b.append(t(x, y + 32, ym, 15, "bold", SUB, mono=True))
-            b.append(f'<line x1="{x}" y1="{y - 9}" x2="{x}" y2="{y - 40}" stroke="{LINE}" stroke-width="2"/>')
-            for j, ln in enumerate(reversed(lines)):
-                b.append(t(x, y - 52 - j * 22, ln, 15))
-        else:
-            b.append(t(x, y - 20, ym, 15, "bold", SUB, mono=True))
-            b.append(f'<line x1="{x}" y1="{y + 9}" x2="{x}" y2="{y + 40}" stroke="{LINE}" stroke-width="2"/>')
-            for j, ln in enumerate(lines):
-                b.append(t(x, y + 64 + j * 22, ln, 15))
-    write("ai-updates.svg", svg(1000, 300, b, "AIがIaCのツールを使いやすくなるアップデート"))
+    step, y0, lx = 46, 30, 104
+    b.append(f'<line x1="{lx}" y1="{y0 - 14}" x2="{lx}" y2="{y0 + step * (len(items) - 1) + 14}" stroke="{LINE}" stroke-width="3"/>')
+    for i, (ym, name) in enumerate(items):
+        y = y0 + i * step
+        hot = name == pick
+        if hot:
+            b.append(f'<rect x="{lx + 14}" y="{y - 18}" width="330" height="36" rx="8" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
+        b.append(t(10, y + 6, ym, 16, "bold", SUB, "start", mono=True))
+        b.append(f'<circle cx="{lx}" cy="{y}" r="8" fill="{GREEN if hot else "#ffffff"}" stroke="{GREEN}" stroke-width="3"/>')
+        b.append(t(lx + 26, y + 6, name, 17, "bold" if hot else "normal", GREEN if hot else INK, "start"))
+    write("ai-updates.svg", svg(460, y0 + step * (len(items) - 1) + 30, b,
+                                "IaCのツールのアップデートを古い順に並べた年表。cdk diagnose（プレビュー）を強調している"))
 
 
 # ---------------------------------------------------------------- 3部: 学び方

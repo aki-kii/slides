@@ -494,3 +494,9 @@
 /* 特徴②④：2つの図を左右に並べ、それぞれに小さい見出しを付ける */
 .fig-pair { display: grid; grid-template-columns: 360px 360px; gap: 4rem; justify-content: center; }
 .fig-head { font-size: 0.95rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.4rem; white-space: nowrap; }
+
+/* 2部：アップデートの縦の年表と、取り上げる1件のカード */
+.update-grid { display: grid; grid-template-columns: 380px 1fr; gap: 1.2rem; align-items: center; }
+.update-card { border: 2px solid #0E8A6E; background: #e9f5f1; border-radius: 14px; padding: 0.9rem 1rem; }
+.update-card-title { font-weight: bold; font-size: 1.05rem; color: #0E8A6E; margin-bottom: 0.4rem; white-space: nowrap; }
+.update-card li { font-size: 0.86rem !important; line-height: 1.6 !important; white-space: nowrap; }
