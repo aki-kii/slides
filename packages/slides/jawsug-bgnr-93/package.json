@@ -6,7 +6,9 @@
     "dev": "slidev",
     "build": "slidev build",
     "export": "slidev export --with-clicks --output ./export/slides.pdf",
-    "export:png": "slidev export --format png --with-clicks --output ./export"
+    "export:png": "slidev export --format png --with-clicks --output ./export",
+    "diagrams": "slides-tools diagrams diagrams/diagrams.ts --out public/images",
+    "shots": "slides-tools shots diagrams/shots.ts --out public/images/story"
   },
   "dependencies": {
     "@slidev/cli": "^52.1.0",
@@ -15,6 +17,7 @@
     "@slides/ui": "workspace:*"
   },
   "devDependencies": {
-    "playwright-chromium": "^1.58.2"
+    "playwright-chromium": "^1.58.2",
+    "@slides/tools": "workspace:*"
   }
 }
