@@ -267,7 +267,7 @@ transition: view-transition
 
 <div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">コードに定義されている通りにデプロイされるため、誰が何回やっても同じ結果になる</div>
 
-<InlineSvg src="feature-reproducibility.svg" label="手作業では1回のデプロイの中で設定変更を繰り返すのでどこかで間違えるが、IaCは誰がやっても同じ結果になる" class="mx-auto mt-3" style="width: 470px" />
+<InlineSvg src="feature-reproducibility.svg" label="マネコンの手作業では作業者ごとに結果がばらつくが、IaCは同じコードから誰がやっても同じ結果になる" class="mx-auto mt-3" style="width: 470px" />
 
 ---
 chapter: IaCとは？

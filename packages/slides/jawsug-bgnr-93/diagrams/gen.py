@@ -366,24 +366,23 @@ def learning_steps():
 # ---------------------------------------------------------------- 1部: 特徴
 def feature_reproducibility():
     b = []
-    # 手作業: 1 回のデプロイの中で、リソースの設定変更を繰り返す
-    b.append(t(20, 30, "手作業", 20, "bold", anchor="start"))
-    b += service("user", 52, 104, "人間", size=48, fs=16)
-    b.append(f'<rect x="104" y="44" width="486" height="146" rx="12" fill="none" stroke="{GRAY}" stroke-width="2" stroke-dasharray="7 5"/>')
-    b.append(t(118, 66, "1回のデプロイ", 15, "bold", SUB, "start"))
     res = [("waf", "AWS WAF"), ("elb", "ALB"), ("ecs", "Amazon ECS")]
-    xs = [200, 350, 500]
-    for (k, n), x in zip(res, xs):
-        b.append(inner(k, x - 24, 80, 48))
-        b.append(t(x, 148, n, 15, "bold"))
-    b.append(arrow("M84,104 L170,104"))
-    b.append(arrow("M230,104 L320,104"))
-    b.append(arrow("M380,104 L470,104"))
-    b.append(t(273, 94, "設定を変える", 12))
-    b.append(t(427, 94, "設定を変える", 12))
-    b.append(t(127, 94, "変える", 12))
-    b.append(f'<rect x="316" y="72" width="68" height="88" rx="10" fill="none" stroke="{RED}" stroke-width="2.5"/>')
-    b.append(t(350, 180, "どこかで間違える", 15))
+    # マネコン（手作業）：作業者ごとにマネコンで操作するので、結果がばらつく（下の IaC と同じ並びで比べる）
+    b.append(f'<rect x="10" y="10" width="580" height="190" rx="14" fill="#ffffff" stroke="{GRAY}" stroke-width="2" stroke-dasharray="7 5"/>')
+    b.append(t(28, 40, "マネコン（手作業）", 20, "bold", anchor="start"))
+    for i, n in enumerate(["新人", "ベテラン"]):
+        y = 82 + i * 74
+        b.append(inner("user", 34, y - 22, 44))
+        b.append(t(92, y + 6, n, 16, "bold", anchor="start"))
+        b.append(arrow(f"M166,{y} L222,{108 + (i * 2 - 1) * 6}"))
+    b += service("console", 258, 108, "マネコンで操作", size=48, fs=16)
+    b.append(arrow("M292,108 L352,108"))
+    for r in range(2):
+        y = 50 + r * 58
+        for j, (k, _) in enumerate(res):
+            b.append(inner(k, 370 + j * 48, y, 38))
+    b.append(f'<rect x="414" y="104" width="46" height="46" rx="8" fill="none" stroke="{RED}" stroke-width="3"/>')
+    b.append(t(441, 186, "結果がばらつく", 17, "bold", RED))
     # IaC
     b.append(f'<rect x="10" y="210" width="580" height="190" rx="14" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
     b.append(t(28, 240, "IaC", 20, "bold", GREEN, "start"))
@@ -399,7 +398,7 @@ def feature_reproducibility():
         for j, (k, _) in enumerate(res):
             b.append(inner(k, 370 + j * 48, y, 38))
     b.append(t(441, 392, "同じ結果", 17, "bold", GREEN))
-    write("feature-reproducibility.svg", svg(600, 410, b, "手作業では1回のデプロイの中で設定変更を繰り返すのでどこかで間違えるが、IaCは誰がやっても同じ結果になる"))
+    write("feature-reproducibility.svg", svg(600, 410, b, "マネコンの手作業では作業者ごとに結果がばらつくが、IaCは同じコードから誰がやっても同じ結果になる"))
 
 
 def resources_row(x, y, size=36, gap=58):
