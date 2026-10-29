@@ -137,22 +137,22 @@ transition: fade
 
 ---
 
-<h2 class="pain-head">このリリースの辛いポイント</h2>
+<h2 class="pain-head">リリースの振り返り</h2>
 
 <div class="mt-8 pain-list">
 
-- マネコンが手順書と変わっていて手間取った
-- 変更先の設定を見間違えて、想定の設定と異なる設定をしてしまった
-- 設定を戻そうとしても元の値を探す必要があり手間取った
+- マネコンが手順書と変わっていて困った
+- 設定を見間違えて事故を起こしてしまった
+- 復旧しようとしても元の値を探す必要があった
 
 </div>
 
-<div class="mt-10 pain-close">IaCなら、これらの間違いが起こらない安全なデプロイができる</div>
+<div class="mt-10 pain-close">→ IaCでデプロイすればこのような間違いが起こらず、<br>&emsp;より安全なデプロイができます！</div>
 
 <style>
 .pain-head { white-space: nowrap; font-size: 1.9rem !important; }
 .pain-list li { font-size: 1.25rem !important; line-height: 2 !important; }
-.pain-close { font-size: 1.4rem; white-space: nowrap; }
+.pain-close { font-size: 1.35rem; line-height: 1.6; white-space: nowrap; }
 </style>
 
 ---
