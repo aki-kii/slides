@@ -156,9 +156,9 @@ transition: fade
 
 ---
 layout: center
-class: text-center
 ---
 
+<!-- 紙芝居型：前置き（小）＋大きい一文。他の紙芝居ページと同じく左寄せ -->
 <div>
   それでは
   <h2>IaCについて解説していきます</h2>
