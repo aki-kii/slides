@@ -1,0 +1,596 @@
+#!/usr/bin/env python3
+"""#93 の図を SVG で組む（life の tasks/speaking/diagram-style.md に合わせる）。
+
+  python3 diagrams/gen.py   # public/images/*.svg に書き出す
+
+AWS のアイコンは AWS Architecture Icons 2026-07-31 版（Icon-package_07312026）。
+置き場は環境変数 AWS_ICONS（既定は /srv/kiro-work/research/aws-icons/pkg）。
+"""
+import os
+import re
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(os.path.dirname(HERE), "public", "images")
+PKG = os.environ.get("AWS_ICONS", "/srv/kiro-work/research/aws-icons/pkg")
+ARCH = f"{PKG}/Architecture-Service-Icons_07312026"
+GROUP = f"{PKG}/Architecture-Group-Icons_07312026"
+RES = f"{PKG}/Resource-Icons_07312026"
+GEN = f"{RES}/Res_General-Icons/Res_48_Light"
+
+I = {
+    "waf": f"{ARCH}/Arch_Security-Identity-Compliance/64/Arch_AWS-WAF_64.svg",
+    "elb": f"{ARCH}/Arch_Networking-Content-Delivery/64/Arch_Elastic-Load-Balancing_64.svg",
+    "ecs": f"{ARCH}/Arch_Containers/64/Arch_Amazon-Elastic-Container-Service_64.svg",
+    "console": f"{ARCH}/Arch_Management-Governance/64/Arch_AWS-Management-Console_64.svg",
+    "cli": f"{ARCH}/Arch_Developer-Tools/64/Arch_AWS-Command-Line-Interface_64.svg",
+    "sdk": f"{ARCH}/Arch_Developer-Tools/64/Arch_AWS-Tools-and-SDKs_64.svg",
+    "lambda": f"{ARCH}/Arch_Compute/64/Arch_AWS-Lambda_64.svg",
+    "dynamodb": f"{ARCH}/Arch_Databases/64/Arch_Amazon-DynamoDB_64.svg",
+    "cloud": f"{GROUP}/AWS-Cloud-logo_32.svg",
+    "office": f"{GEN}/Res_Office-building_48_Light.svg",
+    "user": f"{GEN}/Res_User_48_Light.svg",
+    "code": f"{GEN}/Res_Source-Code_48_Light.svg",
+    "doc": f"{GEN}/Res_Document_48_Light.svg",
+    "toolkit": f"{GEN}/Res_Toolkit_48_Light.svg",
+    "generic": f"{GEN}/Res_Generic-Application_48_Light.svg",
+    "git": f"{GEN}/Res_Git-Repository_48_Light.svg",
+}
+
+JP = "'Noto Sans JP', 'Hiragino Sans', sans-serif"
+MONO = "'Fira Code', monospace"
+INK, SUB, LINE = "#2c3e50", "#6b7684", "#c9d0d9"
+GREEN, GREEN_BG = "#0E8A6E", "#e9f5f1"
+RED, RED_BG = "#DD344C", "#fdecee"
+GRAY = "#8a94a3"
+
+_n = 0
+
+
+def find(path):
+    """パッケージのフォルダ名の揺れ（カテゴリ名）に強くする。"""
+    if os.path.exists(path):
+        return path
+    name = os.path.basename(path)
+    for root, _, files in os.walk(PKG):
+        if "__MACOSX" in root:
+            continue
+        if name in files:
+            return os.path.join(root, name)
+    raise FileNotFoundError(name)
+
+
+def inner(key, x, y, size):
+    """diagram-style.md の inner()。id とクラス名に接頭辞を付けて埋め込む。"""
+    global _n
+    _n += 1
+    prefix = f"{key}{_n}-"
+    s = open(find(I[key])).read()
+    s = re.sub(r'<\?xml[^>]*\?>', '', s)
+    vb = re.search(r'viewBox="([^"]+)"', s).group(1)
+    body = re.search(r'<svg[^>]*>(.*)</svg>', s, re.S).group(1)
+    for i in set(re.findall(r'id="([^"]+)"', body)):
+        body = body.replace(f'id="{i}"', f'id="{prefix}{i}"').replace(f'url(#{i})', f'url(#{prefix}{i})')
+    body = re.sub(r'\.cls-(\d)', rf'.{prefix}cls-\1', body).replace('class="cls-', f'class="{prefix}cls-')
+    body = re.sub(r'<title>.*?</title>', '', body, flags=re.S)
+    return f'<svg x="{x}" y="{y}" width="{size}" height="{size}" viewBox="{vb}">{body.strip()}</svg>'
+
+
+def t(x, y, s, size=15, weight="normal", color=INK, anchor="middle", mono=False):
+    fam = MONO if mono else JP
+    return (f'<text x="{x}" y="{y}" font-family="{fam}" font-size="{size}" font-weight="{weight}" '
+            f'fill="{color}" text-anchor="{anchor}">{s}</text>')
+
+
+def arrow(d, color=INK, width=2.5, dash=None):
+    mid = {INK: "i", GREEN: "g", RED: "r", GRAY: "x"}[color]
+    da = f' stroke-dasharray="{dash}"' if dash else ""
+    return (f'<path d="{d}" fill="none" stroke="{color}" stroke-width="{width}"{da} '
+            f'stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-{mid})"/>')
+
+
+def svg(w, h, body, label):
+    defs = "".join(
+        f'<marker id="a-{m}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" '
+        f'orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{c}"/></marker>'
+        for m, c in (("i", INK), ("g", GREEN), ("r", RED), ("x", GRAY)))
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="100%" role="img" '
+            f'aria-label="{label}">\n<!-- AWS Architecture Icons 2026-07-31 版（Icon-package_07312026） -->\n'
+            f'<defs>{defs}</defs>\n' + "\n".join(body) + "\n</svg>\n")
+
+
+def service(key, cx, cy, name, sub=None, size=64, mono_sub=False, fs=18, ss=15):
+    out = [inner(key, cx - size // 2, cy - size // 2, size)]
+    y = cy + size // 2 + fs + 4
+    out.append(t(cx, y, name, fs, "bold"))
+    if sub:
+        out.append(t(cx, y + ss + 6, sub, ss, color=SUB, mono=mono_sub))
+    return out
+
+
+def write(name, content):
+    os.makedirs(OUT, exist_ok=True)
+    with open(os.path.join(OUT, name), "w") as f:
+        f.write(content)
+    print(name)
+
+
+# ---------------------------------------------------------------- 導入: 構成
+def story_architecture():
+    b = []
+    for i, name in enumerate(["A社", "B社", "C社"]):
+        y = 50 + i * 80
+        b.append(inner("office", 30, y, 48))
+        b.append(t(92, y + 32, name, 18, "bold", anchor="start"))
+    b.append(t(70, 304, "お客さんの会社", 15, color=SUB))
+    b.append('<rect x="200" y="10" width="790" height="320" rx="14" fill="none" stroke="#232F3E" stroke-width="2"/>')
+    b.append(inner("cloud", 200, 10, 30))
+    b.append(t(238, 31, "AWS Cloud", 17, "bold", "#232F3E", "start"))
+    b += service("waf", 330, 100, "WAF", "IPセット")
+    b += service("elb", 610, 100, "ALB")
+    b += service("ecs", 880, 100, "業務システム", "(ECS)")
+    b.append(arrow("M144,140 L292,108"))
+    b.append(t(214, 104, "アクセスする", 16))
+    b.append(arrow("M366,100 L572,100"))
+    b.append(t(470, 88, "許可した会社だけ通す", 16))
+    b.append(arrow("M646,100 L842,100"))
+    b.append(t(744, 88, "リクエストを渡す", 16))
+    x0, y0 = 226, 196
+    b.append(f'<rect x="{x0}" y="{y0}" width="300" height="118" rx="10" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
+    b.append(t(x0 + 14, y0 + 24, "IPセット", 14, "bold", SUB, "start"))
+    for i, (who, ip) in enumerate([("A社", "203.xxx.xxx.10/32"), ("B社", "198.xxx.xxx.7/32"), ("C社", "192.xxx.xxx.45/32")]):
+        yy = y0 + 52 + i * 24
+        b.append(t(x0 + 22, yy, who, 16, anchor="start"))
+        b.append(t(x0 + 80, yy, ip, 16, mono=True, anchor="start"))
+    b.append(f'<rect x="{x0 + 10}" y="{y0 + 33}" width="280" height="25" rx="6" fill="none" stroke="{RED}" stroke-width="2.5"/>')
+    b.append(t(x0 + 316, y0 + 52, "A社のIPアドレスを変更する", 17, "bold", RED, "start"))
+    write("story-architecture.svg", svg(1000, 340, b, "取引先からのアクセスをWAFのIPセットで許可している構成"))
+
+
+# ---------------------------------------------------------------- 導入: 画面
+def pane(x, y, w, h, title, icon):
+    o = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
+         f'<line x1="{x}" y1="{y + 46}" x2="{x + w}" y2="{y + 46}" stroke="{LINE}" stroke-width="2"/>',
+         inner(icon, x + 14, y + 8, 30),
+         t(x + 54, y + 30, title, 17, "bold", anchor="start")]
+    return o
+
+
+def ip_rows(x, y, rows, w=380):
+    o = []
+    for i, ip in enumerate(rows):
+        yy = y + i * 34
+        o.append(f'<rect x="{x}" y="{yy}" width="{w}" height="26" rx="6" fill="#f5f7f9" stroke="{LINE}" stroke-width="1.5"/>')
+        o.append(t(x + 16, yy + 19, ip, 17, mono=True, anchor="start"))
+    return o
+
+
+ROWS = ["192.xxx.xxx.45/32", "198.xxx.xxx.7/32", "203.xxx.xxx.10/32", "192.xxx.xxx.88/32", "198.xxx.xxx.61/32"]
+
+
+def story_screens():
+    # ③ 手順書を開く（手順書通りに進める）
+    b = pane(250, 14, 500, 330, "手順書", "doc")
+    for i, st in enumerate(["1. WAFのコンソールを開く", "2. IPセットを選ぶ", "3. 「編集」を押す", "4. A社の行を書き換える"]):
+        b.append(t(280, 98 + i * 40, st, 20, anchor="start"))
+    write("story-manual.svg", svg(1000, 360, b, "手順書を開いて、手順書通りに進める"))
+
+    # ③ 手順書が古い
+    b = pane(20, 14, 440, 330, "手順書", "doc")
+    for i, s in enumerate(["1. WAFのコンソールを開く", "2. IPセットを選ぶ", "3. 「編集」を押す", "4. A社の行を書き換える"]):
+        b.append(t(44, 92 + i * 32, s, 18, anchor="start"))
+    b.append(f'<rect x="44" y="220" width="392" height="104" rx="8" fill="#f5f7f9" stroke="{LINE}" stroke-width="1.5"/>')
+    b.append(t(60, 244, "（手順書に貼ってある画面）", 12, color=SUB, anchor="start"))
+    b.append(f'<rect x="330" y="262" width="86" height="34" rx="6" fill="#ffffff" stroke="{SUB}" stroke-width="1.5"/>')
+    b.append(t(373, 284, "編集", 14, "bold"))
+    b.append(f'<rect x="322" y="254" width="102" height="50" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
+    b += pane(520, 14, 460, 330, "マネジメントコンソール", "console")
+    for i, s in enumerate(["概要", "ルール", "IPセット", "設定"]):
+        b.append(f'<rect x="{544 + i * 104}" y="78" width="94" height="30" rx="6" fill="#f5f7f9" stroke="{LINE}" stroke-width="1.5"/>')
+        b.append(t(591 + i * 104, 99, s, 15))
+    b.append(t(750, 232, "「編集」が見当たらない…？", 20, "bold", RED))
+    b.append(f'<rect x="544" y="128" width="412" height="196" rx="9" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
+    write("story-old-manual.svg", svg(1000, 360, b, "手順書の画面と今のコンソールの画面が違う"))
+
+    # ④ IP セットの編集画面
+    b = pane(20, 14, 600, 330, "マネジメントコンソール　IPセットの編集", "console")
+    b += ip_rows(48, 76, ROWS, 540)
+    b.append(f'<rect x="40" y="102" width="556" height="38" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
+    b.append(t(48, 278, "どれが誰のIPかは書いていない", 17, color=SUB, anchor="start"))
+    b += pane(680, 14, 300, 200, "手順書", "doc")
+    b.append(t(704, 96, "新しいA社のIP", 16, color=SUB, anchor="start"))
+    b.append(t(704, 128, "203.xxx.xxx.24/32", 18, "bold", mono=True, anchor="start"))
+    b.append(arrow("M690,122 L604,122", RED))
+    b.append(t(704, 170, "コピーして置き換える", 16, "bold", RED, "start"))
+    write("story-ip-set.svg", svg(1000, 360, b, "IPセットの編集画面で、A社だと思った行を置き換える"))
+
+    # ⑤ 事件
+    b = pane(20, 14, 600, 330, "マネジメントコンソール　IPセットの編集", "console")
+    rows = ROWS[:]
+    rows[1] = "203.xxx.xxx.24/32"
+    b += ip_rows(48, 76, rows, 540)
+    b.append(f'<rect x="40" y="102" width="556" height="38" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
+    b.append(t(48, 278, "書き換えたのはB社の行だった", 19, "bold", RED, anchor="start"))
+    for i, (who, msg) in enumerate([("A社", "まだ繋がらないです"), ("B社", "急につながらなくなりました！")]):
+        y = 40 + i * 120
+        b.append(inner("office", 670, y + 6, 40))
+        b.append(t(690, y + 66, who, 13, "bold"))
+        b.append(f'<rect x="724" y="{y}" width="256" height="52" rx="14" fill="{RED_BG}" stroke="{RED}" stroke-width="2"/>')
+        b.append(t(852, y + 33, msg, 16, "bold", RED))
+    write("story-incident.svg", svg(1000, 360, b, "A社からもB社からも、つながらないと連絡が来る"))
+
+    # ⑥ 元の値が分からない
+    b = pane(20, 14, 600, 330, "マネジメントコンソール　IPセットの編集", "console")
+    b += ip_rows(48, 76, rows, 540)
+    b.append(f'<rect x="40" y="102" width="556" height="38" rx="9" fill="none" stroke="{RED}" stroke-width="3"/>')
+    b += pane(680, 14, 300, 200, "手順書", "doc")
+    b.append(t(704, 96, "B社の元の値", 16, color=SUB, anchor="start"))
+    b.append(f'<rect x="704" y="110" width="252" height="40" rx="8" fill="none" stroke="{RED}" stroke-width="3" stroke-dasharray="7 5"/>')
+    b.append(t(830, 137, "？", 20, "bold", RED))
+    b.append(t(704, 188, "どこにも残っていない", 17, color=SUB, anchor="start"))
+    write("story-lost.svg", svg(1000, 360, b, "元の値も経緯も、どこにも記録がない"))
+
+
+# ---------------------------------------------------------------- 1部: デプロイの仕組み（差分）
+def iac_diff():
+    b = []
+    res = [("waf", "AWS WAF"), ("elb", "ALB"), ("ecs", "Amazon ECS")]
+
+    def row(x, y, items, empty=None, hl=None):
+        o = []
+        for i, (k, n) in enumerate(items):
+            xx = x + i * 72
+            if k == empty:
+                # 差分になるところ。足りない枠を緑の破線で見せる
+                o.append(f'<rect x="{xx}" y="{y}" width="48" height="48" rx="8" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2.5" stroke-dasharray="6 4"/>')
+            else:
+                o.append(inner(k, xx, y, 48))
+                if k == hl:
+                    o.append(f'<rect x="{xx - 6}" y="{y - 6}" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>')
+            o.append(t(xx + 24, y + 68, n, 13, "bold" if k in (empty, hl) else "normal", GREEN if k in (empty, hl) else INK))
+        return o
+
+    # コード（あるべき姿）
+    b.append(f'<rect x="20" y="20" width="250" height="140" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
+    b.append(inner("code", 32, 30, 28))
+    b.append(t(66, 50, "コード（あるべき姿）", 16, "bold", anchor="start"))
+    b += row(44, 68, res, hl="ecs")
+    # 現在の状態
+    b.append(f'<rect x="20" y="210" width="250" height="140" rx="12" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
+    b.append(inner("cloud", 32, 220, 28))
+    b.append(t(66, 240, "現在の状態", 16, "bold", anchor="start"))
+    b += row(44, 258, res, empty="ecs")
+    # IaCのツールで比較
+    b.append(inner("toolkit", 376, 146, 64))
+    b.append(t(408, 232, "IaCのツール", 16, "bold"))
+    b.append(arrow("M276,90 L330,90 L330,166 L370,166"))
+    b.append(arrow("M276,280 L330,280 L330,196 L370,196"))
+    b.append(t(316, 186, "比較", 15, anchor="end"))
+    # 差分（ここだけを大きく見せる）
+    b.append(arrow("M446,178 L520,178", GREEN))
+    b.append(f'<rect x="528" y="104" width="148" height="150" rx="12" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="3" stroke-dasharray="7 5"/>')
+    b.append(t(602, 134, "差分", 20, "bold", GREEN))
+    b.append(inner("ecs", 566, 148, 72))
+    b.append(f'<rect x="{566 - 6}" y="{148 - 6}" width="84" height="84" rx="12" fill="none" stroke="{GREEN}" stroke-width="3"/>')
+    b.append(t(602, 244, "Amazon ECS", 14, "bold", GREEN))
+    # デプロイ → 実リソース
+    b.append(arrow("M682,178 L736,178", GREEN))
+    b.append(t(709, 166, "デプロイ", 14, "bold", GREEN))
+    b.append(f'<rect x="742" y="110" width="244" height="140" rx="12" fill="#ffffff" stroke="#232F3E" stroke-width="2"/>')
+    b.append(inner("cloud", 742, 110, 28))
+    b.append(t(778, 130, "実リソース", 16, "bold", "#232F3E", "start"))
+    b += row(764, 156, res, hl="ecs")
+    write("iac-diff.svg", svg(1000, 366, b, "IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする"))
+
+
+# ---------------------------------------------------------------- 2部: アップデート
+def ai_updates():
+    items = [("2025-04", ["AWS Labs", "CDK MCP Server"]),
+             ("2025-05", ["Terraform MCP Server", "ベータ"]),
+             ("2025-07", ["AWS Knowledge", "MCP Server"]),
+             ("2025-09", ["Terraform MCP Server が", "HCP Terraform 連携"]),
+             ("2025-11", ["CloudFormation", "Language Server", "AWS IaC MCP Server"]),
+             ("2025-12", ["Kiro の", "Terraform power"]),
+             ("2026-02", ["Agent Plugins", "for AWS"]),
+             ("2026-06", ["Terraform MCP Server", "GA"])]
+    b = []
+    y = 160
+    b.append(arrow(f"M10,{y} L990,{y}", INK))
+    xs = [84 + i * 118 for i in range(len(items))]
+    for i, ((ym, lines), x) in enumerate(zip(items, xs)):
+        up = i % 2 == 0
+        b.append(f'<circle cx="{x}" cy="{y}" r="7" fill="#ffffff" stroke="{GREEN}" stroke-width="3"/>')
+        if up:
+            b.append(t(x, y + 32, ym, 15, "bold", SUB, mono=True))
+            b.append(f'<line x1="{x}" y1="{y - 9}" x2="{x}" y2="{y - 40}" stroke="{LINE}" stroke-width="2"/>')
+            for j, ln in enumerate(reversed(lines)):
+                b.append(t(x, y - 52 - j * 22, ln, 15))
+        else:
+            b.append(t(x, y - 20, ym, 15, "bold", SUB, mono=True))
+            b.append(f'<line x1="{x}" y1="{y + 9}" x2="{x}" y2="{y + 40}" stroke="{LINE}" stroke-width="2"/>')
+            for j, ln in enumerate(lines):
+                b.append(t(x, y + 64 + j * 22, ln, 15))
+    write("ai-updates.svg", svg(1000, 300, b, "IaCのツールのAIに関するアップデート"))
+
+
+# ---------------------------------------------------------------- 3部: 学び方
+def learning_steps():
+    b = []
+    steps = [("toolkit", ["環境のセットアップ"], "AIに任せてもよい"),
+             ("lambda", ["Lambda関数を作る"], "新規作成"),
+             ("lambda", ["ソースコードや", "設定を変更する"], "設定変更"),
+             ("dynamodb", ["DynamoDBから", "値を取得する"], "他リソースとの連携")]
+    xs = [110, 370, 630, 890]
+    for (k, names, sub), x in zip(steps, xs):
+        b.append(inner(k, x - 36, 44, 72))
+        y = 144
+        for n in names:
+            b.append(t(x, y, n, 20, "bold"))
+            y += 26
+        b.append(t(x, y - 2, sub, 16, color=SUB))
+    for a, c in zip(xs, xs[1:]):
+        b.append(arrow(f"M{a + 56},80 L{c - 56},80", GREEN))
+    b.append(f'<path d="M300,228 L300,240 L960,240 L960,228" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round"/>')
+    b.append(t(630, 272, "最小限のリソースから、少しずつ範囲を広げる", 20, "bold", GREEN))
+    write("learning-steps.svg", svg(1000, 286, b, "AIと一緒にサーバーレス構成を少しずつ育てる"))
+
+
+# ---------------------------------------------------------------- 1部: 特徴
+def feature_reproducibility():
+    b = []
+    # 手作業: 1 回のデプロイの中で、リソースの設定変更を繰り返す
+    b.append(t(20, 30, "手作業", 20, "bold", anchor="start"))
+    b += service("user", 52, 104, "人間", size=48, fs=16)
+    b.append(f'<rect x="104" y="44" width="486" height="146" rx="12" fill="none" stroke="{GRAY}" stroke-width="2" stroke-dasharray="7 5"/>')
+    b.append(t(118, 66, "1回のデプロイ", 15, "bold", SUB, "start"))
+    res = [("waf", "AWS WAF"), ("elb", "ALB"), ("ecs", "Amazon ECS")]
+    xs = [200, 350, 500]
+    for (k, n), x in zip(res, xs):
+        b.append(inner(k, x - 24, 80, 48))
+        b.append(t(x, 148, n, 15, "bold"))
+    b.append(arrow("M84,104 L170,104"))
+    b.append(arrow("M230,104 L320,104"))
+    b.append(arrow("M380,104 L470,104"))
+    b.append(t(273, 94, "設定を変える", 12))
+    b.append(t(427, 94, "設定を変える", 12))
+    b.append(t(127, 94, "変える", 12))
+    b.append(f'<rect x="316" y="72" width="68" height="88" rx="10" fill="none" stroke="{RED}" stroke-width="2.5"/>')
+    b.append(t(350, 180, "どこかで間違える", 15))
+    # IaC
+    b.append(f'<rect x="10" y="210" width="580" height="190" rx="14" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
+    b.append(t(28, 240, "IaC", 20, "bold", GREEN, "start"))
+    for i, n in enumerate(["新人", "ベテラン"]):
+        y = 282 + i * 74
+        b.append(inner("user", 34, y - 22, 44))
+        b.append(t(92, y + 6, n, 16, "bold", anchor="start"))
+        b.append(arrow(f"M166,{y} L222,{308 + (i * 2 - 1) * 6}", GREEN))
+    b += service("code", 258, 308, "同じコード", size=48, fs=16)
+    b.append(arrow("M292,308 L352,308", GREEN))
+    for r in range(2):
+        y = 250 + r * 58
+        for j, (k, _) in enumerate(res):
+            b.append(inner(k, 370 + j * 48, y, 38))
+    b.append(t(441, 392, "同じ結果", 17, "bold", GREEN))
+    write("feature-reproducibility.svg", svg(600, 410, b, "手作業では1回のデプロイの中で設定変更を繰り返すのでどこかで間違えるが、IaCは誰がやっても同じ結果になる"))
+
+
+def feature_change_management():
+    b = []
+
+    def resources(x, y):
+        o = []
+        for i, k in enumerate(["waf", "elb", "ecs"]):
+            o.append(inner(k, x + i * 58, y, 36))
+            if i < 2:
+                o.append(arrow(f"M{x + i * 58 + 39},{y + 18} L{x + (i + 1) * 58 - 4},{y + 18}"))
+        return o
+
+    # 1. レビューしたソースコードをデプロイ
+    b.append(t(10, 28, "1. レビューしたソースコードをデプロイ", 18, "bold", anchor="start"))
+    b += service("user", 60, 88, "レビュー", size=44, fs=15)
+    b.append(arrow("M92,88 L156,88", GREEN))
+    b += service("code", 196, 88, "ソースコード", size=48, fs=15)
+    b.append(arrow("M232,88 L380,88", GREEN))
+    b.append(t(306, 78, "デプロイ", 15, "bold", GREEN))
+    b += resources(400, 70)
+    # 2. 戻したくなったら、前のコミットを戻して再度デプロイ
+    b.append(f'<line x1="10" y1="160" x2="590" y2="160" stroke="{LINE}" stroke-width="2"/>')
+    b.append(t(10, 196, "2. 戻したくなったら、前のコミットを戻して再度デプロイ", 18, "bold", anchor="start"))
+    y = 270
+    b.append(inner("git", 14, y - 24, 48))
+    b.append(f'<line x1="96" y1="{y}" x2="216" y2="{y}" stroke="{INK}" stroke-width="2.5"/>')
+    b.append(f'<circle cx="96" cy="{y}" r="11" fill="#ffffff" stroke="{GREEN}" stroke-width="3"/>')
+    b.append(f'<circle cx="216" cy="{y}" r="11" fill="#ffffff" stroke="{GRAY}" stroke-width="3"/>')
+    b.append(t(96, y + 34, "前のコミット", 15, "bold", GREEN))
+    b.append(t(216, y + 34, "今のコミット", 15, color=GRAY))
+    b.append(arrow(f"M216,{y - 16} C200,{y - 52} 112,{y - 52} 98,{y - 18}", GRAY))
+    b.append(t(156, y - 46, "戻す", 15, color=SUB))
+    b.append(arrow(f"M232,{y} L380,{y}", GREEN))
+    b.append(t(306, y - 10, "再度デプロイ", 15, "bold", GREEN))
+    b += resources(400, y - 18)
+    write("feature-change-management.svg", svg(600, 320, b, "レビューしたソースコードをデプロイし、戻したくなったら前のコミットを戻して再度デプロイする"))
+
+
+def feature_structure():
+    b = []
+    # リソースの関連（左・メイン）
+    b.append(t(110, 30, "リソース同士の関連を追える", 16))
+    for i, (k, n) in enumerate([("waf", "AWS WAF"), ("elb", "ALB"), ("ecs", "Amazon ECS")]):
+        y = 62 + i * 118
+        b.append(inner(k, 24, y, 56))
+        b.append(t(94, y + 34, n, 17, "bold", anchor="start"))
+        if i < 2:
+            b.append(arrow(f"M52,{y + 60} L52,{y + 114}"))
+    # コード（右・CDK）
+    b.append(arrow("M244,210 L218,210"))
+    b.append(f'<rect x="250" y="40" width="462" height="350" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
+    b.append(inner("code", 264, 52, 36))
+    b.append(t(310, 78, "コード（AWS CDK）", 18, "bold", anchor="start"))
+    rows = [
+        (INK, "const alb = new ApplicationLoadBalancer(this, 'Alb', {"),
+        (INK, "  vpc,"),
+        (INK, "  internetFacing: true,"),
+        (INK, "});"),
+        (INK, ""),
+        (GREEN, "// 取引先のシステムがHTTPでしか連携できないため、HTTPを許可する"),
+        (INK, "alb.addListener('Http', {"),
+        (INK, "  port: 80,"),
+        (INK, "  protocol: ApplicationProtocol.HTTP,"),
+        (INK, "});"),
+    ]
+    y = 140
+    for c, line in rows:
+        if c == GREEN:
+            # 日本語のコメントは等幅フォントだと字形が崩れるので、本文のフォントで描く（字下げぶんだけずらす）
+            indent = (len(line) - len(line.lstrip())) * 7.8
+            b.append(t(266 + indent, y, line.strip(), 13, color=c, anchor="start"))
+        elif line:
+            b.append(t(266, y, line.replace(" ", "&#160;"), 13, color=c, anchor="start", mono=True))
+        y += 19.5
+    b.append(t(481, 414, "構成の唯一の記録", 16, "bold"))
+    write("feature-structure.svg", svg(720, 424, b, "WAF・ALB・ECSの関連が分かる構成と、ALBを定義したAWS CDKのコード。あえてHTTPを許可する設定に、その意図をコメントで残している"))
+
+
+def feature_reuse():
+    b = []
+
+    def chain(keys, x, y, size=32, gap=58):
+        o = []
+        for i, k in enumerate(keys):
+            o.append(inner(k, x + i * gap, y, size))
+            if i < len(keys) - 1:
+                o.append(arrow(f"M{x + i * gap + size + 3},{y + size // 2} L{x + (i + 1) * gap - 4},{y + size // 2}"))
+        return o
+
+    # 同じコードで複数環境
+    b += service("code", 52, 92, "同じコード", size=52, fs=15)
+    for i, env in enumerate(["開発環境", "本番環境"]):
+        y = 26 + i * 96
+        b.append(f'<rect x="280" y="{y}" width="300" height="78" rx="12" fill="#ffffff" stroke="#232F3E" stroke-width="2"/>')
+        b.append(inner("cloud", 280, y, 24))
+        b.append(t(312, y + 18, env, 14, "bold", "#232F3E", "start"))
+        b += chain(["waf", "elb", "ecs"], 340, y + 34)
+        b.append(arrow(f"M90,92 L180,92 L272,{y + 46}", GREEN))
+    b.append(t(176, 80, "デプロイ", 15, color=GREEN))
+    b.append(t(430, 226, "同じコードのまま、別の環境にもデプロイ", 14, "bold", GREEN))
+    # 共通パターンを他の構成に組み込む
+    b.append(f'<line x1="10" y1="246" x2="590" y2="246" stroke="{LINE}" stroke-width="2"/>')
+    b.append(f'<rect x="16" y="268" width="150" height="110" rx="12" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
+    b.append(t(91, 292, "共通する部分", 15, "bold", GREEN))
+    b += chain(["elb", "ecs"], 46, 312, size=36, gap=56)
+    b.append(t(91, 368, "切り出す", 13, color=GREEN))
+    b.append(arrow("M172,322 L272,322", GREEN))
+    b.append(t(222, 310, "組み込む", 15, color=GREEN))
+    b.append(f'<rect x="280" y="262" width="300" height="122" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
+    b.append(t(296, 286, "他の構成", 15, "bold", anchor="start"))
+    b.append(f'<rect x="294" y="300" width="132" height="64" rx="10" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2" stroke-dasharray="7 5"/>')
+    b += chain(["elb", "ecs"], 308, 314, size=36, gap=58)
+    b.append(arrow("M426,332 L470,332"))
+    b.append(inner("dynamodb", 478, 312, 40))
+    b.append(t(437, 398, "共通する部分を切り出して、他の構成に組み込む", 14, "bold", GREEN))
+    b.append(t(498, 374, "Amazon DynamoDB", 12, color=SUB))
+    write("feature-reuse.svg", svg(600, 410, b, "同じコードでWAF・ALB・ECSの構成を開発環境と本番環境にデプロイでき、ALBとECSの共通パターンを他の構成に組み込める"))
+
+
+# ---------------------------------------------------------------- 2部: AI に向いている理由
+def ai_badge(cx, cy, size=56):
+    """AI（コーディングエージェントなど）。特定の製品に寄せないよう、文字だけの印にする。"""
+    h = size // 2
+    return [f'<rect x="{cx - h}" y="{cy - h}" width="{size}" height="{size}" rx="14" fill="{INK}"/>',
+            t(cx, cy + 9, "AI", 24, "bold", "#ffffff")]
+
+
+def code_box(x, y, w, h, rows):
+    o = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
+         inner("code", x + 12, y + 10, 30),
+         t(x + 50, y + 32, "コード", 17, "bold", anchor="start")]
+    yy = y + 64
+    for r in rows:
+        if r[0] == "res":
+            o.append(inner(r[1], x + 18, yy - 18, 28))
+            o.append(t(x + 56, yy + 2, r[2], 15, anchor="start"))
+        elif r[0] == "comment":
+            o.append(t(x + 18, yy + 2, r[1], 15, "bold", GREEN, "start"))
+        else:
+            o.append(f'<rect x="{x + 18}" y="{yy - 6}" width="{r[1]}" height="12" rx="6" fill="#e3e7ec"/>')
+        yy += 36
+    return o
+
+
+def ai_context():
+    b = code_box(10, 20, 260, 214, [("res", "waf", "AWS WAF"), ("res", "elb", "ALB"), ("res", "ecs", "Amazon ECS"), ("comment", "# 設計意図のコメント")])
+    b.append(f'<rect x="20" y="177" width="240" height="30" rx="8" fill="none" stroke="{GREEN}" stroke-width="2.5"/>')
+    b.append(t(140, 258, "構成と設計意図", 15, "bold"))
+    b += ai_badge(500, 135)
+    b.append(arrow("M276,135 L466,135", GREEN))
+    b.append(t(371, 123, "コードを渡す", 16, color=GREEN))
+    b.append(t(500, 191, "現状がそのまま伝わる", 15, "bold", GREEN))
+    # AWS を見に行く（コンテキストを食う）
+    b.append(inner("cloud", 476, 300, 48))
+    b.append(t(500, 372, "AWSのリソース", 15, "bold"))
+    b.append(arrow("M470,153 L410,153 L410,324 L470,324", GRAY, dash="7 5"))
+    b.append(t(400, 256, "AWSを見に行くと", 15, color=SUB, anchor="end"))
+    b.append(t(400, 278, "コンテキストを食って遅い", 15, color=SUB, anchor="end"))
+    write("ai-context.svg", svg(600, 390, b, "構成も設計意図もコードにまとまっているので、AIにはコードを渡せば現状が伝わる。AWSを見に行くとコンテキストを食って遅い"))
+
+
+def ai_validation():
+    b = []
+    b += ai_badge(50, 120)
+    b.append(arrow("M82,120 L146,120"))
+    b.append(t(114, 106, "変更", 15))
+    b.append(inner("code", 152, 92, 56))
+    b.append(t(180, 176, "コード", 16, "bold"))
+    b.append(arrow("M214,120 L290,120"))
+    b.append(inner("toolkit", 296, 92, 56))
+    b.append(t(324, 176, "IaCのツール", 16, "bold"))
+    b.append(arrow("M358,120 L470,120", GREEN))
+    b.append(t(414, 96, "差分の確認", 15, "bold", GREEN))
+    b.append(t(414, 112, "・検証", 15, "bold", GREEN))
+    b.append(inner("cloud", 480, 92, 56))
+    b.append(t(508, 176, "実リソース", 16, "bold"))
+    # 壊れていたら止める
+    b.append(arrow("M324,180 L324,262", RED))
+    b.append(f'<circle cx="324" cy="290" r="22" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
+    b.append(f'<path d="M314,280 L334,300 M334,280 L314,300" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
+    b.append(t(360, 296, "おかしければデプロイ前に止める", 16, "bold", anchor="start"))
+    write("ai-validation.svg", svg(600, 340, b, "AIの変更を、IaCのツールがデプロイ前に差分の確認と検証をし、おかしければ止める"))
+
+
+def ai_permission():
+    b = []
+    b += ai_badge(50, 110)
+    b.append(arrow("M82,110 L128,110"))
+    b.append(t(105, 96, "書く", 15))
+    b.append(inner("code", 134, 82, 56))
+    b.append(t(162, 166, "コード", 16, "bold"))
+    b.append(arrow("M196,110 L242,110"))
+    b.append(inner("git", 248, 82, 56))
+    b.append(t(276, 166, "リポジトリ", 16, "bold"))
+    b.append(arrow("M310,110 L356,110"))
+    b.append(inner("toolkit", 362, 82, 56))
+    b.append(t(390, 166, "CI/CD", 16, "bold"))
+    b.append(arrow("M424,110 L494,110", GREEN))
+    b.append(t(459, 96, "デプロイ", 15, "bold", GREEN))
+    b.append(inner("cloud", 500, 82, 56))
+    b.append(t(528, 166, "AWS", 16, "bold"))
+    # AI から AWS へは直接さわらない
+    b.append(arrow("M50,142 L50,256 L528,256 L528,186", GRAY, dash="7 5"))
+    b.append(f'<circle cx="290" cy="256" r="20" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
+    b.append(f'<path d="M281,247 L299,265 M299,247 L281,265" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
+    b.append(t(290, 306, "AIにAWSの権限は渡さない", 16, "bold"))
+    write("ai-permission.svg", svg(600, 330, b, "AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む"))
+
+
+if __name__ == "__main__":
+    story_architecture()
+    story_screens()
+    iac_diff()
+    ai_updates()
+    learning_steps()
+    feature_reproducibility()
+    feature_change_management()
+    feature_structure()
+    feature_reuse()
+    ai_context()
+    ai_validation()
+    ai_permission()
