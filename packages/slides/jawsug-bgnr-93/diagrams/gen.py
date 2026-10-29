@@ -577,7 +577,7 @@ def ai_validation():
     b.append(arrow("M232,130 L294,130"))
     b.append(inner("toolkit", 300, 102, 56))
     b.append(t(328, 186, "検証", 16, "bold"))
-    b.append(t(328, 208, "lint・validateなど", 13, color=SUB))
+    b.append(t(328, 208, "lint・validate・SASTなど", 13, color=SUB))
     # エラーを返して AI が直す
     b.append(arrow("M328,222 L328,256 L70,256 L70,166", RED))
     b.append(t(199, 246, "エラー → AIが自分で直す", 15, "bold", RED))
@@ -592,7 +592,7 @@ def ai_validation():
     b.append(inner("cloud", 774, 102, 56))
     b.append(t(802, 186, "AWS", 16, "bold"))
     b.append(t(802, 208, "壊れたものが届かない", 13, color=SUB))
-    write("ai-validation.svg", svg(880, 300, b, "AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする"))
+    write("ai-validation.svg", svg(880, 300, b, "AIが書いたコードをlint・validate・SASTなどで検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする"))
 
 
 def ai_permission():

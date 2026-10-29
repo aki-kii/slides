@@ -435,7 +435,9 @@ transition: view-transition
 
 <div class="text-lg mt-2">AIが検証して自分で直せて、人間もデプロイ前に差分を見られる</div>
 
-<InlineSvg src="ai-validation.svg" label="AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする" class="mx-auto mt-6" style="width: 800px" />
+<InlineSvg src="ai-validation.svg" label="AIが書いたコードをlint・validate・SASTなどで検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする" class="mx-auto mt-6" style="width: 800px" />
+
+<div class="text-base mt-4 text-center">インフラ構成がコードに乗るので、SASTでネットワークや権限の穴もスキャンできる</div>
 
 ---
 chapter: AIとIaC
