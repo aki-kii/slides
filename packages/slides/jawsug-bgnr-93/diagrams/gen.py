@@ -560,7 +560,7 @@ def ai_validation():
     b.append(t(30, 48, "自己フィードバックするハーネス", 16, "bold", GREEN, "start"))
     b += ai_badge(70, 130)
     b.append(arrow("M102,130 L164,130"))
-    b.append(t(133, 116, "書く", 15))
+    b.append(t(133, 116, "実装", 15))
     b.append(inner("code", 170, 102, 56))
     b.append(t(198, 186, "コード", 16, "bold"))
     b.append(arrow("M232,130 L294,130"))
