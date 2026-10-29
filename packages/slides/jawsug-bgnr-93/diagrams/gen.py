@@ -284,18 +284,17 @@ def iac_diff():
 
 # ---------------------------------------------------------------- 2部: アップデート
 def ai_updates():
-    items = [("2025-04", ["AWS Labs", "CDK MCP Server"]),
-             ("2025-05", ["Terraform MCP Server", "ベータ"]),
-             ("2025-07", ["AWS Knowledge", "MCP Server"]),
-             ("2025-09", ["Terraform MCP Server が", "HCP Terraform 連携"]),
-             ("2025-11", ["CloudFormation", "Language Server", "AWS IaC MCP Server"]),
-             ("2025-12", ["Kiro の", "Terraform power"]),
-             ("2026-02", ["Agent Plugins", "for AWS"]),
-             ("2026-06", ["Terraform MCP Server", "GA"])]
+    items = [("2025-11", ["CloudFormation", "早期バリデーション"]),
+             ("2025-11", ["CloudFormation", "Language Server"]),
+             ("2025-11", ["AWS IaC", "MCP Server"]),
+             ("2026-04", ["cdk diagnose", "（プレビュー）"]),
+             ("2026-06", ["cdk validate", "（プレビュー）"]),
+             ("2026-06", ["Terraform MCP Server", "GA"]),
+             ("2026-07", ["cdk lsp", "（プレビュー）"])]
     b = []
     y = 160
     b.append(arrow(f"M10,{y} L990,{y}", INK))
-    xs = [84 + i * 118 for i in range(len(items))]
+    xs = [90 + i * 136 for i in range(len(items))]
     for i, ((ym, lines), x) in enumerate(zip(items, xs)):
         up = i % 2 == 0
         b.append(f'<circle cx="{x}" cy="{y}" r="7" fill="#ffffff" stroke="{GREEN}" stroke-width="3"/>')
@@ -309,7 +308,7 @@ def ai_updates():
             b.append(f'<line x1="{x}" y1="{y + 9}" x2="{x}" y2="{y + 40}" stroke="{LINE}" stroke-width="2"/>')
             for j, ln in enumerate(lines):
                 b.append(t(x, y + 64 + j * 22, ln, 15))
-    write("ai-updates.svg", svg(1000, 300, b, "IaCのツールのAIに関するアップデート"))
+    write("ai-updates.svg", svg(1000, 300, b, "AIがIaCのツールを使いやすくなるアップデート"))
 
 
 # ---------------------------------------------------------------- 3部: 学び方
@@ -516,69 +515,102 @@ def code_box(x, y, w, h, rows):
     return o
 
 
+ALB_CODE = [
+    (INK, "const alb = new ApplicationLoadBalancer(this, 'Alb', {"),
+    (INK, "  vpc,"),
+    (INK, "  internetFacing: true,"),
+    (INK, "});"),
+    (INK, ""),
+    (GREEN, "// 取引先のシステムがHTTPでしか連携できないため、HTTPを許可する"),
+    (INK, "alb.addListener('Http', {"),
+    (INK, "  port: 80,"),
+    (INK, "  protocol: ApplicationProtocol.HTTP,"),
+    (INK, "});"),
+]
+
+
+def cdk_code(x, y, w, rows, title="コード（AWS CDK）"):
+    """feature_structure() と同じ書き方で CDK のコードを描く。"""
+    h = 76 + len(rows) * 19.5
+    o = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
+         inner("code", x + 14, y + 12, 36),
+         t(x + 60, y + 38, title, 18, "bold", anchor="start")]
+    yy = y + 80
+    for c, line in rows:
+        if c == GREEN:
+            o.append(f'<rect x="{x + 8}" y="{yy - 16}" width="{w - 16}" height="24" rx="6" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
+            o.append(t(x + 16, yy, line.strip(), 13, "bold", c, "start"))
+        elif line:
+            o.append(t(x + 16, yy, line.replace(" ", "&#160;"), 13, color=c, anchor="start", mono=True))
+        yy += 19.5
+    return o
+
+
 def ai_context():
-    b = code_box(10, 20, 260, 214, [("res", "waf", "AWS WAF"), ("res", "elb", "ALB"), ("res", "ecs", "Amazon ECS"), ("comment", "# 設計意図のコメント")])
-    b.append(f'<rect x="20" y="177" width="240" height="30" rx="8" fill="none" stroke="{GREEN}" stroke-width="2.5"/>')
-    b.append(t(140, 258, "構成と設計意図", 15, "bold"))
-    b += ai_badge(500, 135)
-    b.append(arrow("M276,135 L466,135", GREEN))
-    b.append(t(371, 123, "コードを渡す", 16, color=GREEN))
-    b.append(t(500, 191, "現状がそのまま伝わる", 15, "bold", GREEN))
+    b = cdk_code(10, 20, 470, ALB_CODE)
+    b.append(t(245, 316, "構成も、設定の意図も書いてある", 15, "bold"))
+    b += ai_badge(620, 140)
+    b.append(arrow("M488,140 L584,140", GREEN))
+    b.append(t(536, 126, "コードを渡す", 15, color=GREEN))
+    b.append(t(620, 200, "現状と意図が伝わる", 15, "bold", GREEN))
     # AWS を見に行く（コンテキストを食う）
-    b.append(inner("cloud", 476, 300, 48))
-    b.append(t(500, 372, "AWSのリソース", 15, "bold"))
-    b.append(arrow("M470,153 L410,153 L410,324 L470,324", GRAY, dash="7 5"))
-    b.append(t(400, 256, "AWSを見に行くと", 15, color=SUB, anchor="end"))
-    b.append(t(400, 278, "コンテキストを食って遅い", 15, color=SUB, anchor="end"))
-    write("ai-context.svg", svg(600, 390, b, "構成も設計意図もコードにまとまっているので、AIにはコードを渡せば現状が伝わる。AWSを見に行くとコンテキストを食って遅い"))
+    b.append(inner("cloud", 836, 116, 48))
+    b.append(t(860, 188, "AWSのリソース", 15, "bold"))
+    b.append(arrow("M656,140 L826,140", GRAY, dash="7 5"))
+    b.append(t(741, 104, "AWSを見に行くと", 14, color=SUB))
+    b.append(t(741, 124, "コンテキストを食って遅い", 14, color=SUB))
+    write("ai-context.svg", svg(940, 330, b, "ALBのCDKコードに、HTTPを許可する理由がコメントで書いてある。AIにはコードを渡せば構成と意図が伝わる。AWSを見に行くとコンテキストを食って遅い"))
 
 
 def ai_validation():
     b = []
-    b += ai_badge(50, 120)
-    b.append(arrow("M82,120 L146,120"))
-    b.append(t(114, 106, "変更", 15))
-    b.append(inner("code", 152, 92, 56))
-    b.append(t(180, 176, "コード", 16, "bold"))
-    b.append(arrow("M214,120 L290,120"))
-    b.append(inner("toolkit", 296, 92, 56))
-    b.append(t(324, 176, "IaCのツール", 16, "bold"))
-    b.append(arrow("M358,120 L470,120", GREEN))
-    b.append(t(414, 96, "差分の確認", 15, "bold", GREEN))
-    b.append(t(414, 112, "・検証", 15, "bold", GREEN))
-    b.append(inner("cloud", 480, 92, 56))
-    b.append(t(508, 176, "実リソース", 16, "bold"))
-    # 壊れていたら止める
-    b.append(arrow("M324,180 L324,262", RED))
-    b.append(f'<circle cx="324" cy="290" r="22" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
-    b.append(f'<path d="M314,280 L334,300 M334,280 L314,300" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
-    b.append(t(360, 296, "おかしければデプロイ前に止める", 16, "bold", anchor="start"))
-    write("ai-validation.svg", svg(600, 340, b, "AIの変更を、IaCのツールがデプロイ前に差分の確認と検証をし、おかしければ止める"))
+    # 自己フィードバックのハーネス
+    b.append(f'<rect x="10" y="20" width="560" height="270" rx="16" fill="none" stroke="{GREEN}" stroke-width="2" stroke-dasharray="8 6"/>')
+    b.append(t(30, 48, "自己フィードバックするハーネス", 16, "bold", GREEN, "start"))
+    b += ai_badge(90, 130)
+    b.append(arrow("M122,130 L222,130"))
+    b.append(t(172, 116, "書く", 15))
+    b.append(inner("code", 228, 102, 56))
+    b.append(t(256, 186, "コード", 16, "bold"))
+    b.append(arrow("M290,130 L390,130"))
+    b.append(inner("toolkit", 396, 102, 56))
+    b.append(t(424, 186, "検証", 16, "bold"))
+    b.append(t(424, 208, "lint・validateなど", 13, color=SUB))
+    # エラーを返して AI が直す
+    b.append(arrow("M424,222 L424,256 L90,256 L90,166", RED))
+    b.append(t(257, 246, "エラーを返す → AIが自分で直す", 15, "bold", RED))
+    # 通ったものだけデプロイ
+    b.append(arrow("M458,130 L726,130", GREEN))
+    b.append(t(584, 116, "通ったらデプロイ", 15, "bold", GREEN, "start"))
+    b.append(inner("cloud", 734, 102, 56))
+    b.append(t(762, 186, "AWS", 16, "bold"))
+    b.append(t(762, 208, "壊れたものが届かない", 14, color=SUB))
+    write("ai-validation.svg", svg(860, 300, b, "AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったものだけがデプロイされる"))
 
 
 def ai_permission():
     b = []
-    b += ai_badge(50, 110)
-    b.append(arrow("M82,110 L128,110"))
-    b.append(t(105, 96, "書く", 15))
-    b.append(inner("code", 134, 82, 56))
-    b.append(t(162, 166, "コード", 16, "bold"))
-    b.append(arrow("M196,110 L242,110"))
-    b.append(inner("git", 248, 82, 56))
-    b.append(t(276, 166, "リポジトリ", 16, "bold"))
-    b.append(arrow("M310,110 L356,110"))
-    b.append(inner("toolkit", 362, 82, 56))
-    b.append(t(390, 166, "CI/CD", 16, "bold"))
-    b.append(arrow("M424,110 L494,110", GREEN))
-    b.append(t(459, 96, "デプロイ", 15, "bold", GREEN))
-    b.append(inner("cloud", 500, 82, 56))
-    b.append(t(528, 166, "AWS", 16, "bold"))
+    b += ai_badge(50, 70)
+    b.append(arrow("M82,70 L170,70"))
+    b.append(t(126, 56, "書く", 15))
+    b.append(inner("code", 176, 42, 56))
+    b.append(t(204, 126, "コード", 16, "bold"))
+    b.append(arrow("M238,70 L326,70"))
+    b.append(inner("git", 332, 42, 56))
+    b.append(t(360, 126, "リポジトリ", 16, "bold"))
+    b.append(arrow("M394,70 L482,70"))
+    b.append(inner("toolkit", 488, 42, 56))
+    b.append(t(516, 126, "CI/CD", 16, "bold"))
+    b.append(arrow("M550,70 L670,70", GREEN))
+    b.append(t(610, 56, "デプロイ", 15, "bold", GREEN))
+    b.append(inner("cloud", 676, 42, 56))
+    b.append(t(704, 126, "AWS", 16, "bold"))
     # AI から AWS へは直接さわらない
-    b.append(arrow("M50,142 L50,256 L528,256 L528,186", GRAY, dash="7 5"))
-    b.append(f'<circle cx="290" cy="256" r="20" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
-    b.append(f'<path d="M281,247 L299,265 M299,247 L281,265" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
-    b.append(t(290, 306, "AIにAWSの権限は渡さない", 16, "bold"))
-    write("ai-permission.svg", svg(600, 330, b, "AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む"))
+    b.append(arrow("M50,102 L50,180 L704,180 L704,142", GRAY, dash="7 5"))
+    b.append(f'<circle cx="377" cy="180" r="20" fill="#ffffff" stroke="{RED}" stroke-width="3"/>')
+    b.append(f'<path d="M368,171 L386,189 M386,171 L368,189" stroke="{RED}" stroke-width="3" stroke-linecap="round"/>')
+    b.append(t(377, 228, "AIにAWSの権限は渡さない", 16, "bold"))
+    write("ai-permission.svg", svg(760, 240, b, "AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む"))
 
 
 if __name__ == "__main__":

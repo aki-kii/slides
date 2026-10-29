@@ -417,9 +417,9 @@ transition: view-transition
   <h2>コンテキストを渡しやすい</h2>
 </div>
 
-<div class="text-lg mt-2">構成も設計意図もコードにあるので、コードを渡せばAIに現状が伝わる</div>
+<div class="text-lg mt-2">構成も設定の意図もコードにあるので、コードを渡せばAIに現状が伝わる</div>
 
-<InlineSvg src="ai-context.svg" label="構成も設計意図もコードにまとまっているので、AIにはコードを渡せば現状が伝わる。AWSを見に行くとコンテキストを食って遅い" class="mx-auto mt-4" style="width: 460px" />
+<InlineSvg src="ai-context.svg" label="ALBのCDKコードに、HTTPを許可する理由がコメントで書いてある。AIにはコードを渡せば構成と意図が伝わる。AWSを見に行くとコンテキストを食って遅い" class="mx-auto mt-6" style="width: 820px" />
 
 ---
 chapter: AIとIaC
@@ -433,9 +433,9 @@ transition: view-transition
   <h2>変更を検証できる仕組みがある</h2>
 </div>
 
-<div class="text-lg mt-2">デプロイ前に差分を確認・検証できるので、AIの変更がおかしければ止められる</div>
+<div class="text-lg mt-2">AIが書いたコードを検証できるので、AIが自分で直してからデプロイできる</div>
 
-<InlineSvg src="ai-validation.svg" label="AIの変更を、IaCのツールがデプロイ前に差分の確認と検証をし、おかしければ止める" class="mx-auto mt-4" style="width: 540px" />
+<InlineSvg src="ai-validation.svg" label="AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったものだけがデプロイされる" class="mx-auto mt-4" style="width: 740px" />
 
 ---
 chapter: AIとIaC
@@ -450,7 +450,7 @@ chapter: AIとIaC
 
 <div class="text-lg mt-2">AIにはコードを書いてもらうだけにして、デプロイはCI/CDに任せられる</div>
 
-<InlineSvg src="ai-permission.svg" label="AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む" class="mx-auto mt-4" style="width: 540px" />
+<InlineSvg src="ai-permission.svg" label="AIはコードを書くだけで、デプロイはCI/CDが行う。AIにAWSの権限を渡さなくて済む" class="mx-auto mt-8" style="width: 760px" />
 
 ---
 chapter: AIとIaC
@@ -460,9 +460,9 @@ chapter: AIとIaC
 
 ## IaCのツールもAI向けに進化している
 
-<div class="text-lg mt-2">AIに関するアップデートが、これだけ続いている</div>
+<div class="text-lg mt-2">AIがIaCのツールを使いやすくなるアップデートが、これだけ続いている</div>
 
-<InlineSvg src="ai-updates.svg" label="IaCのツールのAIに関するアップデート" class="mx-auto mt-6" style="width: 900px" />
+<InlineSvg src="ai-updates.svg" label="AIがIaCのツールを使いやすくなるアップデート" class="mx-auto mt-6" style="width: 900px" />
 
 ---
 layout: center
