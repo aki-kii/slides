@@ -70,9 +70,9 @@ transition: fade
 transition: fade
 ---
 
-<img src="/images/story/manual-steps-console.png" alt="本番作業手順書の作業手順。No.1 作業開始の連絡から No.5 IPアドレスの書き換えまで。手順3にIPセットの画面が貼ってある" class="mx-auto shot" style="height: 430px" />
+<img src="/images/story/manual-steps-console.png" alt="本番作業手順書の作業手順。No.1 作業開始の連絡から No.5 IPアドレスの書き換えまで。手順3にIPセットの画面が貼ってある" class="mx-auto shot" style="height: 395px" />
 
-<div class="subtitle-band">手順書通りに進めていきたいと思います</div>
+<div class="subtitle-band">手順書通りに進めていきたいと思います<br>それではWAFのコンソールでIPセットを開きます…</div>
 
 ---
 transition: fade
@@ -96,7 +96,7 @@ transition: fade
   </figure>
 </div>
 
-<div class="subtitle-band">WAFのコンソールを開いて…あれ？手順書の画面と見た目が全然違いますね…<br>ボタンの名前も場所も違うし、どこから書き換えればいいんだろう…？</div>
+<div class="subtitle-band">開いてみると…あれ？手順書の画面と見た目が全然違いますね…<br>ボタンの名前も場所も違うし、どこから書き換えればいいんだろう…？</div>
 
 ---
 transition: fade
