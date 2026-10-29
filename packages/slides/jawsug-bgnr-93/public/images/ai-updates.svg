@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 336" width="100%" role="img" aria-label="IaCのツールのアップデートを古い順に並べた年表。cdk diagnose（プレビュー）を強調している">
+<!-- AWS Architecture Icons 2026-07-31 版（Icon-package_07312026） -->
+<defs><marker id="a-i" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E8A6E"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DD344C"/></marker><marker id="a-x" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a94a3"/></marker></defs>
+<line x1="104" y1="16" x2="104" y2="320" stroke="#c9d0d9" stroke-width="3"/>
+<text x="10" y="36" font-family="'Fira Code', monospace" font-size="16" font-weight="bold" fill="#6b7684" text-anchor="start">2025-11</text>
+<circle cx="104" cy="30" r="8" fill="#ffffff" stroke="#0E8A6E" stroke-width="3"/>
+<text x="130" y="36" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="normal" fill="#2c3e50" text-anchor="start">CloudFormation 早期バリデーション</text>
+<text x="10" y="82" font-family="'Fira Code', monospace" font-size="16" font-weight="bold" fill="#6b7684" text-anchor="start">2025-11</text>
+<circle cx="104" cy="76" r="8" fill="#ffffff" stroke="#0E8A6E" stroke-width="3"/>
+<text x="130" y="82" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="normal" fill="#2c3e50" text-anchor="start">CloudFormation Language Server</text>
+<text x="10" y="128" font-family="'Fira Code', monospace" font-size="16" font-weight="bold" fill="#6b7684" text-anchor="start">2025-11</text>
+<circle cx="104" cy="122" r="8" fill="#ffffff" stroke="#0E8A6E" stroke-width="3"/>
+<text x="130" y="128" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="normal" fill="#2c3e50" text-anchor="start">AWS IaC MCP Server</text>
+<rect x="118" y="150" width="330" height="36" rx="8" fill="#e9f5f1" stroke="#0E8A6E" stroke-width="2"/>
+<text x="10" y="174" font-family="'Fira Code', monospace" font-size="16" font-weight="bold" fill="#6b7684" text-anchor="start">2026-04</text>
+<circle cx="104" cy="168" r="8" fill="#0E8A6E" stroke="#0E8A6E" stroke-width="3"/>
+<text x="130" y="174" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="bold" fill="#0E8A6E" text-anchor="start">cdk diagnose（プレビュー）</text>
+<text x="10" y="220" font-family="'Fira Code', monospace" font-size="16" font-weight="bold" fill="#6b7684" text-anchor="start">2026-06</text>
+<circle cx="104" cy="214" r="8" fill="#ffffff" stroke="#0E8A6E" stroke-width="3"/>
+<text x="130" y="220" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="normal" fill="#2c3e50" text-anchor="start">cdk validate（プレビュー）</text>
+<text x="10" y="266" font-family="'Fira Code', monospace" font-size="16" font-weight="bold" fill="#6b7684" text-anchor="start">2026-06</text>
+<circle cx="104" cy="260" r="8" fill="#ffffff" stroke="#0E8A6E" stroke-width="3"/>
+<text x="130" y="266" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="normal" fill="#2c3e50" text-anchor="start">Terraform MCP Server GA</text>
+<text x="10" y="312" font-family="'Fira Code', monospace" font-size="16" font-weight="bold" fill="#6b7684" text-anchor="start">2026-07</text>
+<circle cx="104" cy="306" r="8" fill="#ffffff" stroke="#0E8A6E" stroke-width="3"/>
+<text x="130" y="312" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="17" font-weight="normal" fill="#2c3e50" text-anchor="start">cdk lsp（プレビュー）</text>
+</svg>

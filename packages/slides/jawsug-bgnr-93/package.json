@@ -1,0 +1,23 @@
+{
+  "name": "@slides/jawsug-bgnr-93",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "export": "slidev export --with-clicks --output ./export/slides.pdf",
+    "export:png": "slidev export --format png --with-clicks --output ./export",
+    "diagrams": "slides-tools diagrams diagrams/diagrams.ts --out public/images",
+    "shots": "slides-tools shots diagrams/shots.ts --out public/images/story"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.1.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "@slides/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.58.2",
+    "@slides/tools": "workspace:*"
+  }
+}

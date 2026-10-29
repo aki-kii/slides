@@ -1,0 +1,16 @@
+{
+  "name": "@slides/tools",
+  "type": "module",
+  "private": true,
+  "description": "デッキの図（SVG）とスクショ（切り抜き・黒塗り）を書き出す道具",
+  "bin": {
+    "slides-tools": "./bin/slides-tools.mjs"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "sharp": "^0.35.5",
+    "tsx": "^4.23.15"
+  }
+}
