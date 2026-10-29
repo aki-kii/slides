@@ -161,10 +161,9 @@ class: text-center
 ---
 
 <div>
-  <h2>IaCについて</h2>
+  それでは
+  <h2>IaCについて解説していきます</h2>
 </div>
-
-<div class="subtitle-band">それでは、IaCについて解説していきます</div>
 
 ---
 chapter: IaCとは？
@@ -409,8 +408,6 @@ chapter: AIとIaC
   <div class="mt-8">IaCも例外ではない</div>
   <h2>むしろ、他のデプロイ方法と比べても<br>AIに任せやすい</h2>
 </div>
-
-<div class="subtitle-band">ところで最近は、どんな仕事でもAIに任せられるようになってきましたね</div>
 
 ---
 chapter: AIとIaC
