@@ -90,13 +90,14 @@ transition: fade
   <figure>
     <figcaption>今の画面（新コンソール）</figcaption>
     <div class="shot-wrap">
-      <img src="/images/story/new-ipset-detail.png" alt="新コンソールのIPセット詳細。IPセットを編集のボタンがある" class="shot" />
+      <img src="/images/story/new-ipset-detail.png" alt="新コンソールのIPセット詳細。日本語の画面で、ボタンの名前は削除とアドレスを追加。上にIPセットを編集のボタンもある" class="shot" />
       <span class="shot-mark" style="left: 82%; top: 0.3%; width: 16.8%; height: 6.6%"></span>
+      <span class="shot-mark" style="left: 72.4%; top: 60%; width: 24%; height: 6.6%"></span>
     </div>
   </figure>
 </div>
 
-<div class="subtitle-band">WAFのコンソールを開いて…あれ？<br>手順書の「Delete」も「Add IP address」も見当たりませんね…？</div>
+<div class="subtitle-band">WAFのコンソールを開いて…あれ？手順書の画面と見た目が全然違いますね…<br>ボタンの名前も場所も違うし、どこから書き換えればいいんだろう…？</div>
 
 ---
 transition: fade
