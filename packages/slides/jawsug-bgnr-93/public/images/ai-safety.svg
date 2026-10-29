@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 324" width="100%" role="img" aria-label="セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、書いているときはcdk-nag、あとでレビューするときはCheckovなどでスキャンし、全世界からのSSHを許可していると指摘される">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 324" width="100%" role="img" aria-label="セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、実装中はcdk-nag、セキュリティスキャンではContinuumコードレビューなどでスキャンし、全世界からのSSHを許可していると指摘される">
 <!-- AWS Architecture Icons 2026-07-31 版（Icon-package_07312026） -->
 <defs><marker id="a-i" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E8A6E"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DD344C"/></marker><marker id="a-x" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a94a3"/></marker></defs>
 <rect x="22" y="182.5" width="526" height="22" rx="4" fill="#fdecee"/>
@@ -19,12 +19,12 @@
 <text x="760" y="215.5" font-family="'Fira Code', monospace" font-size="13" font-weight="normal" fill="#DD344C" text-anchor="middle">受信元 0.0.0.0/0 → TCP 22</text>
 <path d="M170,244 L170,220" fill="none" stroke="#0E8A6E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-g)"/>
 <rect x="60" y="248" width="220" height="70" rx="12" fill="#e9f5f1" stroke="#0E8A6E" stroke-width="2"/>
-<text x="170" y="271" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#0E8A6E" text-anchor="middle">書いているとき</text>
+<text x="170" y="271" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#0E8A6E" text-anchor="middle">実装中</text>
 <text x="170" y="290" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" text-anchor="middle">cdk synth のときにルールでチェック</text>
 <text x="170" y="308" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#6b7684" text-anchor="middle">cdk-nag</text>
 <path d="M430,244 L430,220" fill="none" stroke="#0E8A6E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-g)"/>
 <rect x="320" y="248" width="220" height="70" rx="12" fill="#e9f5f1" stroke="#0E8A6E" stroke-width="2"/>
-<text x="430" y="271" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#0E8A6E" text-anchor="middle">あとでレビュー</text>
+<text x="430" y="271" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#0E8A6E" text-anchor="middle">セキュリティスキャン</text>
 <text x="430" y="290" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" text-anchor="middle">リポジトリ全体をまとめてスキャン</text>
-<text x="430" y="308" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#6b7684" text-anchor="middle">Checkov など</text>
+<text x="430" y="308" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#6b7684" text-anchor="middle">Continuumコードレビューなど</text>
 </svg>

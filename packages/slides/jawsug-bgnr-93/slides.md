@@ -474,11 +474,11 @@ chapter: AIとIaC
   <h2>インフラの安全性を検証できる</h2>
 </div>
 
-<div class="text-lg mt-2">コードスキャン（静的解析）で、インフラの危うい設定を見つけられる</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">ソースコードをスキャン（静的解析）することでセキュリティホールを見つけられる</div>
 
-<InlineSvg src="ai-safety.svg" label="セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、書いているときはcdk-nag、あとでレビューするときはCheckovなどでスキャンし、全世界からのSSHを許可していると指摘される" class="mx-auto mt-3" style="width: 740px" />
+<InlineSvg src="ai-safety.svg" label="セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、実装中はcdk-nag、セキュリティスキャンではContinuumコードレビューなどでスキャンし、全世界からのSSHを許可していると指摘される" class="mx-auto mt-3" style="width: 740px" />
 
-<div class="text-base mt-2 text-center">→ マネコンの環境は画面で一つずつ見るしかないが、コードならまとめてスキャンできる</div>
+<div class="text-base mt-2 text-center">→ インフラ設定がソースコードに載っているため、<br>アプリのコードと同時にセキュリティスキャンできる</div>
 
 ---
 chapter: AIとIaC

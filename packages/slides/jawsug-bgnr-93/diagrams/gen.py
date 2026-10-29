@@ -607,14 +607,14 @@ def ai_safety():
     b.append(t(760, hl_y - 6, "全世界からのSSHを許可しています", 18, "bold", RED))
     b.append(t(760, hl_y + 22, "受信元 0.0.0.0/0 → TCP 22", 13, color=RED, mono=True))
     # 同じコードを、2つのタイミングでスキャンする
-    for x, when, how, tool in ((60, "書いているとき", "cdk synth のときにルールでチェック", "cdk-nag"),
-                               (320, "あとでレビュー", "リポジトリ全体をまとめてスキャン", "Checkov など")):
+    for x, when, how, tool in ((60, "実装中", "cdk synth のときにルールでチェック", "cdk-nag"),
+                               (320, "セキュリティスキャン", "リポジトリ全体をまとめてスキャン", "Continuumコードレビューなど")):
         b.append(arrow(f"M{x + 110},244 L{x + 110},220", GREEN))
         b.append(f'<rect x="{x}" y="248" width="220" height="70" rx="12" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>')
         b.append(t(x + 110, 271, when, 16, "bold", GREEN))
         b.append(t(x + 110, 290, how, 12, color=INK))
         b.append(t(x + 110, 308, tool, 12, color=SUB))
-    write("ai-safety.svg", svg(940, 324, b, "セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、書いているときはcdk-nag、あとでレビューするときはCheckovなどでスキャンし、全世界からのSSHを許可していると指摘される"))
+    write("ai-safety.svg", svg(940, 324, b, "セキュリティグループで22番ポートを0.0.0.0/0に開けているCDKのコードを、実装中はcdk-nag、セキュリティスキャンではContinuumコードレビューなどでスキャンし、全世界からのSSHを許可していると指摘される"))
 
 
 def ai_permission():
