@@ -123,9 +123,9 @@ transition: fade
 transition: fade
 ---
 
-<InlineSvg src="story-incident.svg" label="A社はつながったが、B社からつながらなくなったと連絡が来る" class="mx-auto mt-2" style="width: 900px" />
+<InlineSvg src="story-incident.svg" label="IPセットの編集画面。B社の行が消えて、A社の新しい値が入っている。A社は接続でき、B社は接続できない" class="mx-auto mt-2" style="width: 900px" />
 
-<div class="subtitle-band">完了！A社もつながった、めでたしめでたし…っと、、、あれ？<br>B社から、急につながらなくなったって連絡が…！？</div>
+<div class="subtitle-band">設定変更完了しました！<br>おや？B社から苦情が来てますね…</div>
 
 ---
 transition: fade

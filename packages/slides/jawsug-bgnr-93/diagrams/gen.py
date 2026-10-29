@@ -188,11 +188,28 @@ def after_rows(x, y, w, gone, note=None):
     return o
 
 
+CONSOLE_BLUE = "#0972d3"
+
+
+def edit_rows(x, y, rows):
+    """7枚目の実スクショ（IP セットを編集）と同じ形：入力欄＋「削除」ボタン、下に「IP アドレスの追加」。"""
+    o = [t(x, y + 16, "IP アドレス (CIDR 表記)", 14, "bold", anchor="start")]
+    for i, ip in enumerate(rows):
+        yy = y + 28 + i * 34
+        o.append(f'<rect x="{x}" y="{yy}" width="400" height="26" rx="6" fill="#ffffff" stroke="{GRAY}" stroke-width="1.5"/>')
+        o.append(t(x + 12, yy + 18, ip, 15, anchor="start"))
+        o.append(f'<rect x="{x + 414}" y="{yy}" width="64" height="26" rx="13" fill="#ffffff" stroke="{CONSOLE_BLUE}" stroke-width="2"/>')
+        o.append(t(x + 446, yy + 18, "削除", 13, "bold", CONSOLE_BLUE))
+    yy = y + 28 + len(rows) * 34 + 2
+    o.append(f'<rect x="{x}" y="{yy}" width="150" height="26" rx="13" fill="#ffffff" stroke="{CONSOLE_BLUE}" stroke-width="2"/>')
+    o.append(t(x + 75, yy + 18, "IP アドレスの追加", 13, "bold", CONSOLE_BLUE))
+    return o
+
+
 def story_screens():
     # ⑤ 事件
     b = pane(20, 6, 600, 350, "マネジメントコンソール　IP セットを編集", "console")
-    b += after_rows(48, 66, 540, "203.0.113.128/28", "（消した行）")
-    b.append(t(48, 340, "削除したのはB社の行（203.0.113.128/28）", 19, "bold", RED, anchor="start"))
+    b += edit_rows(48, 58, [ip for ip in AFTER if ip])
     for i, (who, msg, c, bg) in enumerate([("A社", "接続できる", GREEN, GREEN_BG),
                                            ("B社", "接続できない", RED, RED_BG)]):
         y = 40 + i * 120
@@ -200,7 +217,7 @@ def story_screens():
         b.append(t(690, y + 66, who, 13, "bold"))
         b.append(f'<rect x="724" y="{y}" width="256" height="52" rx="14" fill="{bg}" stroke="{c}" stroke-width="2"/>')
         b.append(t(852, y + 33, msg, 16, "bold", c))
-    write("story-incident.svg", svg(1000, 360, b, "A社はつながったが、B社からつながらなくなったと連絡が来る"))
+    write("story-incident.svg", svg(1000, 360, b, "IPセットの編集画面。B社の行が消えて、A社の新しい値が入っている。A社は接続でき、B社は接続できない"))
 
     # ⑥ 元の値が分からない
     b = pane(20, 6, 600, 350, "マネジメントコンソール　IP セットを編集", "console")
