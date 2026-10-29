@@ -53,11 +53,10 @@ layout: center
 transition: fade
 ---
 
-<div>
-  <h2>本番リリース：WAFのIPセット変更</h2>
+<!-- 話し言葉ルールの例外：本人の指定で、この1枚だけは字幕帯を使わず画面全体に大きく出す -->
+<div class="w-full text-center">
+  <h2 style="font-size: 3.4rem; line-height: 1.4; white-space: nowrap; text-align: center">これから本番リリースを<br>始めます（？）</h2>
 </div>
-
-<div class="subtitle-band">これから本番リリースを始めます（？）</div>
 
 ---
 transition: fade
