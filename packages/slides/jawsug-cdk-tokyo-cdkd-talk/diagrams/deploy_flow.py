@@ -107,30 +107,29 @@ p.append(f'<rect x="165" y="18" width="1003" height="340" rx="14" fill="#f5f7f9"
 p.append(text(181, 43, "cdk deploy", 16, INK, 700, "start", MONO))
 p.append(text(285, 43, "全体を順に動かす", 12, SUB, None, "start"))
 
-# CDK Bootstrap: 今回の流れで使うものだけ並べ、ほかは 1 か所にまとめる
+# CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは 1 か所にまとめる
 p = SEC["bootstrap"]
-p.append(group(10, 18, 125, 340, "CDK Bootstrap"))
+p.append(group(10, 12, 1003, 74, "CDK Bootstrap"))
+p.append(f'<rect x="132" y="20" width="84" height="22" rx="11" fill="{GREEN}"/>')
+p.append(text(174, 35, "初回のみ作成", 11, "#ffffff", 700))
 items = [
-    ("s3", ["S3バケット"]),
-    ("ecr", ["ECRリポジトリ"]),
-    ("role", ["ファイル用", "パブリッシュ", "ロール"]),
-    ("role", ["イメージ用", "パブリッシュ", "ロール"]),
-    ("role", ["デプロイ用", "ロール"]),
-    ("role", ["CloudFormation", "実行ロール"]),
+    (22, "s3", ["S3バケット"]),
+    (130, "ecr", ["ECRリポジトリ"]),
+    (258, "role", ["ファイル用", "パブリッシュロール"]),
+    (394, "role", ["イメージ用", "パブリッシュロール"]),
+    (530, "role", ["デプロイ用", "ロール"]),
+    (622, "role", ["CloudFormation", "実行ロール"]),
 ]
-y = 52
-for name, lines in items:
-    height = 14 * len(lines) + 12
-    p.append(icon(name, 27, y + (height - 22) / 2, 22))
-    first = y + height / 2 + 4 - 7 * (len(lines) - 1)
+for x, name, lines in items:
+    p.append(icon(name, x + 12, 50, 24))
+    first = 66 - 7 * (len(lines) - 1)
     for k, line in enumerate(lines):
-        p.append(text(42, first + 14 * k, line, 11, INK, 700, "start"))
-    y += height + 5
-p += [text(72, 326, "ルックアップ用ロール、", 10), text(72, 341, "SSMパラメータ など", 10)]
+        p.append(text(x + 29, first + 14 * k, line, 11, INK, 700, "start"))
+p += [text(770, 59, "ルックアップ用ロール、", 11, SUB, None, "start"), text(770, 73, "SSMパラメータ など", 11, SUB, None, "start")]
 
 # bootstrap → cdk deploy の枠
 p = SEC["link"]
-p += [arrow("M135,188 H165"), text(150, 164, "先に"), text(150, 180, "作る")]
+p += [arrow("M60,86 V116"), text(70, 106, "先に作る", anchor="start")]
 
 # synth: ソースコード → 合成 → アセットを横に並べる
 MID = 204
@@ -181,9 +180,9 @@ def state_box(y, name, lines, fill):
 
 p.append(state_box(101, "template", ["新しい", "テンプレート", "（あるべき姿）"], "#ffffff"))
 p.append(state_box(201, "stack", ["スタックの", "状態", "（現在の状態）"], "#f5f7f9"))
-p.append(text(846, DMID + 4, "比較", 11, anchor="end"))
-p.append(arrow(f"M837,132 H852 V{DMID - 8} H876"))
-p.append(arrow(f"M837,232 H852 V{DMID + 8} H876"))
+p.append(text(840, DMID + 4, "比較", 11, anchor="end"))
+p.append(arrow(f"M837,132 H846 V{DMID - 8} H876"))
+p.append(arrow(f"M837,232 H846 V{DMID + 8} H876"))
 p.append(icon("cfn", 895, DMID - 18, 36))
 p.append(text(895, DMID + 32, "CloudFormation", 11, INK, 700))
 p.append(role_chip(858, DMID + 42, ["デプロイ用", "ロール"]))
@@ -208,12 +207,17 @@ defs = (f'<defs><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWi
 DIM = 0.14
 
 
+# Bootstrap を上に置いたぶん、cdk deploy の枠全体をずらす
+MOVE = 'transform="translate(-155,98)"'
+
+
 def write(name, focus=None):
     body = []
     for key, parts in SEC.items():
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
-        body.append(f"<g{opacity}>" + "".join(parts) + "</g>")
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1176 376" width="100%" '
+        move = "" if key in ("bootstrap", "link") else f" {MOVE}"
+        body.append(f"<g{opacity}{move}>" + "".join(parts) + "</g>")
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1023 470" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
         f.write(svg)
