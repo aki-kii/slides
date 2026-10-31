@@ -98,101 +98,101 @@ def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
     return "".join(out)
 
 
-TOP, BOTTOM = 56, 348
+TOP, BOTTOM = 56, 356
 SEC = {k: [] for k in ("outer", "bootstrap", "synth_frame", "source", "group", "publish", "trunk", "deploy", "gap")}
 
 # cdk deploy が synth、publish、deploy の全体を動かす
 p = SEC["outer"]
-p.append(f'<rect x="165" y="18" width="1003" height="340" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
-p.append(text(181, 43, "cdk deploy", 16, INK, 700, "start", MONO))
+p.append(f'<rect x="167" y="18" width="1109" height="350" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
+p.append(text(183, 43, "cdk deploy", 16, INK, 700, "start", MONO))
 
-# CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは 1 か所にまとめる
+# CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは etc… にする
 p = SEC["bootstrap"]
-p.append(group(10, 12, 1003, 74, "CDK Bootstrap"))
+p.append(group(10, 12, 1109, 82, "CDK Bootstrap"))
 p.append(f'<rect x="132" y="20" width="84" height="22" rx="11" fill="{GREEN}"/>')
 p.append(text(174, 35, "初回のみ作成", 11, "#ffffff", 700))
 items = [
-    (22, "s3", ["S3バケット"]),
-    (130, "ecr", ["ECRリポジトリ"]),
-    (258, "role", ["ファイル用", "パブリッシュロール"]),
-    (394, "role", ["イメージ用", "パブリッシュロール"]),
-    (530, "role", ["デプロイ用", "ロール"]),
-    (622, "role", ["CloudFormation", "実行ロール"]),
+    (26, "s3", ["S3バケット"]),
+    (150, "ecr", ["ECRリポジトリ"]),
+    (294, "role", ["ファイル用", "パブリッシュロール"]),
+    (446, "role", ["イメージ用", "パブリッシュロール"]),
+    (598, "role", ["デプロイ用", "ロール"]),
+    (706, "role", ["CloudFormation", "実行ロール"]),
 ]
 for x, name, lines in items:
-    p.append(icon(name, x + 12, 50, 24))
-    first = 66 - 7 * (len(lines) - 1)
+    p.append(icon(name, x + 12, 56, 24))
+    first = 72 - 7 * (len(lines) - 1)
     for k, line in enumerate(lines):
-        p.append(text(x + 29, first + 14 * k, line, 11, INK, 700, "start"))
-p += [text(770, 59, "ルックアップ用ロール、", 11, SUB, None, "start"), text(770, 73, "SSMパラメータ など", 11, SUB, None, "start")]
+        p.append(text(x + 30, first + 14 * k, line, 11, INK, 700, "start"))
+p.append(text(870, 72, "etc…", 12, SUB, None, "start"))
 
 # synth: ソースコード → 合成 → アセットを横に並べる
-MID = 204
+MID = 210
 p = SEC["synth_frame"]
-p.append(step(173, 316, "synth"))
+p.append(step(175, 350, "synth"))
 p = SEC["source"]
-p.append(node("code", 222, MID - 22, 44, "ソースコード"))
-p += [arrow(f"M246,{MID} H305"), text(274, MID - 38, "合成して", 11), text(274, MID - 23, "アセットを", 11), text(274, MID - 8, "作る", 11)]
+p.append(node("code", 235, MID - 22, 44, "ソースコード"))
+p += [arrow(f"M261,{MID} H335"), text(298, MID - 40, "合成して", 11), text(298, MID - 25, "アセットを", 11), text(298, MID - 10, "作る", 11)]
 p = SEC["group"]
-p.append(group(305, 64, 174, 254, "アセット"))
-p.append(file_box(317, 100, 150, 64, "template", ["CloudFormation", "テンプレート"], strong=True, icon_size=28))
-p.append(file_box(317, 172, 150, 64, "asset", ["ファイル"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
-p.append(file_box(317, 244, 150, 64, "image", ["コンテナイメージ"], sub=["Dockerfileなど"], icon_size=28))
+p.append(group(335, 66, 178, 278, "アセット"))
+p.append(file_box(348, 102, 152, 64, "template", ["CloudFormation", "テンプレート"], strong=True, icon_size=28))
+p.append(file_box(348, 178, 152, 64, "asset", ["ファイル"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
+p.append(file_box(348, 254, 152, 64, "image", ["コンテナイメージ"], sub=["Dockerfileなど"], icon_size=28))
 
 # publish: テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ。どちらもまっすぐ進む
-S3Y, ECRY = 132, 276
+S3Y, ECRY = 134, 286
 p = SEC["publish"]
-p.append(step(499, 206, "publish"))
-p += [icon("s3", 655, S3Y - 20, 40), text(655, S3Y - 26, "S3バケット", 13, INK, 700)]
-p += [icon("ecr", 655, ECRY - 20, 40), text(650, ECRY - 26, "ECRリポジトリ", 13, INK, 700)]
+p.append(step(539, 226, "publish"))
+p += [icon("s3", 705, S3Y - 20, 40), text(705, S3Y - 28, "S3バケット", 13, INK, 700)]
+p += [icon("ecr", 705, ECRY - 20, 40), text(700, ECRY - 28, "ECRリポジトリ", 13, INK, 700)]
 p = SEC["trunk"]
-p.append(f'<path d="M467,204 H482 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p += [arrow(f"M467,{S3Y} H635"), text(562, S3Y - 8, "パブリッシュ")]
-p.append(role_chip(506, S3Y + 8, ["ファイル用", "パブリッシュロール"]))
-p += [arrow(f"M467,{ECRY} H635"), text(562, ECRY - 8, "ビルドしてpush")]
-p.append(role_chip(506, ECRY + 8, ["イメージ用", "パブリッシュロール"]))
+p.append(f'<path d="M500,210 H519 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
+p += [arrow(f"M500,{S3Y} H685"), text(612, S3Y - 10, "パブリッシュ")]
+p.append(role_chip(556, S3Y + 12, ["ファイル用", "パブリッシュロール"]))
+p += [arrow(f"M500,{ECRY} H685"), text(612, ECRY - 10, "ビルドしてpush")]
+p.append(role_chip(556, ECRY + 12, ["イメージ用", "パブリッシュロール"]))
 
 # publish → deploy: アップロードしたアセットを deploy で使う
 p = SEC["gap"]
-p.append(f'<path d="M675,{ECRY} H702 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p.append(arrow(f"M675,{S3Y} H727"))
+p.append(f'<path d="M725,{ECRY} H752 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
+p.append(arrow(f"M725,{S3Y} H795"))
 
 # deploy: IaC の図（iac-diff）と同じ形にする。あるべき姿と現在の状態を比べ、差分を反映する
-DMID = 182
+DMID = 186
 p = SEC["deploy"]
-p.append(step(715, 445, "deploy"))
+p.append(step(779, 489, "deploy"))
 
 
 def state_box(y, name, lines, fill):
-    out = [f'<rect x="727" y="{y}" width="110" height="62" rx="10" fill="{fill}" stroke="{LINE}" stroke-width="2"/>',
-           icon(name, 747, y + 15, 32)]
+    out = [f'<rect x="795" y="{y}" width="110" height="62" rx="10" fill="{fill}" stroke="{LINE}" stroke-width="2"/>',
+           icon(name, 815, y + 15, 32)]
     for i, line in enumerate(lines):
         bold = i < len(lines) - 1
-        out.append(text(767, y + 62 / 2 + 4 - 7 * (len(lines) - 1) + 14 * i, line, 11 if bold else 10, INK if bold else SUB, 700 if bold else None, "start"))
+        out.append(text(835, y + 62 / 2 + 4 - 7 * (len(lines) - 1) + 14 * i, line, 11 if bold else 10, INK if bold else SUB, 700 if bold else None, "start"))
     return "".join(out)
 
 
-p.append(state_box(101, "template", ["新しい", "テンプレート", "（あるべき姿）"], "#ffffff"))
-p.append(state_box(201, "stack", ["スタックの", "状態", "（現在の状態）"], "#f5f7f9"))
-p.append(text(840, DMID + 4, "比較", 11, anchor="end"))
-p.append(arrow(f"M837,132 H846 V{DMID - 8} H876"))
-p.append(arrow(f"M837,232 H846 V{DMID + 8} H876"))
-p.append(icon("cfn", 895, DMID - 18, 36))
-p.append(text(895, DMID + 32, "CloudFormation", 11, INK, 700))
-p.append(role_chip(858, DMID + 42, ["デプロイ用", "ロール"]))
-p.append(green_arrow(f"M915,{DMID} H945"))
-p.append(f'<rect x="945" y="{DMID - 42}" width="62" height="84" rx="10" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2" stroke-dasharray="5 4"/>')
-p.append(text(976, DMID - 25, "差分", 12, GREEN, 700))
-p.append(icon("changeset", 976, DMID - 18, 34))
-p.append(text(976, DMID + 32, "変更セット", 11, GREEN, 700))
-p.append(green_arrow(f"M1007,{DMID} H1087"))
-p += [text(1047, DMID - 24, "確認して", 11), text(1047, DMID - 9, "反映する", 11)]
-p.append(icon("role", 1047, DMID + 8, 18))
-p += [text(1047, DMID + 39, "CloudFormation", 10), text(1047, DMID + 52, "実行ロール", 10)]
-p.append(f'<rect x="1087" y="{DMID - 42}" width="65" height="84" rx="10" fill="#ffffff" stroke="{INK}" stroke-width="2"/>')
-p.append(icon("stack", 1119.5, DMID - 30, 34))
-p.append(text(1119.5, DMID + 19, "スタック", 11, INK, 700))
-p.append(text(1119.5, DMID + 33, "実リソース", 10, SUB))
+p.append(state_box(103, "template", ["新しい", "テンプレート", "（あるべき姿）"], "#ffffff"))
+p.append(state_box(207, "stack", ["スタックの", "状態", "（現在の状態）"], "#f5f7f9"))
+p.append(text(914, DMID + 4, "比較", 11, anchor="end"))
+p.append(arrow(f"M905,{S3Y} H920 V{DMID - 8} H950"))
+p.append(arrow(f"M905,238 H920 V{DMID + 8} H950"))
+p.append(icon("cfn", 970, DMID - 18, 36))
+p.append(text(970, DMID + 34, "CloudFormation", 11, INK, 700))
+p.append(role_chip(933, DMID + 46, ["デプロイ用", "ロール"]))
+p.append(green_arrow(f"M990,{DMID} H1030"))
+p.append(f'<rect x="1030" y="{DMID - 46}" width="64" height="92" rx="10" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2" stroke-dasharray="5 4"/>')
+p.append(text(1062, DMID - 27, "差分", 12, GREEN, 700))
+p.append(icon("changeset", 1062, DMID - 18, 34))
+p.append(text(1062, DMID + 34, "変更セット", 11, GREEN, 700))
+p.append(green_arrow(f"M1094,{DMID} H1186"))
+p += [text(1140, DMID - 26, "確認して", 11), text(1140, DMID - 11, "反映する", 11)]
+p.append(icon("role", 1140, DMID + 10, 18))
+p += [text(1140, DMID + 42, "CloudFormation", 10), text(1140, DMID + 55, "実行ロール", 10)]
+p.append(f'<rect x="1186" y="{DMID - 46}" width="68" height="92" rx="10" fill="#ffffff" stroke="{INK}" stroke-width="2"/>')
+p.append(icon("stack", 1220, DMID - 34, 34))
+p.append(text(1220, DMID + 18, "スタック", 11, INK, 700))
+p.append(text(1220, DMID + 33, "実リソース", 10, SUB))
 
 defs = (f'<defs><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'
         f'<path d="M0,0 L10,5 L0,10 z" fill="{INK}"/></marker>'
@@ -202,7 +202,7 @@ DIM = 0.14
 
 
 # Bootstrap を上に置いたぶん、cdk deploy の枠全体をずらす
-MOVE = 'transform="translate(-155,80)"'
+MOVE = 'transform="translate(-157,88)"'
 
 
 def write(name, focus=None):
@@ -214,7 +214,7 @@ def write(name, focus=None):
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
         move = "" if key == "bootstrap" else f" {MOVE}"
         body.append(f"<g{opacity}{move}>" + "".join(parts) + "</g>")
-    box = "0 0 1023 452" if focus is None else "0 88 1023 360"
+    box = "0 0 1129 468" if focus is None else "0 96 1129 370"
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{box}" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
