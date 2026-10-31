@@ -96,8 +96,8 @@ transition: fade
 <div class="definition mt-8 faded">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
-<em>コードでクラウドインフラストラクチャを定義</em>し、<br>
-AWS CloudFormation を通じてプロビジョニングするための、<br>
+<em>コードでクラウドインフラストラクチャを定義し、</em><br>
+AWS CloudFormation を通じて<em>プロビジョニングするための、</em><br>
 オープンソースの<em>ソフトウェア開発フレームワークです</em>。
 
 </div>
@@ -115,12 +115,14 @@ transition: fade
 
 <ChapterLabel />
 
-<div class="definition">コードでクラウドインフラストラクチャを定義する、<br>ソフトウェア開発フレームワークです</div>
+<div class="kari">仮：CloudFormation の句は確認待ち</div>
+
+<div class="definition">コードでクラウドインフラストラクチャを定義し、<br>プロビジョニングするための、<br>ソフトウェア開発フレームワークです。</div>
 
 <div class="big-accent mt-10">IaC（Infrastructure as Code）の定義です！</div>
 
 <!--
-抜き出しは 10-31 09:27 の形。原文の言葉を変えず、つなぎだけ直している。
+仮: 抜き出しは 10-31 12:00 の形。「AWS CloudFormation を通じて」を入れるかは確認待ち。
 -->
 
 ---
@@ -147,8 +149,6 @@ chapter: IaC
 
 <ChapterLabel />
 
-<div class="kari">仮：抜き出しの文に無い言葉</div>
-
 ## プロビジョニングする → どうやって？
 
 <div class="text-lg mt-2">あるべき姿との<span class="accent">差分をデプロイ</span>する</div>
@@ -156,7 +156,7 @@ chapter: IaC
 <InlineSvg src="iac-diff.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする" class="mx-auto mt-4 fig-iac" />
 
 <!--
-仮: 10-31 09:27 の抜き出しには「プロビジョニング」が入っていない。この問いかけ（10-30 01:53）とのつながりは確認待ち。図は #93 の iac-diff を流用。
+問いかけは 10-30 01:53。図は #93 の iac-diff を流用。
 -->
 
 ---
@@ -201,7 +201,7 @@ transition: fade
 <div class="question text-center mt-12">CDK は CloudFormation とどう関わってるの？</div>
 
 <!--
-仮: 10-31 09:22 で「AWS CloudFormation を通じて」を戻してデプロイフローへつなぐと決めた。09:27 の抜き出しとどちらの文にするかは確認待ち。問いかけは 10-30 15:59。
+仮: 10-31 09:22 で「AWS CloudFormation を通じて」を戻してデプロイフローへつなぐと決めた。IaC の定義の抜き出し（10-31 12:00）にこの句を入れるかは確認待ち。問いかけは 10-30 15:59。
 -->
 
 ---
