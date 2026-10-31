@@ -690,6 +690,35 @@ chapter: オープンソース
 -->
 
 ---
+chapter: まとめ
+---
+
+<ChapterLabel />
+
+## AWS CDKとは？
+
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition summary tight">
+
+AWS Cloud Development Kit (AWS CDK) は、<br>
+<s class="struck">コード</s><span class="replaced">プログラミング言語</span>で<em>クラウドインフラストラクチャを定義し、</em><br>
+<em>AWS CloudFormation を通じてプロビジョニングするための、</em><br>
+<em>オープンソースのソフトウェア開発フレームワーク</em>です。
+
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
+
+<!--
+最後のまとめで定義をもう一度出す（10-31 13:21）。発表で取り上げた部分を全部ハイライトする。「コード」は 16 枚目と同じ差し替え。
+-->
+
+---
 layout: ending
 ---
 
