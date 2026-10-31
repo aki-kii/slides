@@ -65,7 +65,7 @@ transition: fade
 
 <ChapterLabel />
 
-<h2 class="long-title">AWS CDKを理解するために、<br>公式の定義を深掘って解説してみる。</h2>
+## AWS CDKとは？
 
 <div class="official-quote mt-5">
 <div class="official-label">AWS公式の定義</div>
