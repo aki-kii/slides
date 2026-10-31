@@ -410,24 +410,43 @@ chapter: プログラミング言語とフレームワーク
 
 <div class="kari">仮：コードの例は仮</div>
 
-## ループとパラメータ化
+## 数の分だけ用意できる
 
 ```ts
 const stages = ['dev', 'stg', 'prod'];
 
 for (const stage of stages) {
-  new ApiStack(app, `Api-${stage}`, {
-    memorySize: memoryOf(stage),
-  });
+  new ApiStack(app, `Api-${stage}`);
 }
 ```
 
-<div class="arrow-note">→ 同じものを環境の数だけ作り、違いは引数で渡す</div>
+<div class="arrow-note">→ 指定した個数ではなく、何かの数の分だけ何かを用意する処理が書ける</div>
 
 <!--
-根拠 10-31 09:32。公式のベストプラクティスは、CloudFormation の Conditions や Parameters より、言語の機能で合成時に決めるよう勧めている。
-CloudFormation にも Fn::ForEach はあるので「できない」とは言わない。使える値や操作は言語のほうがずっと多い、と言う。
+仮: コードの例は仮。根拠 10-31 12:54。CloudFormation にも Fn::ForEach はあるので「できない」とは言わない。
 https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+---
+
+<ChapterLabel />
+
+<div class="kari">仮：コードの例は仮</div>
+
+## 環境によって作らない
+
+```ts
+if (stage !== 'dev') {
+  new MonitoringStack(app, 'Monitoring');
+}
+```
+
+<div class="arrow-note">→ 環境によって、このリソースは作らないと指定できる</div>
+
+<!--
+仮: コードの例は仮。根拠 10-31 12:54。
 -->
 
 ---
@@ -440,39 +459,11 @@ chapter: プログラミング言語とフレームワーク
 
 ## カスタムリソース
 
-<div class="text-xl mt-4">CloudFormationにない操作を、デプロイのときに自分のコードで動かす</div>
-
-<div class="pair-grid mt-8">
-  <div><b>AwsCustomResource</b><span>APIを1回呼ぶだけなら</span></div>
-  <div><b>Provider framework</b><span>自分で処理を書くなら</span></div>
-</div>
-
-<div class="arrow-note">→ もとはCloudFormationの機能。CDKだと簡単に書ける</div>
+<div class="text-2xl mt-16 text-center font-bold">プログラムで実際に何かを作る処理ができる</div>
 
 <!--
-仮: 10-31 09:39 で本人は迷い中。テンプレートだけでも使える機能なので、CDK の良さとして言うなら簡単に書ける点。
+仮: 10-31 09:39 で本人は迷い中。仕組みの説明は消した（12:54）。もとは CloudFormation の機能で、テンプレートだけでも使える。
 https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources-readme.html
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-<div class="kari">仮：足すかは確認待ち</div>
-
-## AWS CDKのつくり
-
-<div class="triple-grid mt-10">
-  <div><b>Construct Library</b><span>AWSが用意した部品</span></div>
-  <div><b>CDK CLI</b><span>cdk deployなどのコマンド</span></div>
-  <div><b>6つの言語</b><span>TypeScript、JavaScript、Python、Java、C#、Go</span></div>
-</div>
-
-<!--
-仮: Construct Library、CDK CLI、多言語対応を足すかは確認待ち（10-31 09:41）。
-https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html
 -->
 
 ---
@@ -519,28 +510,6 @@ chapter: プログラミング言語とフレームワーク
 <!--
 スタックとアプリはコンストラクトの説明の中で触れる（10-31 09:39）。
 https://docs.aws.amazon.com/cdk/v2/guide/apps.html
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-<div class="kari">仮：コードの例は仮</div>
-
-## 条件分岐
-
-```ts
-if (stage === 'prod') {
-  new MonitoringStack(app, 'Monitoring');
-}
-```
-
-<div class="arrow-note">→ 環境ごとの違いをifでそのまま書ける</div>
-
-<!--
-仮: フレームワークとしての特徴として話す（10-31 09:32）。コードの例は仮。
 -->
 
 ---
