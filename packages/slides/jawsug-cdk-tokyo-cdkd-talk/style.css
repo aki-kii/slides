@@ -585,3 +585,12 @@
 .replaced { color: #dd344c; font-weight: 700; }
 .official-quote { position: relative; }
 .official-note { position: absolute; right: 1.4rem; bottom: 1.9rem; white-space: nowrap; }
+.rows .row-head { display: flex; align-items: baseline; gap: 0.6rem; margin: 0; }
+.rows .row-head code { background: none !important; color: #6b7684 !important; font-size: 0.68rem; }
+.rows .row-head i { margin-left: auto; color: #6b7684; font-family: "Fira Code", monospace; font-size: 0.72rem; font-style: normal; }
+.rows .row-head .kari-inline { padding: 0 0.5rem; border: 1.5px solid #dd344c; border-radius: 999px; background: #fdecee; color: #dd344c; font-size: 0.55rem; font-style: normal; font-weight: 700; }
+.rows .row-head { line-height: 1.35; }
+.rows .row-head b { font-size: 0.95rem; }
+.rows > div > span { font-size: 0.78rem; line-height: 1.35; }
+.oss-rows { gap: 0.4rem; }
+.oss-rows > div { padding: 0.3rem 0.9rem; }

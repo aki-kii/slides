@@ -504,15 +504,17 @@ chapter: プログラミング言語とフレームワーク
 ## 好きなCDKコンストラクト
 
 <div class="rows mt-4">
-  <div><b>DockerImageAsset</b><span>ビルドしたコンテナイメージをCDK ToolkitのECRリポジトリに置く</span></div>
-  <div><b>S3Deployment</b><span>静的サイトのデプロイをいい感じにして、CloudFrontのキャッシュの無効化までしてくれる</span></div>
-  <div><b>NATインスタンスのコンストラクト</b><span>NATインスタンスを構築する</span></div>
-  <div><b>DeployTimeBuild（個人のOSS）</b><span>tmokmssさんのコンストラクト</span></div>
+  <div><p class="row-head"><b>DockerImageAsset</b><code>aws-cdk-lib/aws-ecr-assets</code></p><span>コンテナイメージをビルドして、CDK ToolkitのECRリポジトリに置く</span></div>
+  <div><p class="row-head"><b>BucketDeployment</b><code>aws-cdk-lib/aws-s3-deployment</code></p><span>静的サイトのデプロイをいい感じにして、CloudFrontのキャッシュの無効化までしてくれる</span></div>
+  <div><p class="row-head"><b>NatProvider.instanceV2</b><code>aws-cdk-lib/aws-ec2</code></p><span>NATゲートウェイの代わりに、NATインスタンスを構築する</span></div>
+  <div><p class="row-head"><b>@cdklabs/deploy-time-build</b><code>cdklabs</code></p><span>デプロイのときにビルドを走らせる（フロントエンドの静的ファイル、コンテナイメージなど）</span></div>
 </div>
 
 <!--
-仮: 10-30 16:29 では全部 AWS 公式としていたが、npm の deploy-time-build のリポジトリは tmokmss/deploy-time-build で、作者も tmokmss。残すかは本人が決める。
-DockerImageAsset の説明は本人のメモより短くした。
+仮: 口頭で話す 1〜2 個は未定。
+BucketDeployment は本人のメモの「S3Deployment」の正式な名前。
+NAT は本人の意図を確かめていない。aws-cdk-lib の NatProvider.instanceV2（クラスは NatInstanceProviderV2）にした。
+deploy-time-build はもとは tmokmss さんの個人の OSS で、今は cdklabs に移っている（@cdklabs/deploy-time-build）。
 -->
 
 ---
@@ -571,20 +573,18 @@ chapter: オープンソース
 
 <div class="kari">仮：口頭で話す3つは未定</div>
 
-## 関連するOSS（公式側）
+## 関連するOSS
 
-<div class="oss-list mt-2">
-  <div><b>BLEA</b><span>安全なベースライン環境を作るCDKテンプレート</span></div>
-  <div><b>cdk-nag</b><span>ルールでCDKアプリを確かめる</span></div>
-  <div><b>jsii</b><span>CDKをTypeScript以外の言語から使えるようにする</span></div>
-  <div><b>cdk-from-cfn</b><span>CloudFormationテンプレートをCDKのコードに変換する</span></div>
-  <div><b>cdk8s</b><span>Kubernetesのアプリをコードで定義する</span></div>
-  <div><b>AWS Solutions Constructs</b><span>検証済みの構成のコンストラクト集</span></div>
-  <div><b>cdk-monitoring-constructs</b><span>監視を簡単に作るコンストラクト集</span></div>
+<div class="rows oss-rows mt-2">
+  <div><p class="row-head"><b>baseline-environment-on-aws（BLEA）</b><i>aws-samples</i></p><span>安全なベースライン環境を作るCDKテンプレート</span></div>
+  <div><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span>ルールでCDKアプリを確かめる</span></div>
+  <div><p class="row-head"><b>cdk8s</b><i>cdk8s-team</i></p><span>Kubernetesのアプリをコードで定義する</span></div>
+  <div><p class="row-head"><b>aws-solutions-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>awslabs</i></p><span>検証済みの構成のコンストラクト集</span></div>
+  <div><p class="row-head"><b>cdk-monitoring-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>cdklabs</i></p><span>監視を簡単に作るコンストラクト集</span></div>
 </div>
 
 <!--
-仮: スライドには全部載せ、口頭では 3 つくらいに絞る（10-30 01:05）。一覧は 10-30 16:24。説明は各リポジトリの説明から書いた。
+仮: スライドには全部載せ、口頭では 3 つくらいに絞る（10-30 01:05）。作成者は各リポジトリの持ち主を確かめた。AWS Solutions Constructs と cdk-monitoring-constructs は本人が話したか確認中（10-31 12:58）。
 -->
 
 ---
@@ -595,48 +595,28 @@ chapter: オープンソース
 
 <div class="kari">仮：口頭で話す3つは未定</div>
 
-## 関連するOSS（日本・海外）
+## 関連するOSS
 
-<div class="oss-two mt-2">
-<div>
-<div class="oss-head">日本</div>
-<div class="oss-list">
-  <div><b>cdkd（後藤さん）</b><span>CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
-  <div><b>cdk-real-drift（後藤さん）</b><span>テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
-  <div><b>awscdk-lint（山梨さん）</b><span>CDK用のリントのプラグイン</span></div>
-  <div><b>cdk-preflight（くらいやーさん）</b><span>デプロイ時の失敗をsynthの時点で見つける</span></div>
-  <div><b>cfn-exec-policy（くらいやーさん）</b><span>CloudFormation実行ロールを最小権限にする</span></div>
-  <div><b>cfn-idle-cost（くらいやーさん）</b><span>アクセスがなくてもかかる月額を出す</span></div>
-</div>
-</div>
-<div>
-<div class="oss-head">海外</div>
-<div class="oss-list">
-  <div><b>projen</b><span>プロジェクトの設定をコードで管理する</span></div>
-  <div><b>cdk-dia</b><span>構成図を自動で作る</span></div>
-  <div><b>awesome-cdk</b><span>CDK関連のOSSや記事のまとめ</span></div>
-</div>
-</div>
+<div class="rows oss-rows mt-2">
+  <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span>CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
+  <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span>テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
+  <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span>CDK用のリントのプラグイン</span></div>
+  <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span>デプロイ時の失敗をsynthの時点で見つける</span></div>
+  <div><p class="row-head"><b>cfn-exec-policy</b><i>badmintoncryer</i></p><span>CloudFormation実行ロールを最小権限にする</span></div>
+  <div><p class="row-head"><b>cfn-idle-cost</b><i>badmintoncryer</i></p><span>アクセスがなくてもかかる月額を出す</span></div>
 </div>
 
 <!--
-仮: 一覧は 10-30 16:24。口頭で話す 3 つは未決。
+仮: 口頭で話す 3 つは未定。作成者は各リポジトリの持ち主を確かめた。
 -->
 
 ---
-layout: center
-class: text-center
-chapter: 締め
+layout: ending
 ---
 
-<ChapterLabel />
+# Thank You!
 
-<div class="kari">仮：締め方と渡し方は未定</div>
-
-<div class="closing">ここからは後藤さんのcdkdへ</div>
-
-<div class="text-xl mt-6 opacity-70">CloudFormationを通さず、AWS SDKを直接呼ぶCDK CLI</div>
-
-<!--
-仮: ここは決まっていない。ブリーフの「締め=後藤さん cdkd へ渡す」をもとにした仮の文。
--->
+<div class="absolute right-8 bottom-8 flex flex-col items-center gap-2">
+  <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin: 0;">＼ ご清聴ありがとうございました！ ／</p>
+  <img src="/images/aboutme/eye-catch.png" class="h-36" />
+</div>
