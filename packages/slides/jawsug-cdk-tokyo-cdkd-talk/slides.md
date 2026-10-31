@@ -221,11 +221,13 @@ transition: fade
 
 <ChapterLabel />
 
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
 ## デプロイフロー
 
 <InlineSvg src="deploy-flow.svg" label="CDK Bootstrap の枠と、synth、publish、deploy の順に進む cdk deploy の枠" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ cdk deployの中でsynth、publish、deployが順に動く</div>
+<div class="arrow-note">→ <span class="not-own">cdk deployの中でsynth、publish、deployが順に動く</span></div>
 
 <!--
 全体を先に見せる。ここから同じ図の一部を順に強調する。cdk deploy が全体を順に動かす。根拠 10-30 16:06、10-31 09:22。
@@ -255,11 +257,13 @@ transition: fade
 
 <ChapterLabel />
 
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
 ## アセット
 
 <InlineSvg src="deploy-flow-assets.svg" label="アセットの枠を強調した図。テンプレートだけ赤で目立たせている" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ テンプレートと、パブリッシュするものの元。いちばん大事なのはテンプレート</div>
+<div class="arrow-note">→ <span class="not-own">テンプレートと、パブリッシュするものの元。いちばん大事なのはテンプレート</span></div>
 
 <!--
 cdk.out（公式の呼び名は cloud assembly）には manifest.json などもあるが、パブリッシュされないので図から外した。ファイルの大きさでは manifest.json のほうがテンプレートより大きいことがある。synth の時点では zip も Docker イメージも作られない。
@@ -272,11 +276,13 @@ transition: fade
 
 <ChapterLabel />
 
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
 ## パブリッシュ
 
 <InlineSvg src="deploy-flow-publish.svg" label="テンプレートとファイルを S3 バケットへ、コンテナイメージを ECR リポジトリへパブリッシュする部分を強調した図" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ テンプレートとファイルはS3バケットへ、コンテナイメージはECRリポジトリへ</div>
+<div class="arrow-note">→ <span class="not-own">テンプレートとファイルはS3バケットへ、コンテナイメージはECRリポジトリへ</span></div>
 
 <!--
 *.assets.json の一覧で確かめた。テンプレートも S3 へ上げるファイルとして載っている。コンテナイメージは synth では作らず、ここでビルドして push する。
@@ -289,11 +295,13 @@ transition: fade
 
 <ChapterLabel />
 
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
 ## デプロイ
 
 <InlineSvg src="deploy-flow-deploy.svg" label="新しいテンプレートとスタックの状態を比べて変更セットを作り、スタックに反映する部分を強調した図" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ 新しいテンプレートとスタックの状態を比べる。実際のリソースを見に行くわけではない</div>
+<div class="arrow-note">→ <span class="not-own">新しいテンプレートとスタックの状態を比べる。実際のリソースを見に行くわけではない</span></div>
 
 <!--
 publish でアップロードしたアセットを使う。公式は「スタックと、送った変更を比べる」。実際のリソースまで比べるのは drift-aware change set（cdk deploy --revert-drift）のとき。
@@ -307,11 +315,13 @@ chapter: デプロイフロー
 
 <ChapterLabel />
 
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
 ## デプロイ
 
 <InlineSvg src="deploy-flow-deploy.svg" label="変更セットを確認してスタックに反映する部分を強調した図。反映には CloudFormation 実行ロールを使う" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ 変更セットを確認してスタックに反映すると、AWSリソースが作られる</div>
+<div class="arrow-note">→ <span class="not-own">変更セットを確認してスタックに反映すると、AWSリソースが作られる</span></div>
 
 <!--
 リソースの話はこの章でする（10-31 09:39）。
@@ -383,9 +393,9 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari">仮：中身は本人が決める</div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：中身は本人が決める</div></div>
 
-## プログラミング言語だと何がうれしい？
+## <span class="not-own">プログラミング言語だと何がうれしい？</span>
 
 <!--
 仮: 中身は本人がまだ決めていない（10-31 12:52）。本文は書いていない。
@@ -397,9 +407,9 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari">仮：コードの例は仮</div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
 
-## 数の分だけ用意できる
+## <span class="not-own">数の分だけ用意できる</span>
 
 ```ts
 const stages = ['dev', 'stg', 'prod'];
@@ -409,7 +419,7 @@ for (const stage of stages) {
 }
 ```
 
-<div class="arrow-note">→ 指定した個数ではなく、何かの数の分だけ何かを用意する処理が書ける</div>
+<div class="arrow-note">→ <span class="not-own">指定した個数ではなく、何かの数の分だけ何かを用意する処理が書ける</span></div>
 
 <!--
 仮: コードの例は仮。根拠 10-31 12:54。CloudFormation にも Fn::ForEach はあるので「できない」とは言わない。
@@ -422,9 +432,9 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari">仮：コードの例は仮</div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
 
-## 環境によって作らない
+## <span class="not-own">環境によって作らない</span>
 
 ```ts
 if (stage !== 'dev') {
@@ -461,12 +471,14 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
 ## コンストラクト
 
 <div class="levels mt-6">
-  <div class="level l1"><b>L1</b><span>CloudFormationの<br>リソースそのまま</span><code>CfnBucket</code></div>
-  <div class="level l2"><b>L2</b><span>安全な初期値つき</span><code>s3.Bucket</code></div>
-  <div class="level l3"><b>L3</b><span>複数のリソースの<br>構成一式</span><code>ApplicationLoad<br>BalancedFargateService</code></div>
+  <div class="level l1"><b>L1</b><span class="not-own">CloudFormationの<br>リソースそのまま</span><code>CfnBucket</code></div>
+  <div class="level l2"><b>L2</b><span class="not-own">安全な初期値つき</span><code>s3.Bucket</code></div>
+  <div class="level l3"><b>L3</b><span class="not-own">複数のリソースの<br>構成一式</span><code>ApplicationLoad<br>BalancedFargateService</code></div>
 </div>
 
 <div class="arrow-note">→ レベルが上がるほど抽象化も上がる</div>
@@ -482,7 +494,9 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-## アプリもスタックもコンストラクト
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
+## <span class="not-own">アプリもスタックもコンストラクト</span>
 
 <div class="nest-app mt-4">
   <div class="nest-title">アプリ</div>
@@ -507,15 +521,15 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari">仮：口頭で話す1〜2個は未定</div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す1〜2個は未定</div></div>
 
 ## 好きなCDKコンストラクト
 
 <div class="rows mt-4">
-  <div class="row-icon"><img src="/images/icons/ecr.svg" alt="Amazon ECR" /><div><p class="row-head"><b>DockerImageAsset</b><code>aws-cdk-lib/aws-ecr-assets</code></p><span>コンテナイメージをビルドして、CDK ToolkitのECRリポジトリに置く</span></div></div>
-  <div class="row-icon"><img src="/images/icons/s3.svg" alt="Amazon S3" /><div><p class="row-head"><b>BucketDeployment</b><code>aws-cdk-lib/aws-s3-deployment</code></p><span>静的サイトのデプロイをいい感じにして、CloudFrontのキャッシュの無効化までしてくれる</span></div></div>
-  <div class="row-icon"><img src="/images/icons/ec2.svg" alt="Amazon EC2" /><div><p class="row-head"><b>NatProvider.instanceV2</b><code>aws-cdk-lib/aws-ec2</code></p><span>NATゲートウェイの代わりに、NATインスタンスを構築する</span></div></div>
-  <div class="row-icon"><img src="/images/icons/codebuild.svg" alt="AWS CodeBuild" /><div><p class="row-head"><b>@cdklabs/deploy-time-build</b><code>cdklabs</code></p><span>デプロイのときにビルドを走らせる（フロントエンドの静的ファイル、コンテナイメージなど）</span></div></div>
+  <div class="row-icon"><img src="/images/icons/ecr.svg" alt="Amazon ECR" /><div><p class="row-head"><b>DockerImageAsset</b><code>aws-cdk-lib/aws-ecr-assets</code></p><span class="not-own">コンテナイメージをビルドして、CDK ToolkitのECRリポジトリに置く</span></div></div>
+  <div class="row-icon"><img src="/images/icons/s3.svg" alt="Amazon S3" /><div><p class="row-head"><b>BucketDeployment</b><code>aws-cdk-lib/aws-s3-deployment</code></p><span class="not-own">静的サイトのデプロイをいい感じにして、CloudFrontのキャッシュの無効化までしてくれる</span></div></div>
+  <div class="row-icon"><img src="/images/icons/ec2.svg" alt="Amazon EC2" /><div><p class="row-head"><b>NatProvider.instanceV2</b><code>aws-cdk-lib/aws-ec2</code></p><span class="not-own">NATゲートウェイの代わりに、NATインスタンスを構築する</span></div></div>
+  <div class="row-icon"><img src="/images/icons/codebuild.svg" alt="AWS CodeBuild" /><div><p class="row-head"><b>@cdklabs/deploy-time-build</b><code>cdklabs</code></p><span class="not-own">デプロイのときにビルドを走らせる（フロントエンドの静的ファイル、コンテナイメージなど）</span></div></div>
 </div>
 
 <!--
@@ -581,16 +595,16 @@ chapter: オープンソース
 
 <ChapterLabel />
 
-<div class="kari">仮：口頭で話す3つは未定</div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す3つは未定</div></div>
 
 ## 関連するOSS
 
 <div class="rows oss-rows mt-2">
-  <div><p class="row-head"><b>baseline-environment-on-aws（BLEA）</b><i>aws-samples</i></p><span>安全なベースライン環境を作るCDKテンプレート</span></div>
-  <div><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span>ルールでCDKアプリを確かめる</span></div>
-  <div><p class="row-head"><b>cdk8s</b><i>cdk8s-team</i></p><span>Kubernetesのアプリをコードで定義する</span></div>
-  <div><p class="row-head"><b>aws-solutions-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>awslabs</i></p><span>検証済みの構成のコンストラクト集</span></div>
-  <div><p class="row-head"><b>cdk-monitoring-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>cdklabs</i></p><span>監視を簡単に作るコンストラクト集</span></div>
+  <div><p class="row-head"><b>baseline-environment-on-aws（BLEA）</b><i>aws-samples</i></p><span class="not-own">安全なベースライン環境を作るCDKテンプレート</span></div>
+  <div><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span class="not-own">ルールでCDKアプリを確かめる</span></div>
+  <div><p class="row-head"><b>cdk8s</b><i>cdk8s-team</i></p><span class="not-own">Kubernetesのアプリをコードで定義する</span></div>
+  <div><p class="row-head"><b>aws-solutions-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>awslabs</i></p><span class="not-own">検証済みの構成のコンストラクト集</span></div>
+  <div><p class="row-head"><b>cdk-monitoring-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>cdklabs</i></p><span class="not-own">監視を簡単に作るコンストラクト集</span></div>
 </div>
 
 <!--
@@ -603,17 +617,17 @@ chapter: オープンソース
 
 <ChapterLabel />
 
-<div class="kari">仮：口頭で話す3つは未定</div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す3つは未定</div></div>
 
 ## 関連するOSS
 
 <div class="rows oss-rows mt-2">
-  <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span>CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
-  <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span>テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
-  <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span>CDK用のリントのプラグイン</span></div>
-  <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span>デプロイ時の失敗をsynthの時点で見つける</span></div>
-  <div><p class="row-head"><b>cfn-exec-policy</b><i>badmintoncryer</i></p><span>CloudFormation実行ロールを最小権限にする</span></div>
-  <div><p class="row-head"><b>cfn-idle-cost</b><i>badmintoncryer</i></p><span>アクセスがなくてもかかる月額を出す</span></div>
+  <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span class="not-own">CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
+  <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
+  <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span class="not-own">CDK用のリントのプラグイン</span></div>
+  <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span class="not-own">デプロイ時の失敗をsynthの時点で見つける</span></div>
+  <div><p class="row-head"><b>cfn-exec-policy</b><i>badmintoncryer</i></p><span class="not-own">CloudFormation実行ロールを最小権限にする</span></div>
+  <div><p class="row-head"><b>cfn-idle-cost</b><i>badmintoncryer</i></p><span class="not-own">アクセスがなくてもかかる月額を出す</span></div>
 </div>
 
 <!--
