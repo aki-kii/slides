@@ -598,7 +598,8 @@
 .row-icon > img { flex: none; width: 36px; height: 36px; margin: 0; border-radius: 0; box-shadow: none; }
 .row-icon > div { flex: 1; min-width: 0; }
 .row-icon span { display: block; color: #6b7684; font-size: 0.78rem; line-height: 1.35; }
-.official-quote .bottom-link-wrapper { left: auto !important; right: 1.4rem !important; bottom: 0.8rem !important; }
+.official-quote.compact { padding-top: 0.7rem; padding-bottom: 0.6rem; }
+.official-quote.compact .definition { line-height: 1.6; }
 .kari-row { position: absolute; top: 0.8rem; right: 1.5rem; display: flex; gap: 0.4rem; z-index: 60; }
 .kari-row .kari { position: static; }
 .kari-row .kari-not-own { border-color: #b8680a; background: #fdf3e3; color: #b8680a; }

@@ -82,9 +82,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 </div>
 
 <div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
-</div>
 
 <!--
 公式の定義: https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html （根拠 10-30 01:30）
@@ -99,7 +99,7 @@ transition: fade
 
 ## AWS CDKとは？
 
-<div class="official-quote mt-5">
+<div class="official-quote compact mt-2">
 <div class="official-label">AWS公式の定義</div>
 
 <div class="definition faded">
@@ -112,11 +112,11 @@ AWS CloudFormation を通じて<em>プロビジョニングするための、</e
 </div>
 
 <div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
-
-<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 </div>
 
-<div class="reveal-line mt-5">→ IaC（Infrastructure as Code）の説明になりました！</div>
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
+
+<div class="reveal-line mt-3">→ IaC（Infrastructure as Code）の説明になりました！</div>
 
 <!--
 根拠 10-30 01:45。抜き出しの文は 10-31 12:00 の形で、下の一文と合わせてこの 1 枚にまとめた（12:46）。「AWS CloudFormation を通じて」はここでは強調しない（12:02）。
@@ -349,9 +349,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 </div>
 
 <div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
-</div>
 
 <!--
 全文からハイライトして抜き出す（10-31 12:04、12:52）。「で」と「オープンソースの」は含めない。
@@ -379,9 +379,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 </div>
 
 <div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 <span class="official-note">※公式は「コード」</span></div>
+</div>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
-</div>
 
 <!--
 公式の「コード」を「プログラミング言語」に置き換えて見せる（10-30 16:15、10-31 12:52）。公式の文を書き換えていることは出典の横に添えた。
@@ -626,9 +626,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 </div>
 
 <div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
-</div>
 
 <!--
 全文から一部をハイライトして抜き出す（10-31 12:04）。
