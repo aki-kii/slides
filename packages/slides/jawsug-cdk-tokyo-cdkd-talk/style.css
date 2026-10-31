@@ -594,3 +594,7 @@
 .rows > div > span { font-size: 0.78rem; line-height: 1.35; }
 .oss-rows { gap: 0.4rem; }
 .oss-rows > div { padding: 0.3rem 0.9rem; }
+.rows > .row-icon { flex-direction: row; align-items: center; gap: 0.7rem; }
+.row-icon > img { flex: none; width: 36px; height: 36px; margin: 0; border-radius: 0; box-shadow: none; }
+.row-icon > div { flex: 1; min-width: 0; }
+.row-icon span { display: block; color: #6b7684; font-size: 0.78rem; line-height: 1.35; }
