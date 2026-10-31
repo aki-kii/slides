@@ -69,7 +69,7 @@ def step(x, w, title, ja=None):
 
 def group(x, y, w, h, title):
     return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="14" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>'
-            + text(x + w / 2, y + 23, title, 14, GREEN, 700))
+            + text(x + 12, y + 23, title, 14, GREEN, 700, "start"))
 
 
 def role_line(d):

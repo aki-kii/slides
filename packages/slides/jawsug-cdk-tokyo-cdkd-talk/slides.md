@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: AWS CDK とは？
+title: AWS CDKとは？
 mdc: true
 addons:
   - '@slides/ui'
@@ -17,7 +17,7 @@ fonts:
 
 <div class="text-2xl font-normal opacity-90">JAWS-UG CDK支部 × 東京支部コラボ cdkdハンズオン</div>
 
-# AWS CDK とは？
+# AWS CDKとは？
 
 <div class="opacity-70">
 
@@ -57,7 +57,7 @@ transition: slide-left
 </ProfileItem>
 
 <!--
-仮: #93 と同じ中身。入れるかは未決。
+仮: 初心者支部で登壇したスライドと同じ中身。入れるかは未決。
 -->
 
 ---
@@ -67,9 +67,12 @@ transition: fade
 
 <ChapterLabel />
 
-## AWS CDK とは？
+## AWS CDKとは？
 
-<div class="definition mt-8">
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
 コードでクラウドインフラストラクチャを定義し、<br>
@@ -78,7 +81,8 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 
 </div>
 
-<div class="source-note">AWS CDK v2 デベロッパーガイドより</div>
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
+</div>
 
 <!--
 公式の定義: https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html （根拠 10-30 01:30）
@@ -91,15 +95,21 @@ transition: fade
 
 <ChapterLabel />
 
-## AWS CDK とは？
+## AWS CDKとは？
 
-<div class="definition mt-8 faded">
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition faded">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じて<em>プロビジョニングするための、</em><br>
 オープンソースの<em>ソフトウェア開発フレームワークです</em>。
 
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
 </div>
 
 <!--
@@ -135,17 +145,26 @@ chapter: IaC
 
 <div class="big-accent mt-4">あるべき姿を定義する</div>
 
-<div class="pd-card pd-iac declarative mt-6">
-<div class="pd-title">宣言型のデプロイ</div>
-<ul>
-  <li>リソースの「あるべき姿」を宣言するデプロイ方法</li>
+<!--
+根拠 10-30 01:53。次のページで宣言型のデプロイを説明する（10-30 01:54、10-31 12:03、12:08）。手続き型は話さない（10-30 01:50）。
+-->
+
+---
+chapter: IaC
+---
+
+<ChapterLabel />
+
+## 宣言型のデプロイ
+
+<ul class="declarative mt-8">
+  <li>リソースの「<span class="accent font-bold">あるべき姿</span>」を宣言するデプロイ方法</li>
   <li>作成・変更・削除の操作は書かず、最終的な設定だけを書く</li>
   <li>例：コードにメモリサイズと環境変数を書いてデプロイした</li>
 </ul>
-</div>
 
 <!--
-根拠 10-30 01:53、01:54、10-31 12:03。宣言型の説明はここで一緒にする。手続き型は話さない（01:50）。カードの文は #93 の本人の言葉（2026-10-29 16:45）。
+文は初心者支部で登壇したスライドの本人の言葉（2026-10-29 16:45）。
 -->
 
 ---
@@ -161,28 +180,7 @@ chapter: IaC
 <InlineSvg src="iac-diff.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする" class="mx-auto mt-4 fig-iac" />
 
 <!--
-問いかけは 10-30 01:53。図は #93 の iac-diff を流用。
--->
-
----
-chapter: IaC
----
-
-<ChapterLabel />
-
-<div class="kari">仮：置き場所は未定</div>
-
-## IaC の特徴
-
-<div class="feature-grid mt-10">
-  <div>再現性の高さ</div>
-  <div>変更管理ができること</div>
-  <div>構造を把握しやすい</div>
-  <div>再利用のしやすさ</div>
-</div>
-
-<!--
-仮: タイトルだけを見せて、中身は話さない（10-30 01:11）。置き場所は未決。題は #93 のスライドから。
+問いかけは 10-30 01:53。図は 初心者支部で登壇したスライドの iac-diff を流用。
 -->
 
 ---
@@ -221,7 +219,7 @@ transition: fade
 
 </div>
 
-<div class="question text-center mt-12">CDK は CloudFormation とどう関わってるの？</div>
+<div class="question text-center mt-12">CDKはCloudFormationとどう関わってるの？</div>
 
 <!--
 デプロイフローの説明に入る直前で、定義文に「AWS CloudFormation を通じて」を足して見せる（10-31 09:22、12:02）。問いかけは 10-30 15:59。
@@ -238,7 +236,7 @@ transition: fade
 
 <InlineSvg src="deploy-flow.svg" label="CDK Bootstrap で先に作ったものを使い、synth、publish、deploy の順に進む流れ" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ cdk deploy の中で synth、publish、deploy が順に動く</div>
+<div class="arrow-note">→ cdk deployの中でsynth、publish、deployが順に動く</div>
 
 <!--
 全体を先に見せる。ここから同じ図の一部を順に強調する。根拠 10-30 16:06、10-31 09:22。
@@ -251,7 +249,7 @@ transition: fade
 
 <ChapterLabel />
 
-<div class="kari">仮：bootstrap を話すかは未定</div>
+<div class="kari">仮：bootstrapを話すかは未定</div>
 
 ## CDK Bootstrap
 
@@ -308,7 +306,7 @@ transition: fade
 
 <InlineSvg src="deploy-flow-publish.svg" label="テンプレートとファイルを S3 バケットへ、コンテナイメージを ECR リポジトリへパブリッシュする部分を強調した図" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ テンプレートとファイルは S3 バケットへ、コンテナイメージは ECR リポジトリへ</div>
+<div class="arrow-note">→ テンプレートとファイルはS3バケットへ、コンテナイメージはECRリポジトリへ</div>
 
 <!--
 *.assets.json の一覧で確かめた。テンプレートも S3 へ上げるファイルとして載っている。コンテナイメージは synth では作らず、ここでビルドして push する。
@@ -343,7 +341,7 @@ chapter: デプロイフロー
 
 <InlineSvg src="deploy-flow-deploy.svg" label="変更セットを確認してスタックに反映する部分を強調した図。反映には CloudFormation 実行ロールを使う" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ 変更セットを確認してスタックに反映すると、AWS リソースが作られる</div>
+<div class="arrow-note">→ 変更セットを確認してスタックに反映すると、AWSリソースが作られる</div>
 
 <!--
 リソースの話はこの章でする（10-31 09:39）。
@@ -356,15 +354,21 @@ transition: fade
 
 <ChapterLabel />
 
-## AWS CDK とは？
+## AWS CDKとは？
 
-<div class="definition mt-8 faded">
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition faded">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コードで</em>クラウドインフラストラクチャを定義し、<br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
 オープンソースのソフトウェア開発<em>フレームワーク</em>です。
 
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
 </div>
 
 <!--
@@ -428,14 +432,14 @@ chapter: プログラミング言語とフレームワーク
 
 ## カスタムリソース
 
-<div class="text-xl mt-4">CloudFormation にない操作を、デプロイのときに自分のコードで動かす</div>
+<div class="text-xl mt-4">CloudFormationにない操作を、デプロイのときに自分のコードで動かす</div>
 
 <div class="pair-grid mt-8">
-  <div><b>AwsCustomResource</b><span>API を 1 回呼ぶだけなら</span></div>
+  <div><b>AwsCustomResource</b><span>APIを1回呼ぶだけなら</span></div>
   <div><b>Provider framework</b><span>自分で処理を書くなら</span></div>
 </div>
 
-<div class="arrow-note">→ もとは CloudFormation の機能。CDK だと簡単に書ける</div>
+<div class="arrow-note">→ もとはCloudFormationの機能。CDKだと簡単に書ける</div>
 
 <!--
 仮: 10-31 09:39 で本人は迷い中。テンプレートだけでも使える機能なので、CDK の良さとして言うなら簡単に書ける点。
@@ -450,12 +454,12 @@ chapter: プログラミング言語とフレームワーク
 
 <div class="kari">仮：足すかは確認待ち</div>
 
-## AWS CDK のつくり
+## AWS CDKのつくり
 
 <div class="triple-grid mt-10">
-  <div><b>Construct Library</b><span>AWS が用意した部品</span></div>
-  <div><b>CDK CLI</b><span>cdk deploy などのコマンド</span></div>
-  <div><b>6 つの言語</b><span>TypeScript、JavaScript、Python、Java、C#、Go</span></div>
+  <div><b>Construct Library</b><span>AWSが用意した部品</span></div>
+  <div><b>CDK CLI</b><span>cdk deployなどのコマンド</span></div>
+  <div><b>6つの言語</b><span>TypeScript、JavaScript、Python、Java、C#、Go</span></div>
 </div>
 
 <!--
@@ -472,7 +476,7 @@ chapter: プログラミング言語とフレームワーク
 ## コンストラクト
 
 <div class="levels mt-6">
-  <div class="level l1"><b>L1</b><span>CloudFormation の<br>リソースそのまま</span><code>CfnBucket</code></div>
+  <div class="level l1"><b>L1</b><span>CloudFormationの<br>リソースそのまま</span><code>CfnBucket</code></div>
   <div class="level l2"><b>L2</b><span>安全な初期値つき</span><code>s3.Bucket</code></div>
   <div class="level l3"><b>L3</b><span>複数のリソースの<br>構成一式</span><code>ApplicationLoad<br>BalancedFargateService</code></div>
 </div>
@@ -525,7 +529,7 @@ if (stage === 'prod') {
 }
 ```
 
-<div class="arrow-note">→ 環境ごとの違いを if でそのまま書ける</div>
+<div class="arrow-note">→ 環境ごとの違いをifでそのまま書ける</div>
 
 <!--
 仮: フレームワークとしての特徴として話す（10-31 09:32）。コードの例は仮。
@@ -537,15 +541,15 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari">仮：口頭で話す 1〜2 個は未定</div>
+<div class="kari">仮：口頭で話す1〜2個は未定</div>
 
-## 好きな CDK コンストラクト
+## 好きなCDKコンストラクト
 
 <div class="rows mt-4">
-  <div><b>DockerImageAsset</b><span>ビルドしたコンテナイメージを CDK Toolkit の ECR リポジトリに置く</span></div>
-  <div><b>S3Deployment</b><span>静的サイトのデプロイをいい感じにして、CloudFront のキャッシュの無効化までしてくれる</span></div>
-  <div><b>NAT インスタンスのコンストラクト</b><span>NAT インスタンスを構築する</span></div>
-  <div><b>DeployTimeBuild（個人の OSS）</b><span>tmokmss さんのコンストラクト</span></div>
+  <div><b>DockerImageAsset</b><span>ビルドしたコンテナイメージをCDK ToolkitのECRリポジトリに置く</span></div>
+  <div><b>S3Deployment</b><span>静的サイトのデプロイをいい感じにして、CloudFrontのキャッシュの無効化までしてくれる</span></div>
+  <div><b>NATインスタンスのコンストラクト</b><span>NATインスタンスを構築する</span></div>
+  <div><b>DeployTimeBuild（個人のOSS）</b><span>tmokmssさんのコンストラクト</span></div>
 </div>
 
 <!--
@@ -560,15 +564,21 @@ transition: fade
 
 <ChapterLabel />
 
-## AWS CDK とは？
+## AWS CDKとは？
 
-<div class="definition mt-8 faded">
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition faded">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
 コードでクラウドインフラストラクチャを定義し、<br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
 <em>オープンソースの</em>ソフトウェア開発フレームワークです。
 
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
 </div>
 
 <!--
@@ -581,10 +591,10 @@ chapter: オープンソース
 
 <ChapterLabel />
 
-## AWS CDK は OSS
+## AWS CDKはOSS
 
 <div class="oss-flow mt-16">
-  <div>AWS CDK は OSS</div>
+  <div>AWS CDKはOSS</div>
   <span>→</span>
   <div>外からの<br>コントリビュートを<br>受け付けている</div>
   <span>→</span>
@@ -601,16 +611,16 @@ chapter: オープンソース
 
 <ChapterLabel />
 
-<div class="kari">仮：口頭で話す 3 つは未定</div>
+<div class="kari">仮：口頭で話す3つは未定</div>
 
-## 関連する OSS（公式側）
+## 関連するOSS（公式側）
 
 <div class="oss-list mt-2">
-  <div><b>BLEA</b><span>安全なベースライン環境を作る CDK テンプレート</span></div>
-  <div><b>cdk-nag</b><span>ルールで CDK アプリを確かめる</span></div>
-  <div><b>jsii</b><span>CDK を TypeScript 以外の言語から使えるようにする</span></div>
-  <div><b>cdk-from-cfn</b><span>CloudFormation テンプレートを CDK のコードに変換する</span></div>
-  <div><b>cdk8s</b><span>Kubernetes のアプリをコードで定義する</span></div>
+  <div><b>BLEA</b><span>安全なベースライン環境を作るCDKテンプレート</span></div>
+  <div><b>cdk-nag</b><span>ルールでCDKアプリを確かめる</span></div>
+  <div><b>jsii</b><span>CDKをTypeScript以外の言語から使えるようにする</span></div>
+  <div><b>cdk-from-cfn</b><span>CloudFormationテンプレートをCDKのコードに変換する</span></div>
+  <div><b>cdk8s</b><span>Kubernetesのアプリをコードで定義する</span></div>
   <div><b>AWS Solutions Constructs</b><span>検証済みの構成のコンストラクト集</span></div>
   <div><b>cdk-monitoring-constructs</b><span>監視を簡単に作るコンストラクト集</span></div>
 </div>
@@ -625,19 +635,19 @@ chapter: オープンソース
 
 <ChapterLabel />
 
-<div class="kari">仮：口頭で話す 3 つは未定</div>
+<div class="kari">仮：口頭で話す3つは未定</div>
 
-## 関連する OSS（日本・海外）
+## 関連するOSS（日本・海外）
 
 <div class="oss-two mt-2">
 <div>
 <div class="oss-head">日本</div>
 <div class="oss-list">
-  <div><b>cdkd（後藤さん）</b><span>CloudFormation を通さず AWS SDK を直接呼ぶ CDK CLI</span></div>
+  <div><b>cdkd（後藤さん）</b><span>CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
   <div><b>cdk-real-drift（後藤さん）</b><span>テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
-  <div><b>awscdk-lint（山梨さん）</b><span>CDK 用のリントのプラグイン</span></div>
-  <div><b>cdk-preflight（くらいやーさん）</b><span>デプロイ時の失敗を synth の時点で見つける</span></div>
-  <div><b>cfn-exec-policy（くらいやーさん）</b><span>CloudFormation 実行ロールを最小権限にする</span></div>
+  <div><b>awscdk-lint（山梨さん）</b><span>CDK用のリントのプラグイン</span></div>
+  <div><b>cdk-preflight（くらいやーさん）</b><span>デプロイ時の失敗をsynthの時点で見つける</span></div>
+  <div><b>cfn-exec-policy（くらいやーさん）</b><span>CloudFormation実行ロールを最小権限にする</span></div>
   <div><b>cfn-idle-cost（くらいやーさん）</b><span>アクセスがなくてもかかる月額を出す</span></div>
 </div>
 </div>
@@ -646,7 +656,7 @@ chapter: オープンソース
 <div class="oss-list">
   <div><b>projen</b><span>プロジェクトの設定をコードで管理する</span></div>
   <div><b>cdk-dia</b><span>構成図を自動で作る</span></div>
-  <div><b>awesome-cdk</b><span>CDK 関連の OSS や記事のまとめ</span></div>
+  <div><b>awesome-cdk</b><span>CDK関連のOSSや記事のまとめ</span></div>
 </div>
 </div>
 </div>
@@ -665,9 +675,9 @@ chapter: 締め
 
 <div class="kari">仮：締め方と渡し方は未定</div>
 
-<div class="closing">ここからは後藤さんの cdkd へ</div>
+<div class="closing">ここからは後藤さんのcdkdへ</div>
 
-<div class="text-xl mt-6 opacity-70">CloudFormation を通さず、AWS SDK を直接呼ぶ CDK CLI</div>
+<div class="text-xl mt-6 opacity-70">CloudFormationを通さず、AWS SDKを直接呼ぶCDK CLI</div>
 
 <!--
 仮: ここは決まっていない。ブリーフの「締め=後藤さん cdkd へ渡す」をもとにした仮の文。
