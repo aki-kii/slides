@@ -21,7 +21,7 @@ ICON = {
     "s3": "Res_Amazon-Simple-Storage-Service_Bucket_48.svg",
     "ecr": "Res_Amazon-Elastic-Container-Registry_Registry_48.svg",
     "role": "Res_AWS-Identity-Access-Management_Role_48.svg",
-    "image": "Res_Amazon-Elastic-Container-Registry_Image_48.svg",
+    "docker": os.path.join(os.path.dirname(os.path.abspath(__file__)), "docker.svg"),
     "cfn": "Arch_AWS-CloudFormation_64.svg",
     "template": "Res_AWS-CloudFormation_Template_48.svg",
     "changeset": "Res_AWS-CloudFormation_Change-Set_48.svg",
@@ -33,7 +33,7 @@ _n = [0]
 def icon(name, cx, y, size):
     _n[0] += 1
     prefix = f"i{_n[0]}-"
-    s = open(S + ICON[name]).read()
+    s = open(os.path.join(S, ICON[name])).read()
     s = re.sub(r'<\?xml[^>]*\?>', '', s)
     vb = re.search(r'viewBox="([^"]+)"', s).group(1)
     body = re.search(r'<svg[^>]*>(.*)</svg>', s, re.S).group(1)
@@ -137,7 +137,7 @@ p = SEC["group"]
 p.append(group(335, 66, 178, 278, "アセット"))
 p.append(file_box(348, 102, 152, 64, "template", ["CloudFormation", "テンプレート"], strong=True, icon_size=28))
 p.append(file_box(348, 178, 152, 64, "asset", ["ファイルアセット"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
-p.append(file_box(348, 254, 152, 64, "image", ["コンテナイメージ"], sub=["Dockerfileなど"], icon_size=28))
+p.append(file_box(348, 254, 152, 64, "docker", ["Dockerfile"], icon_size=28))
 
 # publish: テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ。どちらもまっすぐ進む
 S3Y, ECRY = 134, 286
@@ -147,9 +147,9 @@ p += [icon("s3", 705, S3Y - 20, 40), text(705, S3Y - 28, "S3バケット", 13, I
 p += [icon("ecr", 705, ECRY - 20, 40), text(700, ECRY - 28, "ECRリポジトリ", 13, INK, 700)]
 p = SEC["trunk"]
 p.append(f'<path d="M500,210 H519 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p += [arrow(f"M500,{S3Y} H685"), text(612, S3Y - 10, "パブリッシュ")]
+p += [arrow(f"M500,{S3Y} H685"), text(612, S3Y - 10, "アップロード")]
 p.append(role_chip(556, S3Y + 12, ["ファイル用", "パブリッシュロール"]))
-p += [arrow(f"M500,{ECRY} H685"), text(612, ECRY - 10, "ビルドしてpush")]
+p += [arrow(f"M500,{ECRY} H685"), text(612, ECRY - 10, "ビルド＆アップロード")]
 p.append(role_chip(556, ECRY + 12, ["イメージ用", "パブリッシュロール"]))
 
 # publish → deploy: アップロードしたアセットを deploy で使う
