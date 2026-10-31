@@ -22,6 +22,7 @@ ICON = {
     "ecr": "Res_Amazon-Elastic-Container-Registry_Registry_48.svg",
     "role": "Res_AWS-Identity-Access-Management_Role_48.svg",
     "image": "Res_Amazon-Elastic-Container-Registry_Image_48.svg",
+    "cfn": "Arch_AWS-CloudFormation_64.svg",
     "template": "Res_AWS-CloudFormation_Template_48.svg",
     "changeset": "Res_AWS-CloudFormation_Change-Set_48.svg",
     "stack": "Res_AWS-CloudFormation_Stack_48.svg",
@@ -72,6 +73,10 @@ def group(x, y, w, h, title):
             + text(x + 12, y + 23, title, 14, GREEN, 700, "start"))
 
 
+def green_arrow(d):
+    return f'<path d="{d}" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#mGreen)"/>'
+
+
 def role_chip(x, y, lines):
     """流れの矢印の横に添える、その操作に使うロール。"""
     out = [icon("role", x + 10, y + (15 * len(lines) - 20) / 2, 20)]
@@ -98,7 +103,7 @@ SEC = {k: [] for k in ("outer", "bootstrap", "link", "synth_frame", "source", "g
 
 # cdk deploy が synth、publish、deploy の全体を動かす
 p = SEC["outer"]
-p.append(f'<rect x="165" y="18" width="825" height="340" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
+p.append(f'<rect x="165" y="18" width="1003" height="340" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
 p.append(text(181, 43, "cdk deploy", 16, INK, 700, "start", MONO))
 p.append(text(285, 43, "全体を順に動かす", 12, SUB, None, "start"))
 
@@ -156,26 +161,50 @@ p.append(role_chip(506, ECRY + 8, ["イメージ用", "パブリッシュロー�
 # publish → deploy: アップロードしたアセットを deploy で使う
 p = SEC["gap"]
 p.append(f'<path d="M675,{ECRY} H702 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p.append(arrow(f"M675,{S3Y} H736"))
+p.append(arrow(f"M675,{S3Y} H727"))
 
-# deploy
+# deploy: IaC の図（iac-diff）と同じ形にする。あるべき姿と現在の状態を比べ、差分を反映する
 DMID = 182
 p = SEC["deploy"]
-p.append(step(715, 267, "deploy"))
-p.append(text(731, 103, "アップロードしたアセットを使う", 12, SUB, None, "start"))
-p.append(node("template", 758, S3Y - 22, 44, "新しい", "テンプレート"))
-p.append(node("stack", 758, S3Y + 100 - 22, 44, "スタックの", "状態"))
-p.append(node("changeset", 922, DMID - 22, 44, "変更セット"))
-p.append(node("stack", 922, 276, 40, "スタック"))
-p.append(f'<path d="M780,{S3Y} H798 V{S3Y + 100} H780" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p += [arrow(f"M798,{DMID} H898")]
-p += [text(848, DMID - 42, "CloudFormationが", 11), text(848, DMID - 27, "比べて", 11), text(848, DMID - 12, "変更セットを作る", 11)]
-p.append(role_chip(812, DMID + 8, ["デプロイ用", "ロール"]))
-p += [arrow("M922,228 V276"), text(932, 248, "確認して", 11, anchor="start"), text(932, 263, "反映する", 11, anchor="start")]
-p.append(role_chip(806, 240, ["CloudFormation", "実行ロール"]))
+p.append(step(715, 445, "deploy"))
+p.append(text(808, 84, "アップロードしたアセットを使う", 12, SUB, None, "start"))
+
+
+def state_box(y, name, lines, fill):
+    out = [f'<rect x="727" y="{y}" width="110" height="62" rx="10" fill="{fill}" stroke="{LINE}" stroke-width="2"/>',
+           icon(name, 747, y + 15, 32)]
+    for i, line in enumerate(lines):
+        bold = i < len(lines) - 1
+        out.append(text(767, y + 62 / 2 + 4 - 7 * (len(lines) - 1) + 14 * i, line, 11 if bold else 10, INK if bold else SUB, 700 if bold else None, "start"))
+    return "".join(out)
+
+
+p.append(state_box(101, "template", ["新しい", "テンプレート", "（あるべき姿）"], "#ffffff"))
+p.append(state_box(201, "stack", ["スタックの", "状態", "（現在の状態）"], "#f5f7f9"))
+p.append(text(846, DMID + 4, "比較", 11, anchor="end"))
+p.append(arrow(f"M837,132 H852 V{DMID - 8} H876"))
+p.append(arrow(f"M837,232 H852 V{DMID + 8} H876"))
+p.append(icon("cfn", 895, DMID - 18, 36))
+p.append(text(895, DMID + 32, "CloudFormation", 11, INK, 700))
+p.append(role_chip(858, DMID + 42, ["デプロイ用", "ロール"]))
+p.append(green_arrow(f"M915,{DMID} H945"))
+p.append(f'<rect x="945" y="{DMID - 42}" width="62" height="84" rx="10" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2" stroke-dasharray="5 4"/>')
+p.append(text(976, DMID - 25, "差分", 12, GREEN, 700))
+p.append(icon("changeset", 976, DMID - 18, 34))
+p.append(text(976, DMID + 32, "変更セット", 11, GREEN, 700))
+p.append(green_arrow(f"M1007,{DMID} H1087"))
+p += [text(1047, DMID - 24, "確認して", 11), text(1047, DMID - 9, "反映する", 11)]
+p.append(icon("role", 1047, DMID + 8, 18))
+p += [text(1047, DMID + 39, "CloudFormation", 10), text(1047, DMID + 52, "実行ロール", 10)]
+p.append(f'<rect x="1087" y="{DMID - 42}" width="65" height="84" rx="10" fill="#ffffff" stroke="{INK}" stroke-width="2"/>')
+p.append(icon("stack", 1119.5, DMID - 30, 34))
+p.append(text(1119.5, DMID + 19, "スタック", 11, INK, 700))
+p.append(text(1119.5, DMID + 33, "実リソース", 10, SUB))
 
 defs = (f'<defs><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'
-        f'<path d="M0,0 L10,5 L0,10 z" fill="{INK}"/></marker></defs>')
+        f'<path d="M0,0 L10,5 L0,10 z" fill="{INK}"/></marker>'
+        f'<marker id="mGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'
+        f'<path d="M0,0 L10,5 L0,10 z" fill="{GREEN}"/></marker></defs>')
 DIM = 0.14
 
 
@@ -184,7 +213,7 @@ def write(name, focus=None):
     for key, parts in SEC.items():
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
         body.append(f"<g{opacity}>" + "".join(parts) + "</g>")
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 376" width="100%" '
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1176 376" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
         f.write(svg)
