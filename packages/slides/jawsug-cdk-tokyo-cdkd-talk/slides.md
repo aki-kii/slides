@@ -196,6 +196,26 @@ transition: fade
 <div class="definition">
 
 コードでクラウドインフラストラクチャを定義し、<br>
+プロビジョニングするための、<br>
+ソフトウェア開発フレームワークです。
+
+</div>
+
+<!--
+前に抜き出した IaC の定義の文。次のページでこの文に「AWS CloudFormation を通じて」を足す（10-31 12:04）。ここだけ全文からは出さない。
+-->
+
+---
+layout: center
+chapter: デプロイフロー
+transition: fade
+---
+
+<ChapterLabel />
+
+<div class="definition">
+
+コードでクラウドインフラストラクチャを定義し、<br>
 <span class="accent font-bold">AWS CloudFormation を通じて</span>プロビジョニングするための、<br>
 ソフトウェア開発フレームワークです。
 
@@ -327,6 +347,28 @@ chapter: デプロイフロー
 
 <!--
 リソースの話はこの章でする（10-31 09:39）。
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+transition: fade
+---
+
+<ChapterLabel />
+
+## AWS CDK とは？
+
+<div class="definition mt-8 faded">
+
+AWS Cloud Development Kit (AWS CDK) は、<br>
+<em>コードで</em>クラウドインフラストラクチャを定義し、<br>
+AWS CloudFormation を通じてプロビジョニングするための、<br>
+オープンソースのソフトウェア開発<em>フレームワーク</em>です。
+
+</div>
+
+<!--
+全文から一部をハイライトして抜き出す（10-31 12:04）。公式の文なので「コードで」のまま強調し、次のページで「プログラミング言語で」と見せる（10-30 16:15、16:16）。
 -->
 
 ---
@@ -509,6 +551,28 @@ chapter: プログラミング言語とフレームワーク
 <!--
 仮: 10-30 16:29 では全部 AWS 公式としていたが、npm の deploy-time-build のリポジトリは tmokmss/deploy-time-build で、作者も tmokmss。残すかは本人が決める。
 DockerImageAsset の説明は本人のメモより短くした。
+-->
+
+---
+chapter: オープンソース
+transition: fade
+---
+
+<ChapterLabel />
+
+## AWS CDK とは？
+
+<div class="definition mt-8 faded">
+
+AWS Cloud Development Kit (AWS CDK) は、<br>
+コードでクラウドインフラストラクチャを定義し、<br>
+AWS CloudFormation を通じてプロビジョニングするための、<br>
+<em>オープンソースの</em>ソフトウェア開発フレームワークです。
+
+</div>
+
+<!--
+全文から一部をハイライトして抜き出す（10-31 12:04）。
 -->
 
 ---
