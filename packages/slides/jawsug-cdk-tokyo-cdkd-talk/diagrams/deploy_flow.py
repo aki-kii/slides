@@ -132,11 +132,11 @@ p = SEC["synth_frame"]
 p.append(step(175, 350, "synth"))
 p = SEC["source"]
 p.append(node("code", 235, MID - 22, 44, "ソースコード"))
-p += [arrow(f"M261,{MID} H335"), text(298, MID - 40, "合成して", 11), text(298, MID - 25, "アセットを", 11), text(298, MID - 10, "作る", 11)]
+p += [arrow(f"M261,{MID} H335"), text(298, MID - 10, "合成", 12)]
 p = SEC["group"]
 p.append(group(335, 66, 178, 278, "アセット"))
 p.append(file_box(348, 102, 152, 64, "template", ["CloudFormation", "テンプレート"], strong=True, icon_size=28))
-p.append(file_box(348, 178, 152, 64, "asset", ["ファイル"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
+p.append(file_box(348, 178, 152, 64, "asset", ["ファイルアセット"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
 p.append(file_box(348, 254, 152, 64, "image", ["コンテナイメージ"], sub=["Dockerfileなど"], icon_size=28))
 
 # publish: テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ。どちらもまっすぐ進む
