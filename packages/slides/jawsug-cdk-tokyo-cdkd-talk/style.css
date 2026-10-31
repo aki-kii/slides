@@ -582,3 +582,6 @@
 .official-quote .definition { font-size: 1.25rem; line-height: 1.8; }
 .official-source { margin-top: 0.6rem; color: #6b7684; font-size: 0.65rem; }
 .reveal-line { color: #0e8a6e; font-size: 1.5rem; font-weight: 700; white-space: nowrap; }
+.replaced { color: #dd344c; font-weight: 700; }
+.official-quote { position: relative; }
+.official-note { position: absolute; right: 1.4rem; bottom: 1.9rem; white-space: nowrap; }

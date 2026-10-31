@@ -347,9 +347,9 @@ transition: fade
 <div class="definition faded">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
-<em>コードで</em>クラウドインフラストラクチャを定義し、<br>
+<em>コード</em>でクラウドインフラストラクチャを定義し、<br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
-オープンソースのソフトウェア開発<em>フレームワーク</em>です。
+オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
 
 </div>
 
@@ -357,26 +357,49 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 </div>
 
 <!--
-全文から一部をハイライトして抜き出す（10-31 12:04）。公式の文なので「コードで」のまま強調し、次のページで「プログラミング言語で」と見せる（10-30 16:15、16:16）。
+全文からハイライトして抜き出す（10-31 12:04、12:52）。「で」と「オープンソースの」は含めない。
 -->
 
 ---
-layout: center
-class: text-center
 chapter: プログラミング言語とフレームワーク
 transition: fade
 ---
 
 <ChapterLabel />
 
-<div class="big-accent">プログラミング言語で</div>
+## AWS CDKとは？
 
-<div class="big-accent mt-8">フレームワーク</div>
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
 
-<div class="source-note">公式の定義では「コードで」</div>
+<div class="definition faded">
+
+AWS Cloud Development Kit (AWS CDK) は、<br>
+<span class="replaced">プログラミング言語</span>でクラウドインフラストラクチャを定義し、<br>
+AWS CloudFormation を通じてプロビジョニングするための、<br>
+オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
+
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html <span class="official-note">※公式は「コード」</span></div>
+</div>
 
 <!--
-定義文のこの 2 語だけを残す（10-30 16:16）。公式は「コードで」だが、スライドでは「プログラミング言語で」に書き換える（16:15）。
+公式の「コード」を「プログラミング言語」に置き換えて見せる（10-30 16:15、10-31 12:52）。公式の文を書き換えていることは出典の横に添えた。
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+---
+
+<ChapterLabel />
+
+<div class="kari">仮：中身は本人が決める</div>
+
+## プログラミング言語だと何がうれしい？
+
+<!--
+仮: 中身は本人がまだ決めていない（10-31 12:52）。本文は書いていない。
 -->
 
 ---
