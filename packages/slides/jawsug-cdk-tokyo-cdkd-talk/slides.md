@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: AWS CDKとは？
+title: AWS CDKを理解するために、公式の定義を深掘って解説してみる
 mdc: true
 addons:
   - '@slides/ui'
@@ -13,11 +13,9 @@ fonts:
   mono: 'Fira Code'
 ---
 
-<div class="kari">仮：発表タイトルは未定</div>
-
 <div class="text-2xl font-normal opacity-90">JAWS-UG CDK支部 × 東京支部コラボ cdkdハンズオン</div>
 
-# AWS CDKとは？
+# AWS CDKを理解するために、<br>公式の定義を深掘って解説してみる
 
 <div class="opacity-70">
 
