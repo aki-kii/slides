@@ -112,25 +112,10 @@ AWS CloudFormation を通じて<em>プロビジョニングするための、</e
 <div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
 </div>
 
-<!--
-根拠 10-30 01:45。
--->
-
----
-layout: center
-class: text-center
-chapter: IaC
-transition: fade
----
-
-<ChapterLabel />
-
-<div class="definition">コードでクラウドインフラストラクチャを定義し、<br>プロビジョニングするための、<br>ソフトウェア開発フレームワークです。</div>
-
-<div class="big-accent mt-10">→ IaC（Infrastructure as Code）の定義になりました！</div>
+<div class="reveal-line mt-5">→ IaC（Infrastructure as Code）の説明になりました！</div>
 
 <!--
-抜き出しは 10-31 12:00 の形。「AWS CloudFormation を通じて」はここには入れない（12:02）。
+根拠 10-30 01:45。抜き出しの文は 10-31 12:00 の形で、下の一文と合わせてこの 1 枚にまとめた（12:46）。「AWS CloudFormation を通じて」はここでは強調しない（12:02）。
 -->
 
 ---

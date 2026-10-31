@@ -581,3 +581,4 @@
 .official-label { display: inline-block; margin-bottom: 0.5rem; padding: 0.1rem 0.8rem; border-radius: 999px; background: #0e8a6e; color: #fff; font-size: 0.8rem; font-weight: 700; }
 .official-quote .definition { font-size: 1.25rem; line-height: 1.8; }
 .official-source { margin-top: 0.6rem; color: #6b7684; font-size: 0.65rem; }
+.reveal-line { color: #0e8a6e; font-size: 1.5rem; font-weight: 700; white-space: nowrap; }
