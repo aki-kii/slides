@@ -529,7 +529,7 @@
     z-index: 60;
 }
 .definition { font-size: 1.35rem; line-height: 1.9; }
-.definition.faded { color: #c9d0d9; }
+.definition.faded, .definition.faded p { color: #c9d0d9; }
 .definition.faded em { color: #0e8a6e; font-style: normal; font-weight: 700; }
 .accent { color: #0e8a6e; }
 .big-accent { color: #0e8a6e; font-size: 1.9rem; font-weight: 700; line-height: 1.4; }
