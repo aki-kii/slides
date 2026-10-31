@@ -127,7 +127,7 @@ transition: fade
 
 <div class="definition">コードでクラウドインフラストラクチャを定義し、<br>プロビジョニングするための、<br>ソフトウェア開発フレームワークです。</div>
 
-<div class="big-accent mt-10">IaC（Infrastructure as Code）の定義です！</div>
+<div class="big-accent mt-10">→ IaC（Infrastructure as Code）の定義になりました！</div>
 
 <!--
 抜き出しは 10-31 12:00 の形。「AWS CloudFormation を通じて」はここには入れない（12:02）。
