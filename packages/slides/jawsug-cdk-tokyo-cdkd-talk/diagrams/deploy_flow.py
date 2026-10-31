@@ -99,13 +99,12 @@ def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
 
 
 TOP, BOTTOM = 56, 348
-SEC = {k: [] for k in ("outer", "bootstrap", "link", "synth_frame", "source", "group", "publish", "trunk", "deploy", "gap")}
+SEC = {k: [] for k in ("outer", "bootstrap", "synth_frame", "source", "group", "publish", "trunk", "deploy", "gap")}
 
 # cdk deploy が synth、publish、deploy の全体を動かす
 p = SEC["outer"]
 p.append(f'<rect x="165" y="18" width="1003" height="340" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
 p.append(text(181, 43, "cdk deploy", 16, INK, 700, "start", MONO))
-p.append(text(285, 43, "全体を順に動かす", 12, SUB, None, "start"))
 
 # CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは 1 か所にまとめる
 p = SEC["bootstrap"]
@@ -126,10 +125,6 @@ for x, name, lines in items:
     for k, line in enumerate(lines):
         p.append(text(x + 29, first + 14 * k, line, 11, INK, 700, "start"))
 p += [text(770, 59, "ルックアップ用ロール、", 11, SUB, None, "start"), text(770, 73, "SSMパラメータ など", 11, SUB, None, "start")]
-
-# bootstrap → cdk deploy の枠
-p = SEC["link"]
-p += [arrow("M60,86 V116"), text(70, 106, "先に作る", anchor="start")]
 
 # synth: ソースコード → 合成 → アセットを横に並べる
 MID = 204
@@ -166,7 +161,6 @@ p.append(arrow(f"M675,{S3Y} H727"))
 DMID = 182
 p = SEC["deploy"]
 p.append(step(715, 445, "deploy"))
-p.append(text(808, 84, "アップロードしたアセットを使う", 12, SUB, None, "start"))
 
 
 def state_box(y, name, lines, fill):
@@ -208,23 +202,26 @@ DIM = 0.14
 
 
 # Bootstrap を上に置いたぶん、cdk deploy の枠全体をずらす
-MOVE = 'transform="translate(-155,98)"'
+MOVE = 'transform="translate(-155,80)"'
 
 
 def write(name, focus=None):
+    """focus を渡すと、そのフェーズに寄った図にする。Bootstrap は出さず、cdk deploy の枠だけを切り出す。"""
     body = []
     for key, parts in SEC.items():
+        if focus is not None and key == "bootstrap":
+            continue
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
-        move = "" if key in ("bootstrap", "link") else f" {MOVE}"
+        move = "" if key == "bootstrap" else f" {MOVE}"
         body.append(f"<g{opacity}{move}>" + "".join(parts) + "</g>")
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1023 470" width="100%" '
+    box = "0 0 1023 452" if focus is None else "0 88 1023 360"
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{box}" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
         f.write(svg)
 
 
 write("deploy-flow")
-write("deploy-flow-bootstrap", {"bootstrap"})
 write("deploy-flow-synth", {"outer", "synth_frame", "source", "group"})
 write("deploy-flow-assets", {"outer", "group"})
 write("deploy-flow-publish", {"outer", "group", "trunk", "publish"})

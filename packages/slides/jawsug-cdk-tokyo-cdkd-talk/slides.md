@@ -219,31 +219,12 @@ transition: fade
 
 ## デプロイフロー
 
-<InlineSvg src="deploy-flow.svg" label="CDK Bootstrap で先に作ったものを使い、synth、publish、deploy の順に進む流れ" class="mx-auto fig-flow" />
+<InlineSvg src="deploy-flow.svg" label="CDK Bootstrap の枠と、synth、publish、deploy の順に進む cdk deploy の枠" class="mx-auto fig-flow" />
 
 <div class="arrow-note">→ cdk deployの中でsynth、publish、deployが順に動く</div>
 
 <!--
-全体を先に見せる。ここから同じ図の一部を順に強調する。根拠 10-30 16:06、10-31 09:22。
--->
-
----
-chapter: デプロイフロー
-transition: fade
----
-
-<ChapterLabel />
-
-<div class="kari">仮：bootstrapを話すかは未定</div>
-
-## CDK Bootstrap
-
-<InlineSvg src="deploy-flow-bootstrap.svg" label="CDK Bootstrap の枠を強調した図" class="mx-auto fig-flow" />
-
-<div class="arrow-note">→ デプロイに使うものを先に作っておく</div>
-
-<!--
-仮: 下書きの案A（bootstrap を話す）の中身。今回の流れで使うものだけ並べ、ルックアップ用ロールや SSM パラメータはまとめた。
+全体を先に見せる。ここから同じ図の一部を順に強調する。cdk deploy が全体を順に動かす。根拠 10-30 16:06、10-31 09:22。
 -->
 
 ---
@@ -311,7 +292,7 @@ transition: fade
 <div class="arrow-note">→ 新しいテンプレートとスタックの状態を比べる。実際のリソースを見に行くわけではない</div>
 
 <!--
-公式は「スタックと、送った変更を比べる」。実際のリソースまで比べるのは drift-aware change set（cdk deploy --revert-drift）のとき。
+publish でアップロードしたアセットを使う。公式は「スタックと、送った変更を比べる」。実際のリソースまで比べるのは drift-aware change set（cdk deploy --revert-drift）のとき。
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
 ロールバックと承認ゲートは扱わない。
 -->
