@@ -81,7 +81,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 
 </div>
 
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 </div>
 
 <!--
@@ -109,7 +111,9 @@ AWS CloudFormation を通じて<em>プロビジョニングするための、</e
 
 </div>
 
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 </div>
 
 <div class="reveal-line mt-5">→ IaC（Infrastructure as Code）の説明になりました！</div>
@@ -334,7 +338,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 
 </div>
 
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 </div>
 
 <!--
@@ -362,7 +368,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 
 </div>
 
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html <span class="official-note">※公式は「コード」</span></div>
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 <span class="official-note">※公式は「コード」</span></div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 </div>
 
 <!--
@@ -538,7 +546,9 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 
 </div>
 
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html</div>
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 </div>
 
 <!--
