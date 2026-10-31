@@ -173,45 +173,35 @@ chapter: IaC
 -->
 
 ---
-layout: center
 chapter: デプロイフロー
 transition: fade
 ---
 
 <ChapterLabel />
 
-<div class="definition">
+## AWS CDKとは？
 
+<div class="official-quote compact mt-2">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition faded">
+
+AWS Cloud Development Kit (AWS CDK) は、<br>
 コードでクラウドインフラストラクチャを定義し、<br>
-プロビジョニングするための、<br>
-ソフトウェア開発フレームワークです。
+<em>AWS CloudFormation を通じて</em>プロビジョニングするための、<br>
+オープンソースのソフトウェア開発フレームワークです。
 
 </div>
 
-<!--
-前に抜き出した IaC の定義の文。次のページでこの文に「AWS CloudFormation を通じて」を足す（10-31 12:04）。ここだけ全文からは出さない。
--->
-
----
-layout: center
-chapter: デプロイフロー
-transition: fade
----
-
-<ChapterLabel />
-
-<div class="definition">
-
-コードでクラウドインフラストラクチャを定義し、<br>
-<span class="accent font-bold">AWS CloudFormation を通じて</span>プロビジョニングするための、<br>
-ソフトウェア開発フレームワークです。
-
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
 </div>
 
-<div class="question text-center mt-12">CDKはCloudFormationとどう関わってるの？</div>
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
+
+<div class="reveal-question mt-3">CDKはCloudFormationとどう関わってるの？</div>
 
 <!--
-デプロイフローの説明に入る直前で、定義文に「AWS CloudFormation を通じて」を足して見せる（10-31 09:22、12:02）。問いかけは 10-30 15:59。
+定義の全文の中で「AWS CloudFormation を通じて」を強調して、デプロイフローへつなぐ（10-31 09:22、12:02、13:14）。問いかけは 10-30 15:59。
 -->
 
 ---
@@ -339,7 +329,7 @@ transition: fade
 <div class="official-quote mt-5">
 <div class="official-label">AWS公式の定義</div>
 
-<div class="definition faded">
+<div class="definition faded tight">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コード</em>でクラウドインフラストラクチャを定義し、<br>
@@ -369,22 +359,22 @@ transition: fade
 <div class="official-quote mt-5">
 <div class="official-label">AWS公式の定義</div>
 
-<div class="definition faded">
+<div class="definition faded tight">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
-<span class="replaced">プログラミング言語</span>でクラウドインフラストラクチャを定義し、<br>
+<s class="struck">コード</s><span class="replaced">プログラミング言語</span>でクラウドインフラストラクチャを定義し、<br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
 オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
 
 </div>
 
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」 <span class="official-note">※公式は「コード」</span></div>
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
 </div>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-公式の「コード」を「プログラミング言語」に置き換えて見せる（10-30 16:15、10-31 12:52）。公式の文を書き換えていることは出典の横に添えた。
+公式の「コード」を取り消し線で残し、直後に「プログラミング言語」を赤で見せる（10-30 16:15、10-31 12:52、13:16）。注記は付けない。
 -->
 
 ---
