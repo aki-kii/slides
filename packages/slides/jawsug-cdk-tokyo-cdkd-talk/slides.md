@@ -115,14 +115,12 @@ transition: fade
 
 <ChapterLabel />
 
-<div class="kari">仮：CloudFormation の句は確認待ち</div>
-
 <div class="definition">コードでクラウドインフラストラクチャを定義し、<br>プロビジョニングするための、<br>ソフトウェア開発フレームワークです。</div>
 
 <div class="big-accent mt-10">IaC（Infrastructure as Code）の定義です！</div>
 
 <!--
-仮: 抜き出しは 10-31 12:00 の形。「AWS CloudFormation を通じて」を入れるかは確認待ち。
+抜き出しは 10-31 12:00 の形。「AWS CloudFormation を通じて」はここには入れない（12:02）。
 -->
 
 ---
@@ -188,20 +186,18 @@ transition: fade
 
 <ChapterLabel />
 
-<div class="kari">仮：抜き出しの文は確認待ち</div>
-
 <div class="definition">
 
 コードでクラウドインフラストラクチャを定義し、<br>
 <span class="accent font-bold">AWS CloudFormation を通じて</span>プロビジョニングするための、<br>
-ソフトウェア開発フレームワークです
+ソフトウェア開発フレームワークです。
 
 </div>
 
 <div class="question text-center mt-12">CDK は CloudFormation とどう関わってるの？</div>
 
 <!--
-仮: 10-31 09:22 で「AWS CloudFormation を通じて」を戻してデプロイフローへつなぐと決めた。IaC の定義の抜き出し（10-31 12:00）にこの句を入れるかは確認待ち。問いかけは 10-30 15:59。
+デプロイフローの説明に入る直前で、定義文に「AWS CloudFormation を通じて」を足して見せる（10-31 09:22、12:02）。問いかけは 10-30 15:59。
 -->
 
 ---
