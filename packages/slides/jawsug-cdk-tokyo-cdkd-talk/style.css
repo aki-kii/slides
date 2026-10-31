@@ -538,7 +538,7 @@
 .source-note { position: absolute; left: 3.5rem; bottom: 1.5rem; font-size: 0.7rem; color: #6b7684; }
 .text-center .source-note { left: 0; right: 0; }
 .arrow-note { position: absolute; left: 3.5rem; right: 2rem; bottom: 1.2rem; font-size: 1rem; }
-.fig-flow { width: 800px; margin-top: 0.2rem; }
+.fig-flow { width: 840px; margin-top: 0.2rem; }
 .fig-iac { width: 720px; }
 .pair-grid, .triple-grid { display: grid; gap: 1rem; }
 .pair-grid { grid-template-columns: 1fr 1fr; }

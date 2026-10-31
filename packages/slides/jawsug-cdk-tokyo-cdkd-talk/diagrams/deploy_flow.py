@@ -72,8 +72,12 @@ def group(x, y, w, h, title):
             + text(x + 12, y + 23, title, 14, GREEN, 700, "start"))
 
 
-def role_line(d):
-    return f'<path d="{d}" fill="none" stroke="{RED}" stroke-width="2" stroke-linejoin="round" marker-end="url(#mRole)"/>'
+def role_chip(x, y, lines):
+    """流れの矢印の横に添える、その操作に使うロール。"""
+    out = [icon("role", x + 10, y + (15 * len(lines) - 20) / 2, 20)]
+    for i, line in enumerate(lines):
+        out.append(text(x + 24, y + 11 + 15 * i, line, 11, SUB, None, "start"))
+    return "".join(out)
 
 
 def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
@@ -89,12 +93,12 @@ def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
     return "".join(out)
 
 
-TOP, BOTTOM = 20, 460
-SEC = {k: [] for k in ("bootstrap", "link", "synth_frame", "source", "group", "publish", "trunk", "gap", "deploy", "legend")}
+TOP, BOTTOM = 20, 412
+SEC = {k: [] for k in ("bootstrap", "link", "synth_frame", "source", "group", "publish", "trunk", "gap", "deploy")}
 p = SEC["bootstrap"]
 
 # CDK Bootstrap: 今回の流れで使うものだけ並べ、ほかは 1 か所にまとめる
-p.append(group(15, TOP, 174, BOTTOM - TOP, "CDK Bootstrap"))
+p.append(group(15, TOP, 150, BOTTOM - TOP, "CDK Bootstrap"))
 items = [
     ("s3", ["S3バケット"]),
     ("ecr", ["ECRリポジトリ"]),
@@ -104,73 +108,63 @@ items = [
     ("role", ["CloudFormation", "実行ロール"]),
 ]
 for i, (name, lines) in enumerate(items):
-    p.append(file_box(25, 56 + i * 54, 154, 46, name, lines, icon_size=26))
-p += [text(102, 396 + 28, "ルックアップ用ロール、", 12), text(102, 396 + 44, "SSMパラメータ など", 12)]
+    y = 58 + i * 47
+    p.append(icon(name, 39, y + 4, 26))
+    first = y + 21 - 7.5 * (len(lines) - 1)
+    for k, line in enumerate(lines):
+        p.append(text(57, first + 15 * k, line, 11, INK, 700, "start"))
+p += [text(90, 366, "ルックアップ用ロール、", 11), text(90, 382, "SSMパラメータ など", 11)]
 
 # bootstrap → synth
 p = SEC["link"]
-p += [arrow("M189,110 H250"), text(219, 86, "先に"), text(219, 102, "作る")]
+p += [arrow("M165,110 H205"), text(185, 80, "先に"), text(185, 96, "作る")]
 
 # synth
 p = SEC["synth_frame"]
-p.append(step(250, 200, "synth"))
+p.append(step(205, 180, "synth"))
 p = SEC["source"]
-p.append(node("code", 350, 58, 44, "ソースコード"))
-p += [arrow("M350,126 V170"), text(358, 145, "合成して", anchor="start"), text(358, 161, "アセットを作る", anchor="start")]
-GX = 263
+p.append(node("code", 270, 56, 40, "ソースコード"))
+p += [arrow("M270,118 V158"), text(278, 135, "合成して", anchor="start"), text(278, 151, "アセットを作る", anchor="start")]
 p = SEC["group"]
-p.append(group(GX, 170, 174, 276, "アセット"))
-p.append(file_box(GX + 12, 206, 150, 70, "template", ["CloudFormation", "テンプレート"], strong=True))
-p.append(file_box(GX + 12, 286, 150, 70, "asset", ["ファイル"], sub=["Lambdaのコード、", "画像など"]))
-p.append(file_box(GX + 12, 366, 150, 70, "image", ["コンテナイメージ"], sub=["Dockerfileなど"]))
+p.append(group(212, 158, 166, 240, "アセット"))
+p.append(file_box(220, 194, 150, 60, "template", ["CloudFormation", "テンプレート"], strong=True, icon_size=28))
+p.append(file_box(220, 262, 150, 60, "asset", ["ファイル"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
+p.append(file_box(220, 330, 150, 60, "image", ["コンテナイメージ"], sub=["Dockerfileなど"], icon_size=28))
 
-# publish
-S3Y, ECRY = 82, 262
-RIGHT = GX + 12 + 150
+# publish: テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ。どちらもまっすぐ進む
+S3Y, ECRY = 258, 360
 p = SEC["publish"]
-p.append(step(545, 130, "publish"))
-p.append(node("s3", 610, S3Y - 20, 40, "S3バケット"))
-p.append(node("role", 610, S3Y + 53, 30, "ファイル用", "パブリッシュロール", label_size=12))
-p.append(role_line(f"M594,{S3Y + 68} H556 V{S3Y + 3}"))
-p.append(node("ecr", 610, ECRY - 20, 40, "ECRリポジトリ"))
-p.append(node("role", 610, ECRY + 53, 30, "イメージ用", "パブリッシュロール", label_size=12))
-p.append(role_line(f"M594,{ECRY + 68} H556 V{ECRY + 3}"))
+p.append(step(410, 235, "publish"))
+p.append(node("s3", 597, S3Y - 20, 40, "S3バケット"))
+p.append(node("ecr", 597, ECRY - 20, 40, "ECRリポジトリ"))
 p = SEC["trunk"]
-# テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ
-p.append(f'<path d="M{RIGHT},241 H457" fill="none" stroke="{INK}" stroke-width="2.5"/>')
-p += [arrow(f"M{RIGHT},321 H457 V{S3Y} H590"), text(499, S3Y - 8, "パブリッシュ")]
-p += [arrow(f"M{RIGHT},401 H470 V{ECRY} H590"), text(508, ECRY - 24, "ビルドして"), text(508, ECRY - 8, "push")]
+p.append(f'<path d="M370,224 H392 V292 H370" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
+p += [arrow(f"M392,{S3Y} H577"), text(495, S3Y - 8, "パブリッシュ")]
+p.append(role_chip(418, S3Y + 8, ["ファイル用", "パブリッシュロール"]))
+p += [arrow(f"M370,{ECRY} H577"), text(495, ECRY - 8, "ビルドしてpush")]
+p.append(role_chip(418, ECRY + 8, ["イメージ用", "パブリッシュロール"]))
 
 # publish → deploy
-DMID = 140
+DMID = 135
 p = SEC["gap"]
-p.append(arrow(f"M675,{DMID} H695"))
+p.append(arrow(f"M645,{DMID} H665"))
 
 # deploy
 p = SEC["deploy"]
-p.append(step(695, 290, "deploy"))
-p.append(node("template", 738, DMID - 50 - 24, 48, "新しい", "テンプレート"))
-p.append(node("stack", 738, DMID + 50 - 24, 48, "スタックの", "状態"))
-p.append(node("changeset", 912, DMID - 24, 48, "変更セット"))
-p.append(node("stack", 912, 330, 48, "スタック"))
-p.append(f'<path d="M762,{DMID - 50} H780 V{DMID + 50} H762" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p += [arrow(f"M780,{DMID} H888")]
-p += [text(836, DMID - 44, "CloudFormationが"), text(836, DMID - 28, "比べて"), text(836, DMID - 12, "変更セットを作る")]
-p += [arrow("M912,204 V330"), text(922, 240, "確認して", anchor="start"), text(922, 256, "反映する", anchor="start")]
-p.append(node("role", 836, 196, 32, "デプロイ用", "ロール"))
-p.append(role_line(f"M836,198 V{DMID + 3}"))
-p.append(node("role", 790, 294, 32, "CloudFormation", "実行ロール"))
-p.append(role_line("M808,310 H909"))
-
-# 凡例
-p = SEC["legend"]
-p.append(role_line("M712,437 H752"))
-p.append(text(760, 442, "その操作に使うロール", 12, anchor="start"))
+p.append(step(665, 320, "deploy"))
+p.append(node("template", 712, DMID - 50 - 22, 44, "新しい", "テンプレート"))
+p.append(node("stack", 712, DMID + 50 - 22, 44, "スタックの", "状態"))
+p.append(node("changeset", 925, DMID - 22, 44, "変更セット"))
+p.append(node("stack", 925, 304, 44, "スタック"))
+p.append(f'<path d="M734,{DMID - 50} H752 V{DMID + 50} H734" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
+p += [arrow(f"M752,{DMID} H901")]
+p += [text(826, DMID - 44, "CloudFormationが"), text(826, DMID - 28, "比べて"), text(826, DMID - 12, "変更セットを作る")]
+p.append(role_chip(772, DMID + 8, ["デプロイ用ロール"]))
+p += [arrow("M925,196 V304"), text(935, 240, "確認して", anchor="start"), text(935, 256, "反映する", anchor="start")]
+p.append(role_chip(812, 236, ["CloudFormation", "実行ロール"]))
 
 defs = (f'<defs><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'
-        f'<path d="M0,0 L10,5 L0,10 z" fill="{INK}"/></marker>'
-        f'<marker id="mRole" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'
-        f'<path d="M0,0 L10,5 L0,10 z" fill="{RED}"/></marker></defs>')
+        f'<path d="M0,0 L10,5 L0,10 z" fill="{INK}"/></marker></defs>')
 DIM = 0.14
 
 
@@ -179,15 +173,15 @@ def write(name, focus=None):
     for key, parts in SEC.items():
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
         body.append(f"<g{opacity}>" + "".join(parts) + "</g>")
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="100%" '
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 432" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
         f.write(svg)
 
 
 write("deploy-flow")
-write("deploy-flow-bootstrap", {"bootstrap", "legend"})
-write("deploy-flow-synth", {"synth_frame", "source", "group", "legend"})
-write("deploy-flow-assets", {"group", "legend"})
-write("deploy-flow-publish", {"group", "trunk", "publish", "legend"})
-write("deploy-flow-deploy", {"gap", "deploy", "legend"})
+write("deploy-flow-bootstrap", {"bootstrap"})
+write("deploy-flow-synth", {"synth_frame", "source", "group"})
+write("deploy-flow-assets", {"group"})
+write("deploy-flow-publish", {"group", "trunk", "publish"})
+write("deploy-flow-deploy", {"gap", "deploy"})
