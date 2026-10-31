@@ -577,3 +577,5 @@
 .oss-list span { color: #6b7684; font-size: 0.75rem; }
 .oss-two { display: grid; grid-template-columns: 3fr 2fr; gap: 1.5rem; }
 .oss-head { color: #0e8a6e; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.4rem; }
+.declarative { max-width: 40rem; margin-left: auto; margin-right: auto; text-align: left; }
+.declarative li { min-height: 0 !important; margin-bottom: 0.2rem !important; }
