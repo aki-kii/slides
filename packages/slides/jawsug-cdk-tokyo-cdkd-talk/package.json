@@ -7,7 +7,7 @@
     "build": "slidev build",
     "export": "slidev export --with-clicks --output ./export/slides.pdf",
     "export:png": "slidev export --format png --with-clicks --output ./export",
-    "diagrams": "python3 diagrams/deploy_flow.py"
+    "diagrams": "python3 diagrams/deploy_flow.py && python3 diagrams/constructs.py"
   },
   "dependencies": {
     "@slidev/cli": "^52.1.0",

@@ -603,3 +603,7 @@
 .kari-row .kari { position: static; }
 .kari-row .kari-not-own { border-color: #b8680a; background: #fdf3e3; color: #b8680a; }
 .not-own { text-decoration: underline dotted #b8680a; text-decoration-thickness: 1.5px; text-underline-offset: 0.2em; }
+.construct-points { margin-top: 0.3rem; }
+.construct-points li { font-size: 0.85rem !important; line-height: 1.5 !important; white-space: nowrap; }
+.fig-construct { width: 840px; margin-top: 0.6rem; }
+.fig-construct-wide { width: 930px; margin-left: -45px !important; margin-top: 0.4rem; }

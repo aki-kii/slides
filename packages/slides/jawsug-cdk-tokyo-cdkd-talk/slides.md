@@ -471,21 +471,86 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
 ## コンストラクト
 
-<div class="levels mt-6">
-  <div class="level l1"><b>L1</b><span class="not-own">CloudFormationの<br>リソースそのまま</span><code>CfnBucket</code></div>
-  <div class="level l2"><b>L2</b><span class="not-own">安全な初期値つき</span><code>s3.Bucket</code></div>
-  <div class="level l3"><b>L3</b><span class="not-own">複数のリソースの<br>構成一式</span><code>ApplicationLoad<br>BalancedFargateService</code></div>
-</div>
+<ul class="construct-points">
+  <li>1つ以上のAWSリソースの設定が定義されているコンポーネント</li>
+  <li>リソースの抽象度によってレベル分けがされている</li>
+</ul>
 
-<div class="arrow-note">→ レベルが上がるほど抽象化も上がる</div>
+<InlineSvg src="construct-levels.svg" label="抽象度が小さい順に L1、L2、L3 の Construct と、それぞれが作るリソース" class="mx-auto fig-construct" />
 
 <!--
-この章の主役。抽象化はコンストラクトと 1 つの話（10-31 09:39）。
-https://docs.aws.amazon.com/cdk/v2/guide/constructs.html
+本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 18 枚目（10-31 13:12）。この章の主役（10-31 09:39）。https://speakerdeck.com/akihisaikeda/aws-cdknotui-sipointonxuan
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+---
+
+<ChapterLabel />
+
+## L1 Construct（抽象度：小）
+
+<ul class="construct-points">
+  <li>リソースのプロパティがCloudFormationのプロパティと1:1で対応している</li>
+</ul>
+
+<InlineSvg src="construct-l1.svg" label="CloudFormation テンプレートと CfnBucket のコードが 1:1 で対応している図" class="mx-auto fig-construct" />
+
+<!--
+本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 19 枚目。
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+---
+
+<ChapterLabel />
+
+## L2 Construct（抽象度：中）
+
+<ul class="construct-points">
+  <li>リソースのプロパティが扱いやすいように抽象化されている</li>
+</ul>
+
+<InlineSvg src="construct-l2.svg" label="Bucket のコードとテンプレートの対応、抽象化、KMS Key の自動作成の図" class="mx-auto fig-construct" />
+
+<!--
+本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 20 枚目。
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+---
+
+<ChapterLabel />
+
+## L2 Construct
+
+<InlineSvg src="construct-l2-examples.svg" label="VPC の例（ソースコード 15 行、テンプレート 266 行）と、Lambda 関数の例（実行ロール、IAM Policy、CloudWatch Logs が自動で作られる）" class="mx-auto fig-construct-wide" />
+
+<!--
+本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 21、22 枚目を 1 枚にまとめた。VPC の図のサブネットなどのリソース一覧は省いた。
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+---
+
+<ChapterLabel />
+
+## 自作Construct
+
+<ul class="construct-points">
+  <li>L1やL2などのConstructを組み合わせて自作のConstructを定義できる</li>
+  <li>自作Constructも他の自作Constructに組み込める</li>
+</ul>
+
+<InlineSvg src="construct-custom.svg" label="MyConstruct のコードから S3 バケットと Lambda 関数が作られる図" class="mx-auto fig-construct" />
+
+<!--
+本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 23 枚目。
 -->
 
 ---
