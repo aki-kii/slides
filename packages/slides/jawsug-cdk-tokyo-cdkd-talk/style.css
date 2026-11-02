@@ -611,3 +611,7 @@
 .official-quote .definition.tight, .official-quote .definition.tight p { font-size: 1.1rem !important; line-height: 2 !important; white-space: nowrap; }
 .definition.summary em { color: #0e8a6e; font-style: normal; font-weight: 700; }
 .slidev-layout h2.long-title { font-size: 1.5rem; line-height: 1.35; }
+.iac-sentence { font-size: 1.25rem; font-weight: 700; line-height: 1.6; white-space: nowrap; }
+.fig-iac-define { width: 860px; }
+.fig-iac-small { width: 640px; }
+.cfn-emphasis { color: #0e8a6e; font-weight: 700; }

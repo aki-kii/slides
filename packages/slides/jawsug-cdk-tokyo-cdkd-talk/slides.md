@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: AWS CDKを理解するために、公式の定義を深掘って解説してみる
+title: AWS CDKを理解するために公式の定義を深掘って解説してみる
 mdc: true
 addons:
   - '@slides/ui'
@@ -15,7 +15,7 @@ fonts:
 
 <div class="text-2xl font-normal opacity-90">JAWS-UG CDK支部 × 東京支部コラボ cdkdハンズオン</div>
 
-# AWS CDKを理解するために、<br>公式の定義を深掘って解説してみる
+# AWS CDKを理解するために<br>公式の定義を深掘って解説してみる
 
 <div class="opacity-70">
 
@@ -84,8 +84,13 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
+<Overlay clickStart=1>
+  定義の一部を抜き出してみます
+</Overlay>
+
 <!--
 公式の定義: https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html （根拠 10-30 01:30）
+クリックで「定義の一部を抜き出してみます」を重ねる（2026-11-03 01:52 本人）。
 -->
 
 ---
@@ -114,26 +119,29 @@ AWS CloudFormation を通じて<em>プロビジョニングするための、</e
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div class="reveal-line mt-3">→ IaC（Infrastructure as Code）の説明になりました！</div>
+<div v-click class="reveal-line mt-3">→ IaC（Infrastructure as Code）の説明になりました！</div>
 
 <!--
 根拠 10-30 01:45。抜き出しの文は 10-31 12:00 の形で、下の一文と合わせてこの 1 枚にまとめた（12:46）。「AWS CloudFormation を通じて」はここでは強調しない（12:02）。
 -->
 
 ---
-layout: center
-class: text-center
 chapter: IaC
+transition: fade
 ---
 
 <ChapterLabel />
 
-<div class="question">定義する → 何を？</div>
+## IaC（Infrastructure as Code）とは？
 
-<div class="big-accent mt-4">あるべき姿を定義する</div>
+<div class="iac-sentence mt-3"><span class="accent">コード</span>で<span class="accent">インフラストラクチャ</span>を<span class="accent">定義</span>し、<br><span class="accent">プロビジョニング</span>するための<span class="accent">ソフトウェア開発フレームワーク</span></div>
+
+<InlineSvg src="iac-define.svg" label="コードでインフラストラクチャを定義し、IaCのツールがそれを読んで実際のインフラストラクチャをプロビジョニングする" class="mx-auto mt-5 fig-iac-define" />
+
+<div class="arrow-note">→ IaCは宣言型のデプロイ手法です</div>
 
 <!--
-根拠 10-30 01:53。次のページで宣言型のデプロイを説明する（10-30 01:54、10-31 12:03、12:08）。手続き型は話さない（10-30 01:50）。
+2026-11-03 01:52 本人: 前の「定義する → 何を？」「宣言型のデプロイ」「プロビジョニングする → どうやって？」の 3 枚をこの 2 枚に置き換えた。文を図解する。図は iac-diff と同じ部品（diagrams/iac_define.py）。
 -->
 
 ---
@@ -142,32 +150,16 @@ chapter: IaC
 
 <ChapterLabel />
 
-## 宣言型のデプロイ
+## IaC（Infrastructure as Code）とは？
 
-<ul class="declarative mt-8">
-  <li>リソースの「<span class="accent font-bold">あるべき姿</span>」を宣言するデプロイ方法</li>
-  <li>作成・変更・削除の操作は書かず、最終的な設定だけを書く</li>
-  <li>例：コードにメモリサイズと環境変数を書いてデプロイした</li>
-</ul>
+<div class="question mt-1">宣言型のデプロイ手法</div>
 
-<!--
-文は初心者支部で登壇したスライドの本人の言葉（2026-10-29 16:45）。
--->
+<div class="text-lg mt-1">インフラのあるべき姿を宣言するデプロイ手法</div>
 
----
-chapter: IaC
----
-
-<ChapterLabel />
-
-## プロビジョニングする → どうやって？
-
-<div class="text-lg mt-2">あるべき姿との<span class="accent">差分をデプロイ</span>する</div>
-
-<InlineSvg src="iac-diff.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする" class="mx-auto mt-4 fig-iac" />
+<InlineSvg src="iac-diff.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする" class="mx-auto mt-3 fig-iac-small" />
 
 <!--
-問いかけは 10-30 01:53。図は 初心者支部で登壇したスライドの iac-diff を流用。
+2026-11-03 01:52 本人。図は前の「プロビジョニングする → どうやって？」の図（初心者支部で登壇したスライドの iac-diff）をそのまま使う。
 -->
 
 ---
@@ -179,15 +171,42 @@ transition: fade
 
 ## AWS CDKとは？
 
-<div class="official-quote compact mt-2">
-<div class="official-label">AWS公式の定義</div>
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義（一部）</div>
 
-<div class="definition faded">
+<div class="definition">
 
-AWS Cloud Development Kit (AWS CDK) は、<br>
 コードでクラウドインフラストラクチャを定義し、<br>
-<em>AWS CloudFormation を通じて</em>プロビジョニングするための、<br>
-オープンソースのソフトウェア開発フレームワークです。
+プロビジョニングするためのソフトウェア開発フレームワーク
+
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
+
+<!--
+2026-11-03 01:52 本人: 文をこの形にする。次のページで「AWS CloudFormation を通じて」を足して強調する。
+-->
+
+---
+chapter: デプロイフロー
+transition: fade
+---
+
+<ChapterLabel />
+
+## AWS CDKとは？
+
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義（一部）</div>
+
+<div class="definition">
+
+コードでクラウドインフラストラクチャを定義し、<br>
+<span class="cfn-emphasis">AWS CloudFormation を通じて</span>プロビジョニングするための<br>
+ソフトウェア開発フレームワーク
 
 </div>
 
@@ -199,7 +218,7 @@ AWS Cloud Development Kit (AWS CDK) は、<br>
 <div class="reveal-question mt-3">CDKはCloudFormationとどう関わってるの？</div>
 
 <!--
-定義の全文の中で「AWS CloudFormation を通じて」を強調して、デプロイフローへつなぐ（10-31 09:22、12:02、13:14）。問いかけは 10-30 15:59。
+2026-11-03 01:52 本人: 「AWS CloudFormation を通じて」を強調する 1 枚を足した。デプロイフローへつなぐ問いかけ（10-30 15:59）は前のページからここへ移した。
 -->
 
 ---
