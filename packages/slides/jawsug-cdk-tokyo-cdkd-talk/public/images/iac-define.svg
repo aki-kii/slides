@@ -38,7 +38,6 @@
     </g></svg>
 <text x="408" y="232" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">IaCのツール</text>
 </g>
-<text x="408" y="164" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="13" font-weight="normal" fill="#6b7684" text-anchor="middle">ソフトウェア開発フレームワーク</text>
 <path d="M446,90 L738,90" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-i)"/>
 <text x="592" y="78" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="15" font-weight="normal" fill="#2c3e50" text-anchor="middle">プロビジョニングする</text>
 <g transform="translate(0,-90)">

@@ -1,8 +1,8 @@
 """iac-diff.svg をもとに、言葉とアイコンを入れ替えた図を書き出す。
 
 - iac-diff-ideal.svg: 「コード（あるべき姿）」の枠を緑で強調する（IaCのデプロイの仕組み）
-- cfn-define.svg: 「IaCとは？」の図を CloudFormation に置き換える（テンプレート → CloudFormation → スタック）
-- cfn-deploy.svg: IaCのデプロイの仕組みの図を CloudFormation に置き換える（テンプレートとスタックを比べ、変更セットを反映する）
+- cfn-define.svg: 「IaCとは？」の図を CloudFormation に置き換える（テンプレート → CloudFormation → スタック。説明は名前の下）
+- cfn-deploy.svg: IaCの仕組みの図を CloudFormation に置き換える（テンプレートと更新前のスタックを比べ、変更セットを同じスタックに反映する）
 
   AWS_ICONS=<アイコン置き場> python3 diagrams/iac_variants.py
 
@@ -93,39 +93,44 @@ ideal[7] = ideal[7].replace('fill="#2c3e50"', f'fill="{GREEN}"')
 save("iac-diff-ideal", [l for l in ideal if l != ""])
 
 # 2. CloudFormation とは？（テンプレート → CloudFormation → スタック）
-code = plain_ecs(lines(4, 32, drop={31}, swap={
-    5: icon(TEMPLATE, 32, 30, 28), 6: None, 7: None,
-    8: retext(LINES[7], "コード（あるべき姿）", "CloudFormationテンプレート", 14),
-}))
+# テンプレートとスタックの説明は、それぞれの名前の下に書く（2026-11-04 本人）
+code = [LINES[3].replace('height="140"', 'height="160"'), icon(TEMPLATE, 32, 30, 28),
+        retext(LINES[7], "コード（あるべき姿）", "CloudFormationテンプレート", 14),
+        f'<text x="66" y="70" font-family="{FONT}" font-size="12" fill="{SUB}">あるべき姿を書いたコード</text>',
+        '<g transform="translate(0,18)">', *plain_ecs(lines(9, 32, drop={31})), "</g>"]
 tool = lines(57, 60, swap={57: icon(CFN, 376, 146, 64), 58: None, 59: None,
                            60: retext(LINES[59], "IaCのツール", "CloudFormation")})
-stack = plain_ecs(lines(77, 106, drop={105}, swap={
-    78: icon(STACK, 744, 111, 28), 79: None, 80: None, 81: None,
-    82: retext(LINES[81], "実リソース", "スタック"),
-}))
-save("cfn-define", head("0 0 1000 196", "CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする") + [
+stack = [LINES[76].replace('height="140"', 'height="160"'), icon(STACK, 744, 111, 28),
+         retext(LINES[81], "実リソース", "スタック"),
+         f'<text x="778" y="150" font-family="{FONT}" font-size="12" fill="{SUB}">AWSリソースをまとめて管理する単位</text>',
+         '<g transform="translate(0,18)">', *plain_ecs(lines(83, 106, drop={105})), "</g>"]
+save("cfn-define", head("0 0 1000 200", "CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする") + [
     *code,
-    text(145, 186, "あるべき姿のコード", 14, SUB),
-    arrow(272, 370, 90),
-    text(321, 78, "読み込む", 14),
-    '<g transform="translate(0,-88)">', *tool, "</g>",
-    arrow(446, 738, 90),
-    text(592, 78, "プロビジョニングする", 15),
+    arrow(272, 370, 100),
+    text(321, 88, "読み込む", 14),
+    '<g transform="translate(0,-78)">', *tool, "</g>",
+    arrow(446, 738, 100),
+    text(592, 88, "プロビジョニングする", 15),
     '<g transform="translate(0,-90)">', *stack, "</g>",
-    text(864, 186, "実リソースのまとまり", 14, SUB),
     "</svg>",
 ])
 
 # 3. CloudFormation のデプロイ（テンプレートとスタックの状態を比べ、変更セットを反映する）
-save("cfn-deploy", head("0 0 1000 366", "CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する") + lines(4, 106, swap={
+save("cfn-deploy", head("0 0 1000 396", "CloudFormationが新しいテンプレートと更新前のスタックを比較し、差分の変更セットを同じスタックへ反映する。スタックがAWSリソースを管理している") + lines(4, 106, swap={
     5: icon(TEMPLATE, 32, 30, 28), 6: None, 7: None,
     8: retext(LINES[7], "コード（あるべき姿）", "テンプレート（あるべき姿）", 14),
     34: icon(STACK, 32, 220, 28), 35: None, 36: None, 37: None,
-    38: retext(LINES[37], "現在の状態", "スタック（現在の状態）"),
+    38: retext(LINES[37], "現在の状態", "スタック（更新前）"),
     57: icon(CFN, 376, 146, 64), 58: None, 59: None,
     60: retext(LINES[59], "IaCのツール", "CloudFormation"),
     66: retext(LINES[65], "差分", "変更セット", 18),
     76: retext(LINES[75], "デプロイ", "反映する", 12),
     78: icon(STACK, 744, 111, 28), 79: None, 80: None, 81: None,
-    82: retext(LINES[81], "実リソース", "スタック（実リソース）"),
-}) + ["</svg>"])
+    82: retext(LINES[81], "実リソース", "スタック（更新後）"),
+}) + [
+    # 更新前と更新後は同じスタック。点線でつなぐ（2026-11-04 本人「スタックが2つ出てきて分かりづらい」）
+    f'<path d="M145,352 V384 H864 V252" fill="none" stroke="{SUB}" stroke-width="2" stroke-dasharray="6 4" stroke-linejoin="round"/>',
+    text(505, 377, "同じスタック", 13, SUB, "bold"),
+    text(864, 100, "スタックがAWSリソースを管理している", 13, SUB),
+    "</svg>",
+])

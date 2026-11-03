@@ -110,7 +110,7 @@ transition: fade
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じて<em>プロビジョニングするための、</em><br>
-オープンソースの<em>ソフトウェア開発フレームワークです</em>。
+オープンソースのソフトウェア開発フレームワークです。
 
 </div>
 
@@ -134,10 +134,14 @@ transition: fade
 
 ## IaC（Infrastructure as Code）とは？
 
-<div class="iac-sentence mt-3"><span class="accent">コード</span>で<span class="accent">インフラストラクチャ</span>を<span class="accent">定義</span>し、<br><span class="accent">プロビジョニング</span>するための<span class="accent">ソフトウェア開発フレームワーク</span></div>
+<div class="iac-sentence mt-3"><span class="accent">コード</span>で<span class="accent">インフラストラクチャ</span>を<span class="accent">定義</span>し、<br><span class="accent">プロビジョニング</span>する</div>
 
 <InlineSvg src="iac-define.svg" label="コードでインフラストラクチャを定義し、IaCのツールがそれを読んで実際のインフラストラクチャをプロビジョニングする" class="mx-auto mt-5 fig-iac-define" />
 
+
+<Overlay clickStart=1>
+  もう少し詳しく見ていきます
+</Overlay>
 
 <!--
 2026-11-03 01:52 本人: 前の「定義する → 何を？」「宣言型のデプロイ」「プロビジョニングする → どうやって？」の 3 枚をこの 2 枚に置き換えた。文を図解する。図は iac-diff と同じ部品（diagrams/iac_define.py）。
@@ -149,9 +153,9 @@ chapter: IaC
 
 <ChapterLabel />
 
-## IaCのデプロイの仕組み
+## IaCの仕組み
 
-<div class="text-lg mt-1"><span class="accent font-bold">あるべき姿</span>をコードで定義し、<span class="replaced">現在の状態との差分</span>をデプロイする</div>
+<div class="mt-1" style="font-size: 1.05rem; white-space: nowrap">コードでインフラの<span class="replaced">あるべき姿</span>を定義し、<span class="replaced">現在の状態との差分</span>をプロビジョニングする</div>
 
 <InlineSvg src="iac-diff-ideal.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする。コード（あるべき姿）の枠を強調している" class="mx-auto mt-4 fig-iac" />
 
@@ -176,7 +180,7 @@ transition: fade
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
 <span v-click="1" class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングするための、</em><br>
-オープンソースの<em>ソフトウェア開発フレームワークです</em>。
+オープンソースのソフトウェア開発フレームワークです。
 
 </div>
 
@@ -185,7 +189,7 @@ AWS Cloud Development Kit (AWS CDK) は、<br>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div v-click="2" class="reveal-question mt-3">CloudFormationとの関わりを見ていきます</div>
+<div v-click="2" class="reveal-question mt-3">→ CloudFormationとの関わりを見ていきます</div>
 
 <!--
 2026-11-03 本人「CloudFormationを通じてを書く時はp5の状態から赤文字でCloudFormationを通じてを強調するって意味。定義で使ってない部分を省略しないでね」。IaC の抜き出しのページと同じ状態から、クリックで「AWS CloudFormation を通じて」を赤にする。問いかけは 10-30 15:59。
@@ -249,7 +253,7 @@ transition: fade
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
 <span class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングするための、</em><br>
-オープンソースの<em>ソフトウェア開発フレームワークです</em>。
+オープンソースのソフトウェア開発フレームワークです。
 
 </div>
 
@@ -333,7 +337,7 @@ transition: fade
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
-オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
+オープンソースのソフトウェア開発フレームワークです。
 
 </div>
 
@@ -343,7 +347,7 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-2026-11-03 本人（round 6）: 「コードでクラウドインフラストラクチャを定義し」と「ソフトウェア開発フレームワーク」をピックアップする。
+2026-11-03 本人（round 6）: 「コードでクラウドインフラストラクチャを定義し」をピックアップする。2026-11-04 本人: 「ソフトウェア開発フレームワーク」は説明していないので、どの定義のページでも強調しない。
 -->
 
 ---
@@ -363,7 +367,7 @@ transition: fade
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <s class="struck">コード</s><span class="replaced">プログラミング言語</span><em>でクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
-オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
+オープンソースのソフトウェア開発フレームワークです。
 
 </div>
 
@@ -559,7 +563,7 @@ chapter: まとめ
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <s class="struck">コード</s><span class="replaced">プログラミング言語</span>で<em>クラウドインフラストラクチャを定義し、</em><br>
 <em>AWS CloudFormation を通じてプロビジョニングするための、</em><br>
-<em>オープンソースのソフトウェア開発フレームワーク</em>です。
+<em>オープンソースの</em>ソフトウェア開発フレームワークです。
 
 </div>
 

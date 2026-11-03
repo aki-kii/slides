@@ -101,12 +101,13 @@ def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
     return "".join(out)
 
 
-TOP, BOTTOM = 56, 386
+TOP, BOTTOM = 56, 400
+DY = 46  # 各フェーズの名前の下に補足の行を置くぶん、中身を下げる
 SEC = {k: [] for k in ("outer", "bootstrap", "synth_frame", "source", "group", "publish", "trunk", "deploy", "gap")}
 
 # cdk deploy が synth、publish、deploy の全体を動かす
 p = SEC["outer"]
-p.append(f'<rect x="167" y="18" width="820" height="380" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
+p.append(f'<rect x="167" y="18" width="820" height="392" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
 p.append(text(183, 43, "cdk deploy", 16, INK, 700, "start", MONO))
 
 # CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは etc… にする
@@ -130,28 +131,37 @@ for x, name, lines in items:
 p.append(text(870, 72, "etc…", 12, SUB, None, "start"))
 
 # synth: ソースコード → 合成 → アセットを横に並べる
-MID = 210
+MID = 210 + DY
 p = SEC["synth_frame"]
 p.append(step(175, 350, "synth"))
-p.append(text(350, BOTTOM - 16, "ソースコードからアセットを合成する", 12, SUB))
+p.append(text(191, TOP + 50, "ソースコードからアセットを合成する", 12, SUB, None, "start"))
 p = SEC["source"]
 p.append(node("code", 235, MID - 22, 44, "ソースコード"))
 p += [arrow(f"M261,{MID} H335"), text(298, MID - 10, "合成", 12)]
 p = SEC["group"]
-p.append(group(335, 66, 178, 278, "アセット"))
-p.append(file_box(348, 102, 152, 64, "template", ["CloudFormation", "テンプレート"], icon_size=28))
-p.append(file_box(348, 178, 152, 64, "asset", ["ファイルアセット"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
-p.append(file_box(348, 254, 152, 64, "docker", ["Dockerfile"], icon_size=28))
+p.append(group(335, 66 + DY, 178, 278, "アセット"))
+p.append(file_box(348, 102 + DY, 152, 64, "template", ["CloudFormation", "テンプレート"], icon_size=28))
+p.append(file_box(348, 178 + DY, 152, 64, "asset", ["ファイルアセット"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
+p.append(file_box(348, 254 + DY, 152, 64, "docker", ["Dockerfile"], icon_size=28))
 
 # publish: テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ。どちらもまっすぐ進む
-S3Y, ECRY = 134, 286
+S3Y, ECRY = 134 + DY, 286 + DY
 p = SEC["publish"]
 p.append(step(539, 226, "publish"))
-p.append(text(652, BOTTOM - 16, "アセットをアップロードする", 12, SUB))
+p.append(text(555, TOP + 50, "アセットをAWSにアップロードする", 12, SUB, None, "start"))
 p += [icon("s3", 705, S3Y - 20, 40), text(705, S3Y - 28, "S3バケット", 13, INK, 700)]
 p += [icon("ecr", 705, ECRY - 20, 40), text(700, ECRY - 28, "ECRリポジトリ", 13, INK, 700)]
+
+
+def bootstrap_tag(cx, y):
+    """cdk bootstrap で作られるものに付ける札（2026-11-03 本人）。"""
+    return (f'<rect x="{cx - 35}" y="{y}" width="70" height="18" rx="9" fill="{GREEN}"/>'
+            + text(cx, y + 13, "bootstrap", 11, "#ffffff", 700, "middle", MONO))
+
+
+p += [bootstrap_tag(705, S3Y - 64), bootstrap_tag(700, ECRY - 64)]
 p = SEC["trunk"]
-p.append(f'<path d="M500,210 H519 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
+p.append(f'<path d="M500,{MID} H519 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
 p += [arrow(f"M500,{S3Y} H685"), text(612, S3Y - 10, "アップロード")]
 p.append(role_chip(556, S3Y + 12, ["ファイル用", "パブリッシュロール"]))
 p += [arrow(f"M500,{ECRY} H685"), text(612, ECRY - 10, "ビルド＆アップロード")]
@@ -166,7 +176,7 @@ p.append(arrow(f"M725,{S3Y} H844"))
 DMID = 186
 p = SEC["deploy"]
 p.append(step(779, 200, "deploy"))
-p.append(text(879, BOTTOM - 16, "スタックをデプロイする", 12, SUB))
+p.append(text(795, TOP + 50, "AWSリソースをデプロイする", 12, SUB, None, "start"))
 p.append(icon("cfn", 880, S3Y - 32, 64))
 p.append(text(880, S3Y + 52, "CloudFormation", 13, INK, 700))
 p.append(text(880, S3Y + 68, "でデプロイ", 13, INK, 700))
@@ -192,7 +202,7 @@ def write(name, focus=None):
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
         move = "" if key == "bootstrap" else f" {MOVE}"
         body.append(f"<g{opacity}{move}>" + "".join(parts) + "</g>")
-    box = "0 96 840 400"
+    box = "0 96 840 412"
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{box}" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:

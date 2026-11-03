@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 196" width="100%" role="img" aria-label="CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" width="100%" role="img" aria-label="CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする">
 <!-- AWS Architecture Icons 2026-07-31 版（Icon-package_07312026） -->
 <defs><marker id="a-i" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E8A6E"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#DD344C"/></marker><marker id="a-x" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a94a3"/></marker></defs>
-<rect x="20" y="20" width="250" height="140" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
+<rect x="20" y="20" width="250" height="160" rx="12" fill="#ffffff" stroke="#c9d0d9" stroke-width="2"/>
 <svg x="32" y="30" width="28" height="28" viewBox="0 0 48 48"><g id="cfn-define-v1-Icon-Resource/Management-Governance/Res_AWS-CloudFormation_Template_48" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <path d="M22.734,38.089 L37.593,38.089 L37.593,36.089 L22.734,36.089 L22.734,38.089 Z M22.734,25.852 L37.593,25.852 L37.593,23.852 L22.734,23.852 L22.734,25.852 Z M22.734,13.615 L37.593,13.615 L37.593,11.615 L22.734,11.615 L22.734,13.615 Z M14.118,37.838 L18.237,37.838 L18.237,33.719 L14.118,33.719 L14.118,37.838 Z M13.118,39.838 L19.238,39.838 C19.79,39.838 20.238,39.391 20.238,38.838 L20.238,32.719 C20.238,32.166 19.79,31.719 19.238,31.719 L13.118,31.719 C12.566,31.719 12.118,32.166 12.118,32.719 L12.118,38.838 C12.118,39.391 12.566,39.838 13.118,39.838 L13.118,39.838 Z M14.118,25.6 L18.237,25.6 L18.237,21.481 L14.118,21.481 L14.118,25.6 Z M13.118,27.601 L19.238,27.601 C19.79,27.601 20.238,27.153 20.238,26.601 L20.238,20.481 C20.238,19.929 19.79,19.481 19.238,19.481 L13.118,19.481 C12.566,19.481 12.118,19.929 12.118,20.481 L12.118,26.601 C12.118,27.153 12.566,27.601 13.118,27.601 L13.118,27.601 Z M14.118,13.363 L18.237,13.363 L18.237,9.244 L14.118,9.244 L14.118,13.363 Z M13.118,15.363 L19.238,15.363 C19.79,15.363 20.238,14.916 20.238,14.363 L20.238,8.244 C20.238,7.691 19.79,7.244 19.238,7.244 L13.118,7.244 C12.566,7.244 12.118,7.691 12.118,8.244 L12.118,14.363 C12.118,14.916 12.566,15.363 13.118,15.363 L13.118,15.363 Z M8,43.956 L40.963,43.956 L40.963,4 L8,4 L8,43.956 Z M41.963,2 L7,2 C6.448,2 6,2.447 6,3 L6,44.956 C6,45.509 6.448,45.956 7,45.956 L41.963,45.956 C42.516,45.956 42.963,45.509 42.963,44.956 L42.963,3 C42.963,2.447 42.516,2 41.963,2 L41.963,2 Z" id="cfn-define-v1-AWS-CloudFormation_template_Resource-Icon_light-bg" fill="#E7157B"></path>
     </g></svg>
 <text x="66" y="50" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="14" font-weight="bold" fill="#2c3e50" text-anchor="start">CloudFormationテンプレート</text>
+<text x="66" y="70" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" fill="#6b7684">あるべき姿を書いたコード</text>
+<g transform="translate(0,18)">
 <svg x="44" y="68" width="48" height="48" viewBox="0 0 80 80"><g id="cfn-define-waf13-Icon-Architecture/64/Arch_AWS-WAF_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="cfn-define-waf13-Icon-Architecture-BG/64/Security-Identity-Compliance" fill="#DD344C">
             <rect id="cfn-define-waf13-Rectangle" x="0" y="0" width="80" height="80"></rect>
@@ -29,10 +31,10 @@
         <path d="M64,48.2340095 L56,43.4330117 L56,32.0000169 C56,31.6440171 55.812,31.3150172 55.504,31.1360173 L44,24.4260204 L44,14.7520248 L64,26.5710194 L64,48.2340095 Z M65.509,25.13902 L43.509,12.139026 C43.199,11.9560261 42.818,11.9540261 42.504,12.131026 C42.193,12.3090259 42,12.6410257 42,13.0000256 L42,25.0000201 C42,25.3550199 42.189,25.6840198 42.496,25.8640197 L54,32.5740166 L54,44.0000114 C54,44.3510113 54.185,44.6770111 54.486,44.857011 L64.486,50.8570083 C64.644,50.9520082 64.822,51 65,51 C65.17,51 65.34,50.9570082 65.493,50.8700083 C65.807,50.6930084 66,50.3600085 66,50 L66,26.0000196 C66,25.6460198 65.814,25.31902 65.509,25.13902 L65.509,25.13902 Z M40.445,66.863001 L17,54.3990067 L17,26.5710194 L37,14.7520248 L37,24.4510204 L26.463,31.1560173 C26.175,31.3400172 26,31.6580171 26,32.0000169 L26,49.0000091 C26,49.373009 26.208,49.7150088 26.538,49.8870087 L39.991,56.8870055 C40.28,57.0370055 40.624,57.0380055 40.912,56.8880055 L53.964,50.1440086 L61.996,54.9640064 L40.445,66.863001 Z M64.515,54.1420068 L54.515,48.1420095 C54.217,47.9640096 53.849,47.9520096 53.541,48.1120095 L40.455,54.8730065 L28,48.3930094 L28,32.5490167 L38.537,25.8440197 C38.825,25.6600198 39,25.3420199 39,25.0000201 L39,13.0000256 C39,12.6410257 38.808,12.3090259 38.496,12.131026 C38.184,11.9540261 37.802,11.9560261 37.491,12.139026 L15.491,25.13902 C15.187,25.31902 15,25.6460198 15,26.0000196 L15,55 C15,55.3690062 15.204,55.7090061 15.53,55.883006 L39.984,68.8830001 C40.131,68.961 40.292,69 40.453,69 C40.62,69 40.786,68.958 40.937,68.8750001 L64.484,55.875006 C64.797,55.7020061 64.993,55.3750062 65.0001416,55.0180064 C65.006,54.6600066 64.821,54.3260067 64.515,54.1420068 L64.515,54.1420068 Z" id="cfn-define-ecs15-Amazon-Elastic-Container-Service_Icon_64_Squid" fill="#FFFFFF"></path>
     </g></svg>
 <text x="212" y="136" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="13" font-weight="normal" fill="#2c3e50" text-anchor="middle">Amazon ECS</text>
-<text x="145" y="186" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="14" font-weight="normal" fill="#6b7684" text-anchor="middle">あるべき姿のコード</text>
-<path d="M272,90 L370,90" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-i)"/>
-<text x="321" y="78" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="14" font-weight="normal" fill="#2c3e50" text-anchor="middle">読み込む</text>
-<g transform="translate(0,-88)">
+</g>
+<path d="M272,100 L370,100" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-i)"/>
+<text x="321" y="88" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="14" font-weight="normal" fill="#2c3e50" text-anchor="middle">読み込む</text>
+<g transform="translate(0,-78)">
 <svg x="376" y="146" width="64" height="64" viewBox="0 0 80 80"><g id="cfn-define-v2-Icon-Architecture/64/Arch_AWS-CloudFormation_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="cfn-define-v2-Icon-Architecture-BG/64/Management-Governance" fill="#E7157B">
             <rect id="cfn-define-v2-Rectangle" x="0" y="0" width="80" height="80"></rect>
@@ -41,14 +43,16 @@
     </g></svg>
 <text x="408" y="232" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#2c3e50" text-anchor="middle">CloudFormation</text>
 </g>
-<path d="M446,90 L738,90" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-i)"/>
-<text x="592" y="78" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="15" font-weight="normal" fill="#2c3e50" text-anchor="middle">プロビジョニングする</text>
+<path d="M446,100 L738,100" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-i)"/>
+<text x="592" y="88" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="15" font-weight="normal" fill="#2c3e50" text-anchor="middle">プロビジョニングする</text>
 <g transform="translate(0,-90)">
-<rect x="742" y="110" width="244" height="140" rx="12" fill="#ffffff" stroke="#232F3E" stroke-width="2"/>
+<rect x="742" y="110" width="244" height="160" rx="12" fill="#ffffff" stroke="#232F3E" stroke-width="2"/>
 <svg x="744" y="111" width="28" height="28" viewBox="0 0 48 48"><g id="cfn-define-v3-Icon-Resource/Management-Governance/Res_AWS-CloudFormation_Stack_48" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <path d="M2,15.353 L45.92,15.353 L45.92,2 L2,2 L2,15.353 Z M4,13.354 L43.92,13.354 L43.92,4 L4,4 L4,13.354 Z M24.706,30.201 L45.92,30.201 L45.92,16.847 L24.706,16.847 L24.706,30.201 Z M26.706,28.2 L43.92,28.2 L43.92,18.847 L26.706,18.847 L26.706,28.2 Z M2,30.201 L23.213,30.201 L23.213,16.847 L2,16.847 L2,30.201 Z M4,28.2 L21.213,28.2 L21.213,18.847 L4,18.847 L4,28.2 Z M32.567,45.047 L45.92,45.047 L45.92,31.694 L32.567,31.694 L32.567,45.047 Z M34.566,43.047 L43.92,43.047 L43.92,33.693 L34.566,33.693 L34.566,43.047 Z M16.847,45.047 L31.073,45.047 L31.073,31.694 L16.847,31.694 L16.847,45.047 Z M18.847,43.047 L29.074,43.047 L29.074,33.693 L18.847,33.693 L18.847,43.047 Z M2,45.047 L15.352,45.047 L15.352,31.694 L2,31.694 L2,45.047 Z M4,43.047 L13.353,43.047 L13.353,33.693 L4,33.693 L4,43.047 Z" id="cfn-define-v3-AWS-CloudFormation_stack_Resource-Icon_light-bg" fill="#E7157B"></path>
     </g></svg>
 <text x="778" y="130" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#232F3E" text-anchor="start">スタック</text>
+<text x="778" y="150" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" fill="#6b7684">AWSリソースをまとめて管理する単位</text>
+<g transform="translate(0,18)">
 <svg x="764" y="156" width="48" height="48" viewBox="0 0 80 80"><g id="cfn-define-waf22-Icon-Architecture/64/Arch_AWS-WAF_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="cfn-define-waf22-Icon-Architecture-BG/64/Security-Identity-Compliance" fill="#DD344C">
             <rect id="cfn-define-waf22-Rectangle" x="0" y="0" width="80" height="80"></rect>
@@ -73,5 +77,5 @@
     </g></svg>
 <text x="932" y="224" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="13" font-weight="normal" fill="#2c3e50" text-anchor="middle">Amazon ECS</text>
 </g>
-<text x="864" y="186" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="14" font-weight="normal" fill="#6b7684" text-anchor="middle">実リソースのまとまり</text>
+</g>
 </svg>
