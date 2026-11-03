@@ -171,42 +171,15 @@ transition: fade
 
 ## AWS CDKとは？
 
-<div class="official-quote mt-5">
-<div class="official-label">AWS公式の定義（一部）</div>
+<div class="official-quote compact mt-2">
+<div class="official-label">AWS公式の定義</div>
 
-<div class="definition">
+<div class="definition faded">
 
-コードでクラウドインフラストラクチャを定義し、<br>
-プロビジョニングするためのソフトウェア開発フレームワーク
-
-</div>
-
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
-</div>
-
-<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
-
-<!--
-2026-11-03 01:52 本人: 文をこの形にする。次のページで「AWS CloudFormation を通じて」を足して強調する。
--->
-
----
-chapter: デプロイフロー
-transition: fade
----
-
-<ChapterLabel />
-
-## AWS CDKとは？
-
-<div class="official-quote mt-5">
-<div class="official-label">AWS公式の定義（一部）</div>
-
-<div class="definition">
-
-コードでクラウドインフラストラクチャを定義し、<br>
-<span class="cfn-emphasis">AWS CloudFormation を通じて</span>プロビジョニングするための<br>
-ソフトウェア開発フレームワーク
+AWS Cloud Development Kit (AWS CDK) は、<br>
+<em>コードでクラウドインフラストラクチャを定義し、</em><br>
+<span v-click="1" class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングするための、</em><br>
+オープンソースの<em>ソフトウェア開発フレームワークです</em>。
 
 </div>
 
@@ -215,10 +188,10 @@ transition: fade
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div class="reveal-question mt-3">CDKはCloudFormationとどう関わってるの？</div>
+<div v-click="2" class="reveal-question mt-3">CDKはCloudFormationとどう関わってるの？</div>
 
 <!--
-2026-11-03 01:52 本人: 「AWS CloudFormation を通じて」を強調する 1 枚を足した。デプロイフローへつなぐ問いかけ（10-30 15:59）は前のページからここへ移した。
+2026-11-03 本人「CloudFormationを通じてを書く時はp5の状態から赤文字でCloudFormationを通じてを強調するって意味。定義で使ってない部分を省略しないでね」。IaC の抜き出しのページと同じ状態から、クリックで「AWS CloudFormation を通じて」を赤にする。問いかけは 10-30 15:59。
 -->
 
 ---
@@ -230,11 +203,37 @@ transition: fade
 
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
-## デプロイフロー
+## CloudFormationのデプロイ
 
-<InlineSvg src="deploy-flow.svg" label="CDK Bootstrap の枠と、synth、publish、deploy の順に進む cdk deploy の枠" class="mx-auto fig-flow" />
+<InlineSvg src="cfn-deploy.svg" label="新しいテンプレートとスタックの状態を CloudFormation が比べて変更セットを作り、確認してスタックに反映する" class="mx-auto mt-4 fig-cfn" />
+
+<div class="arrow-note">→ <span class="not-own">新しいテンプレートとスタックの状態を比べて変更セットを作り、確認してスタックに反映すると、AWSリソースが作られる</span></div>
+
+<!--
+2026-11-03 本人「CloudFormationのデプロイも説明しよう。CloudFormationのデプロイってタイトルにしようね」。図と文は、前の CDK のデプロイフローの deploy の部分から移した。
+公式は「スタックと、送った変更を比べる」。実際のリソースまで比べるのは drift-aware change set（cdk deploy --revert-drift）のとき。
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
+ロールバックと承認ゲートは扱わない。リソースの話はこの章でする（10-31 09:39）。
+-->
+
+---
+chapter: デプロイフロー
+transition: fade
+---
+
+<ChapterLabel />
+
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
+## CDKのデプロイ
+
+<InlineSvg src="deploy-flow.svg" label="CDK Bootstrap の枠と、synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
 
 <div class="arrow-note">→ <span class="not-own">cdk deployの中でsynth、publish、deployが順に動く</span></div>
+
+<Overlay clickStart=1>
+  CDKはCloudFormationを通じてデプロイしている
+</Overlay>
 
 <!--
 全体を先に見せる。ここから同じ図の一部を順に強調する。cdk deploy が全体を順に動かす。根拠 10-30 16:06、10-31 09:22。
@@ -297,7 +296,6 @@ transition: fade
 
 ---
 chapter: デプロイフロー
-transition: fade
 ---
 
 <ChapterLabel />
@@ -306,32 +304,12 @@ transition: fade
 
 ## デプロイ
 
-<InlineSvg src="deploy-flow-deploy.svg" label="新しいテンプレートとスタックの状態を比べて変更セットを作り、スタックに反映する部分を強調した図" class="mx-auto fig-flow" />
+<InlineSvg src="deploy-flow-deploy.svg" label="deploy の部分を強調した図。CloudFormation でデプロイする" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ <span class="not-own">新しいテンプレートとスタックの状態を比べる。実際のリソースを見に行くわけではない</span></div>
-
-<!--
-publish でアップロードしたアセットを使う。公式は「スタックと、送った変更を比べる」。実際のリソースまで比べるのは drift-aware change set（cdk deploy --revert-drift）のとき。
-https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
-ロールバックと承認ゲートは扱わない。
--->
-
----
-chapter: デプロイフロー
----
-
-<ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
-## デプロイ
-
-<InlineSvg src="deploy-flow-deploy.svg" label="変更セットを確認してスタックに反映する部分を強調した図。反映には CloudFormation 実行ロールを使う" class="mx-auto fig-flow" />
-
-<div class="arrow-note">→ <span class="not-own">変更セットを確認してスタックに反映すると、AWSリソースが作られる</span></div>
+<div class="arrow-note">→ <span class="not-own">パブリッシュしたテンプレートを使って、CloudFormationのデプロイをする</span></div>
 
 <!--
-リソースの話はこの章でする（10-31 09:39）。
+2026-11-03 本人「CDKのデプロイ、図はCloudFormationのデプロイは前に紹介してるから省略形にする」。変更セットとスタックの説明は「CloudFormationのデプロイ」のページへ移したので、デプロイの 2 枚を 1 枚にした。
 -->
 
 ---

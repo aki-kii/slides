@@ -1,4 +1,5 @@
 """デプロイフロー図を SVG で組む。全体の図と、一部を強調した図を images/ に書き出す。
+CloudFormation のデプロイの図（cfn-deploy.svg）も書き出す。CDK の図の deploy は、その前のページで説明するので CloudFormation のアイコンだけにする。
 
   AWS_ICONS=<アイコン置き場> python3 diagrams/deploy_flow.py
 
@@ -100,15 +101,16 @@ def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
 
 TOP, BOTTOM = 56, 356
 SEC = {k: [] for k in ("outer", "bootstrap", "synth_frame", "source", "group", "publish", "trunk", "deploy", "gap")}
+CFN = []  # CloudFormation のデプロイの図。cdk deploy の図には入れない
 
 # cdk deploy が synth、publish、deploy の全体を動かす
 p = SEC["outer"]
-p.append(f'<rect x="167" y="18" width="1109" height="350" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
+p.append(f'<rect x="167" y="18" width="920" height="350" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
 p.append(text(183, 43, "cdk deploy", 16, INK, 700, "start", MONO))
 
 # CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは etc… にする
 p = SEC["bootstrap"]
-p.append(group(10, 12, 1109, 82, "CDK Bootstrap"))
+p.append(group(10, 12, 920, 82, "CDK Bootstrap"))
 p.append(f'<rect x="132" y="20" width="84" height="22" rx="11" fill="{GREEN}"/>')
 p.append(text(174, 35, "初回のみ作成", 11, "#ffffff", 700))
 items = [
@@ -155,14 +157,18 @@ p.append(role_chip(556, ECRY + 12, ["イメージ用", "パブリッシュロー
 # publish → deploy: アップロードしたアセットを deploy で使う
 p = SEC["gap"]
 p.append(f'<path d="M725,{ECRY} H752 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p.append(arrow(f"M725,{S3Y} H795"))
+p.append(arrow(f"M725,{S3Y} H844"))
 
-# deploy: IaC の図（iac-diff）と同じ形にする。あるべき姿と現在の状態を比べ、差分を反映する
+# deploy: CloudFormation のデプロイは前のページで説明するので、CloudFormation のアイコンだけで表す（2026-11-03 本人）
 DMID = 186
 p = SEC["deploy"]
-p.append(step(779, 489, "deploy"))
+p.append(step(779, 300, "deploy"))
+p.append(icon("cfn", 880, S3Y - 32, 64))
+p.append(text(880, S3Y + 52, "CloudFormation", 13, INK, 700))
+p.append(text(880, S3Y + 68, "でデプロイ", 13, INK, 700))
 
 
+# CloudFormation のデプロイ: IaC の図（iac-diff）と同じ形。あるべき姿と現在の状態を比べ、差分を反映する
 def state_box(y, name, lines, fill):
     out = [f'<rect x="795" y="{y}" width="110" height="62" rx="10" fill="{fill}" stroke="{LINE}" stroke-width="2"/>',
            icon(name, 815, y + 15, 32)]
@@ -172,6 +178,7 @@ def state_box(y, name, lines, fill):
     return "".join(out)
 
 
+p = CFN
 p.append(state_box(103, "template", ["新しい", "テンプレート", "（あるべき姿）"], "#ffffff"))
 p.append(state_box(207, "stack", ["スタックの", "状態", "（現在の状態）"], "#f5f7f9"))
 p.append(text(914, DMID + 4, "比較", 11, anchor="end"))
@@ -179,16 +186,13 @@ p.append(arrow(f"M905,{S3Y} H920 V{DMID - 8} H950"))
 p.append(arrow(f"M905,238 H920 V{DMID + 8} H950"))
 p.append(icon("cfn", 970, DMID - 18, 36))
 p.append(text(970, DMID + 34, "CloudFormation", 11, INK, 700))
-p.append(role_chip(933, DMID + 46, ["デプロイ用", "ロール"]))
 p.append(green_arrow(f"M990,{DMID} H1030"))
 p.append(f'<rect x="1030" y="{DMID - 46}" width="64" height="92" rx="10" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2" stroke-dasharray="5 4"/>')
 p.append(text(1062, DMID - 27, "差分", 12, GREEN, 700))
 p.append(icon("changeset", 1062, DMID - 18, 34))
 p.append(text(1062, DMID + 34, "変更セット", 11, GREEN, 700))
 p.append(green_arrow(f"M1094,{DMID} H1186"))
-p += [text(1140, DMID - 26, "確認して", 11), text(1140, DMID - 11, "反映する", 11)]
-p.append(icon("role", 1140, DMID + 10, 18))
-p += [text(1140, DMID + 42, "CloudFormation", 10), text(1140, DMID + 55, "実行ロール", 10)]
+p += [text(1140, DMID - 9, "確認して", 11), text(1140, DMID + 6, "反映する", 11)]
 p.append(f'<rect x="1186" y="{DMID - 46}" width="68" height="92" rx="10" fill="#ffffff" stroke="{INK}" stroke-width="2"/>')
 p.append(icon("stack", 1220, DMID - 34, 34))
 p.append(text(1220, DMID + 18, "スタック", 11, INK, 700))
@@ -214,7 +218,7 @@ def write(name, focus=None):
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
         move = "" if key == "bootstrap" else f" {MOVE}"
         body.append(f"<g{opacity}{move}>" + "".join(parts) + "</g>")
-    box = "0 0 1129 468" if focus is None else "0 96 1129 370"
+    box = "0 0 940 468" if focus is None else "0 96 940 370"
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{box}" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
@@ -226,3 +230,10 @@ write("deploy-flow-synth", {"outer", "synth_frame", "source", "group"})
 write("deploy-flow-assets", {"outer", "group"})
 write("deploy-flow-publish", {"outer", "group", "trunk", "publish"})
 write("deploy-flow-deploy", {"outer", "gap", "deploy"})
+
+# CloudFormation のデプロイ: 図の部品だけを左上に寄せて切り出す
+svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 200" width="100%" '
+       f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n"
+       '<g transform="translate(-780,-88)">' + "".join(CFN) + "</g>\n</svg>\n")
+with open(os.path.join(OUT, "cfn-deploy.svg"), "w") as f:
+    f.write(svg)
