@@ -376,102 +376,58 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 -->
 
 ---
+layout: center
+class: text-center
 chapter: プログラミング言語とフレームワーク
 ---
 
-<ChapterLabel />
+## プログラミング言語で何が嬉しい？
+
+<!--
+2026-11-03 本人（round 9）: 恩恵のページを、初心者支部で登壇したスライドの「IaCの特徴」「IaCがAIに向いている理由」と同じ型で作り直した。この見出しのページ → 「① 〜」「② 〜」を view-transition でつなぐ。カスタムリソースと IDE の話は入れない。
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+transition: view-transition
+---
 
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
-## <span class="not-own">プログラミング言語だと何がうれしい？</span>
-
-<div class="text-lg mt-4 not-own">AIがCDKを全部書く時代でも</div>
-
-<div class="big-accent one-line mt-2 not-own">プログラミング言語のフレームワークだから嬉しい！</div>
-
-<div class="benefit-list mt-8">
-  <div><b class="accent">①</b> <span class="not-own">インフラの設定を抽象化できる</span></div>
-  <div><b class="accent">②</b> <span class="not-own">デプロイ前の検証手段が豊富</span></div>
+<div style="view-transition-name: cdk-benefit">
+  <span class="not-own">プログラミング言語で嬉しいこと ①</span>
+  <h2>インフラの設定を抽象化できる</h2>
 </div>
 
-<div class="quote-note">「AI で書けるじゃん？」という議論もあると思いますが、結局そのコードのオーナーシップを持つのは自分です。</div>
+<div class="text-lg mt-2 not-own">抽象化されたメソッドを使うので、1行で設定の意図が読める</div>
 
-<BottomLink href="https://blog.serverworks.co.jp/2025/07/15/133000" title="出典：AWS CDK の良さを感じるタイミングってどんなとき？（私見）" />
+<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行が、CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-4 fig-benefit" />
+
+<div class="text-base mt-2 text-center">→ <span class="not-own">AIが書いたコードも、人がレビューしやすい</span></div>
 
 <!--
-2026-11-03 本人（round 8）: 前の「プログラミング言語だと何がうれしい？」「数の分だけ用意できる」「環境によって作らない」「カスタムリソース」の 4 枚を作り直した。カスタムリソースは一旦外す。軸は「AIがCDKを全部書く時代でも、プログラミング言語のフレームワークだから嬉しい」。IDE の話は入れない。
-引用は サーバーワークスエンジニアブログ 橋本 拓弥さん https://blog.serverworks.co.jp/2025/07/15/133000 （原文のまま）。
+2026-11-03 本人（round 8〜9）: 例は bucket.grants.write(taskRole) か myBucket.grantRead(myFunction)。よく知られている grantRead にした。右は grantRead が作るポリシーの中身を抜き出したもの。図は diagrams/benefit_abstract.py。
 -->
 
 ---
 chapter: プログラミング言語とフレームワーク
 ---
 
-<ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
-
-## <span class="not-own">① インフラの設定を抽象化できる</span>
-
-<div class="pair-code mt-4">
-<div>
-<div class="code-head">AWS CDK</div>
-
-```ts
-myBucket.grantRead(myFunction);
-```
-
-</div>
-<div>
-<div class="code-head">CloudFormation（同じ権限）</div>
-
-```yaml
-Policies:
-  - PolicyDocument:
-      Statement:
-        - Effect: Allow
-          Action:
-            - s3:GetObject*
-            - s3:GetBucket*
-            - s3:List*
-          Resource:
-            - !GetAtt MyBucket.Arn
-            - !Sub "${MyBucket.Arn}/*"
-```
-
-</div>
-</div>
-
-<div class="arrow-note">→ <span class="not-own">1行で意図が読める！ AIが書いたコードも人がレビューしやすい</span></div>
-
-<!--
-2026-11-03 本人（round 8）: 例は bucket.grants.write(taskRole) か myBucket.grantRead(myFunction)。よく知られている grantRead にした。右は grantRead が作るポリシーのアクションを CloudFormation で書いた形（ロールに付ける部分だけ抜き出した）。
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
-## <span class="not-own">② デプロイ前の検証手段が豊富</span>
-
-<div class="triple-grid mt-6">
-  <div><b>Linter</b><span class="not-own">書き方のミス</span></div>
-  <div><b>型チェック</b><span class="not-own">プロパティの間違い</span></div>
-  <div><b>単体テスト</b><span class="not-own">テンプレートの中身</span></div>
-  <div><b><code>cdk synth</code></b><span class="not-own">テンプレートを作れるか</span></div>
-  <div><b><code>cdk diff</code></b><span class="not-own">何が変わるか</span></div>
+<div style="view-transition-name: cdk-benefit">
+  <span class="not-own">プログラミング言語で嬉しいこと ②</span>
+  <h2>デプロイ前の検証手段が豊富</h2>
 </div>
 
-<div class="reveal-line mt-6">→ <span class="not-own">AIが自分で検証して直せる！</span></div>
+<div class="text-lg mt-2 not-own">AIが書いたコードを、デプロイする前にAI自身が検証して直せる</div>
 
-<BottomLink href="https://speakerdeck.com/akihisaikeda/cdk-deploy-jawssonic-marathon-shi-nagara-aws-risosu-o-shi-te-miyou" title="検証の回し方は「cdk deploy JawsSonic #MARATHONしながらAWSリソースをデプロイしてみよう」で話しました" />
+<InlineSvg src="ai-validation.svg" label="AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする" class="mx-auto mt-4 fig-benefit" />
+
+<BottomLink href="https://speakerdeck.com/akihisaikeda/cdk-deploy-jawssonic-marathon-shi-nagara-aws-risosu-o-shi-te-miyou" title="検証しながらデプロイする話は「cdk deploy JawsSonic #MARATHONしながらAWSリソースをデプロイしてみよう」で" />
 
 <!--
-2026-11-03 本人（round 8）: 検証手段は Linter、型チェック、単体テスト、cdk synth、cdk diff、cdk validate など。cdk validate はコマンドがあるか確かめられなかったので、本人に確認するまで入れていない。
+2026-11-03 本人（round 8〜9）: 検証手段は Linter、型チェック、単体テスト、cdk synth、cdk diff、cdk validate など。図は初心者支部で登壇したスライドの「IaCがAIに向いている理由 ②」の ai-validation.svg をそのまま使った（検証の下に「lint・validateなど」）。
 -->
 
 ---
