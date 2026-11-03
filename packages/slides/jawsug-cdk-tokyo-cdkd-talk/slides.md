@@ -337,7 +337,7 @@ transition: fade
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
-オープンソースのソフトウェア開発フレームワークです。
+オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
 
 </div>
 
@@ -347,7 +347,7 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-2026-11-03 本人（round 6）: 「コードでクラウドインフラストラクチャを定義し」をピックアップする。2026-11-04 本人: 「ソフトウェア開発フレームワーク」は説明していないので、どの定義のページでも強調しない。
+2026-11-03 本人（round 6）: 「コードでクラウドインフラストラクチャを定義し」をピックアップする。2026-11-04 本人: 定義の全文はどのページでも同じにする。「ソフトウェア開発フレームワーク」の強調を外すのは IaC の話のところだけで、プログラミング言語の章（ここ）とまとめは残す。
 -->
 
 ---
@@ -367,7 +367,7 @@ transition: fade
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <s class="struck">コード</s><span class="replaced">プログラミング言語</span><em>でクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
-オープンソースのソフトウェア開発フレームワークです。
+オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
 
 </div>
 
@@ -563,7 +563,7 @@ chapter: まとめ
 AWS Cloud Development Kit (AWS CDK) は、<br>
 <s class="struck">コード</s><span class="replaced">プログラミング言語</span>で<em>クラウドインフラストラクチャを定義し、</em><br>
 <em>AWS CloudFormation を通じてプロビジョニングするための、</em><br>
-<em>オープンソースの</em>ソフトウェア開発フレームワークです。
+<em>オープンソースのソフトウェア開発フレームワーク</em>です。
 
 </div>
 
