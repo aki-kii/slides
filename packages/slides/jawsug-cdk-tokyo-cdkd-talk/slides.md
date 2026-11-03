@@ -221,9 +221,9 @@ transition: fade
 
 ## CloudFormationのデプロイ
 
-<InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-3 fig-iac" />
+<div class="mt-2 not-own" style="font-size: 1.05rem; white-space: nowrap">CloudFormationがテンプレートとスタックを比べて、変更セットをスタックに反映する</div>
 
-<div class="arrow-note">→ <span class="not-own">テンプレートとスタックの状態を比べて変更セットを作り、スタックに反映する</span></div>
+<InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-3 fig-iac" />
 
 <!--
 2026-11-03 本人「CloudFormationのデプロイも説明しよう。CloudFormationのデプロイってタイトルにしようね」。round 5 で、図を「IaCのデプロイの仕組み」と同じ形にしてリソース（AWS WAF、ALB、Amazon ECS）も描いた（diagrams/iac_variants.py）。
@@ -277,9 +277,10 @@ transition: fade
 
 ## CDKのデプロイ
 
+<div class="text-lg mt-2 not-own">cdk deployの中でsynth、publish、deployが順に動く</div>
+
 <InlineSvg src="deploy-flow.svg" label="synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
 
-<div class="arrow-note">→ <span class="not-own">cdk deployの中でsynth、publish、deployが順に動く</span></div>
 
 <!--
 全体を先に見せる。ここから同じ図の一部を順に強調する。cdk deploy が全体を順に動かす。根拠 10-30 16:06、10-31 09:22。
@@ -527,6 +528,8 @@ chapter: プログラミング言語とフレームワーク
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 ## <span class="not-own">アプリもスタックもコンストラクト</span>
+
+<div class="text-lg mt-2 not-own">CDKのアプリは、コンストラクトを入れ子にして組み立てている</div>
 
 <div class="nest-app mt-4">
   <div class="nest-title">アプリ</div>
