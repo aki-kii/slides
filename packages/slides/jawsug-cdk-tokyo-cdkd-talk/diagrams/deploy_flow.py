@@ -1,6 +1,7 @@
 """デプロイフロー図を SVG で組む。全体の図と、一部を強調した図を images/ に書き出す。
 CDK の図の deploy は、その前のページ（cfn-deploy.svg、diagrams/iac_variants.py）で説明するので CloudFormation のアイコンだけにする。
 CDK Bootstrap は図に出さない。アセットの中も強調しない（2026-11-03 本人）。
+フェーズごとのページは作らず、各フェーズの枠の下に短い補足を付ける（2026-11-03 本人、round 6）。
 
   AWS_ICONS=<アイコン置き場> python3 diagrams/deploy_flow.py
 
@@ -100,12 +101,12 @@ def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
     return "".join(out)
 
 
-TOP, BOTTOM = 56, 356
+TOP, BOTTOM = 56, 386
 SEC = {k: [] for k in ("outer", "bootstrap", "synth_frame", "source", "group", "publish", "trunk", "deploy", "gap")}
 
 # cdk deploy が synth、publish、deploy の全体を動かす
 p = SEC["outer"]
-p.append(f'<rect x="167" y="18" width="920" height="350" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
+p.append(f'<rect x="167" y="18" width="820" height="380" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
 p.append(text(183, 43, "cdk deploy", 16, INK, 700, "start", MONO))
 
 # CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは etc… にする
@@ -132,6 +133,7 @@ p.append(text(870, 72, "etc…", 12, SUB, None, "start"))
 MID = 210
 p = SEC["synth_frame"]
 p.append(step(175, 350, "synth"))
+p.append(text(350, BOTTOM - 16, "ソースコードからアセットを合成する", 12, SUB))
 p = SEC["source"]
 p.append(node("code", 235, MID - 22, 44, "ソースコード"))
 p += [arrow(f"M261,{MID} H335"), text(298, MID - 10, "合成", 12)]
@@ -145,6 +147,7 @@ p.append(file_box(348, 254, 152, 64, "docker", ["Dockerfile"], icon_size=28))
 S3Y, ECRY = 134, 286
 p = SEC["publish"]
 p.append(step(539, 226, "publish"))
+p.append(text(652, BOTTOM - 16, "アセットをアップロードする", 12, SUB))
 p += [icon("s3", 705, S3Y - 20, 40), text(705, S3Y - 28, "S3バケット", 13, INK, 700)]
 p += [icon("ecr", 705, ECRY - 20, 40), text(700, ECRY - 28, "ECRリポジトリ", 13, INK, 700)]
 p = SEC["trunk"]
@@ -162,7 +165,8 @@ p.append(arrow(f"M725,{S3Y} H844"))
 # deploy: CloudFormation のデプロイは前のページで説明するので、CloudFormation のアイコンだけで表す（2026-11-03 本人）
 DMID = 186
 p = SEC["deploy"]
-p.append(step(779, 300, "deploy"))
+p.append(step(779, 200, "deploy"))
+p.append(text(879, BOTTOM - 16, "スタックをデプロイする", 12, SUB))
 p.append(icon("cfn", 880, S3Y - 32, 64))
 p.append(text(880, S3Y + 52, "CloudFormation", 13, INK, 700))
 p.append(text(880, S3Y + 68, "でデプロイ", 13, INK, 700))
@@ -188,7 +192,7 @@ def write(name, focus=None):
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
         move = "" if key == "bootstrap" else f" {MOVE}"
         body.append(f"<g{opacity}{move}>" + "".join(parts) + "</g>")
-    box = "0 96 940 370"
+    box = "0 96 840 400"
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{box}" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
@@ -196,7 +200,4 @@ def write(name, focus=None):
 
 
 write("deploy-flow")
-write("deploy-flow-synth", {"outer", "synth_frame", "source", "group"})
-write("deploy-flow-publish", {"outer", "group", "trunk", "publish"})
-write("deploy-flow-deploy", {"outer", "gap", "deploy"})
 

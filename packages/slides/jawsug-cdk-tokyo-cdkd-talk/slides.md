@@ -286,57 +286,33 @@ transition: fade
 -->
 
 ---
-chapter: デプロイフロー
+chapter: プログラミング言語とフレームワーク
 transition: fade
 ---
 
 <ChapterLabel />
 
-## synth
+## AWS CDKとは？
 
-<InlineSvg src="deploy-flow-synth.svg" label="synth の枠を強調した図" class="mx-auto fig-flow" />
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
 
-<div class="arrow-note">→ ソースコードから合成して、アセットを作る</div>
+<div class="definition tight">
 
-<!--
-synth は合成（シンセサイズ）。「ビルド」とは書かない。
--->
+AWS Cloud Development Kit (AWS CDK) は、<br>
+コードでクラウドインフラストラクチャを定義し、<br>
+AWS CloudFormation を通じてプロビジョニングするための、<br>
+オープンソースのソフトウェア開発フレームワークです。
 
----
-chapter: デプロイフロー
-transition: fade
----
+</div>
 
-<ChapterLabel />
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
-## パブリッシュ
-
-<InlineSvg src="deploy-flow-publish.svg" label="テンプレートとファイルを S3 バケットへ、コンテナイメージを ECR リポジトリへパブリッシュする部分を強調した図" class="mx-auto fig-flow" />
-
-<div class="arrow-note">→ <span class="not-own">テンプレートとファイルはS3バケットへ、コンテナイメージはECRリポジトリへ</span></div>
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-*.assets.json の一覧で確かめた。テンプレートも S3 へ上げるファイルとして載っている。コンテナイメージは synth では作らず、ここでビルドして push する。
--->
-
----
-chapter: デプロイフロー
----
-
-<ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
-## デプロイ
-
-<InlineSvg src="deploy-flow-deploy.svg" label="deploy の部分を強調した図。CloudFormation でデプロイする" class="mx-auto fig-flow" />
-
-<div class="arrow-note">→ <span class="not-own">パブリッシュしたテンプレートを使って、CloudFormationのデプロイをする</span></div>
-
-<!--
-2026-11-03 本人「CDKのデプロイ、図はCloudFormationのデプロイは前に紹介してるから省略形にする」。変更セットとスタックの説明は「CloudFormationのデプロイ」のページへ移したので、デプロイの 2 枚を 1 枚にした。
+2026-11-03 本人（round 6）: CDK のデプロイフローのあとは、まず定義の全文をそのまま見せる（ピックアップなし）。
 -->
 
 ---
@@ -354,7 +330,7 @@ transition: fade
 <div class="definition faded tight">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
-<em>コード</em>でクラウドインフラストラクチャを定義し、<br>
+<em>コードでクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
 オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
 
@@ -366,7 +342,7 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-全文からハイライトして抜き出す（10-31 12:04、12:52）。「で」と「オープンソースの」は含めない。
+2026-11-03 本人（round 6）: 「コードでクラウドインフラストラクチャを定義し」と「ソフトウェア開発フレームワーク」をピックアップする。
 -->
 
 ---
@@ -384,7 +360,7 @@ transition: fade
 <div class="definition faded tight">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
-<s class="struck">コード</s><span class="replaced">プログラミング言語</span>でクラウドインフラストラクチャを定義し、<br>
+<s class="struck">コード</s><span class="replaced">プログラミング言語</span><em>でクラウドインフラストラクチャを定義し、</em><br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
 オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
 
@@ -396,7 +372,7 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-公式の「コード」を取り消し線で残し、直後に「プログラミング言語」を赤で見せる（10-30 16:15、10-31 12:52、13:16）。注記は付けない。
+2026-11-03 本人（round 6）: 「コード」に取り消し線を付け、「プログラミング言語」を添えてハイライトする。公式の「コード」を取り消し線で残す見せ方は 10-30 16:15、10-31 12:52、13:16。注記は付けない。
 -->
 
 ---
