@@ -432,30 +432,6 @@ chapter: プログラミング言語とフレームワーク
 -->
 
 ---
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す1〜2個は未定</div></div>
-
-## 好きなCDKコンストラクト
-
-<div class="rows mt-4">
-  <div class="row-icon"><img src="/images/icons/ecr.svg" alt="Amazon ECR" /><div><p class="row-head"><b>DockerImageAsset</b><code>aws-cdk-lib/aws-ecr-assets</code></p><span class="not-own">コンテナイメージをビルドして、CDK ToolkitのECRリポジトリに置く</span></div></div>
-  <div class="row-icon"><img src="/images/icons/s3.svg" alt="Amazon S3" /><div><p class="row-head"><b>BucketDeployment</b><code>aws-cdk-lib/aws-s3-deployment</code></p><span class="not-own">静的サイトのデプロイをいい感じにして、CloudFrontのキャッシュの無効化までしてくれる</span></div></div>
-  <div class="row-icon"><img src="/images/icons/ec2.svg" alt="Amazon EC2" /><div><p class="row-head"><b>NatProvider.instanceV2</b><code>aws-cdk-lib/aws-ec2</code></p><span class="not-own">NATゲートウェイの代わりに、NATインスタンスを構築する</span></div></div>
-  <div class="row-icon"><img src="/images/icons/codebuild.svg" alt="AWS CodeBuild" /><div><p class="row-head"><b>@cdklabs/deploy-time-build</b><code>cdklabs</code></p><span class="not-own">デプロイのときにビルドを走らせる（フロントエンドの静的ファイル、コンテナイメージなど）</span></div></div>
-</div>
-
-<!--
-仮: 口頭で話す 1〜2 個は未定。
-BucketDeployment は本人のメモの「S3Deployment」の正式な名前。
-NAT は aws-cdk-lib の NatProvider.instanceV2（クラスは NatInstanceProviderV2）で、本人のイメージと合っている（10-31 13:07）。NAT インスタンスは EC2 インスタンスなので EC2 のアイコンにした。
-deploy-time-build はもとは tmokmss さんの個人の OSS で、今は cdklabs に移っている（@cdklabs/deploy-time-build）。
--->
-
----
 chapter: オープンソース
 transition: fade
 ---
