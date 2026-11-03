@@ -2,7 +2,7 @@
 「ソフトウェア開発フレームワーク」は発表で説明しないので、図にも入れない（2026-11-04 本人）。
 
 「コードでインフラストラクチャを定義し、プロビジョニングする」を、
-コード → IaCのツール → インフラストラクチャ の横並びで見せる。
+コード → IaCのツール → AWSアカウント の横並びで見せる。ツールは左右の真ん中に置く（2026-11-04 本人「左右のバランスがおかしい」）。
 iac-diff.svg と同じ箱とアイコンを使うので、次のページの図と見た目がそろう。
 
   python3 diagrams/iac_define.py
@@ -46,23 +46,23 @@ code = plain_ecs(take(4, 32, drop={31}))  # 31 行目は ECS を囲む緑の枠
 code = [l.replace(">コード（あるべき姿）<", ">コード<") for l in code]
 tool = take(57, 60)
 infra = plain_ecs(take(77, 106, drop={105}))  # 105 行目は ECS を囲む緑の枠
-infra = [l.replace(">実リソース<", ">インフラストラクチャ<") for l in infra]
+infra = [l.replace(">実リソース<", ">AWSアカウント<") for l in infra]
 
 body = [
     lines[0].replace('viewBox="0 0 1000 366"', 'viewBox="0 0 1000 196"').replace(
         re.search(r'aria-label="[^"]*"', lines[0]).group(0),
-        'aria-label="コードでインフラストラクチャを定義し、IaCのツールがそれを読んで実際のインフラストラクチャをプロビジョニングする"'),
+        'aria-label="コードでインフラストラクチャを定義し、IaCのツールがそれを読んでAWSアカウントにプロビジョニングする"'),
     lines[1],
     lines[2],
     *code,
     text(145, 186, "インフラストラクチャを定義する", size=14, color=SUB),
-    arrow(272, 370, 90),
-    text(321, 78, "コードを読む", size=14),
-    '<g transform="translate(0,-88)">',
+    arrow(272, 462, 90),
+    text(367, 78, "コードを読む", size=14),
+    '<g transform="translate(92,-88)">',
     *tool,
     "</g>",
-    arrow(446, 738, 90),
-    text(592, 78, "プロビジョニングする", size=15),
+    arrow(538, 738, 90),
+    text(638, 78, "プロビジョニングする", size=15),
     '<g transform="translate(0,-90)">',
     *infra,
     "</g>",

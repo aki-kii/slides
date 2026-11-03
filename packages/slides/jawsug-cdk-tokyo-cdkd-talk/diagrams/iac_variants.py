@@ -90,6 +90,7 @@ def save(name, body):
 ideal = list(LINES[:-1]) if LINES[-1] == "" else list(LINES)
 ideal[3] = ideal[3].replace('stroke="#c9d0d9" stroke-width="2"', f'stroke="{GREEN}" stroke-width="3"')
 ideal[7] = ideal[7].replace('fill="#2c3e50"', f'fill="{GREEN}"')
+ideal[81] = retext(ideal[81], "実リソース", "AWSアカウント")  # 2026-11-04 本人
 save("iac-diff-ideal", [l for l in ideal if l != ""])
 
 # 2. CloudFormation とは？（テンプレート → CloudFormation → スタック）
