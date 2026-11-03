@@ -381,12 +381,26 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：中身は本人が決める</div></div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 ## <span class="not-own">プログラミング言語だと何がうれしい？</span>
 
+<div class="text-lg mt-4 not-own">AIがCDKを全部書く時代でも</div>
+
+<div class="big-accent one-line mt-2 not-own">プログラミング言語のフレームワークだから嬉しい！</div>
+
+<div class="benefit-list mt-8">
+  <div><b class="accent">①</b> <span class="not-own">インフラの設定を抽象化できる</span></div>
+  <div><b class="accent">②</b> <span class="not-own">デプロイ前の検証手段が豊富</span></div>
+</div>
+
+<div class="quote-note">「AI で書けるじゃん？」という議論もあると思いますが、結局そのコードのオーナーシップを持つのは自分です。</div>
+
+<BottomLink href="https://blog.serverworks.co.jp/2025/07/15/133000" title="出典：AWS CDK の良さを感じるタイミングってどんなとき？（私見）" />
+
 <!--
-仮: 中身は本人がまだ決めていない（10-31 12:52）。本文は書いていない。
+2026-11-03 本人（round 8）: 前の「プログラミング言語だと何がうれしい？」「数の分だけ用意できる」「環境によって作らない」「カスタムリソース」の 4 枚を作り直した。カスタムリソースは一旦外す。軸は「AIがCDKを全部書く時代でも、プログラミング言語のフレームワークだから嬉しい」。IDE の話は入れない。
+引用は サーバーワークスエンジニアブログ 橋本 拓弥さん https://blog.serverworks.co.jp/2025/07/15/133000 （原文のまま）。
 -->
 
 ---
@@ -397,21 +411,41 @@ chapter: プログラミング言語とフレームワーク
 
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
 
-## <span class="not-own">数の分だけ用意できる</span>
+## <span class="not-own">① インフラの設定を抽象化できる</span>
+
+<div class="pair-code mt-4">
+<div>
+<div class="code-head">AWS CDK</div>
 
 ```ts
-const stages = ['dev', 'stg', 'prod'];
-
-for (const stage of stages) {
-  new ApiStack(app, `Api-${stage}`);
-}
+myBucket.grantRead(myFunction);
 ```
 
-<div class="arrow-note">→ <span class="not-own">指定した個数ではなく、何かの数の分だけ何かを用意する処理が書ける</span></div>
+</div>
+<div>
+<div class="code-head">CloudFormation（同じ権限）</div>
+
+```yaml
+Policies:
+  - PolicyDocument:
+      Statement:
+        - Effect: Allow
+          Action:
+            - s3:GetObject*
+            - s3:GetBucket*
+            - s3:List*
+          Resource:
+            - !GetAtt MyBucket.Arn
+            - !Sub "${MyBucket.Arn}/*"
+```
+
+</div>
+</div>
+
+<div class="arrow-note">→ <span class="not-own">1行で意図が読める！ AIが書いたコードも人がレビューしやすい</span></div>
 
 <!--
-仮: コードの例は仮。根拠 10-31 12:54。CloudFormation にも Fn::ForEach はあるので「できない」とは言わない。
-https://docs.aws.amazon.com/cdk/v2/guide/best-practices.html
+2026-11-03 本人（round 8）: 例は bucket.grants.write(taskRole) か myBucket.grantRead(myFunction)。よく知られている grantRead にした。右は grantRead が作るポリシーのアクションを CloudFormation で書いた形（ロールに付ける部分だけ抜き出した）。
 -->
 
 ---
@@ -420,37 +454,24 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
-## <span class="not-own">環境によって作らない</span>
+## <span class="not-own">② デプロイ前の検証手段が豊富</span>
 
-```ts
-if (stage !== 'dev') {
-  new MonitoringStack(app, 'Monitoring');
-}
-```
+<div class="triple-grid mt-6">
+  <div><b>Linter</b><span class="not-own">書き方のミス</span></div>
+  <div><b>型チェック</b><span class="not-own">プロパティの間違い</span></div>
+  <div><b>単体テスト</b><span class="not-own">テンプレートの中身</span></div>
+  <div><b><code>cdk synth</code></b><span class="not-own">テンプレートを作れるか</span></div>
+  <div><b><code>cdk diff</code></b><span class="not-own">何が変わるか</span></div>
+</div>
 
-<div class="arrow-note">→ 環境によって、このリソースは作らないと指定できる</div>
+<div class="reveal-line mt-6">→ <span class="not-own">AIが自分で検証して直せる！</span></div>
 
-<!--
-仮: コードの例は仮。根拠 10-31 12:54。
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-<div class="kari">仮：入れるかは未定</div>
-
-## カスタムリソース
-
-<div class="text-2xl mt-16 text-center font-bold">プログラムで実際に何かを作る処理ができる</div>
+<BottomLink href="https://speakerdeck.com/akihisaikeda/cdk-deploy-jawssonic-marathon-shi-nagara-aws-risosu-o-shi-te-miyou" title="検証の回し方は「cdk deploy JawsSonic #MARATHONしながらAWSリソースをデプロイしてみよう」で話しました" />
 
 <!--
-仮: 10-31 09:39 で本人は迷い中。仕組みの説明は消した（12:54）。もとは CloudFormation の機能で、テンプレートだけでも使える。
-https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.custom_resources-readme.html
+2026-11-03 本人（round 8）: 検証手段は Linter、型チェック、単体テスト、cdk synth、cdk diff、cdk validate など。cdk validate はコマンドがあるか確かめられなかったので、本人に確認するまで入れていない。
 -->
 
 ---

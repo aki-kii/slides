@@ -620,3 +620,11 @@
 .cfn-red { color: #dd344c; transition: color 0.3s ease; }
 .slidev-layout .cfn-red.slidev-vclick-target { animation: none; }
 .cfn-red.slidev-vclick-hidden { opacity: 1 !important; color: #c9d0d9; }
+.benefit-list { display: flex; flex-direction: column; gap: 0.8rem; font-size: 1.4rem; font-weight: 700; }
+.quote-note { position: absolute; left: 3.5rem; right: 3rem; bottom: 3.2rem; color: #6b7684; font-size: 0.85rem; }
+.pair-code { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: start; }
+.pair-code > div:first-child pre code { font-size: 1.5em !important; }
+.pair-code > div:last-child pre code { font-size: 1.05em !important; line-height: 1.45 !important; }
+.pair-code pre { padding: 1rem 1.2rem !important; }
+.code-head { font-size: 0.9rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.3rem; }
+.big-accent.one-line { font-size: 1.65rem; white-space: nowrap; }
