@@ -119,7 +119,7 @@ AWS CloudFormation を通じて<em>プロビジョニングするための、</e
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div v-click class="reveal-line mt-3">→ IaC（Infrastructure as Code）の説明になりました！</div>
+<div v-click class="reveal-line mt-3">→ IaC（Infrastructure as Code）の定義になりました！</div>
 
 <!--
 根拠 10-30 01:45。抜き出しの文は 10-31 12:00 の形で、下の一文と合わせてこの 1 枚にまとめた（12:46）。「AWS CloudFormation を通じて」はここでは強調しない（12:02）。
