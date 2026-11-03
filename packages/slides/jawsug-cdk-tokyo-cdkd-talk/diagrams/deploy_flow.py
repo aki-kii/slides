@@ -101,13 +101,13 @@ def file_box(x, y, w, h, name, lines, strong=False, icon_size=30, sub=()):
     return "".join(out)
 
 
-TOP, BOTTOM = 56, 400
+TOP, BOTTOM = 56, 414
 DY = 46  # 各フェーズの名前の下に補足の行を置くぶん、中身を下げる
 SEC = {k: [] for k in ("outer", "bootstrap", "synth_frame", "source", "group", "publish", "trunk", "deploy", "gap")}
 
 # cdk deploy が synth、publish、deploy の全体を動かす
 p = SEC["outer"]
-p.append(f'<rect x="167" y="18" width="820" height="392" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
+p.append(f'<rect x="167" y="18" width="820" height="406" rx="14" fill="#f5f7f9" stroke="{LINE}" stroke-width="2"/>')
 p.append(text(183, 43, "cdk deploy", 16, INK, 700, "start", MONO))
 
 # CDK Bootstrap: 図の上に横並びで置く。今回の流れで使うものだけ並べ、ほかは etc… にする
@@ -164,8 +164,10 @@ p = SEC["trunk"]
 p.append(f'<path d="M500,{MID} H519 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
 p += [arrow(f"M500,{S3Y} H685"), text(612, S3Y - 10, "アップロード")]
 p.append(role_chip(556, S3Y + 12, ["ファイル用", "パブリッシュロール"]))
+p.append(bootstrap_tag(615, S3Y + 46))  # ロールも bootstrap で作られる（2026-11-04 本人）
 p += [arrow(f"M500,{ECRY} H685"), text(612, ECRY - 10, "ビルド＆アップロード")]
 p.append(role_chip(556, ECRY + 12, ["イメージ用", "パブリッシュロール"]))
+p.append(bootstrap_tag(615, ECRY + 46))
 
 # publish → deploy: アップロードしたアセットを deploy で使う
 p = SEC["gap"]
@@ -202,7 +204,7 @@ def write(name, focus=None):
         opacity = "" if focus is None or key in focus else f' opacity="{DIM}"'
         move = "" if key == "bootstrap" else f" {MOVE}"
         body.append(f"<g{opacity}{move}>" + "".join(parts) + "</g>")
-    box = "0 96 840 412"
+    box = "0 96 840 426"
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{box}" width="100%" '
            f"font-family=\"'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', sans-serif\">\n{defs}\n" + "\n".join(body) + "\n</svg>\n")
     with open(os.path.join(OUT, name + ".svg"), "w") as f:
