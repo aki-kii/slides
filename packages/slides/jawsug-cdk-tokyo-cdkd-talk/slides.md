@@ -85,12 +85,12 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <Overlay clickStart=1>
-  定義の一部を抜き出してみます
+  定義の一部を抜き出して深掘りしていきます
 </Overlay>
 
 <!--
 公式の定義: https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html （根拠 10-30 01:30）
-クリックで「定義の一部を抜き出してみます」を重ねる（2026-11-03 01:52 本人）。
+クリックで「定義の一部を抜き出して深掘りしていきます」を重ねる（2026-11-03 01:52 本人、文言は 11:xx の round 5）。
 -->
 
 ---
@@ -119,7 +119,7 @@ AWS CloudFormation を通じて<em>プロビジョニングするための、</e
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div v-click class="reveal-line mt-3">→ IaC（Infrastructure as Code）の定義になりました！</div>
+<div v-click class="reveal-line mt-3">→ これはIaCのことを説明しています！</div>
 
 <!--
 根拠 10-30 01:45。抜き出しの文は 10-31 12:00 の形で、下の一文と合わせてこの 1 枚にまとめた（12:46）。「AWS CloudFormation を通じて」はここでは強調しない（12:02）。
@@ -138,7 +138,6 @@ transition: fade
 
 <InlineSvg src="iac-define.svg" label="コードでインフラストラクチャを定義し、IaCのツールがそれを読んで実際のインフラストラクチャをプロビジョニングする" class="mx-auto mt-5 fig-iac-define" />
 
-<div class="arrow-note">→ IaCは宣言型のデプロイ手法です</div>
 
 <!--
 2026-11-03 01:52 本人: 前の「定義する → 何を？」「宣言型のデプロイ」「プロビジョニングする → どうやって？」の 3 枚をこの 2 枚に置き換えた。文を図解する。図は iac-diff と同じ部品（diagrams/iac_define.py）。
@@ -150,16 +149,14 @@ chapter: IaC
 
 <ChapterLabel />
 
-## IaC（Infrastructure as Code）とは？
+## IaCのデプロイの仕組み
 
-<div class="question mt-1">宣言型のデプロイ手法</div>
+<div class="text-lg mt-1"><span class="accent font-bold">あるべき姿</span>をコードで定義し、<span class="replaced">現在の状態との差分</span>をデプロイする</div>
 
-<div class="text-lg mt-1">インフラのあるべき姿を宣言するデプロイ手法</div>
-
-<InlineSvg src="iac-diff.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする" class="mx-auto mt-3 fig-iac-small" />
+<InlineSvg src="iac-diff-ideal.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする。コード（あるべき姿）の枠を強調している" class="mx-auto mt-4 fig-iac" />
 
 <!--
-2026-11-03 01:52 本人。図は前の「プロビジョニングする → どうやって？」の図（初心者支部で登壇したスライドの iac-diff）をそのまま使う。
+2026-11-03 本人（round 5）: 「宣言型のデプロイ手法」のページはカットし、「IaCのデプロイの仕組み」をそのまま書く。「あるべき姿」もハイライトする（文と左上の枠）。図は初心者支部で登壇したスライドの iac-diff に、あるべき姿の枠の強調を足したもの（diagrams/iac_variants.py）。
 -->
 
 ---
@@ -188,7 +185,7 @@ AWS Cloud Development Kit (AWS CDK) は、<br>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div v-click="2" class="reveal-question mt-3">CDKはCloudFormationとどう関わってるの？</div>
+<div v-click="2" class="reveal-question mt-3">CloudFormationとの関わりを見ていきます</div>
 
 <!--
 2026-11-03 本人「CloudFormationを通じてを書く時はp5の状態から赤文字でCloudFormationを通じてを強調するって意味。定義で使ってない部分を省略しないでね」。IaC の抜き出しのページと同じ状態から、クリックで「AWS CloudFormation を通じて」を赤にする。問いかけは 10-30 15:59。
@@ -203,17 +200,70 @@ transition: fade
 
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
-## CloudFormationのデプロイ
+## AWS CloudFormationとは？
 
-<InlineSvg src="cfn-deploy.svg" label="新しいテンプレートとスタックの状態を CloudFormation が比べて変更セットを作り、確認してスタックに反映する" class="mx-auto mt-4 fig-cfn" />
+<div class="iac-sentence mt-3 not-own"><span class="accent">CloudFormationテンプレート</span>であるべき姿を定義し、<br><span class="accent">スタック</span>としてまとめてプロビジョニングする</div>
 
-<div class="arrow-note">→ <span class="not-own">新しいテンプレートとスタックの状態を比べて変更セットを作り、確認してスタックに反映すると、AWSリソースが作られる</span></div>
+<InlineSvg src="cfn-define.svg" label="CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする" class="mx-auto mt-5 fig-iac-define" />
 
 <!--
-2026-11-03 本人「CloudFormationのデプロイも説明しよう。CloudFormationのデプロイってタイトルにしようね」。図と文は、前の CDK のデプロイフローの deploy の部分から移した。
+2026-11-03 本人（round 5）: 「CloudFormationのデプロイ」の前に CloudFormation の説明を足す。「IaCとは？」の図を CloudFormation 版にし、テンプレートとスタックを図に入れる。上の文はエージェントが書いた。
+-->
+
+---
+chapter: デプロイフロー
+transition: fade
+---
+
+<ChapterLabel />
+
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
+## CloudFormationのデプロイ
+
+<InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-3 fig-iac" />
+
+<div class="arrow-note">→ <span class="not-own">テンプレートとスタックの状態を比べて変更セットを作り、スタックに反映する</span></div>
+
+<!--
+2026-11-03 本人「CloudFormationのデプロイも説明しよう。CloudFormationのデプロイってタイトルにしようね」。round 5 で、図を「IaCのデプロイの仕組み」と同じ形にしてリソース（AWS WAF、ALB、Amazon ECS）も描いた（diagrams/iac_variants.py）。
 公式は「スタックと、送った変更を比べる」。実際のリソースまで比べるのは drift-aware change set（cdk deploy --revert-drift）のとき。
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
 ロールバックと承認ゲートは扱わない。リソースの話はこの章でする（10-31 09:39）。
+-->
+
+---
+chapter: デプロイフロー
+transition: fade
+---
+
+<ChapterLabel />
+
+## AWS CDKとは？
+
+<div class="official-quote compact mt-2">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition faded">
+
+AWS Cloud Development Kit (AWS CDK) は、<br>
+<em>コードでクラウドインフラストラクチャを定義し、</em><br>
+<span class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングするための、</em><br>
+オープンソースの<em>ソフトウェア開発フレームワークです</em>。
+
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
+
+<Overlay clickStart=1>
+  CloudFormationを“通じて”
+</Overlay>
+
+<!--
+2026-11-03 本人（round 5）: CDK のデプロイの前に、もう一度 CDK の定義に戻る。IaC に当たる部分（緑）と「AWS CloudFormation を通じて」（赤）を出したうえで、「CloudFormationを“通じて”」を重ねる。CDK のデプロイのページにあった「CDKはCloudFormationを通じてデプロイしている」は、これと重なるので外した。
 -->
 
 ---
@@ -227,13 +277,9 @@ transition: fade
 
 ## CDKのデプロイ
 
-<InlineSvg src="deploy-flow.svg" label="CDK Bootstrap の枠と、synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
+<InlineSvg src="deploy-flow.svg" label="synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
 
 <div class="arrow-note">→ <span class="not-own">cdk deployの中でsynth、publish、deployが順に動く</span></div>
-
-<Overlay clickStart=1>
-  CDKはCloudFormationを通じてデプロイしている
-</Overlay>
 
 <!--
 全体を先に見せる。ここから同じ図の一部を順に強調する。cdk deploy が全体を順に動かす。根拠 10-30 16:06、10-31 09:22。
@@ -254,25 +300,6 @@ transition: fade
 
 <!--
 synth は合成（シンセサイズ）。「ビルド」とは書かない。
--->
-
----
-chapter: デプロイフロー
-transition: fade
----
-
-<ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
-## アセット
-
-<InlineSvg src="deploy-flow-assets.svg" label="アセットの枠を強調した図。テンプレートだけ赤で目立たせている" class="mx-auto fig-flow" />
-
-<div class="arrow-note">→ <span class="not-own">テンプレートと、パブリッシュするものの元。いちばん大事なのはテンプレート</span></div>
-
-<!--
-cdk.out（公式の呼び名は cloud assembly）には manifest.json などもあるが、パブリッシュされないので図から外した。ファイルの大きさでは manifest.json のほうがテンプレートより大きいことがある。synth の時点では zip も Docker イメージも作られない。
 -->
 
 ---
