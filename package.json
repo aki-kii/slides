@@ -2,7 +2,8 @@
   "name": "slides",
   "private": true,
   "scripts": {
-    "new-slide": "node scripts/create-slide.mjs"
+    "new-slide": "node scripts/create-slide.mjs",
+    "export-check": "node scripts/export-check.mjs"
   },
   "devDependencies": {
     "oxfmt": "^0.36.0",
