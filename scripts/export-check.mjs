@@ -8,7 +8,7 @@
 //
 // 書き出しはデッキの `pnpm export` を使う（--with-clicks などはデッキの設定に従う）。
 // 各ページを撮る前に --wait ミリ秒待つ。待たないと、クリックで出すオーバーレイがアニメーションの途中で写ることがある。
-// pdfinfo、pdftoppm（poppler-utils）が要る。
+// pdfinfo、pdftoppm、pdftotext（poppler-utils）が要る。
 import { spawnSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -75,6 +75,13 @@ function pageImages(pdf) {
   }
 }
 
+// ページごとの文字。見た目の比べ方では拾えない小さな文字の違いを拾う
+function pageTexts(pdf) {
+  const r = run('pdftotext', ['-layout', pdf, '-']);
+  if (r.status !== 0) throw new Error(`pdftotext が失敗しました: ${r.stderr.trim()}`);
+  return r.stdout.split('\f').map((t) => t.replace(/\s+/g, ' ').trim());
+}
+
 // 書き出すたびに文字の縁などがわずかにずれるので、ずれた画素が 0.3% 未満なら同じ見た目とみなす
 function sameLook(a, b) {
   if (a.length !== b.length) return false;
@@ -113,15 +120,17 @@ const pdf = resolve(deck, exported[1]);
 // 2. 前回の PDF と比べるため、上書きする前にハッシュを取る
 mkdirSync(opts.out, { recursive: true });
 const outPdf = join(opts.out, `${name}.pdf`);
-const before = existsSync(outPdf) ? pageImages(outPdf) : null;
+const before = existsSync(outPdf) ? { images: pageImages(outPdf), texts: pageTexts(outPdf) } : null;
 copyFileSync(pdf, outPdf);
 const total = pageCount(outPdf);
 
 let changed = null;
 if (before) {
   // 前のどのページとも見た目が違うページを、変わったページとする（ページが前後にずれても追える）
-  const after = pageImages(outPdf);
-  changed = after.flatMap((img, i) => (before.some((old) => sameLook(img, old)) ? [] : [i + 1]));
+  const images = pageImages(outPdf);
+  const texts = pageTexts(outPdf);
+  const same = (i, j) => texts[i] === before.texts[j] && sameLook(images[i], before.images[j]);
+  changed = images.flatMap((_, i) => (before.images.some((_, j) => same(i, j)) ? [] : [i + 1]));
 }
 
 // 3. PNG
@@ -142,7 +151,7 @@ for (const p of pages) {
 // 4. 結果
 console.log(`PDF: ${outPdf}（${total} ページ）`);
 if (changed === null) console.log('変わったページ: 前回の PDF が無いので比べていない');
-else console.log(`変わったページ: ${changed.length ? changed.join(', ') : 'なし'}（前回の ${before.length} ページと比べた）`);
+else console.log(`変わったページ: ${changed.length ? changed.join(', ') : 'なし'}（前回の ${before.images.length} ページと比べた）`);
 console.log(`PNG: ${pngDir}（${pages.length} 枚${pages.length ? `: ${pages.join(', ')}` : ''}）`);
 console.log(`警告: ${warnings.length} 件`);
 for (const w of [...new Set(warnings)].slice(0, 10)) console.log(`  ${w.trim()}`);
