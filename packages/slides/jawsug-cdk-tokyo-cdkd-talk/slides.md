@@ -437,123 +437,6 @@ chapter: プログラミング言語とフレームワーク
 
 <ChapterLabel />
 
-## コンストラクト
-
-<ul class="construct-points">
-  <li>1つ以上のAWSリソースの設定が定義されているコンポーネント</li>
-  <li>リソースの抽象度によってレベル分けがされている</li>
-</ul>
-
-<InlineSvg src="construct-levels.svg" label="抽象度が小さい順に L1、L2、L3 の Construct と、それぞれが作るリソース" class="mx-auto fig-construct" />
-
-<!--
-本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 18 枚目（10-31 13:12）。この章の主役（10-31 09:39）。https://speakerdeck.com/akihisaikeda/aws-cdknotui-sipointonxuan
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-## L1 Construct（抽象度：小）
-
-<ul class="construct-points">
-  <li>リソースのプロパティがCloudFormationのプロパティと1:1で対応している</li>
-</ul>
-
-<InlineSvg src="construct-l1.svg" label="CloudFormation テンプレートと CfnBucket のコードが 1:1 で対応している図" class="mx-auto fig-construct" />
-
-<!--
-本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 19 枚目。
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-## L2 Construct（抽象度：中）
-
-<ul class="construct-points">
-  <li>リソースのプロパティが扱いやすいように抽象化されている</li>
-</ul>
-
-<InlineSvg src="construct-l2.svg" label="Bucket のコードとテンプレートの対応、抽象化、KMS Key の自動作成の図" class="mx-auto fig-construct" />
-
-<!--
-本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 20 枚目。
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-## L2 Construct
-
-<InlineSvg src="construct-l2-examples.svg" label="VPC の例（ソースコード 15 行、テンプレート 266 行）と、Lambda 関数の例（実行ロール、IAM Policy、CloudWatch Logs が自動で作られる）" class="mx-auto fig-construct-wide" />
-
-<!--
-本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 21、22 枚目を 1 枚にまとめた。VPC の図のサブネットなどのリソース一覧は省いた。
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-## 自作Construct
-
-<ul class="construct-points">
-  <li>L1やL2などのConstructを組み合わせて自作のConstructを定義できる</li>
-  <li>自作Constructも他の自作Constructに組み込める</li>
-</ul>
-
-<InlineSvg src="construct-custom.svg" label="MyConstruct のコードから S3 バケットと Lambda 関数が作られる図" class="mx-auto fig-construct" />
-
-<!--
-本人の旧資料「AWS CDKの推しポイントN選」の推しポイント⑦ Constructの 23 枚目。
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
-## <span class="not-own">アプリもスタックもコンストラクト</span>
-
-<div class="text-lg mt-2 not-own">CDKのアプリは、コンストラクトを入れ子にして組み立てている</div>
-
-<div class="nest-app mt-4">
-  <div class="nest-title">アプリ</div>
-  <div class="nest-stack">
-    <div class="nest-title ink">スタック</div>
-    <div class="nest-row">
-      <div>コンストラクト</div>
-      <div>コンストラクト</div>
-      <div>コンストラクト</div>
-    </div>
-  </div>
-</div>
-
-<!--
-スタックとアプリはコンストラクトの説明の中で触れる（10-31 09:39）。
-https://docs.aws.amazon.com/cdk/v2/guide/apps.html
--->
-
----
-chapter: プログラミング言語とフレームワーク
----
-
-<ChapterLabel />
-
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す1〜2個は未定</div></div>
 
 ## 好きなCDKコンストラクト
@@ -608,9 +491,13 @@ chapter: オープンソース
 
 <ChapterLabel />
 
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
+
 ## AWS CDKはOSS
 
-<div class="oss-flow mt-16">
+<div class="text-lg mt-2 not-own">コントリビュートを受け付けているから、良いコンストラクトが育っていく</div>
+
+<div class="oss-flow mt-10">
   <div>AWS CDKはOSS</div>
   <span>→</span>
   <div>外からの<br>コントリビュートを<br>受け付けている</div>
@@ -620,6 +507,7 @@ chapter: オープンソース
 
 <!--
 軽く流す（10-31 09:25）。
+2026-11-03 本人（round 11）: 資料の型（見出し＋リード＋図）に合わせてリードを足した。
 -->
 
 ---
@@ -630,35 +518,47 @@ chapter: オープンソース
 
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す3つは未定</div></div>
 
-## 関連するOSS
+<div style="view-transition-name: cdk-oss">
+  関連するOSS ①
+  <h2><span class="not-own">作るとデプロイを助けるOSS</span></h2>
+</div>
 
-<div class="rows oss-rows mt-2">
+<div class="text-lg mt-2 not-own">環境やリソースの定義と、デプロイの手間を減らすOSS</div>
+
+<div class="rows oss-rows oss-compact mt-3">
   <div><p class="row-head"><b>baseline-environment-on-aws（BLEA）</b><i>aws-samples</i></p><span class="not-own">安全なベースライン環境を作るCDKテンプレート</span></div>
-  <div><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span class="not-own">ルールでCDKアプリを確かめる</span></div>
   <div><p class="row-head"><b>cdk8s</b><i>cdk8s-team</i></p><span class="not-own">Kubernetesのアプリをコードで定義する</span></div>
   <div><p class="row-head"><b>aws-solutions-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>awslabs</i></p><span class="not-own">検証済みの構成のコンストラクト集</span></div>
   <div><p class="row-head"><b>cdk-monitoring-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>cdklabs</i></p><span class="not-own">監視を簡単に作るコンストラクト集</span></div>
+  <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span class="not-own">CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
 </div>
 
 <!--
 仮: スライドには全部載せ、口頭では 3 つくらいに絞る（10-30 01:05）。作成者は各リポジトリの持ち主を確かめた。AWS Solutions Constructs と cdk-monitoring-constructs は本人が話したか確認中（10-31 12:58）。
+2026-11-03 本人（round 11）: 資料の型に合わせ、2枚を「関連するOSS ①②」の前置き＋見出し＋リードにした。分け方は出どころ（AWS か個人か）ではなく役割にした（10-31 12:58「日本・海外は分けない」）。見出しとリードはエージェントが書いた。
 -->
 
 ---
 chapter: オープンソース
+transition: view-transition
 ---
 
 <ChapterLabel />
 
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す3つは未定</div></div>
 
-## 関連するOSS
+<div style="view-transition-name: cdk-oss">
+  関連するOSS ②
+  <h2><span class="not-own">確かめるのを助けるOSS</span></h2>
+</div>
 
-<div class="rows oss-rows mt-2">
-  <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span class="not-own">CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
-  <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
+<div class="text-lg mt-2 not-own">デプロイの前と後で、CDKアプリやスタックを確かめるOSS</div>
+
+<div class="rows oss-rows oss-compact mt-3">
+  <div><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span class="not-own">ルールでCDKアプリを確かめる</span></div>
   <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span class="not-own">CDK用のリントのプラグイン</span></div>
   <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span class="not-own">デプロイ時の失敗をsynthの時点で見つける</span></div>
+  <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
   <div><p class="row-head"><b>cfn-exec-policy</b><i>badmintoncryer</i></p><span class="not-own">CloudFormation実行ロールを最小権限にする</span></div>
   <div><p class="row-head"><b>cfn-idle-cost</b><i>badmintoncryer</i></p><span class="not-own">アクセスがなくてもかかる月額を出す</span></div>
 </div>

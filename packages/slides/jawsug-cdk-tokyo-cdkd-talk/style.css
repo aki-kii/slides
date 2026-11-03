@@ -621,3 +621,7 @@
 .slidev-layout .cfn-red.slidev-vclick-target { animation: none; }
 .cfn-red.slidev-vclick-hidden { opacity: 1 !important; color: #c9d0d9; }
 .fig-benefit { width: 760px; }
+.rows.oss-compact { gap: 0.3rem; }
+.rows.oss-compact > div { padding: 0.15rem 0.8rem; }
+.rows.oss-compact .row-head b { font-size: 0.85rem; }
+.rows.oss-compact > div > span { font-size: 0.72rem; line-height: 1.3; }
