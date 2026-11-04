@@ -479,14 +479,13 @@ chapter: オープンソース
 
 ## AWS CDKはOSS
 
-<div class="text-lg mt-2">コミュニティからの質の良い貢献によって、CDKの仕組みが作られています</div>
-
-<InlineSvg src="oss-cdk.svg" label="AWSとコミュニティの両方から、GitHubのaws/aws-cdkリポジトリにコードが入っていく" class="mx-auto mt-4 fig-oss" />
-
-<div v-click="1" class="pr-card mt-4">
-  <div class="pr-head"><span class="pr-merged">Merged</span><span class="pr-repo">aws/aws-cdk</span><span class="pr-num">#35290</span><em class="kari-inline">仮：PRは未定</em></div>
-  <div class="pr-title">feat(apigatewayv2): add disableSchemaValidation for Websocket api</div>
-  <div class="pr-say">僕のコードも入っています！</div>
+<div class="oss-lines mt-10">
+  <p class="not-own">AWSが提供するOSSのフレームワーク</p>
+  <p class="not-own">だれでもコントリビュートでき、<br>コミュニティからの質の良い貢献によって、<br>CDKの仕組みが作られています</p>
+  <div v-click="1" class="oss-mine">
+    <p class="accent">僕のコードも入っています！</p>
+    <div class="oss-pr"><a href="https://github.com/aws/aws-cdk/pull/35290" target="_blank" rel="noopener">aws/aws-cdk#35290 feat(apigatewayv2): add disableSchemaValidation for Websocket api</a><em class="kari-inline">仮：PRは未定</em></div>
+  </div>
 </div>
 
 <Overlay clickStart=2>
@@ -494,8 +493,8 @@ chapter: オープンソース
 </Overlay>
 
 <!--
-2026-11-04 本人（round 21）「とりあえず作ってみて」: 1 枚で、CDK は AWS が提供する OSS のフレームワーク、だれでもコントリビュートでき、コミュニティからの質の良い貢献で CDK の仕組みが作られている、自分のコードも入っている、と言う。「良いコンストラクトが作られていく」はコンストラクトを説明しなくなったので外した。貢献の割合や数は出さない。
-PR は仮で https://github.com/aws/aws-cdk/pull/35290 （2025-09-15 にマージ、作者 aki-kii）。ほかの候補は aws-cdk-cli#1127、aws-cdk#33728。図は diagrams/oss_flow.py。図の中の補足（「開発とメンテナンス」「世界中のコントリビューター」など）はエージェントが書いた。
+2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: round 21 の図をやめ、文字だけにした。文はエージェントが書いた（2行目の後半は round 21 の本人のリードのまま）。
+PR は仮で https://github.com/aws/aws-cdk/pull/35290 （2025-09-15 にマージ、作者 aki-kii）。ほかの候補は aws-cdk-cli#1127、aws-cdk#33728。
 -->
 
 ---
