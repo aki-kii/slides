@@ -619,7 +619,8 @@
 /* クリックで赤にする。クリック前も消さず、ほかの薄い字と同じ色で見せる */
 .cfn-red { color: #dd344c; font-weight: 700; transition: color 0.3s ease; }
 .slidev-layout .cfn-red.slidev-vclick-target { animation: none; }
-.cfn-red.slidev-vclick-hidden { opacity: 1 !important; color: #c9d0d9; font-weight: 400; }
+/* クリックの前後で太さを変えない（太さが変わると字が大きく見える。2026-11-04 本人） */
+.cfn-red.slidev-vclick-hidden { opacity: 1 !important; color: #c9d0d9; }
 .fig-benefit { width: 760px; }
 .rows.oss-compact { gap: 0.3rem; }
 .rows.oss-compact > div { padding: 0.15rem 0.8rem; }
@@ -628,3 +629,8 @@
 /* 定義から抜き出すページでも、主語の「AWS CDKは、」は薄くしない（2026-11-04 本人） */
 .definition.faded .def-subject { color: #2c3e50; }
 .fig-cfn-deploy { width: 900px; }
+/* CloudFormationのデプロイのリード: 図の箱の名前と同じ色の下線でつなぐ（2026-11-04 本人） */
+.u-tpl, .u-stack, .u-cs { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
+.u-tpl { text-decoration-color: #2F6FB3; }
+.u-stack { text-decoration-color: #E67E22; }
+.u-cs { text-decoration-color: #0E8A6E; }

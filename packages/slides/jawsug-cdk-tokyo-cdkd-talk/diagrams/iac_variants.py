@@ -88,13 +88,6 @@ def save(name, body):
     print(name)
 
 
-# 1. あるべき姿を強調した IaC のデプロイの仕組み
-ideal = list(LINES[:-1]) if LINES[-1] == "" else list(LINES)
-ideal[3] = ideal[3].replace('stroke="#c9d0d9" stroke-width="2"', f'stroke="{GREEN}" stroke-width="3"')
-ideal[7] = ideal[7].replace('fill="#2c3e50"', f'fill="{GREEN}"')
-ideal[81] = retext(ideal[81], "実リソース", "AWSアカウント")  # 2026-11-04 本人
-save("iac-diff-ideal", [l for l in ideal if l != ""])
-
 # 2. CloudFormation とは？（テンプレート → CloudFormation → スタック）
 # テンプレートとスタックの説明は、それぞれの名前の下に書く（2026-11-04 本人）
 code = [LINES[3].replace('height="140"', 'height="174"'), icon(TEMPLATE, 32, 30, 28),
@@ -106,8 +99,8 @@ tool = lines(57, 60, swap={57: icon(CFN, 376, 146, 64), 58: None, 59: None,
                            60: retext(LINES[59], "IaCのツール", "CloudFormation")})
 stack = [LINES[76].replace('height="140"', 'height="174"'), icon(STACK, 744, 111, 28),
          retext(LINES[81], "実リソース", "スタック"),
-         f'<text x="778" y="148" font-family="{FONT}" font-size="12" fill="{SUB}">AWSリソースをまとめて管理し、</text>',
-         f'<text x="778" y="163" font-family="{FONT}" font-size="12" fill="{SUB}">今の状態を持つ単位</text>',
+         f'<text x="778" y="148" font-family="{FONT}" font-size="12" fill="{SUB}">AWSリソースの状態を管理する</text>',
+         f'<text x="778" y="163" font-family="{FONT}" font-size="12" fill="{SUB}">CloudFormationのリソース</text>',
          '<g transform="translate(0,32)">', *plain_ecs(lines(83, 106, drop={105})), "</g>"]
 # 矢印は短く、ラベルは名詞にして、IaCとは？の図と同じ並びにする（2026-11-04 本人）
 save("cfn-define", head("0 0 810 210", "CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする") + [
@@ -126,6 +119,8 @@ save("cfn-define", head("0 0 810 210", "CloudFormationテンプレートであ�
 DDB = "Arch_Amazon-DynamoDB_64.svg"
 RES = [("Arch_Amazon-API-Gateway_64.svg", "API Gateway"), ("Arch_AWS-Lambda_64.svg", "Lambda"), (DDB, "DynamoDB")]
 LINE, CLOUD_INK = "#c9d0d9", "#232F3E"
+# リードの下線と同じ色で、箱の名前をつなぐ（2026-11-04 本人）
+TPL_BLUE, STACK_ORANGE = "#2F6FB3", "#E67E22"
 
 
 def rtext(x, y, s, size=13, color=INK, weight="normal", anchor="start"):
@@ -145,7 +140,7 @@ def i_arrow(d):
 
 cloud = lines(78, 82, swap={82: retext(LINES[81], "実リソース", "AWSアカウント")})
 body = [f'<rect x="20" y="50" width="250" height="140" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
-        icon(TEMPLATE, 32, 60, 28), rtext(66, 80, "テンプレート（あるべき姿）", 14, weight="bold")]
+        icon(TEMPLATE, 32, 60, 28), rtext(66, 80, "テンプレート（あるべき姿）", 14, TPL_BLUE, "bold")]
 for k, (f, name) in enumerate(RES):
     cx = 68 + 72 * k
     body.append(icon(f, cx - 24, 98, 48))
@@ -165,7 +160,7 @@ body += [
     '<g transform="translate(-170,-90)">' + "".join(cloud) + "</g>",
     g_arrow("M548,120 L588,120"), rtext(560, 108, "反映", 12, anchor="middle"),
     f'<rect x="592" y="66" width="104" height="116" rx="12" fill="#ffffff" stroke="{INK}" stroke-width="2"/>',
-    icon(STACK, 624, 80, 40), rtext(644, 144, "スタック", 15, weight="bold", anchor="middle"),
+    icon(STACK, 624, 80, 40), rtext(644, 144, "スタック", 15, STACK_ORANGE, "bold", "middle"),
     rtext(644, 164, "状態を持つ", 12, SUB, anchor="middle"),
     # スタックの今の状態を CloudFormation が読んで比べる
     i_arrow("M644,184 L644,246 L358,246 L358,182"), rtext(501, 238, "今の状態", 12, anchor="middle"),
@@ -179,3 +174,45 @@ for k, (f, name) in enumerate(RES):
     body.append((g_arrow if hi else i_arrow)(f"M698,120 C730,120 760,{y + 22} 794,{y + 22}"))
 body.append(rtext(694, 220, "スタックが AWS リソースをデプロイして管理する", 12, SUB))
 save("cfn-deploy", head("0 0 1000 262", "CloudFormationがテンプレートとスタックの今の状態を比べて変更セットを作り、スタックに反映する。スタックからAPI Gateway、Lambda、DynamoDBがデプロイされる") + body + ["</svg>"])
+
+
+# 1. IaC の仕組み（あるべき姿を強調）
+# 現在の状態は「AWSアカウント（更新前）」として更新後の下に置く。CloudFormation のデプロイの図と同じ並び（2026-11-04 本人）
+CODE = "Res_Source-Code_48_Light.svg"
+body = [f'<rect x="20" y="40" width="250" height="140" rx="12" fill="#ffffff" stroke="{GREEN}" stroke-width="3"/>',
+        icon(CODE, 32, 50, 28), rtext(66, 70, "コード（あるべき姿）", 14, GREEN, "bold")]
+
+
+def resource_row(x0, y, empty_last=False):
+    out = []
+    for k, (f, name) in enumerate(RES):
+        cx = x0 + 74 * k
+        last = k == len(RES) - 1
+        if last and empty_last:
+            out.append(f'<rect x="{cx - 24}" y="{y}" width="48" height="48" rx="8" fill="#e9f5f1" stroke="{GREEN}" stroke-width="2.5" stroke-dasharray="6 4"/>')
+        else:
+            out.append(icon(f, cx - 24, y, 48))
+        if last and not empty_last:
+            out.append(f'<rect x="{cx - 30}" y="{y - 6}" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>')
+        out.append(rtext(cx, y + 68, name, 13, GREEN if last else INK, "bold" if last else "normal", "middle"))
+    return out
+
+
+body += resource_row(68, 82)
+body += [i_arrow("M272,110 L360,110"), rtext(316, 98, "読み込み", 12, anchor="middle"),
+         '<g transform="translate(-8,-68)">' + "".join(lines(57, 59)) + "</g>",
+         rtext(400, 166, "IaCのツール", 15, weight="bold", anchor="middle"),
+         g_arrow("M440,110 L476,110"),
+         f'<rect x="480" y="40" width="130" height="140" rx="12" fill="#e9f5f1" stroke="{GREEN}" stroke-width="3" stroke-dasharray="7 5"/>',
+         rtext(545, 68, "差分", 18, GREEN, "bold", "middle"),
+         icon(DDB, 515, 82, 60), rtext(545, 166, "DynamoDB", 13, GREEN, "bold", "middle"),
+         g_arrow("M614,110 L714,110"), rtext(664, 98, "プロビジョニング", 11, GREEN, "bold", "middle")]
+cloud = "".join(lines(34, 37))
+for y, title, fill, stroke in ((40, "AWSアカウント（更新後）", "#ffffff", CLOUD_INK), (210, "AWSアカウント（更新前）", "#f5f7f9", LINE)):
+    body += [f'<rect x="720" y="{y}" width="260" height="140" rx="12" fill="{fill}" stroke="{stroke}" stroke-width="2"/>',
+             f'<g transform="translate(690,{y - 218})">' + cloud + "</g>",
+             rtext(756, y + 20, title, 14, CLOUD_INK, "bold")]
+body += resource_row(776, 82)
+body += resource_row(776, 252, empty_last=True)
+body += [i_arrow("M718,280 L400,280 L400,176"), rtext(560, 272, "比較", 12, anchor="middle")]
+save("iac-diff-ideal", head("0 0 1000 360", "IaCのツールが、コードのあるべき姿と更新前のAWSアカウントを比較し、その差分をプロビジョニングして更新後のAWSアカウントにする") + body + ["</svg>"])

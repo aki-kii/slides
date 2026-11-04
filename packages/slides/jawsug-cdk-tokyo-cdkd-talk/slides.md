@@ -39,8 +39,6 @@ name: アキキー | 池田 晃尚
 transition: slide-left
 ---
 
-<div class="kari">仮：入れるかは未定</div>
-
 <ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ">
 
 - バックエンドエンジニア / SRE
@@ -55,7 +53,7 @@ transition: slide-left
 </ProfileItem>
 
 <!--
-仮: 初心者支部で登壇したスライドと同じ中身。入れるかは未決。
+初心者支部で登壇したスライドと同じ中身。2026-11-04 本人: このまま入れる。
 -->
 
 ---
@@ -67,7 +65,7 @@ transition: fade
 
 ## AWS CDKとは？
 
-<div class="official-quote mt-5">
+<div class="official-quote compact mt-2">
 <div class="official-label">AWS公式の定義</div>
 
 <div class="definition">
@@ -109,7 +107,7 @@ transition: fade
 
 <span class="def-subject">AWS Cloud Development Kit (AWS CDK) は、</span><br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
-AWS CloudFormation を通じて<em>プロビジョニングするための、</em><br>
+AWS CloudFormation を通じて<em>プロビジョニングする</em>ための、<br>
 オープンソースのソフトウェア開発フレームワークです。
 
 </div>
@@ -119,7 +117,9 @@ AWS CloudFormation を通じて<em>プロビジョニングするための、</e
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div v-click class="reveal-line mt-3">→ これはIaCのことを説明しています！</div>
+<Overlay clickStart=1>
+  これはIaCのことを説明しています！
+</Overlay>
 
 <!--
 根拠 10-30 01:45。抜き出しの文は 10-31 12:00 の形で、下の一文と合わせてこの 1 枚にまとめた（12:46）。「AWS CloudFormation を通じて」はここでは強調しない（12:02）。
@@ -155,12 +155,12 @@ chapter: IaC
 
 ## IaCの仕組み
 
-<div class="text-lg mt-1">コードでインフラの<span class="replaced">あるべき姿</span>を定義し、<br><span class="replaced">現在の状態との差分</span>をプロビジョニングする</div>
+<div class="mt-1" style="font-size: 1.05rem; white-space: nowrap">コードでインフラの<span class="replaced">あるべき姿</span>を定義し、<span class="replaced">現在の状態との差分</span>をプロビジョニングする</div>
 
-<InlineSvg src="iac-diff-ideal.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする。コード（あるべき姿）の枠を強調している" class="mx-auto mt-4 fig-iac" />
+<InlineSvg src="iac-diff-ideal.svg" label="IaCのツールが、コードのあるべき姿と更新前のAWSアカウントを比較し、その差分をプロビジョニングして更新後のAWSアカウントにする。コード（あるべき姿）の枠を強調している" class="mx-auto mt-4 fig-iac" />
 
 <Overlay clickStart=1>
-  ここでCDKの定義を見直してみます
+  あらためてCDKの定義（IaC部分）を確認します
 </Overlay>
 
 <!--
@@ -183,7 +183,7 @@ transition: fade
 
 <span class="def-subject">AWS Cloud Development Kit (AWS CDK) は、</span><br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
-<span v-click="1" class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングするための、</em><br>
+<span v-click="1" class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングする</em>ための、<br>
 オープンソースのソフトウェア開発フレームワークです。
 
 </div>
@@ -193,7 +193,9 @@ transition: fade
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<div v-click="2" class="reveal-question mt-3">→ CloudFormationとの関わりを見ていきます</div>
+<Overlay clickStart=2>
+  → CloudFormationについて説明していきます！
+</Overlay>
 
 <!--
 2026-11-03 本人「CloudFormationを通じてを書く時はp5の状態から赤文字でCloudFormationを通じてを強調するって意味。定義で使ってない部分を省略しないでね」。IaC の抜き出しのページと同じ状態から、クリックで「AWS CloudFormation を通じて」を赤にする。問いかけは 10-30 15:59。
@@ -210,7 +212,7 @@ transition: fade
 
 ## AWS CloudFormationとは？
 
-<div class="iac-sentence mt-3 not-own"><span class="accent">CloudFormationテンプレート</span>であるべき姿を定義し、<br><span class="accent">スタック</span>としてまとめてプロビジョニングする</div>
+<div class="mt-3" style="font-size: 1.1rem; font-weight: 700; white-space: nowrap">コードでAWSリソースを定義し、AWSアカウントにプロビジョニングするサービス</div>
 
 <InlineSvg src="cfn-define.svg" label="CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする" class="mx-auto mt-5 fig-iac-define" />
 
@@ -229,7 +231,7 @@ transition: fade
 
 ## CloudFormationのデプロイ
 
-<div class="mt-2 not-own" style="font-size: 1.05rem; white-space: nowrap">CloudFormationがテンプレートとスタックを比べて、変更セットをスタックに反映する</div>
+<div class="text-lg mt-1 cfn-lead"><span class="u-tpl">CloudFormationテンプレート</span>でAWSリソースのあるべき姿を定義し、<br>現在の状態と<span class="u-stack">スタック</span>の差分を<span class="u-cs">変更セット</span>として抽出し、<br>それを元にAWSアカウントにプロビジョニングする</div>
 
 <InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-6 fig-cfn-deploy" />
 
@@ -256,7 +258,7 @@ transition: fade
 
 <span class="def-subject">AWS Cloud Development Kit (AWS CDK) は、</span><br>
 <em>コードでクラウドインフラストラクチャを定義し、</em><br>
-<span class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングするための、</em><br>
+<span class="cfn-red">AWS CloudFormation を通じて</span><em>プロビジョニングする</em>ための、<br>
 オープンソースのソフトウェア開発フレームワークです。
 
 </div>
@@ -285,12 +287,12 @@ transition: fade
 
 ## CDKのデプロイ
 
-<div class="text-lg mt-2 not-own">cdk deployの中でsynth、publish、deployが順に動く</div>
+<div class="text-lg mt-2">cdk deployはCloudFormationのデプロイを外側から包んでいる</div>
 
 <InlineSvg src="deploy-flow.svg" label="synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
 
 
-<div class="source-note">※ bootstrapと書いてあるものはcdk bootstrapによって作られたリソースです</div>
+<div class="source-note" style="bottom: 0.7rem">※ bootstrapと書いてあるものはcdk bootstrapによって作られたリソースです</div>
 
 <!--
 全体を先に見せる。ここから同じ図の一部を順に強調する。cdk deploy が全体を順に動かす。根拠 10-30 16:06、10-31 09:22。

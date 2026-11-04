@@ -142,7 +142,7 @@ p = SEC["group"]
 p.append(group(335, 66 + DY, 178, 278, "アセット"))
 p.append(file_box(348, 102 + DY, 152, 64, "template", ["CloudFormation", "テンプレート"], icon_size=28))
 p.append(file_box(348, 178 + DY, 152, 64, "asset", ["ファイルアセット"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
-p.append(file_box(348, 254 + DY, 152, 64, "docker", ["Dockerfile"], icon_size=28))
+p.append(file_box(348, 254 + DY, 152, 64, "docker", ["Dockerfile"], sub=["コンテナイメージを", "ビルドする手順"], icon_size=28))  # 補足はエージェントが書いた（2026-11-04）
 
 # publish: テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ。どちらもまっすぐ進む
 S3Y, ECRY = 134 + DY, 286 + DY
