@@ -376,7 +376,7 @@ transition: view-transition
 
 <div class="text-lg mt-2">TypeScriptなどの使い慣れたプログラミング言語でAWSリソースを定義できます</div>
 
-<div class="text-base mt-1">（TypeScript / JavaScript / Python / Java / C# / Go など…）</div>
+<div class="text-base mt-1">（TypeScript / JavaScript / Python / Java / C# / F# / Go など…）</div>
 
 <div class="code-narrow mt-3">
 
@@ -384,7 +384,7 @@ transition: view-transition
 const fn = new NodejsFunction(this, 'Function', {
   entry: 'lambda/index.ts',
   handler: 'handler',
-  runtime: Runtime.NODEJS_22_X,
+  runtime: Runtime.NODEJS_24_X,
   memorySize: 512,
   timeout: Duration.seconds(30),
   environment: { TABLE_NAME: table.tableName },
@@ -483,10 +483,10 @@ chapter: オープンソース
 <div class="oss-text2">
 
 - OSSとは？
-  - オープンソース (open source) とは、ソフトウェアのソースコードを一般公開し、自由な使用、改良、配布を許可する開発モデルです。(<a href="https://www.redhat.com/ja/topics/open-source/what-is-open-source" target="_blank" rel="noopener">Redhatより</a>)
+  - オープンソース (open source) とは、ソフトウェアのソースコードを一般公開し、自由な使用、改良、配布を許可する開発モデルです。(<a href="https://www.redhat.com/ja/topics/open-source/what-is-open-source" target="_blank" rel="noopener">Red Hatより</a>)
 - AWSも数多くのOSSを展開しており、AWS CDKもそのうちの１つ
 - AWSのメンバー以外にも誰だって貢献が可能
-  - コミットの約半数はコミュニティによるものとのこと(<a href="https://github.com/aws/aws-cdk/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.mdより</a>)
+  - コミュニティからの貢献がAWS CDKの開発に大きな影響を与えているとのこと(<a href="https://github.com/aws/aws-cdk/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.mdより</a>)
 
 <div v-click="1" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
 
@@ -503,6 +503,7 @@ chapter: オープンソース
 
 <!--
 2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: 図をやめ、文字だけにした。round 23 で本人の文に差し替えた。「コミットの約半分はコミュニティから」は出典を確認中（CONTRIBUTING.md には数字が無く、community contributions significantly impact とだけある）。
+2026-11-05 本人: 「約半数」は旧 CONTRIBUTING.md（master 時代）の数字で、今の main には無い。今の文面（community contributions, which significantly impact the development of the AWS CDK）に合わせて書き直し、リンクも main にした。
 2026-11-04 本人（round 24）: PR は https://github.com/aws/aws-cdk/pull/35328 （feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api、2026-03-03 にマージ、作者 aki-kii）に決めた。画面は GitHub のページを headless Chromium（幅 520 のスマホくらいの幅、ライトテーマ）で撮って、タイトルから aki-kii のコメントと説明の冒頭までを切り抜いた（public/images/pr-35328.png）。round 25 で右に縦長に置いた。
 -->
 
