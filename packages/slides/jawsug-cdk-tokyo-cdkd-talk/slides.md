@@ -477,7 +477,8 @@ chapter: オープンソース
 
 ## AWS CDKはOSS
 
-<div class="oss-text mt-4">
+<div class="oss-grid mt-4">
+<div class="oss-text">
   <div class="oss-sec">OSSとは？</div>
   <p>誰でも使える・読める・直せるソフトウェア</p>
   <div class="oss-sec">CDKはAWSだけで作っているわけじゃない</div>
@@ -488,9 +489,12 @@ chapter: オープンソース
   </ul>
   <div v-click="1" class="oss-mine">
     <p class="accent">僕のコードも入っています！</p>
-    <a class="pr-shot" href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener"><img src="/images/pr-35328.png" alt="aws/aws-cdk のプルリクエスト #35328「feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api」。Merged" /></a>
-    <div class="oss-pr"><a href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener">aws/aws-cdk#35328</a></div>
   </div>
+</div>
+<div v-click="1" class="oss-shot">
+  <a class="pr-shot" href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener"><img src="/images/pr-35328.png" alt="aws/aws-cdk のプルリクエスト #35328「feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api」。Merged。aki-kii のコメントと説明の冒頭" /></a>
+  <div class="oss-pr"><a href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener">aws/aws-cdk#35328</a></div>
+</div>
 </div>
 
 <Overlay clickStart=2>
@@ -499,7 +503,7 @@ chapter: オープンソース
 
 <!--
 2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: 図をやめ、文字だけにした。round 23 で本人の文に差し替えた。「コミットの約半分はコミュニティから」は出典を確認中（CONTRIBUTING.md には数字が無く、community contributions significantly impact とだけある）。
-2026-11-04 本人（round 24）: PR は https://github.com/aws/aws-cdk/pull/35328 （feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api、2026-03-03 にマージ、作者 aki-kii）に決めた。画面は GitHub のページを headless Chromium（幅 1280、ライトテーマ）で撮って、タイトルと Merged の行を切り抜いた（public/images/pr-35328.png）。
+2026-11-04 本人（round 24）: PR は https://github.com/aws/aws-cdk/pull/35328 （feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api、2026-03-03 にマージ、作者 aki-kii）に決めた。画面は GitHub のページを headless Chromium（幅 520 のスマホくらいの幅、ライトテーマ）で撮って、タイトルから aki-kii のコメントと説明の冒頭までを切り抜いた（public/images/pr-35328.png）。round 25 で右に縦長に置いた。
 -->
 
 ---

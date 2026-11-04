@@ -649,5 +649,9 @@
 .oss-pr { display: flex; align-items: center; gap: 0.6rem; font-family: "Fira Code", monospace; font-size: 0.68rem; white-space: nowrap; }
 .oss-pr .kari-inline { padding: 0 0.5rem; border: 1.5px solid #dd344c; border-radius: 999px; background: #fdecee; color: #dd344c; font-family: "Noto Sans JP", sans-serif; font-size: 0.55rem; font-style: normal; font-weight: 700; }
 /* PR の画面。ぼかした影は PDF で灰色の箱になるので、ぼかさない薄い影にする */
-.pr-shot { display: block; width: 640px; margin: 0.2rem 0 0.9rem 1rem; transform: rotate(-1deg); }
+.pr-shot { display: block; width: 100%; transform: rotate(1.5deg); }
 .pr-shot img { display: block; width: 100%; border: 1px solid #d0d7de; border-radius: 10px; box-shadow: 5px 5px 0 #e3e8ee; background: #fff; padding: 6px 8px; }
+.oss-grid { display: grid; grid-template-columns: 1fr 255px; gap: 1rem; align-items: start; }
+.oss-grid .oss-text li { font-size: 1rem !important; white-space: nowrap; }
+.oss-shot { margin-top: -0.6rem; }
+.oss-shot .oss-pr { margin-top: 0.5rem; justify-content: center; }
