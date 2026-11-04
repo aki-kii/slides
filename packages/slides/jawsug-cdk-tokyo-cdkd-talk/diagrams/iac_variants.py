@@ -11,6 +11,8 @@
 import os
 import re
 
+from resource_swap import swap
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMAGES = os.path.join(HERE, "..", "public", "images")
 ICONS = os.environ["AWS_ICONS"].rstrip("/") + "/"
@@ -78,7 +80,7 @@ def plain_ecs(block):
 
 
 def save(name, body):
-    svg = "\n".join(body) + "\n"
+    svg = swap("\n".join(body) + "\n")
     # 同じページに iac-diff.svg が並んでも id がぶつからないよう、元の図のアイコンの id に接頭辞を付ける
     svg = re.sub(r'(id="|url\(#)([a-z]+\d+-)', rf"\1{name}-\2", svg)
     with open(os.path.join(IMAGES, name + ".svg"), "w", encoding="utf-8") as f:
@@ -95,43 +97,83 @@ save("iac-diff-ideal", [l for l in ideal if l != ""])
 
 # 2. CloudFormation とは？（テンプレート → CloudFormation → スタック）
 # テンプレートとスタックの説明は、それぞれの名前の下に書く（2026-11-04 本人）
-code = [LINES[3].replace('height="140"', 'height="160"'), icon(TEMPLATE, 32, 30, 28),
+code = [LINES[3].replace('height="140"', 'height="174"'), icon(TEMPLATE, 32, 30, 28),
         retext(LINES[7], "コード（あるべき姿）", "CloudFormationテンプレート", 14),
-        f'<text x="66" y="70" font-family="{FONT}" font-size="12" fill="{SUB}">あるべき姿を書いたコード</text>',
-        '<g transform="translate(0,18)">', *plain_ecs(lines(9, 32, drop={31})), "</g>"]
+        f'<text x="66" y="68" font-family="{FONT}" font-size="12" fill="{SUB}">AWSリソースの設定を</text>',
+        f'<text x="66" y="83" font-family="{FONT}" font-size="12" fill="{SUB}">YAMLやJSONで書いたファイル</text>',
+        '<g transform="translate(0,32)">', *plain_ecs(lines(9, 32, drop={31})), "</g>"]
 tool = lines(57, 60, swap={57: icon(CFN, 376, 146, 64), 58: None, 59: None,
                            60: retext(LINES[59], "IaCのツール", "CloudFormation")})
-stack = [LINES[76].replace('height="140"', 'height="160"'), icon(STACK, 744, 111, 28),
+stack = [LINES[76].replace('height="140"', 'height="174"'), icon(STACK, 744, 111, 28),
          retext(LINES[81], "実リソース", "スタック"),
-         f'<text x="778" y="150" font-family="{FONT}" font-size="12" fill="{SUB}">AWSリソースをまとめて管理する単位</text>',
-         '<g transform="translate(0,18)">', *plain_ecs(lines(83, 106, drop={105})), "</g>"]
-save("cfn-define", head("0 0 1000 200", "CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする") + [
+         f'<text x="778" y="148" font-family="{FONT}" font-size="12" fill="{SUB}">AWSリソースをまとめて管理し、</text>',
+         f'<text x="778" y="163" font-family="{FONT}" font-size="12" fill="{SUB}">今の状態を持つ単位</text>',
+         '<g transform="translate(0,32)">', *plain_ecs(lines(83, 106, drop={105})), "</g>"]
+# 矢印は短く、ラベルは名詞にして、IaCとは？の図と同じ並びにする（2026-11-04 本人）
+save("cfn-define", head("0 0 810 210", "CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする") + [
     *code,
-    arrow(272, 370, 100),
-    text(321, 88, "読み込む", 14),
-    '<g transform="translate(0,-78)">', *tool, "</g>",
-    arrow(446, 738, 100),
-    text(592, 88, "プロビジョニングする", 15),
-    '<g transform="translate(0,-90)">', *stack, "</g>",
+    arrow(272, 362, 107),
+    text(317, 95, "読み込み", 14),
+    '<g transform="translate(-8,-71)">', *tool, "</g>",
+    arrow(438, 546, 107),
+    text(492, 95, "プロビジョニング", 13),
+    '<g transform="translate(-192,-90)">', *stack, "</g>",
     "</svg>",
 ])
 
-# 3. CloudFormation のデプロイ（テンプレートとスタックの状態を比べ、変更セットを反映する）
-save("cfn-deploy", head("0 0 1000 396", "CloudFormationが新しいテンプレートと更新前のスタックを比較し、差分の変更セットを同じスタックへ反映する。スタックがAWSリソースを管理している") + lines(4, 106, swap={
-    5: icon(TEMPLATE, 32, 30, 28), 6: None, 7: None,
-    8: retext(LINES[7], "コード（あるべき姿）", "テンプレート（あるべき姿）", 14),
-    34: icon(STACK, 32, 220, 28), 35: None, 36: None, 37: None,
-    38: retext(LINES[37], "現在の状態", "スタック（更新前）"),
-    57: icon(CFN, 376, 146, 64), 58: None, 59: None,
-    60: retext(LINES[59], "IaCのツール", "CloudFormation"),
-    66: retext(LINES[65], "差分", "変更セット", 18),
-    76: retext(LINES[75], "デプロイ", "反映する", 12),
-    78: icon(STACK, 744, 111, 28), 79: None, 80: None, 81: None,
-    82: retext(LINES[81], "実リソース", "スタック（更新後）"),
-}) + [
-    # 更新前と更新後は同じスタック。点線でつなぐ（2026-11-04 本人「スタックが2つ出てきて分かりづらい」）
-    f'<path d="M145,352 V384 H864 V252" fill="none" stroke="{SUB}" stroke-width="2" stroke-dasharray="6 4" stroke-linejoin="round"/>',
-    text(505, 377, "同じスタック", 13, SUB, "bold"),
-    text(864, 100, "スタックがAWSリソースを管理している", 13, SUB),
-    "</svg>",
-])
+# 3. CloudFormation のデプロイ
+# スタックは状態を持つだけ。スタックへデプロイするようには見せず、スタックから AWS リソースへの矢印でデプロイを見せる（2026-11-04 本人）
+DDB = "Arch_Amazon-DynamoDB_64.svg"
+RES = [("Arch_Amazon-API-Gateway_64.svg", "API Gateway"), ("Arch_AWS-Lambda_64.svg", "Lambda"), (DDB, "DynamoDB")]
+LINE, CLOUD_INK = "#c9d0d9", "#232F3E"
+
+
+def rtext(x, y, s, size=13, color=INK, weight="normal", anchor="start"):
+    return (f'<text x="{x}" y="{y}" font-family="{FONT}" font-size="{size}" font-weight="{weight}" '
+            f'fill="{color}" text-anchor="{anchor}">{s}</text>')
+
+
+def g_arrow(d):
+    return (f'<path d="{d}" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round" '
+            'stroke-linecap="round" marker-end="url(#a-g)"/>')
+
+
+def i_arrow(d):
+    return (f'<path d="{d}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round" '
+            'stroke-linecap="round" marker-end="url(#a-i)"/>')
+
+
+body = [f'<rect x="20" y="50" width="250" height="140" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
+        icon(TEMPLATE, 32, 60, 28), rtext(66, 80, "テンプレート（あるべき姿）", 14, weight="bold")]
+for k, (f, name) in enumerate(RES):
+    cx = 68 + 72 * k
+    body.append(icon(f, cx - 24, 98, 48))
+    hi = f == DDB
+    body.append(rtext(cx, 166, name, 13, GREEN if hi else INK, "bold" if hi else "normal", "middle"))
+    if hi:
+        body.append(f'<rect x="{cx - 30}" y="92" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>')
+body += [
+    i_arrow("M272,120 L318,120"), rtext(295, 108, "読み込み", 12, anchor="middle"),
+    icon(CFN, 326, 88, 64), rtext(358, 172, "CloudFormation", 13, weight="bold", anchor="middle"),
+    g_arrow("M394,120 L436,120"), rtext(415, 108, "作成", 12, anchor="middle"),
+    f'<rect x="440" y="58" width="104" height="124" rx="12" fill="#e9f5f1" stroke="{GREEN}" stroke-width="3" stroke-dasharray="7 5"/>',
+    rtext(492, 84, "変更セット", 16, GREEN, "bold", "middle"),
+    icon(DDB, 468, 94, 48), rtext(492, 166, "DynamoDB", 13, GREEN, "bold", "middle"),
+    g_arrow("M548,120 L588,120"), rtext(568, 108, "反映", 12, anchor="middle"),
+    f'<rect x="592" y="62" width="104" height="116" rx="12" fill="#ffffff" stroke="{INK}" stroke-width="2"/>',
+    icon(STACK, 624, 76, 40), rtext(644, 140, "スタック", 15, weight="bold", anchor="middle"),
+    rtext(644, 160, "状態を持つ", 12, SUB, anchor="middle"),
+    # スタックの今の状態を CloudFormation が読んで比べる
+    i_arrow("M644,180 L644,224 L358,224 L358,182"), rtext(501, 216, "今の状態", 12, anchor="middle"),
+    f'<rect x="748" y="20" width="232" height="208" rx="12" fill="#ffffff" stroke="{CLOUD_INK}" stroke-width="2"/>',
+]
+cloud = lines(78, 82, swap={82: retext(LINES[81], "実リソース", "AWSアカウント")})
+body.append('<g transform="translate(6,-90)">' + "".join(cloud) + "</g>")
+for k, (f, name) in enumerate(RES):
+    y = 52 + 58 * k
+    body.append(icon(f, 800, y, 44))
+    hi = f == DDB
+    body.append(rtext(854, y + 28, name, 14, GREEN if hi else INK, "bold" if hi else "normal"))
+    body.append((g_arrow if hi else i_arrow)(f"M698,120 C730,120 760,{y + 22} 794,{y + 22}"))
+body.append(rtext(724, 252, "スタックが AWS リソースをデプロイして管理する", 12, SUB, anchor="middle"))
+save("cfn-deploy", head("0 0 1000 262", "CloudFormationがテンプレートとスタックの今の状態を比べて変更セットを作り、スタックに反映する。スタックからAPI Gateway、Lambda、DynamoDBがデプロイされる") + body + ["</svg>"])

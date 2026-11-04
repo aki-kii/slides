@@ -2,13 +2,15 @@
 「ソフトウェア開発フレームワーク」は発表で説明しないので、図にも入れない（2026-11-04 本人）。
 
 「コードでインフラストラクチャを定義し、プロビジョニングする」を、
-コード → IaCのツール → AWSアカウント の横並びで見せる。ツールは左右の真ん中に置く（2026-11-04 本人「左右のバランスがおかしい」）。
+コード → IaCのツール → AWSアカウント の横並びで見せる。矢印は短く、ラベルは名詞にする（2026-11-04 本人）。
 iac-diff.svg と同じ箱とアイコンを使うので、次のページの図と見た目がそろう。
 
   python3 diagrams/iac_define.py
 """
 import os
 import re
+
+from resource_swap import swap
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMAGES = os.path.join(HERE, "..", "public", "images")
@@ -49,26 +51,26 @@ infra = plain_ecs(take(77, 106, drop={105}))  # 105 行目は ECS を囲む緑�
 infra = [l.replace(">実リソース<", ">AWSアカウント<") for l in infra]
 
 body = [
-    lines[0].replace('viewBox="0 0 1000 366"', 'viewBox="0 0 1000 196"').replace(
+    lines[0].replace('viewBox="0 0 1000 366"', 'viewBox="0 0 810 196"').replace(
         re.search(r'aria-label="[^"]*"', lines[0]).group(0),
         'aria-label="コードでインフラストラクチャを定義し、IaCのツールがそれを読んでAWSアカウントにプロビジョニングする"'),
     lines[1],
     lines[2],
     *code,
     text(145, 186, "インフラストラクチャを定義する", size=14, color=SUB),
-    arrow(272, 462, 90),
-    text(367, 78, "コードを読む", size=14),
-    '<g transform="translate(92,-88)">',
+    arrow(272, 362, 90),
+    text(317, 78, "読み込み", size=14),
+    '<g transform="translate(-8,-88)">',
     *tool,
     "</g>",
-    arrow(538, 738, 90),
-    text(638, 78, "プロビジョニングする", size=15),
-    '<g transform="translate(0,-90)">',
+    arrow(438, 546, 90),
+    text(492, 78, "プロビジョニング", size=13),
+    '<g transform="translate(-192,-90)">',
     *infra,
     "</g>",
     "</svg>",
 ]
-svg = "\n".join(body) + "\n"
+svg = swap("\n".join(body) + "\n")
 # 同じページに iac-diff.svg が並んでも id がぶつからないよう、アイコンの id に接頭辞を付ける
 svg = re.sub(r'(id="|url\(#)([a-z]+\d+-)', r"\1def-\2", svg)
 open(OUT, "w", encoding="utf-8").write(svg)

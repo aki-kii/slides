@@ -159,6 +159,10 @@ chapter: IaC
 
 <InlineSvg src="iac-diff-ideal.svg" label="IaCのツールが、コードのあるべき姿と現在の状態を比較し、その差分だけを実リソースへデプロイする。コード（あるべき姿）の枠を強調している" class="mx-auto mt-4 fig-iac" />
 
+<Overlay clickStart=1>
+  ここでCDKの定義を見直してみます
+</Overlay>
+
 <!--
 2026-11-03 本人（round 5）: 「宣言型のデプロイ手法」のページはカットし、「IaCのデプロイの仕組み」をそのまま書く。「あるべき姿」もハイライトする（文と左上の枠）。図は初心者支部で登壇したスライドの iac-diff に、あるべき姿の枠の強調を足したもの（diagrams/iac_variants.py）。
 -->
@@ -227,10 +231,10 @@ transition: fade
 
 <div class="mt-2 not-own" style="font-size: 1.05rem; white-space: nowrap">CloudFormationがテンプレートとスタックを比べて、変更セットをスタックに反映する</div>
 
-<InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-3 fig-iac" />
+<InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-6 fig-cfn-deploy" />
 
 <!--
-2026-11-03 本人「CloudFormationのデプロイも説明しよう。CloudFormationのデプロイってタイトルにしようね」。round 5 で、図を「IaCのデプロイの仕組み」と同じ形にしてリソース（AWS WAF、ALB、Amazon ECS）も描いた（diagrams/iac_variants.py）。
+2026-11-03 本人「CloudFormationのデプロイも説明しよう。CloudFormationのデプロイってタイトルにしようね」。round 5 で、図を「IaCのデプロイの仕組み」と同じ形にしてリソース（2026-11-04 から API Gateway、Lambda、DynamoDB）も描いた（diagrams/iac_variants.py）。
 公式は「スタックと、送った変更を比べる」。実際のリソースまで比べるのは drift-aware change set（cdk deploy --revert-drift）のとき。
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
 ロールバックと承認ゲートは扱わない。リソースの話はこの章でする（10-31 09:39）。
