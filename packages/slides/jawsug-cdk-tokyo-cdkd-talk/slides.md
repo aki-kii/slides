@@ -593,17 +593,6 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 -->
 
 ---
-layout: ending
----
-
-# Thank You!
-
-<div class="absolute right-8 bottom-8 flex flex-col items-center gap-2">
-  <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin: 0;">＼ ご清聴ありがとうございました！ ／</p>
-  <img src="/images/aboutme/eye-catch.png" class="h-36" />
-</div>
-
----
 layout: default
 ---
 
@@ -616,3 +605,14 @@ layout: default
 <div class="promo-when">12月(日付未定) 19:30-21:00</div>
 
 <div class="promo-note">近日connpass公開予定</div>
+
+---
+layout: ending
+---
+
+# Thank You!
+
+<div class="absolute right-8 bottom-8 flex flex-col items-center gap-2">
+  <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin: 0;">＼ ご清聴ありがとうございました！ ／</p>
+  <img src="/images/aboutme/eye-catch.png" class="h-36" />
+</div>
