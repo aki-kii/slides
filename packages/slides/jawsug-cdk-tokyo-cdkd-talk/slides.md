@@ -484,7 +484,7 @@ chapter: オープンソース
   <div class="oss-sec">CDKはAWSだけで作っているわけじゃない</div>
   <ul>
     <li>AWSの社員でなくても、誰でも機能追加やバグ修正ができる</li>
-    <li>コミットの約半分はコミュニティから<span class="oss-note">※出典確認中</span></li>
+    <li>コミットの約半分はコミュニティから</li>
     <li>必要なのは高度なコードより、AWSの知識</li>
   </ul>
   <div v-click="1" class="oss-mine">
