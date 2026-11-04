@@ -49,7 +49,7 @@ YAML = ["Effect: Allow", "Action:", "  - s3:GetObject*", "  - s3:GetBucket*", " 
         "Resource:", "  - !GetAtt MyBucket.Arn", '  - !Sub "${MyBucket.Arn}/*"']
 
 body = [
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" width="100%" role="img" '
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 332" width="100%" role="img" '
     'aria-label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールに、S3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは、そのIAMポリシーが読み取りの権限を並べた形になる">',
     '<!-- AWS Architecture Icons 2026-07-31 版（Icon-package_07312026） -->',
     f'<defs><marker id="ba-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{INK}"/></marker>'
@@ -59,23 +59,24 @@ body = [
     '<rect x="6" y="46" width="430" height="64" rx="8" fill="#282a36"/>',
     f'<text x="26" y="86" font-family="{MONO}" font-size="20">'
     '<tspan fill="#f8f8f2">myBucket.</tspan><tspan fill="#50fa7b">grantRead</tspan><tspan fill="#f8f8f2">(myFunction);</tspan></text>',
-    # このコードで作られる AWS リソース
-    text(6, 152, "このコードで作られるAWSリソース", 15, weight="bold"),
-    *node("Arch_AWS-Lambda_64.svg", 50, 172, "Lambda関数", "myFunction"),
-    arrow(80, 130, 196), text(105, 186, "使う", 12, anchor="middle"),
-    *node("Res_AWS-Identity-Access-Management_Role_48.svg", 160, 172, "実行ロール", ""),
-    arrow(250, 196, 196, GREEN), text(223, 186, "付く", 12, GREEN, "bold", anchor="middle"),
-    *node("Res_AWS-Identity-Access-Management_Permissions_48.svg", 280, 172, "IAMポリシー", "grantRead", GREEN),
-    f'<rect x="250" y="166" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>',
-    arrow(310, 368, 196, GREEN), text(339, 186, "読み取り", 12, GREEN, "bold", anchor="middle"),
-    *node("Res_Amazon-Simple-Storage-Service_Bucket_48.svg", 396, 172, "S3バケット", "myBucket"),
-    # 合成すると、テンプレートでは IAM ポリシーがこう書かれる
+    # このコードで作られる AWS リソース。ロールは Lambda の右上、矢印は同じ形でそろえる（2026-11-05 本人）
+    text(6, 148, "このコードで作られるAWSリソース", 15, weight="bold"),
+    *node("Res_AWS-Identity-Access-Management_Role_48.svg", 160, 160, "実行ロール", ""),
+    arrow(186, 252, 184, GREEN), text(219, 174, "アタッチ", 12, GREEN, "bold", anchor="middle"),
+    *node("Res_AWS-Identity-Access-Management_Permissions_48.svg", 280, 160, "IAMポリシー", "grantRead", GREEN),
+    f'<rect x="250" y="154" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>',
+    f'<path d="M312,206 L380,232" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ba-g)"/>',
+    text(352, 210, "読み取り権限", 12, GREEN, "bold", anchor="start"),
+    *node("Arch_AWS-Lambda_64.svg", 50, 238, "Lambda関数", "myFunction"),
+    arrow(78, 368, 262), text(223, 280, "読み取り", 12, anchor="middle"),
+    *node("Res_Amazon-Simple-Storage-Service_Bucket_48.svg", 396, 238, "S3バケット", "myBucket"),
+    # 合成すると、テンプレートでは IAM ポリシーがこう書かれる。コードと同じ暗い背景のコードブロックにする
     arrow(440, 520, 78), text(480, 66, "合成", 14, anchor="middle"),
-    f'<rect x="524" y="6" width="430" height="318" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
-    icon("Res_AWS-CloudFormation_Template_48.svg", 540, 18, 36),
-    text(586, 44, "CloudFormationテンプレート", 18, weight="bold"),
-    text(544, 82, "IAMポリシー（抜粋）", 15, SUB),
-    *[text(544, 116 + 25 * i, line, 17, family=MONO) for i, line in enumerate(YAML)],
+    icon("Res_AWS-CloudFormation_Template_48.svg", 524, 6, 32),
+    text(564, 30, "CloudFormationテンプレート", 18, weight="bold"),
+    '<rect x="524" y="46" width="430" height="282" rx="8" fill="#282a36"/>',
+    text(544, 80, "# IAMポリシー（抜粋）", 15, "#6272a4", family=MONO),
+    *[text(544, 114 + 26 * i, line, 17, "#f8f8f2", family=MONO) for i, line in enumerate(YAML)],
     "</svg>",
 ]
 open(OUT, "w", encoding="utf-8").write("\n".join(body) + "\n")

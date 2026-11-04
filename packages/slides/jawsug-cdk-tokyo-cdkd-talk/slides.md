@@ -231,7 +231,7 @@ transition: fade
 
 ## CloudFormationのデプロイ
 
-<div class="text-lg mt-1 cfn-lead"><span class="u-tpl">CloudFormationテンプレート</span>でAWSリソースのあるべき姿を定義し、<br>現在の状態と<span class="u-stack">スタック</span>の差分を<span class="u-cs">変更セット</span>として抽出し、<br>それを元にAWSアカウントにプロビジョニングする</div>
+<div class="text-lg mt-1 cfn-lead"><span class="u-tpl">CloudFormationテンプレート</span>でAWSリソースのあるべき姿を定義し、<br><span class="u-stack">スタック</span>が持つ現在の状態との差分を<span class="u-cs">変更セット</span>として抽出し、<br>それを元にAWSアカウントにプロビジョニングする</div>
 
 <InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-6 fig-cfn-deploy" />
 
@@ -287,7 +287,7 @@ transition: fade
 
 ## CDKのデプロイ
 
-<div class="text-lg mt-2">cdk deployはCloudFormationのデプロイを外側から包んでいる</div>
+<div class="text-lg mt-2"><code>cdk deploy</code>はCloudFormationを通じてデプロイしている</div>
 
 <InlineSvg src="deploy-flow.svg" label="synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
 
@@ -376,21 +376,27 @@ transition: view-transition
 
 <div class="text-lg mt-2">TypeScriptなどの使い慣れたプログラミング言語でAWSリソースを定義できます</div>
 
-<div class="code-narrow mt-4">
+<div class="text-base mt-1">（TypeScript / JavaScript / Python / Java / C# / Go など…）</div>
+
+<div class="code-narrow mt-3">
 
 ```ts
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-
 const fn = new NodejsFunction(this, 'Function', {
   entry: 'lambda/index.ts',
+  handler: 'handler',
+  runtime: Runtime.NODEJS_22_X,
+  memorySize: 512,
+  timeout: Duration.seconds(30),
+  environment: { TABLE_NAME: table.tableName },
 });
 ```
 
 </div>
 
-<div class="text-base mt-2 text-center not-own">TypeScript / JavaScript / Python / Java / C# / Go</div>
-
-<div v-click class="text-lg mt-4 text-center">→ プログラミング言語で書けるからこその仕組みがあります！</div>
+<div v-click class="mt-3">
+  <div style="font-size: 0.9rem; white-space: nowrap">ただし、AIが書くのでプログラミング言語で書けることが直接的にはメリットになりづらくなってきました</div>
+  <div class="text-lg mt-1">→ AI時代でもCDKのメリットとなる特徴を紹介します！</div>
+</div>
 
 <!--
 2026-11-04 本人（round 17）: 特徴の ① を「プログラミング言語で書ける」にし、前の ①② を ②③ にずらした。round 20: リードと最後の一文は本人の文。コードの例は NodejsFunction（エージェントが書いた）。対応している言語は https://docs.aws.amazon.com/cdk/v2/guide/languages.html
@@ -405,14 +411,17 @@ transition: view-transition
 
 <div style="view-transition-name: cdk-benefit">
   <span class="not-own">CDKの特徴②</span>
-  <h2>インフラの設定を抽象化できる</h2>
+  <h2>インフラの設定を抽象化している</h2>
 </div>
 
-<div class="text-lg mt-2 not-own">抽象化されたメソッドを使うので、1行で設定の意図が読める</div>
+<div class="text-lg mt-2">適切な抽象化により少ない実装で意図を伝えられる</div>
 
-<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-4 fig-benefit-wide" />
+<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-2 fig-benefit-wide" />
 
-<div class="text-base mt-2 text-center">→ <span class="not-own">AIが書いたコードも、人がレビューしやすい</span></div>
+<div class="text-base mt-1">
+  <div>AIにとって読みやすく</div>
+  <div>→ 人間にもAIにも設定の意図が伝わりやすい</div>
+</div>
 
 <!--
 2026-11-03 本人（round 8〜9）: 例は bucket.grants.write(taskRole) か myBucket.grantRead(myFunction)。よく知られている grantRead にした。右は grantRead が作るポリシーの中身を抜き出したもの。図は diagrams/benefit_abstract.py。2026-11-04 本人（round 20）: ぼやけて見えるので文字を大きくして縮めずに出し、作られるリソースを図にした。

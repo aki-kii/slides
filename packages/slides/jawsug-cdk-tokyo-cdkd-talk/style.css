@@ -637,7 +637,9 @@
 /* コードの影は PDF で灰色の箱になるので付けない（2026-11-04 本人） */
 .slidev-layout pre { box-shadow: none !important; }
 .code-narrow { width: 620px; margin-left: auto; margin-right: auto; }
-.fig-benefit-wide { width: 900px; }
+.code-narrow pre { padding: 0.9rem 1.2rem !important; }
+.code-narrow pre code { font-size: 1em !important; line-height: 1.5 !important; }
+.fig-benefit-wide { width: 800px; }
 .oss-text .oss-sec { font-size: 1.2rem; font-weight: 700; color: #0e8a6e; margin-top: 0.6rem; }
 .slidev-layout .oss-text p { font-size: 1.15rem; font-weight: 700; margin: 0.1rem 0 0.4rem; }
 .slidev-layout .oss-text ul { margin-top: 0.1rem; }

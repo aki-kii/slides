@@ -189,8 +189,7 @@ p.append(step(779, 200, "deploy"))
 p.append(text(795, TOP + 50, "AWSリソースをデプロイする", 12, SUB, None, "start"))
 p.append(icon("cfn", 880, S3Y - 32, 64))
 # CloudFormation を通じてデプロイすることを出す（2026-11-04 本人）
-p.append(text(880, S3Y + 52, "CloudFormationを通じて", 13, INK, 700))
-p.append(text(880, S3Y + 68, "デプロイする", 13, INK, 700))
+p.append(text(880, S3Y + 52, "CloudFormation", 13, INK, 700))
 
 
 defs = (f'<defs><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'

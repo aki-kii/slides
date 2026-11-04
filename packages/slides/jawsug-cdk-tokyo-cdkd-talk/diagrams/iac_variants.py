@@ -149,11 +149,11 @@ for k, (f, name) in enumerate(RES):
     if hi:
         body.append(f'<rect x="{cx - 30}" y="92" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>')
 body += [
-    i_arrow("M272,120 L318,120"), rtext(295, 108, "読み込み", 12, anchor="middle"),
+    i_arrow("M272,120 L318,120"), rtext(295, 108, "適用", 12, anchor="middle"),
     icon(CFN, 326, 88, 64), rtext(358, 172, "CloudFormation", 13, weight="bold", anchor="middle"),
     g_arrow("M394,120 L436,120"), rtext(415, 108, "作成", 12, anchor="middle"),
     f'<rect x="440" y="58" width="104" height="124" rx="12" fill="#e9f5f1" stroke="{GREEN}" stroke-width="3" stroke-dasharray="7 5"/>',
-    rtext(492, 84, "変更セット", 16, GREEN, "bold", "middle"),
+    rtext(492, 84, "変更セット（差分）", 11, GREEN, "bold", "middle"),
     icon(DDB, 468, 94, 48), rtext(492, 166, "DynamoDB", 13, GREEN, "bold", "middle"),
     # スタックも AWS アカウントの中にデプロイされるので、AWS アカウントの枠に入れる（2026-11-04 本人）
     f'<rect x="572" y="20" width="408" height="208" rx="12" fill="#ffffff" stroke="{CLOUD_INK}" stroke-width="2"/>',
@@ -161,9 +161,9 @@ body += [
     g_arrow("M548,120 L588,120"), rtext(560, 108, "反映", 12, anchor="middle"),
     f'<rect x="592" y="66" width="104" height="116" rx="12" fill="#ffffff" stroke="{STACK_ORANGE}" stroke-width="2.5"/>',
     icon(STACK, 624, 80, 40), rtext(644, 144, "スタック", 15, STACK_ORANGE, "bold", "middle"),
-    rtext(644, 164, "状態を持つ", 12, SUB, anchor="middle"),
+    rtext(644, 164, "（状態を保持）", 12, SUB, anchor="middle"),
     # スタックの今の状態を CloudFormation が読んで比べる
-    i_arrow("M644,184 L644,246 L358,246 L358,182"), rtext(501, 238, "今の状態", 12, anchor="middle"),
+    i_arrow("M644,184 L644,246 L358,246 L358,182"), rtext(501, 238, "現在の状態と比較", 12, anchor="middle"),
 ]
 
 for k, (f, name) in enumerate(RES):
@@ -199,7 +199,7 @@ def resource_row(x0, y, empty_last=False):
 
 
 body += resource_row(68, 82)
-body += [i_arrow("M272,110 L360,110"), rtext(316, 98, "読み込み", 12, anchor="middle"),
+body += [i_arrow("M272,110 L360,110"), rtext(316, 98, "適用", 12, anchor="middle"),
          '<g transform="translate(-8,-68)">' + "".join(lines(57, 59)) + "</g>",
          rtext(400, 166, "IaCのツール", 15, weight="bold", anchor="middle"),
          g_arrow("M440,110 L476,110"),

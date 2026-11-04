@@ -31,7 +31,7 @@
 <text x="212" y="166" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="13" font-weight="bold" fill="#0E8A6E" text-anchor="middle">DynamoDB</text>
 <rect x="182" y="92" width="60" height="60" rx="10" fill="none" stroke="#0E8A6E" stroke-width="3"/>
 <path d="M272,120 L318,120" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-i)"/>
-<text x="295" y="108" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" text-anchor="middle">読み込み</text>
+<text x="295" y="108" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" text-anchor="middle">適用</text>
 <svg x="326" y="88" width="64" height="64" viewBox="0 0 80 80"><g id="cfn-deploy-v8-Icon-Architecture/64/Arch_AWS-CloudFormation_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="cfn-deploy-v8-Icon-Architecture-BG/64/Management-Governance" fill="#E7157B">
             <rect id="cfn-deploy-v8-Rectangle" x="0" y="0" width="80" height="80"></rect>
@@ -42,7 +42,7 @@
 <path d="M394,120 L436,120" fill="none" stroke="#0E8A6E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-g)"/>
 <text x="415" y="108" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" text-anchor="middle">作成</text>
 <rect x="440" y="58" width="104" height="124" rx="12" fill="#e9f5f1" stroke="#0E8A6E" stroke-width="3" stroke-dasharray="7 5"/>
-<text x="492" y="84" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="16" font-weight="bold" fill="#0E8A6E" text-anchor="middle">変更セット</text>
+<text x="492" y="84" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="11" font-weight="bold" fill="#0E8A6E" text-anchor="middle">変更セット（差分）</text>
 <svg x="468" y="94" width="48" height="48" viewBox="0 0 80 80"><g id="cfn-deploy-v9-Icon-Architecture/64/Arch_Amazon-DynamoDB_64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="cfn-deploy-v9-Icon-Architecture-BG/64/Database" fill="#C925D1">
             <rect id="cfn-deploy-v9-Rectangle" x="0" y="0" width="80" height="80"></rect>
@@ -59,9 +59,9 @@
         <path d="M2,15.353 L45.92,15.353 L45.92,2 L2,2 L2,15.353 Z M4,13.354 L43.92,13.354 L43.92,4 L4,4 L4,13.354 Z M24.706,30.201 L45.92,30.201 L45.92,16.847 L24.706,16.847 L24.706,30.201 Z M26.706,28.2 L43.92,28.2 L43.92,18.847 L26.706,18.847 L26.706,28.2 Z M2,30.201 L23.213,30.201 L23.213,16.847 L2,16.847 L2,30.201 Z M4,28.2 L21.213,28.2 L21.213,18.847 L4,18.847 L4,28.2 Z M32.567,45.047 L45.92,45.047 L45.92,31.694 L32.567,31.694 L32.567,45.047 Z M34.566,43.047 L43.92,43.047 L43.92,33.693 L34.566,33.693 L34.566,43.047 Z M16.847,45.047 L31.073,45.047 L31.073,31.694 L16.847,31.694 L16.847,45.047 Z M18.847,43.047 L29.074,43.047 L29.074,33.693 L18.847,33.693 L18.847,43.047 Z M2,45.047 L15.352,45.047 L15.352,31.694 L2,31.694 L2,45.047 Z M4,43.047 L13.353,43.047 L13.353,33.693 L4,33.693 L4,43.047 Z" id="cfn-deploy-v10-AWS-CloudFormation_stack_Resource-Icon_light-bg" fill="#E7157B"></path>
     </g></svg>
 <text x="644" y="144" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="15" font-weight="bold" fill="#E67E22" text-anchor="middle">スタック</text>
-<text x="644" y="164" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#6b7684" text-anchor="middle">状態を持つ</text>
+<text x="644" y="164" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#6b7684" text-anchor="middle">（状態を保持）</text>
 <path d="M644,184 L644,246 L358,246 L358,182" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-i)"/>
-<text x="501" y="238" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" text-anchor="middle">今の状態</text>
+<text x="501" y="238" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#2c3e50" text-anchor="middle">現在の状態と比較</text>
 <svg x="800" y="52" width="44" height="44" viewBox="0 0 80 80"><g id="cfn-deploy-v11-Icon-Architecture/64/Arch_Amazon-API-Gateway_64">
 <g id="cfn-deploy-v11-Icon-Architecture-BG/64/Networking-Content-Delivery">
 <rect id="cfn-deploy-v11-Rectangle" width="80" height="80" fill="#8C4FFF"/>
