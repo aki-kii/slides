@@ -475,13 +475,17 @@ chapter: オープンソース
 
 <ChapterLabel />
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
 ## AWS CDKはOSS
 
-<div class="oss-lines mt-10">
-  <p class="not-own">AWSが提供するOSSのフレームワーク</p>
-  <p class="not-own">だれでもコントリビュートでき、<br>コミュニティからの質の良い貢献によって、<br>CDKの仕組みが作られています</p>
+<div class="oss-text mt-4">
+  <div class="oss-sec">OSSとは？</div>
+  <p>誰でも使える・読める・直せるソフトウェア</p>
+  <div class="oss-sec">CDKはAWSだけで作っているわけじゃない</div>
+  <ul>
+    <li>AWSの社員でなくても、誰でも機能追加やバグ修正ができる</li>
+    <li>コミットの約半分はコミュニティから<span class="oss-note">※出典確認中</span></li>
+    <li>必要なのは高度なコードより、AWSの知識</li>
+  </ul>
   <div v-click="1" class="oss-mine">
     <p class="accent">僕のコードも入っています！</p>
     <div class="oss-pr"><a href="https://github.com/aws/aws-cdk/pull/35290" target="_blank" rel="noopener">aws/aws-cdk#35290 feat(apigatewayv2): add disableSchemaValidation for Websocket api</a><em class="kari-inline">仮：PRは未定</em></div>
@@ -493,7 +497,7 @@ chapter: オープンソース
 </Overlay>
 
 <!--
-2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: round 21 の図をやめ、文字だけにした。文はエージェントが書いた（2行目の後半は round 21 の本人のリードのまま）。
+2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: 図をやめ、文字だけにした。round 23 で本人の文に差し替えた。「コミットの約半分はコミュニティから」は出典を確認中（CONTRIBUTING.md には数字が無く、community contributions significantly impact とだけある）。
 PR は仮で https://github.com/aws/aws-cdk/pull/35290 （2025-09-15 にマージ、作者 aki-kii）。ほかの候補は aws-cdk-cli#1127、aws-cdk#33728。
 -->
 

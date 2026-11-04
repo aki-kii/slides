@@ -638,9 +638,13 @@
 .slidev-layout pre { box-shadow: none !important; }
 .code-narrow { width: 620px; margin-left: auto; margin-right: auto; }
 .fig-benefit-wide { width: 900px; }
-.slidev-layout .oss-lines p { font-size: 1.35rem; font-weight: 700; line-height: 1.55; margin-bottom: 1rem; white-space: nowrap; }
-.slidev-layout .oss-lines p.accent { color: #0e8a6e; }
-.oss-mine { margin-top: 1.6rem; }
+.oss-text .oss-sec { font-size: 1.2rem; font-weight: 700; color: #0e8a6e; margin-top: 0.6rem; }
+.slidev-layout .oss-text p { font-size: 1.15rem; font-weight: 700; margin: 0.1rem 0 0.4rem; }
+.slidev-layout .oss-text ul { margin-top: 0.1rem; }
+.slidev-layout .oss-text li { font-size: 1.05rem; line-height: 1.5; margin-bottom: 0.15rem; }
+.oss-note { margin-left: 0.6rem; color: #6b7684; font-size: 0.7rem; }
+.slidev-layout .oss-text p.accent { color: #0e8a6e; font-size: 1.25rem; }
+.oss-mine { margin-top: 0.8rem; }
 .oss-mine p { margin-bottom: 0.3rem; }
 .oss-pr { display: flex; align-items: center; gap: 0.6rem; font-family: "Fira Code", monospace; font-size: 0.68rem; white-space: nowrap; }
 .oss-pr .kari-inline { padding: 0 0.5rem; border: 1.5px solid #dd344c; border-radius: 999px; background: #fdecee; color: #dd344c; font-family: "Noto Sans JP", sans-serif; font-size: 0.55rem; font-style: normal; font-weight: 700; }
