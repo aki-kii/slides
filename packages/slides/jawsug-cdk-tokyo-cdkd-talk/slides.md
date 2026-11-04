@@ -363,8 +363,6 @@ chapter: プログラミング言語とフレームワーク
 transition: view-transition
 ---
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
-
 <div style="view-transition-name: cdk-benefit">
   <span class="not-own">CDKの特徴①</span>
   <h2>プログラミング言語で書ける</h2>
@@ -372,7 +370,7 @@ transition: view-transition
 
 <div class="text-lg mt-2">TypeScriptなどの使い慣れたプログラミング言語でAWSリソースを定義できます</div>
 
-<div class="text-base mt-1">（TypeScript / JavaScript / Python / Java / C# / F# / Go など…）</div>
+<div class="text-base mt-1">（TypeScript / JavaScript / Python / Java / C# / F# / Go）</div>
 
 <div class="code-narrow mt-3">
 
@@ -389,10 +387,10 @@ const fn = new NodejsFunction(this, 'Function', {
 
 </div>
 
-<div class="text-lg mt-3">ただし、AIが書くのでプログラミング言語で書けることが<br>直接的にはメリットになりづらくなってきました</div>
+<div class="text-lg mt-3">ただし、IaCもAIで書くためプログラミング言語で書けることが<br>直接的にはメリットになりづらくなってきました</div>
 
 <Overlay clickStart=1>
-  → AI時代でもCDKのメリットとなる特徴を紹介します！
+  AI時代でもCDKのメリットとなる特徴を紹介します！
 </Overlay>
 
 <!--
