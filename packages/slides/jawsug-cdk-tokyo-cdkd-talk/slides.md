@@ -279,11 +279,9 @@ transition: fade
 
 <ChapterLabel />
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
 ## CDKのデプロイ
 
-<div class="text-lg mt-2"><code>cdk deploy</code>はCloudFormationを通じてデプロイしている</div>
+<div class="text-lg mt-2"><code>cdk deploy</code>はCloudFormationを通じてデプロイします</div>
 
 <InlineSvg src="deploy-flow.svg" label="synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
 
