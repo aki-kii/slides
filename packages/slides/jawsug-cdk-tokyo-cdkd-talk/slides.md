@@ -435,14 +435,14 @@ chapter: プログラミング言語とフレームワーク
 
 <div style="view-transition-name: cdk-benefit">
   <span class="not-own">CDKの特徴③</span>
-  <h2>デプロイ前の検証手段が豊富</h2>
+  <h2>変更を検証できる仕組みが豊富</h2>
 </div>
 
-<div class="text-lg mt-2 not-own">AIが書いたコードを、デプロイする前にAI自身が検証して直せる</div>
+<div class="text-lg mt-2">AI自身が生成したソースコードを検証する仕組みが整っている</div>
 
 <InlineSvg src="ai-validation.svg" label="AIが書いたコードを検証し、エラーがあればAIが自分で直す。検証を通ったら、人間がデプロイ前に差分を見てからデプロイする" class="mx-auto mt-4 fig-benefit" />
 
-<BottomLink href="https://speakerdeck.com/akihisaikeda/cdk-deploy-jawssonic-marathon-shi-nagara-aws-risosu-o-shi-te-miyou" title="検証しながらデプロイする話は「cdk deploy JawsSonic #MARATHONしながらAWSリソースをデプロイしてみよう」で" />
+<BottomLink href="https://speakerdeck.com/akihisaikeda/cdk-deploy-jawssonic-marathon-shi-nagara-aws-risosu-o-shi-te-miyou" title="参考: cdk deploy JawsSonic #MARATHONしながらAWSリソースをデプロイしてみよう" />
 
 <!--
 2026-11-03 本人（round 8〜9）: 検証手段は Linter、型チェック、単体テスト、cdk synth、cdk diff、cdk validate など。図は初心者支部で登壇したスライドの「IaCがAIに向いている理由 ②」の ai-validation.svg をそのまま使った（検証の下に「lint・validateなど」）。
@@ -465,7 +465,7 @@ transition: fade
 <span class="def-subject">AWS Cloud Development Kit (AWS CDK) は、</span><br>
 コードでクラウドインフラストラクチャを定義し、<br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
-<em>オープンソースの</em>ソフトウェア開発フレームワークです。
+<em>オープンソースのソフトウェア開発フレームワーク</em>です。
 
 </div>
 
