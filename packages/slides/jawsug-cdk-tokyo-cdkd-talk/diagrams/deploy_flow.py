@@ -140,9 +140,18 @@ p.append(node("code", 235, MID - 22, 44, "ソースコード"))
 p += [arrow(f"M261,{MID} H335"), text(298, MID - 10, "合成", 12)]
 p = SEC["group"]
 p.append(group(335, 66 + DY, 178, 278, "アセット"))
-p.append(file_box(348, 102 + DY, 152, 64, "template", ["CloudFormation", "テンプレート"], icon_size=28))
-p.append(file_box(348, 178 + DY, 152, 64, "asset", ["ファイルアセット"], sub=["Lambdaのコード、", "画像など"], icon_size=28))
-p.append(file_box(348, 254 + DY, 152, 64, "docker", ["Dockerfile"], sub=["コンテナイメージを", "ビルドする手順"], icon_size=28))  # 補足はエージェントが書いた（2026-11-04）
+# S3 へ上げるものは 1 つの枠にまとめ、出ていく矢印も 1 本にする（2026-11-04 本人）
+FILES_Y, FILES_H = 140, 148
+p.append(f'<rect x="348" y="{FILES_Y}" width="152" height="{FILES_H}" rx="10" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
+for name, y, labels in (("template", FILES_Y + 10, ["CloudFormation", "テンプレート"]),
+                         ("code", FILES_Y + 52, ["Lambdaソースコード"]),
+                         ("asset", FILES_Y + 88, ["S3静的ファイル"])):
+    p.append(icon(name, 368, y, 26))
+    first = y + 13 + 4 - 7 * (len(labels) - 1)
+    for i, label in enumerate(labels):
+        p.append(text(386, first + 14 * i, label, 12, INK, 700, "start"))
+p.append(text(386, FILES_Y + FILES_H - 14, "など…", 12, SUB, None, "start"))
+p.append(file_box(348, 254 + DY, 152, 64, "docker", ["Dockerfile"], sub=["LambdaやECSで使う", "コンテナイメージ"], icon_size=28))
 
 # publish: テンプレートとファイルはまとめて S3 へ、コンテナイメージだけ ECR へ。どちらもまっすぐ進む
 S3Y, ECRY = 134 + DY, 286 + DY
@@ -161,8 +170,7 @@ def bootstrap_tag(cx, y):
 
 p += [bootstrap_tag(705, S3Y - 64), bootstrap_tag(700, ECRY - 64)]
 p = SEC["trunk"]
-p.append(f'<path d="M500,{MID} H519 V{S3Y}" fill="none" stroke="{INK}" stroke-width="2.5" stroke-linejoin="round"/>')
-p += [arrow(f"M500,{S3Y} H685"), text(612, S3Y - 10, "アップロード")]
+p += [arrow(f"M500,{FILES_Y + FILES_H / 2} H519 V{S3Y} H685"), text(612, S3Y - 10, "アップロード")]
 p.append(role_chip(556, S3Y + 12, ["ファイル用", "パブリッシュロール"]))
 p.append(bootstrap_tag(615, S3Y + 46))  # ロールも bootstrap で作られる（2026-11-04 本人）
 p += [arrow(f"M500,{ECRY} H685"), text(612, ECRY - 10, "ビルド＆アップロード")]
