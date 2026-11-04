@@ -143,6 +143,7 @@ def i_arrow(d):
             'stroke-linecap="round" marker-end="url(#a-i)"/>')
 
 
+cloud = lines(78, 82, swap={82: retext(LINES[81], "実リソース", "AWSアカウント")})
 body = [f'<rect x="20" y="50" width="250" height="140" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
         icon(TEMPLATE, 32, 60, 28), rtext(66, 80, "テンプレート（あるべき姿）", 14, weight="bold")]
 for k, (f, name) in enumerate(RES):
@@ -159,21 +160,22 @@ body += [
     f'<rect x="440" y="58" width="104" height="124" rx="12" fill="#e9f5f1" stroke="{GREEN}" stroke-width="3" stroke-dasharray="7 5"/>',
     rtext(492, 84, "変更セット", 16, GREEN, "bold", "middle"),
     icon(DDB, 468, 94, 48), rtext(492, 166, "DynamoDB", 13, GREEN, "bold", "middle"),
-    g_arrow("M548,120 L588,120"), rtext(568, 108, "反映", 12, anchor="middle"),
-    f'<rect x="592" y="62" width="104" height="116" rx="12" fill="#ffffff" stroke="{INK}" stroke-width="2"/>',
-    icon(STACK, 624, 76, 40), rtext(644, 140, "スタック", 15, weight="bold", anchor="middle"),
-    rtext(644, 160, "状態を持つ", 12, SUB, anchor="middle"),
+    # スタックも AWS アカウントの中にデプロイされるので、AWS アカウントの枠に入れる（2026-11-04 本人）
+    f'<rect x="572" y="20" width="408" height="208" rx="12" fill="#ffffff" stroke="{CLOUD_INK}" stroke-width="2"/>',
+    '<g transform="translate(-170,-90)">' + "".join(cloud) + "</g>",
+    g_arrow("M548,120 L588,120"), rtext(560, 108, "反映", 12, anchor="middle"),
+    f'<rect x="592" y="66" width="104" height="116" rx="12" fill="#ffffff" stroke="{INK}" stroke-width="2"/>',
+    icon(STACK, 624, 80, 40), rtext(644, 144, "スタック", 15, weight="bold", anchor="middle"),
+    rtext(644, 164, "状態を持つ", 12, SUB, anchor="middle"),
     # スタックの今の状態を CloudFormation が読んで比べる
-    i_arrow("M644,180 L644,224 L358,224 L358,182"), rtext(501, 216, "今の状態", 12, anchor="middle"),
-    f'<rect x="748" y="20" width="232" height="208" rx="12" fill="#ffffff" stroke="{CLOUD_INK}" stroke-width="2"/>',
+    i_arrow("M644,184 L644,246 L358,246 L358,182"), rtext(501, 238, "今の状態", 12, anchor="middle"),
 ]
-cloud = lines(78, 82, swap={82: retext(LINES[81], "実リソース", "AWSアカウント")})
-body.append('<g transform="translate(6,-90)">' + "".join(cloud) + "</g>")
+
 for k, (f, name) in enumerate(RES):
     y = 52 + 58 * k
     body.append(icon(f, 800, y, 44))
     hi = f == DDB
     body.append(rtext(854, y + 28, name, 14, GREEN if hi else INK, "bold" if hi else "normal"))
     body.append((g_arrow if hi else i_arrow)(f"M698,120 C730,120 760,{y + 22} 794,{y + 22}"))
-body.append(rtext(724, 252, "スタックが AWS リソースをデプロイして管理する", 12, SUB, anchor="middle"))
+body.append(rtext(694, 220, "スタックが AWS リソースをデプロイして管理する", 12, SUB))
 save("cfn-deploy", head("0 0 1000 262", "CloudFormationがテンプレートとスタックの今の状態を比べて変更セットを作り、スタックに反映する。スタックからAPI Gateway、Lambda、DynamoDBがデプロイされる") + body + ["</svg>"])

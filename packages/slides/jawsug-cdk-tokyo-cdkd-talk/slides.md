@@ -290,6 +290,8 @@ transition: fade
 <InlineSvg src="deploy-flow.svg" label="synth、publish、deploy の順に進む cdk deploy の枠。deploy は CloudFormation のアイコンだけで表す" class="mx-auto fig-flow" />
 
 
+<div class="source-note">※ bootstrapと書いてあるものはcdk bootstrapによって作られたリソースです</div>
+
 <!--
 全体を先に見せる。ここから同じ図の一部を順に強調する。cdk deploy が全体を順に動かす。根拠 10-30 16:06、10-31 09:22。
 -->
@@ -339,9 +341,9 @@ transition: fade
 <div class="definition faded tight">
 
 <span class="def-subject">AWS Cloud Development Kit (AWS CDK) は、</span><br>
-<em>コードでクラウドインフラストラクチャを定義し、</em><br>
+コードでクラウドインフラストラクチャを定義し、<br>
 AWS CloudFormation を通じてプロビジョニングするための、<br>
-オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
+オープンソースの<em>ソフトウェア開発フレームワークです</em>。
 
 </div>
 
@@ -351,37 +353,7 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-2026-11-03 本人（round 6）: 「コードでクラウドインフラストラクチャを定義し」をピックアップする。2026-11-04 本人: 定義の全文はどのページでも同じにする。「ソフトウェア開発フレームワーク」の強調を外すのは IaC の話のところだけで、プログラミング言語の章（ここ）とまとめは残す。
--->
-
----
-chapter: プログラミング言語とフレームワーク
-transition: fade
----
-
-<ChapterLabel />
-
-## AWS CDKとは？
-
-<div class="official-quote mt-5">
-<div class="official-label">AWS公式の定義</div>
-
-<div class="definition faded tight">
-
-<span class="def-subject">AWS Cloud Development Kit (AWS CDK) は、</span><br>
-<s class="struck">コード</s><span class="replaced">プログラミング言語</span><em>でクラウドインフラストラクチャを定義し、</em><br>
-AWS CloudFormation を通じてプロビジョニングするための、<br>
-オープンソースの<em>ソフトウェア開発フレームワーク</em>です。
-
-</div>
-
-<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
-</div>
-
-<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
-
-<!--
-2026-11-03 本人（round 6）: 「コード」に取り消し線を付け、「プログラミング言語」を添えてハイライトする。公式の「コード」を取り消し線で残す見せ方は 10-30 16:15、10-31 12:52、13:16。注記は付けない。
+2026-11-04 本人（round 17）: この章のピックアップは「ソフトウェア開発フレームワークです」だけにする。「（プログラミング言語で）クラウドインフラストラクチャを定義し」は拾わない。取り消し線のページはやめ、プログラミング言語の話は特徴 ① にした。定義の全文はどのページでも同じ。
 -->
 
 ---
@@ -390,10 +362,36 @@ class: text-center
 chapter: プログラミング言語とフレームワーク
 ---
 
-## プログラミング言語で何が嬉しい？
+<h2 style="font-size: 1.6rem; white-space: nowrap">ソフトウェア開発フレームワーク「AWS CDK」の特徴</h2>
 
 <!--
-2026-11-03 本人（round 9）: 恩恵のページを、初心者支部で登壇したスライドの「IaCの特徴」「IaCがAIに向いている理由」と同じ型で作り直した。この見出しのページ → 「① 〜」「② 〜」を view-transition でつなぐ。カスタムリソースと IDE の話は入れない。
+2026-11-03 本人（round 9）: 恩恵のページを、初心者支部で登壇したスライドの「IaCの特徴」「IaCがAIに向いている理由」と同じ型で作り直した。この見出しのページ → 「① 〜」「② 〜」「③ 〜」を view-transition でつなぐ（2026-11-04 に ① を足して ③ まで）。カスタムリソースと IDE の話は入れない。
+-->
+
+---
+chapter: プログラミング言語とフレームワーク
+transition: view-transition
+---
+
+<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
+
+<div style="view-transition-name: cdk-benefit">
+  <span class="not-own">ソフトウェア開発フレームワーク「AWS CDK」の特徴 ①</span>
+  <h2>プログラミング言語で書ける</h2>
+</div>
+
+<div class="text-lg mt-2 not-own">TypeScriptやPythonなど、ふだんの言語でインフラを定義できる</div>
+
+```ts
+const table = new dynamodb.TableV2(this, 'Table', {
+  partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+});
+```
+
+<div class="text-base mt-2 text-center not-own">TypeScript / JavaScript / Python / Java / C# / Go</div>
+
+<!--
+2026-11-04 本人（round 17）: 特徴の ① を「プログラミング言語で書ける」にし、前の ①② を ②③ にずらした。説明とコードの例はエージェントが書いた。対応している言語は https://docs.aws.amazon.com/cdk/v2/guide/languages.html
 -->
 
 ---
@@ -404,7 +402,7 @@ transition: view-transition
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">プログラミング言語で嬉しいこと ①</span>
+  <span class="not-own">ソフトウェア開発フレームワーク「AWS CDK」の特徴 ②</span>
   <h2>インフラの設定を抽象化できる</h2>
 </div>
 
@@ -425,7 +423,7 @@ chapter: プログラミング言語とフレームワーク
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">プログラミング言語で嬉しいこと ②</span>
+  <span class="not-own">ソフトウェア開発フレームワーク「AWS CDK」の特徴 ③</span>
   <h2>デプロイ前の検証手段が豊富</h2>
 </div>
 
