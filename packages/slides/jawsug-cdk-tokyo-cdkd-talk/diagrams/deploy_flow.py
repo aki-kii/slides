@@ -144,8 +144,8 @@ p.append(group(335, 66 + DY, 178, 278, "アセット"))
 FILES_Y, FILES_H = 140, 148
 p.append(f'<rect x="348" y="{FILES_Y}" width="152" height="{FILES_H}" rx="10" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>')
 for name, y, labels in (("template", FILES_Y + 10, ["CloudFormation", "テンプレート"]),
-                         ("code", FILES_Y + 52, ["Lambdaソースコード"]),
-                         ("asset", FILES_Y + 88, ["S3静的ファイル"])):
+                         ("code", FILES_Y + 52, ["Lambdaの", "ソースコード"]),
+                         ("asset", FILES_Y + 92, ["S3に配信する", "静的ファイル"])):
     p.append(icon(name, 368, y, 26))
     first = y + 13 + 4 - 7 * (len(labels) - 1)
     for i, label in enumerate(labels):

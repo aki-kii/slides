@@ -354,20 +354,12 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
-<!--
-2026-11-04 本人（round 17）: この章のピックアップは「ソフトウェア開発フレームワークです」だけにする。「（プログラミング言語で）クラウドインフラストラクチャを定義し」は拾わない。取り消し線のページはやめ、プログラミング言語の話は特徴 ① にした。定義の全文はどのページでも同じ。
--->
-
----
-layout: center
-class: text-center
-chapter: プログラミング言語とフレームワーク
----
-
-<h2 style="font-size: 1.6rem; white-space: nowrap">ソフトウェア開発フレームワーク「AWS CDK」の特徴</h2>
+<Overlay clickStart=1>
+  フレームワーク「AWS CDK」としての特徴を説明します！
+</Overlay>
 
 <!--
-2026-11-03 本人（round 9）: 恩恵のページを、初心者支部で登壇したスライドの「IaCの特徴」「IaCがAIに向いている理由」と同じ型で作り直した。この見出しのページ → 「① 〜」「② 〜」「③ 〜」を view-transition でつなぐ（2026-11-04 に ① を足して ③ まで）。カスタムリソースと IDE の話は入れない。
+2026-11-04 本人（round 19）: 見出しだけのページ「ソフトウェア開発フレームワーク「AWS CDK」の特徴」はやめ、ここにオーバーレイ「フレームワーク「AWS CDK」としての特徴を説明します！」を出す。このあと ①〜③ を view-transition でつなぐ。round 17: この章のピックアップは「ソフトウェア開発フレームワークです」だけにする。「（プログラミング言語で）クラウドインフラストラクチャを定義し」は拾わない。取り消し線のページはやめ、プログラミング言語の話は特徴 ① にした。定義の全文はどのページでも同じ。
 -->
 
 ---
@@ -382,7 +374,7 @@ transition: view-transition
   <h2>プログラミング言語で書ける</h2>
 </div>
 
-<div class="text-lg mt-2 not-own">TypeScriptやPythonなど、ふだんの言語でインフラを定義できる</div>
+<div class="text-lg mt-2 not-own">プログラミング言語で書けることが、このあとの2つの特徴の下地になっている</div>
 
 ```ts
 const table = new dynamodb.TableV2(this, 'Table', {
@@ -562,12 +554,12 @@ chapter: まとめ
 <div class="official-quote mt-5">
 <div class="official-label">AWS公式の定義</div>
 
-<div class="definition summary tight">
+<div class="definition tight">
 
 AWS Cloud Development Kit (AWS CDK) は、<br>
-<s class="struck">コード</s><span class="replaced">プログラミング言語</span>で<em>クラウドインフラストラクチャを定義し、</em><br>
-<em>AWS CloudFormation を通じてプロビジョニングするための、</em><br>
-<em>オープンソースのソフトウェア開発フレームワーク</em>です。
+コードでクラウドインフラストラクチャを定義し、<br>
+AWS CloudFormation を通じてプロビジョニングするための、<br>
+オープンソースのソフトウェア開発フレームワークです。
 
 </div>
 
@@ -577,7 +569,7 @@ AWS Cloud Development Kit (AWS CDK) は、<br>
 <BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 <!--
-最後のまとめで定義をもう一度出す（10-31 13:21）。発表で取り上げた部分を全部ハイライトする。「コード」は 16 枚目と同じ差し替え。
+最後のまとめで定義をもう一度出す（10-31 13:21）。2026-11-04 本人: 強調も取り消し線も付けず、全文を黒のまま見せる。
 -->
 
 ---
