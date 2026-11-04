@@ -393,10 +393,11 @@ const fn = new NodejsFunction(this, 'Function', {
 
 </div>
 
-<div v-click class="mt-3">
-  <div style="font-size: 0.9rem; white-space: nowrap">ただし、AIが書くのでプログラミング言語で書けることが直接的にはメリットになりづらくなってきました</div>
-  <div class="text-lg mt-1">→ AI時代でもCDKのメリットとなる特徴を紹介します！</div>
-</div>
+<div class="text-lg mt-3">ただし、AIが書くのでプログラミング言語で書けることが<br>直接的にはメリットになりづらくなってきました</div>
+
+<Overlay clickStart=1>
+  → AI時代でもCDKのメリットとなる特徴を紹介します！
+</Overlay>
 
 <!--
 2026-11-04 本人（round 17）: 特徴の ① を「プログラミング言語で書ける」にし、前の ①② を ②③ にずらした。round 20: リードと最後の一文は本人の文。コードの例は NodejsFunction（エージェントが書いた）。対応している言語は https://docs.aws.amazon.com/cdk/v2/guide/languages.html
@@ -412,14 +413,10 @@ transition: view-transition
   <h2>インフラの設定を抽象化している</h2>
 </div>
 
-<div class="text-lg mt-2">適切な抽象化により少ない実装で意図を伝えられる</div>
+<div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">適切な抽象化により少ない実装で意図が伝えられるため、人間にもAIにも理解しやすい</div>
 
-<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-2 fig-benefit-wide" />
+<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-3 fig-benefit-wide" />
 
-<div class="text-base mt-1">
-  <div>AIにとって読みやすく</div>
-  <div>→ 人間にもAIにも設定の意図が伝わりやすい</div>
-</div>
 
 <!--
 2026-11-03 本人（round 8〜9）: 例は bucket.grants.write(taskRole) か myBucket.grantRead(myFunction)。よく知られている grantRead にした。右は grantRead が作るポリシーの中身を抜き出したもの。図は diagrams/benefit_abstract.py。2026-11-04 本人（round 20）: ぼやけて見えるので文字を大きくして縮めずに出し、作られるリソースを図にした。
@@ -605,3 +602,17 @@ layout: ending
   <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin: 0;">＼ ご清聴ありがとうございました！ ／</p>
   <img src="/images/aboutme/eye-catch.png" class="h-36" />
 </div>
+
+---
+layout: default
+---
+
+<div class="promo-logo"><img src="/images/aboutme/jawsug-cdk-logo.png" alt="JAWS-UG CDK支部" /></div>
+
+<div class="promo-catch">2026年のAWS CDK振り返り会</div>
+
+<img class="promo-banner" src="/images/cdk27-banner.png" alt="CDK #27 2026年のAWS CDK 振り返り会" />
+
+<div class="promo-when">12月(日付未定) 19:30-21:00</div>
+
+<div class="promo-note">近日connpass公開予定</div>

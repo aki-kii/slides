@@ -639,7 +639,7 @@
 .code-narrow { width: 620px; margin-left: auto; margin-right: auto; }
 .code-narrow pre { padding: 0.9rem 1.2rem !important; }
 .code-narrow pre code { font-size: 1em !important; line-height: 1.5 !important; }
-.fig-benefit-wide { width: 800px; }
+.fig-benefit-wide { width: 880px; }
 .oss-text .oss-sec { font-size: 1.2rem; font-weight: 700; color: #0e8a6e; margin-top: 0.6rem; }
 .slidev-layout .oss-text p { font-size: 1.15rem; font-weight: 700; margin: 0.1rem 0 0.4rem; }
 .slidev-layout .oss-text ul { margin-top: 0.1rem; }
@@ -661,3 +661,11 @@
 .slidev-layout .oss-text2 > ul > li { font-size: 1rem; font-weight: 700; line-height: 1.5; margin-bottom: 0.35rem; }
 .slidev-layout .oss-text2 ul ul li { font-size: 0.85rem; font-weight: 400; line-height: 1.5; margin-bottom: 0.1rem; }
 .oss-mine2 { margin-top: 0.8rem; font-size: 1.1rem; font-weight: 700; color: #0e8a6e; }
+/* 宣伝のページ（JawsSonic の宣伝と同じ並び） */
+.promo-logo { position: absolute; top: 1.2rem; left: 1.6rem; }
+.promo-logo img { height: 56px; }
+.promo-catch { margin-top: 1.2rem; text-align: center; font-size: 1.9rem; font-weight: 700; }
+.promo-banner { display: block; width: 640px; margin: 1rem auto 0; border-radius: 10px; }
+.promo-when { margin-top: 1rem; text-align: center; font-size: 1.2rem; font-weight: 700; }
+.promo-note { margin-top: 0.3rem; text-align: center; font-size: 1rem; color: #6b7684; }
+
