@@ -596,7 +596,7 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 layout: default
 ---
 
-<div class="promo-logo"><img src="/images/aboutme/jawsug-cdk-logo.png" alt="JAWS-UG CDK支部" /></div>
+<div class="promo-logo"><img src="/images/aboutme/jawsug-cdk-logo.png" alt="" /><span>JAWS-UG CDK支部</span></div>
 
 <div class="promo-catch">2026年のAWS CDK振り返り会</div>
 

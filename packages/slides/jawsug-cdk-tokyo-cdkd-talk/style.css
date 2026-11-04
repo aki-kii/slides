@@ -662,7 +662,8 @@
 .slidev-layout .oss-text2 ul ul li { font-size: 0.85rem; font-weight: 400; line-height: 1.5; margin-bottom: 0.1rem; }
 .oss-mine2 { margin-top: 0.8rem; font-size: 1.1rem; font-weight: 700; color: #0e8a6e; }
 /* 宣伝のページ（JawsSonic の宣伝と同じ並び） */
-.promo-logo { position: absolute; top: 1.2rem; left: 1.6rem; }
+.promo-logo { position: absolute; top: 1.2rem; left: 1.6rem; display: flex; align-items: center; gap: 0.6rem; }
+.promo-logo span { font-size: 1.1rem; font-weight: 700; color: #2c3e50; }
 .promo-logo img { height: 56px; }
 .promo-catch { margin-top: 1.2rem; text-align: center; font-size: 1.9rem; font-weight: 700; }
 .promo-banner { display: block; width: 640px; margin: 1rem auto 0; border-radius: 10px; }
