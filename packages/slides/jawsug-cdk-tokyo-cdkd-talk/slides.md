@@ -208,8 +208,6 @@ transition: fade
 
 <ChapterLabel />
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
 ## AWS CloudFormationとは？
 
 <div class="mt-3" style="font-size: 1.1rem; font-weight: 700; white-space: nowrap">コードでAWSリソースを定義し、AWSアカウントにプロビジョニングするサービス</div>
@@ -226,8 +224,6 @@ transition: fade
 ---
 
 <ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 ## CloudFormationのデプロイ
 
