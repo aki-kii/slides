@@ -488,7 +488,8 @@ chapter: オープンソース
   </ul>
   <div v-click="1" class="oss-mine">
     <p class="accent">僕のコードも入っています！</p>
-    <div class="oss-pr"><a href="https://github.com/aws/aws-cdk/pull/35290" target="_blank" rel="noopener">aws/aws-cdk#35290 feat(apigatewayv2): add disableSchemaValidation for Websocket api</a><em class="kari-inline">仮：PRは未定</em></div>
+    <a class="pr-shot" href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener"><img src="/images/pr-35328.png" alt="aws/aws-cdk のプルリクエスト #35328「feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api」。Merged" /></a>
+    <div class="oss-pr"><a href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener">aws/aws-cdk#35328</a></div>
   </div>
 </div>
 
@@ -498,7 +499,7 @@ chapter: オープンソース
 
 <!--
 2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: 図をやめ、文字だけにした。round 23 で本人の文に差し替えた。「コミットの約半分はコミュニティから」は出典を確認中（CONTRIBUTING.md には数字が無く、community contributions significantly impact とだけある）。
-PR は仮で https://github.com/aws/aws-cdk/pull/35290 （2025-09-15 にマージ、作者 aki-kii）。ほかの候補は aws-cdk-cli#1127、aws-cdk#33728。
+2026-11-04 本人（round 24）: PR は https://github.com/aws/aws-cdk/pull/35328 （feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api、2026-03-03 にマージ、作者 aki-kii）に決めた。画面は GitHub のページを headless Chromium（幅 1280、ライトテーマ）で撮って、タイトルと Merged の行を切り抜いた（public/images/pr-35328.png）。
 -->
 
 ---
