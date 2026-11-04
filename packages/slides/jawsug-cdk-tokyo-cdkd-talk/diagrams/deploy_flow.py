@@ -170,7 +170,7 @@ def bootstrap_tag(cx, y):
 
 p += [bootstrap_tag(705, S3Y - 64), bootstrap_tag(700, ECRY - 64)]
 p = SEC["trunk"]
-p += [arrow(f"M500,{FILES_Y + FILES_H / 2} H519 V{S3Y} H685"), text(612, S3Y - 10, "アップロード")]
+p += [arrow(f"M500,{S3Y} H685"), text(612, S3Y - 10, "アップロード")]  # まっすぐ S3 へ（2026-11-04 本人）
 p.append(role_chip(556, S3Y + 12, ["ファイル用", "パブリッシュロール"]))
 p.append(bootstrap_tag(615, S3Y + 46))  # ロールも bootstrap で作られる（2026-11-04 本人）
 p += [arrow(f"M500,{ECRY} H685"), text(612, ECRY - 10, "ビルド＆アップロード")]
@@ -188,8 +188,9 @@ p = SEC["deploy"]
 p.append(step(779, 200, "deploy"))
 p.append(text(795, TOP + 50, "AWSリソースをデプロイする", 12, SUB, None, "start"))
 p.append(icon("cfn", 880, S3Y - 32, 64))
-p.append(text(880, S3Y + 52, "CloudFormation", 13, INK, 700))
-p.append(text(880, S3Y + 68, "でデプロイ", 13, INK, 700))
+# CloudFormation を通じてデプロイすることを出す（2026-11-04 本人）
+p.append(text(880, S3Y + 52, "CloudFormationを通じて", 13, INK, 700))
+p.append(text(880, S3Y + 68, "デプロイする", 13, INK, 700))
 
 
 defs = (f'<defs><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'

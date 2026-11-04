@@ -636,3 +636,5 @@
 .u-cs { text-decoration-color: #0E8A6E; }
 /* コードの影は PDF で灰色の箱になるので付けない（2026-11-04 本人） */
 .slidev-layout pre { box-shadow: none !important; }
+.code-narrow { width: 620px; margin-left: auto; margin-right: auto; }
+.fig-benefit-wide { width: 900px; }

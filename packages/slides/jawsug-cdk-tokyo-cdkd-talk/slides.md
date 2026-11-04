@@ -370,22 +370,30 @@ transition: view-transition
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：コードの例は仮</div></div>
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">ソフトウェア開発フレームワーク「AWS CDK」の特徴 ①</span>
+  <span class="not-own">CDKの特徴①</span>
   <h2>プログラミング言語で書ける</h2>
 </div>
 
-<div class="text-lg mt-2 not-own">プログラミング言語で書けることが、このあとの2つの特徴の下地になっている</div>
+<div class="text-lg mt-2">TypeScriptなどの使い慣れたプログラミング言語でAWSリソースを定義できます</div>
+
+<div class="code-narrow mt-4">
 
 ```ts
-const table = new dynamodb.TableV2(this, 'Table', {
-  partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+
+const fn = new NodejsFunction(this, 'Function', {
+  entry: 'lambda/index.ts',
 });
 ```
 
+</div>
+
 <div class="text-base mt-2 text-center not-own">TypeScript / JavaScript / Python / Java / C# / Go</div>
 
+<div v-click class="text-lg mt-4 text-center">→ プログラミング言語で書けるからこその仕組みがあります！</div>
+
 <!--
-2026-11-04 本人（round 17）: 特徴の ① を「プログラミング言語で書ける」にし、前の ①② を ②③ にずらした。説明とコードの例はエージェントが書いた。対応している言語は https://docs.aws.amazon.com/cdk/v2/guide/languages.html
+2026-11-04 本人（round 17）: 特徴の ① を「プログラミング言語で書ける」にし、前の ①② を ②③ にずらした。round 20: リードと最後の一文は本人の文。コードの例は NodejsFunction（エージェントが書いた）。対応している言語は https://docs.aws.amazon.com/cdk/v2/guide/languages.html
 -->
 
 ---
@@ -396,18 +404,18 @@ transition: view-transition
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">ソフトウェア開発フレームワーク「AWS CDK」の特徴 ②</span>
+  <span class="not-own">CDKの特徴②</span>
   <h2>インフラの設定を抽象化できる</h2>
 </div>
 
 <div class="text-lg mt-2 not-own">抽象化されたメソッドを使うので、1行で設定の意図が読める</div>
 
-<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行が、CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-4 fig-benefit" />
+<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-4 fig-benefit-wide" />
 
 <div class="text-base mt-2 text-center">→ <span class="not-own">AIが書いたコードも、人がレビューしやすい</span></div>
 
 <!--
-2026-11-03 本人（round 8〜9）: 例は bucket.grants.write(taskRole) か myBucket.grantRead(myFunction)。よく知られている grantRead にした。右は grantRead が作るポリシーの中身を抜き出したもの。図は diagrams/benefit_abstract.py。
+2026-11-03 本人（round 8〜9）: 例は bucket.grants.write(taskRole) か myBucket.grantRead(myFunction)。よく知られている grantRead にした。右は grantRead が作るポリシーの中身を抜き出したもの。図は diagrams/benefit_abstract.py。2026-11-04 本人（round 20）: ぼやけて見えるので文字を大きくして縮めずに出し、作られるリソースを図にした。
 -->
 
 ---
@@ -417,7 +425,7 @@ chapter: プログラミング言語とフレームワーク
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">ソフトウェア開発フレームワーク「AWS CDK」の特徴 ③</span>
+  <span class="not-own">CDKの特徴③</span>
   <h2>デプロイ前の検証手段が豊富</h2>
 </div>
 

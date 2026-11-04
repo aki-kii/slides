@@ -119,7 +119,7 @@ save("cfn-define", head("0 0 810 210", "CloudFormationテンプレートであ�
 DDB = "Arch_Amazon-DynamoDB_64.svg"
 RES = [("Arch_Amazon-API-Gateway_64.svg", "API Gateway"), ("Arch_AWS-Lambda_64.svg", "Lambda"), (DDB, "DynamoDB")]
 LINE, CLOUD_INK = "#c9d0d9", "#232F3E"
-# リードの下線と同じ色で、箱の名前をつなぐ（2026-11-04 本人）
+# リードの下線と同じ色で、箱の枠と名前をつなぐ（2026-11-04 本人）
 TPL_BLUE, STACK_ORANGE = "#2F6FB3", "#E67E22"
 
 
@@ -139,7 +139,7 @@ def i_arrow(d):
 
 
 cloud = lines(78, 82, swap={82: retext(LINES[81], "実リソース", "AWSアカウント")})
-body = [f'<rect x="20" y="50" width="250" height="140" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
+body = [f'<rect x="20" y="50" width="250" height="140" rx="12" fill="#ffffff" stroke="{TPL_BLUE}" stroke-width="2.5"/>',
         icon(TEMPLATE, 32, 60, 28), rtext(66, 80, "テンプレート（あるべき姿）", 14, TPL_BLUE, "bold")]
 for k, (f, name) in enumerate(RES):
     cx = 68 + 72 * k
@@ -159,7 +159,7 @@ body += [
     f'<rect x="572" y="20" width="408" height="208" rx="12" fill="#ffffff" stroke="{CLOUD_INK}" stroke-width="2"/>',
     '<g transform="translate(-170,-90)">' + "".join(cloud) + "</g>",
     g_arrow("M548,120 L588,120"), rtext(560, 108, "反映", 12, anchor="middle"),
-    f'<rect x="592" y="66" width="104" height="116" rx="12" fill="#ffffff" stroke="{INK}" stroke-width="2"/>',
+    f'<rect x="592" y="66" width="104" height="116" rx="12" fill="#ffffff" stroke="{STACK_ORANGE}" stroke-width="2.5"/>',
     icon(STACK, 624, 80, 40), rtext(644, 144, "スタック", 15, STACK_ORANGE, "bold", "middle"),
     rtext(644, 164, "状態を持つ", 12, SUB, anchor="middle"),
     # スタックの今の状態を CloudFormation が読んで比べる
