@@ -172,7 +172,6 @@ for k, (f, name) in enumerate(RES):
     hi = f == DDB
     body.append(rtext(854, y + 28, name, 14, GREEN if hi else INK, "bold" if hi else "normal"))
     body.append((g_arrow if hi else i_arrow)(f"M698,120 C730,120 760,{y + 22} 794,{y + 22}"))
-body.append(rtext(694, 220, "スタックが AWS リソースをデプロイして管理する", 12, SUB))
 save("cfn-deploy", head("0 0 1000 262", "CloudFormationがテンプレートとスタックの今の状態を比べて変更セットを作り、スタックに反映する。スタックからAPI Gateway、Lambda、DynamoDBがデプロイされる") + body + ["</svg>"])
 
 

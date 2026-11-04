@@ -88,5 +88,4 @@
     </g></svg>
 <text x="854" y="196" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="14" font-weight="bold" fill="#0E8A6E" text-anchor="start">DynamoDB</text>
 <path d="M698,120 C730,120 760,190 794,190" fill="none" stroke="#0E8A6E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#a-g)"/>
-<text x="694" y="220" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="12" font-weight="normal" fill="#6b7684" text-anchor="start">スタックが AWS リソースをデプロイして管理する</text>
 </svg>
