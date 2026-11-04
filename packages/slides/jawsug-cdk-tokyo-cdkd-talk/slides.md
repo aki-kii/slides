@@ -601,9 +601,9 @@ layout: default
 
 <div class="promo-catch">2026年のAWS CDK振り返り会</div>
 
-<img class="promo-banner" src="/images/cdk27-banner.png" alt="CDK #27 2026年のAWS CDK 振り返り会" />
-
 <div class="promo-when">12月(日付未定) 19:30-21:00</div>
+
+<img class="promo-banner" src="/images/cdk27-banner.png" alt="CDK #27 2026年のAWS CDK 振り返り会" />
 
 <div class="promo-note">近日connpass公開予定</div>
 
