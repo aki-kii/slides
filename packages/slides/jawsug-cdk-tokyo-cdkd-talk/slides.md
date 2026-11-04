@@ -407,8 +407,6 @@ chapter: プログラミング言語とフレームワーク
 transition: view-transition
 ---
 
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
-
 <div style="view-transition-name: cdk-benefit">
   <span class="not-own">CDKの特徴②</span>
   <h2>インフラの設定を抽象化している</h2>
@@ -430,8 +428,6 @@ transition: view-transition
 ---
 chapter: プログラミング言語とフレームワーク
 ---
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div></div>
 
 <div style="view-transition-name: cdk-benefit">
   <span class="not-own">CDKの特徴③</span>
@@ -484,21 +480,19 @@ chapter: オープンソース
 
 <ChapterLabel />
 
-## AWS CDKはOSS
+## AWS CDKとOSS(Open Source Software)
 
-<div class="oss-grid mt-4">
-<div class="oss-text">
-  <div class="oss-sec">OSSとは？</div>
-  <p>誰でも使える・読める・直せるソフトウェア</p>
-  <div class="oss-sec">CDKはAWSだけで作っているわけじゃない</div>
-  <ul>
-    <li>AWSの社員でなくても、誰でも機能追加やバグ修正ができる</li>
-    <li>コミットの約半分はコミュニティから</li>
-    <li>必要なのは高度なコードより、AWSの知識</li>
-  </ul>
-  <div v-click="1" class="oss-mine">
-    <p class="accent">僕のコードも入っています！</p>
-  </div>
+<div class="oss-grid mt-3">
+<div class="oss-text2">
+
+- OSSとは？
+  - オープンソース (open source) とは、ソフトウェアのソースコードを一般公開し、自由な使用、改良、配布を許可する開発モデルです。(<a href="https://www.redhat.com/ja/topics/open-source/what-is-open-source" target="_blank" rel="noopener">Redhatより</a>)
+- AWSも数多くのOSSを展開しており、AWS CDKもそのうちの１つ
+- AWSのメンバー以外にも誰だって貢献が可能
+  - コミットの約半数はコミュニティによるものとのこと(<a href="https://github.com/aws/aws-cdk/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.mdより</a>)
+
+<div v-click="1" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
+
 </div>
 <div v-click="1" class="oss-shot">
   <a class="pr-shot" href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener"><img src="/images/pr-35328.png" alt="aws/aws-cdk のプルリクエスト #35328「feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api」。Merged。aki-kii のコメントと説明の冒頭" /></a>

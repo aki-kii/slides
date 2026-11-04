@@ -657,3 +657,7 @@
 .oss-grid .oss-text li { font-size: 1rem !important; white-space: nowrap; }
 .oss-shot { margin-top: -0.6rem; }
 .oss-shot .oss-pr { margin-top: 0.5rem; justify-content: center; }
+.slidev-layout .oss-text2 ul { margin-top: 0; }
+.slidev-layout .oss-text2 > ul > li { font-size: 1rem; font-weight: 700; line-height: 1.5; margin-bottom: 0.35rem; }
+.slidev-layout .oss-text2 ul ul li { font-size: 0.85rem; font-weight: 400; line-height: 1.5; margin-bottom: 0.1rem; }
+.oss-mine2 { margin-top: 0.8rem; font-size: 1.1rem; font-weight: 700; color: #0e8a6e; }

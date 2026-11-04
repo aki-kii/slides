@@ -61,8 +61,11 @@ body = [
     '<tspan fill="#f8f8f2">myBucket.</tspan><tspan fill="#50fa7b">grantRead</tspan><tspan fill="#f8f8f2">(myFunction);</tspan></text>',
     # このコードで作られる AWS リソース。ロールは Lambda の右上、矢印は同じ形でそろえる（2026-11-05 本人）
     text(6, 148, "このコードで作られるAWSリソース", 15, weight="bold"),
-    *node("Res_AWS-Identity-Access-Management_Role_48.svg", 160, 160, "実行ロール", ""),
-    arrow(186, 252, 184, GREEN), text(219, 174, "アタッチ", 12, GREEN, "bold", anchor="middle"),
+    # 実行ロールは Lambda 関数の右肩に寄せる（2026-11-05 本人）
+    icon("Res_AWS-Identity-Access-Management_Role_48.svg", 78, 196, 40),
+    text(124, 222, "実行ロール", 14, weight="bold", anchor="start"),
+    f'<path d="M120,200 L252,186" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ba-g)"/>',
+    text(190, 184, "アタッチ", 12, GREEN, "bold", anchor="middle"),
     *node("Res_AWS-Identity-Access-Management_Permissions_48.svg", 280, 160, "IAMポリシー", "grantRead", GREEN),
     f'<rect x="250" y="154" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>',
     f'<path d="M312,206 L380,232" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ba-g)"/>',
