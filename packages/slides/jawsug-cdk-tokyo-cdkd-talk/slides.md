@@ -479,19 +479,23 @@ chapter: オープンソース
 
 ## AWS CDKはOSS
 
-<div class="text-lg mt-2 not-own">コントリビュートを受け付けているから、良いコンストラクトが育っていく</div>
+<div class="text-lg mt-2">コミュニティからの質の良い貢献によって、CDKの仕組みが作られています</div>
 
-<div class="oss-flow mt-10">
-  <div>AWS CDKはOSS</div>
-  <span>→</span>
-  <div>外からの<br>コントリビュートを<br>受け付けている</div>
-  <span>→</span>
-  <div class="accent-box">良いコンストラクトが<br>作られていく</div>
+<InlineSvg src="oss-cdk.svg" label="AWSとコミュニティの両方から、GitHubのaws/aws-cdkリポジトリにコードが入っていく" class="mx-auto mt-4 fig-oss" />
+
+<div v-click="1" class="pr-card mt-4">
+  <div class="pr-head"><span class="pr-merged">Merged</span><span class="pr-repo">aws/aws-cdk</span><span class="pr-num">#35290</span><em class="kari-inline">仮：PRは未定</em></div>
+  <div class="pr-title">feat(apigatewayv2): add disableSchemaValidation for Websocket api</div>
+  <div class="pr-say">僕のコードも入っています！</div>
 </div>
 
+<Overlay clickStart=2>
+  → CDKの周りにもOSSが広がっています
+</Overlay>
+
 <!--
-軽く流す（10-31 09:25）。
-2026-11-03 本人（round 11）: 資料の型（見出し＋リード＋図）に合わせてリードを足した。
+2026-11-04 本人（round 21）「とりあえず作ってみて」: 1 枚で、CDK は AWS が提供する OSS のフレームワーク、だれでもコントリビュートでき、コミュニティからの質の良い貢献で CDK の仕組みが作られている、自分のコードも入っている、と言う。「良いコンストラクトが作られていく」はコンストラクトを説明しなくなったので外した。貢献の割合や数は出さない。
+PR は仮で https://github.com/aws/aws-cdk/pull/35290 （2025-09-15 にマージ、作者 aki-kii）。ほかの候補は aws-cdk-cli#1127、aws-cdk#33728。図は diagrams/oss_flow.py。図の中の補足（「開発とメンテナンス」「世界中のコントリビューター」など）はエージェントが書いた。
 -->
 
 ---

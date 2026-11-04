@@ -638,3 +638,12 @@
 .slidev-layout pre { box-shadow: none !important; }
 .code-narrow { width: 620px; margin-left: auto; margin-right: auto; }
 .fig-benefit-wide { width: 900px; }
+.fig-oss { width: 820px; }
+.pr-card { width: 680px; margin-left: auto; margin-right: auto; padding: 0.5rem 0.9rem; border: 2px solid #c9d0d9; border-radius: 10px; background: #fff; }
+.pr-head { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; }
+.pr-merged { padding: 0 0.55rem; border-radius: 999px; background: #8250df; color: #fff; font-weight: 700; }
+.pr-repo { font-family: "Fira Code", monospace; color: #2c3e50; }
+.pr-num { color: #6b7684; }
+.pr-head .kari-inline { margin-left: auto; padding: 0 0.5rem; border: 1.5px solid #dd344c; border-radius: 999px; background: #fdecee; color: #dd344c; font-size: 0.55rem; font-style: normal; font-weight: 700; }
+.pr-title { margin-top: 0.2rem; font-family: "Fira Code", monospace; font-size: 0.75rem; white-space: nowrap; color: #2c3e50; }
+.pr-say { margin-top: 0.2rem; font-size: 0.95rem; font-weight: 700; color: #0e8a6e; }
