@@ -362,7 +362,7 @@ transition: view-transition
 ---
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">CDKの特徴①</span>
+  CDKの特徴①
   <h2>プログラミング言語で書ける</h2>
 </div>
 
@@ -401,7 +401,7 @@ transition: view-transition
 ---
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">CDKの特徴②</span>
+  CDKの特徴②
   <h2>インフラの設定を抽象化している</h2>
 </div>
 
@@ -419,7 +419,7 @@ chapter: プログラミング言語とフレームワーク
 ---
 
 <div style="view-transition-name: cdk-benefit">
-  <span class="not-own">CDKの特徴③</span>
+  CDKの特徴③
   <h2>変更を検証できる仕組みが豊富</h2>
 </div>
 
