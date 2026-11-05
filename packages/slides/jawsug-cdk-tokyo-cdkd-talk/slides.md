@@ -408,7 +408,7 @@ transition: view-transition
 
 <div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">適切な抽象化により少ない実装で意図が伝えられるため、人間にもAIにも理解しやすい</div>
 
-<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-3 fig-benefit-wide" />
+<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grants.read(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-3 fig-benefit-wide" />
 
 
 <!--
