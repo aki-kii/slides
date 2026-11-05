@@ -694,5 +694,4 @@
 /* AWS 公式の OSS に付ける札（2026-11-05） */
 .oss-groups .rows > div.aws-official { position: relative; }
 .oss-groups .aws-tag { position: absolute; top: -0.5rem; right: 0.6rem; padding: 0 0.5rem; border-radius: 999px; background: #0e8a6e; color: #fff !important; font-size: 0.55rem !important; font-weight: 700; line-height: 1.5; }
-.oss-groups { grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr); gap: 1rem; }
-.oss-groups .rows.oss-compact > div > span:not(.aws-tag) { font-size: 0.68rem; }
+.oss-groups { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }

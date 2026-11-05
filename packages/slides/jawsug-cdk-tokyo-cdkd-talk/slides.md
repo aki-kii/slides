@@ -528,9 +528,9 @@ chapter: オープンソース
   <div class="oss-group">
     <div class="oss-group-title">堅牢なCDKアプリを助けるOSS</div>
     <div class="rows oss-rows oss-compact">
-      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span>CDKのセキュリティやコンプライアンスを遵守するルールセット</span></div>
+      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span>CDKアプリのセキュリティを守るルールセット</span></div>
       <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span>CDKのセオリーを守るLinterプラグイン</span></div>
-      <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span>デプロイ時に気づく設定ミスをsynthの時点でチェックするルールセット</span></div>
+      <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span>デプロイ前に設定ミスを検証するルールセット</span></div>
       <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">書いていないプロパティまでドリフトを検出する</span></div>
     </div>
   </div>
