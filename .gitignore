@@ -8,3 +8,4 @@ components.d.ts
 **/export
 
 .claude/worktrees/*
+__pycache__/

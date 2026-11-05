@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "new-slide": "node scripts/create-slide.mjs",
+    "export-check": "node scripts/export-check.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   },
   "devDependencies": {
