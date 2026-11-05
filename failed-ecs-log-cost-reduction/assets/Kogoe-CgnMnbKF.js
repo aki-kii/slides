@@ -1,0 +1,1 @@
+import{o,e as s,i as t}from"./modules/vue-C09LZK9H.js";import{u as _}from"./slidev/context-B3bc3bUJ.js";import{_ as n}from"./index-DOek12sj.js";const r={class:"kogoe"},a={__name:"Kogoe",setup(c){return _(),(e,p)=>(o(),s("span",r,[t(e.$slots,"default",{},void 0,!0)]))}},f=n(a,[["__scopeId","data-v-ccfcdafd"]]);export{f as _};

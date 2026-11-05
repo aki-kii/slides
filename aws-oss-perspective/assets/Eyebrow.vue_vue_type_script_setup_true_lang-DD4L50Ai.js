@@ -1,0 +1,1 @@
+import{f as t,o,e as s,t as n}from"./modules/vue-DoQ4JpIF.js";import{u as r}from"./slidev/context-CZCd3gM4.js";const a={class:"eyebrow"},m=t({__name:"Eyebrow",props:{text:{}},setup(e){return r(),(c,p)=>(o(),s("span",a,n(e.text),1))}});export{m as _};
