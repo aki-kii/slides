@@ -3,7 +3,7 @@
 //
 // 使い方: node scripts/build-pages.mjs [--base /slides/] [デッキ名 ...]
 //   --base   サイトのルートのパス。既定は /slides/
-//   デッキ名 指定したデッキだけビルドする（省略すると全部）
+//   デッキ名 指定したデッキだけビルドする（省略すると EXCLUDE 以外の全部）
 
 import { execFileSync } from 'node:child_process';
 import {
@@ -15,6 +15,9 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { join, resolve } from 'node:path';
+
+// Pages に載せないデッキ（packages/slides/ のフォルダ名）
+const EXCLUDE = ['whats-cloud-assembly', 'cdk-3min-cooking'];
 
 const root = resolve(import.meta.dirname, '..');
 const slidesDir = join(root, 'packages', 'slides');
@@ -34,8 +37,16 @@ const decks = readdirSync(slidesDir, { withFileTypes: true })
     (d) => d.isDirectory() && existsSync(join(slidesDir, d.name, 'slides.md')),
   )
   .map((d) => d.name)
-  .filter((name) => only.length === 0 || only.includes(name))
+  .filter((name) =>
+    only.length > 0 ? only.includes(name) : !EXCLUDE.includes(name),
+  )
   .sort();
+
+for (const name of EXCLUDE) {
+  if (!existsSync(join(slidesDir, name, 'slides.md'))) {
+    console.warn(`EXCLUDE の ${name} は packages/slides/ にない`);
+  }
+}
 
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
