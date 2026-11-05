@@ -228,7 +228,7 @@ transition: fade
 
 ## CloudFormationのデプロイ
 
-<div class="text-lg mt-1 cfn-lead"><span class="u-tpl">CloudFormationテンプレート</span>でAWSリソースのあるべき姿を定義し、<br><span class="u-stack">スタック</span>が持つ現在の状態との差分を<span class="u-cs">変更セット</span>として抽出し、<br>それを元にAWSアカウントにプロビジョニングする</div>
+<div class="text-lg mt-1 cfn-lead"><span class="u-tpl">CloudFormationテンプレート</span>でAWSリソースの<span class="replaced">あるべき姿</span>を定義し、<br><span class="u-stack">スタック</span>が持つ<span class="replaced">現在の状態との差分</span>を<span class="u-cs">変更セット</span>として抽出し、<br>それを元にAWSアカウントにプロビジョニングする</div>
 
 <InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-6 fig-cfn-deploy" />
 
