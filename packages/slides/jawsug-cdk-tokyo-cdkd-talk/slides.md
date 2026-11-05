@@ -501,6 +501,8 @@ chapter: オープンソース
 <div class="oss-grid mt-3">
 <div class="oss-text2">
 
+<v-clicks>
+
 - OSSとは？
   - オープンソース (open source) とは、ソフトウェアのソースコードを一般公開し、自由な使用、改良、配布を許可する開発モデルです。(<a href="https://www.redhat.com/ja/topics/open-source/what-is-open-source" target="_blank" rel="noopener">Red Hatより</a>)
 - AWSも数多くのOSSを展開しており、AWS CDKもそのうちの１つ
@@ -508,10 +510,12 @@ chapter: オープンソース
   - コミュニティからの貢献がAWS CDKの開発に大きな影響を与えているとのこと(<a href="https://github.com/aws/aws-cdk/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.mdより</a>)
   - CDKへのコントリビュートを効率化してくれるAWS公式スキルもある(<a href="https://github.com/cdklabs/cdk-contribution-skill" target="_blank" rel="noopener">cdk-contribution-skill</a>)
 
-<div v-click="1" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
+</v-clicks>
+
+<div v-click="4" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
 
 </div>
-<div v-click="1" class="oss-shot">
+<div v-click="4" class="oss-shot">
   <div class="pr-stack">
     <a class="pr-back pr-back-1" href="https://github.com/aws/aws-cdk/pull/35290" target="_blank" rel="noopener"><span class="pr-back-title">feat(apigatewayv2): add disableSchemaValidation for Websocket api <span class="pr-back-num">#35290</span></span><span class="pr-back-meta"><span class="pr-merged">Merged</span>aki-kii merged on Sep 15, 2025</span></a>
     <a class="pr-back pr-back-2" href="https://github.com/aws/aws-cdk/pull/35991" target="_blank" rel="noopener"><span class="pr-back-title">chore(kms): support ML-DSA keys for keySpec <span class="pr-back-num">#35991</span></span><span class="pr-back-meta"><span class="pr-merged">Merged</span>aki-kii merged on Nov 10, 2025</span></a>
@@ -521,7 +525,7 @@ chapter: オープンソース
 </div>
 </div>
 
-<Overlay clickStart=2>
+<Overlay clickStart=5>
   AWS CDKに関連するOSSもたくさんあります！
 </Overlay>
 
