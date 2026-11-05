@@ -531,7 +531,7 @@ chapter: オープンソース
       <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span>CDKアプリのセキュリティを守るルールセット</span></div>
       <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span>CDKのセオリーを守るLinterプラグイン</span></div>
       <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span>デプロイ前に設定ミスを検証するルールセット</span></div>
-      <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span>検知漏れの無いドリフト管理ツール</span></div>
+      <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span>検知漏れを防げるドリフト管理ツール</span></div>
     </div>
   </div>
 </div>
