@@ -487,7 +487,6 @@ chapter: オープンソース
   <div class="pr-stack">
     <a class="pr-back pr-back-1" href="https://github.com/aws/aws-cdk/pull/35290" target="_blank" rel="noopener"><span class="pr-back-title">feat(apigatewayv2): add disableSchemaValidation for Websocket api <span class="pr-back-num">#35290</span></span><span class="pr-back-meta"><span class="pr-merged">Merged</span>aki-kii merged on Sep 15, 2025</span></a>
     <a class="pr-back pr-back-2" href="https://github.com/aws/aws-cdk/pull/35991" target="_blank" rel="noopener"><span class="pr-back-title">chore(kms): support ML-DSA keys for keySpec <span class="pr-back-num">#35991</span></span><span class="pr-back-meta"><span class="pr-merged">Merged</span>aki-kii merged on Nov 10, 2025</span></a>
-    <a class="pr-back pr-back-3" href="https://github.com/aws/aws-cdk/pull/33753" target="_blank" rel="noopener"><span class="pr-back-title">feat(logs): throw ValidationError instead of untyped Errors <span class="pr-back-num">#33753</span></span><span class="pr-back-meta"><span class="pr-merged">Merged</span>aki-kii merged on Mar 17, 2025</span></a>
   <a class="pr-shot" href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener"><img src="/images/pr-35328.png" alt="aws/aws-cdk のプルリクエスト #35328「feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api」。Merged。aki-kii のコメントと説明の冒頭" /></a>
   </div>
   <div class="oss-pr"><a href="https://github.com/aws/aws-cdk/pull/35328" target="_blank" rel="noopener">aws/aws-cdk#35328</a></div>
@@ -502,7 +501,7 @@ chapter: オープンソース
 2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: 図をやめ、文字だけにした。round 23 で本人の文に差し替えた。「コミットの約半分はコミュニティから」は出典を確認中（CONTRIBUTING.md には数字が無く、community contributions significantly impact とだけある）。
 2026-11-05 本人: 「約半数」は旧 CONTRIBUTING.md（master 時代）の数字で、今の main には無い。今の文面（community contributions, which significantly impact the development of the AWS CDK）に合わせて書き直し、リンクも main にした。
 2026-11-04 本人（round 24）: PR は https://github.com/aws/aws-cdk/pull/35328 （feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api、2026-03-03 にマージ、作者 aki-kii）に決めた。画面は GitHub のページを headless Chromium（幅 520 のスマホくらいの幅、ライトテーマ）で撮って、タイトルから aki-kii のコメントと説明の冒頭までを切り抜いた（public/images/pr-35328.png）。round 25 で右に縦長に置いた。
-2026-11-05 本人「僕のPRを何個か重なってるように見えるようにして」（6個は超えない）: 後ろに実際にマージされた PR を3枚重ねた（#35290、#35991、#33753）。この環境では GitHub の CSS が読めずスクショが崩れるので、後ろの3枚はタイトル・番号・Merged・マージ日を HTML で組んだカード。
+2026-11-05 本人「僕のPRを何個か重なってるように見えるようにして」（6個は超えない）: 後ろに実際にマージされた PR を3枚重ねた（#35290、#35991、#33753）。09:02 本人「合計3枚にする」: #33753 を外し、後ろは2枚。この環境では GitHub の CSS が読めずスクショが崩れるので、後ろの3枚はタイトル・番号・Merged・マージ日を HTML で組んだカード。
 -->
 
 ---
@@ -590,20 +589,6 @@ AWS CloudFormation を通じてプロビジョニングするための、<br>
 <!--
 最後のまとめで定義をもう一度出す（10-31 13:21）。2026-11-04 本人: 強調も取り消し線も付けず、全文を黒のまま見せる。
 -->
-
----
-layout: default
----
-
-<div class="promo-logo"><img src="/images/aboutme/jawsug-cdk-logo.png" alt="" /><span>JAWS-UG CDK支部</span></div>
-
-<div class="promo-catch">2026年のAWS CDK振り返り会</div>
-
-<div class="promo-when">12月(日付未定) 19:30-21:00</div>
-
-<img class="promo-banner" src="/images/cdk27-banner.png" alt="CDK #27 2026年のAWS CDK 振り返り会" />
-
-<div class="promo-note">近日connpass公開予定</div>
 
 ---
 layout: ending
