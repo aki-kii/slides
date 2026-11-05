@@ -50,7 +50,7 @@ YAML = ["Effect: Allow", "Action:", "  - s3:GetObject*", "  - s3:GetBucket*", " 
 
 body = [
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 332" width="100%" role="img" '
-    'aria-label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールに、S3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは、そのIAMポリシーが読み取りの権限を並べた形になる">',
+    'aria-label="AWS CDKのコード myBucket.grants.read(myFunction) の1行で、Lambda関数の実行ロールに、S3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは、そのIAMポリシーが読み取りの権限を並べた形になる">',
     '<!-- AWS Architecture Icons 2026-07-31 版（Icon-package_07312026） -->',
     f'<defs><marker id="ba-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{INK}"/></marker>'
     f'<marker id="ba-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{GREEN}"/></marker></defs>',
@@ -58,7 +58,7 @@ body = [
     icon("Res_Source-Code_48_Light.svg", 6, 6, 32), text(46, 30, "コード（AWS CDK）", 18, weight="bold"),
     '<rect x="6" y="46" width="430" height="64" rx="8" fill="#282a36"/>',
     f'<text x="26" y="86" font-family="{MONO}" font-size="20">'
-    '<tspan fill="#f8f8f2">myBucket.</tspan><tspan fill="#50fa7b">grantRead</tspan><tspan fill="#f8f8f2">(myFunction);</tspan></text>',
+    '<tspan fill="#f8f8f2">myBucket.grants.</tspan><tspan fill="#50fa7b">read</tspan><tspan fill="#f8f8f2">(myFunction);</tspan></text>',
     # このコードで作られる AWS リソース。ロールは Lambda の右上、矢印は同じ形でそろえる（2026-11-05 本人）
     text(6, 148, "このコードで作られるAWSリソース", 15, weight="bold"),
     # 実行ロールは Lambda 関数の右肩に寄せる（2026-11-05 本人）
@@ -66,7 +66,7 @@ body = [
     text(124, 222, "実行ロール", 14, weight="bold", anchor="start"),
     f'<path d="M120,200 L252,186" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ba-g)"/>',
     text(190, 184, "アタッチ", 12, GREEN, "bold", anchor="middle"),
-    *node("Res_AWS-Identity-Access-Management_Permissions_48.svg", 280, 160, "IAMポリシー", "grantRead", GREEN),
+    *node("Res_AWS-Identity-Access-Management_Permissions_48.svg", 280, 160, "IAMポリシー", "grants.read", GREEN),
     f'<rect x="250" y="154" width="60" height="60" rx="10" fill="none" stroke="{GREEN}" stroke-width="3"/>',
     f'<path d="M312,206 L380,232" fill="none" stroke="{GREEN}" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ba-g)"/>',
     text(352, 210, "読み取り権限", 12, GREEN, "bold", anchor="start"),

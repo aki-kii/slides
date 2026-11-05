@@ -630,10 +630,11 @@
 .definition.faded .def-subject { color: #2c3e50; }
 .fig-cfn-deploy { width: 900px; }
 /* CloudFormationのデプロイのリード: 図の箱の名前と同じ色の下線でつなぐ（2026-11-04 本人） */
-.u-tpl, .u-stack, .u-cs { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
-.u-tpl { text-decoration-color: #2F6FB3; }
-.u-stack { text-decoration-color: #E67E22; }
-.u-cs { text-decoration-color: #0E8A6E; }
+/* 下線ではなく、図の箱と同じ系統の薄い背景色で囲む（変更セットの緑の箱と同じ見せ方。2026-11-05 本人） */
+.u-tpl, .u-stack, .u-cs { padding: 0 0.2em; border-radius: 4px; border: 1.5px solid; }
+.u-tpl { background: #e8f0fa; border-color: #2F6FB3; }
+.u-stack { background: #fdf0e3; border-color: #E67E22; }
+.u-cs { background: #e9f5f1; border-color: #0E8A6E; border-style: dashed; }
 /* コードの影は PDF で灰色の箱になるので付けない（2026-11-04 本人） */
 .slidev-layout pre { box-shadow: none !important; }
 .code-narrow { width: 620px; margin-left: auto; margin-right: auto; }

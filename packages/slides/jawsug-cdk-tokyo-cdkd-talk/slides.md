@@ -211,7 +211,7 @@ transition: fade
 
 ## AWS CloudFormationとは？
 
-<div class="mt-3" style="font-size: 1.1rem; font-weight: 700; white-space: nowrap">コードでAWSリソースを定義し、AWSアカウントにプロビジョニングするサービス</div>
+<div class="mt-3" style="font-size: 1.1rem; font-weight: 700; white-space: nowrap">CloudFormationテンプレートでAWSリソースを定義し、<br>AWSアカウントにプロビジョニングするサービス</div>
 
 <InlineSvg src="cfn-define.svg" label="CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする" class="mx-auto mt-5 fig-iac-define" />
 
@@ -228,7 +228,7 @@ transition: fade
 
 ## CloudFormationのデプロイ
 
-<div class="text-lg mt-1 cfn-lead"><span class="u-tpl">CloudFormationテンプレート</span>でAWSリソースのあるべき姿を定義し、<br><span class="u-stack">スタック</span>が持つ現在の状態との差分を<span class="u-cs">変更セット</span>として抽出し、<br>それを元にAWSアカウントにプロビジョニングする</div>
+<div class="text-lg mt-1 cfn-lead"><span class="u-tpl">CloudFormationテンプレート</span>でAWSリソースの<span class="replaced">あるべき姿</span>を定義し、<br><span class="u-stack">スタック</span>が持つ<span class="replaced">現在の状態との差分</span>を<span class="u-cs">変更セット</span>として抽出し、<br>それを元にAWSアカウントにプロビジョニングする</div>
 
 <InlineSvg src="cfn-deploy.svg" label="CloudFormationが新しいテンプレートとスタックの現在の状態を比較し、差分の変更セットをスタックの実リソースへ反映する" class="mx-auto mt-6 fig-cfn-deploy" />
 
@@ -408,7 +408,7 @@ transition: view-transition
 
 <div class="mt-2" style="font-size: 1.05rem; white-space: nowrap">適切な抽象化により少ない実装で意図が伝えられるため、人間にもAIにも理解しやすい</div>
 
-<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grantRead(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-3 fig-benefit-wide" />
+<InlineSvg src="benefit-abstract.svg" label="AWS CDKのコード myBucket.grants.read(myFunction) の1行で、Lambda関数の実行ロールにS3バケットを読み取るIAMポリシーが付く。CloudFormationテンプレートでは読み取りの権限を並べたIAMポリシーになる" class="mx-auto mt-3 fig-benefit-wide" />
 
 
 <!--
@@ -433,6 +433,32 @@ chapter: プログラミング言語とフレームワーク
 <!--
 2026-11-03 本人（round 8〜9）: 検証手段は Linter、型チェック、単体テスト、cdk synth、cdk diff、cdk validate など。図は初心者支部で登壇したスライドの「IaCがAIに向いている理由 ②」の ai-validation.svg をそのまま使った（検証の下に「lint・validateなど」）。
 -->
+
+---
+chapter: オープンソース
+transition: fade
+---
+
+<ChapterLabel />
+
+## AWS CDKとは？
+
+<div class="official-quote mt-5">
+<div class="official-label">AWS公式の定義</div>
+
+<div class="definition">
+
+AWS Cloud Development Kit (AWS CDK) は、<br>
+コードでクラウドインフラストラクチャを定義し、<br>
+AWS CloudFormation を通じてプロビジョニングするための、<br>
+オープンソースのソフトウェア開発フレームワークです。
+
+</div>
+
+<div class="official-source">出典：AWS CDK v2 デベロッパーガイド「AWS CDK とは」</div>
+</div>
+
+<BottomLink href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" />
 
 ---
 chapter: オープンソース
@@ -475,6 +501,8 @@ chapter: オープンソース
 <div class="oss-grid mt-3">
 <div class="oss-text2">
 
+<v-clicks>
+
 - OSSとは？
   - オープンソース (open source) とは、ソフトウェアのソースコードを一般公開し、自由な使用、改良、配布を許可する開発モデルです。(<a href="https://www.redhat.com/ja/topics/open-source/what-is-open-source" target="_blank" rel="noopener">Red Hatより</a>)
 - AWSも数多くのOSSを展開しており、AWS CDKもそのうちの１つ
@@ -482,10 +510,12 @@ chapter: オープンソース
   - コミュニティからの貢献がAWS CDKの開発に大きな影響を与えているとのこと(<a href="https://github.com/aws/aws-cdk/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.mdより</a>)
   - CDKへのコントリビュートを効率化してくれるAWS公式スキルもある(<a href="https://github.com/cdklabs/cdk-contribution-skill" target="_blank" rel="noopener">cdk-contribution-skill</a>)
 
-<div v-click="1" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
+</v-clicks>
+
+<div v-click="4" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
 
 </div>
-<div v-click="1" class="oss-shot">
+<div v-click="4" class="oss-shot">
   <div class="pr-stack">
     <a class="pr-back pr-back-1" href="https://github.com/aws/aws-cdk/pull/35290" target="_blank" rel="noopener"><span class="pr-back-title">feat(apigatewayv2): add disableSchemaValidation for Websocket api <span class="pr-back-num">#35290</span></span><span class="pr-back-meta"><span class="pr-merged">Merged</span>aki-kii merged on Sep 15, 2025</span></a>
     <a class="pr-back pr-back-2" href="https://github.com/aws/aws-cdk/pull/35991" target="_blank" rel="noopener"><span class="pr-back-title">chore(kms): support ML-DSA keys for keySpec <span class="pr-back-num">#35991</span></span><span class="pr-back-meta"><span class="pr-merged">Merged</span>aki-kii merged on Nov 10, 2025</span></a>
@@ -495,7 +525,7 @@ chapter: オープンソース
 </div>
 </div>
 
-<Overlay clickStart=2>
+<Overlay clickStart=5>
   AWS CDKに関連するOSSもたくさんあります！
 </Overlay>
 
