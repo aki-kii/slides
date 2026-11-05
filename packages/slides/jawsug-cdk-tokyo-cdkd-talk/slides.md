@@ -479,7 +479,7 @@ chapter: オープンソース
 - AWSも数多くのOSSを展開しており、AWS CDKもそのうちの１つ
 - AWSのメンバー以外にも誰だって貢献が可能
   - コミュニティからの貢献がAWS CDKの開発に大きな影響を与えているとのこと(<a href="https://github.com/aws/aws-cdk/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.mdより</a>)
-  - <span class="not-own">IssueからPRまでをAIが手伝ってくれる公式のスキルもある</span>(<a href="https://github.com/cdklabs/cdk-contribution-skill" target="_blank" rel="noopener">cdk-contribution-skill</a>)
+  - CDKへのコントリビュートを効率化してくれるAWS公式スキルもある(<a href="https://github.com/cdklabs/cdk-contribution-skill" target="_blank" rel="noopener">cdk-contribution-skill</a>)
 
 <div v-click="1" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
 
@@ -521,16 +521,16 @@ chapter: オープンソース
   <div class="oss-group">
     <div class="oss-group-title">CDKアプリの設計を助けるOSS</div>
     <div class="rows oss-rows oss-compact">
-      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>aws-cdk-examples</b><i>aws-samples</i></p><span class="not-own">CDKのサンプルプロジェクト集</span></div>
-      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>BLEA</b><i>aws-samples</i></p><span class="not-own">安全なベースライン環境を作るCDKテンプレート</span></div>
+      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>aws-cdk-examples</b><i>aws-samples</i></p><span>CDKのサンプルプロジェクト集</span></div>
+      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>BLEA</b><i>aws-samples</i></p><span>安全なベースライン環境を作るCDKテンプレート</span></div>
     </div>
   </div>
   <div class="oss-group">
     <div class="oss-group-title">堅牢なCDKアプリを助けるOSS</div>
     <div class="rows oss-rows oss-compact">
-      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span class="not-own">ルールでCDKアプリを確かめる</span></div>
-      <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span class="not-own">CDK用のリントのプラグイン</span></div>
-      <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span class="not-own">デプロイ時の失敗をsynthの時点で見つける</span></div>
+      <div class="aws-official"><span class="aws-tag">AWS公式</span><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span>CDKのセキュリティやコンプライアンスを遵守するルールセット</span></div>
+      <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span>CDKのセオリーを守るLinterプラグイン</span></div>
+      <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span>デプロイ時に気づく設定ミスをsynthの時点でチェックするルールセット</span></div>
       <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">書いていないプロパティまでドリフトを検出する</span></div>
     </div>
   </div>
@@ -557,7 +557,7 @@ chapter: オープンソース
 <!--
 2026-11-05 14:00 本人「1ページにまとめて、目的によってグルーピングする」: 「関連するOSS ①②」の2枚（役割で分けた形 → 13:53 に出どころで分けた形）をやめて1枚にした。出どころは右端の作者でわかる。
 載せるものは 13:56 の剪定案（AWS: aws-cdk-examples・BLEA・aws-solutions-constructs・cdk-nag、コミュニティ: cdkd・cdk-preflight・awscdk-lint・cdk-real-drift）。外したもの: cdk8s、cdk-monitoring-constructs、cfn-exec-policy、cfn-idle-cost（できて間もなく、今日の話につながる所がない。検証中）、cdk-terrain（Terraform 向け）。aws-cdk-examples は 13:58 本人「これや！」（10-31 12:58 の「awesome-cdk」と言っていたもの）。
-14:01〜14:02 本人: グループは「参考になる系／堅牢なコードを書ける系／便利系」。便利系に delstack（go-to-k）を足し、aws-solutions-constructs を外して8つ。14:13 本人: cdk-local（go-to-k）も便利系に足した（9つ）。14:20 本人: 「AI系」を足し、Agent Toolkit for AWS（aws/agent-toolkit-for-aws。AWS Labs の MCP サーバーやスキルの後継、2026-05 GA）と cdk-skills（go-to-k）を入れた（11）。14:43 本人: グループ名を「〜を助けるOSS」でそろえる。「堅牢なCDKアプリを助けるOSS」は本人、ほかの3つはエージェントが合わせた。14:46 本人: cdk-real-drift を「堅牢なCDKアプリを助けるOSS」に移した。14:48 本人: AWS 公式のもの（aws-samples、cdklabs、aws）の右上に「AWS公式」の札を付ける。説明はエージェントが書いた。口頭で話すのは cdk-nag・cdkd ともう1つの案（13:28 の台本）。
+14:01〜14:02 本人: グループは「参考になる系／堅牢なコードを書ける系／便利系」。便利系に delstack（go-to-k）を足し、aws-solutions-constructs を外して8つ。14:13 本人: cdk-local（go-to-k）も便利系に足した（9つ）。14:20 本人: 「AI系」を足し、Agent Toolkit for AWS（aws/agent-toolkit-for-aws。AWS Labs の MCP サーバーやスキルの後継、2026-05 GA）と cdk-skills（go-to-k）を入れた（11）。14:43 本人: グループ名を「〜を助けるOSS」でそろえる。「堅牢なCDKアプリを助けるOSS」は本人、ほかの3つはエージェントが合わせた。14:46 本人: cdk-real-drift を「堅牢なCDKアプリを助けるOSS」に移した。14:48 本人: AWS 公式のもの（aws-samples、cdklabs、aws）の右上に「AWS公式」の札を付ける。15:22 本人: グループ名・見出し・aws-cdk-examples〜cdk-preflight の説明を本人の言葉で確定。説明はエージェントが書いた。口頭で話すのは cdk-nag・cdkd ともう1つの案（13:28 の台本）。
 -->
 
 ---
