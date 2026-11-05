@@ -211,7 +211,7 @@ transition: fade
 
 ## AWS CloudFormationとは？
 
-<div class="mt-3" style="font-size: 1.1rem; font-weight: 700; white-space: nowrap">コードでAWSリソースを定義し、AWSアカウントにプロビジョニングするサービス</div>
+<div class="mt-3" style="font-size: 1.1rem; font-weight: 700; white-space: nowrap">CloudFormationテンプレートでAWSリソースを定義し、<br>AWSアカウントにプロビジョニングするサービス</div>
 
 <InlineSvg src="cfn-define.svg" label="CloudFormationテンプレートであるべき姿を定義し、CloudFormationがそれを読んでスタックとしてリソースをプロビジョニングする" class="mx-auto mt-5 fig-iac-define" />
 
