@@ -42,6 +42,7 @@ writeFileSync(
 );
 
 const slidesContent = `---
+routerMode: hash
 title: ${name}
 mdc: true
 drawings:

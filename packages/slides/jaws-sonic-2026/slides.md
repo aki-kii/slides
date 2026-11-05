@@ -1,6 +1,7 @@
 ---
+routerMode: hash
 layout: title
-title: jaws-sonic-2026
+title: cdk deploy JawsSonic 〜MARATHONしながらAWSリソースをデプロイしてみよう〜
 mdc: true
 drawings:
   persist: false

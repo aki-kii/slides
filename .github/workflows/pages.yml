@@ -1,0 +1,36 @@
+name: Deploy slides to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # mise.toml の Node 24 と pnpm をそのまま使う
+      - uses: jdx/mise-action@v2
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build:pages
+
+      # gh-pages ブランチに置く。あとでブランチのプレビューを preview/<ブランチ>/ に足せるように、
+      # Actions の Pages ではなくブランチから公開する形にしている
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: 'deploy: ${{ github.sha }}'

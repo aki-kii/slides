@@ -2,3 +2,9 @@ packages:
   - 'packages/slides/*'
   - 'packages/ui'
   - 'packages/tools'
+
+# 依存のビルドスクリプトを動かしてよいか（pnpm 11 以降は決めていないとインストールが止まる）
+allowBuilds:
+  esbuild: true
+  # ブラウザの取得は PDF の書き出しで必要なときに `pnpm exec playwright install chromium` で行う
+  playwright-chromium: false
