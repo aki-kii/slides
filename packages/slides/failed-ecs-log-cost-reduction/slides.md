@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 layout: title
 drawings:
   persist: false

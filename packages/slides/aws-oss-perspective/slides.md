@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 background: '#015d7d'
 class: 'cover'
 drawings:
