@@ -683,3 +683,9 @@
 .pr-back-meta { display: flex; align-items: center; gap: 5px; font-size: 0.45rem; color: #59636e; }
 .pr-merged { padding: 1px 7px; border-radius: 999px; background: #8250df; color: #fff; font-weight: 600; font-size: 0.45rem; }
 .oss-shot .oss-pr { position: relative; z-index: 5; }
+
+/* 関連するOSS を目的で分けた1枚（2026-11-05） */
+.oss-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: start; }
+.oss-group { margin-bottom: 0.7rem; }
+.oss-group-title { display: inline-block; margin-bottom: 0.3rem; font-size: 0.85rem; font-weight: 700; color: #0e8a6e; }
+.oss-groups .row-head i { white-space: nowrap; }

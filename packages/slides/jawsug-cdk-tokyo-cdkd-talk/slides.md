@@ -494,7 +494,7 @@ chapter: オープンソース
 </div>
 
 <Overlay clickStart=2>
-  → CDKの周りにもOSSが広がっています
+  AWS CDKに関連するOSSもたくさんあります！
 </Overlay>
 
 <!--
@@ -512,53 +512,42 @@ chapter: オープンソース
 
 <div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す3つは未定</div></div>
 
-<div style="view-transition-name: cdk-oss">
-  関連するOSS ①
-  <h2><span class="not-own">作るとデプロイを助けるOSS</span></h2>
+## AWS CDKに関連するOSS
+
+<div class="oss-groups mt-3">
+<div>
+  <div class="oss-group">
+    <div class="oss-group-title">参考になる系</div>
+    <div class="rows oss-rows oss-compact">
+      <div><p class="row-head"><b>aws-cdk-examples</b><i>aws-samples</i></p><span class="not-own">CDKのサンプルプロジェクト集</span></div>
+      <div><p class="row-head"><b>BLEA</b><i>aws-samples</i></p><span class="not-own">Baseline Environment on AWS。安全なベースライン環境を作るCDKテンプレート</span></div>
+    </div>
+  </div>
+  <div class="oss-group">
+    <div class="oss-group-title">堅牢なコードを書ける系</div>
+    <div class="rows oss-rows oss-compact">
+      <div><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span class="not-own">ルールでCDKアプリを確かめる</span></div>
+      <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span class="not-own">CDK用のリントのプラグイン</span></div>
+      <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span class="not-own">デプロイ時の失敗をsynthの時点で見つける</span></div>
+    </div>
+  </div>
 </div>
-
-<div class="text-lg mt-2 not-own">環境やリソースの定義と、デプロイの手間を減らすOSS</div>
-
-<div class="rows oss-rows oss-compact mt-3">
-  <div><p class="row-head"><b>baseline-environment-on-aws（BLEA）</b><i>aws-samples</i></p><span class="not-own">安全なベースライン環境を作るCDKテンプレート</span></div>
-  <div><p class="row-head"><b>cdk8s</b><i>cdk8s-team</i></p><span class="not-own">Kubernetesのアプリをコードで定義する</span></div>
-  <div><p class="row-head"><b>aws-solutions-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>awslabs</i></p><span class="not-own">検証済みの構成のコンストラクト集</span></div>
-  <div><p class="row-head"><b>cdk-monitoring-constructs</b><em class="kari-inline">仮：入れるか確認中</em><i>cdklabs</i></p><span class="not-own">監視を簡単に作るコンストラクト集</span></div>
-  <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span class="not-own">CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
+<div>
+  <div class="oss-group">
+    <div class="oss-group-title">便利系</div>
+    <div class="rows oss-rows oss-compact">
+      <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span class="not-own">CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
+      <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
+      <div><p class="row-head"><b>delstack</b><i>go-to-k</i></p><span class="not-own">消せないリソースを含むスタックも強制的に削除できるCLI</span></div>
+    </div>
+  </div>
 </div>
-
-<!--
-仮: スライドには全部載せ、口頭では 3 つくらいに絞る（10-30 01:05）。作成者は各リポジトリの持ち主を確かめた。AWS Solutions Constructs と cdk-monitoring-constructs は本人が話したか確認中（10-31 12:58）。
-2026-11-03 本人（round 11）: 資料の型に合わせ、2枚を「関連するOSS ①②」の前置き＋見出し＋リードにした。分け方は出どころ（AWS か個人か）ではなく役割にした（10-31 12:58「日本・海外は分けない」）。見出しとリードはエージェントが書いた。
--->
-
----
-chapter: オープンソース
-transition: view-transition
----
-
-<ChapterLabel />
-
-<div class="kari-row"><div class="kari kari-not-own">仮：本人の言葉じゃない</div><div class="kari">仮：口頭で話す3つは未定</div></div>
-
-<div style="view-transition-name: cdk-oss">
-  関連するOSS ②
-  <h2><span class="not-own">確かめるのを助けるOSS</span></h2>
-</div>
-
-<div class="text-lg mt-2 not-own">デプロイの前と後で、CDKアプリやスタックを確かめるOSS</div>
-
-<div class="rows oss-rows oss-compact mt-3">
-  <div><p class="row-head"><b>cdk-nag</b><i>cdklabs</i></p><span class="not-own">ルールでCDKアプリを確かめる</span></div>
-  <div><p class="row-head"><b>awscdk-lint</b><i>ren-yamanashi</i></p><span class="not-own">CDK用のリントのプラグイン</span></div>
-  <div><p class="row-head"><b>cdk-preflight</b><i>badmintoncryer</i></p><span class="not-own">デプロイ時の失敗をsynthの時点で見つける</span></div>
-  <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
-  <div><p class="row-head"><b>cfn-exec-policy</b><i>badmintoncryer</i></p><span class="not-own">CloudFormation実行ロールを最小権限にする</span></div>
-  <div><p class="row-head"><b>cfn-idle-cost</b><i>badmintoncryer</i></p><span class="not-own">アクセスがなくてもかかる月額を出す</span></div>
 </div>
 
 <!--
-仮: 口頭で話す 3 つは未定。作成者は各リポジトリの持ち主を確かめた。
+2026-11-05 14:00 本人「1ページにまとめて、目的によってグルーピングする」: 「関連するOSS ①②」の2枚（役割で分けた形 → 13:53 に出どころで分けた形）をやめて1枚にした。出どころは右端の作者でわかる。
+載せるものは 13:56 の剪定案（AWS: aws-cdk-examples・BLEA・aws-solutions-constructs・cdk-nag、コミュニティ: cdkd・cdk-preflight・awscdk-lint・cdk-real-drift）。外したもの: cdk8s、cdk-monitoring-constructs、cfn-exec-policy、cfn-idle-cost（できて間もなく、今日の話につながる所がない。検証中）、cdk-terrain（Terraform 向け）。aws-cdk-examples は 13:58 本人「これや！」（10-31 12:58 の「awesome-cdk」と言っていたもの）。
+14:01〜14:02 本人: グループは「参考になる系／堅牢なコードを書ける系／便利系」。便利系に delstack（go-to-k）を足し、aws-solutions-constructs を外して8つ。説明はエージェントが書いた。口頭で話すのは cdk-nag・cdkd ともう1つの案（13:28 の台本）。
 -->
 
 ---
