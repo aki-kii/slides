@@ -190,6 +190,11 @@ p.append(text(795, TOP + 50, "AWSリソースをデプロイする", 12, SUB, No
 p.append(icon("cfn", 880, S3Y - 32, 64))
 # CloudFormation を通じてデプロイすることを出す（2026-11-04 本人）
 p.append(text(880, S3Y + 52, "CloudFormation", 13, INK, 700))
+# deploy で使う2つのロール。CDK CLI がデプロイ用ロールで CloudFormation を呼び、CloudFormation が実行ロールでリソースを作る（2026-11-05 本人）
+p.append(role_chip(822, S3Y + 74, ["デプロイ用ロール"]))
+p.append(bootstrap_tag(880, S3Y + 98))
+p.append(role_chip(822, S3Y + 132, ["CloudFormation", "実行ロール"]))
+p.append(bootstrap_tag(880, S3Y + 170))
 
 
 defs = (f'<defs><marker id="mInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'
