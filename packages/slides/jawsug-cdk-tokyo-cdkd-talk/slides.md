@@ -538,6 +538,7 @@ chapter: オープンソース
     <div class="rows oss-rows oss-compact">
       <div><p class="row-head"><b>cdkd</b><i>go-to-k</i></p><span class="not-own">CloudFormationを通さずAWS SDKを直接呼ぶCDK CLI</span></div>
       <div><p class="row-head"><b>cdk-real-drift</b><i>go-to-k</i></p><span class="not-own">テンプレートに書いていないプロパティまでドリフトを検出する</span></div>
+      <div><p class="row-head"><b>cdk-local</b><i>go-to-k</i></p><span class="not-own">デプロイせずにCDKアプリを手元で動かせる</span></div>
       <div><p class="row-head"><b>delstack</b><i>go-to-k</i></p><span class="not-own">消せないリソースを含むスタックも強制的に削除できるCLI</span></div>
     </div>
   </div>
@@ -547,7 +548,7 @@ chapter: オープンソース
 <!--
 2026-11-05 14:00 本人「1ページにまとめて、目的によってグルーピングする」: 「関連するOSS ①②」の2枚（役割で分けた形 → 13:53 に出どころで分けた形）をやめて1枚にした。出どころは右端の作者でわかる。
 載せるものは 13:56 の剪定案（AWS: aws-cdk-examples・BLEA・aws-solutions-constructs・cdk-nag、コミュニティ: cdkd・cdk-preflight・awscdk-lint・cdk-real-drift）。外したもの: cdk8s、cdk-monitoring-constructs、cfn-exec-policy、cfn-idle-cost（できて間もなく、今日の話につながる所がない。検証中）、cdk-terrain（Terraform 向け）。aws-cdk-examples は 13:58 本人「これや！」（10-31 12:58 の「awesome-cdk」と言っていたもの）。
-14:01〜14:02 本人: グループは「参考になる系／堅牢なコードを書ける系／便利系」。便利系に delstack（go-to-k）を足し、aws-solutions-constructs を外して8つ。説明はエージェントが書いた。口頭で話すのは cdk-nag・cdkd ともう1つの案（13:28 の台本）。
+14:01〜14:02 本人: グループは「参考になる系／堅牢なコードを書ける系／便利系」。便利系に delstack（go-to-k）を足し、aws-solutions-constructs を外して8つ。14:13 本人: cdk-local（go-to-k）も便利系に足した（9つ）。説明はエージェントが書いた。口頭で話すのは cdk-nag・cdkd ともう1つの案（13:28 の台本）。
 -->
 
 ---
