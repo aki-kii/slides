@@ -64,12 +64,18 @@ for (const name of decks) {
       join(dir, 'public'),
       `${base}${name}/`,
     );
-    built.push({ name, title: readTitle(join(dir, 'slides.md')) ?? name });
+    const md = readFileSync(join(dir, 'slides.md'), 'utf8');
+    built.push({ name, title: readTitle(md) ?? name, date: readDate(md) });
   } catch {
     failed.push(name);
   }
 }
 
+// 一覧は登壇日の新しい順。日付が拾えないデッキは最後に名前順で並べる
+built.sort(
+  (a, b) =>
+    (b.date ?? '').localeCompare(a.date ?? '') || a.name.localeCompare(b.name),
+);
 writeFileSync(join(outDir, 'index.html'), indexHtml(built));
 writeFileSync(join(outDir, '.nojekyll'), '');
 
@@ -112,10 +118,18 @@ function* walk(dir) {
   }
 }
 
-function readTitle(file) {
-  const m = readFileSync(file, 'utf8').match(/^---\n([\s\S]*?)\n---/);
+function readTitle(md) {
+  const m = md.match(/^---\n([\s\S]*?)\n---/);
   const t = m?.[1].match(/^title:\s*(.+)$/m)?.[1].trim();
   return t?.replace(/^['"]|['"]$/g, '');
+}
+
+// 登壇日は表紙に書いてある日付（`2026.10.29（木）`、`2026/9/5 sat.` など）を使う。
+// slides.md の中で最初に出てくる日付を拾い、YYYY-MM-DD にそろえる
+function readDate(md) {
+  const m = md.match(/(20\d{2})[./-](\d{1,2})[./-](\d{1,2})/);
+  if (!m) return undefined;
+  return `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}`;
 }
 
 function esc(s) {
@@ -128,8 +142,8 @@ function esc(s) {
 function indexHtml(items) {
   const list = items
     .map(
-      ({ name, title }) =>
-        `      <li><a href="./${name}/"><span>${esc(title)}</span><code>${name}</code></a></li>`,
+      ({ name, title, date }) =>
+        `      <li><a href="./${name}/"><time>${date ?? ''}</time><span>${esc(title)}</span><code>${name}</code></a></li>`,
     )
     .join('\n');
   return `<!DOCTYPE html>
@@ -144,6 +158,7 @@ function indexHtml(items) {
       ul { list-style: none; padding: 0; }
       li a { display: block; padding: .75rem 1rem; margin: .5rem 0; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; color: inherit; }
       li a:hover { background: #f6f6f6; }
+      li time { display: block; font-size: .8rem; color: #666; }
       li span { display: block; font-weight: 600; }
       li code { font-size: .8rem; color: #888; }
     </style>
