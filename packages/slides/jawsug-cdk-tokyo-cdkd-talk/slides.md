@@ -479,6 +479,7 @@ chapter: オープンソース
 - AWSも数多くのOSSを展開しており、AWS CDKもそのうちの１つ
 - AWSのメンバー以外にも誰だって貢献が可能
   - コミュニティからの貢献がAWS CDKの開発に大きな影響を与えているとのこと(<a href="https://github.com/aws/aws-cdk/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.mdより</a>)
+  - <span class="not-own">IssueからPRまでをAIが手伝ってくれる公式のスキルもある</span>(<a href="https://github.com/cdklabs/cdk-contribution-skill" target="_blank" rel="noopener">cdk-contribution-skill</a>)
 
 <div v-click="1" class="oss-mine2">僕も何個かPullRequestを出してマージされています！</div>
 
@@ -501,7 +502,8 @@ chapter: オープンソース
 2026-11-04 本人（round 22）「OSSのページ図にするのは無理あるな。k.gotoさんの資料のように文字だけにするか」: 図をやめ、文字だけにした。round 23 で本人の文に差し替えた。「コミットの約半分はコミュニティから」は出典を確認中（CONTRIBUTING.md には数字が無く、community contributions significantly impact とだけある）。
 2026-11-05 本人: 「約半数」は旧 CONTRIBUTING.md（master 時代）の数字で、今の main には無い。今の文面（community contributions, which significantly impact the development of the AWS CDK）に合わせて書き直し、リンクも main にした。
 2026-11-04 本人（round 24）: PR は https://github.com/aws/aws-cdk/pull/35328 （feat(appsync): add EnhancedMetricsConfigProperty for GraphQL api、2026-03-03 にマージ、作者 aki-kii）に決めた。画面は GitHub のページを headless Chromium（幅 520 のスマホくらいの幅、ライトテーマ）で撮って、タイトルから aki-kii のコメントと説明の冒頭までを切り抜いた（public/images/pr-35328.png）。round 25 で右に縦長に置いた。
-2026-11-05 本人「僕のPRを何個か重なってるように見えるようにして」（6個は超えない）: 後ろに実際にマージされた PR を3枚重ねた（#35290、#35991、#33753）。09:02 本人「合計3枚にする」: #33753 を外し、後ろは2枚。この環境では GitHub の CSS が読めずスクショが崩れるので、後ろの3枚はタイトル・番号・Merged・マージ日を HTML で組んだカード。
+2026-11-05 本人「僕のPRを何個か重なってるように見えるようにして」（6個は超えない）: 後ろに実際にマージされた PR を3枚重ねた（#35290、#35991、#33753）。09:02 本人「合計3枚にする」: #33753 を外し、後ろは2枚。
+2026-11-05 14:17 本人: cdklabs/cdk-contribution-skill（Issue から PR までを助ける Agent Skill）を「誰だって貢献が可能」の下に添える。文はエージェントが書いた。この環境では GitHub の CSS が読めずスクショが崩れるので、後ろの3枚はタイトル・番号・Merged・マージ日を HTML で組んだカード。
 -->
 
 ---
