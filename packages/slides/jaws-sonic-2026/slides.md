@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 layout: title
 title: jaws-sonic-2026
 mdc: true
