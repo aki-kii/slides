@@ -17,7 +17,7 @@ import {
 import { join, resolve } from 'node:path';
 
 // Pages に載せないデッキ（packages/slides/ のフォルダ名）
-const EXCLUDE = ['whats-cloud-assembly', 'cdk-3min-cooking'];
+const EXCLUDE = ['cdk-3min-cooking'];
 
 const root = resolve(import.meta.dirname, '..');
 const slidesDir = join(root, 'packages', 'slides');
