@@ -1,0 +1,390 @@
+---
+routerMode: hash
+layout: title
+drawings:
+  persist: false
+transition: fade
+title: MuseをAI秘書にして健康管理を任せてみた
+mdc: true
+htmlAttrs:
+  lang: ja
+addons:
+  - '@slides/ui'
+fonts:
+  sans: 'Noto Sans JP'
+  serif: 'Noto Sans JP'
+  mono: 'Fira Code'
+---
+
+<div class="text-2xl font-normal opacity-90">自由が丘.any #1</div>
+
+# MuseをAI秘書にして<br>健康管理を任せてみた
+
+<div class="title-meta">
+
+2026.11.11（水）\
+池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
+
+</div>
+
+<div class="absolute right-8 bottom-8">
+  <img src="/images/aboutme/eye-catch.png" class="h-36" />
+</div>
+
+---
+layout: profile
+image: /images/aboutme/me.jpeg
+name: アキキー | 池田 晃尚
+transition: slide-left
+---
+
+- 普段はAWSコミュニティ（JAWS-UG）によくいます
+- コーヒーが好き
+- ランニングしながらAI（Grok Bot）と会話して開発してます
+
+---
+layout: center
+transition: fade
+clicks: 1
+---
+
+<StatementList>
+  <Statement
+    lead="健康になりたい！！！！"
+    :notes="['30歳を超えてからそう思うことが増えました']"
+  />
+  <Statement
+    v-click="1"
+    note="しかし、"
+    lead="健康になるためには"
+    :notes="['ハードルがたくさんあります']"
+  />
+</StatementList>
+
+---
+layout: center
+transition: fade
+clicks: 1
+---
+
+<StatementList>
+  <Statement
+    lead="健康な生活は、食事と運動から"
+    lead-size="md"
+    :notes="['料理も、体を動かすのも、やること自体は好きです', 'でも、その前後で「考えること」がとにかく多いんです']"
+  />
+  <Statement
+    v-click="1"
+    note="健康には考えることがたっっっくさんあって大変ですね！"
+    lead="ということで健康管理をAIに全部任せちゃいました！"
+    lead-size="md"
+  />
+</StatementList>
+
+---
+layout: center
+chapter: 説明
+---
+
+<ChapterLabel />
+
+<StatementList>
+  <Statement>
+    パーソナルAIエージェント Museを<br>『みのるん式』によってAI秘書にしてます
+  </Statement>
+</StatementList>
+
+---
+chapter: 説明
+---
+
+<ChapterLabel />
+
+# パーソナルAIエージェントとは？
+
+<div class="muse-feature-text">質問に答えるだけでなく、あなたの代わりにアクションを実行して物事を片付けるAI</div>
+<div class="definition-source">Meta社の公式FAQより意訳</div>
+
+<div class="kari-row">
+  <div class="kari">仮：説明は書き味をそろえた仮置き</div>
+</div>
+
+<div class="agent-split">
+<div class="agent-grid">
+  <div class="agent-item"><img class="agent-icon" src="/images/muse/muse-app-icon.svg" alt="Museのアプリアイコン" /><span>Muse</span></div>
+  <div class="agent-item"><img class="agent-icon" src="/images/agents/grok-bot.png" alt="Grok Botのアプリアイコン" /><span>Grok Bot</span></div>
+  <div class="agent-item"><img class="agent-icon" src="/images/agents/chatgpt.png" alt="ChatGPTのアプリアイコン（DotsはChatGPTの中で動く）" /><span>Dots</span></div>
+  <div class="agent-item"><img class="agent-icon" src="/images/agents/claude-duet.png" alt="Claude Duetのアプリアイコン" /><span>Claude Duet</span></div>
+</div>
+<ul class="agent-points">
+  <li>ユーザーごとに独立したクラウド環境で動く</li>
+  <li>ユーザーの代わりにブラウザの操作やコマンドラインの実行など、コンピューターの操作をお願いできる</li>
+  <li>様々なアプリやサービスと連携できる</li>
+  <li>与えたタスクを非同期で自律的に実行できる</li>
+</ul>
+</div>
+
+<!--
+仮：説明の箇条書きは、これまでの4項目（ユーザーごとに独立したクラウド環境で動く／ユーザーの代わりにブラウザの操作やコマンドラインの実行など、コンピューターの操作をお願いできる／様々なアプリやサービスと連携できる／与えたタスクを非同期で自律的に実行できる）を書き味をそろえて並べた仮置き。本人の言葉で直す前提。
+Dots は ChatGPT の中の機能で単体のアプリが無く、公式のアイコン／ロゴのファイルも入手できなかったので、ChatGPT の公式アプリアイコン（App Store）で表している。Claude Duet のアイコンは App Store（US）の公式アプリアイコン。
+-->
+
+---
+chapter: 説明
+class: muse-feature-page
+---
+
+<ChapterLabel />
+
+# Museの特徴
+
+<div class="kari-row">
+  <div class="kari">仮：箇条書きの文は書き味をそろえた仮置き</div>
+</div>
+
+<div class="muse-feature-text">あなたの指示に応じてアクションを実行して作業をこなすパーソナルAIエージェントであり、他のアプリやサービスと接続することができます</div>
+
+<div class="muse-feature-grid">
+<div class="avatar-compose">
+  <img class="avatar-big" src="/images/muse/jolly.png" alt="Museの公式のエージェントのキャラクター（Jolly）" />
+  <div class="avatar-custom">
+    <svg class="avatar-arrow" viewBox="0 0 260 280" aria-hidden="true">
+      <defs><marker id="avatar-arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3498db" /></marker></defs>
+      <path d="M 44 152 C 34 200, 96 222, 146 196" fill="none" stroke="#3498db" stroke-width="2.5" stroke-linecap="round" marker-end="url(#avatar-arrowhead)" />
+    </svg>
+    <img class="avatar-small" src="/images/muse/mamedaifuku.png" alt="本人のMuseのアバター（まめだいふく）" />
+    <div class="avatar-caption">エージェントの見た目も<br>パーソナライズできてかわいい！</div>
+  </div>
+</div>
+<ul class="muse-features">
+  <li>無料から使い始められて気軽に試せる</li>
+  <li>利用量が寛大でたくさん使える</li>
+  <li>豊富なアプリやサービスとコネクタで接続できる
+    <div class="connector-icons">
+      <img src="/images/connectors/google.png" alt="Google" />
+      <img src="/images/apps/health.png" alt="ヘルスケア" />
+      <img src="/images/connectors/moneyforward.png" alt="マネーフォワード ME" />
+      <img src="/images/connectors/1password.png" alt="1Password" />
+      <img src="/images/connectors/facebook.png" alt="Facebook" />
+      <img src="/images/connectors/instagram.png" alt="Instagram" />
+      <img src="/images/connectors/threads.png" alt="Threads" />
+    </div>
+  </li>
+  <div v-click="1"><li><Kogoe>倫理観がない</Kogoe></li></div>
+</ul>
+</div>
+
+<!--
+仮：箇条書きのうち「豊富なアプリやサービスとコネクタで接続できる」だけが本人の言葉。ほかの2つ（無料から使い始められて気軽に試せる／利用量が寛大でたくさん使える）は、その書き味にそろえた仮置き。本人の言葉で直す前提。
+-->
+
+---
+chapter: 説明
+---
+
+<ChapterLabel />
+
+# みのるん式とは？
+
+<div class="quote-slide">
+  <img src="/images/minorun-slide-4.jpg" alt="みのるんさんのスライド「みのるん式とは？」のページ" />
+  <div class="quote-source">
+    出典：みのるんさんのスライド 4ページ（https://speakerdeck.com/minorun365/kiro-crew-de-minoru-nshiki-shigotojutsu-ya-te-mita）
+  </div>
+</div>
+
+<BottomLink href="https://speakerdeck.com/minorun365/kiro-crew-de-minoru-nshiki-shigotojutsu-ya-te-mita" title="出典：Kiro Crewで「みのるん式」仕事術やってみた" />
+
+---
+chapter: 説明
+clicks: 1
+---
+
+<ChapterLabel />
+
+# みのるん式とは？
+
+<div class="kari-row">
+  <div class="kari">仮：図の中の依頼と情報の例は仮置き</div>
+</div>
+
+<p class="monorepo-lead">『みのるん式』メソッドを活用して、僕のプライベートな情報を詰め込んだモノレポ（1つのGitリポジトリ）をAIに渡して秘書にしています</p>
+
+<MonorepoSecretaryFigure
+  label="僕がAI秘書（Muse）に睡眠や体重の記録、スライドや献立の作成などを細かく依頼し、AI秘書がGitリポジトリで情報やスキルを確認する図"
+  class="monorepo-figure"
+/>
+
+<Overlay :click-start="1" position="center" font-size="1.8rem">
+
+このAI秘書に健康管理を任せました
+
+</Overlay>
+
+<!--
+仮：図の中の依頼のうち、本人の言葉は「睡眠の記録」「体重の記録」「スライド作成の依頼」「献立作成の依頼」。ほかの4つ（筋トレの記録／買い物リスト作成／食事の栄養チェック／筋トレメニューの相談）と、Gitリポジトリの中の情報・スキルの例（睡眠・体重・食事の記録／これまでに決めたこと／記録の付け方／献立やスライドの作り方）は、実際に任せていることから埋めた仮置き。本人の言葉で直す前提。
+-->
+
+---
+layout: center
+transition: fade
+---
+
+<div class="kari">仮：文言は本人の言葉で直す前の仮置き</div>
+
+<StatementList>
+  <Statement note="健康管理をしてもらうために、AI秘書には" lead-size="md">
+    <span>記録と提案をしてもらっています</span>
+  </Statement>
+</StatementList>
+
+<!--
+仮：本人の「健康管理してもらうために、記録と提案をしてもらってる」を組み立てた仮置き。本人の言葉で直す前提。
+-->
+
+---
+chapter: 記録
+---
+
+<ChapterLabel />
+
+# 記録していること
+
+<div class="record-list">
+  <div class="record-item"><img class="record-icon" src="/images/apps/health.png" alt="ヘルスケア" /><div class="record-text"><div class="record-name">体重・体脂肪率</div><div class="record-src">体組成計 → ヘルスケア</div></div></div>
+  <div class="record-item"><img class="record-icon" src="/images/apps/watch.png" alt="Apple Watch" /><div class="record-text"><div class="record-name">睡眠（就寝・起床・実睡眠時間・安静時心拍数）</div><div class="record-src">Apple Watch → ヘルスケア</div></div></div>
+  <div class="record-item"><img class="record-icon" src="/images/apps/watch.png" alt="Apple Watch" /><div class="record-text"><div class="record-name">歩数</div><div class="record-src">Apple WatchとiPhone → ヘルスケア</div></div></div>
+  <div class="record-item"><img class="record-icon" src="/images/apps/asken.png" alt="あすけん" /><div class="record-text"><div class="record-name">食事（カロリーとPFC）</div><div class="record-src">あすけん（スクショ）</div></div></div>
+  <div class="record-item"><img class="record-icon" src="/images/apps/fitplace.png" alt="FIT PLACE" /><div class="record-text"><div class="record-name">トレーニング（種目・重量・回数・ボリューム、行ったジム）</div><div class="record-src">スペースの筋トレ記録アプリ</div></div></div>
+  <div class="record-item"><img class="record-icon" src="/images/apps/watch.png" alt="Apple Watch" /><div class="record-text"><div class="record-name">ランニングなどの運動（距離・時間・心拍）</div><div class="record-src">Apple Watchのワークアウト → ヘルスケア</div></div></div>
+</div>
+
+<div class="record-note">PFC：たんぱく質（Protein）・脂質（Fat）・炭水化物（Carbohydrate）</div>
+
+---
+chapter: 記録
+clicks: 1
+---
+
+<ChapterLabel />
+
+# ヘルスケア
+
+<div class="with-visual">
+<StatementList>
+  <Statement
+    lead="ヘルスケア情報をまとめるのが結構大変だった"
+    lead-size="md"
+    :notes="['スクショにも収まらないし全部書き出すのも時間がかかって面倒', 'ショートカット機能も微妙で画面ついてないとダメなど制約多い']"
+  />
+  <Statement v-click="1" lead="しかしコネクタならそのまま渡せて超便利" lead-size="md" />
+</StatementList>
+<img class="visual-app" src="/images/apps/health.png" alt="ヘルスケア" />
+</div>
+
+---
+chapter: 記録
+---
+
+<ChapterLabel />
+
+# あすけん（栄養素）
+
+<div class="with-visual">
+<StatementList>
+  <Statement
+    lead="スクショをエージェントに渡して記録"
+    lead-size="md"
+    :notes="['カロリー、PFC（タンパク質・脂肪・炭水化物）、栄養素を記録']"
+  />
+</StatementList>
+<img class="visual-space" src="/images/apps/asken-nutrition.jpg" alt="あすけんの栄養素グラフ" />
+</div>
+
+---
+chapter: 記録
+---
+
+<ChapterLabel />
+
+# トレーニング
+
+<div class="with-visual">
+<StatementList>
+  <Statement
+    lead="スペース機能にてトレーニング記録アプリを作成"
+    lead-size="md"
+    :notes="['そこでメニューの作成からトレーニング結果の記録までやってもらってる']"
+  />
+</StatementList>
+<img class="visual-space" src="/images/spaces/training-app.jpg" alt="筋トレ記録のスペース（今日のメニューの画面）" />
+</div>
+
+---
+chapter: 提案
+---
+
+<ChapterLabel />
+
+# 献立
+
+<div class="with-visual">
+<div>
+
+- 栄養素とPFC、カロリーを考えつつ、余り物少なく考えてくれる
+- 好きなものの好みも覚えてくれる
+
+</div>
+<img class="visual-space" src="/images/spaces/menu-oyakodon.png" alt="夕食メニューのスペース（親子丼の日）" />
+</div>
+
+---
+chapter: 提案
+---
+
+<ChapterLabel />
+
+# 筋トレメニュー
+
+<div class="with-visual">
+<div>
+
+- 僕ができるトレーニングメニューを考えてくれる
+- わからない種目を減らすためにたまに新しい種目を教えてくれる
+- 器具の状況によって柔軟にメニューを変えれる
+- 成長によって重量を増やしてくれる
+- スペースのアプリでメニューを入力しておける
+
+</div>
+<img class="visual-space" src="/images/spaces/training-app.jpg" alt="筋トレ記録のスペース（今日のメニューの画面）" />
+</div>
+
+---
+layout: center
+chapter: まとめ
+---
+
+<ChapterLabel />
+
+<div class="with-visual">
+<StatementList>
+  <Statement
+    note="MuseをAI秘書にして健康管理してもらうことで"
+    lead="僕のことをよく理解して最適な食事やトレーニングのメニューを考えてくれるようになりました"
+    lead-size="md"
+  />
+</StatementList>
+<img class="muse-icon" src="/images/muse/muse-app-icon.svg" alt="Museの公式アイコン" />
+</div>
+
+---
+layout: ending
+---
+
+# Thank You!
+
+ご清聴ありがとうございました
+
+<div class="absolute right-8 bottom-8">
+  <img src="/images/aboutme/eye-catch.png" class="h-36" />
+</div>
