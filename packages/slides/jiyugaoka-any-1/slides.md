@@ -84,15 +84,23 @@ clicks: 1
 ---
 layout: center
 chapter: 説明
+clicks: 3
 ---
 
 <ChapterLabel />
 
 <StatementList>
   <Statement>
-    パーソナルAIエージェント Museを<br>『みのるん式』によってAI秘書にしてます
+    <span class="u-click u-agent" :class="{ 'is-on': $clicks >= 1 }">パーソナルAIエージェント</span> <span class="u-click u-muse" :class="{ 'is-on': $clicks >= 2 }">Muse</span>を<br><span class="u-click u-minorun" :class="{ 'is-on': $clicks >= 3 }">『みのるん式』</span>によってAI秘書にしてます
   </Statement>
 </StatementList>
+
+<style>
+.u-click { text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 3px; text-underline-offset: 0.25em; transition: text-decoration-color 0.3s; }
+.u-agent.is-on { text-decoration-color: #2F6FB3; }
+.u-muse.is-on { text-decoration-color: #E67E22; }
+.u-minorun.is-on { text-decoration-color: #27AE60; }
+</style>
 
 ---
 chapter: 説明
@@ -243,6 +251,13 @@ transition: fade
 -->
 
 ---
+layout: center
+class: text-center
+---
+
+## 記録
+
+---
 chapter: 記録
 ---
 
@@ -319,6 +334,13 @@ chapter: 記録
 </StatementList>
 <img class="visual-space" src="/images/spaces/training-app.jpg" alt="筋トレ記録のスペース（今日のメニューの画面）" />
 </div>
+
+---
+layout: center
+class: text-center
+---
+
+## 提案
 
 ---
 chapter: 提案
