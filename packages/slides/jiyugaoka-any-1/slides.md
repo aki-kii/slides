@@ -136,7 +136,7 @@ class: muse-feature-page
 
 <ChapterLabel />
 
-# Museの特徴
+# Museとは？
 
 <div class="kari-row">
   <div class="kari">仮：箇条書きの文は書き味をそろえた仮置き</div>
@@ -170,7 +170,7 @@ class: muse-feature-page
       <img src="/images/connectors/threads.png" alt="Threads" />
     </div>
   </li>
-  <div v-click="1"><li><Kogoe>倫理観がない</Kogoe></li></div>
+  <li><s>倫理観がない</s></li>
 </ul>
 </div>
 
