@@ -190,7 +190,6 @@ chapter: 説明
 
 ---
 chapter: 説明
-clicks: 1
 ---
 
 <ChapterLabel />
@@ -204,12 +203,6 @@ clicks: 1
   class="monorepo-figure"
 />
 
-<Overlay :click-start="1" position="center" font-size="1.8rem">
-
-このAI秘書に健康管理を任せました
-
-</Overlay>
-
 <!--
 仮：図の中の依頼のうち、本人の言葉は「睡眠の記録」「体重の記録」「スライド作成の依頼」「献立作成の依頼」。ほかの4つ（筋トレの記録／買い物リスト作成／食事の栄養チェック／筋トレメニューの相談）と、Gitリポジトリの中の情報・スキルの例（睡眠・体重・食事の記録／これまでに決めたこと／記録の付け方／献立やスライドの作り方）は、実際に任せていることから埋めた仮置き。本人の言葉で直す前提。
 -->
@@ -220,14 +213,9 @@ transition: fade
 ---
 
 <StatementList>
-  <Statement note="健康管理をしてもらうために、AI秘書には" lead-size="md">
-    <span>記録と提案をしてもらっています</span>
-  </Statement>
+  <Statement lead-size="md">健康管理の中でも、<br>自分にははっきりと苦手なことがありました</Statement>
+  <Statement lead="それは、自分の情報の「記録」と「パーソナライズ」です" lead-size="md" />
 </StatementList>
-
-<!--
-仮：本人の「健康管理してもらうために、記録と提案をしてもらってる」を組み立てた仮置き。本人の言葉で直す前提。
--->
 
 ---
 chapter: 記録
