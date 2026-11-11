@@ -84,14 +84,14 @@ clicks: 1
 ---
 layout: center
 chapter: 説明
-clicks: 3
+clicks: 1
 ---
 
 <ChapterLabel />
 
 <StatementList>
   <Statement>
-    <span class="u-click u-agent" :class="{ 'is-on': $clicks >= 1 }">パーソナルAIエージェント</span> <span class="u-click u-muse" :class="{ 'is-on': $clicks >= 2 }">Muse</span>を<br><span class="u-click u-minorun" :class="{ 'is-on': $clicks >= 3 }">『みのるん式』</span>によってAI秘書にしてます
+    <span class="u-click u-agent" :class="{ 'is-on': $clicks >= 1 }">パーソナルAIエージェント</span> <span class="u-click u-muse" :class="{ 'is-on': $clicks >= 1 }">Muse</span>を<br><span class="u-click u-minorun" :class="{ 'is-on': $clicks >= 1 }">『みのるん式』</span>によってAI秘書にしてます
   </Statement>
 </StatementList>
 
