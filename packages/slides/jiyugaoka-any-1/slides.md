@@ -45,6 +45,15 @@ transition: slide-left
 ---
 layout: center
 transition: fade
+---
+
+<StatementList>
+  <Statement lead="健康になりたい！！！！" />
+</StatementList>
+
+---
+layout: center
+transition: fade
 clicks: 1
 ---
 
@@ -273,7 +282,7 @@ chapter: 提案
 
 # メニューの提案
 
-<p class="record-lead">Museにパーソナルトレーナーとして振る舞ってもらい<br>様々な提案をしてもらっています</p>
+<p class="record-lead">Museが健康情報を管理してくれているので、<br>的確なアドバイスをもらえます！</p>
 
 <div class="proposal-list">
   <div class="proposal-block">
