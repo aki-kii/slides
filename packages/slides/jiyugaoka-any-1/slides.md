@@ -241,7 +241,7 @@ chapter: 記録
 
 # 記録
 
-<p class="record-lead">健康を管理するためMuseに様々な情報を連携して記録してもらいます</p>
+<p class="record-lead">健康を管理するためMuseに様々な情報を連携して記録してもらってます</p>
 
 <div class="record-list">
   <div class="record-item">
