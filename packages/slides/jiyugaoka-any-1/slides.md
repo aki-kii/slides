@@ -110,7 +110,7 @@ chapter: 説明
 
 # パーソナルAIエージェントとは？
 
-<div class="muse-feature-text">質問に答えるだけでなく、あなたの代わりにアクションを実行して物事を片付けるAI</div>
+<div class="muse-feature-text">質問に答えるだけでなくあなたの代わりにアクションを実行して物事を片付けるAI</div>
 <div class="definition-source">Meta社の公式FAQより意訳</div>
 
 <div class="kari-row">
@@ -121,20 +121,20 @@ chapter: 説明
 <div class="agent-grid">
   <div class="agent-item"><img class="agent-icon" src="/images/muse/muse-app-icon.svg" alt="Museのアプリアイコン" /><span>Muse</span></div>
   <div class="agent-item"><img class="agent-icon" src="/images/agents/grok-bot.png" alt="Grok Botのアプリアイコン" /><span>Grok Bot</span></div>
-  <div class="agent-item"><img class="agent-icon" src="/images/agents/chatgpt.png" alt="ChatGPTのアプリアイコン（DotsはChatGPTの中で動く）" /><span>Dots</span></div>
+  <div class="agent-item"><img class="agent-icon" src="/images/agents/dots.png" alt="Dotsのキャラクター（Felipe）" /><span>Dots</span></div>
   <div class="agent-item"><img class="agent-icon" src="/images/agents/claude-duet.png" alt="Claude Duetのアプリアイコン" /><span>Claude Duet</span></div>
 </div>
 <ul class="agent-points">
   <li>ユーザーごとに独立したクラウド環境で動く</li>
-  <li>ユーザーの代わりにブラウザの操作やコマンドラインの実行など、コンピューターの操作をお願いできる</li>
+  <li>ユーザーの代わりにブラウザの操作やコマンドラインの実行などコンピューターの操作をお願いできる</li>
   <li>様々なアプリやサービスと連携できる</li>
   <li>与えたタスクを非同期で自律的に実行できる</li>
 </ul>
 </div>
 
 <!--
-仮：説明の箇条書きは、これまでの4項目（ユーザーごとに独立したクラウド環境で動く／ユーザーの代わりにブラウザの操作やコマンドラインの実行など、コンピューターの操作をお願いできる／様々なアプリやサービスと連携できる／与えたタスクを非同期で自律的に実行できる）を書き味をそろえて並べた仮置き。本人の言葉で直す前提。
-Dots は ChatGPT の中の機能で単体のアプリが無く、公式のアイコン／ロゴのファイルも入手できなかったので、ChatGPT の公式アプリアイコン（App Store）で表している。Claude Duet のアイコンは App Store（US）の公式アプリアイコン。
+仮：説明の箇条書きは、これまでの4項目（ユーザーごとに独立したクラウド環境で動く／ユーザーの代わりにブラウザの操作やコマンドラインの実行などコンピューターの操作をお願いできる／様々なアプリやサービスと連携できる／与えたタスクを非同期で自律的に実行できる）を書き味をそろえて並べた仮置き。本人の言葉で直す前提。
+Dots は ChatGPT の中の機能で単体の公式アイコンが無いため、OpenAI DevDay 2026 の発表映像に出たキャラクター Felipe（ユーザーが自分の dot にデザインする3Dキャラクターの例）の画像を切り出して使っている。Claude Duet のアイコンは App Store（US）の公式アプリアイコン。
 -->
 
 ---
