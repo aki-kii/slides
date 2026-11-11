@@ -75,7 +75,8 @@ def text(x, y, s, size, color=INK, weight=400, anchor="middle"):
     return f'<text x="{x}" y="{y}" font-size="{size}"{w} fill="{color}" text-anchor="{anchor}">{s}</text>'
 
 
-me = png_data(DECK / "public/images/aboutme/me-icon.png", crop=(0, 120, 640, 760))
+# 切り抜かずに画像全体を円に入れる（アップにせず、芽の飾りから手元まで映す）
+me = png_data(DECK / "public/images/aboutme/me-icon.png")
 muse = png_data(DECK / "public/images/muse/jolly.png")
 
 # 横の並び。AI秘書は、僕との間に吹き出しを散らす場所を取るため右寄りに置く
