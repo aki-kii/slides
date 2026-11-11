@@ -762,13 +762,16 @@
 .slidev-layout p.monorepo-lead { margin-top: 1.2rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
 .monorepo-figure { width: 860px; margin: 1.2rem auto 0; }
 
-/* 記録していること: 記録と取得元の表 */
-.record-list { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0; }
-.record-item { display: flex; align-items: center; gap: 1rem; }
-.record-icon { width: 2.3rem; height: 2.3rem; flex: none; border-radius: 22%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
-.record-name { font-size: 1.1rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
-.record-src { font-size: 0.85rem; color: #6b7684; line-height: 1.35; }
-.record-note { margin-top: 0.4rem; font-size: 0.65rem; color: #6b7684; }
+/* 記録: 上にリード文、下にアイコン＋名前＋説明の3行 */
+/* テーマの h1 + p（薄く・詰める）を打ち消し、ほかのページのリード文（monorepo-lead）とそろえる */
+.slidev-layout h1 + p.record-lead { margin: 0; opacity: 1; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
+.record-list { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.2rem; }
+.record-item { display: flex; align-items: center; gap: 1.2rem; }
+.record-icon { width: 3.2rem; height: 3.2rem; flex: none; border-radius: 22%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
+/* 筋トレアプリの行はアイコンなし。名前・説明の開始位置をほかの行とそろえるため、同じ幅を空ける */
+.record-icon--none { box-shadow: none; }
+.record-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
+.record-src { margin-top: 0.2rem; font-size: 0.95rem; color: #6b7684; line-height: 1.5; }
 
 /* 日本語を文節で折り返す（「コンピュータ|ー」のような途中での改行を防ぐ） */
 .slidev-layout { word-break: auto-phrase; }
@@ -777,7 +780,6 @@
 .with-visual { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2.5rem; width: 100%; }
 .visual-stack { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
 .visual-icon { width: 6rem; height: 6rem; color: var(--brand); flex: none; }
-.visual-app { width: 8rem; height: 8rem; border-radius: 22%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
 /* 提案のページ: スペースの画面（スマホ幅の縦長スクショ） */
 .visual-space { height: 19rem; width: auto; max-width: none; flex: none; border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); }
 /* Muse の特徴のページ: エージェントのキャラクター Jolly（muse.ai の公式画像 /images/landing/brand/hatch.jpg。背景が白に近いので角丸だけ） */

@@ -250,88 +250,35 @@ transition: fade
 -->
 
 ---
-layout: center
-class: text-center
----
-
-## 記録
-
----
 chapter: 記録
 ---
 
-<ChapterLabel />
+# 記録
 
-# 記録していること
+<p class="record-lead">記録するためにMuseに様々な情報を連携します</p>
 
 <div class="record-list">
-  <div class="record-item"><img class="record-icon" src="/images/apps/health.png" alt="ヘルスケア" /><div class="record-text"><div class="record-name">体重・体脂肪率</div><div class="record-src">体組成計 → ヘルスケア</div></div></div>
-  <div class="record-item"><img class="record-icon" src="/images/apps/watch.png" alt="Apple Watch" /><div class="record-text"><div class="record-name">睡眠（就寝・起床・実睡眠時間・安静時心拍数）</div><div class="record-src">Apple Watch → ヘルスケア</div></div></div>
-  <div class="record-item"><img class="record-icon" src="/images/apps/watch.png" alt="Apple Watch" /><div class="record-text"><div class="record-name">歩数</div><div class="record-src">Apple WatchとiPhone → ヘルスケア</div></div></div>
-  <div class="record-item"><img class="record-icon" src="/images/apps/asken.png" alt="あすけん" /><div class="record-text"><div class="record-name">食事（カロリーとPFC）</div><div class="record-src">あすけん（スクショ）</div></div></div>
-  <div class="record-item"><img class="record-icon" src="/images/apps/fitplace.png" alt="FIT PLACE" /><div class="record-text"><div class="record-name">トレーニング（種目・重量・回数・ボリューム、行ったジム）</div><div class="record-src">スペースの筋トレ記録アプリ</div></div></div>
-  <div class="record-item"><img class="record-icon" src="/images/apps/watch.png" alt="Apple Watch" /><div class="record-text"><div class="record-name">ランニングなどの運動（距離・時間・心拍）</div><div class="record-src">Apple Watchのワークアウト → ヘルスケア</div></div></div>
-</div>
-
-<div class="record-note">PFC：たんぱく質（Protein）・脂質（Fat）・炭水化物（Carbohydrate）</div>
-
----
-chapter: 記録
-clicks: 1
----
-
-<ChapterLabel />
-
-# ヘルスケア
-
-<div class="with-visual">
-<StatementList>
-  <Statement
-    lead="ヘルスケア情報をまとめるのが結構大変だった"
-    lead-size="sm"
-    :notes="['スクショにも収まらないし全部書き出すのも時間がかかって面倒', 'ショートカット機能も微妙で画面ついてないとダメなど制約多い']"
-  />
-  <Statement v-click="1" lead="しかしコネクタならそのまま渡せて超便利" lead-size="sm" />
-</StatementList>
-<img class="visual-app" src="/images/apps/health.png" alt="ヘルスケア" />
-</div>
-
----
-chapter: 記録
----
-
-<ChapterLabel />
-
-# あすけん（栄養素）
-
-<div class="with-visual">
-<StatementList>
-  <Statement
-    lead="スクショをエージェントに渡して記録"
-    lead-size="sm"
-    :notes="['カロリー、PFC（タンパク質・脂肪・炭水化物）、栄養素を記録']"
-  />
-</StatementList>
-<img class="visual-space" src="/images/apps/asken-nutrition.jpg" alt="あすけんの栄養素グラフ" />
-</div>
-
----
-chapter: 記録
----
-
-<ChapterLabel />
-
-# トレーニング
-
-<div class="with-visual">
-<StatementList>
-  <Statement
-    lead="スペース機能にてトレーニング記録アプリを作成"
-    lead-size="sm"
-    :notes="['そこでメニューの作成からトレーニング結果の記録までやってもらってる']"
-  />
-</StatementList>
-<img class="visual-space" src="/images/spaces/training-app.jpg" alt="筋トレ記録のスペース（今日のメニューの画面）" />
+  <div class="record-item">
+    <img class="record-icon" src="/images/apps/health.png" alt="ヘルスケア" />
+    <div class="record-text">
+      <div class="record-name">ヘルスケア</div>
+      <div class="record-src">Museのコネクタで連携。体重・体脂肪率（オムロンコネクト）、睡眠・歩数、ランニングの記録（Apple Watch）</div>
+    </div>
+  </div>
+  <div class="record-item">
+    <img class="record-icon" src="/images/apps/asken.png" alt="あすけん" />
+    <div class="record-text">
+      <div class="record-name">あすけん</div>
+      <div class="record-src">アプリからスクショで連携。一日分のカロリー・PFC（タンパク質・脂質・炭水化物）バランス・栄養素</div>
+    </div>
+  </div>
+  <div class="record-item">
+    <div class="record-icon record-icon--none" aria-hidden="true"></div>
+    <div class="record-text">
+      <div class="record-name">筋トレアプリ</div>
+      <div class="record-src">Museのスペースで自作。トレーニングメニュー・重量の記録</div>
+    </div>
+  </div>
 </div>
 
 ---
