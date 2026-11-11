@@ -142,7 +142,7 @@ class: muse-feature-page
 
 # <span class="title-u title-u-muse">Muse</span>とは？
 
-<div class="muse-feature-text">あなたの指示に応じてアクションを実行して<br>作業をこなすパーソナルAIエージェントであり、<br>他のアプリやサービスと接続することができます</div>
+<div class="muse-feature-text">あなたの指示に応じてアクションを実行して作業をこなすパーソナル<br>AIエージェントであり、他のアプリやサービスと接続することができます</div>
 
 <div class="muse-feature-grid">
 <div class="avatar-compose">
