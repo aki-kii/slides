@@ -48,47 +48,32 @@ transition: fade
 ---
 
 <StatementList>
-  <Statement lead="健康になりたい！！！！" />
+  <Statement lead="健康になりたい！！！！！" />
 </StatementList>
 
 ---
 layout: center
 transition: fade
-clicks: 1
+clicks: 2
 ---
 
 <StatementList>
   <Statement
-    lead="健康になりたい！！！！"
-    :notes="['30歳を超えてからそう思うことが増えました']"
+    lead="けど考えることが多くてハードル高いですよね…"
+    lead-size="md"
   />
   <Statement
     v-click="1"
-    note="しかし、"
-    lead="健康になるためには"
-    :notes="['ハードルがたくさんあります']"
-  />
-</StatementList>
-
----
-layout: center
-transition: fade
-clicks: 1
----
-
-<StatementList>
-  <Statement
-    lead="健康な生活は、食事と運動から"
-    lead-size="md"
-    :notes="['料理も、体を動かすのも、やること自体は好きです', 'でも、その前後で「考えること」がとにかく多いんです']"
-  />
-  <Statement
-    v-click="1"
-    note="健康には考えることがたっっっくさんあって大変ですね！"
-    lead="ということで健康管理をAIに全部任せちゃいました！"
+    lead="なので、健康をAIに管理してもらおう！と考えました"
     lead-size="md"
   />
 </StatementList>
+
+<Overlay :click-start="2" position="center" font-size="1.8rem">
+
+というわけで
+
+</Overlay>
 
 ---
 layout: center
