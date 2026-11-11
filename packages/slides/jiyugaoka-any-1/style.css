@@ -764,7 +764,9 @@
 
 /* 記録: 上にリード文、下にアイコン＋名前＋説明の3行 */
 /* テーマの h1 + p（薄く・詰める）を打ち消し、ほかのページのリード文（monorepo-lead）とそろえる */
-.slidev-layout h1 + p.record-lead { margin: 0; opacity: 1; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
+.slidev-layout h1 + p.record-lead { margin: 0; opacity: 1; font-size: 1.2rem; font-weight: 700; line-height: 1.5; }
+/* 記録・提案のページ: 見出しとリード文の間を詰める（提案のページをスライドの高さに収めるため。2ページでそろえる） */
+.slidev-layout h1:has(+ p.record-lead) { margin-bottom: 1rem; }
 .record-list { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.2rem; }
 .record-item { display: flex; align-items: center; gap: 1.2rem; }
 .record-icon { width: 3.2rem; height: 3.2rem; flex: none; border-radius: 22%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
@@ -773,12 +775,12 @@
 .record-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
 .record-src { margin-top: 0.2rem; font-size: 0.95rem; color: #6b7684; line-height: 1.5; }
 
-/* 提案: 見出しブロック2つ（名前＋箇条書き）→ 下に締めの一文。記録のページと同じ流儀 */
-.proposal-list { display: flex; flex-direction: column; gap: 1.3rem; }
-.proposal-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
-.slidev-layout ul.proposal-items { margin: 0.3rem 0 0; padding-left: 1.4rem; list-style: disc; }
-.slidev-layout ul.proposal-items li { margin: 0; font-size: 1.05rem; line-height: 1.6; }
-.slidev-layout p.proposal-closing { margin-top: 1.8rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
+/* 提案: リード文 → 見出しブロック2つ（名前＋箇条書き）→ 下に締めの一文。記録のページと同じ流儀 */
+.proposal-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.9rem; }
+.proposal-name { font-size: 1.2rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
+.slidev-layout ul.proposal-items { margin: 0.2rem 0 0; padding-left: 1.4rem; list-style: disc; }
+.slidev-layout ul.proposal-items li { margin: 0; font-size: 1rem; line-height: 1.45; }
+.slidev-layout p.proposal-closing { margin-top: 1rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
 
 /* 日本語を文節で折り返す（「コンピュータ|ー」のような途中での改行を防ぐ） */
 .slidev-layout { word-break: auto-phrase; }

@@ -255,7 +255,7 @@ chapter: 記録
 
 # 記録
 
-<p class="record-lead">記録するためにMuseに様々な情報を連携します</p>
+<p class="record-lead">健康を管理するためMuseに様々な情報を連携して記録してもらいます</p>
 
 <div class="record-list">
   <div class="record-item">
@@ -287,13 +287,15 @@ chapter: 提案
 
 # 提案
 
+<p class="record-lead">Museにパーソナルトレーナーとして振る舞ってもらい<br>様々な提案をしてもらっています</p>
+
 <div class="proposal-list">
   <div class="proposal-block">
     <div class="proposal-name">献立の提案</div>
     <ul class="proposal-items">
       <li>目指す体型に向けたカロリー・栄養バランスの献立を提案してもらえる</li>
       <li>好みや直近で食べたものが被らないようにメニューを考えてもらえる</li>
-      <li>ネットスーパーでそのまま頼んでもらえたらいいな…</li>
+      <li>買い物リストも作ってもらえて買う時に便利！</li>
     </ul>
   </div>
   <div class="proposal-block">
