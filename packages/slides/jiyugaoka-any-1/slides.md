@@ -210,12 +210,19 @@ chapter: 説明
 ---
 layout: center
 transition: fade
+clicks: 1
 ---
 
 <StatementList>
   <Statement lead-size="md">健康管理の中でも、<br>自分にははっきりと苦手なことがありました</Statement>
   <Statement lead="それは、自分の情報の「記録」と「パーソナライズ」です" lead-size="md" />
 </StatementList>
+
+<Overlay :click-start="1" position="center" font-size="1.8rem">
+
+それをAIに任せることとしました
+
+</Overlay>
 
 ---
 chapter: 記録
