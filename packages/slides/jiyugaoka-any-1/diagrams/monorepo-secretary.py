@@ -88,26 +88,26 @@ REPO_CX = REPO_X + REPO_W / 2
 ARROW_X1 = MUSE_X + MUSE_R + 6
 ARROW_X2 = REPO_X - 3
 
-# 僕からAI秘書への細かい依頼。カテゴリで整理せず、僕とAI秘書の間の領域の「枠の形」に沿って並べる。
-# 上の辺に2つ、左右の辺に2つずつ、下の辺に2つ。上下の辺は内側に寄せ、左右の辺は外側に張り出させて、
-# 楕円の輪のような形にする（真ん中は空ける）。(x, y) は吹き出しの箱の左上。しっぽはさらに左へ 10 出る
+# 僕からAI秘書への細かい依頼。カテゴリで整理せず、僕とAI秘書の間に散らす（口語の依頼の形で書く）。
+# 位置は 2026-11-11 に、領域をゆるく 8 つの区画に分け、各区画に 1 件ずつ区画の中でランダムにずらして置いて決めたもの。
+# 均等な格子にも、ひと固まりにもしない。文言を変えても位置は保つ（吹き出しの幅は文字数に合わせて伸び縮みする）。
+# (x, y) は吹き出しの箱の左上。しっぽはさらに左へ 10 出る
 BUBBLE_H = 30
 TAIL = 10  # しっぽが箱の左へ出る長さ
+GAP = 6  # 吹き出し同士の最小のすき間
 AREA_LEFT = ME_X + ME_R + 10  # しっぽの先が僕のアイコンに触れない
 AREA_RIGHT = MUSE_X - MUSE_R - 12  # AI秘書のアイコンに触れない
+AREA_TOP, AREA_BOTTOM = 0, 305
 requests = [
-    # 上の辺
-    (162, 8, "睡眠の記録"),
-    (285, 8, "スライド作成の依頼"),
-    # 左右の辺（上）
-    (AREA_LEFT + TAIL, 92, "筋トレの記録"),
-    (AREA_RIGHT - 157, 92, "食事の栄養チェック"),
-    # 左右の辺（下）
-    (AREA_LEFT + TAIL, 178, "献立作成の依頼"),
-    (AREA_RIGHT - 142, 178, "買い物リスト作成"),
-    # 下の辺
-    (160, 266, "体重の記録"),
-    (283, 266, "筋トレメニューの相談"),
+    (203, 49, "筋トレメニュー考えて"),
+    (159, 122, "献立を考えて"),
+    (182, 174, "食事の栄養をチェックして"),
+    (171, 249, "スライド作って"),
+    (316, 12, "体重を記録して"),
+    # 文言が伸びた分、AI秘書のアイコンに触れないよう右端を領域の内側に収める（元の x は 303 と 360）
+    (AREA_RIGHT - 157, 110, "買い物リスト作って"),
+    (283, 212, "筋トレも記録して"),
+    (AREA_RIGHT - 127, 271, "睡眠を記録して"),
 ]
 
 
@@ -115,15 +115,18 @@ def bubble_w(s, font=15):
     return len(s) * font + 22
 
 
+def overlaps(a, b):
+    return not (a[2] + GAP <= b[0] or b[2] + GAP <= a[0] or a[3] + GAP <= b[1] or b[3] + GAP <= a[1])
+
+
 def check_layout():
     """吹き出し同士が重ならず、領域（僕とAI秘書の間、図の上下の端）からはみ出さないことを確かめる。"""
     rects = [(x - TAIL, y, x + bubble_w(s), y + BUBBLE_H) for x, y, s in requests]
     for r, (_, _, s) in zip(rects, requests):
-        assert AREA_LEFT <= r[0] and r[2] <= AREA_RIGHT and 0 <= r[1] and r[3] <= 305, s
+        assert AREA_LEFT <= r[0] and r[2] <= AREA_RIGHT and AREA_TOP <= r[1] and r[3] <= AREA_BOTTOM, s
     for i, a in enumerate(rects):
         for b in rects[i + 1:]:
-            apart = a[2] + 6 <= b[0] or b[2] + 6 <= a[0] or a[3] + 6 <= b[1] or b[3] + 6 <= a[1]
-            assert apart, (a, b)
+            assert not overlaps(a, b), (a, b)
 
 
 check_layout()
