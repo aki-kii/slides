@@ -1,0 +1,1 @@
+import{o as t,e as o,i as s}from"./modules/vue-DYqgnUG_.js";import{u as n}from"./slidev/context-B_GwVWhL.js";import{_}from"./index-BjcroZWZ.js";const a={class:"plain-list"},r={__name:"PlainList",setup(c){return n(),(e,i)=>(t(),o("ul",a,[s(e.$slots,"default",{},void 0,!0)]))}},m=_(r,[["__scopeId","data-v-c82c62af"]]);export{m as _};

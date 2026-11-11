@@ -1,0 +1,1 @@
+import{f as o,o as i,e as n,g as t,t as s}from"./modules/vue-CS1Yvepd.js";import{u as a}from"./slidev/context-BGDUSdoB.js";const c={class:"flex items-baseline gap-4 mb-4"},l={class:"!m-0"},_=o({__name:"TitledSection",props:{title:{},description:{}},setup(e){return a(),(r,m)=>(i(),n("div",c,[t("h2",l,s(e.title),1),t("span",null,s(e.description),1)]))}});export{_};
