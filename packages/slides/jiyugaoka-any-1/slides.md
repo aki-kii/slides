@@ -311,13 +311,11 @@ chapter: 提案
 <p class="proposal-closing">他にも健康状態のレポートやランニングコースの提案をしてもらってます！</p>
 
 ---
-layout: center
 chapter: まとめ
 ---
 
-<ChapterLabel />
+# まとめ
 
-<div class="with-visual">
 <StatementList>
   <Statement
     note="MuseをAI秘書にして健康管理してもらうことで"
@@ -325,8 +323,6 @@ chapter: まとめ
     lead-size="md"
   />
 </StatementList>
-<img class="muse-icon" src="/images/muse/muse-app-icon.svg" alt="Museの公式アイコン" />
-</div>
 
 ---
 layout: ending

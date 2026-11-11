@@ -785,8 +785,6 @@
 /* 日本語を文節で折り返す（「コンピュータ|ー」のような途中での改行を防ぐ） */
 .slidev-layout { word-break: auto-phrase; }
 
-/* 文字の横に見て分かる要素を置く（左に文、右にアイコン・画像） */
-.with-visual { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2.5rem; width: 100%; }
 .visual-stack { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
 .visual-icon { width: 6rem; height: 6rem; color: var(--brand); flex: none; }
 /* Muse の特徴のページ: エージェントのキャラクター Jolly（muse.ai の公式画像 /images/landing/brand/hatch.jpg。背景が白に近いので角丸だけ） */
@@ -813,8 +811,6 @@
 /* 特徴のページ: 一言 → 画像 → 説明文 */
 .muse-feature-lead { margin-top: 0.4rem; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
 .muse-feature-text { margin-top: 0.8rem; font-size: 1.2rem; line-height: 1.6; color: var(--ink); }
-/* Meta Muse の公式アイコン（白い角丸の四角なので、白い背景で縁が分かるよう枠と影を付ける） */
-.muse-icon { width: 11rem; height: 11rem; border-radius: 36%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 6px 20px rgba(0, 0, 0, 0.10); }
 /* 「倫理観がない」までスライドの高さに収める */
 .slidev-layout .muse-features li { line-height: 1.45; margin-bottom: 0.25rem; }
 
