@@ -826,3 +826,8 @@
 .slidev-layout .agent-points li { font-size: 1.05rem; line-height: 1.5; margin-bottom: 0.4rem; }
 /* 定義ページ: 地の文の下に置く出典の小さな注記 */
 .definition-source { margin-top: 0.2rem; color: #6b7684; font-size: 0.75rem; }
+/* スライド6〜8の見出しの下線。色と線はスライド5の下線（.u-click）とそろえ、最初から出す */
+.title-u { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
+.title-u-agent { text-decoration-color: #2F6FB3; }
+.title-u-muse { text-decoration-color: #E67E22; }
+.title-u-minorun { text-decoration-color: #27AE60; }

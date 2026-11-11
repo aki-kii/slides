@@ -108,7 +108,7 @@ chapter: 説明
 
 <ChapterLabel />
 
-# パーソナルAIエージェントとは？
+# <span class="title-u title-u-agent">パーソナルAIエージェント</span>とは？
 
 <div class="muse-feature-text">質問に答えるだけでなくあなたの代わりにアクションを実行して物事を片付けるAI</div>
 <div class="definition-source">Meta社の公式FAQより意訳</div>
@@ -144,7 +144,7 @@ class: muse-feature-page
 
 <ChapterLabel />
 
-# Museとは？
+# <span class="title-u title-u-muse">Muse</span>とは？
 
 <div class="kari-row">
   <div class="kari">仮：箇条書きの文は書き味をそろえた仮置き</div>
@@ -167,6 +167,7 @@ class: muse-feature-page
 <ul class="muse-features">
   <li>無料から使い始められて気軽に試せる</li>
   <li>利用量が寛大でたくさん使える</li>
+  <li>スマホから気軽に呼び出せる</li>
   <li>豊富なアプリやサービスとコネクタで接続できる
     <div class="connector-icons">
       <img src="/images/connectors/google.png" alt="Google" />
@@ -178,12 +179,13 @@ class: muse-feature-page
       <img src="/images/connectors/threads.png" alt="Threads" />
     </div>
   </li>
+  <li>スペースで自分専用のアプリを作って使い続けられる</li>
   <li><s>倫理観がない</s></li>
 </ul>
 </div>
 
 <!--
-仮：箇条書きのうち「豊富なアプリやサービスとコネクタで接続できる」だけが本人の言葉。ほかの2つ（無料から使い始められて気軽に試せる／利用量が寛大でたくさん使える）は、その書き味にそろえた仮置き。本人の言葉で直す前提。
+仮：箇条書きのうち「豊富なアプリやサービスとコネクタで接続できる」と「スマホから気軽に呼び出せる」は本人の言葉。「無料から使い始められて気軽に試せる」「利用量が寛大でたくさん使える」は、その書き味にそろえた仮置き。「スペースで自分専用のアプリを作って使い続けられる」は、本人の「スペースの話」を受けて本人と共有した候補の文で、仮置き。本人の言葉で直す前提。
 -->
 
 ---
@@ -192,7 +194,7 @@ chapter: 説明
 
 <ChapterLabel />
 
-# みのるん式とは？
+# <span class="title-u title-u-minorun">みのるん式</span>とは？
 
 <div class="quote-slide">
   <img src="/images/minorun-slide-4.jpg" alt="みのるんさんのスライド「みのるん式とは？」のページ" />
