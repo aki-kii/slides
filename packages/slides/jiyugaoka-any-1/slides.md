@@ -271,7 +271,7 @@ chapter: 記録
     <img class="record-icon record-icon--muse" src="/images/muse/muse-app-icon.svg" alt="Muse" />
     <div class="record-text">
       <div class="record-name">筋トレアプリ</div>
-      <div class="record-src">Museのスペースで自作。トレーニングメニュー・重量の記録</div>
+      <div class="record-src">Museの「スペース」機能で筋トレアプリを自作してデータ連携。</div>
     </div>
   </div>
 </div>
