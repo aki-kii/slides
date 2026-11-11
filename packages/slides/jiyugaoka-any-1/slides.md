@@ -100,7 +100,7 @@ clicks: 1
 
 <StatementList>
   <Statement>
-    <span class="u-click u-agent" :class="{ 'is-on': $clicks >= 1 }">パーソナルAIエージェント</span> <span class="u-click u-muse" :class="{ 'is-on': $clicks >= 1 }">Muse</span>を<br><span class="u-click u-minorun" :class="{ 'is-on': $clicks >= 1 }">『みのるん式』</span>によってAI秘書にしてます
+    <span class="u-click u-agent" :class="{ 'is-on': $clicks >= 1 }">パーソナルAIエージェント</span> <span class="u-click u-muse" :class="{ 'is-on': $clicks >= 1 }">Muse</span>を<br><span class="u-click u-minorun" :class="{ 'is-on': $clicks >= 1 }">『みのるん式』</span>によってAI秘書にしました！
   </Statement>
 </StatementList>
 
