@@ -320,6 +320,10 @@ chapter: まとめ
     lead="僕のことをよく理解して最適な食事やトレーニングのメニューを考えてくれるようになりました"
     lead-size="md"
   />
+  <Statement
+    lead="やってみて思ったより健康モチベが上がったのでオススメです！！！"
+    lead-size="md"
+  />
 </StatementList>
 
 ---
