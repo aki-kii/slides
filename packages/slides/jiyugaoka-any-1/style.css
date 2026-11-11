@@ -754,7 +754,7 @@
 .quote-source { font-size: 0.6rem; color: #6b7684; }
 
 /* モノレポと秘書: 上に一文、下に図 */
-.slidev-layout p.monorepo-lead { margin-top: 1.2rem; font-size: 1.15rem; font-weight: 700; line-height: 1.7; }
+.slidev-layout p.monorepo-lead { margin-top: 1.2rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
 .monorepo-figure { width: 860px; margin: 1.2rem auto 0; }
 
 /* 記録していること: 記録と取得元の表 */
@@ -798,7 +798,7 @@
 .agent-icon-missing { display: flex; align-items: center; justify-content: center; text-align: center; border: 2px dashed #c9d0d9; box-shadow: none; color: #9aa4b1; font-size: 0.6rem; line-height: 1.4; }
 /* 特徴のページ: 一言 → 画像 → 説明文 */
 .muse-feature-lead { margin-top: 0.4rem; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
-.muse-feature-text { margin-top: 0.8rem; font-size: 1rem; line-height: 1.6; color: var(--ink); }
+.muse-feature-text { margin-top: 0.8rem; font-size: 1.2rem; line-height: 1.6; color: var(--ink); }
 /* Meta Muse の公式アイコン（白い角丸の四角なので、白い背景で縁が分かるよう枠と影を付ける） */
 .muse-icon { width: 11rem; height: 11rem; border-radius: 36%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 6px 20px rgba(0, 0, 0, 0.10); }
 /* 「倫理観がない」までスライドの高さに収める */
