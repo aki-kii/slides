@@ -773,6 +773,13 @@
 .record-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
 .record-src { margin-top: 0.2rem; font-size: 0.95rem; color: #6b7684; line-height: 1.5; }
 
+/* 提案: 見出しブロック2つ（名前＋箇条書き）→ 下に締めの一文。記録のページと同じ流儀 */
+.proposal-list { display: flex; flex-direction: column; gap: 1.3rem; }
+.proposal-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
+.slidev-layout ul.proposal-items { margin: 0.3rem 0 0; padding-left: 1.4rem; list-style: disc; }
+.slidev-layout ul.proposal-items li { margin: 0; font-size: 1.05rem; line-height: 1.6; }
+.slidev-layout p.proposal-closing { margin-top: 1.8rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
+
 /* 日本語を文節で折り返す（「コンピュータ|ー」のような途中での改行を防ぐ） */
 .slidev-layout { word-break: auto-phrase; }
 
@@ -780,8 +787,6 @@
 .with-visual { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2.5rem; width: 100%; }
 .visual-stack { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
 .visual-icon { width: 6rem; height: 6rem; color: var(--brand); flex: none; }
-/* 提案のページ: スペースの画面（スマホ幅の縦長スクショ） */
-.visual-space { height: 19rem; width: auto; max-width: none; flex: none; border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); }
 /* Muse の特徴のページ: エージェントのキャラクター Jolly（muse.ai の公式画像 /images/landing/brand/hatch.jpg。背景が白に近いので角丸だけ） */
 /* 特徴のページ: 一言の下に、左に画像（公式の Jolly の大きい丸と、本人のまめだいふくの小さい丸、左下を回る矢印、画像の下の注釈）、右に箇条書き。
    画像まわりは固定サイズの箱の中で absolute に置く */

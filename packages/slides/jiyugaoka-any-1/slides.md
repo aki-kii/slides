@@ -282,50 +282,31 @@ chapter: 記録
 </div>
 
 ---
-layout: center
-class: text-center
----
-
-## 提案
-
----
 chapter: 提案
 ---
 
-<ChapterLabel />
+# 提案
 
-# 献立
-
-<div class="with-visual">
-<div>
-
-- 栄養素とPFC、カロリーを考えつつ、余り物少なく考えてくれる
-- 好きなものの好みも覚えてくれる
-
+<div class="proposal-list">
+  <div class="proposal-block">
+    <div class="proposal-name">献立の提案</div>
+    <ul class="proposal-items">
+      <li>目指す体型に向けたカロリー・栄養バランスの献立を提案してもらえる</li>
+      <li>好みや直近で食べたものが被らないようにメニューを考えてもらえる</li>
+      <li>ネットスーパーでそのまま頼んでもらえたらいいな…</li>
+    </ul>
+  </div>
+  <div class="proposal-block">
+    <div class="proposal-name">筋トレメニューの提案</div>
+    <ul class="proposal-items">
+      <li>自分の成長に合わせてトレーニングメニューを提案してもらえる</li>
+      <li>使おうと思ってたマシンが空いてなければすぐメニューを変えれる</li>
+      <li>自作の筋トレアプリにメニューのデータを書き込める</li>
+    </ul>
+  </div>
 </div>
-<img class="visual-space" src="/images/spaces/menu-oyakodon.png" alt="夕食メニューのスペース（親子丼の日）" />
-</div>
 
----
-chapter: 提案
----
-
-<ChapterLabel />
-
-# 筋トレメニュー
-
-<div class="with-visual">
-<div>
-
-- 僕ができるトレーニングメニューを考えてくれる
-- わからない種目を減らすためにたまに新しい種目を教えてくれる
-- 器具の状況によって柔軟にメニューを変えれる
-- 成長によって重量を増やしてくれる
-- スペースのアプリでメニューを入力しておける
-
-</div>
-<img class="visual-space" src="/images/spaces/training-app.jpg" alt="筋トレ記録のスペース（今日のメニューの画面）" />
-</div>
+<p class="proposal-closing">他にも健康状態のレポートやランニングコースの提案をしてもらってます！</p>
 
 ---
 layout: center
