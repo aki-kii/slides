@@ -1,7 +1,7 @@
 """みのるん式の図（diagrams/monorepo-secretary.svg）を作る。
 
 左に僕（トモコレ風の本人アイコン）、真ん中にAI秘書（Muse の公式キャラクター Jolly）、右にGitHubのlifeリポジトリ。
-僕がAI秘書に細かい依頼を吹き出しでたくさん投げている様子。矢印は描かない。
+僕がAI秘書に細かい依頼を吹き出しでたくさん投げ（矢印なし）、AI秘書がGitHubのリポジトリで情報やスキルを確認する（矢印あり）。
 画像は MonorepoSecretaryFigure が ?raw で取り込めるよう、縮めた PNG を base64 で SVG に埋め込む。
 
     python3 diagrams/monorepo-secretary.py   # デッキのディレクトリで
@@ -78,27 +78,87 @@ def text(x, y, s, size, color=INK, weight=400, anchor="middle"):
 me = png_data(DECK / "public/images/aboutme/me-icon.png", crop=(0, 120, 640, 760))
 muse = png_data(DECK / "public/images/muse/jolly.png")
 
-# 横の並び。AI秘書の位置は、矢印があったころに2本の矢印を同じ長さにした位置（x=452）のまま
+# 横の並び。AI秘書は、僕との間に吹き出しを散らす場所を取るため右寄りに置く
 CY = 160
 ME_X, ME_R = 70, 56
-MUSE_X, MUSE_R = 452, 60
+MUSE_X, MUSE_R = 530, 60
 REPO_X, REPO_W = 778, 212
 REPO_CX = REPO_X + REPO_W / 2
+# AI秘書 → GitHub の矢印
+ARROW_X1 = MUSE_X + MUSE_R + 6
+ARROW_X2 = REPO_X - 3
 
-# 僕からAI秘書への細かい依頼。カテゴリで整理せず、ばらけた位置に置く
-requests = [
-    (90, 26, "睡眠の記録"),
-    (215, 26, "スライド作成の依頼"),
-    (130, 74, "献立作成の依頼"),
-    (300, 74, "体重の記録"),
-    (120, 216, "筋トレの記録"),
-    (250, 216, "買い物リスト作成"),
-    (60, 264, "筋トレメニューの相談"),
-    (254, 264, "食事の栄養チェック"),
+# 僕からAI秘書への細かい依頼（文言）。カテゴリで整理しない
+REQUESTS = [
+    "睡眠の記録",
+    "スライド作成の依頼",
+    "献立作成の依頼",
+    "体重の記録",
+    "筋トレの記録",
+    "買い物リスト作成",
+    "筋トレメニューの相談",
+    "食事の栄養チェック",
 ]
+BUBBLE_H = 30
+TAIL = 10  # しっぽが箱の左へ出る長さ
+
+
+def bubble_w(s, font=15):
+    return len(s) * font + 22
+
+
+def place_requests():
+    """吹き出しを僕とAI秘書の間（上下・中央を含む）に一様にランダムに散らす。
+
+    シードを固定した乱数で何通りも置いてみて、重なり・アイコンとのぶつかりがない案のうち、
+    吹き出し同士のいちばん狭い隙間が最も広い案を選ぶ（偏らず全体に散らばる）。
+    """
+    import random
+
+    left = ME_X + ME_R + 10 + TAIL  # しっぽの先が僕のアイコンに触れない
+    right = MUSE_X - MUSE_R - 12  # AI秘書のアイコンに触れない
+    top, bottom = 6, 299
+    pad = 8
+
+    def gap(a, b):
+        ax1, ay1, ax2, ay2 = a
+        bx1, by1, bx2, by2 = b
+        dx = max(bx1 - ax2, ax1 - bx2, 0)
+        dy = max(by1 - ay2, ay1 - by2, 0)
+        return (dx * dx + dy * dy) ** 0.5 if dx and dy else max(dx, dy)
+
+    best, best_score = None, -1
+    for seed in range(3000):
+        rng = random.Random(seed)
+        rects, ok = [], True
+        for s in REQUESTS:
+            w = bubble_w(s)
+            for _ in range(200):
+                x = rng.uniform(left, right - w)
+                y = rng.uniform(top, bottom - BUBBLE_H)
+                r = (x - TAIL, y, x + w, y + BUBBLE_H)
+                if all(gap(r, o) >= pad for o in rects):
+                    rects.append(r)
+                    break
+            else:
+                ok = False
+                break
+        if not ok:
+            continue
+        score = min(gap(a, b) for i, a in enumerate(rects) for b in rects[i + 1:])
+        if score > best_score:
+            best, best_score = rects, score
+    return [(round(r[0] + TAIL), round(r[1]), s) for r, s in zip(best, REQUESTS)]
+
+
+requests = place_requests()
 
 parts = [
     f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 305" width="100%" font-family="{FONT}">',
+    "<defs>"
+    '<marker id="monorepo-arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">'
+    f'<path d="M0,0 L6,3 L0,6 Z" fill="{INK}"/></marker>'
+    "</defs>",
     # 左: 僕
     avatar(ME_X, CY, ME_R, me, "monorepo-me"),
     text(ME_X, 244, "僕", 19, weight=700),
@@ -108,6 +168,9 @@ parts = [
     avatar(MUSE_X, CY, MUSE_R, muse, "monorepo-muse"),
     text(MUSE_X, 250, "AI秘書", 21, weight=700),
     text(MUSE_X, 277, "（Muse）", 16, color=SUB),
+    # AI秘書 → GitHub
+    f'<line x1="{ARROW_X1}" y1="{CY}" x2="{ARROW_X2}" y2="{CY}" stroke="{INK}" stroke-width="2.5" marker-end="url(#monorepo-arr)"/>',
+    text((ARROW_X1 + ARROW_X2) / 2, 150, "情報やスキルを確認する", 15),
     # 右: Gitリポジトリ（主役の緑）
     f'<rect x="{REPO_X}" y="22" width="{REPO_W}" height="270" rx="14" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>',
     github_mark(REPO_X + 16, 34, 26),
