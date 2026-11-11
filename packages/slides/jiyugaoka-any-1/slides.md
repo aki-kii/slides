@@ -121,7 +121,7 @@ chapter: 説明
 <div class="agent-grid">
   <div class="agent-item"><img class="agent-icon" src="/images/muse/muse-app-icon.svg" alt="Museのアプリアイコン" /><span>Muse</span></div>
   <div class="agent-item"><img class="agent-icon" src="/images/agents/grok-bot.png" alt="Grok Botのアプリアイコン" /><span>Grok Bot</span></div>
-  <div class="agent-item"><img class="agent-icon" src="/images/agents/dots.png" alt="Dotsのキャラクター（Todd）" /><span>Dots</span></div>
+  <div class="agent-item"><img class="agent-icon" src="/images/agents/dots.png" alt="Dotsのキャラクター（Felipe）" /><span>Dots</span></div>
   <div class="agent-item"><img class="agent-icon" src="/images/agents/claude-duet.png" alt="Claude Duetのアプリアイコン" /><span>Claude Duet</span></div>
 </div>
 <ul class="agent-points">
@@ -134,7 +134,7 @@ chapter: 説明
 
 <!--
 仮：説明の箇条書きは、これまでの4項目（ユーザーごとに独立したクラウド環境で動く／ユーザーの代わりにブラウザの操作やコマンドラインの実行などコンピューターの操作をお願いできる／様々なアプリやサービスと連携できる／与えたタスクを非同期で自律的に実行できる）を書き味をそろえて並べた仮置き。本人の言葉で直す前提。
-Dots は ChatGPT の中の機能で単体の公式アイコンが無いため、OpenAI の公式キービジュアルに出たキャラクター Todd（ユーザーが自分の dot にデザインする3Dキャラクターの例）の画像を使っている。Claude Duet のアイコンは App Store（US）の公式アプリアイコン。
+Dots は ChatGPT の中の機能で単体の公式アイコンが無いため、OpenAI 公式の dots 紹介ページに出ている青い雲のキャラクター Felipe（フェリペ）の画像を使っている（本人が送った公式ページのスクリーンショットから切り取ったもの）。Claude Duet のアイコンは App Store（US）の公式アプリアイコン。
 -->
 
 ---
