@@ -260,9 +260,9 @@ chapter: 記録
 chapter: 提案
 ---
 
-# メニューの提案
+# パーソナライズ
 
-<p class="record-lead">Museが健康情報を管理してくれているので、<br>的確なアドバイスをもらえます！</p>
+<p class="record-lead">Museが健康情報を管理してくれているので、<br>パーソナライズされたアドバイスがもらえます！</p>
 
 <div class="proposal-list">
   <div class="proposal-block">
