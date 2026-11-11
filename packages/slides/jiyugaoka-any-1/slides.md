@@ -110,7 +110,7 @@ chapter: 説明
 
 # <span class="title-u title-u-agent">パーソナルAIエージェント</span>とは？
 
-<div class="muse-feature-text">質問に答えるだけでなくあなたの代わりにアクションを実行して物事を片付けるAI</div>
+<div class="muse-feature-text">質問に答えるだけでなく<br>あなたの代わりにアクションを実行して<br>物事を片付けるAI</div>
 <div class="definition-source">Meta社の公式FAQより意訳</div>
 
 <div class="kari-row">
@@ -150,7 +150,7 @@ class: muse-feature-page
   <div class="kari">仮：箇条書きの文は書き味をそろえた仮置き</div>
 </div>
 
-<div class="muse-feature-text">あなたの指示に応じてアクションを実行して作業をこなすパーソナルAIエージェントであり、他のアプリやサービスと接続することができます</div>
+<div class="muse-feature-text">あなたの指示に応じてアクションを実行して<br>作業をこなすパーソナルAIエージェントであり、<br>他のアプリやサービスと接続することができます</div>
 
 <div class="muse-feature-grid">
 <div class="avatar-compose">
