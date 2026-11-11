@@ -247,7 +247,7 @@ chapter: 記録
   <div class="record-item">
     <img class="record-icon" src="/images/apps/health.png" alt="ヘルスケア" />
     <div class="record-text">
-      <div class="record-name">ヘルスケア</div>
+      <div class="record-name">ヘルスケア（iOSアプリ）</div>
       <div class="record-src">Museのコネクタで連携。体重・体脂肪率（オムロンコネクト）、睡眠・歩数、ランニングの記録（Apple Watch）</div>
     </div>
   </div>
