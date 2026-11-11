@@ -772,8 +772,8 @@
 .record-list { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.2rem; }
 .record-item { display: flex; align-items: center; gap: 1.2rem; }
 .record-icon { width: 3.2rem; height: 3.2rem; flex: none; border-radius: 22%; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); }
-/* 筋トレアプリの行はアイコンなし。名前・説明の開始位置をほかの行とそろえるため、同じ幅を空ける */
-.record-icon--none { box-shadow: none; }
+/* 筋トレアプリの行は Muse の公式アプリアイコン（スライド6と同じ SVG）。SVG の白い角丸は 36% で枠の 22% より丸いので、四隅が透けないよう白で塗る */
+.record-icon--muse { background: #fff; }
 .record-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
 .record-src { margin-top: 0.2rem; font-size: 0.95rem; color: #6b7684; line-height: 1.5; }
 
