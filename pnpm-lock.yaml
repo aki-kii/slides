@@ -185,6 +185,25 @@ importers:
         specifier: ^1.58.2
         version: 1.58.2
 
+  packages/slides/jiyugaoka-any-1:
+    dependencies:
+      '@slides/ui':
+        specifier: workspace:*
+        version: link:../../ui
+      '@slidev/cli':
+        specifier: ^52.1.0
+        version: 52.11.5(@nuxt/kit@3.21.1)(@types/markdown-it@14.1.2)(@types/node@22.19.11)(@vue/compiler-sfc@3.5.28)(markdown-it-async@2.2.0)(playwright-chromium@1.58.2)(postcss@8.5.6)(tsx@4.23.15)
+      '@slidev/theme-default':
+        specifier: latest
+        version: 0.25.0
+      '@slidev/theme-seriph':
+        specifier: latest
+        version: 0.25.0
+    devDependencies:
+      playwright-chromium:
+        specifier: ^1.58.2
+        version: 1.58.2
+
   packages/slides/zero-drift-cdk-ops:
     dependencies:
       '@slidev/cli':
@@ -201,7 +220,7 @@ importers:
     dependencies:
       sharp:
         specifier: ^0.35.5
-        version: 0.35.5
+        version: 0.35.5(@types/node@22.19.11)
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
@@ -6657,7 +6676,7 @@ snapshots:
 
   setimmediate@1.0.5: {}
 
-  sharp@0.35.5:
+  sharp@0.35.5(@types/node@22.19.11):
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
@@ -6688,6 +6707,7 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.5
       '@img/sharp-win32-ia32': 0.35.5
       '@img/sharp-win32-x64': 0.35.5
+      '@types/node': 22.19.11
 
   shiki-magic-move@1.2.1(shiki@3.22.0)(vue@3.5.28(typescript@5.9.3)):
     dependencies:
