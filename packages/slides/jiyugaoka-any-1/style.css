@@ -760,9 +760,11 @@
 
 /* モノレポと秘書: 上に一文、下に図 */
 .slidev-layout p.monorepo-lead { margin-top: 1.2rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
-/* 見出しのすぐ下に来るので、テーマの h1 + p（薄く・下を詰める）を打ち消して、元の濃さと下の余白（p の 1.5rem）に戻す */
-.slidev-layout h1 + p.monorepo-lead { opacity: 1; margin-bottom: 1.5rem; }
-.monorepo-figure { width: 860px; margin: 1.2rem auto 0; }
+/* 見出しのすぐ下に来るので、テーマの h1 + p（薄くする）を打ち消して元の濃さに戻す。上下の余白は、2行の見出しでも図がスライドに収まるよう詰めている */
+.slidev-layout h1 + p.monorepo-lead { opacity: 1; margin-top: 0.6rem; margin-bottom: 1rem; }
+/* 見出しが2行になるので、見出しの下を記録・提案のページと同じ 1rem に詰めて、図をスライドの高さ（552px）に収める。はみ出すと PDF で図が消える */
+.slidev-layout h1:has(+ p.monorepo-lead) { margin-bottom: 1rem; }
+.monorepo-figure { width: 860px; margin: 1rem auto 0; }
 
 /* 記録: 上にリード文、下にアイコン＋名前＋説明の3行 */
 /* テーマの h1 + p（薄く・詰める）を打ち消し、ほかのページのリード文（monorepo-lead）とそろえる */

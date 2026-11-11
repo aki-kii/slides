@@ -210,7 +210,7 @@ clicks: 1
 
 <ChapterLabel />
 
-# みのるん式とは？
+# 『<span class="title-u title-u-minorun">みのるん式</span>』でMuseをAI秘書にしてみた
 
 <p class="monorepo-lead">『みのるん式』メソッドを活用して、僕のプライベートな情報を詰め込んだモノレポ（1つのGitリポジトリ）をAIに渡して秘書にしています</p>
 
