@@ -196,9 +196,6 @@ chapter: 説明
 
 <div class="quote-slide">
   <img src="/images/minorun-slide-4.jpg" alt="みのるんさんのスライド「みのるん式とは？」のページ" />
-  <div class="quote-source">
-    出典：みのるんさんのスライド 4ページ（https://speakerdeck.com/minorun365/kiro-crew-de-minoru-nshiki-shigotojutsu-ya-te-mita）
-  </div>
 </div>
 
 <BottomLink href="https://speakerdeck.com/minorun365/kiro-crew-de-minoru-nshiki-shigotojutsu-ya-te-mita" title="出典：Kiro Crewで「みのるん式」仕事術やってみた" />
