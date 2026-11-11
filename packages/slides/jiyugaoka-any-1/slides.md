@@ -288,10 +288,10 @@ clicks: 1
 <StatementList>
   <Statement
     lead="ヘルスケア情報をまとめるのが結構大変だった"
-    lead-size="md"
+    lead-size="sm"
     :notes="['スクショにも収まらないし全部書き出すのも時間がかかって面倒', 'ショートカット機能も微妙で画面ついてないとダメなど制約多い']"
   />
-  <Statement v-click="1" lead="しかしコネクタならそのまま渡せて超便利" lead-size="md" />
+  <Statement v-click="1" lead="しかしコネクタならそのまま渡せて超便利" lead-size="sm" />
 </StatementList>
 <img class="visual-app" src="/images/apps/health.png" alt="ヘルスケア" />
 </div>
@@ -308,7 +308,7 @@ chapter: 記録
 <StatementList>
   <Statement
     lead="スクショをエージェントに渡して記録"
-    lead-size="md"
+    lead-size="sm"
     :notes="['カロリー、PFC（タンパク質・脂肪・炭水化物）、栄養素を記録']"
   />
 </StatementList>
@@ -327,7 +327,7 @@ chapter: 記録
 <StatementList>
   <Statement
     lead="スペース機能にてトレーニング記録アプリを作成"
-    lead-size="md"
+    lead-size="sm"
     :notes="['そこでメニューの作成からトレーニング結果の記録までやってもらってる']"
   />
 </StatementList>

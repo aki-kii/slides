@@ -19,11 +19,11 @@ defineProps({
   lead: { type: String, default: '' },
   /** 言い切りの後ろに置く補足。行ごとに配列で渡す */
   notes: { type: Array, default: () => [] },
-  /** 言い切りの文字サイズ。'md' は 1 行が長いページ用に一段落とす */
+  /** 言い切りの文字サイズ。'md' は 1 行が長いページ用に一段落とす。'sm' は見出し付きの詳細ページのリード文用 */
   leadSize: {
     type: String,
     default: 'lg',
-    validator: (value) => ['lg', 'md'].includes(value),
+    validator: (value) => ['lg', 'md', 'sm'].includes(value),
   },
 });
 </script>
@@ -34,7 +34,7 @@ defineProps({
 
     <div
       class="intro-lead"
-      :class="{ 'intro-lead--md': leadSize === 'md' }"
+      :class="{ 'intro-lead--md': leadSize === 'md', 'intro-lead--sm': leadSize === 'sm' }"
     >
       <slot>{{ lead }}</slot>
     </div>
