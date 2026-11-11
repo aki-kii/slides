@@ -1,6 +1,6 @@
 """みのるん式の図（diagrams/monorepo-secretary.svg）を作る。
 
-左に僕（トモコレ風の本人アイコン）、真ん中にAI秘書（まめだいふく）、右にGitリポジトリ。
+左に僕（トモコレ風の本人アイコン）、真ん中にAI秘書（Muse の公式キャラクター Jolly）、右にGitリポジトリ。
 僕がAI秘書に細かい依頼を雑多に投げ、AI秘書がGitリポジトリで情報やスキルを確認する流れ。
 画像は MonorepoSecretaryFigure が ?raw で取り込めるよう、縮めた PNG を base64 で SVG に埋め込む。
 
@@ -58,18 +58,35 @@ def text(x, y, s, size, color=INK, weight=400, anchor="middle"):
 
 
 me = png_data(DECK / "public/images/aboutme/me-icon.png", crop=(0, 120, 640, 760))
-muse = png_data(DECK / "public/images/muse/mamedaifuku.png")
+muse = png_data(DECK / "public/images/muse/jolly.png")
+
+# 横の並び。僕 → AI秘書 → Gitリポジトリの2本の矢印が同じ長さになるよう、AI秘書の位置を計算で決める
+# （僕のアイコンとGitリポジトリの枠は幅が違うので、中心ではなく要素の間の空きをそろえる）
+CY = 160
+ME_X, ME_R = 70, 56
+MUSE_R = 60
+REPO_X, REPO_W = 778, 212
+TAIL_GAP = 6  # 矢印の根元と要素の間
+HEAD_GAP = 3  # 矢じりの先と要素の間
+A1_X1 = ME_X + ME_R + TAIL_GAP
+A2_X2 = REPO_X - HEAD_GAP
+# (MUSE_X - MUSE_R - HEAD_GAP) - A1_X1 == A2_X2 - (MUSE_X + MUSE_R + TAIL_GAP)
+MUSE_X = (A1_X1 + A2_X2 + HEAD_GAP - TAIL_GAP) / 2
+A1_X2 = MUSE_X - MUSE_R - HEAD_GAP
+A2_X1 = MUSE_X + MUSE_R + TAIL_GAP
+assert A1_X2 - A1_X1 == A2_X2 - A2_X1
+REPO_CX = REPO_X + REPO_W / 2
 
 # 僕からAI秘書への細かい依頼。カテゴリで整理せず、ばらけた位置に置く
 requests = [
-    (160, 26, "睡眠の記録"),
-    (290, 26, "スライド作成の依頼"),
-    (200, 74, "献立作成の依頼"),
-    (372, 74, "体重の記録"),
-    (156, 216, "筋トレの記録"),
-    (300, 216, "買い物リスト作成"),
-    (176, 264, "食事の栄養チェック"),
-    (346, 264, "筋トレメニューの相談"),
+    (90, 26, "睡眠の記録"),
+    (215, 26, "スライド作成の依頼"),
+    (130, 74, "献立作成の依頼"),
+    (300, 74, "体重の記録"),
+    (120, 216, "筋トレの記録"),
+    (250, 216, "買い物リスト作成"),
+    (60, 264, "筋トレメニューの相談"),
+    (248, 264, "食事の栄養チェック"),
 ]
 
 parts = [
@@ -79,31 +96,31 @@ parts = [
     f'<path d="M0,0 L6,3 L0,6 Z" fill="{INK}"/></marker>'
     "</defs>",
     # 左: 僕
-    avatar(80, 160, 56, me, "monorepo-me"),
-    text(80, 244, "僕", 19, weight=700),
+    avatar(ME_X, CY, ME_R, me, "monorepo-me"),
+    text(ME_X, 244, "僕", 19, weight=700),
     # 依頼（僕 → AI秘書）
     *[pill(x, y, s, font=15) for x, y, s in requests],
-    f'<line x1="142" y1="160" x2="514" y2="160" stroke="{INK}" stroke-width="2.5" marker-end="url(#monorepo-arr)"/>',
-    text(328, 150, "僕がAI秘書に依頼する", 15),
-    # 真ん中: AI秘書（まめだいふく）
-    avatar(580, 160, 60, muse, "monorepo-muse"),
-    text(580, 250, "AI秘書", 21, weight=700),
-    text(580, 277, "（Muse）", 16, color=SUB),
+    f'<line x1="{A1_X1}" y1="{CY}" x2="{A1_X2}" y2="{CY}" stroke="{INK}" stroke-width="2.5" marker-end="url(#monorepo-arr)"/>',
+    text((A1_X1 + A1_X2) / 2, 150, "僕がAI秘書に依頼する", 15),
+    # 真ん中: AI秘書（Muse の公式キャラクター Jolly）
+    avatar(MUSE_X, CY, MUSE_R, muse, "monorepo-muse"),
+    text(MUSE_X, 250, "AI秘書", 21, weight=700),
+    text(MUSE_X, 277, "（Muse）", 16, color=SUB),
     # AI秘書 → Gitリポジトリ
-    f'<line x1="644" y1="160" x2="772" y2="160" stroke="{INK}" stroke-width="2.5" marker-end="url(#monorepo-arr)"/>',
-    text(708, 128, "AI秘書が情報や", 14),
-    text(708, 147, "スキルを確認する", 14),
+    f'<line x1="{A2_X1}" y1="{CY}" x2="{A2_X2}" y2="{CY}" stroke="{INK}" stroke-width="2.5" marker-end="url(#monorepo-arr)"/>',
+    text((A2_X1 + A2_X2) / 2, 128, "AI秘書が情報や", 14),
+    text((A2_X1 + A2_X2) / 2, 147, "スキルを確認する", 14),
     # 右: Gitリポジトリ（主役の緑）
-    f'<rect x="775" y="22" width="212" height="270" rx="14" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>',
-    text(793, 55, "Gitリポジトリ", 18, color=GREEN, weight=700, anchor="start"),
-    f'<rect x="789" y="70" width="184" height="98" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
-    text(881, 98, "情報", 17, weight=700),
-    text(881, 124, "睡眠・体重・食事の記録", 13, color=SUB),
-    text(881, 147, "これまでに決めたこと", 13, color=SUB),
-    f'<rect x="789" y="180" width="184" height="98" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
-    text(881, 208, "スキル", 17, weight=700),
-    text(881, 234, "記録の付け方", 13, color=SUB),
-    text(881, 257, "献立やスライドの作り方", 13, color=SUB),
+    f'<rect x="{REPO_X}" y="22" width="{REPO_W}" height="270" rx="14" fill="{GREEN_BG}" stroke="{GREEN}" stroke-width="2"/>',
+    text(REPO_X + 18, 55, "Gitリポジトリ", 18, color=GREEN, weight=700, anchor="start"),
+    f'<rect x="{REPO_X + 14}" y="70" width="184" height="98" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
+    text(REPO_CX, 98, "情報", 17, weight=700),
+    text(REPO_CX, 124, "睡眠・体重・食事の記録", 13, color=SUB),
+    text(REPO_CX, 147, "これまでに決めたこと", 13, color=SUB),
+    f'<rect x="{REPO_X + 14}" y="180" width="184" height="98" rx="12" fill="#ffffff" stroke="{LINE}" stroke-width="2"/>',
+    text(REPO_CX, 208, "スキル", 17, weight=700),
+    text(REPO_CX, 234, "記録の付け方", 13, color=SUB),
+    text(REPO_CX, 257, "献立やスライドの作り方", 13, color=SUB),
     "</svg>",
 ]
 
