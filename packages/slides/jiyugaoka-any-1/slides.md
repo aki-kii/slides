@@ -307,7 +307,7 @@ chapter: まとめ
     lead-size="md"
   />
   <Statement
-    lead="やってみて思ったより健康モチベが上がったのでオススメです！！！"
+    lead="やってみて、かなり健康モチベが上がったのでおすすめです！！！"
     lead-size="md"
   />
 </StatementList>
