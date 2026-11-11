@@ -760,6 +760,8 @@
 
 /* モノレポと秘書: 上に一文、下に図 */
 .slidev-layout p.monorepo-lead { margin-top: 1.2rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
+/* 見出しのすぐ下に来るので、テーマの h1 + p（薄く・下を詰める）を打ち消して、元の濃さと下の余白（p の 1.5rem）に戻す */
+.slidev-layout h1 + p.monorepo-lead { opacity: 1; margin-bottom: 1.5rem; }
 .monorepo-figure { width: 860px; margin: 1.2rem auto 0; }
 
 /* 記録: 上にリード文、下にアイコン＋名前＋説明の3行 */

@@ -113,10 +113,6 @@ chapter: 説明
 <div class="muse-feature-text">質問に答えるだけでなく<br>あなたの代わりにアクションを実行して<br>物事を片付けるAI</div>
 <div class="definition-source">Meta社の公式FAQより意訳</div>
 
-<div class="kari-row">
-  <div class="kari">仮：説明は書き味をそろえた仮置き</div>
-</div>
-
 <div class="agent-split">
 <div class="agent-grid">
   <div class="agent-item"><img class="agent-icon" src="/images/muse/muse-app-icon.svg" alt="Museのアプリアイコン" /><span>Muse</span></div>
@@ -145,10 +141,6 @@ class: muse-feature-page
 <ChapterLabel />
 
 # <span class="title-u title-u-muse">Muse</span>とは？
-
-<div class="kari-row">
-  <div class="kari">仮：箇条書きの文は書き味をそろえた仮置き</div>
-</div>
 
 <div class="muse-feature-text">あなたの指示に応じてアクションを実行して<br>作業をこなすパーソナルAIエージェントであり、<br>他のアプリやサービスと接続することができます</div>
 
@@ -211,10 +203,6 @@ clicks: 1
 
 # みのるん式とは？
 
-<div class="kari-row">
-  <div class="kari">仮：図の中の依頼と情報の例は仮置き</div>
-</div>
-
 <p class="monorepo-lead">『みのるん式』メソッドを活用して、僕のプライベートな情報を詰め込んだモノレポ（1つのGitリポジトリ）をAIに渡して秘書にしています</p>
 
 <MonorepoSecretaryFigure
@@ -236,8 +224,6 @@ clicks: 1
 layout: center
 transition: fade
 ---
-
-<div class="kari">仮：文言は本人の言葉で直す前の仮置き</div>
 
 <StatementList>
   <Statement note="健康管理をしてもらうために、AI秘書には" lead-size="md">
