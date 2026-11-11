@@ -775,12 +775,11 @@
 .record-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
 .record-src { margin-top: 0.2rem; font-size: 0.95rem; color: #6b7684; line-height: 1.5; }
 
-/* 提案: リード文 → 見出しブロック2つ（名前＋箇条書き）→ 下に締めの一文。記録のページと同じ流儀 */
-.proposal-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.9rem; }
-.proposal-name { font-size: 1.2rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
+/* 提案: リード文 → 見出しブロック2つ（名前＋箇条書き）。記録のページと同じ流儀 */
+.proposal-list { display: flex; flex-direction: column; gap: 1.3rem; margin-top: 1.2rem; }
+.proposal-name { font-size: 1.3rem; font-weight: 700; line-height: 1.35; color: #2c3e50; }
 .slidev-layout ul.proposal-items { margin: 0.2rem 0 0; padding-left: 1.4rem; list-style: disc; }
-.slidev-layout ul.proposal-items li { margin: 0; font-size: 1rem; line-height: 1.45; }
-.slidev-layout p.proposal-closing { margin-top: 1rem; font-size: 1.2rem; font-weight: 700; line-height: 1.7; }
+.slidev-layout ul.proposal-items li { margin: 0; font-size: 1.05rem; line-height: 1.6; }
 
 /* 日本語を文節で折り返す（「コンピュータ|ー」のような途中での改行を防ぐ） */
 .slidev-layout { word-break: auto-phrase; }

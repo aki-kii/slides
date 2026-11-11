@@ -285,13 +285,13 @@ chapter: 記録
 chapter: 提案
 ---
 
-# 提案
+# メニューの提案
 
 <p class="record-lead">Museにパーソナルトレーナーとして振る舞ってもらい<br>様々な提案をしてもらっています</p>
 
 <div class="proposal-list">
   <div class="proposal-block">
-    <div class="proposal-name">献立の提案</div>
+    <div class="proposal-name">食事メニューの提案</div>
     <ul class="proposal-items">
       <li>目指す体型に向けたカロリー・栄養バランスの献立を提案してもらえる</li>
       <li>好みや直近で食べたものが被らないようにメニューを考えてもらえる</li>
@@ -307,8 +307,6 @@ chapter: 提案
     </ul>
   </div>
 </div>
-
-<p class="proposal-closing">他にも健康状態のレポートやランニングコースの提案をしてもらってます！</p>
 
 ---
 chapter: まとめ
