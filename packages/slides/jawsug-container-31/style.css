@@ -1,0 +1,437 @@
+/* =====================================================
+   Design Tokens
+   ===================================================== */
+:root {
+    --ink: #2c3e50;
+    --ink-soft: #34495e;
+    --ink-mute: #7f8c8d;
+    --paper: #ffffff;
+    --line: #dee2e6;
+    --brand: #3498db;
+    --brand-deep: #2980b9;
+    --brand-tint: #ebf5fb;
+    --accent-warm: #e74c3c;
+    font-size: 20px;
+}
+
+/* =====================================================
+   Base Layout
+   ===================================================== */
+.slidev-layout {
+    background: var(--paper);
+    color: var(--ink);
+    font-family:
+        "Noto Sans JP",
+        "Inter",
+        -apple-system,
+        sans-serif;
+
+    :is(h1, h2, h3, h4, h5, h6) {
+        @apply font-sans;
+    }
+
+    h1 {
+        color: var(--ink);
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+        line-height: 1.2;
+    }
+
+    h2 {
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+
+    h3,
+    h4 {
+        color: var(--ink-soft);
+        font-weight: 500;
+        font-size: 1.5rem;
+        line-height: 1.4;
+    }
+
+    p {
+        color: var(--ink);
+        line-height: 1.8;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    a {
+        color: var(--brand);
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--brand-deep);
+        }
+        &:has(img) {
+            text-decoration: none !important;
+            border: none !important;
+        }
+    }
+
+    strong {
+        color: var(--accent-warm);
+        font-weight: 700;
+    }
+
+    em {
+        color: var(--ink-soft);
+        font-style: italic;
+    }
+
+    ul li {
+        color: var(--ink);
+        font-size: 1.3rem;
+        line-height: 1.6;
+        margin-bottom: 0.4rem;
+        &::marker {
+            color: var(--brand);
+        }
+    }
+
+    ol li {
+        color: var(--ink);
+        font-size: 1.3rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+        &::marker {
+            color: var(--brand);
+            font-weight: 600;
+        }
+    }
+
+    blockquote {
+        border-left: 4px solid var(--brand);
+        background: #f8f9fa;
+        padding: 1.5rem 2rem;
+        border-radius: 0 8px 8px 0;
+        margin: 2rem 0;
+
+        p {
+            color: var(--ink-soft);
+            font-style: italic;
+            margin: 0;
+            font-size: 1.1em;
+            margin-bottom: 0;
+        }
+    }
+
+    pre {
+        background: var(--shiki-dark-bg, #282a36) !important;
+        border: 1px solid #44475a !important;
+        padding: 1.5rem !important;
+        border-radius: 8px !important;
+        overflow-y: auto !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+
+        code {
+            font-size: 1.3em !important;
+            line-height: 1.6;
+        }
+    }
+
+    :not(pre) > code {
+        background: #44475a;
+        color: #ff79c6;
+        padding: 0.2em 0.5em;
+        border-radius: 4px;
+        font-size: 1.1em;
+        font-weight: 500;
+    }
+
+    .slidev-vclick-target {
+        animation: fade-in-clean 0.3s ease-out;
+    }
+
+    .slidev-page-num {
+        color: var(--ink-mute);
+        font-size: 0.9rem;
+    }
+}
+
+/* =====================================================
+   Dark Layout
+   ===================================================== */
+.slidev-layout.dark {
+    background: #0c1a24 !important;
+    color: white;
+
+    p,
+    li {
+        color: rgba(255, 255, 255, 0.92);
+    }
+    strong {
+        color: white;
+    }
+}
+
+/* =====================================================
+   Typography Helpers
+   ===================================================== */
+.eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.1rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand);
+    font-weight: 500;
+    margin: 0 0 0.8rem;
+    display: block;
+}
+
+.slide-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 2rem;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.slide-title .accent {
+    color: var(--brand);
+}
+
+/* =====================================================
+   Shiki Magic Move
+   ===================================================== */
+.shiki-magic-move-container {
+    background: var(--shiki-dark-bg, #282a36) !important;
+    border: 1px solid #44475a !important;
+    padding: 1.5rem !important;
+    border-radius: 8px !important;
+    overflow-y: auto !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+
+    .shiki-magic-move-item {
+        font-size: 1.3em !important;
+        line-height: 1.6 !important;
+    }
+}
+
+/* =====================================================
+   Animations
+   ===================================================== */
+@keyframes fade-in-clean {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slidev-layout .slidev-vclick-target,
+    .slidev-layout img,
+    .slidev-layout button {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* =====================================================
+   Card Component
+   ===================================================== */
+.card {
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+
+.card--default {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+.card--danger {
+    background: #fef2f2;
+    border-color: #fca5a5;
+}
+.card--warning {
+    background: #fffbeb;
+    border-color: #fcd34d;
+}
+.card--info {
+    background: #eff6ff;
+    border-color: #93c5fd;
+}
+
+.card-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.2rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.card--danger .card-header {
+    border-bottom-color: #fca5a5;
+}
+.card--warning .card-header {
+    border-bottom-color: #fcd34d;
+}
+.card--info .card-header {
+    border-bottom-color: #93c5fd;
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1e293b;
+    line-height: 1.4;
+}
+
+.card--danger .card-title {
+    color: #dc2626;
+}
+.card--warning .card-title {
+    color: #d97706;
+}
+.card--info .card-title {
+    color: #2563eb;
+}
+
+.card-date {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.card-body {
+    padding: 0.75rem 1.2rem;
+    font-size: 0.9rem;
+    color: #374151;
+    line-height: 1.7;
+}
+
+.card-body p {
+    margin: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+    margin-bottom: 0 !important;
+}
+
+.card-body ul,
+.card-body ol {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+.card-body li {
+    font-size: inherit !important;
+    color: inherit !important;
+    line-height: 1.7 !important;
+    margin-bottom: 0.2rem !important;
+}
+
+/* =====================================================
+   Title Layout
+   ===================================================== */
+.slidev-layout.title {
+    background: linear-gradient(155deg, #015d7d 0%, #0283b2 60%, #1aa9d1 100%);
+    color: white;
+    padding: 5rem 4rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.slidev-layout.title h1 {
+    color: white;
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.slidev-layout.title h2 {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+.slidev-layout.title p,
+.slidev-layout.title a,
+.slidev-layout.title strong,
+.slidev-layout.title li {
+    color: white;
+}
+
+.slidev-layout.title h1 + p {
+    opacity: 1;
+}
+
+/* =====================================================
+   Ending Layout
+   ===================================================== */
+.slidev-layout.ending {
+    background: linear-gradient(155deg, #015d7d 0%, #0283b2 60%, #1aa9d1 100%);
+    color: white;
+    padding: 5rem 6rem;
+    height: 100%;
+    position: relative;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.slidev-layout.ending h1 {
+    color: white;
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+}
+
+.slidev-layout.ending p,
+.slidev-layout.ending strong {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* =====================================================
+   two-cols-header: ヘッダー(h2)と本文の隙間を詰める
+   gap-8 が行間にも効いてしまうため row-gap だけ上書き
+   ===================================================== */
+.slidev-layout.two-cols-header {
+    row-gap: 2rem;
+}
+
+.slidev-layout.two-cols-header.cols-4-6 {
+    grid-template-columns: 4fr 6fr;
+}
+
+.slidev-layout.two-cols-header .col-header > :last-child {
+    margin-bottom: 0;
+}
+/* =====================================================
+   Export (PDF / PNG)
+   ===================================================== */
+
+/*
+ * Slidev の export は page.emulateMedia({ media: 'screen' }) でレンダリングするため
+ * @media print が効かない。エクスポート時は #print-container 配下になるので、
+ * こちらで判定して <Overlay hide-on-export> を非表示にする。
+ * 印刷レイアウトでは絶対配置が崩れるため、崩れるページに個別で付ける。
+ */
+#print-container .overlay-hide-on-export {
+    display: none !important;
+}
+
