@@ -435,3 +435,20 @@
     display: none !important;
 }
 
+
+/* =====================================================
+   仮の札: 本人が決めていない所に付ける
+   ===================================================== */
+.kari {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    padding: 0.2rem 0.7rem;
+    border: 2px solid var(--accent-warm);
+    border-radius: 4px;
+    color: var(--accent-warm);
+    background: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 60;
+}

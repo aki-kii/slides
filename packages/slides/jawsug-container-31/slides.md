@@ -46,30 +46,30 @@ transition: slide-left
 </ProfileItem>
 
 ---
+layout: center
+---
+
+<div>
+  今日は
+  <h2><strong>コンテナアプリの起動</strong>を<br>早くする話</h2>
+</div>
+
+---
+
+<div class="kari">仮：特性の言い方は未定</div>
 
 ## 自作のDiscord音声bot
 
 <div class="text-lg mt-2">DiscordのボイスチャンネルでClaude Codeと<strong>通話する仕組み</strong>を作りました</div>
 
-<img src="/images/bot-overview.svg" class="mx-auto mt-2" style="width: 720px" />
+<InlineSvg src="bot-task.svg" label="ECSタスク（Fargate）の中に、Discord bot、読み上げ（VOICEVOX）、文字起こしの3つのコンテナがある" class="mx-auto mt-4" style="width: 700px" />
 
----
+<div class="text-xl mt-4" v-click>→ コストを抑えるため、<strong>使うときだけ</strong>ECSタスクを起動する</div>
+<div class="text-xl mt-1" v-click>→ 起動が遅いと、そのぶん<strong>話せるまで待たされる</strong>ので、起動を早くしたい</div>
 
-## 自作のDiscord音声bot
-
-<img src="/images/bot-task.svg" class="mx-auto mt-6" style="width: 800px" />
-
-<div class="text-xl mt-6">→ コストを抑えるため、ECSタスクは<strong>必要なタイミングで起動する</strong>仕組み</div>
-
----
-layout: center
----
-
-<div>
-  Fargateのままチューニングしたら
-  <h2><strong>100秒以上</strong> → <strong>約30秒</strong>に！</h2>
-  <Kogoe class="mt-6">その話はまたどこかで</Kogoe>
-</div>
+<!--
+仮の札: 構成まとめでは「アプリの説明→特性→その特性を元に改善したかった」の流れだけが決まっていて、特性の言い方は本人の言葉がないため。
+-->
 
 ---
 chapter: 起動にかかる時間を見る
@@ -77,70 +77,43 @@ chapter: 起動にかかる時間を見る
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">そこで</div>
+<div class="text-sm opacity-70">まず</div>
 
-## 起動にかかる時間を見てみました
+## 起動にかかる時間の内訳
 
-<InlineSvg src="chart-breakdown.svg" label="チューニング前の起動の内訳。準備約25秒、イメージの取得37.5秒、取得後8.0秒のあと、Discord botは読み上げと文字起こしのヘルスチェック合格を30.0秒待ってから起動し、合計約103秒" class="mx-auto" style="width: 780px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前の起動の内訳。全体約106秒、イメージの取得37.5秒、読み上げの起動0.8秒、botの起動1.5秒。残りはその他の起動処理" class="mx-auto mt-2" style="width: 740px" />
 
-<div class="kaizen">
-  <div v-click>① <strong>イメージの取得</strong>に時間がかかっている</div>
-  <div v-click>② Discord botが<strong>ほかのコンテナの起動を待っている</strong>から遅い</div>
-  <div v-after class="pl-8"><Kogoe>しかも、ほかのコンテナはヘルスチェックを待っている</Kogoe></div>
+<div class="text-xl mt-4" v-click>→ <strong>イメージの取得</strong>が大きな塊</div>
+<div class="text-lg mt-1 pl-8" v-click>読み上げ（VOICEVOX）のイメージが<strong>約1.9GB</strong>と大きいから <Kogoe>削りようがない</Kogoe></div>
+
+---
+layout: center
+chapter: イメージの取得を速くする
+---
+
+<ChapterLabel />
+
+<div>
+  イメージの取得が大きな塊なので
+  <h2><strong>SOCIインデックス</strong>で<br>プル時間を短くする</h2>
 </div>
 
-<style>
-.kaizen { margin-top: 0.6rem; font-size: 1.1rem; line-height: 1.7; }
-</style>
-
 ---
 chapter: イメージの取得を速くする
 ---
 
 <ChapterLabel />
-
-<div class="text-sm opacity-70">まず、① イメージの取得</div>
-
-## イメージが大きいのかな？
-
-<br>
-
-- 読み上げが<strong>約1.9GB</strong>
-- Discord botが約390MB
-- 文字起こしが約90MB
-
-<br>
-
-- 読み上げはVOICEVOXが提供しているイメージを使っているので、仕組み上この大きさ
-  - <Kogoe>削りようがない</Kogoe>
-
----
-chapter: イメージの取得を速くする
----
-
-<ChapterLabel />
-
-<div class="text-sm opacity-70">調べてみたら、重いコンテナイメージのダウンロードを改善するのに、SOCIインデックスが使える！</div>
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/ecr.svg" class="h-12" />
   <h2 class="!m-0">SOCIインデックスとは？</h2>
 </div>
 
-<div class="text-lg mt-2">コンテナイメージを<strong>遅延読み込み</strong>できる仕組み<Kogoe>（AWSが作ったOSS）</Kogoe></div>
+<div class="text-lg mt-3">コンテナイメージを<strong>遅延読み込み</strong>できる仕組み<Kogoe>（AWSが作ったOSS）</Kogoe></div>
 
-<InlineSvg src="soci-concept.svg" label="ふつうはイメージを全部ダウンロードしてから起動する。SOCIインデックスがあると起動に必要な分だけ取って起動し、残りのファイルはあとで取ってくる" class="mx-auto mt-2" style="width: 640px" />
+<InlineSvg src="soci-flow.svg" label="いつもの起動はプルでイメージを全部取得してから起動する。SOCIインデックスではプルは最小限なので速くなるが、起動時に足りないファイルを取るので起動は長くなる" class="mx-auto mt-6" style="width: 720px" />
 
-<div class="tight-list">
-
-- ダウンロードするときに、起動に必要なファイルだけ取得して、起動を早くできる
-- その他のファイルは、順次、もしくは必要になったタイミングでダウンロードする
-
-</div>
-
-<style>
-.tight-list li { font-size: 1.05rem !important; line-height: 1.5 !important; margin-top: 0.1rem !important; margin-bottom: 0.1rem !important; }
-</style>
+<div class="text-xl mt-6" v-click>→ <strong>プルは速くなる</strong>けど、<strong>起動はいつもより時間がかかる</strong></div>
 
 <BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
 
@@ -155,27 +128,16 @@ chapter: イメージの取得を速くする
   <h2 class="!m-0">SOCIインデックスとは？</h2>
 </div>
 
-<br>
+<div class="text-lg mt-3">プルのときは、イメージから<strong>最小限のファイル</strong>しか取得しない</div>
 
-- コンテナイメージとは別に、ECRリポジトリにSOCIインデックスを置く
-  - イメージの中身を作り直さずに使える
-- サイズが大きいコンテナイメージで効果的
-  - <Kogoe>起動直後に多くのファイルを読むコンテナには不向き</Kogoe>
+<InlineSvg src="soci-mechanism.svg" label="プル時はSOCIインデックスとzTOC、小さいレイヤーだけを取得する。起動時に足りないファイルは、zTOCを使ってspanごとに区切られたイメージレイヤーから探して取得する" class="mx-auto mt-3" style="width: 700px" />
 
-<BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
+<div class="text-lg mt-3" v-click>→ 起動時に足りないファイルを、<strong>zTOC</strong>を使って<strong>spanごと</strong>に区切られたレイヤーから探して取得する</div>
 
----
-chapter: イメージの取得を速くする
----
-
-<ChapterLabel />
-
-## 読み上げコンテナはSOCIと相性がいい
-
-<br>
-
-- 読み上げのVOICEVOXには、話者ごとの音声モデルが入っているので<strong>大きい</strong>
-- 起動のときは、モデルの本体は読まない
+<!--
+プル時に取るのは、manifest/config・SOCIインデックス・全レイヤーのzTOC（イメージの約1〜3%）と、zTOCが作られない小さいレイヤー（既定10MiB未満）の全量。
+大きなレイヤーの中身は取らずに起動する。起動後のバックグラウンド取得も既定で走る。
+-->
 
 ---
 chapter: イメージの取得を速くする
@@ -187,25 +149,9 @@ chapter: イメージの取得を速くする
 
 ## SOCIインデックスを入れた結果
 
-<InlineSvg src="chart-soci.svg" label="SOCIなしはイメージの取得37.5秒で全部立ち上がるまで約64秒。SOCIありは取得3.3秒で約37秒。ただしDiscord botの起動は1.5秒から4.7秒、読み上げの起動は0.8秒から9.1秒に延びた" class="mx-auto" style="width: 780px" />
+<InlineSvg src="chart-soci.svg" label="改善前とSOCIインデックスありの比較。全体は約106秒から48.6秒、イメージの取得は37.5秒から3.3秒に短縮。読み上げの起動は0.8秒から9.1秒、botの起動は1.5秒から4.7秒に延びた" class="mx-auto mt-1" style="width: 720px" />
 
-<div class="text-center text-lg">イメージの取得は37.5秒から<strong>3.3秒</strong>になった</div>
-
----
-chapter: イメージの取得を速くする
----
-
-<ChapterLabel />
-
-<div class="text-sm opacity-70">ただし</div>
-
-## 起動は延びた
-
-<br>
-
-- 読み上げは0.8秒から<strong>9.1秒</strong>
-- Discord botは1.5秒から<strong>4.7秒</strong>
-- 足りないファイルを、起動しながら取りに行くから
+<div class="text-lg mt-2" v-click>→ プルは<strong>37.5秒 → 3.3秒</strong>。その代わり、コンテナの<strong>起動は延びた</strong></div>
 
 ---
 chapter: ほかのコンテナを待たない
@@ -213,15 +159,16 @@ chapter: ほかのコンテナを待たない
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">次に、② Discord botがほかのコンテナの起動を待っている</div>
+<div class="text-sm opacity-70">次に</div>
 
-## 読み上げの準備が遅くなったのに待っている
+## botは読み上げの準備を待っていた
 
 <br>
 
-- 読み上げの準備が遅くなったのに、Discord botはそれを待っている
-- でも、Discord botがボイスチャットに入るだけなら、読み上げは<strong>まだいらない</strong>
-- 読み上げがいるのは、誰かが話して、それを読み上げるときだけ
+- botは、読み上げ（VOICEVOX）の<strong>読み込みが終わるのを待ってから</strong>起動していた
+- SOCIインデックスで、読み上げの起動が<strong>0.8秒 → 9.1秒</strong>に延びた
+
+<div class="text-xl mt-8" v-click>→ でも、botがボイスチャンネルに入るだけなら、読み上げは<strong>まだいらない</strong></div>
 
 ---
 chapter: ほかのコンテナを待たない
@@ -229,14 +176,18 @@ chapter: ほかのコンテナを待たない
 
 <ChapterLabel />
 
-<div class="text-sm opacity-70">ヘルスチェックを5秒にする手もあるけど、そもそも待たなければいい</div>
+<div class="kari">仮：言い方は未定</div>
 
-## Discord botだけ先に起動する
+## botは待たずに起動する
 
 <br>
 
-- Discord botだけ先に起動して、ボイスチャットに入るようにした
-- 準備ができていなくても、声や文章はためておいて、準備できたら流す
+- 読み上げの準備を待たずに、botが先にボイスチャンネルに入る
+- 準備ができていなくても、<strong>声や文章はためておいて</strong>、準備ができたら流す
+
+<!--
+仮の札: 構成まとめ（2026-11-15）で「待たずに起動する（言い方の詳細は後で詰める）」となっているため。
+-->
 
 ---
 chapter: ほかのコンテナを待たない
@@ -244,16 +195,33 @@ chapter: ほかのコンテナを待たない
 
 <ChapterLabel />
 
-## コンテナを待たずに起動した結果
+## 待たずに起動した結果
 
-<InlineSvg src="chart-nowait.svg" label="全部のコンテナを待つと、Discord botは読み上げのヘルスチェック合格まで30.0秒待ってから起動して約66秒。Discord botだけ待つと約36秒" class="mx-auto" style="width: 720px" />
+<InlineSvg src="chart-total.svg" label="全体の起動時間は、改善前の約106秒から、SOCIインデックスで48.6秒、さらに待たずに起動して32.7秒" class="mx-auto mt-8" style="width: 760px" />
 
-<div class="text-center text-lg">全部のコンテナを待つと約66秒、Discord botだけなら<strong>約36秒</strong></div>
+<div class="text-center text-2xl mt-10" v-click><strong>100秒以上</strong> → <strong>約30秒台</strong>に！</div>
 
 ---
+
+<div class="kari">仮：一文の言い回しは未定</div>
+
+## まとめ
+
+<div class="summary mt-16">
+  SOCIインデックスを使うと<br><strong>イメージのプル時間が速くなる</strong>から<br>起動を短くできた！！！
+</div>
+
+<style>
+.summary { font-size: 2rem; font-weight: 700; line-height: 1.6; text-align: center; }
+</style>
+
+<!--
+仮の札: 構成まとめ（2026-11-15）では「という雰囲気の一文」とされていて、言い回しが決まっていないため。
+-->
+
 ---
 
-<div class="text-sm opacity-70">余談</div>
+<div class="text-sm opacity-70">補足</div>
 
 ## 調べてるうちに見つけたCDKの便利な部品
 
@@ -263,6 +231,10 @@ chapter: ほかのコンテナを待たない
   - <Kogoe>NATインスタンスを作れる</Kogoe>
 - `SociIndexV2Build`
   - <Kogoe>SOCIインデックスを作れる（@cdklabs/deploy-time-build）</Kogoe>
+
+<!--
+時間があれば話す。無ければ飛ばす。
+-->
 
 ---
 layout: ending
@@ -274,4 +246,3 @@ layout: ending
   <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin: 0;">＼ ご清聴ありがとうございました！ ／</p>
   <img src="/images/aboutme/eye-catch.png" class="h-36" />
 </div>
-
