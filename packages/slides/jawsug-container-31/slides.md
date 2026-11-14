@@ -56,11 +56,28 @@ layout: center
 
 ---
 
+<div class="kari">仮：使う場面の言い方は未定</div>
+
+## 自作のDiscord音声botとは？
+
+<div class="text-lg mt-2">DiscordのボイスチャンネルでClaude Codeと<strong>通話する仕組み</strong>を作りました</div>
+
+<InlineSvg src="bot-overview.svg" label="Discordのボイスチャンネルで話した声を音声botが文字起こししてテキストチャンネルに書き、Claude Code botの返事を音声botが読み上げる。音声botはECS Fargate、Claude Codeは手元のPCで動く" class="mx-auto mt-2" style="width: 600px" />
+
+<div class="text-xl mt-2" v-click>→ 話した声を<strong>文字起こし</strong>してClaude Codeに渡し、返事は<strong>読み上げ</strong>で聞く</div>
+<div class="text-xl mt-1" v-click>→ 画面を見なくても、<strong>声だけで</strong>Claude Codeとやりとりできる</div>
+
+<!--
+仮の札: 「声だけでClaude Codeとやりとりする」は、既存のスライドの「Claude Codeと通話する仕組み」と life の構成まとめ（読み上げ・文字起こし・bot）から書いた。どんな場面で使っているか（画面を見なくても、の部分）は本人の言葉が記録にないため。
+-->
+
+---
+
 <div class="kari">仮：特性の言い方は未定</div>
 
 ## 自作のDiscord音声bot
 
-<div class="text-lg mt-2">DiscordのボイスチャンネルでClaude Codeと<strong>通話する仕組み</strong>を作りました</div>
+<div class="text-lg mt-2">読み上げ・文字起こし・botの<strong>3つのコンテナ</strong>を1つのECSタスクで動かす</div>
 
 <InlineSvg src="bot-task.svg" label="ECSタスク（Fargate）の中に、Discord bot、読み上げ（VOICEVOX）、文字起こしの3つのコンテナがある" class="mx-auto mt-4" style="width: 700px" />
 
@@ -81,10 +98,14 @@ chapter: 起動にかかる時間を見る
 
 ## 起動にかかる時間の内訳
 
-<InlineSvg src="chart-breakdown.svg" label="改善前の起動の内訳。全体約106秒、イメージの取得37.5秒、読み上げの起動0.8秒、botの起動1.5秒。残りはその他の起動処理" class="mx-auto mt-2" style="width: 740px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約106秒のうち、その他の起動処理のあとにイメージの取得37.5秒、その他を挟んで読み上げの起動0.8秒、その他を挟んでbotの起動1.5秒" class="mx-auto mt-4" style="width: 780px" />
 
 <div class="text-xl mt-4" v-click>→ <strong>イメージの取得</strong>が大きな塊</div>
 <div class="text-lg mt-1 pl-8" v-click>読み上げ（VOICEVOX）のイメージが<strong>約1.9GB</strong>と大きいから <Kogoe>削りようがない</Kogoe></div>
+
+<!--
+タイムラインの順番と「その他」の長さは、LT #40 の記録（2026-10-14 23:14 の回）の流れに合わせた: 準備 約25秒 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げ起動 0.8秒 → 待ち 29.2秒 → bot起動 1.5秒 → VCへ接続 0.9秒。全体が約106秒になるよう、準備を約28秒で描いている。
+-->
 
 ---
 layout: center
@@ -116,6 +137,26 @@ chapter: イメージの取得を速くする
 <div class="text-xl mt-6" v-click>→ <strong>プルは速くなる</strong>けど、<strong>起動はいつもより時間がかかる</strong></div>
 
 <BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
+
+---
+chapter: イメージの取得を速くする
+---
+
+<ChapterLabel />
+
+<div class="text-sm opacity-70">仕組みの前に</div>
+
+## イメージレイヤー・span・zTOCとは？
+
+<InlineSvg src="soci-terms.svg" label="コンテナイメージはレイヤーを重ねたもの。大きいレイヤーはspanという単位に区切られ、zTOCというレイヤーの目次で、どのファイルがどのspanにあるかが分かる" class="mx-auto mt-2" style="width: 640px" />
+
+<div class="text-lg mt-3"><strong>イメージレイヤー</strong>：イメージを作っている層。ふだんのプルでは丸ごと取得する</div>
+<div class="text-lg mt-1"><strong>span</strong>：レイヤーを区切った、取得の単位</div>
+<div class="text-lg mt-1"><strong>zTOC</strong>：レイヤーごとの目次。どのファイルがどのspanにあるかが分かる</div>
+
+<!--
+事実は research_notes の soci-pull-mechanism レポートによる。zTOC はファイルの情報（TOC）と、圧縮の途中から展開するためのチェックポイント（zInfo）の2つでできている。gzip は途中から展開できないので、このチェックポイントが要る。span は既定で4MiB（展開後のサイズ）。zTOC は既定で10MiB以上のレイヤーにだけ作られる。
+-->
 
 ---
 chapter: イメージの取得を速くする

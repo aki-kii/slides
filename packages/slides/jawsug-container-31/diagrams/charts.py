@@ -3,13 +3,15 @@
     python3 diagrams/charts.py   # パッケージのディレクトリで
 
 public/images/ に次の SVG を書き出す。
-- chart-breakdown.svg : 最初の分析（改善前の内訳）
+- chart-breakdown.svg : 最初の分析（改善前の内訳を1本のタイムラインで）
 - chart-soci.svg      : SOCI 後の振り返り（改善前と同じ項目を並べて比べる）
 - chart-total.svg     : 全体の推移（改善前 → SOCI → 待たずに起動）
 - soci-flow.svg       : いつもの起動と SOCI の起動の流れ
+- soci-terms.svg      : イメージレイヤー・span・zTOC の説明
 - soci-mechanism.svg  : SOCI でプル時・起動時に何を取るか
 
-数字は life の構成まとめ（2026-11-15）の値。時間の棒はどの図も同じ縮尺にする。
+数字は life の構成まとめ（2026-11-15）の値。比べる棒の図（chart-soci、chart-total）は同じ縮尺にする。
+タイムライン（chart-breakdown）は1本だけなので、横幅いっぱいに描く。
 """
 
 import base64
@@ -63,7 +65,9 @@ def svg(w: int, h: int, body: list[str]) -> str:
         '<marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
         'markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3498db"/></marker>'
         '<marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
-        'markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#27ae60"/></marker></defs>'
+        'markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#27ae60"/></marker>'
+        '<marker id="arrm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
+        'markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7f8c8d"/></marker></defs>'
     )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" font-family="{FONT}">'
@@ -105,17 +109,56 @@ def light(color: str) -> str:
 # 最初の分析: 改善前の内訳
 # ---------------------------------------------------------------------------
 def chart_breakdown() -> str:
+    # 改善前の起動を時間の流れに沿って並べる。順番と「その他」の長さは、
+    # LT #40 の記録（life の 2026-10-jawsug-tokyo-lunch-lt-40/logs/prep.md、10-14 23:14 の回）による:
+    # 準備 約25秒 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げ起動 0.8秒 → 待ち 29.2秒 → bot起動 1.5秒 → VC接続 0.9秒。
+    # 合計が約106秒になるよう、準備を約28秒にしている（準備はばらつく値なので）。
+    other = BEFORE["total"] - BEFORE["pull"] - BEFORE["voice"] - BEFORE["bot"] - 8.0 - 29.2 - 0.9
+    segs = [
+        ("other", other),
+        ("pull", BEFORE["pull"]),
+        ("other", 8.0),
+        ("voice", BEFORE["voice"]),
+        ("other", 29.2),
+        ("bot", BEFORE["bot"]),
+        ("other", 0.9),
+    ]
+    x0, width = 20, 800
+    k = width / BEFORE["total"]
+    bar_y, bar_h = 64, 52
     body = []
-    y = 30
-    for key, label, color, ic in ITEMS:
-        v = BEFORE[key]
-        w = v * SCALE
-        body += row_label(y + 19, label, ic, bold=key in ("total", "pull"))
-        body.append(rect(BAR_X, y, w, 28, color))
-        body.append(text(BAR_X + w + 10, y + 21, fmt(v), size=18, fill=color, bold=True))
-        y += 46
-    body.append(text(BAR_X, y + 10, "残りは、その他の起動処理", size=16, fill=MUTE))
-    return svg(820, y + 20, body)
+    # 全体: 上に区間の線
+    body.append(f'<path d="M{x0},40 L{x0},52 M{x0},46 L{x0 + width},46 M{x0 + width},40 L{x0 + width},52" stroke="{INK}" stroke-width="2.5" fill="none"/>')
+    body.append(f'<rect x="{x0 + width / 2 - 82}" y="30" width="164" height="30" fill="#fff"/>')
+    body.append(text(x0 + width / 2, 54, "全体 約106秒", size=20, bold=True, anchor="middle"))
+    color = {"other": "#d5d8dc", "pull": BLUE, "voice": GREEN, "bot": ORANGE}
+    x = x0
+    centers = {}
+    for key, v in segs:
+        w = max(v * k, 5)
+        body.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{w:.1f}" height="{bar_h}" fill="{color[key]}" stroke="#fff" stroke-width="1.5"/>')
+        if key == "pull":
+            body.append(text(x + w / 2, bar_y + 33, f"イメージの取得 {BEFORE['pull']}秒", size=19, fill="#fff", anchor="middle", bold=True))
+        elif key == "other" and w > 150:
+            body.append(text(x + w / 2, bar_y + 32, "その他の起動処理", size=16, fill=MUTE, anchor="middle"))
+        elif key == "other" and w > 45:
+            body.append(text(x + w / 2, bar_y + 32, "その他", size=15, fill=MUTE, anchor="middle"))
+        centers[key] = x + w / 2
+        x += w
+    # 小さい区間は下に引き出す
+    # bot は右端にあるので、文字を線の左に寄せる
+    # bot は一段下げて、読み上げの文字とぶつからないようにする
+    for key, label, anchor, dx, ln in (("voice", "読み上げの起動", "middle", 0, 26), ("bot", "botの起動", "end", 6, 56)):
+        cx = centers[key]
+        c = color[key]
+        body.append(f'<path d="M{cx:.1f},{bar_y + bar_h} L{cx:.1f},{bar_y + bar_h + ln}" stroke="{c}" stroke-width="2.5"/>')
+        body.append(text(cx + dx, bar_y + bar_h + ln + 24, f"{label} {BEFORE[key]}秒", size=19, fill=c, anchor=anchor, bold=True))
+    # 時間の流れ
+    ay = bar_y + bar_h + 112
+    body.append(f'<path d="M{x0},{ay} L{x0 + width - 4},{ay}" stroke="{MUTE}" stroke-width="2" marker-end="url(#arrm)"/>')
+    body.append(text(x0, ay + 24, "起動の開始", size=15, fill=MUTE))
+    body.append(text(x0 + width, ay + 24, "ボイスチャンネルに入る", size=15, fill=MUTE, anchor="end"))
+    return svg(840, ay + 32, body)
 
 
 # ---------------------------------------------------------------------------
@@ -187,6 +230,50 @@ def soci_flow() -> str:
 
 
 # ---------------------------------------------------------------------------
+# 用語: イメージレイヤー・span・zTOC
+# ---------------------------------------------------------------------------
+def soci_terms() -> str:
+    body = []
+    # 左: コンテナイメージはレイヤーを重ねたもの
+    body.append(text(100, 88, "コンテナイメージ", size=17, bold=True, anchor="middle"))
+    for i, (w, hl) in enumerate(((150, False), (170, False), (190, True))):
+        y = 104 + i * 48
+        x = 100 - w / 2
+        fill = "#ebf5fb" if hl else "#fff"
+        stroke = BLUE if hl else "#95a5a6"
+        body.append(rect(x, y, w, 40, fill, rx=4, extra=f' stroke="{stroke}" stroke-width="{2.5 if hl else 1.5}"'))
+        body.append(text(100, y + 26, "レイヤー", size=16, fill=BLUE if hl else MUTE, anchor="middle", bold=hl))
+    # 拡大の線
+    body.append(f'<path d="M195,200 L290,104 M195,240 L290,292" stroke="#95a5a6" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>')
+
+    # 右: 大きいレイヤーを span で区切る
+    lx, ly, lw, lh = 290, 200, 560, 92
+    body.append(rect(lx, 104, lw, 188, "#f8f9fa", rx=8, extra=' stroke="#3498db" stroke-width="2"'))
+    body.append(text(lx + 14, 128, "レイヤー（圧縮されたファイルのかたまり）", size=16, fill=BLUE, bold=True))
+    n = 6
+    sw = (lw - 28 - (n - 1) * 6) / n
+    span_x = []
+    for i in range(n):
+        x = lx + 14 + i * (sw + 6)
+        span_x.append(x)
+        hl = i == 4
+        body.append(rect(x, 210, sw, 56, "#d5f5e3" if hl else "#fff", rx=3,
+                         extra=f' stroke="{GREEN if hl else "#95a5a6"}" stroke-width="{2.5 if hl else 1.5}"'))
+        body.append(text(x + sw / 2, 244, f"span {i + 1}", size=15, fill=GREEN if hl else MUTE, anchor="middle", bold=hl))
+    body.append(text(lx + lw / 2, 284, "span：取得の単位（既定 4MiB ずつ区切る）", size=15, fill=GREEN, anchor="middle", bold=True))
+
+    # 上: zTOC（レイヤーの目次）
+    zx, zy, zw = 540, 0, 310
+    body.append(rect(zx, zy, zw, 84, "#fff", rx=6, extra=' stroke="#3498db" stroke-width="2"'))
+    body.append(text(zx + 14, zy + 24, "zTOC（レイヤーの目次）", size=16, fill=BLUE, bold=True))
+    body.append(text(zx + 14, zy + 50, "ファイルA は span 5 にある", size=15, fill=INK))
+    body.append(text(zx + 14, zy + 74, "＋ 途中から展開するための目印", size=14, fill=MUTE))
+    sx = span_x[4] + sw / 2
+    body.append(f'<path d="M{sx:.1f},{zy + 86} L{sx:.1f},206" stroke="#27ae60" stroke-width="2.5" fill="none" marker-end="url(#arrg)"/>')
+    return svg(860, 296, body)
+
+
+# ---------------------------------------------------------------------------
 # SOCI の仕組み: プル時に取るもの、起動時に取るもの
 # ---------------------------------------------------------------------------
 def soci_mechanism() -> str:
@@ -246,6 +333,7 @@ def main() -> None:
         "chart-soci.svg": chart_soci(),
         "chart-total.svg": chart_total(),
         "soci-flow.svg": soci_flow(),
+        "soci-terms.svg": soci_terms(),
         "soci-mechanism.svg": soci_mechanism(),
     }
     for name, content in files.items():
