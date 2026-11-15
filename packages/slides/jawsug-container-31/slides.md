@@ -52,6 +52,7 @@ layout: center
 <div>
   今日は
   <h2><strong>コンテナアプリの起動</strong>を<br>早くする話</h2>
+  <div class="text-xl mt-6">起動に時間がかかって<strong>困っていた</strong>ので、改善してみた</div>
 </div>
 
 ---
@@ -98,13 +99,14 @@ chapter: 起動にかかる時間を見る
 
 ## 起動にかかる時間の内訳
 
-<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約106秒のうち、その他の起動処理のあとにイメージの取得37.5秒、その他を挟んで読み上げの起動0.8秒、その他を挟んでbotの起動1.5秒" class="mx-auto mt-4" style="width: 780px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約106秒のうち、タスクの準備のあとにイメージの取得37.5秒、その他を挟んで読み上げの起動0.8秒、ヘルスチェック待ちを挟んでbotの起動1.5秒" class="mx-auto mt-4" style="width: 780px" />
 
 <div class="text-xl mt-4" v-click>→ <strong>イメージの取得</strong>が大きな塊</div>
 <div class="text-lg mt-1 pl-8" v-click>読み上げ（VOICEVOX）のイメージが<strong>約1.9GB</strong>と大きいから <Kogoe>削りようがない</Kogoe></div>
 
 <!--
 タイムラインの順番と「その他」の長さは、LT #40 の記録（2026-10-14 23:14 の回）の流れに合わせた: 準備 約25秒 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げ起動 0.8秒 → 待ち 29.2秒 → bot起動 1.5秒 → VCへ接続 0.9秒。全体が約106秒になるよう、準備を約28秒で描いている。
+図の表記（2026-11-15 本人コメント対応）: 準備は「タスクの準備」、待ち 29.2秒は「ヘルスチェック待ち」と表記した。待ちの中身は、botが読み上げ（VOICEVOX）のヘルスチェック完了を待つ時間（依存条件 HEALTHY の待ち）。取得後 8.0秒は小さいので「その他」のまま。
 -->
 
 ---
