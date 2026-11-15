@@ -54,44 +54,44 @@ layout: center
 <!-- slide-id: s-8902058138e3d09a -->
 <div>
   今日は
-  <h2><strong>コンテナアプリの起動</strong>を<br>早くする話</h2>
-  <div class="text-xl mt-6">起動に時間がかかって<strong>困っていた</strong>ので、改善してみた</div>
+  <h2>コンテナアプリの起動を<br>早くする話</h2>
+  <div class="text-xl mt-6">起動に時間がかかって困っていたので、改善してみた</div>
 </div>
 
 ---
 
 <!-- slide-id: s-c09c833bf636d5b9 -->
-<div class="kari">仮：使う場面の言い方は未定</div>
+<div class="kari">仮：定義の言い方は未定</div>
 
-## 自作のDiscord音声botとは？
+<div class="flex items-center gap-4">
+  <img src="/images/discord.svg" class="h-12" />
+  <h2 class="!m-0">自作のDiscord音声botとは？</h2>
+</div>
 
-<div class="text-lg mt-2">DiscordのボイスチャンネルでClaude Codeと<strong>通話する仕組み</strong>を作りました</div>
+<div class="text-lg mt-3">Discordのボイスチャンネルで<strong>読み上げと文字起こし</strong>をするbot</div>
 
-<InlineSvg src="bot-overview.svg" label="Discordのボイスチャンネルで話した声を音声botが文字起こししてテキストチャンネルに書き、Claude Code botの返事を音声botが読み上げる。音声botはECS Fargate、Claude Codeは手元のPCで動く" class="mx-auto mt-2" style="width: 600px" />
+<InlineSvg src="bot-task.svg" label="1つのECSタスク（Fargate）の中に、bot、読み上げ（VOICEVOX）、文字起こしの3つのコンテナがある" class="mx-auto mt-8" style="width: 760px" />
 
-<div class="text-xl mt-2" v-click>→ 話した声を<strong>文字起こし</strong>してClaude Codeに渡し、返事は<strong>読み上げ</strong>で聞く</div>
-<div class="text-xl mt-1" v-click>→ 画面を見なくても、<strong>声だけで</strong>Claude Codeとやりとりできる</div>
+<div class="text-xl mt-6">→ 3つのコンテナを1つのECSタスクにまとめて動かしている</div>
 
 <!--
-仮の札: 「声だけでClaude Codeとやりとりする」は、既存のスライドの「Claude Codeと通話する仕組み」と life の構成まとめ（読み上げ・文字起こし・bot）から書いた。どんな場面で使っているか（画面を見なくても、の部分）は本人の言葉が記録にないため。
+仮の札: 構成まとめ（2026-11-15）には「Discord音声bot（読み上げ＝VOICEVOX、文字起こし、botの3コンテナを1タスクにまとめた構成）」とだけあり、botを一言で言う定義の文は本人の言葉がないため。
 -->
 
 ---
+layout: center
+---
 
 <!-- slide-id: s-87cada606e6f210e -->
-<div class="kari">仮：特性の言い方は未定</div>
+<div class="kari">仮：アプリの特性の言い方は未定</div>
 
-## 自作のDiscord音声bot
-
-<div class="text-lg mt-2">読み上げ・文字起こし・botの<strong>3つのコンテナ</strong>を1つのECSタスクで動かす</div>
-
-<InlineSvg src="bot-task.svg" label="ECSタスク（Fargate）の中に、Discord bot、読み上げ（VOICEVOX）、文字起こしの3つのコンテナがある" class="mx-auto mt-4" style="width: 700px" />
-
-<div class="text-xl mt-4" v-click>→ コストを抑えるため、<strong>使うときだけ</strong>ECSタスクを起動する</div>
-<div class="text-xl mt-1" v-click>→ 起動が遅いと、そのぶん<strong>話せるまで待たされる</strong>ので、起動を早くしたい</div>
+<div>
+  このbotは、話したいときだけECSタスクを起動するので
+  <h2>起動が遅いと、<br>話し始めるまで待たされる</h2>
+</div>
 
 <!--
-仮の札: 構成まとめでは「アプリの説明→特性→その特性を元に改善したかった」の流れだけが決まっていて、特性の言い方は本人の言葉がないため。
+仮の札: 構成まとめでは「アプリの説明→特性→その特性を元に改善したかった」の流れだけが決まっていて、特性の中身と言い方は本人の言葉がないため。「使うときだけ起動する」は、前のデッキに置いてあった仮の中身から取った。
 -->
 
 ---
@@ -105,31 +105,30 @@ chapter: 起動にかかる時間を見る
 
 ## 起動にかかる時間の内訳
 
-<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約106秒のうち、タスクの準備のあとにイメージの取得37.5秒、その他を挟んで読み上げの起動0.8秒、ヘルスチェック待ちを挟んでbotの起動1.5秒" class="mx-auto mt-4" style="width: 780px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約106秒のうち、タスクの準備のあとにイメージのプル37.5秒、読み上げの起動0.8秒、ヘルスチェック待ちを挟んでbotの起動1.5秒" class="mx-auto mt-4" style="width: 800px" />
 
-<div class="text-xl mt-4" v-click>→ <strong>イメージの取得</strong>が大きな塊</div>
-<div class="text-lg mt-1 pl-8" v-click>読み上げ（VOICEVOX）のイメージが<strong>約1.9GB</strong>と大きいから <Kogoe>削りようがない</Kogoe></div>
+<div class="text-xl mt-4" v-click>→ イメージのプルが大きな塊</div>
+<div class="text-xl mt-2" v-click>→ 読み上げ（VOICEVOX）のコンテナイメージが約1.9GBと大きいから</div>
 
 <!--
-タイムラインの順番と「その他」の長さは、LT #40 の記録（2026-10-14 23:14 の回）の流れに合わせた: 準備 約25秒 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げ起動 0.8秒 → 待ち 29.2秒 → bot起動 1.5秒 → VCへ接続 0.9秒。全体が約106秒になるよう、準備を約28秒で描いている。
-図の表記（2026-11-15 本人コメント対応）: 準備は「タスクの準備」、待ち 29.2秒は「ヘルスチェック待ち」と表記した。待ちの中身は、botが読み上げ（VOICEVOX）のヘルスチェック完了を待つ時間（依存条件 HEALTHY の待ち）。取得後 8.0秒は小さいので「その他」のまま。
+タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: 準備 → プル 37.5秒 → プル後 8.0秒 → 読み上げ起動 0.8秒 → 待ち 29.2秒 → bot起動 1.5秒 → VCへ接続 0.9秒。全体が約106秒になるよう、準備の長さを残りで決めている。
 -->
 
 ---
 layout: center
-chapter: イメージの取得を速くする
+chapter: イメージのプルを速くする
 ---
 
 <!-- slide-id: s-9969bbcc92d8cef5 -->
 <ChapterLabel />
 
 <div>
-  イメージの取得が大きな塊なので
-  <h2><strong>SOCIインデックス</strong>で<br>プル時間を短くする</h2>
+  イメージのプルが大きな塊なので
+  <h2>SOCIインデックスで<br>プル時間を短くする</h2>
 </div>
 
 ---
-chapter: イメージの取得を速くする
+chapter: イメージのプルを速くする
 ---
 
 <!-- slide-id: s-156016a127432fe1 -->
@@ -137,19 +136,30 @@ chapter: イメージの取得を速くする
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/ecr.svg" class="h-12" />
-  <h2 class="!m-0">SOCIインデックスとは？</h2>
+  <h2 class="!m-0">SOCI（Seekable OCI）とは？</h2>
 </div>
 
-<div class="text-lg mt-3">コンテナイメージを<strong>遅延読み込み</strong>できる仕組み<Kogoe>（AWSが作ったOSS）</Kogoe></div>
+<div class="text-lg mt-2">コンテナイメージを<strong>遅延読み込み</strong>することでコンテナの起動を早くするための技術</div>
 
-<InlineSvg src="soci-flow.svg" label="いつもの起動はプルでイメージを全部取得してから起動する。SOCIインデックスではプルは最小限なので速くなるが、起動時に足りないファイルを取るので起動は長くなる" class="mx-auto mt-6" style="width: 720px" />
+<InlineSvg src="soci-lifecycle.svg" label="コンテナが動くまでの流れ pull → create → start。pull ではECRリポジトリのSOCIインデックスなど最低限だけ読み込み、start のときにコンテナイメージから必要なファイルを読み取る" class="mx-auto mt-2" style="width: 600px" />
 
-<div class="text-xl mt-6" v-click>→ <strong>プルは速くなる</strong>けど、<strong>起動はいつもより時間がかかる</strong></div>
+<div class="soci-points">
+
+- コンテナイメージのレイヤーに対してインデックスを作成することで、<br>コンテナ起動時に必要なファイルだけ読み取って起動する
+- インデックスはコンテナイメージを作り直さずに後付けできる
+
+</div>
+
+<style>
+.soci-points { margin-top: 0.2rem; }
+.soci-points ul { margin: 0; }
+.soci-points li { font-size: 1rem !important; line-height: 1.45 !important; margin-bottom: 0 !important; }
+</style>
 
 <BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
 
 ---
-chapter: イメージの取得を速くする
+chapter: イメージのプルを速くする
 ---
 
 <!-- slide-id: s-7c809e7e8d360db8 -->
@@ -160,20 +170,12 @@ chapter: イメージの取得を速くする
   <h2 class="!m-0">SOCIインデックスの仕組み</h2>
 </div>
 
-<div class="text-lg mt-3">このあとの仕組みは、レイヤー・span・zTOCの3つの言葉で説明する</div>
+<div class="text-lg mt-3">いつもの起動と比べると、<br>イメージのプルは速くなるが、コンテナの起動にはいつもより時間がかかる</div>
 
-<InlineSvg src="soci-terms.svg" label="コンテナイメージはレイヤーを重ねたもの。大きいレイヤーはspanという単位に区切られ、zTOCというレイヤーの目次で、どのファイルがどのspanにあるかが分かる" class="mx-auto mt-4" style="width: 640px" />
-
-<div class="text-lg mt-3"><strong>イメージレイヤー</strong>：イメージを作っている層。ふだんのプルでは丸ごと取得する</div>
-<div class="text-lg mt-1"><strong>span</strong>：レイヤーを区切った、取得の単位</div>
-<div class="text-lg mt-1"><strong>zTOC</strong>：レイヤーごとの目次。どのファイルがどのspanにあるかが分かる</div>
-
-<!--
-事実は research_notes の soci-pull-mechanism レポートによる。zTOC はファイルの情報（TOC）と、圧縮の途中から展開するためのチェックポイント（zInfo）の2つでできている。gzip は途中から展開できないので、このチェックポイントが要る。span は既定で4MiB（展開後のサイズ）。zTOC は既定で10MiB以上のレイヤーにだけ作られる。
--->
+<InlineSvg src="soci-compare.svg" label="いつもの起動はpullでイメージを全部取得するので長い。SOCIインデックスを使うとpullは短くなるが、startが長くなる" class="mx-auto mt-10" style="width: 760px" />
 
 ---
-chapter: イメージの取得を速くする
+chapter: イメージのプルを速くする
 ---
 
 <!-- slide-id: s-7067122156c4c57a -->
@@ -184,11 +186,11 @@ chapter: イメージの取得を速くする
   <h2 class="!m-0">SOCIインデックスの仕組み</h2>
 </div>
 
-<div class="text-lg mt-3">プルのときは、イメージから<strong>最小限のファイル</strong>しか取得しない</div>
+<div class="text-lg mt-3">プルのときは、イメージから最小限のファイルしか取得しない</div>
 
-<InlineSvg src="soci-mechanism.svg" label="プル時はSOCIインデックスとzTOC、小さいレイヤーだけを取得する。起動時に足りないファイルは、zTOCを使ってspanごとに区切られたイメージレイヤーから探して取得する" class="mx-auto mt-3" style="width: 700px" />
+<InlineSvg src="soci-mechanism.svg" label="pullのときは、ECRリポジトリからSOCIインデックス（レイヤーの目次であるzTOC）と小さいレイヤーだけを取得する。startのときに足りないファイルは、zTOCで探して、スパンごとに区切られた大きいレイヤーから取得する" class="mx-auto mt-3" style="width: 680px" />
 
-<div class="text-lg mt-3" v-click>→ 起動時に足りないファイルを、<strong>zTOC</strong>を使って<strong>spanごと</strong>に区切られたレイヤーから探して取得する</div>
+<div class="text-lg mt-3" v-click>→ 起動時に足りないファイルを、zTOCを使ってスパンごとに区切られたイメージレイヤーから探して取得する</div>
 
 <!--
 プル時に取るのは、manifest/config・SOCIインデックス・全レイヤーのzTOC（イメージの約1〜3%）と、zTOCが作られない小さいレイヤー（既定10MiB未満）の全量。
@@ -196,7 +198,7 @@ chapter: イメージの取得を速くする
 -->
 
 ---
-chapter: イメージの取得を速くする
+chapter: イメージのプルを速くする
 ---
 
 <!-- slide-id: s-67d1a97a584737a0 -->
@@ -206,9 +208,9 @@ chapter: イメージの取得を速くする
 
 ## SOCIインデックスを入れた結果
 
-<InlineSvg src="chart-soci.svg" label="改善前とSOCIインデックスありの比較。全体は約106秒から48.6秒、イメージの取得は37.5秒から3.3秒に短縮。読み上げの起動は0.8秒から9.1秒、botの起動は1.5秒から4.7秒に延びた" class="mx-auto mt-1" style="width: 720px" />
+<InlineSvg src="chart-soci.svg" label="改善前とSOCIインデックスを使った起動の比較。全体は約106秒から48.6秒、イメージのプルは37.5秒から3.3秒に短縮。読み上げの起動は0.8秒から9.1秒、botの起動は1.5秒から4.7秒に伸びた" class="mx-auto mt-2" style="width: 760px" />
 
-<div class="text-lg mt-2" v-click>→ プルは<strong>37.5秒 → 3.3秒</strong>。その代わり、コンテナの<strong>起動は延びた</strong></div>
+<div class="text-xl mt-2" v-click>→ プルは37.5秒 → 3.3秒。その代わり、コンテナの起動は伸びた</div>
 
 ---
 chapter: ほかのコンテナを待たない
@@ -219,14 +221,11 @@ chapter: ほかのコンテナを待たない
 
 <div class="text-sm opacity-70">次に</div>
 
-## botは読み上げの準備を待っていた
+## botは読み上げの読み込みを待っていた
 
-<br>
+<div class="text-lg mt-2">botは、読み上げ（VOICEVOX）の読み込みが終わるのを待ってから起動していた</div>
 
-- botは、読み上げ（VOICEVOX）の<strong>読み込みが終わるのを待ってから</strong>起動していた
-- SOCIインデックスで、読み上げの起動が<strong>0.8秒 → 9.1秒</strong>に延びた
-
-<div class="text-xl mt-8" v-click>→ でも、botがボイスチャンネルに入るだけなら、読み上げは<strong>まだいらない</strong></div>
+<InlineSvg src="wait-before.svg" label="読み上げのコンテナが読み込みを終えるまで、botのコンテナは待ち、読み込みが完了してから起動してボイスチャンネル（VC）に入る" class="mx-auto mt-8" style="width: 760px" />
 
 ---
 chapter: ほかのコンテナを待たない
@@ -239,13 +238,12 @@ chapter: ほかのコンテナを待たない
 
 ## botは待たずに起動する
 
-<br>
+<div class="text-lg mt-2">botは読み上げの読み込みを待たずに起動して、先にボイスチャンネルに入る</div>
 
-- 読み上げの準備を待たずに、botが先にボイスチャンネルに入る
-- 準備ができていなくても、<strong>声や文章はためておいて</strong>、準備ができたら流す
+<InlineSvg src="wait-after.svg" label="botのコンテナは読み上げの読み込みを待たずに起動してボイスチャンネル（VC）に入り、声や文章をためておき、読み上げの準備ができたら流す" class="mx-auto mt-8" style="width: 760px" />
 
 <!--
-仮の札: 構成まとめ（2026-11-15）で「待たずに起動する（言い方の詳細は後で詰める）」となっているため。
+仮の札: 構成まとめ（2026-11-15）で「待たずに起動する（言い方の詳細は後で詰める）」となっているため。図の「声や文章をためる」「準備ができたら流す」は構成まとめの「声や文章はためておいて、準備ができたら流す」から。
 -->
 
 ---
@@ -257,18 +255,20 @@ chapter: ほかのコンテナを待たない
 
 ## 待たずに起動した結果
 
-<InlineSvg src="chart-total.svg" label="全体の起動時間は、改善前の約106秒から、SOCIインデックスで48.6秒、さらに待たずに起動して32.7秒" class="mx-auto mt-8" style="width: 760px" />
+<InlineSvg src="chart-total.svg" label="全体の起動時間は、改善前の約106秒から、SOCIインデックスで48.6秒、さらに待たずに起動して32.7秒" class="mx-auto mt-10" style="width: 760px" />
 
-<div class="text-center text-2xl mt-10" v-click><strong>100秒以上</strong> → <strong>約30秒台</strong>に！</div>
+<div class="text-center text-2xl mt-10" v-click>100秒以上 → 約30秒台に！</div>
 
+---
+layout: center
 ---
 
 <!-- slide-id: s-03a0a2c107c9bb52 -->
 <div class="kari">仮：一文の言い回しは未定</div>
 
-## まとめ
+<div class="text-sm opacity-70">まとめ</div>
 
-<div class="summary mt-16">
+<div class="summary mt-6">
   SOCIインデックスを使うと<br><strong>イメージのプル時間が速くなる</strong>から<br>起動を短くできた！！！
 </div>
 
@@ -283,6 +283,8 @@ chapter: ほかのコンテナを待たない
 ---
 
 <!-- slide-id: s-8bcd6cdc6f796018 -->
+<div class="kari">仮：載せる部品は未定</div>
+
 <div class="text-sm opacity-70">補足</div>
 
 ## 調べてるうちに見つけたCDKの便利な部品
@@ -295,7 +297,8 @@ chapter: ほかのコンテナを待たない
   - <Kogoe>SOCIインデックスを作れる（@cdklabs/deploy-time-build）</Kogoe>
 
 <!--
-時間があれば話す。無ければ飛ばす。
+時間があれば話す。無ければ飛ばす（構成まとめ 2026-11-15）。
+仮の札: 余談を入れることは決まっているが、どの部品を載せるかは本人の言葉が記録にないため。前のデッキに置いてあった中身をそのまま残した。
 -->
 
 ---

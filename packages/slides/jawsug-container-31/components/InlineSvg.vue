@@ -35,7 +35,7 @@ const svg = computed(() => {
 </template>
 
 <style scoped>
-.inline-svg :deep(svg) {
+.inline-svg > :deep(svg) {
   display: block;
   width: 100%;
   height: auto;
