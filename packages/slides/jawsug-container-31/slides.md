@@ -13,9 +13,10 @@ fonts:
   mono: 'Fira Code'
 ---
 
+<!-- slide-id: s-2e49c3400c263186 -->
 # <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">SOCIインデックス</span>で<br>コンテナの起動を早くしてみた</span>
 
-<div class="opacity-70">
+<div style="color: #fff; opacity: 1">
 
 2026.11.16（月）\
 池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
@@ -32,6 +33,7 @@ name: アキキー | 池田 晃尚
 transition: slide-left
 ---
 
+<!-- slide-id: s-3ff98294b8253ca6 -->
 <ProfileItem icon="/images/aboutme/mates-logo.png" name="株式会社メイツ">
 
 - バックエンドエンジニア / SRE
@@ -49,6 +51,7 @@ transition: slide-left
 layout: center
 ---
 
+<!-- slide-id: s-8902058138e3d09a -->
 <div>
   今日は
   <h2><strong>コンテナアプリの起動</strong>を<br>早くする話</h2>
@@ -57,6 +60,7 @@ layout: center
 
 ---
 
+<!-- slide-id: s-c09c833bf636d5b9 -->
 <div class="kari">仮：使う場面の言い方は未定</div>
 
 ## 自作のDiscord音声botとは？
@@ -74,6 +78,7 @@ layout: center
 
 ---
 
+<!-- slide-id: s-87cada606e6f210e -->
 <div class="kari">仮：特性の言い方は未定</div>
 
 ## 自作のDiscord音声bot
@@ -93,6 +98,7 @@ layout: center
 chapter: 起動にかかる時間を見る
 ---
 
+<!-- slide-id: s-e1e48e9fc8821ccd -->
 <ChapterLabel />
 
 <div class="text-sm opacity-70">まず</div>
@@ -114,6 +120,7 @@ layout: center
 chapter: イメージの取得を速くする
 ---
 
+<!-- slide-id: s-9969bbcc92d8cef5 -->
 <ChapterLabel />
 
 <div>
@@ -125,6 +132,7 @@ chapter: イメージの取得を速くする
 chapter: イメージの取得を速くする
 ---
 
+<!-- slide-id: s-156016a127432fe1 -->
 <ChapterLabel />
 
 <div class="flex items-center gap-4">
@@ -144,11 +152,12 @@ chapter: イメージの取得を速くする
 chapter: イメージの取得を速くする
 ---
 
+<!-- slide-id: s-7c809e7e8d360db8 -->
 <ChapterLabel />
 
 <div class="text-sm opacity-70">仕組みの前に</div>
 
-## イメージレイヤー・span・zTOCとは？
+## SOCIインデックスの仕組み
 
 <InlineSvg src="soci-terms.svg" label="コンテナイメージはレイヤーを重ねたもの。大きいレイヤーはspanという単位に区切られ、zTOCというレイヤーの目次で、どのファイルがどのspanにあるかが分かる" class="mx-auto mt-2" style="width: 640px" />
 
@@ -164,11 +173,12 @@ chapter: イメージの取得を速くする
 chapter: イメージの取得を速くする
 ---
 
+<!-- slide-id: s-7067122156c4c57a -->
 <ChapterLabel />
 
 <div class="flex items-center gap-4">
   <img src="/images/aws/ecr.svg" class="h-12" />
-  <h2 class="!m-0">SOCIインデックスとは？</h2>
+  <h2 class="!m-0">SOCIインデックスの仕組み</h2>
 </div>
 
 <div class="text-lg mt-3">プルのときは、イメージから<strong>最小限のファイル</strong>しか取得しない</div>
@@ -186,6 +196,7 @@ chapter: イメージの取得を速くする
 chapter: イメージの取得を速くする
 ---
 
+<!-- slide-id: s-67d1a97a584737a0 -->
 <ChapterLabel />
 
 <div class="text-sm opacity-70">入れてみると</div>
@@ -200,6 +211,7 @@ chapter: イメージの取得を速くする
 chapter: ほかのコンテナを待たない
 ---
 
+<!-- slide-id: s-a4dcee05fcc576d6 -->
 <ChapterLabel />
 
 <div class="text-sm opacity-70">次に</div>
@@ -217,6 +229,7 @@ chapter: ほかのコンテナを待たない
 chapter: ほかのコンテナを待たない
 ---
 
+<!-- slide-id: s-150b4c72a8603b32 -->
 <ChapterLabel />
 
 <div class="kari">仮：言い方は未定</div>
@@ -236,6 +249,7 @@ chapter: ほかのコンテナを待たない
 chapter: ほかのコンテナを待たない
 ---
 
+<!-- slide-id: s-4a40864a983f1fa8 -->
 <ChapterLabel />
 
 ## 待たずに起動した結果
@@ -246,6 +260,7 @@ chapter: ほかのコンテナを待たない
 
 ---
 
+<!-- slide-id: s-03a0a2c107c9bb52 -->
 <div class="kari">仮：一文の言い回しは未定</div>
 
 ## まとめ
@@ -264,6 +279,7 @@ chapter: ほかのコンテナを待たない
 
 ---
 
+<!-- slide-id: s-8bcd6cdc6f796018 -->
 <div class="text-sm opacity-70">補足</div>
 
 ## 調べてるうちに見つけたCDKの便利な部品
@@ -283,6 +299,7 @@ chapter: ほかのコンテナを待たない
 layout: ending
 ---
 
+<!-- slide-id: s-bd274433b54aefeb -->
 # Thank You!
 
 <div class="absolute right-8 bottom-8 flex flex-col items-center gap-2">
