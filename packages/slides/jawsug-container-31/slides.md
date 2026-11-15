@@ -155,11 +155,14 @@ chapter: イメージの取得を速くする
 <!-- slide-id: s-7c809e7e8d360db8 -->
 <ChapterLabel />
 
-<div class="text-sm opacity-70">仕組みの前に</div>
+<div class="flex items-center gap-4">
+  <img src="/images/aws/ecr.svg" class="h-12" />
+  <h2 class="!m-0">SOCIインデックスの仕組み</h2>
+</div>
 
-## SOCIインデックスの仕組み
+<div class="text-lg mt-3">このあとの仕組みは、レイヤー・span・zTOCの3つの言葉で説明する</div>
 
-<InlineSvg src="soci-terms.svg" label="コンテナイメージはレイヤーを重ねたもの。大きいレイヤーはspanという単位に区切られ、zTOCというレイヤーの目次で、どのファイルがどのspanにあるかが分かる" class="mx-auto mt-2" style="width: 640px" />
+<InlineSvg src="soci-terms.svg" label="コンテナイメージはレイヤーを重ねたもの。大きいレイヤーはspanという単位に区切られ、zTOCというレイヤーの目次で、どのファイルがどのspanにあるかが分かる" class="mx-auto mt-4" style="width: 640px" />
 
 <div class="text-lg mt-3"><strong>イメージレイヤー</strong>：イメージを作っている層。ふだんのプルでは丸ごと取得する</div>
 <div class="text-lg mt-1"><strong>span</strong>：レイヤーを区切った、取得の単位</div>
