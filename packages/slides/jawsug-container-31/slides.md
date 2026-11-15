@@ -54,45 +54,44 @@ layout: center
 <!-- slide-id: s-8902058138e3d09a -->
 <div>
   今日は
-  <h2>コンテナアプリの起動を<br>早くする話</h2>
-  <div class="text-xl mt-6">起動に時間がかかって困っていたので、改善してみた</div>
+  <h2>ECSにホストしたコンテナアプリの<br>起動を早くする話</h2>
+  <div class="text-xl mt-6">起動時間が遅くて困っていたため、改善を図りました</div>
 </div>
 
 ---
 
 <!-- slide-id: s-c09c833bf636d5b9 -->
-<div class="kari">仮：定義の言い方は未定</div>
-
 <div class="flex items-center gap-4">
   <img src="/images/discord.svg" class="h-12" />
   <h2 class="!m-0">自作のDiscord音声botとは？</h2>
 </div>
 
-<div class="text-lg mt-3">Discordのボイスチャンネルで<strong>読み上げと文字起こし</strong>をするbot</div>
+<div class="text-lg mt-2"><strong>Claude Codeと通話できる</strong>Discord bot</div>
 
-<InlineSvg src="bot-task.svg" label="1つのECSタスク（Fargate）の中に、bot、読み上げ（VOICEVOX）、文字起こしの3つのコンテナがある" class="mx-auto mt-8" style="width: 760px" />
+<InlineSvg src="bot-overview.svg" label="ユーザーがボイスチャンネルで話すと、botが文字起こししてテキストチャンネルに投稿する。Claude CodeはChannelsでテキストチャンネルに接続していて、返事をテキストチャンネルに返す。botがその返事をボイスチャンネルで読み上げる" class="mx-auto mt-2" style="width: 600px" />
 
-<div class="text-xl mt-6">→ 3つのコンテナを1つのECSタスクにまとめて動かしている</div>
+---
 
-<!--
-仮の札: 構成まとめ（2026-11-15）には「Discord音声bot（読み上げ＝VOICEVOX、文字起こし、botの3コンテナを1タスクにまとめた構成）」とだけあり、botを一言で言う定義の文は本人の言葉がないため。
--->
+<!-- slide-id: s-5b1e7c0a94d2f683 -->
+<div class="flex items-center gap-4">
+  <img src="/images/discord.svg" class="h-12" />
+  <h2 class="!m-0">自作のDiscord音声botとは？</h2>
+</div>
+
+<div class="text-lg mt-3">3つのコンテナを<strong>1つのECSタスク</strong>としてFargate上に動かしています</div>
+
+<InlineSvg src="bot-task.svg" label="1つのECSタスク（Fargate）の中に、bot、読み上げ（VOICEVOX）、文字起こし（Transcribe Streaming）の3つのコンテナがある" class="mx-auto mt-8" style="width: 760px" />
 
 ---
 layout: center
 ---
 
 <!-- slide-id: s-87cada606e6f210e -->
-<div class="kari">仮：アプリの特性の言い方は未定</div>
-
 <div>
-  このbotは、話したいときだけECSタスクを起動するので
-  <h2>起動が遅いと、<br>話し始めるまで待たされる</h2>
+  費用を抑えるために、使いたい時にタスクを起動して使い終わったら止めている
+  <h2>毎回の起動に<br>100秒以上かかっていた</h2>
+  <div class="text-xl mt-6">起動時間が長いと音声会話のハードルが高くなり、<br>使いたい時も面倒くさくて使わなかったことがある</div>
 </div>
-
-<!--
-仮の札: 構成まとめでは「アプリの説明→特性→その特性を元に改善したかった」の流れだけが決まっていて、特性の中身と言い方は本人の言葉がないため。「使うときだけ起動する」は、前のデッキに置いてあった仮の中身から取った。
--->
 
 ---
 chapter: 起動にかかる時間を見る
@@ -103,12 +102,12 @@ chapter: 起動にかかる時間を見る
 
 <div class="text-sm opacity-70">まず</div>
 
-## 起動にかかる時間の内訳
+## 改善前の起動時間の内訳
 
 <InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約106秒のうち、タスクの準備のあとにイメージのプル37.5秒、読み上げの起動0.8秒、ヘルスチェック待ちを挟んでbotの起動1.5秒" class="mx-auto mt-4" style="width: 800px" />
 
-<div class="text-xl mt-4" v-click>→ イメージのプルが大きな塊</div>
-<div class="text-xl mt-2" v-click>→ 読み上げ（VOICEVOX）のコンテナイメージが約1.9GBと大きいから</div>
+<div class="text-xl mt-4" v-click>→ 一番大きいのはイメージの取得（プル）。VOICEVOXのコンテナイメージが約1.9GBと、かなり大きいから</div>
+<div class="text-xl mt-2" v-click>→ まずはこのプルの時間を短くするところから改善していきます</div>
 
 <!--
 タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: 準備 → プル 37.5秒 → プル後 8.0秒 → 読み上げ起動 0.8秒 → 待ち 29.2秒 → bot起動 1.5秒 → VCへ接続 0.9秒。全体が約106秒になるよう、準備の長さを残りで決めている。
