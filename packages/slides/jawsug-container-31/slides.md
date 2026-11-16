@@ -270,7 +270,6 @@ layout: center
 <div class="text-base mt-1" v-click>→ イメージのプルは圧倒的に速くなったが、その代わりにコンテナの起動時間が伸びた<br><span class="text-sm opacity-70">（最小限のファイルしか取らなかったため、起動時に足りないファイルがあるたびに取りに行く）</span></div>
 
 ---
----
 layout: center
 ---
 
