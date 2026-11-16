@@ -271,6 +271,13 @@ layout: center
 
 ---
 layout: center
+<div class="flex items-center gap-4">
+  <img src="/images/aws/fargate.svg" class="h-12" />
+  <h2 class="!m-0">ECSタスク起動のタイムライン</h2>
+</div>
+
+<InlineSvg src="chart-breakdown.svg" label="改善前のECSタスク起動を、区間ごとに段をずらして時間順に並べたタイムライン。全体約77秒。ECSタスクの立ち上げ処理など、イメージのプル37.5秒、コンテナ作成など、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒、その他の起動処理の順" class="mx-auto mt-2" style="width: 740px" />
+
 ---
 
 <!-- slide-id: s-03a0a2c107c9bb52 -->
