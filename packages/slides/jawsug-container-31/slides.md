@@ -344,30 +344,6 @@ layout: center
 -->
 
 ---
-
-<!-- slide-id: s-8bcd6cdc6f796018 -->
-<div class="kari">仮：載せる部品は未定</div>
-
-<div class="text-sm opacity-70">補足</div>
-
-<div class="flex items-center gap-4">
-  <img src="/images/aboutme/awscdk.dio.png" class="h-12" />
-  <h2 class="!m-0"><span style="font-size: 0.85em">調べてるうちに見つけたCDKの便利な部品</span></h2>
-</div>
-
-<br>
-
-- `NatInstanceProviderV2`
-  - <Kogoe>NATインスタンスを作れる</Kogoe>
-- `SociIndexV2Build`
-  - <Kogoe>SOCIインデックスを作れる（@cdklabs/deploy-time-build）</Kogoe>
-
-<!--
-時間があれば話す。無ければ飛ばす（構成まとめ 2026-11-15）。
-仮の札: 余談を入れることは決まっているが、どの部品を載せるかは本人の言葉が記録にないため。前のデッキに置いてあった中身をそのまま残した。
--->
-
----
 layout: ending
 ---
 
