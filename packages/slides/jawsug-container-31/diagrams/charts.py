@@ -3,7 +3,7 @@
     python3 diagrams/charts.py   # パッケージのディレクトリで
 
 public/images/ に次の SVG を書き出す。見た目は life の tasks/speaking/diagram-style.md に従う。
-- bot-task.svg        : 音声botの構成（1つのECSタスクに3つのコンテナ）
+- bot-task.svg        : 音声botの構成（前のページの bot-overview.svg の bot の部分を開いて、1つのECSタスクに3つのコンテナ）
 - chart-breakdown.svg : 最初の分析（改善前の起動の内訳を1本のタイムラインで）
 - soci-lifecycle.svg  : SOCIとは？（pull → create → start と、それぞれで読むもの）
 - soci-terms.svg      : 仕組みの3つの言葉（レイヤー・span・zTOC）
@@ -128,22 +128,74 @@ def fmt(v: float, about: bool = False) -> str:
 
 
 # ---------------------------------------------------------------------------
-# 音声botの構成
+# 音声botの構成: 前のページの図（bot-overview.svg）の bot の部分を開いて、ECSタスクの中身を見せる
 # ---------------------------------------------------------------------------
+# bot-overview.svg に合わせる色と形（ECS Fargate の箱、文字起こし・読み上げの矢印、Discord の枠）
+OV_ECS, OV_ECS_BG = "#E67E22", "#FEF5EC"
+OV_DISCORD, OV_STT, OV_TTS = "#5865F2", "#2F6FB3", "#8B5CF6"
+
+
+def _overview_parts() -> tuple[str, str, str]:
+    """bot-overview.svg から、defs・図の中身・bot の部分（音声bot 2つ・矢印・ECS Fargate の箱）を取り出す。"""
+    src = (OUT / "bot-overview.svg").read_text()
+    defs = re.search(r"<defs>(.*?)</defs>", src, re.S).group(1)
+    body = re.search(r"</defs>(.*)</svg>", src, re.S).group(1)
+    picks = []
+    for begin, stop in (
+        ('<clipPath id="c270">', ">音声bot</text>"),
+        ('<clipPath id="c580">', ">音声bot</text>"),
+        ('<rect x="140" y="350"', ">音声botが動く</text>"),
+    ):
+        i = body.index(begin)
+        picks.append(body[i : body.index(stop, i) + len(stop)])
+    picks += re.findall(r'<path d="M(?:270|580),292[^>]*/>', body)
+    return defs, body, "".join(picks)
+
+
+def _prefix_ids(s: str, prefix: str) -> str:
+    s = re.sub(r'\bid="([^"]+)"', rf'id="{prefix}\1"', s)
+    return re.sub(r"url\(#([^)]+)\)", rf"url(#{prefix}\1)", s)
+
+
 def bot_task() -> str:
     b = []
-    b.append(box(20, 20, 960, 230, stroke="#ED7100", fill="#fdf3ea", rx=14))
-    b.append(FARGATE(40, 36, 30))
-    b.append(text(80, 59, "ECSタスク（Fargate）", size=18, fill="#B85700", bold=True))
-    items = [("Discord botコンテナ", "Discordとやりとりする"), ("読み上げコンテナ", "VOICEVOX"), ("文字起こしコンテナ", "")]
-    for i, (name, note) in enumerate(items):
-        x = 60 + i * 310
-        b.append(box(x, 86, 260, 136))
-        b.append(CONTAINER(x + 102, 98, 56))
-        b.append(text(x + 130, 182, name, size=20, bold=True, anchor="middle"))
+    defs, body, picks = _overview_parts()
+    k, ox, oy = 0.62, 0, 72  # 前の図を縮めて左に置く
+    # 前の図は薄く敷き、bot の部分だけ元の濃さで重ねる
+    b.append(f'<defs>{_prefix_ids(defs, "ov-")}</defs>')
+    b.append(f'<g transform="translate({ox} {oy}) scale({k})" opacity="0.28">{_prefix_ids(body, "ov-")}</g>')
+    b.append(f'<g transform="translate({ox} {oy}) scale({k})">{_prefix_ids(picks, "hl-")}</g>')
+
+    # ECS Fargate の箱（前の図の座標 140,350 300x76）から、右のECSタスクへ広げる
+    ex, ey, ew, eh = ox + 140 * k, oy + 350 * k, 300 * k, 76 * k
+    px, py, pw, ph = 530, 14, 456, 392
+    b.append(
+        f'<polygon points="{ex + ew:.1f},{ey:.1f} {px},{py} {px},{py + ph} {ex + ew:.1f},{ey + eh:.1f}" '
+        f'fill="{OV_ECS}" fill-opacity="0.10"/>'
+    )
+    for y0, y1 in ((ey, py), (ey + eh, py + ph)):
+        b.append(f'<line x1="{ex + ew:.1f}" y1="{y0:.1f}" x2="{px}" y2="{y1}" stroke="{OV_ECS}" stroke-width="1.5" stroke-opacity="0.7"/>')
+    b.append(f'<rect x="{ex - 3:.1f}" y="{ey - 3:.1f}" width="{ew + 6:.1f}" height="{eh + 6:.1f}" rx="10" fill="none" stroke="{OV_ECS}" stroke-width="2.5"/>')
+
+    # ECSタスクの中身（前の図の ECS Fargate の箱と同じ色）
+    b.append(box(px, py, pw, ph, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
+    b.append(FARGATE(px + 20, py + 16, 30))
+    b.append(text(px + 60, py + 39, "音声botのECSタスク（Fargate）", size=18, fill="#B85700", bold=True))
+    items = [
+        ("Discord botコンテナ", "Discordとやりとりする", OV_DISCORD),
+        ("読み上げコンテナ", "VOICEVOX", OV_TTS),
+        ("文字起こしコンテナ", "", OV_STT),
+    ]
+    for i, (name, note, color) in enumerate(items):
+        x, y, w, h = px + 24, py + 66 + i * 106, pw - 48, 92
+        b.append(box(x, y, w, h, stroke=color))
+        b.append(CONTAINER(x + 18, y + h / 2 - 28, 56))
         if note:
-            b.append(text(x + 130, 208, note, size=16, fill=SUB, anchor="middle"))
-    return svg(1000, 270, b)
+            b.append(text(x + 92, y + 40, name, size=20, bold=True))
+            b.append(text(x + 92, y + 67, note, size=15, fill=SUB))
+        else:
+            b.append(text(x + 92, y + h / 2 + 7, name, size=20, bold=True))
+    return svg(1000, 420, b)
 
 
 # ---------------------------------------------------------------------------

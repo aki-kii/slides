@@ -58,10 +58,7 @@ layout: center
 ---
 
 <!-- slide-id: s-c09c833bf636d5b9 -->
-<div class="flex items-center gap-4">
-  <img src="/images/discord.svg" class="h-12" />
-  <h2 class="!m-0">自作のDiscord音声botとは？</h2>
-</div>
+<h2 class="!m-0">Discord音声通話bot（自作）の仕組み</h2>
 
 <div class="text-lg"><strong>Claude Code</strong>と通話できるDiscord bot</div>
 
@@ -77,17 +74,18 @@ layout: center
 
 <div class="text-lg">3つのコンテナを<strong>1つのECSタスク</strong>としてFargate上に動かしています</div>
 
-<InlineSvg src="bot-task.svg" label="1つのECSタスク（Fargate）の中に、Discord botコンテナ、読み上げコンテナ（VOICEVOX）、文字起こしコンテナ（Transcribe Streaming）の3つがある" class="mx-auto mt-6" style="width: 800px" />
+<InlineSvg src="bot-task.svg" label="前のページの図を薄く敷き、音声botが動くECS Fargateの箱を開いた図。1つのECSタスク（Fargate）の中に、Discord botコンテナ、読み上げコンテナ（VOICEVOX）、文字起こしコンテナ（Transcribe Streaming）の3つがある" class="mx-auto mt-3" style="width: 760px" />
+
+<div class="text-lg mt-3">費用を抑えるために、使いたい時にタスクを起動して使い終わったら止めている</div>
 
 ---
 layout: center
 ---
 
 <!-- slide-id: s-87cada606e6f210e -->
-<div>
-  費用を抑えるために、使いたい時にタスクを起動して使い終わったら止めている
-  <h2>毎回の起動に<br><strong>約77秒</strong>かかっていた</h2>
-  <div class="text-lg mt-4 opacity-70">起動時間が長いと音声会話のハードルが高くなり、<br>使いたい時も面倒くさくて使わなかったことがある</div>
+<div class="text-3xl leading-relaxed">
+  <p>Discord botの起動に80秒前後かかっていました</p>
+  <p>起動時間が長いと使うのも億劫になります…</p>
 </div>
 
 ---
