@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: SOCIインデックスでコンテナの起動を早くしてみた
+title: SOCIインデックスでコンテナの起動を速くしてみた
 mdc: true
 addons:
   - '@slides/ui'
@@ -14,7 +14,7 @@ fonts:
 ---
 
 <!-- slide-id: s-2e49c3400c263186 -->
-# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">SOCIインデックス</span>で<br>コンテナの起動を早くしてみた</span>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">SOCIインデックス</span>で<br>コンテナの起動を速くしてみた</span>
 
 2026.11.16（月）\
 池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
@@ -50,9 +50,7 @@ layout: center
 
 <!-- slide-id: s-8902058138e3d09a -->
 <div>
-  今日は
-  <h2>ECSにホストしたコンテナアプリの<br><strong>起動を早くする</strong>話</h2>
-  <div class="text-lg mt-4 opacity-70">起動時間が遅くて困っていたため、改善を図りました</div>
+  <h2>ECSにホストしたコンテナアプリの<br><strong>起動時間が遅くて</strong>困っていました</h2>
 </div>
 
 ---
@@ -67,26 +65,29 @@ layout: center
 ---
 
 <!-- slide-id: s-5b1e7c0a94d2f683 -->
-<div class="flex items-center gap-4">
-  <img src="/images/discord.svg" class="h-12" />
-  <h2 class="!m-0">自作のDiscord音声botとは？</h2>
-</div>
+<h2 class="!m-0">Discord音声通話bot（自作）の仕組み</h2>
 
 <div class="text-lg">3つのコンテナを<strong>1つのECSタスク</strong>としてFargate上に動かしています</div>
 
-<InlineSvg src="bot-task.svg" label="前のページの図を薄く敷き、音声botが動くECS Fargateの箱を開いた図。1つのECSタスク（Fargate）の中に、Discord botコンテナ、読み上げコンテナ（VOICEVOX）、文字起こしコンテナ（Transcribe Streaming）の3つがある" class="mx-auto mt-3" style="width: 760px" />
+<InlineSvg src="bot-task.svg" label="前のページの図を薄く敷き、音声botが動くECS Fargateの箱から点線で右のECSタスクにつないだ図。1つのECSタスク（Fargate）の中に、Discord botコンテナ、読み上げコンテナ（VOICEVOX）、文字起こしコンテナ（Transcribe Streaming）の3つがある" class="mx-auto mt-3" style="width: 760px" />
 
-<div class="text-lg mt-3">費用を抑えるために、使いたい時にタスクを起動して使い終わったら止めている</div>
+<div class="text-lg mt-3">→ 費用を抑えるために使いたい時のみタスクを起動しています</div>
 
 ---
 layout: center
 ---
 
 <!-- slide-id: s-87cada606e6f210e -->
-<div class="text-3xl leading-relaxed">
+<div class="text-4xl leading-relaxed">
   <p>Discord botの起動に80秒前後かかっていました</p>
   <p>起動時間が長いと使うのも億劫になります…</p>
 </div>
+
+<Overlay position="center">
+
+そこで、ECSタスクの起動時間を改善していこうと思いました
+
+</Overlay>
 
 ---
 
@@ -96,16 +97,13 @@ layout: center
   <h2 class="!m-0">ECSタスク起動のタイムライン</h2>
 </div>
 
-<InlineSvg src="chart-breakdown.svg" label="改善前のECSタスク起動を、区間ごとに段をずらして時間順に並べたタイムライン。全体約77秒。その他の起動処理、イメージのプル37.5秒、コンテナ作成など、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒、その他の起動処理の順" class="mx-auto mt-4" style="width: 780px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前のECSタスク起動を、区間ごとに段をずらして時間順に並べたタイムライン。全体約77秒。ECSタスクの立ち上げ処理など、イメージのプル37.5秒、コンテナ作成など、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒、その他の起動処理の順" class="mx-auto mt-2" style="width: 740px" />
 
-<Overlay position="center">
-
-一番大きいのはイメージのプル
-
-→ イメージのプルに時間がかかっている！<br>
-<span class="whitespace-nowrap">→ 読み上げコンテナ（VOICEVOX）のサイズが大きい（約2GB）ため</span>
-
-</Overlay>
+<div class="text-lg mt-4 leading-relaxed">
+  <p class="!my-0"><strong>一番大きいのはイメージのプル</strong></p>
+  <p class="!my-0">→ イメージのプルに時間がかかっている！</p>
+  <p class="!my-0 whitespace-nowrap">→ 読み上げコンテナ（VOICEVOX）のサイズが大きい（約2GB）ため</p>
+</div>
 
 <!--
 タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: その他 → プル 37.5秒 → プル後 8.0秒 → 読み上げコンテナの起動 0.8秒 → Discord botコンテナの起動 1.5秒 → VCへ接続 0.9秒。
@@ -116,7 +114,7 @@ layout: center
 ---
 
 <!-- slide-id: s-ed5f48a99294093b -->
-<h2 class="!m-0"><span style="font-size: 0.85em">コンテナイメージのプルを速くするためには</span></h2>
+<h2 class="!m-0"><span style="font-size: 0.85em">コンテナイメージのプルを速くする方法</span></h2>
 
 <div class="means mt-8">
 
@@ -125,11 +123,11 @@ layout: center
 - × イメージのキャッシュ
   - FargateはECSタスクごとに環境が独立しているため、できない
 - ○ <strong>イメージの遅延読み込み</strong>
-  - SOCI Snapshotterによって実現する
+  - SOCIによって実現する
 
 </div>
 
-<div class="text-xl mt-8" v-click>→ <strong>イメージの遅延読み込み</strong>をSOCI Snapshotterによって実現していく</div>
+<div class="text-xl mt-8" v-click>→ <strong>イメージの遅延読み込み</strong>をSOCIによって実現していく</div>
 
 <style>
 .means li ul { margin-top: 0.2rem; }
@@ -144,21 +142,31 @@ layout: center
   <h2 class="!m-0">SOCI（Seekable OCI）とは？</h2>
 </div>
 
-<div class="text-lg">コンテナイメージを<strong>遅延読み込み</strong>することでコンテナの起動を早くするための技術</div>
+<div class="grid grid-cols-[360px_1fr] gap-8 items-center mt-2">
 
-<InlineSvg src="soci-lifecycle.svg" label="コンテナが動くまでの流れ pull → create → start。pull ではECRリポジトリのSOCIインデックスなど最低限だけ読み込み、start のときにコンテナイメージから必要なファイルを読み取る" class="mx-auto mt-2" style="width: 560px" />
+<InlineSvg src="soci-compare.svg" label="ECSタスクの中でコンテナが動くまでの流れを上から下へ pull → create → start と縦に並べた図。遅延読み込みなしは、pullでイメージ全体を取得してレイヤーを全部展開するのでpullが長い。SOCIは、pullでイメージ全体は取得しないのでpullが短く、startが長い" style="width: 360px" />
 
-<div class="soci-points">
+<div>
 
-- イメージをプルする時に必要最低限のファイルのみ取得してコンテナを起動し、<br>他のファイルはアプリの実行中に必要になった時に取得する
+<div class="text-lg">AWSのOSSの1つで、コンテナイメージを<strong>遅延読み込み</strong>することでコンテナの起動を早くするための技術</div>
+
+<div class="text-base mt-3">コンテナの起動は、イメージのプル（pull）→ コンテナの作成（create）→ コンテナの起動（start）という順に進む</div>
+
+<div class="soci-points mt-3">
+
+- イメージをプルする時に必要最低限のファイルのみ取得してコンテナを起動し、他のファイルはアプリの実行中に必要になった時に取得する
 - コンテナイメージのレイヤーに対してインデックスを作成することで実現している
 - インデックスはコンテナイメージを作り直さずに後付けできる
 
 </div>
 
+</div>
+
+</div>
+
 <style>
 .soci-points ul { margin: 0; }
-.soci-points li { font-size: 1rem !important; line-height: 1.45 !important; margin-bottom: 0 !important; }
+.soci-points li { font-size: 1rem !important; line-height: 1.45 !important; margin-bottom: 0.15rem !important; }
 </style>
 
 <BottomLink href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html" title="Fargate tasks and services - Lazy loading container images using Seekable OCI" />
@@ -171,9 +179,9 @@ layout: center
   <h2 class="!m-0">SOCIインデックスの仕組み</h2>
 </div>
 
-<div class="text-lg">仕組みは、レイヤー・span・zTOCという3つの言葉で説明できる</div>
+<div class="grid grid-cols-[400px_1fr] gap-8 items-center mt-4">
 
-<InlineSvg src="soci-terms.svg" label="コンテナイメージはレイヤーを重ねたもの。レイヤーはTARアーカイブを圧縮したもので、zTOCがspanという単位に区切っている。zTOCはレイヤーのインデックスで、どのファイルがレイヤーの中のどこにあるかが書いてある" class="mx-auto mt-1" style="width: 540px" />
+<InlineSvg src="soci-terms.svg" label="コンテナイメージの枠の中にレイヤーが重なっている。レイヤーはTARアーカイブを圧縮したもので、zTOCがspanという単位に区切っている。zTOCはレイヤーのインデックスで、どのファイルがレイヤーの中のどこにあるかが書いてある" style="width: 400px" />
 
 <div class="terms">
 
@@ -183,22 +191,12 @@ layout: center
 
 </div>
 
-<style>
-.terms ul { margin: 0.25rem 0 0; }
-.terms li { font-size: 1rem !important; line-height: 1.45 !important; margin-bottom: 0.1rem !important; }
-</style>
-
----
-
-<!-- slide-id: s-7c809e7e8d360db8 -->
-<div class="flex items-center gap-4">
-  <img src="/images/aws/ecr.svg" class="h-12" />
-  <h2 class="!m-0">SOCIインデックスの仕組み</h2>
 </div>
 
-<div class="text-lg">コンテナの起動は、イメージのプル（pull）→ コンテナの作成（create）→<br>コンテナの起動（start）という順に進む</div>
-
-<InlineSvg src="soci-compare.svg" label="遅延読み込みなしは、pullでイメージ全体を取得してレイヤーを全部展開し、ファイルが全部そろってからコンテナを作成する。SOCIは、pullでイメージ全体は取得せず、全てのレイヤーを取得していない状態でコンテナを作成する" class="mx-auto mt-8" style="width: 800px" />
+<style>
+.terms ul { margin: 0; }
+.terms li { font-size: 1.1rem !important; line-height: 1.55 !important; margin-bottom: 0.6rem !important; }
+</style>
 
 ---
 
@@ -208,12 +206,14 @@ layout: center
   <h2 class="!m-0">SOCIインデックスの仕組み</h2>
 </div>
 
-<div class="text-lg">プルで取得するのは、SOCIインデックスとzTOC、<br>10MiB未満の小さいレイヤーだけ</div>
+<div class="text-lg">コンテナ起動時にアプリがファイルを読み込むときに足りないものを取得する仕組み</div>
 
 <InlineSvg src="soci-mechanism.svg" label="pullのときは、ECRリポジトリからSOCIインデックス（レイヤーのインデックスであるzTOC）と10MiB未満の小さいレイヤーだけを取得する。startのときに足りないものは、zTOCから探して、span単位でレイヤーから取得する" class="mx-auto mt-1" style="width: 500px" />
 
 <div class="text-lg mt-2" v-click>→ 起動時、アプリがファイルを読むたびに足りないものをzTOCから探して、<strong>span単位</strong>で取得する</div>
 <div class="text-lg mt-1" v-click>→ 必要になった分から読み込むため、<strong>遅延読み込み</strong>と呼ばれている</div>
+
+<div class="absolute right-8 bottom-6 text-sm opacity-70">※ 10MiB未満の小さいレイヤーは、プルで丸ごと取得する</div>
 
 <!--
 プル時に取るのは、manifest/config・SOCIインデックス・全レイヤーのzTOC（イメージの約1〜3%）と、zTOCが作られない小さいレイヤー（既定10MiB未満）の全量。
@@ -231,56 +231,59 @@ layout: center
 <div class="text-lg">遅延読み込みが効果を発揮しやすいのは、<br>圧縮後のサイズが<strong>250MiB</strong>を超えるコンテナイメージ</div>
 
 <div class="apply mt-6">
-  <div class="target">
-    <img src="/images/aws/ecs-container.svg" class="h-12" />
-    <div class="name">Discord botコンテナ</div>
-  </div>
-  <div class="target">
+  <div class="target on">
     <img src="/images/aws/ecs-container.svg" class="h-12" />
     <div class="name">読み上げコンテナ<br><span class="sub">VOICEVOX</span></div>
+    <div class="size">約1.9GB</div>
+  </div>
+  <div class="target on">
+    <img src="/images/aws/ecs-container.svg" class="h-12" />
+    <div class="name">Discord botコンテナ</div>
+    <div class="size">約390MB</div>
+  </div>
+  <div class="target off">
+    <img src="/images/aws/ecs-container.svg" class="h-12" />
+    <div class="name">文字起こしコンテナ</div>
+    <div class="size">約90MB</div>
   </div>
 </div>
 
-<div class="text-xl mt-8">→ この2つに<strong>SOCIインデックス</strong>を適用する</div>
-<div class="text-sm mt-2 opacity-70">適用には、SOCI Index Builder や SOCI CLI が一般的だが、<br>CDKの deploy-time-build Construct がSOCIインデックスの構築に対応していたので、こちらを利用した</div>
+<div class="text-xl mt-6">→ この2つに<strong>SOCIインデックス</strong>を適用する</div>
+<div class="text-lg mt-3">適用には、SOCI Index Builder や SOCI CLI が一般的だが、<br>CDKの deploy-time-build Construct がSOCIインデックスの構築に対応していたので、こちらを利用した</div>
 
 <style>
-.apply { display: flex; justify-content: center; gap: 1.5rem; }
-.apply .target { display: flex; align-items: center; gap: 0.75rem; border: 2px solid #d1d5db; border-radius: 0.75rem; padding: 0.6rem 1.4rem; min-width: 280px; }
+.apply { display: flex; justify-content: center; gap: 1rem; }
+.apply .target { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; border: 2px solid #c9d0d9; border-radius: 0.75rem; padding: 0.7rem 1rem; width: 250px; text-align: center; }
+.apply .target.on { border-color: #DD344C; background: #fdecee; }
+.apply .target.off { opacity: 0.55; }
 .apply .name { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
 .apply .sub { font-size: 0.875rem; font-weight: 400; opacity: 0.7; }
+.apply .size { font-size: 1.5rem; font-weight: 700; }
+.apply .on .size { color: #DD344C; }
 </style>
 
 ---
 
 <!-- slide-id: s-67d1a97a584737a0 -->
-<div class="text-sm opacity-70">入れてみると</div>
-
 <div class="flex items-center gap-4">
   <img src="/images/aws/fargate.svg" class="h-12" />
   <h2 class="!m-0">SOCIインデックスを入れた結果</h2>
 </div>
 
-<InlineSvg src="chart-soci.svg" label="改善前とSOCIインデックスを使った起動の比較。全体は約77秒から約49秒、イメージのプルは37.5秒から3.3秒に短縮。読み上げコンテナの起動は0.8秒から9.1秒、Discord botコンテナの起動は1.5秒から4.7秒に伸びた" class="mx-auto mt-1" style="width: 560px" />
+<InlineSvg src="chart-soci.svg" label="改善前とSOCIインデックスを使った起動の比較。全体は約77秒から約49秒で、全体で約29秒短縮。イメージのプルは37.5秒から3.3秒に短縮。読み上げコンテナの起動は0.8秒から9.1秒、Discord botコンテナの起動は1.5秒から4.7秒に伸びた" class="mx-auto mt-2" style="width: 680px" />
 
 <div class="text-base mt-1" v-click>→ イメージのプルは圧倒的に速くなったが、その代わりにコンテナの起動時間が伸びた<br><span class="text-sm opacity-70">（最小限のファイルしか取らなかったため、起動時に足りないファイルがあるたびに取りに行く）</span></div>
-<div class="text-xl mt-2" v-click>→ 全体で<strong>約29秒</strong>も短縮できました！</div>
 
 ---
 layout: center
 ---
 
 <!-- slide-id: s-03a0a2c107c9bb52 -->
-<div class="kari">仮：一文の言い回しは未定</div>
-
 <div>
   <Kogoe>まとめ</Kogoe>
-  <h2>SOCIインデックスを使うと<br><strong>イメージのプル時間が速くなる</strong>から<br>起動を短くできた！！！</h2>
+  <h2>SOCIインデックスを使うと<br>イメージを<strong>遅延読み込み</strong>するので<br><strong>プル時間が速くなる！</strong></h2>
+  <div class="text-lg mt-4">その代わりコンテナの起動時間が伸びるので、必ずしもECSタスクの起動時間を速くできるわけではなさそう</div>
 </div>
-
-<!--
-仮の札: 構成まとめ（2026-11-15）では「という雰囲気の一文」とされていて、言い回しが決まっていないため。
--->
 
 ---
 layout: ending
