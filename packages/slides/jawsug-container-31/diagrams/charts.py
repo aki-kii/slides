@@ -5,7 +5,7 @@
 public/images/ に次の SVG を書き出す。見た目は life の tasks/speaking/diagram-style.md に従う。
 - bot-task.svg        : 音声botの構成（前のページの bot-overview.svg の bot の部分を開いて、1つのECSタスクに3つのコンテナ）
 - chart-breakdown.svg : 最初の分析（改善前の起動の内訳を1本のタイムラインで）
-- soci-lifecycle.svg  : SOCIとは？（pull → create → start と、それぞれで読むもの）
+- soci-lifecycle.svg  : SOCIとは？（ECSタスクの中の pull → create → start と、それぞれで読むもの）
 - soci-terms.svg      : 仕組みの3つの言葉（レイヤー・span・zTOC）
 - soci-compare.svg    : コンテナ起動の流れ（遅延読み込みなし と SOCI）
 - soci-mechanism.svg  : プル時と起動時に、どこから何を取得するか
@@ -74,6 +74,10 @@ def CONTAINER(x, y, s):
 
 def TASK(x, y, s):
     return icon(HERE / "icons" / "ecs-task.svg", x, y, s)
+
+
+def ECS(x, y, s):
+    return icon(AWS / "ecs.svg", x, y, s)
 
 
 def FARGATE(x, y, s):
@@ -267,18 +271,22 @@ def layers(x, y, w, n=3, h=22, gap=6, picks=()) -> list[str]:
 def soci_lifecycle() -> str:
     b = []
     # ECRリポジトリ
-    b.append(box(20, 20, 960, 150, rx=14))
-    b.append(ECR(40, 34, 30))
-    b.append(text(80, 56, "ECRリポジトリ", size=17, bold=True))
+    b.append(box(20, 16, 960, 144, rx=14))
+    b.append(ECR(40, 28, 30))
+    b.append(text(80, 50, "ECRリポジトリ", size=17, bold=True))
     # SOCIインデックス（左）
-    b.append(box(60, 78, 220, 72, stroke=RED, fill=RED_BG, rx=10))
-    b.append(text(170, 121, "SOCIインデックス", size=17, fill=RED, bold=True, anchor="middle"))
+    b.append(box(100, 72, 220, 72, stroke=RED, fill=RED_BG, rx=10))
+    b.append(text(210, 115, "SOCIインデックス", size=17, fill=RED, bold=True, anchor="middle"))
     # コンテナイメージ（右）
-    b.append(text(420, 98, "コンテナイメージ", size=16, bold=True))
-    b += layers(420, 108, 520, n=2, h=20, gap=6, picks=[(0, 398), (1, 120)])
+    b.append(text(420, 92, "コンテナイメージ", size=16, bold=True))
+    b += layers(420, 102, 520, n=2, h=20, gap=6, picks=[(0, 398), (1, 120)])
+    # ECSタスク（pull・create・start を囲む。音声botの構成の図と同じ色）
+    b.append(box(20, 214, 960, 140, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
+    b.append(ECS(40, 226, 30))
+    b.append(text(80, 248, "ECSタスク", size=17, fill="#B85700", bold=True))
     # ライフサイクル
-    cy = 262
-    xs = {"pull": 170, "create": 500, "start": 830}
+    cy = 286
+    xs = {"pull": 210, "create": 520, "start": 830}
     pc = {"pull": RED, "create": SUB, "start": GREEN}
     for k, cx in xs.items():
         b.append(pill(cx, cy, k, fill=pc[k]))
@@ -286,13 +294,13 @@ def soci_lifecycle() -> str:
     b.append(arrow(f"M{xs['create'] + 50},{cy} L{xs['start'] - 52},{cy}"))
     notes = {"pull": "イメージを持ってくる", "create": "コンテナの器を用意する", "start": "コンテナを起動する"}
     for k, cx in xs.items():
-        b.append(text(cx, cy + 46, notes[k], size=17, fill=SUB, anchor="middle"))
+        b.append(text(cx, cy + 44, notes[k], size=17, fill=SUB, anchor="middle"))
     # 読むもの
-    b.append(arrow(f"M170,152 L170,{cy - 18}", RED, "Red"))
-    b.append(text(184, 214, "最低限だけ読み込む", size=17, fill=RED, bold=True))
-    b.append(arrow(f"M830,156 L830,{cy - 18}", GREEN, "Green"))
-    b.append(text(816, 214, "必要なファイルを読み取る", size=17, fill=GREEN, bold=True, anchor="end"))
-    return svg(1000, 326, b)
+    b.append(arrow(f"M210,146 L210,{cy - 18}", RED, "Red"))
+    b.append(text(224, 196, "最低限だけ読み込む", size=17, fill=RED, bold=True))
+    b.append(arrow(f"M830,150 L830,{cy - 18}", GREEN, "Green"))
+    b.append(text(816, 196, "必要なファイルを読み取る", size=17, fill=GREEN, bold=True, anchor="end"))
+    return svg(1000, 370, b)
 
 
 # ---------------------------------------------------------------------------

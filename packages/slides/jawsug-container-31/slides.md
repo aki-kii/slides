@@ -96,16 +96,13 @@ layout: center
   <h2 class="!m-0">ECSタスク起動のタイムライン</h2>
 </div>
 
-<InlineSvg src="chart-breakdown.svg" label="改善前のECSタスク起動を、区間ごとに段をずらして時間順に並べたタイムライン。全体約77秒。その他の起動処理、イメージのプル37.5秒、コンテナ作成など、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒、その他の起動処理の順" class="mx-auto mt-4" style="width: 780px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前のECSタスク起動を、区間ごとに段をずらして時間順に並べたタイムライン。全体約77秒。その他の起動処理、イメージのプル37.5秒、コンテナ作成など、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒、その他の起動処理の順" class="mx-auto mt-2" style="width: 740px" />
 
-<Overlay position="center">
-
-一番大きいのはイメージのプル
-
-→ イメージのプルに時間がかかっている！<br>
-<span class="whitespace-nowrap">→ 読み上げコンテナ（VOICEVOX）のサイズが大きい（約2GB）ため</span>
-
-</Overlay>
+<div class="text-lg mt-4 leading-relaxed">
+  <p class="!my-0"><strong>一番大きいのはイメージのプル</strong></p>
+  <p class="!my-0">→ イメージのプルに時間がかかっている！</p>
+  <p class="!my-0 whitespace-nowrap">→ 読み上げコンテナ（VOICEVOX）のサイズが大きい（約2GB）ため</p>
+</div>
 
 <!--
 タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: その他 → プル 37.5秒 → プル後 8.0秒 → 読み上げコンテナの起動 0.8秒 → Discord botコンテナの起動 1.5秒 → VCへ接続 0.9秒。
@@ -125,11 +122,11 @@ layout: center
 - × イメージのキャッシュ
   - FargateはECSタスクごとに環境が独立しているため、できない
 - ○ <strong>イメージの遅延読み込み</strong>
-  - SOCI Snapshotterによって実現する
+  - SOCIによって実現する
 
 </div>
 
-<div class="text-xl mt-8" v-click>→ <strong>イメージの遅延読み込み</strong>をSOCI Snapshotterによって実現していく</div>
+<div class="text-xl mt-8" v-click>→ <strong>イメージの遅延読み込み</strong>をSOCIによって実現していく</div>
 
 <style>
 .means li ul { margin-top: 0.2rem; }
@@ -146,7 +143,7 @@ layout: center
 
 <div class="text-lg">コンテナイメージを<strong>遅延読み込み</strong>することでコンテナの起動を早くするための技術</div>
 
-<InlineSvg src="soci-lifecycle.svg" label="コンテナが動くまでの流れ pull → create → start。pull ではECRリポジトリのSOCIインデックスなど最低限だけ読み込み、start のときにコンテナイメージから必要なファイルを読み取る" class="mx-auto mt-2" style="width: 560px" />
+<InlineSvg src="soci-lifecycle.svg" label="ECSタスクの中でコンテナが動くまでの流れ pull → create → start。pull ではECRリポジトリのSOCIインデックスなど最低限だけ読み込み、start のときにコンテナイメージから必要なファイルを読み取る" class="mx-auto mt-2" style="width: 540px" />
 
 <div class="soci-points">
 
