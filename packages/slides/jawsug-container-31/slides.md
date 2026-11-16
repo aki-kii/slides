@@ -98,8 +98,14 @@ layout: center
 
 <InlineSvg src="chart-breakdown.svg" label="改善前のECSタスク起動を、区間ごとに段をずらして時間順に並べたタイムライン。全体約77秒。その他の起動処理、イメージのプル37.5秒、コンテナ作成など、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒、その他の起動処理の順" class="mx-auto mt-4" style="width: 780px" />
 
-<div class="text-lg mt-6" v-click>→ 一番大きいのは<strong>イメージの取得（プル）</strong>。VOICEVOXのコンテナイメージが約1.9GBと、かなり大きいから</div>
-<div class="text-lg mt-2" v-click>→ まずはこのプルの時間を短くするところから改善していきます</div>
+<Overlay position="center">
+
+一番大きいのはイメージのプル
+
+→ イメージのプルに時間がかかっている！<br>
+<span class="whitespace-nowrap">→ 読み上げコンテナ（VOICEVOX）のサイズが大きい（約2GB）ため</span>
+
+</Overlay>
 
 <!--
 タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: その他 → プル 37.5秒 → プル後 8.0秒 → 読み上げコンテナの起動 0.8秒 → Discord botコンテナの起動 1.5秒 → VCへ接続 0.9秒。
@@ -108,49 +114,26 @@ layout: center
 -->
 
 ---
-layout: center
----
-
-<!-- slide-id: s-9969bbcc92d8cef5 -->
-<div>
-  さっきの内訳で一番大きかったのは
-  <h2><strong>コンテナイメージのプル</strong></h2>
-  <div class="text-lg mt-4">読み上げコンテナに使っているVOICEVOXのイメージが約1.9GBと大きい</div>
-  <div class="text-sm mt-3 opacity-70">通常、ECSタスクを起動する時は全てのイメージをプルしてからコンテナの起動が始まるため、<br>コンテナのイメージサイズが起動時間に直結する</div>
-</div>
-
----
 
 <!-- slide-id: s-ed5f48a99294093b -->
-<div class="flex items-center gap-4">
-  <img src="/images/aws/ecr.svg" class="h-12" />
-  <h2 class="!m-0"><span style="font-size: 0.85em">コンテナイメージのプルを速くするためには</span></h2>
-</div>
+<h2 class="!m-0"><span style="font-size: 0.85em">コンテナイメージのプルを速くするためには</span></h2>
 
 <div class="means mt-8">
-  <div class="mean">
-    <div class="name"><span class="mark">×</span>イメージの軽量化</div>
-    <div class="why">VOICEVOXはOSSとして提供されているものをそのまま使うため、できない</div>
-  </div>
-  <div class="mean">
-    <div class="name"><span class="mark">×</span>イメージのキャッシュ</div>
-    <div class="why">FargateはECSタスクごとに環境が独立しているため、できない</div>
-  </div>
-  <div class="mean ok">
-    <div class="name"><span class="mark">○</span>イメージの遅延読み込み</div>
-    <div class="why">SOCI Snapshotterによって実現する</div>
-  </div>
+
+- × イメージの軽量化
+  - VOICEVOXはOSSとして提供されているものをそのまま使うため、できない
+- × イメージのキャッシュ
+  - FargateはECSタスクごとに環境が独立しているため、できない
+- ○ <strong>イメージの遅延読み込み</strong>
+  - SOCI Snapshotterによって実現する
+
 </div>
 
 <div class="text-xl mt-8" v-click>→ <strong>イメージの遅延読み込み</strong>をSOCI Snapshotterによって実現していく</div>
 
 <style>
-.means { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
-.mean { border: 2px solid #d1d5db; border-radius: 0.75rem; padding: 0.75rem 0.8rem; }
-.mean .name { font-size: 0.95rem; white-space: nowrap; font-weight: 700; }
-.mean .mark { margin-right: 0.35rem; opacity: 0.6; }
-.mean .why { font-size: 0.875rem; opacity: 0.7; margin-top: 0.5rem; line-height: 1.5; }
-.mean.ok { border-color: var(--ink-mute); }
+.means li ul { margin-top: 0.2rem; }
+.means li li { font-size: 1rem; opacity: 0.7; }
 </style>
 
 ---
