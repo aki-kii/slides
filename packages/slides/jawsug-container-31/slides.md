@@ -142,23 +142,17 @@ layout: center
   <h2 class="!m-0">SOCI（Seekable OCI）とは？</h2>
 </div>
 
-<div class="grid grid-cols-[360px_1fr] gap-8 items-center mt-2">
+<div class="mt-4">
 
-<InlineSvg src="soci-compare.svg" label="ECSタスクの中でコンテナが動くまでの流れを上から下へ pull → create → start と縦に並べた図。遅延読み込みなしは、pullでイメージ全体を取得してレイヤーを全部展開するのでpullが長い。SOCIは、pullでイメージ全体は取得しないのでpullが短く、startが長い" style="width: 360px" />
+<div class="text-lg">AWSのOSSの1つ。コンテナイメージを<strong>遅延読み込み</strong>して、起動を早くする技術</div>
 
-<div>
-
-<div class="text-lg">AWSのOSSの1つで、コンテナイメージを<strong>遅延読み込み</strong>することでコンテナの起動を早くするための技術</div>
-
-<div class="text-base mt-3">コンテナの起動は、イメージのプル（pull）→ コンテナの作成（create）→ コンテナの起動（start）という順に進む</div>
+<div class="text-base mt-3">コンテナの起動は pull → create → start の順に進む</div>
 
 <div class="soci-points mt-3">
 
-- イメージをプルする時に必要最低限のファイルのみ取得してコンテナを起動し、他のファイルはアプリの実行中に必要になった時に取得する
-- コンテナイメージのレイヤーに対してインデックスを作成することで実現している
-- インデックスはコンテナイメージを作り直さずに後付けできる
-
-</div>
+- プルでは必要最低限のファイルだけ取得して起動し、残りは必要になった時に取得する
+- レイヤーにインデックスを作ることで実現している
+- インデックスはイメージを作り直さず後付けできる
 
 </div>
 
