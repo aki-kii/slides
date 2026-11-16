@@ -3,7 +3,7 @@ layout: title
 drawings:
   persist: false
 transition: fade
-title: SOCIインデックスでコンテナの起動を早くしてみた
+title: SOCIインデックスでコンテナの起動を速くしてみた
 mdc: true
 addons:
   - '@slides/ui'
@@ -14,7 +14,7 @@ fonts:
 ---
 
 <!-- slide-id: s-2e49c3400c263186 -->
-# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">SOCIインデックス</span>で<br>コンテナの起動を早くしてみた</span>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">SOCIインデックス</span>で<br>コンテナの起動を速くしてみた</span>
 
 2026.11.16（月）\
 池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
@@ -50,9 +50,7 @@ layout: center
 
 <!-- slide-id: s-8902058138e3d09a -->
 <div>
-  今日は
-  <h2>ECSにホストしたコンテナアプリの<br><strong>起動を早くする</strong>話</h2>
-  <div class="text-lg mt-4 opacity-70">起動時間が遅くて困っていたため、改善を図りました</div>
+  <h2>ECSにホストしたコンテナアプリの<br><strong>起動時間が遅くて</strong>困っていました</h2>
 </div>
 
 ---
@@ -76,7 +74,7 @@ layout: center
 
 <InlineSvg src="bot-task.svg" label="前のページの図を薄く敷き、音声botが動くECS Fargateの箱を開いた図。1つのECSタスク（Fargate）の中に、Discord botコンテナ、読み上げコンテナ（VOICEVOX）、文字起こしコンテナ（Transcribe Streaming）の3つがある" class="mx-auto mt-3" style="width: 760px" />
 
-<div class="text-lg mt-3">費用を抑えるために、使いたい時にタスクを起動して使い終わったら止めている</div>
+<div class="text-lg mt-3">→ 費用を抑えるために使いたい時のみタスクを起動しています</div>
 
 ---
 layout: center
@@ -87,6 +85,12 @@ layout: center
   <p>Discord botの起動に80秒前後かかっていました</p>
   <p>起動時間が長いと使うのも億劫になります…</p>
 </div>
+
+<Overlay position="center">
+
+そこで、ECSタスクの起動時間を改善していこうと思いました
+
+</Overlay>
 
 ---
 
