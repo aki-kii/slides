@@ -14,7 +14,7 @@ fonts:
 ---
 
 <!-- slide-id: s-2e49c3400c263186 -->
-# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block">SOCIインデックスで<br>コンテナの起動を早くしてみた</span>
+# <span style="font-size: 0.95em; line-height: 1.4; display: inline-block"><span style="color:#ffd54f">SOCIインデックス</span>で<br>コンテナの起動を早くしてみた</span>
 
 2026.11.16（月）\
 池田 晃尚（[@akikii\_\_](https://x.com/akikii__)）
