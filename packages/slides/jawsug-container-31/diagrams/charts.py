@@ -6,14 +6,15 @@ public/images/ に次の SVG を書き出す。見た目は life の tasks/speak
 - bot-task.svg        : 音声botの構成（1つのECSタスクに3つのコンテナ）
 - chart-breakdown.svg : 最初の分析（改善前の起動の内訳を1本のタイムラインで）
 - soci-lifecycle.svg  : SOCIとは？（pull → create → start と、それぞれで読むもの）
-- soci-compare.svg    : いつもの起動とSOCIインデックスを使った起動の比較
+- soci-terms.svg      : 仕組みの3つの言葉（レイヤー・span・zTOC）
+- soci-compare.svg    : コンテナ起動の流れ（遅延読み込みなし と SOCI）
 - soci-mechanism.svg  : プル時と起動時に、どこから何を取得するか
 - chart-soci.svg      : SOCI後の振り返り（改善前と同じ項目を並べて比べる）
 - wait-before.svg     : botが読み上げの読み込み完了を待って起動していた
 - wait-after.svg      : botが待たずに起動する
 - chart-total.svg     : 全体の推移（改善前 → SOCI → 待たずに起動）
 
-数字は life の container-31 README の構成まとめ（2026-11-15）の値。
+数字は life の container-31 README の構成まとめ（2026-11-15）の値。全体は 2026-11-16 の本人の決定で約77秒（改善前）・約49秒（SOCI）。
 色は意味で使う: イメージのプル＝赤、コンテナの起動＝緑、その他＝灰色、全体＝濃い文字色。
 """
 
@@ -35,8 +36,9 @@ DASH = "#aab2bd"
 OTHER = "#e3e7ec"
 
 # 改善前とSOCI後の数字（秒）
-BEFORE = {"total": 106, "pull": 37.5, "voice": 0.8, "bot": 1.5}
-SOCI = {"total": 48.6, "pull": 3.3, "voice": 9.1, "bot": 4.7}
+# 全体はヘルスチェックを改善した後の値（2026-11-16 本人。ヘルスチェックの説明は話に入れない）
+BEFORE = {"total": 77, "pull": 37.5, "voice": 0.8, "bot": 1.5}
+SOCI = {"total": 49, "pull": 3.3, "voice": 9.1, "bot": 4.7}
 NOWAIT_TOTAL = 32.7
 
 
@@ -120,8 +122,9 @@ def pill(cx, cy, label, fill=INK, w=96) -> str:
     )
 
 
-def fmt(v: float) -> str:
-    return f"約{v:.0f}秒" if v >= 100 else f"{v}秒"
+def fmt(v: float, about: bool = False) -> str:
+    """全体の秒数は「約77秒」のように丸めて言う。"""
+    return f"約{v:.0f}秒" if about else f"{v}秒"
 
 
 # ---------------------------------------------------------------------------
@@ -148,15 +151,15 @@ def bot_task() -> str:
 # ---------------------------------------------------------------------------
 def chart_breakdown() -> str:
     # 改善前の起動を時間の流れに沿って並べる。順番と「その他」の長さは LT #40 の記録
-    # （準備 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げ起動 0.8秒 → 待ち 29.2秒 → bot起動 1.5秒 → VC接続 0.9秒）による。
-    # 全体が約106秒になるよう、準備の長さを残りで決める。
-    prep = BEFORE["total"] - BEFORE["pull"] - BEFORE["voice"] - BEFORE["bot"] - 8.0 - 29.2 - 0.9
+    # （準備 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げ起動 0.8秒 → bot起動 1.5秒 → VC接続 0.9秒）による。
+    # ヘルスチェック待ちは改善済みの値を出すので区切りに入れない（2026-11-16 本人）。
+    # 全体が約77秒になるよう、最初の「その他」の長さを残りで決める。
+    prep = BEFORE["total"] - BEFORE["pull"] - BEFORE["voice"] - BEFORE["bot"] - 8.0 - 0.9
     segs = [
-        ("other", prep, "タスクの準備"),
+        ("other", prep, "その他の起動処理"),
         ("pull", BEFORE["pull"], f"イメージのプル {BEFORE['pull']}秒"),
         ("other", 8.0, ""),
         ("voice", BEFORE["voice"], ""),
-        ("other", 29.2, "ヘルスチェック待ち"),
         ("bot", BEFORE["bot"], ""),
         ("other", 0.9, ""),
     ]
@@ -168,7 +171,7 @@ def chart_breakdown() -> str:
     # 全体
     b.append(f'<path d="M{x0},38 L{x0},54 M{x0},46 L{x0 + width},46 M{x0 + width},38 L{x0 + width},54" stroke="{INK}" stroke-width="2" fill="none"/>')
     b.append(f'<rect x="{x0 + width / 2 - 80}" y="30" width="160" height="32" fill="#fff"/>')
-    b.append(text(x0 + width / 2, 54, "全体 約106秒", size=20, bold=True, anchor="middle"))
+    b.append(text(x0 + width / 2, 54, f"全体 {fmt(BEFORE['total'], True)}", size=20, bold=True, anchor="middle"))
     x = x0
     centers = {}
     for key, v, label in segs:
@@ -180,7 +183,7 @@ def chart_breakdown() -> str:
         centers[key] = x + w / 2
         x += w
     # 小さい区間は下に引き出す
-    for key, label, anchor, dx, ln in (("voice", "読み上げの起動", "middle", 0, 26), ("bot", "botの起動", "end", 6, 60)):
+    for key, label, anchor, dx, ln in (("voice", "読み上げの起動", "end", 0, 26), ("bot", "botの起動", "end", 14, 60)):
         cx = centers[key]
         b.append(f'<path d="M{cx:.1f},{by + bh} L{cx:.1f},{by + bh + ln}" stroke="{GREEN}" stroke-width="2"/>')
         b.append(text(cx + dx, by + bh + ln + 24, f"{label} {BEFORE[key]}秒", size=18, fill=GREEN, anchor=anchor, bold=True))
@@ -238,16 +241,55 @@ def soci_lifecycle() -> str:
 
 
 # ---------------------------------------------------------------------------
-# 仕組み①: いつもの起動との比較
+# 仕組み①: 3つの言葉（レイヤー・span・zTOC）
+# ---------------------------------------------------------------------------
+def soci_terms() -> str:
+    b = []
+    # 左: イメージはレイヤーを重ねたもの
+    b.append(text(110, 92, "コンテナイメージ", size=17, bold=True, anchor="middle"))
+    for i in range(3):
+        y = 108 + i * 50
+        hl = i == 2
+        b.append(box(30, y, 160, 42, stroke=INK if hl else LINE, fill="#f4f6f8", rx=6))
+        b.append(text(110, y + 28, "レイヤー", size=17, fill=INK if hl else SUB, anchor="middle", bold=hl))
+    b.append(f'<path d="M190,208 L300,108 M190,250 L300,300" stroke="{DASH}" stroke-width="2" stroke-dasharray="6 5" fill="none"/>')
+    # 右: 1つのレイヤー（TARアーカイブを圧縮したもの）を span に区切る
+    lx, lw = 300, 670
+    b.append(box(lx, 108, lw, 192, stroke=INK, fill="#f4f6f8", rx=10))
+    b.append(text(lx + 18, 136, "レイヤー（TARアーカイブを圧縮したもの）", size=17, bold=True))
+    n = 6
+    sw = (lw - 36 - (n - 1) * 8) / n
+    xs = []
+    for i in range(n):
+        x = lx + 18 + i * (sw + 8)
+        xs.append(x)
+        hl = i == 4
+        b.append(box(x, 210, sw, 52, stroke=GREEN if hl else LINE, fill=GREEN_BG if hl else "#fff", rx=6))
+        b.append(text(x + sw / 2, 243, "span", size=17, fill=GREEN if hl else SUB, anchor="middle", bold=hl, mono=True))
+    b.append(text(lx + lw / 2, 288, "span：zTOCがレイヤーを区切った単位", size=15, fill=GREEN, anchor="middle", bold=True))
+    # 上: zTOC（レイヤーのインデックス）
+    zx, zw = 560, 410
+    b.append(box(zx, 4, zw, 76, stroke=RED, fill=RED_BG, rx=10))
+    b.append(text(zx + 18, 32, "zTOC（レイヤーのインデックス）", size=17, fill=RED, bold=True))
+    b.append(text(zx + 18, 62, "どのファイルが、レイヤーの中のどこにあるか", size=15, fill=INK))
+    sx = xs[4] + sw / 2
+    b.append(arrow(f"M{sx:.1f},82 L{sx:.1f},206", RED, "Red"))
+    return svg(1000, 306, b)
+
+
+# ---------------------------------------------------------------------------
+# 仕組み②: コンテナ起動の流れ（遅延読み込みなし と SOCI）
 # ---------------------------------------------------------------------------
 def soci_compare() -> str:
     b = []
     x0 = 230
     rows = [
-        ("いつもの起動", [("pull", 380), ("create", 110), ("start", 90)], 40),
-        ("SOCIインデックス", [("pull", 110), ("create", 110), ("start", 250)], 160),
+        ("遅延読み込みなし", [("pull", 380), ("create", 110), ("start", 90)], 40,
+         "イメージ全体を取得して、レイヤーを全部展開。ファイルが全部そろってからコンテナを作成"),
+        ("SOCI", [("pull", 110), ("create", 110), ("start", 250)], 170,
+         "イメージ全体は取得しない。全てのレイヤーを取得していない状態でコンテナを作成"),
     ]
-    for label, segs, y in rows:
+    for label, segs, y, note in rows:
         b.append(text(20, y + 8, label, size=19, bold=True))
         x = x0
         for k, w in segs:
@@ -255,15 +297,12 @@ def soci_compare() -> str:
             b.append(f'<rect x="{x}" y="{y - 22}" width="{w - 6}" height="44" rx="8" fill="{fill}"/>')
             b.append(text(x + (w - 6) / 2, y + 7, k, size=17, fill="#fff", anchor="middle", bold=True, mono=True))
             x += w
-    # 下の注釈
-    b.append(text(x0 + 52, 222, "プルは速くなる", size=16, fill=RED, bold=True, anchor="middle"))
-    b.append(text(x0 + 220 + 122, 222, "起動はいつもより時間がかかる", size=16, fill=GREEN, bold=True, anchor="middle"))
-    b.append(text(x0 + 187, 98, "イメージを全部取得する", size=15, fill=SUB, anchor="middle"))
-    return svg(1000, 240, b)
+        b.append(text(x0, y + 52, note, size=16, fill=SUB))
+    return svg(1000, 236, b)
 
 
 # ---------------------------------------------------------------------------
-# 仕組み②: プル時と起動時に何を取得するか
+# 仕組み③: プル時と起動時に何を取得するか
 # ---------------------------------------------------------------------------
 def soci_mechanism() -> str:
     b = []
@@ -278,13 +317,13 @@ def soci_mechanism() -> str:
         x = 62 + i * 100
         b.append(f'<rect x="{x}" y="122" width="86" height="34" rx="6" fill="#fff" stroke="{RED}" stroke-width="2"/>')
         b.append(text(x + 43, 145, "zTOC", size=15, fill=RED, anchor="middle", bold=True, mono=True))
-    b.append(text(370, 145, "レイヤーの目次", size=16, fill=SUB))
-    # イメージレイヤー
-    b.append(text(44, 206, "イメージレイヤー", size=16, bold=True))
+    b.append(text(366, 145, "レイヤーのインデックス", size=15, fill=SUB))
+    # レイヤー
+    b.append(text(44, 206, "レイヤー", size=16, bold=True))
     # 小さいレイヤー（丸ごと）
     b.append(f'<rect x="44" y="222" width="512" height="38" rx="6" fill="#f4f6f8" stroke="{LINE}" stroke-width="2"/>')
-    b.append(text(300, 247, "小さいレイヤー", size=16, fill=SUB, anchor="middle"))
-    # 大きいレイヤー（スパンに区切る）
+    b.append(text(300, 247, "10MiB未満の小さいレイヤー", size=16, fill=SUB, anchor="middle"))
+    # 大きいレイヤー（span に区切る）
     for r, y in enumerate((280, 336)):
         for i in range(6):
             x = 44 + i * 86
@@ -293,26 +332,27 @@ def soci_mechanism() -> str:
                 f'<rect x="{x}" y="{y}" width="80" height="40" rx="6" fill="{GREEN_BG if hl else "#f4f6f8"}" '
                 f'stroke="{GREEN if hl else LINE}" stroke-width="2"/>'
             )
-            b.append(text(x + 40, y + 26, "スパン", size=15, fill=GREEN if hl else SUB, anchor="middle", bold=hl))
-    b.append(text(300, 404, "大きいレイヤーはスパンごとに区切られている", size=15, fill=SUB, anchor="middle"))
+            b.append(text(x + 40, y + 26, "span", size=15, fill=GREEN if hl else SUB, anchor="middle", bold=hl, mono=True))
+    b.append(text(300, 404, "zTOCがレイヤーをspanに区切っている", size=15, fill=SUB, anchor="middle"))
     # 右: プル時 / 起動時
     b.append(box(700, 90, 270, 120))
     b.append(pill(835, 126, "pull", fill=RED))
     b.append(text(835, 182, "最小限のファイルを取得", size=18, anchor="middle", bold=True))
     b.append(box(700, 270, 270, 120))
     b.append(pill(835, 306, "start", fill=GREEN))
-    b.append(text(835, 362, "足りないファイルを取得", size=18, anchor="middle", bold=True))
+    b.append(text(835, 352, "足りないものを", size=18, anchor="middle", bold=True))
+    b.append(text(835, 376, "span単位で取得", size=18, anchor="middle", bold=True))
     b.append(arrow("M556,126 L698,126", RED, "Red"))
     b.append(arrow("M556,241 L630,241 L630,174 L698,174", RED, "Red"))
     b.append(arrow("M556,300 L698,300", GREEN, "Green"))
-    b.append(text(627, 288, "zTOCで探す", size=15, fill=GREEN, anchor="middle", bold=True))
+    b.append(text(627, 288, "zTOCから探す", size=15, fill=GREEN, anchor="middle", bold=True))
     return svg(1000, 440, b)
 
 
 # ---------------------------------------------------------------------------
 # SOCI後の振り返り
 # ---------------------------------------------------------------------------
-BAR_X, SCALE = 230, 5.6  # 106秒 → 約594px
+BAR_X, SCALE = 230, 7.6  # 77秒 → 約585px
 
 
 def chart_soci() -> str:
@@ -327,9 +367,9 @@ def chart_soci() -> str:
         bv, av = BEFORE[key], SOCI[key]
         b.append(text(20, y + 33, label, size=20, bold=True))
         b.append(bar(BAR_X, y, bv * SCALE, 18, LINE))
-        b.append(text(BAR_X + bv * SCALE + 10, y + 16, fmt(bv), size=17, fill=SUB))
+        b.append(text(BAR_X + bv * SCALE + 10, y + 16, fmt(bv, key == "total"), size=17, fill=SUB))
         b.append(bar(BAR_X, y + 24, av * SCALE, 26, color))
-        b.append(text(BAR_X + av * SCALE + 10, y + 45, fmt(av), size=21, fill=color, bold=True))
+        b.append(text(BAR_X + av * SCALE + 10, y + 45, fmt(av, key == "total"), size=21, fill=color, bold=True))
         y += 76
     return svg(1000, y - 12, b)
 
@@ -379,16 +419,16 @@ def lanes(after: bool) -> str:
 # ---------------------------------------------------------------------------
 def chart_total() -> str:
     rows = [
-        ("改善前", BEFORE["total"], LINE, SUB),
-        ("SOCIインデックス", SOCI["total"], INK, INK),
-        ("＋ 待たずに起動", NOWAIT_TOTAL, INK, INK),
+        ("改善前", BEFORE["total"], LINE, SUB, fmt(BEFORE["total"], True)),
+        ("SOCIインデックス", SOCI["total"], INK, INK, fmt(SOCI["total"], True)),
+        ("＋ 待たずに起動", NOWAIT_TOTAL, INK, INK, fmt(NOWAIT_TOTAL)),
     ]
     b = []
     y = 10
-    for label, v, color, tcolor in rows:
+    for label, v, color, tcolor, vl in rows:
         b.append(text(20, y + 30, label, size=19, bold=True))
         b.append(bar(BAR_X, y, v * SCALE, 42, color, rx=4))
-        b.append(text(BAR_X + v * SCALE + 12, y + 30, fmt(v), size=22, fill=tcolor, bold=True))
+        b.append(text(BAR_X + v * SCALE + 12, y + 30, vl, size=22, fill=tcolor, bold=True))
         y += 66
     return svg(1000, y - 14, b)
 
@@ -398,6 +438,7 @@ def main() -> None:
         "bot-task.svg": bot_task(),
         "chart-breakdown.svg": chart_breakdown(),
         "soci-lifecycle.svg": soci_lifecycle(),
+        "soci-terms.svg": soci_terms(),
         "soci-compare.svg": soci_compare(),
         "soci-mechanism.svg": soci_mechanism(),
         "chart-soci.svg": chart_soci(),
