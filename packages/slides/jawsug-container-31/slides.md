@@ -124,6 +124,7 @@ layout: center
 
 ---
 
+<!-- slide-id: s-ed5f48a99294093b -->
 <div class="flex items-center gap-4">
   <img src="/images/aws/ecr.svg" class="h-12" />
   <h2 class="!m-0"><span style="font-size: 0.85em">コンテナイメージのプルを速くするためには</span></h2>
@@ -184,6 +185,7 @@ layout: center
 
 ---
 
+<!-- slide-id: s-4ecc9db345c504e2 -->
 <div class="flex items-center gap-4">
   <img src="/images/aws/ecr.svg" class="h-12" />
   <h2 class="!m-0">SOCIインデックスの仕組み</h2>
@@ -240,6 +242,7 @@ layout: center
 
 ---
 
+<!-- slide-id: s-3d2ba11d928be7ba -->
 <div class="flex items-center gap-4">
   <img src="/images/aws/ecr.svg" class="h-12" />
   <h2 class="!m-0">SOCIインデックスを適用する</h2>
