@@ -202,44 +202,47 @@ def bot_task() -> str:
 # 最初の分析: 改善前の内訳
 # ---------------------------------------------------------------------------
 def chart_breakdown() -> str:
-    # 改善前の起動を時間の流れに沿って並べる。順番と「その他」の長さは LT #40 の記録
+    # 改善前の起動を、区間ごとに1段ずつ下へずらしたタイムラインで並べる（2026-11-16 修正依頼84）。
+    # 順番と「その他」の長さは LT #40 の記録
     # （準備 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げコンテナの起動 0.8秒 → Discord botコンテナの起動 1.5秒 → VC接続 0.9秒）による。
+    # 「コンテナ作成」は取得後 8.0秒の中にあるが、単独の実測値はないので秒数を書かず、灰色（その他の起動処理）の段として位置だけ見せる。
     # ヘルスチェック待ちは改善済みの値を出すので区切りに入れない（2026-11-16 本人）。
     # 全体が約77秒になるよう、最初の「その他」の長さを残りで決める。
     prep = BEFORE["total"] - BEFORE["pull"] - BEFORE["voice"] - BEFORE["bot"] - 8.0 - 0.9
-    segs = [
-        ("other", prep, "その他の起動処理"),
-        ("pull", BEFORE["pull"], f"イメージのプル {BEFORE['pull']}秒"),
-        ("other", 8.0, ""),
-        ("voice", BEFORE["voice"], ""),
-        ("bot", BEFORE["bot"], ""),
-        ("other", 0.9, ""),
+    rows = [
+        ("other", prep, "その他の起動処理", ""),
+        ("pull", BEFORE["pull"], "イメージのプル", f"{BEFORE['pull']}秒"),
+        ("other", 8.0, "コンテナ作成など", ""),
+        ("voice", BEFORE["voice"], "読み上げコンテナの起動", f"{BEFORE['voice']}秒"),
+        ("bot", BEFORE["bot"], "Discord botコンテナの起動", f"{BEFORE['bot']}秒"),
+        ("other", 0.9, "その他の起動処理", ""),
     ]
-    color = {"other": OTHER, "pull": RED, "voice": GREEN, "bot": GREEN}
-    x0, width = 30, 940
+    color = {"other": "#c3cad3", "pull": RED, "voice": GREEN, "bot": GREEN}
+    x0, width = 290, 610
     k = width / BEFORE["total"]
-    by, bh = 70, 56
+    top, pitch, bh = 64, 34, 22
     b = []
     # 全体
     b.append(f'<path d="M{x0},38 L{x0},54 M{x0},46 L{x0 + width},46 M{x0 + width},38 L{x0 + width},54" stroke="{INK}" stroke-width="2" fill="none"/>')
     b.append(f'<rect x="{x0 + width / 2 - 80}" y="30" width="160" height="32" fill="#fff"/>')
     b.append(text(x0 + width / 2, 54, f"全体 {fmt(BEFORE['total'], True)}", size=20, bold=True, anchor="middle"))
+    bottom = top + len(rows) * pitch
     x = x0
-    centers = {}
-    for key, v, label in segs:
+    for i, (key, v, label, sec) in enumerate(rows):
+        y = top + i * pitch + (pitch - bh) / 2
         w = max(v * k, 5)
-        b.append(f'<rect x="{x:.1f}" y="{by}" width="{w:.1f}" height="{bh}" fill="{color[key]}" stroke="#fff" stroke-width="2"/>')
-        if label:
-            fill = "#fff" if key == "pull" else SUB
-            b.append(text(x + w / 2, by + 35, label, size=19 if key == "pull" else 17, fill=fill, anchor="middle", bold=key == "pull"))
-        centers[key] = x + w / 2
+        # 区間の境目を縦の点線でつなぎ、時間の流れを追えるようにする
+        if i > 0:
+            b.append(f'<path d="M{x:.1f},{y - (pitch - bh) - 2:.1f} L{x:.1f},{y:.1f}" stroke="{DASH}" stroke-width="1.5" stroke-dasharray="3 3"/>')
+        b.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{bh}" rx="3" fill="{color[key]}"/>')
+        main = key != "other"
+        b.append(text(x0 - 16, y + bh / 2 + 6, label, size=18 if main else 16, fill={"pull": RED, "other": SUB}.get(key, GREEN), anchor="end", bold=main))
+        if key == "pull":
+            b.append(text(x + w / 2, y + bh / 2 + 7, sec, size=19, fill="#fff", anchor="middle", bold=True))
+        elif sec:
+            b.append(text(x + w + 10, y + bh / 2 + 7, sec, size=19, fill=GREEN, bold=True))
         x += w
-    # 小さい区間は下に引き出す
-    for key, label, anchor, dx, ln in (("voice", "読み上げコンテナの起動", "end", 0, 26), ("bot", "Discord botコンテナの起動", "end", 14, 60)):
-        cx = centers[key]
-        b.append(f'<path d="M{cx:.1f},{by + bh} L{cx:.1f},{by + bh + ln}" stroke="{GREEN}" stroke-width="2"/>')
-        b.append(text(cx + dx, by + bh + ln + 24, f"{label} {BEFORE[key]}秒", size=18, fill=GREEN, anchor=anchor, bold=True))
-    ay = by + bh + 120
+    ay = bottom + 16
     b.append(arrow(f"M{x0},{ay} L{x0 + width - 2},{ay}", SUB, "Sub", 2))
     b.append(text(x0, ay + 26, "起動の開始", size=15, fill=SUB))
     b.append(text(x0 + width, ay + 26, "ボイスチャンネルに入る", size=15, fill=SUB, anchor="end"))

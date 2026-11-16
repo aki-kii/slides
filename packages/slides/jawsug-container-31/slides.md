@@ -91,20 +91,19 @@ layout: center
 ---
 
 <!-- slide-id: s-e1e48e9fc8821ccd -->
-<div class="text-sm opacity-70">まず</div>
-
 <div class="flex items-center gap-4">
   <img src="/images/aws/fargate.svg" class="h-12" />
-  <h2 class="!m-0">改善前の起動時間の内訳</h2>
+  <h2 class="!m-0">ECSタスク起動のタイムライン</h2>
 </div>
 
-<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約77秒のうち、イメージのプル37.5秒、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒。残りはその他の起動処理" class="mx-auto mt-6" style="width: 820px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前のECSタスク起動を、区間ごとに段をずらして時間順に並べたタイムライン。全体約77秒。その他の起動処理、イメージのプル37.5秒、コンテナ作成など、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒、その他の起動処理の順" class="mx-auto mt-4" style="width: 780px" />
 
 <div class="text-lg mt-6" v-click>→ 一番大きいのは<strong>イメージの取得（プル）</strong>。VOICEVOXのコンテナイメージが約1.9GBと、かなり大きいから</div>
 <div class="text-lg mt-2" v-click>→ まずはこのプルの時間を短くするところから改善していきます</div>
 
 <!--
 タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: その他 → プル 37.5秒 → プル後 8.0秒 → 読み上げコンテナの起動 0.8秒 → Discord botコンテナの起動 1.5秒 → VCへ接続 0.9秒。
+「コンテナ作成」はプル後 8.0秒の中にある（pull → コンテナ作成 → 起動）。コンテナ作成だけの実測秒数はないので、秒数は書かずに灰色（その他の起動処理）の段として位置だけを見せている。
 全体はヘルスチェックを改善した後の約77秒（2026-11-16 本人の決定。ヘルスチェックの説明は話に入れないので、待ちの区切りは図から外した）。最初の「その他」の長さを残りで決めている。
 -->
 
