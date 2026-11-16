@@ -223,37 +223,37 @@ layout: center
   <h2 class="!m-0">SOCIインデックスを適用する</h2>
 </div>
 
-<div class="text-lg">遅延読み込みが効果を発揮しやすいのは、<br>圧縮後のサイズが<strong>250MiB</strong>を超えるコンテナイメージ</div>
+<div class="text-base">遅延読み込みが効果を発揮しやすいのは、<br>圧縮後のサイズが<strong>250MiB</strong>を超えるコンテナイメージ</div>
 
-<div class="apply mt-4">
+<div class="apply mt-3">
   <div class="target on">
-    <img src="/images/aws/ecs-container.svg" class="h-12" />
+    <img src="/images/aws/ecs-container.svg" class="h-9" />
     <div class="name">読み上げコンテナ<br><span class="sub">VOICEVOX</span></div>
     <div class="size">約1.9GB</div>
   </div>
   <div class="target on">
-    <img src="/images/aws/ecs-container.svg" class="h-12" />
+    <img src="/images/aws/ecs-container.svg" class="h-9" />
     <div class="name">Discord botコンテナ</div>
     <div class="size">約390MB</div>
   </div>
   <div class="target off">
-    <img src="/images/aws/ecs-container.svg" class="h-12" />
+    <img src="/images/aws/ecs-container.svg" class="h-9" />
     <div class="name">文字起こしコンテナ</div>
     <div class="size">約90MB</div>
   </div>
 </div>
 
-<div class="text-xl mt-4">→ この2つに<strong>SOCIインデックス</strong>を適用する</div>
-<div class="text-lg mt-2">適用には、SOCI Index Builder や SOCI CLI が一般的だが、<br>CDKの deploy-time-build Construct がSOCIインデックスの構築に対応していたので、こちらを利用した</div>
+<div class="text-lg mt-3">→ この2つに<strong>SOCIインデックス</strong>を適用する</div>
+<div class="text-base mt-2 leading-snug">適用には、SOCI Index Builder や SOCI CLI が一般的だが、<br>CDKの deploy-time-build Construct がSOCIインデックスの構築に対応していたので、こちらを利用した</div>
 
 <style>
 .apply { display: flex; justify-content: center; gap: 1rem; }
-.apply .target { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; border: 2px solid #c9d0d9; border-radius: 0.75rem; padding: 0.5rem 1rem; width: 250px; text-align: center; }
+.apply .target { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; border: 2px solid #c9d0d9; border-radius: 0.75rem; padding: 0.4rem 0.8rem; width: 250px; text-align: center; }
 .apply .target.on { border-color: #DD344C; background: #fdecee; }
 .apply .target.off { opacity: 0.55; }
-.apply .name { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+.apply .name { font-size: 1rem; font-weight: 700; line-height: 1.3; }
 .apply .sub { font-size: 0.875rem; font-weight: 400; opacity: 0.7; }
-.apply .size { font-size: 1.35rem; font-weight: 700; }
+.apply .size { font-size: 1.2rem; font-weight: 700; }
 .apply .on .size { color: #DD344C; }
 </style>
 
