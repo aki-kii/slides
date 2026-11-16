@@ -143,7 +143,9 @@ layout: center
 
 <div class="text-lg">コンテナイメージを<strong>遅延読み込み</strong>することでコンテナの起動を早くするための技術</div>
 
-<InlineSvg src="soci-lifecycle.svg" label="ECSタスクの中でコンテナが動くまでの流れ pull → create → start。pull ではECRリポジトリのSOCIインデックスなど最低限だけ読み込み、start のときにコンテナイメージから必要なファイルを読み取る" class="mx-auto mt-2" style="width: 540px" />
+<div class="text-base mt-2">コンテナの起動は、イメージのプル（pull）→ コンテナの作成（create）→<br>コンテナの起動（start）という順に進む</div>
+
+<InlineSvg src="soci-compare.svg" label="ECSタスクの中でコンテナが動くまでの流れ pull → create → start。遅延読み込みなしは、pullでイメージ全体を取得してレイヤーを全部展開し、ファイルが全部そろってからコンテナを作成する。SOCIは、pullでイメージ全体は取得せず、全てのレイヤーを取得していない状態でコンテナを作成する" class="mx-auto mt-2" style="width: 720px" />
 
 <div class="soci-points">
 
@@ -184,18 +186,6 @@ layout: center
 .terms ul { margin: 0.25rem 0 0; }
 .terms li { font-size: 1rem !important; line-height: 1.45 !important; margin-bottom: 0.1rem !important; }
 </style>
-
----
-
-<!-- slide-id: s-7c809e7e8d360db8 -->
-<div class="flex items-center gap-4">
-  <img src="/images/aws/ecr.svg" class="h-12" />
-  <h2 class="!m-0">SOCIインデックスの仕組み</h2>
-</div>
-
-<div class="text-lg">コンテナの起動は、イメージのプル（pull）→ コンテナの作成（create）→<br>コンテナの起動（start）という順に進む</div>
-
-<InlineSvg src="soci-compare.svg" label="遅延読み込みなしは、pullでイメージ全体を取得してレイヤーを全部展開し、ファイルが全部そろってからコンテナを作成する。SOCIは、pullでイメージ全体は取得せず、全てのレイヤーを取得していない状態でコンテナを作成する" class="mx-auto mt-8" style="width: 800px" />
 
 ---
 

@@ -5,9 +5,8 @@
 public/images/ に次の SVG を書き出す。見た目は life の tasks/speaking/diagram-style.md に従う。
 - bot-task.svg        : 音声botの構成（前のページの bot-overview.svg の bot の部分を開いて、1つのECSタスクに3つのコンテナ）
 - chart-breakdown.svg : 最初の分析（改善前の起動の内訳を1本のタイムラインで）
-- soci-lifecycle.svg  : SOCIとは？（ECSタスクの中の pull → create → start と、それぞれで読むもの）
 - soci-terms.svg      : 仕組みの3つの言葉（レイヤー・span・zTOC）
-- soci-compare.svg    : コンテナ起動の流れ（遅延読み込みなし と SOCI）
+- soci-compare.svg    : SOCIとは？ コンテナ起動の流れ（遅延読み込みなし と SOCI。pull・create・start をECSタスクの枠で囲む）
 - soci-mechanism.svg  : プル時と起動時に、どこから何を取得するか
 - chart-soci.svg      : SOCI後の振り返り（改善前と同じ項目を並べて比べる）
 - wait-before.svg     : Discord botコンテナが読み上げコンテナの読み込み完了を待って起動していた
@@ -254,56 +253,6 @@ def chart_breakdown() -> str:
 
 
 # ---------------------------------------------------------------------------
-# SOCIとは？: pull → create → start
-# ---------------------------------------------------------------------------
-def layers(x, y, w, n=3, h=22, gap=6, picks=()) -> list[str]:
-    """イメージレイヤーを重ねた絵。picks の (段, 位置) に必要なファイルの印を付ける。"""
-    out = []
-    for i in range(n):
-        yy = y + i * (h + gap)
-        out.append(f'<rect x="{x}" y="{yy}" width="{w}" height="{h}" rx="4" fill="#f4f6f8" stroke="{LINE}" stroke-width="2"/>')
-    for row, pos in picks:
-        yy = y + row * (h + gap)
-        out.append(f'<rect x="{x + pos:.1f}" y="{yy + 5}" width="22" height="{h - 10}" rx="2" fill="{GREEN}"/>')
-    return out
-
-
-def soci_lifecycle() -> str:
-    b = []
-    # ECRリポジトリ
-    b.append(box(20, 16, 960, 144, rx=14))
-    b.append(ECR(40, 28, 30))
-    b.append(text(80, 50, "ECRリポジトリ", size=17, bold=True))
-    # SOCIインデックス（左）
-    b.append(box(100, 72, 220, 72, stroke=RED, fill=RED_BG, rx=10))
-    b.append(text(210, 115, "SOCIインデックス", size=17, fill=RED, bold=True, anchor="middle"))
-    # コンテナイメージ（右）
-    b.append(text(420, 92, "コンテナイメージ", size=16, bold=True))
-    b += layers(420, 102, 520, n=2, h=20, gap=6, picks=[(0, 398), (1, 120)])
-    # ECSタスク（pull・create・start を囲む。音声botの構成の図と同じ色）
-    b.append(box(20, 214, 960, 140, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
-    b.append(ECS(40, 226, 30))
-    b.append(text(80, 248, "ECSタスク", size=17, fill="#B85700", bold=True))
-    # ライフサイクル
-    cy = 286
-    xs = {"pull": 210, "create": 520, "start": 830}
-    pc = {"pull": RED, "create": SUB, "start": GREEN}
-    for k, cx in xs.items():
-        b.append(pill(cx, cy, k, fill=pc[k]))
-    b.append(arrow(f"M{xs['pull'] + 50},{cy} L{xs['create'] - 52},{cy}"))
-    b.append(arrow(f"M{xs['create'] + 50},{cy} L{xs['start'] - 52},{cy}"))
-    notes = {"pull": "イメージを持ってくる", "create": "コンテナの器を用意する", "start": "コンテナを起動する"}
-    for k, cx in xs.items():
-        b.append(text(cx, cy + 44, notes[k], size=17, fill=SUB, anchor="middle"))
-    # 読むもの
-    b.append(arrow(f"M210,146 L210,{cy - 18}", RED, "Red"))
-    b.append(text(224, 196, "最低限だけ読み込む", size=17, fill=RED, bold=True))
-    b.append(arrow(f"M830,150 L830,{cy - 18}", GREEN, "Green"))
-    b.append(text(816, 196, "必要なファイルを読み取る", size=17, fill=GREEN, bold=True, anchor="end"))
-    return svg(1000, 370, b)
-
-
-# ---------------------------------------------------------------------------
 # 仕組み①: 3つの言葉（レイヤー・span・zTOC）
 # ---------------------------------------------------------------------------
 def soci_terms() -> str:
@@ -341,15 +290,19 @@ def soci_terms() -> str:
 
 
 # ---------------------------------------------------------------------------
-# 仕組み②: コンテナ起動の流れ（遅延読み込みなし と SOCI）
+# SOCIとは？: コンテナ起動の流れ（遅延読み込みなし と SOCI）
 # ---------------------------------------------------------------------------
 def soci_compare() -> str:
     b = []
+    # ECSタスク（pull・create・start を囲む。音声botの構成の図と同じ色）
+    b.append(box(200, 10, 780, 262, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
+    b.append(ECS(216, 20, 30))
+    b.append(text(256, 42, "ECSタスク", size=17, fill="#B85700", bold=True))
     x0 = 230
     rows = [
-        ("遅延読み込みなし", [("pull", 380), ("create", 110), ("start", 90)], 40,
+        ("遅延読み込みなし", [("pull", 380), ("create", 110), ("start", 90)], 96,
          "イメージ全体を取得して、レイヤーを全部展開。ファイルが全部そろってからコンテナを作成"),
-        ("SOCI", [("pull", 110), ("create", 110), ("start", 250)], 170,
+        ("SOCI", [("pull", 110), ("create", 110), ("start", 250)], 200,
          "イメージ全体は取得しない。全てのレイヤーを取得していない状態でコンテナを作成"),
     ]
     for label, segs, y, note in rows:
@@ -360,8 +313,8 @@ def soci_compare() -> str:
             b.append(f'<rect x="{x}" y="{y - 22}" width="{w - 6}" height="44" rx="8" fill="{fill}"/>')
             b.append(text(x + (w - 6) / 2, y + 7, k, size=17, fill="#fff", anchor="middle", bold=True, mono=True))
             x += w
-        b.append(text(x0, y + 52, note, size=16, fill=SUB))
-    return svg(1000, 236, b)
+        b.append(text(x0, y + 48, note, size=16, fill=SUB))
+    return svg(1000, 282, b)
 
 
 # ---------------------------------------------------------------------------
@@ -503,7 +456,6 @@ def main() -> None:
     out = {
         "bot-task.svg": bot_task(),
         "chart-breakdown.svg": chart_breakdown(),
-        "soci-lifecycle.svg": soci_lifecycle(),
         "soci-terms.svg": soci_terms(),
         "soci-compare.svg": soci_compare(),
         "soci-mechanism.svg": soci_mechanism(),
