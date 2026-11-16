@@ -178,7 +178,7 @@ def bot_task() -> str:
 
     # ECSタスクの中身（前の図の ECS Fargate の箱と同じ色）
     b.append(box(px, py, pw, ph, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
-    b.append(FARGATE(px + 20, py + 16, 30))
+    b.append(TASK(px + 20, py + 16, 30))
     b.append(text(px + 60, py + 39, "音声botのECSタスク（Fargate）", size=18, fill="#B85700", bold=True))
     items = [
         ("Discord botコンテナ", "Discordとやりとりする", OV_DISCORD),
@@ -238,6 +238,48 @@ def chart_breakdown() -> str:
         b.append(text(x0 - 16, y + bh / 2 + 6, label, size=18 if main else 16, fill={"pull": RED, "other": SUB}.get(key, GREEN), anchor="end", bold=main))
         if key == "pull":
             b.append(text(x + w / 2, y + bh / 2 + 7, sec, size=19, fill="#fff", anchor="middle", bold=True))
+        elif sec:
+            b.append(text(x + w + 10, y + bh / 2 + 7, sec, size=19, fill=GREEN, bold=True))
+        x += w
+    ay = bottom + 16
+    b.append(arrow(f"M{x0},{ay} L{x0 + width - 2},{ay}", SUB, "Sub", 2))
+    b.append(text(x0, ay + 26, "起動の開始", size=15, fill=SUB))
+    b.append(text(x0 + width, ay + 26, "ボイスチャンネルに入る", size=15, fill=SUB, anchor="end"))
+    return svg(1000, ay + 36, b)
+
+
+def chart_breakdown_after() -> str:
+    # SOCIインデックスを入れた後の起動を、改善前と同じ並べ方でタイムラインにする（2026-11-16 ページ追加依頼）。
+    # 秒数を書くのは実測のある全体・プル・読み上げ・botだけ。「コンテナ作成など」と最後の区間は改善前と同じ置き方。
+    prep = SOCI["total"] - SOCI["pull"] - SOCI["voice"] - SOCI["bot"] - 8.0 - 0.9
+    rows = [
+        ("other", prep, "ECSタスクの立ち上げ処理など", ""),
+        ("pull", SOCI["pull"], "イメージのプル", f"{SOCI['pull']}秒"),
+        ("other", 8.0, "コンテナ作成など", ""),
+        ("voice", SOCI["voice"], "読み上げコンテナの起動", f"{SOCI['voice']}秒"),
+        ("bot", SOCI["bot"], "Discord botコンテナの起動", f"{SOCI['bot']}秒"),
+        ("other", 0.9, "その他の起動処理", ""),
+    ]
+    color = {"other": "#c3cad3", "pull": RED, "voice": GREEN, "bot": GREEN}
+    x0, width = 290, 610
+    k = width / SOCI["total"]
+    top, pitch, bh = 64, 34, 22
+    b = []
+    b.append(f'<path d="M{x0},38 L{x0},54 M{x0},46 L{x0 + width},46 M{x0 + width},38 L{x0 + width},54" stroke="{INK}" stroke-width="2" fill="none"/>')
+    b.append(f'<rect x="{x0 + width / 2 - 80}" y="30" width="160" height="32" fill="#fff"/>')
+    b.append(text(x0 + width / 2, 54, f"全体 {fmt(SOCI['total'], True)}", size=20, bold=True, anchor="middle"))
+    bottom = top + len(rows) * pitch
+    x = x0
+    for i, (key, v, label, sec) in enumerate(rows):
+        y = top + i * pitch + (pitch - bh) / 2
+        w = max(v * k, 5)
+        if i > 0:
+            b.append(f'<path d="M{x:.1f},{y - (pitch - bh) - 2:.1f} L{x:.1f},{y:.1f}" stroke="{DASH}" stroke-width="1.5" stroke-dasharray="3 3"/>')
+        b.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{bh}" rx="3" fill="{color[key]}"/>')
+        main = key != "other"
+        b.append(text(x0 - 16, y + bh / 2 + 6, label, size=18 if main else 16, fill={"pull": RED, "other": SUB}.get(key, GREEN), anchor="end", bold=main))
+        if key == "pull":
+            b.append(text(x + w + 10, y + bh / 2 + 7, sec, size=19, fill=RED, bold=True))
         elif sec:
             b.append(text(x + w + 10, y + bh / 2 + 7, sec, size=19, fill=GREEN, bold=True))
         x += w
@@ -473,6 +515,7 @@ def main() -> None:
     out = {
         "bot-task.svg": bot_task(),
         "chart-breakdown.svg": chart_breakdown(),
+        "chart-breakdown-after.svg": chart_breakdown_after(),
         "soci-terms.svg": soci_terms(),
         "soci-compare.svg": soci_compare(),
         "soci-mechanism.svg": soci_mechanism(),
