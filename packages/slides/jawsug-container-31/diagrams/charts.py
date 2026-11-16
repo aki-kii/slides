@@ -10,8 +10,8 @@ public/images/ に次の SVG を書き出す。見た目は life の tasks/speak
 - soci-compare.svg    : コンテナ起動の流れ（遅延読み込みなし と SOCI）
 - soci-mechanism.svg  : プル時と起動時に、どこから何を取得するか
 - chart-soci.svg      : SOCI後の振り返り（改善前と同じ項目を並べて比べる）
-- wait-before.svg     : botが読み上げの読み込み完了を待って起動していた
-- wait-after.svg      : botが待たずに起動する
+- wait-before.svg     : Discord botコンテナが読み上げコンテナの読み込み完了を待って起動していた
+- wait-after.svg      : Discord botコンテナが待たずに起動する
 - chart-total.svg     : 全体の推移（改善前 → SOCI → 待たずに起動）
 
 数字は life の container-31 README の構成まとめ（2026-11-15）の値。全体は 2026-11-16 の本人の決定で約77秒（改善前）・約49秒（SOCI）。
@@ -135,12 +135,12 @@ def bot_task() -> str:
     b.append(box(20, 20, 960, 230, stroke="#ED7100", fill="#fdf3ea", rx=14))
     b.append(FARGATE(40, 36, 30))
     b.append(text(80, 59, "ECSタスク（Fargate）", size=18, fill="#B85700", bold=True))
-    items = [("bot", "Discordとやりとりする"), ("読み上げ", "VOICEVOX"), ("文字起こし", "")]
+    items = [("Discord botコンテナ", "Discordとやりとりする"), ("読み上げコンテナ", "VOICEVOX"), ("文字起こしコンテナ", "")]
     for i, (name, note) in enumerate(items):
         x = 60 + i * 310
         b.append(box(x, 86, 260, 136))
         b.append(CONTAINER(x + 102, 98, 56))
-        b.append(text(x + 130, 182, name, size=22, bold=True, anchor="middle"))
+        b.append(text(x + 130, 182, name, size=20, bold=True, anchor="middle"))
         if note:
             b.append(text(x + 130, 208, note, size=16, fill=SUB, anchor="middle"))
     return svg(1000, 270, b)
@@ -151,7 +151,7 @@ def bot_task() -> str:
 # ---------------------------------------------------------------------------
 def chart_breakdown() -> str:
     # 改善前の起動を時間の流れに沿って並べる。順番と「その他」の長さは LT #40 の記録
-    # （準備 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げ起動 0.8秒 → bot起動 1.5秒 → VC接続 0.9秒）による。
+    # （準備 → 取得 37.5秒 → 取得後 8.0秒 → 読み上げコンテナの起動 0.8秒 → Discord botコンテナの起動 1.5秒 → VC接続 0.9秒）による。
     # ヘルスチェック待ちは改善済みの値を出すので区切りに入れない（2026-11-16 本人）。
     # 全体が約77秒になるよう、最初の「その他」の長さを残りで決める。
     prep = BEFORE["total"] - BEFORE["pull"] - BEFORE["voice"] - BEFORE["bot"] - 8.0 - 0.9
@@ -183,7 +183,7 @@ def chart_breakdown() -> str:
         centers[key] = x + w / 2
         x += w
     # 小さい区間は下に引き出す
-    for key, label, anchor, dx, ln in (("voice", "読み上げの起動", "end", 0, 26), ("bot", "botの起動", "end", 14, 60)):
+    for key, label, anchor, dx, ln in (("voice", "読み上げコンテナの起動", "end", 0, 26), ("bot", "Discord botコンテナの起動", "end", 14, 60)):
         cx = centers[key]
         b.append(f'<path d="M{cx:.1f},{by + bh} L{cx:.1f},{by + bh + ln}" stroke="{GREEN}" stroke-width="2"/>')
         b.append(text(cx + dx, by + bh + ln + 24, f"{label} {BEFORE[key]}秒", size=18, fill=GREEN, anchor=anchor, bold=True))
@@ -356,7 +356,9 @@ BAR_X, SCALE = 230, 7.6  # 77秒 → 約585px
 
 
 def chart_soci() -> str:
-    items = [("total", "全体", INK), ("pull", "イメージのプル", RED), ("voice", "読み上げの起動", GREEN), ("bot", "botの起動", GREEN)]
+    items = [("total", "全体", INK), ("pull", "イメージのプル", RED), ("voice", "読み上げコンテナの起動", GREEN), ("bot", "Discord botコンテナの起動", GREEN)]
+    # 項目名が長い（「Discord botコンテナの起動」）ので、この図だけ棒の始まりを右に寄せる
+    BAR_X = 310
     b = []
     b.append(bar(BAR_X, 6, 22, 16, LINE))
     b.append(text(BAR_X + 30, 20, "改善前", size=16, fill=SUB))
@@ -380,11 +382,12 @@ def chart_soci() -> str:
 def lanes(after: bool) -> str:
     b = []
     lx, x0 = 20, 230
-    yv, yb = 60, 160  # 読み上げの段 / botの段
-    for y, name in ((yv, "読み上げ"), (yb, "bot")):
+    yv, yb = 60, 160  # 読み上げコンテナの段 / Discord botコンテナの段
+    for y, name in ((yv, "読み上げ"), (yb, "Discord bot")):
         b.append(CONTAINER(lx, y - 20, 40))
-        b.append(text(lx + 52, y + 8, name, size=21, bold=True))
-    # 読み上げ: 読み込み
+        b.append(text(lx + 52, y - 3, name, size=19, bold=True))
+        b.append(text(lx + 52, y + 20, "コンテナ", size=19, bold=True))
+    # 読み上げコンテナ: 読み込み
     b.append(bar(x0, yv - 20, 420, 40, GREEN, rx=8))
     b.append(text(x0 + 210, yv + 7, "読み込み", size=19, fill="#fff", anchor="middle", bold=True))
     done = x0 + 420

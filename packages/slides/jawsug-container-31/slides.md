@@ -80,7 +80,7 @@ layout: center
 
 <div class="text-lg mt-3">3つのコンテナを<strong>1つのECSタスク</strong>としてFargate上に動かしています</div>
 
-<InlineSvg src="bot-task.svg" label="1つのECSタスク（Fargate）の中に、bot、読み上げ（VOICEVOX）、文字起こし（Transcribe Streaming）の3つのコンテナがある" class="mx-auto mt-8" style="width: 760px" />
+<InlineSvg src="bot-task.svg" label="1つのECSタスク（Fargate）の中に、Discord botコンテナ、読み上げコンテナ（VOICEVOX）、文字起こしコンテナ（Transcribe Streaming）の3つがある" class="mx-auto mt-8" style="width: 760px" />
 
 ---
 layout: center
@@ -104,13 +104,13 @@ chapter: 起動にかかる時間を見る
 
 ## 改善前の起動時間の内訳
 
-<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約77秒のうち、イメージのプル37.5秒、読み上げの起動0.8秒、botの起動1.5秒。残りはその他の起動処理" class="mx-auto mt-4" style="width: 800px" />
+<InlineSvg src="chart-breakdown.svg" label="改善前の起動を1本のタイムラインで表した図。全体約77秒のうち、イメージのプル37.5秒、読み上げコンテナの起動0.8秒、Discord botコンテナの起動1.5秒。残りはその他の起動処理" class="mx-auto mt-4" style="width: 800px" />
 
 <div class="text-xl mt-4" v-click>→ 一番大きいのはイメージの取得（プル）。VOICEVOXのコンテナイメージが約1.9GBと、かなり大きいから</div>
 <div class="text-xl mt-2" v-click>→ まずはこのプルの時間を短くするところから改善していきます</div>
 
 <!--
-タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: その他 → プル 37.5秒 → プル後 8.0秒 → 読み上げ起動 0.8秒 → bot起動 1.5秒 → VCへ接続 0.9秒。
+タイムラインの順番と「その他」の長さは、LT #40 の記録の流れに合わせた: その他 → プル 37.5秒 → プル後 8.0秒 → 読み上げコンテナの起動 0.8秒 → Discord botコンテナの起動 1.5秒 → VCへ接続 0.9秒。
 全体はヘルスチェックを改善した後の約77秒（2026-11-16 本人の決定。ヘルスチェックの説明は話に入れないので、待ちの区切りは図から外した）。最初の「その他」の長さを残りで決めている。
 -->
 
@@ -307,7 +307,7 @@ chapter: イメージのプルを速くする
 
 ## SOCIインデックスを入れた結果
 
-<InlineSvg src="chart-soci.svg" label="改善前とSOCIインデックスを使った起動の比較。全体は約77秒から約49秒、イメージのプルは37.5秒から3.3秒に短縮。読み上げの起動は0.8秒から9.1秒、botの起動は1.5秒から4.7秒に伸びた" class="mx-auto mt-0" style="width: 580px" />
+<InlineSvg src="chart-soci.svg" label="改善前とSOCIインデックスを使った起動の比較。全体は約77秒から約49秒、イメージのプルは37.5秒から3.3秒に短縮。読み上げコンテナの起動は0.8秒から9.1秒、Discord botコンテナの起動は1.5秒から4.7秒に伸びた" class="mx-auto mt-0" style="width: 580px" />
 
 <div class="text-base mt-1" v-click>→ イメージのプルは圧倒的に速くなったが、<br>その代わりにコンテナの起動時間が伸びた<br><span class="text-sm opacity-80">（最小限のファイルしか取らなかったため、起動時に足りないファイルがあるたびに取りに行く）</span></div>
 <div class="text-2xl font-bold mt-2" v-click>全体で約29秒も短縮できました！</div>
@@ -321,11 +321,11 @@ chapter: ほかのコンテナを待たない
 
 <div class="text-sm opacity-70">次に</div>
 
-## botは読み上げの読み込みを待っていた
+## Discord botコンテナは<br>読み上げコンテナの読み込みを待っていた
 
-<div class="text-lg mt-2">botは、読み上げ（VOICEVOX）の読み込みが終わるのを待ってから起動していた</div>
+<div class="text-lg mt-2">Discord botコンテナは、読み上げコンテナ（VOICEVOX）の読み込みが終わるのを<br>待ってから起動していた</div>
 
-<InlineSvg src="wait-before.svg" label="読み上げのコンテナが読み込みを終えるまで、botのコンテナは待ち、読み込みが完了してから起動してボイスチャンネル（VC）に入る" class="mx-auto mt-8" style="width: 760px" />
+<InlineSvg src="wait-before.svg" label="読み上げコンテナが読み込みを終えるまで、Discord botコンテナは待ち、読み込みが完了してから起動してボイスチャンネル（VC）に入る" class="mx-auto mt-4" style="width: 760px" />
 
 ---
 chapter: ほかのコンテナを待たない
@@ -336,11 +336,11 @@ chapter: ほかのコンテナを待たない
 
 <div class="kari">仮：言い方は未定</div>
 
-## botは待たずに起動する
+## Discord botコンテナは待たずに起動する
 
-<div class="text-lg mt-2">botは読み上げの読み込みを待たずに起動して、先にボイスチャンネルに入る</div>
+<div class="text-lg mt-2">Discord botコンテナは読み上げコンテナの読み込みを待たずに起動して、<br>先にボイスチャンネルに入る</div>
 
-<InlineSvg src="wait-after.svg" label="botのコンテナは読み上げの読み込みを待たずに起動してボイスチャンネル（VC）に入り、声や文章をためておき、読み上げの準備ができたら流す" class="mx-auto mt-8" style="width: 760px" />
+<InlineSvg src="wait-after.svg" label="Discord botコンテナは読み上げコンテナの読み込みを待たずに起動してボイスチャンネル（VC）に入り、声や文章をためておき、読み上げコンテナの準備ができたら流す" class="mx-auto mt-8" style="width: 760px" />
 
 <!--
 仮の札: 構成まとめ（2026-11-15）で「待たずに起動する（言い方の詳細は後で詰める）」となっているため。図の「声や文章をためる」「準備ができたら流す」は構成まとめの「声や文章はためておいて、準備ができたら流す」から。
