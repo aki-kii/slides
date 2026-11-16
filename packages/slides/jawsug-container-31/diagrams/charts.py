@@ -169,16 +169,12 @@ def bot_task() -> str:
     b.append(f'<g transform="translate({ox} {oy}) scale({k})" opacity="0.28">{_prefix_ids(body, "ov-")}</g>')
     b.append(f'<g transform="translate({ox} {oy}) scale({k})">{_prefix_ids(picks, "hl-")}</g>')
 
-    # ECS Fargate の箱（前の図の座標 140,350 300x76）から、右のECSタスクへ広げる
+    # ECS Fargate の箱（前の図の座標 140,350 300x76）から、右のECSタスクへ細い点線でつなぐだけにする
+    # （塗りの広がりと太い縁取りは「ちょっと大げさかも？」で外した。2026-11-16 本人）
     ex, ey, ew, eh = ox + 140 * k, oy + 350 * k, 300 * k, 76 * k
     px, py, pw, ph = 530, 14, 456, 392
-    b.append(
-        f'<polygon points="{ex + ew:.1f},{ey:.1f} {px},{py} {px},{py + ph} {ex + ew:.1f},{ey + eh:.1f}" '
-        f'fill="{OV_ECS}" fill-opacity="0.10"/>'
-    )
     for y0, y1 in ((ey, py), (ey + eh, py + ph)):
-        b.append(f'<line x1="{ex + ew:.1f}" y1="{y0:.1f}" x2="{px}" y2="{y1}" stroke="{OV_ECS}" stroke-width="1.5" stroke-opacity="0.7"/>')
-    b.append(f'<rect x="{ex - 3:.1f}" y="{ey - 3:.1f}" width="{ew + 6:.1f}" height="{eh + 6:.1f}" rx="10" fill="none" stroke="{OV_ECS}" stroke-width="2.5"/>')
+        b.append(f'<line x1="{ex + ew:.1f}" y1="{y0:.1f}" x2="{px}" y2="{y1}" stroke="{DASH}" stroke-width="1.5" stroke-dasharray="5 4"/>')
 
     # ECSタスクの中身（前の図の ECS Fargate の箱と同じ色）
     b.append(box(px, py, pw, ph, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
@@ -213,7 +209,7 @@ def chart_breakdown() -> str:
     # 全体が約77秒になるよう、最初の「その他」の長さを残りで決める。
     prep = BEFORE["total"] - BEFORE["pull"] - BEFORE["voice"] - BEFORE["bot"] - 8.0 - 0.9
     rows = [
-        ("other", prep, "その他の起動処理", ""),
+        ("other", prep, "ECSタスクの立ち上げ処理など", ""),
         ("pull", BEFORE["pull"], "イメージのプル", f"{BEFORE['pull']}秒"),
         ("other", 8.0, "コンテナ作成など", ""),
         ("voice", BEFORE["voice"], "読み上げコンテナの起動", f"{BEFORE['voice']}秒"),
@@ -256,65 +252,77 @@ def chart_breakdown() -> str:
 # 仕組み①: 3つの言葉（レイヤー・span・zTOC）
 # ---------------------------------------------------------------------------
 def soci_terms() -> str:
+    # 図を左、説明を右に置くので縦長に組む（2026-11-16 本人「図を左側、右側に説明にしたい」）。
+    # レイヤー全体を「コンテナイメージ」の枠で囲み、コンテナのアイコンを付ける（同 本人）。
     b = []
-    # 左: イメージはレイヤーを重ねたもの
-    b.append(text(110, 92, "コンテナイメージ", size=17, bold=True, anchor="middle"))
-    for i in range(3):
-        y = 108 + i * 50
-        hl = i == 2
-        b.append(box(30, y, 160, 42, stroke=INK if hl else LINE, fill="#f4f6f8", rx=6))
-        b.append(text(110, y + 28, "レイヤー", size=17, fill=INK if hl else SUB, anchor="middle", bold=hl))
-    b.append(f'<path d="M190,208 L300,108 M190,250 L300,300" stroke="{DASH}" stroke-width="2" stroke-dasharray="6 5" fill="none"/>')
-    # 右: 1つのレイヤー（TARアーカイブを圧縮したもの）を span に区切る
-    lx, lw = 300, 670
-    b.append(box(lx, 108, lw, 192, stroke=INK, fill="#f4f6f8", rx=10))
-    b.append(text(lx + 18, 136, "レイヤー（TARアーカイブを圧縮したもの）", size=17, bold=True))
-    n = 6
+    fx, fy, fw = 20, 10, 560
+    # コンテナイメージの枠
+    b.append(box(fx, fy, fw, 330, stroke=INK, fill="#f4f6f8", rx=14))
+    b.append(CONTAINER(fx + 18, fy + 12, 34))
+    b.append(text(fx + 62, fy + 37, "コンテナイメージ", size=19, bold=True))
+    # レイヤーを重ねる（一番下のレイヤーを開いて span を見せる）
+    lx, lw = fx + 20, fw - 40
+    for i in range(2):
+        y = fy + 62 + i * 52
+        b.append(box(lx, y, lw, 42, rx=8))
+        b.append(text(lx + lw / 2, y + 28, "レイヤー", size=17, fill=SUB, anchor="middle"))
+    ly, lh = fy + 166, 144
+    b.append(box(lx, ly, lw, lh, stroke=INK, rx=8))
+    b.append(text(lx + 18, ly + 30, "レイヤー（TARアーカイブを圧縮したもの）", size=17, bold=True))
+    n = 5
     sw = (lw - 36 - (n - 1) * 8) / n
     xs = []
     for i in range(n):
         x = lx + 18 + i * (sw + 8)
         xs.append(x)
-        hl = i == 4
-        b.append(box(x, 210, sw, 52, stroke=GREEN if hl else LINE, fill=GREEN_BG if hl else "#fff", rx=6))
-        b.append(text(x + sw / 2, 243, "span", size=17, fill=GREEN if hl else SUB, anchor="middle", bold=hl, mono=True))
-    b.append(text(lx + lw / 2, 288, "span：zTOCがレイヤーを区切った単位", size=15, fill=GREEN, anchor="middle", bold=True))
-    # 上: zTOC（レイヤーのインデックス）
-    zx, zw = 560, 410
-    b.append(box(zx, 4, zw, 76, stroke=RED, fill=RED_BG, rx=10))
-    b.append(text(zx + 18, 32, "zTOC（レイヤーのインデックス）", size=17, fill=RED, bold=True))
-    b.append(text(zx + 18, 62, "どのファイルが、レイヤーの中のどこにあるか", size=15, fill=INK))
-    sx = xs[4] + sw / 2
-    b.append(arrow(f"M{sx:.1f},82 L{sx:.1f},206", RED, "Red"))
-    return svg(1000, 306, b)
+        hl = i == 3
+        b.append(box(x, ly + 50, sw, 48, stroke=GREEN if hl else LINE, fill=GREEN_BG if hl else "#fff", rx=6))
+        b.append(text(x + sw / 2, ly + 81, "span", size=17, fill=GREEN if hl else SUB, anchor="middle", bold=hl, mono=True))
+    b.append(text(lx + lw / 2, ly + 128, "zTOCがレイヤーをspanに区切っている", size=15, fill=GREEN, anchor="middle", bold=True))
+    # 下: zTOC（レイヤーのインデックス）から span を指す
+    zy = 380
+    b.append(box(fx, zy, fw, 76, stroke=RED, fill=RED_BG, rx=10))
+    b.append(text(fx + 18, zy + 30, "zTOC（レイヤーのインデックス）", size=17, fill=RED, bold=True))
+    b.append(text(fx + 18, zy + 60, "どのファイルが、レイヤーの中のどこにあるか", size=15, fill=INK))
+    sx = xs[3] + sw / 2
+    b.append(arrow(f"M{sx:.1f},{zy - 2} L{sx:.1f},{ly + 100}", RED, "Red"))
+    return svg(600, zy + 82, b)
 
 
 # ---------------------------------------------------------------------------
 # SOCIとは？: コンテナ起動の流れ（遅延読み込みなし と SOCI）
 # ---------------------------------------------------------------------------
 def soci_compare() -> str:
+    # pull・create・start を縦に並べる（2026-11-16 本人「縦の図にして」）。説明はスライドの右側に置く。
     b = []
+    W = 560
     # ECSタスク（pull・create・start を囲む。音声botの構成の図と同じ色）
-    b.append(box(200, 10, 780, 262, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
-    b.append(ECS(216, 20, 30))
-    b.append(text(256, 42, "ECSタスク", size=17, fill="#B85700", bold=True))
-    x0 = 230
-    rows = [
-        ("遅延読み込みなし", [("pull", 380), ("create", 110), ("start", 90)], 96,
-         "イメージ全体を取得して、レイヤーを全部展開。ファイルが全部そろってからコンテナを作成"),
-        ("SOCI", [("pull", 110), ("create", 110), ("start", 250)], 200,
-         "イメージ全体は取得しない。全てのレイヤーを取得していない状態でコンテナを作成"),
+    top, H = 10, 470
+    b.append(box(70, top, W - 90, H - 20, stroke=OV_ECS, fill=OV_ECS_BG, rx=14))
+    b.append(ECS(86, top + 10, 30))
+    b.append(text(126, top + 32, "ECSタスク", size=17, fill="#B85700", bold=True))
+    cols = [
+        ("遅延読み込みなし", [("pull", 230), ("create", 62), ("start", 52)], 205,
+         ["イメージ全体を取得して", "レイヤーを全部展開"]),
+        ("SOCI", [("pull", 62), ("create", 62), ("start", 150)], 405,
+         ["イメージ全体は", "取得しない"]),
     ]
-    for label, segs, y, note in rows:
-        b.append(text(20, y + 8, label, size=19, bold=True))
-        x = x0
-        for k, w in segs:
+    y0, cw = 104, 150
+    for label, segs, cx, note in cols:
+        b.append(text(cx, y0 - 22, label, size=19, bold=True, anchor="middle"))
+        y = y0
+        for k, h in segs:
             fill = RED if k == "pull" else (GREEN if k == "start" else SUB)
-            b.append(f'<rect x="{x}" y="{y - 22}" width="{w - 6}" height="44" rx="8" fill="{fill}"/>')
-            b.append(text(x + (w - 6) / 2, y + 7, k, size=17, fill="#fff", anchor="middle", bold=True, mono=True))
-            x += w
-        b.append(text(x0, y + 48, note, size=16, fill=SUB))
-    return svg(1000, 282, b)
+            b.append(f'<rect x="{cx - cw / 2}" y="{y}" width="{cw}" height="{h - 6}" rx="8" fill="{fill}"/>')
+            b.append(text(cx, y + (h - 6) / 2 + 6, k, size=17, fill="#fff", anchor="middle", bold=True, mono=True))
+            y += h
+        for i, line in enumerate(note):
+            b.append(text(cx, y + 18 + i * 21, line, size=15, fill=SUB, anchor="middle"))
+    # 時間の流れ（上から下）
+    b.append(arrow(f"M36,{y0} L36,{y0 + 340}", SUB, "Sub", 2))
+    b.append(f'<text x="28" y="{y0 + 170}" font-size="14" fill="{SUB}" text-anchor="middle" '
+             f'writing-mode="tb" glyph-orientation-vertical="0">時間</text>')
+    return svg(W, H, b)
 
 
 # ---------------------------------------------------------------------------
@@ -386,8 +394,17 @@ def chart_soci() -> str:
         b.append(text(20, y + 33, label, size=20, bold=True))
         b.append(bar(BAR_X, y, bv * SCALE, 18, LINE))
         b.append(text(BAR_X + bv * SCALE + 10, y + 16, fmt(bv, key == "total"), size=17, fill=SUB))
-        b.append(bar(BAR_X, y + 24, av * SCALE, 26, color))
-        b.append(text(BAR_X + av * SCALE + 10, y + 45, fmt(av, key == "total"), size=21, fill=color, bold=True))
+        if key == "total":
+            # 全体で縮んだ分を図の中に書く（2026-11-16 本人「全体で29秒〜は図の中に入れよう」）
+            ax, ex = BAR_X + av * SCALE, BAR_X + bv * SCALE
+            b.append(bar(BAR_X, y + 24, av * SCALE, 26, color))
+            b.append(text(ax - 10, y + 44, fmt(av, True), size=19, fill="#fff", anchor="end", bold=True))
+            b.append(f'<rect x="{ax + 3:.1f}" y="{y + 25}" width="{ex - ax - 4:.1f}" height="24" rx="3" fill="#fff" '
+                     f'stroke="{INK}" stroke-width="1.5" stroke-dasharray="5 4"/>')
+            b.append(text((ax + ex) / 2, y + 44, "全体で約29秒短縮", size=18, anchor="middle", bold=True))
+        else:
+            b.append(bar(BAR_X, y + 24, av * SCALE, 26, color))
+            b.append(text(BAR_X + av * SCALE + 10, y + 45, fmt(av, key == "total"), size=21, fill=color, bold=True))
         y += 76
     return svg(1000, y - 12, b)
 
