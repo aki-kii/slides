@@ -204,10 +204,11 @@ layout: center
 
 <InlineSvg src="soci-mechanism.svg" label="pullのときは、ECRリポジトリからSOCIインデックス（レイヤーのインデックスであるzTOC）と10MiB未満の小さいレイヤーだけを取得する。startのときに足りないものは、zTOCから探して、span単位でレイヤーから取得する" class="mx-auto mt-1" style="width: 500px" />
 
+<div class="text-right text-sm opacity-70">※ 10MiB未満の小さいレイヤーは、プルで丸ごと取得する</div>
+
 <div class="text-lg mt-2" v-click>→ 起動時、アプリがファイルを読むたびに足りないものをzTOCから探して、<strong>span単位</strong>で取得する</div>
 <div class="text-lg mt-1" v-click>→ 必要になった分から読み込むため、<strong>遅延読み込み</strong>と呼ばれている</div>
 
-<div class="absolute right-8 bottom-6 text-sm opacity-70">※ 10MiB未満の小さいレイヤーは、プルで丸ごと取得する</div>
 
 <!--
 プル時に取るのは、manifest/config・SOCIインデックス・全レイヤーのzTOC（イメージの約1〜3%）と、zTOCが作られない小さいレイヤー（既定10MiB未満）の全量。
@@ -224,7 +225,7 @@ layout: center
 
 <div class="text-lg">遅延読み込みが効果を発揮しやすいのは、<br>圧縮後のサイズが<strong>250MiB</strong>を超えるコンテナイメージ</div>
 
-<div class="apply mt-6">
+<div class="apply mt-4">
   <div class="target on">
     <img src="/images/aws/ecs-container.svg" class="h-12" />
     <div class="name">読み上げコンテナ<br><span class="sub">VOICEVOX</span></div>
@@ -242,17 +243,17 @@ layout: center
   </div>
 </div>
 
-<div class="text-xl mt-6">→ この2つに<strong>SOCIインデックス</strong>を適用する</div>
-<div class="text-lg mt-3">適用には、SOCI Index Builder や SOCI CLI が一般的だが、<br>CDKの deploy-time-build Construct がSOCIインデックスの構築に対応していたので、こちらを利用した</div>
+<div class="text-xl mt-4">→ この2つに<strong>SOCIインデックス</strong>を適用する</div>
+<div class="text-lg mt-2">適用には、SOCI Index Builder や SOCI CLI が一般的だが、<br>CDKの deploy-time-build Construct がSOCIインデックスの構築に対応していたので、こちらを利用した</div>
 
 <style>
 .apply { display: flex; justify-content: center; gap: 1rem; }
-.apply .target { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; border: 2px solid #c9d0d9; border-radius: 0.75rem; padding: 0.7rem 1rem; width: 250px; text-align: center; }
+.apply .target { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; border: 2px solid #c9d0d9; border-radius: 0.75rem; padding: 0.5rem 1rem; width: 250px; text-align: center; }
 .apply .target.on { border-color: #DD344C; background: #fdecee; }
 .apply .target.off { opacity: 0.55; }
 .apply .name { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
 .apply .sub { font-size: 0.875rem; font-weight: 400; opacity: 0.7; }
-.apply .size { font-size: 1.5rem; font-weight: 700; }
+.apply .size { font-size: 1.35rem; font-weight: 700; }
 .apply .on .size { color: #DD344C; }
 </style>
 
