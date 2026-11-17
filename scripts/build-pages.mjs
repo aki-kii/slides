@@ -15,6 +15,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { buildDesignSystem } from './build-design-system.mjs';
 
 // Pages に載せないデッキ（packages/slides/ のフォルダ名）
 const EXCLUDE = ['cdk-3min-cooking'];
@@ -87,6 +88,12 @@ built.sort(
   (a, b) =>
     (b.date ?? '').localeCompare(a.date ?? '') || a.name.localeCompare(b.name),
 );
+// スライド用デザインシステム（design-system/）を dist/design-system/ に置く
+const dsProblems = buildDesignSystem({
+  outDir: join(outDir, 'design-system'),
+  base,
+  decks: built.map((b) => b.name),
+});
 writeFileSync(join(outDir, 'index.html'), indexHtml(built));
 writeFileSync(join(outDir, '.nojekyll'), '');
 
@@ -95,6 +102,7 @@ if (failed.length) {
   console.error(`失敗した: ${failed.join(', ')}`);
   process.exit(1);
 }
+if (dsProblems.length) process.exit(1);
 
 // デッキの中では public/ のファイルを `/images/...` のような絶対パスで書いている
 // （frontmatter の値、<img src>、Vue の props など Vite が base を付けない所が多い）。
@@ -172,10 +180,12 @@ function indexHtml(items) {
       li time { display: block; font-size: .8rem; color: #666; }
       li span { display: block; font-weight: 600; }
       li code { font-size: .8rem; color: #888; }
+      .ds a { font-weight: 600; }
     </style>
   </head>
   <body>
     <h1>Slides</h1>
+    <p class="ds"><a href="./design-system/">スライドのデザインシステム</a>（ファウンデーション・コンポーネント・テンプレート／ストーリー: パターン・テーマ）</p>
     <ul>
 ${list}
     </ul>

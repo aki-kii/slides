@@ -4,7 +4,8 @@
   "scripts": {
     "new-slide": "node scripts/create-slide.mjs",
     "export-check": "node scripts/export-check.mjs",
-    "build:pages": "node scripts/build-pages.mjs"
+    "build:pages": "node scripts/build-pages.mjs",
+    "build:ds": "node scripts/build-design-system.mjs"
   },
   "devDependencies": {
     "oxfmt": "^0.36.0",

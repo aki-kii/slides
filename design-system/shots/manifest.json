@@ -1,0 +1,602 @@
+{
+ "base-color": [
+  {
+   "file": "base-color/lt-40-p01.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 1
+  },
+  {
+   "file": "base-color/continuum-p20.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 20
+  }
+ ],
+ "base-diagram": [
+  {
+   "file": "base-diagram/lt-40-p09.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 9
+  },
+  {
+   "file": "base-diagram/lt-40-p13.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 13
+  },
+  {
+   "file": "base-diagram/zero-drift-p04.png",
+   "deck": "zero-drift-cdk-ops",
+   "page": 4
+  },
+  {
+   "file": "base-diagram/jaws-sonic-2026-p06.png",
+   "deck": "jaws-sonic-2026",
+   "page": 6
+  }
+ ],
+ "part-icon-heading": [
+  {
+   "file": "part-icon-heading/continuum-p03.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 3
+  },
+  {
+   "file": "part-icon-heading/lt-40-p06.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 6
+  }
+ ],
+ "part-arrow-conclusion": [
+  {
+   "file": "part-arrow-conclusion/bgnr-93-p10.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 10
+  },
+  {
+   "file": "part-arrow-conclusion/ecr-sbom-p03.png",
+   "deck": "ecr-sbom-supply-chain-investigation",
+   "page": 3
+  },
+  {
+   "file": "part-arrow-conclusion/lt-40-p13.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 13
+  }
+ ],
+ "part-strong": [
+  {
+   "file": "part-strong/bgnr-93-p23.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 23
+  },
+  {
+   "file": "part-strong/failed-ecs-p03.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "page": 3
+  },
+  {
+   "file": "part-strong/ecr-sbom-p13.png",
+   "deck": "ecr-sbom-supply-chain-investigation",
+   "page": 13
+  }
+ ],
+ "part-underline": [
+  {
+   "file": "part-underline/lt-40-p07.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 7
+  }
+ ],
+ "part-kogoe": [
+  {
+   "file": "part-kogoe/continuum-p12.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 12
+  },
+  {
+   "file": "part-kogoe/cdk-day1-p12.png",
+   "deck": "cdk-day1-experiment",
+   "page": 12
+  }
+ ],
+ "part-overlay": [
+  {
+   "file": "part-overlay/cdkd-talk-p10.png",
+   "deck": "jawsug-cdk-tokyo-cdkd-talk",
+   "page": 10
+  },
+  {
+   "file": "part-overlay/cdk-day1-p13.png",
+   "deck": "cdk-day1-experiment",
+   "page": 13
+  },
+  {
+   "file": "part-overlay/failed-ecs-p04.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "page": 4
+  }
+ ],
+ "part-bottomlink": [
+  {
+   "file": "part-bottomlink/lt-40-p06.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 6
+  },
+  {
+   "file": "part-bottomlink/cdkd-talk-p21.png",
+   "deck": "jawsug-cdk-tokyo-cdkd-talk",
+   "page": 21
+  }
+ ],
+ "part-subtitle-band": [
+  {
+   "file": "part-subtitle-band/bgnr-93-p06.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 6
+  }
+ ],
+ "page-title": [
+  {
+   "file": "page-title/continuum-p01.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 1
+  },
+  {
+   "file": "page-title/failed-ecs-p01.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "page": 1
+  },
+  {
+   "file": "page-title/zero-drift-p01.png",
+   "deck": "zero-drift-cdk-ops",
+   "page": 1
+  },
+  {
+   "file": "page-title/lt-40-p01.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 1
+  }
+ ],
+ "page-profile": [
+  {
+   "file": "page-profile/continuum-p02.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 2
+  }
+ ],
+ "page-kamishibai": [
+  {
+   "file": "page-kamishibai/jaws-sonic-2026-p04.png",
+   "deck": "jaws-sonic-2026",
+   "page": 4
+  },
+  {
+   "file": "page-kamishibai/bgnr-93-p23.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 23
+  },
+  {
+   "file": "page-kamishibai/zero-drift-p21.png",
+   "deck": "zero-drift-cdk-ops",
+   "page": 21
+  },
+  {
+   "file": "page-kamishibai/continuum-p04.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 4
+  },
+  {
+   "file": "page-kamishibai/failed-ecs-p03.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "page": 3
+  },
+  {
+   "file": "page-kamishibai/zero-drift-p03.png",
+   "deck": "zero-drift-cdk-ops",
+   "page": 3
+  },
+  {
+   "file": "page-kamishibai/cdk-3min-p04.png",
+   "deck": "cdk-3min-cooking",
+   "page": 4
+  }
+ ],
+ "page-chapter": [
+  {
+   "file": "page-chapter/bgnr-93-p11.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 11
+  },
+  {
+   "file": "page-chapter/cdk-day1-p11.png",
+   "deck": "cdk-day1-experiment",
+   "page": 11
+  },
+  {
+   "file": "page-chapter/zero-drift-p23.png",
+   "deck": "zero-drift-cdk-ops",
+   "page": 23
+  },
+  {
+   "file": "page-chapter/ecr-sbom-p07.png",
+   "deck": "ecr-sbom-supply-chain-investigation",
+   "page": 7
+  },
+  {
+   "file": "page-chapter/jaws-sonic-2026-p08.png",
+   "deck": "jaws-sonic-2026",
+   "page": 8
+  }
+ ],
+ "page-story": [
+  {
+   "file": "page-story/bgnr-93-p05.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 5
+  },
+  {
+   "file": "page-story/bgnr-93-p06.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 6
+  },
+  {
+   "file": "page-story/bgnr-93-p07.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 7
+  }
+ ],
+ "page-what-is-list": [
+  {
+   "file": "page-what-is-list/ecr-sbom-p08.png",
+   "deck": "ecr-sbom-supply-chain-investigation",
+   "page": 8
+  },
+  {
+   "file": "page-what-is-list/lt-40-p06.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 6
+  }
+ ],
+ "page-what-is-figure": [
+  {
+   "file": "page-what-is-figure/continuum-p03.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 3
+  },
+  {
+   "file": "page-what-is-figure/zero-drift-p04.png",
+   "deck": "zero-drift-cdk-ops",
+   "page": 4
+  }
+ ],
+ "page-definition-reuse": [
+  {
+   "file": "page-definition-reuse/cdkd-talk-p03.png",
+   "deck": "jawsug-cdk-tokyo-cdkd-talk",
+   "page": 3
+  },
+  {
+   "file": "page-definition-reuse/cdkd-talk-p07.png",
+   "deck": "jawsug-cdk-tokyo-cdkd-talk",
+   "page": 7
+  },
+  {
+   "file": "page-definition-reuse/cdkd-talk-p12.png",
+   "deck": "jawsug-cdk-tokyo-cdkd-talk",
+   "page": 12
+  },
+  {
+   "file": "page-definition-reuse/cdkd-talk-p21.png",
+   "deck": "jawsug-cdk-tokyo-cdkd-talk",
+   "page": 21
+  }
+ ],
+ "page-one-by-one": [
+  {
+   "file": "page-one-by-one/bgnr-93-p18.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 18
+  }
+ ],
+ "page-list-conclusion": [
+  {
+   "file": "page-list-conclusion/bgnr-93-p10.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 10
+  },
+  {
+   "file": "page-list-conclusion/continuum-p11.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 11
+  }
+ ],
+ "page-figure-conclusion": [
+  {
+   "file": "page-figure-conclusion/lt-40-p13.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 13
+  },
+  {
+   "file": "page-figure-conclusion/failed-ecs-p05.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "page": 5
+  },
+  {
+   "file": "page-figure-conclusion/failed-ecs-p07.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "page": 7
+  }
+ ],
+ "page-compare": [
+  {
+   "file": "page-compare/bgnr-93-p14.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 14
+  },
+  {
+   "file": "page-compare/lt-40-p07.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 7
+  },
+  {
+   "file": "page-compare/continuum-p20.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 20
+  }
+ ],
+ "page-onayami": [
+  {
+   "file": "page-onayami/cdk-day1-p12.png",
+   "deck": "cdk-day1-experiment",
+   "page": 12
+  },
+  {
+   "file": "page-onayami/cdk-day1-p13.png",
+   "deck": "cdk-day1-experiment",
+   "page": 13
+  }
+ ],
+ "page-qa": [
+  {
+   "file": "page-qa/bgnr-93-p30.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 30
+  },
+  {
+   "file": "page-qa/lt-40-p11.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 11
+  },
+  {
+   "file": "page-qa/jaws-sonic-2026-p05.png",
+   "deck": "jaws-sonic-2026",
+   "page": 5
+  }
+ ],
+ "page-summary-statement": [
+  {
+   "file": "page-summary-statement/ecr-sbom-p13.png",
+   "deck": "ecr-sbom-supply-chain-investigation",
+   "page": 13
+  },
+  {
+   "file": "page-summary-statement/jaws-sonic-2026-p34.png",
+   "deck": "jaws-sonic-2026",
+   "page": 34
+  },
+  {
+   "file": "page-summary-statement/continuum-p21.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 21
+  }
+ ],
+ "page-summary-list": [
+  {
+   "file": "page-summary-list/bgnr-93-p32.png",
+   "deck": "jawsug-bgnr-93",
+   "page": 32
+  },
+  {
+   "file": "page-summary-list/lt-40-p17.png",
+   "deck": "jawsug-tokyo-lunch-lt-40",
+   "page": 17
+  },
+  {
+   "file": "page-summary-list/zero-drift-p37.png",
+   "deck": "zero-drift-cdk-ops",
+   "page": 37
+  },
+  {
+   "file": "page-summary-list/failed-ecs-p13.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "page": 13
+  }
+ ],
+ "page-promo": [
+  {
+   "file": "page-promo/continuum-p22.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 22
+  },
+  {
+   "file": "page-promo/aws-oss-p14.png",
+   "deck": "aws-oss-perspective",
+   "page": 14
+  }
+ ],
+ "page-thanks": [
+  {
+   "file": "page-thanks/aws-oss-p16.png",
+   "deck": "aws-oss-perspective",
+   "page": 16
+  },
+  {
+   "file": "page-thanks/ecr-sbom-p18.png",
+   "deck": "ecr-sbom-supply-chain-investigation",
+   "page": 18
+  }
+ ],
+ "flow-question-answer": [
+  {
+   "file": "flow-question-answer/continuum-p11.png",
+   "deck": "cdk-custom-resource-continuum",
+   "page": 11
+  }
+ ],
+ "flow-whole": [
+  {
+   "file": "flow-whole/ecr-sbom-strip.png",
+   "deck": "ecr-sbom-supply-chain-investigation",
+   "pages": [
+    1,
+    2,
+    3,
+    5,
+    8,
+    9,
+    13,
+    18
+   ],
+   "strip": true
+  }
+ ],
+ "flow-analyze-improve-review": [
+  {
+   "file": "flow-analyze-improve-review/container-31-strip.png",
+   "deck": "jawsug-container-31",
+   "pages": [
+    7,
+    8,
+    9,
+    11,
+    12,
+    13
+   ],
+   "strip": true
+  }
+ ],
+ "flow-trouble-solution": [
+  {
+   "file": "flow-trouble-solution/bgnr-93-strip.png",
+   "deck": "jawsug-bgnr-93",
+   "pages": [
+    5,
+    6,
+    7,
+    10,
+    11
+   ],
+   "strip": true
+  }
+ ],
+ "flow-onayami": [
+  {
+   "file": "flow-onayami/cdk-day1-strip.png",
+   "deck": "cdk-day1-experiment",
+   "pages": [
+    10,
+    11,
+    12,
+    13
+   ],
+   "strip": true
+  }
+ ],
+ "flow-part-intro": [
+  {
+   "file": "flow-part-intro/zero-drift-strip.png",
+   "deck": "zero-drift-cdk-ops",
+   "pages": [
+    20,
+    21,
+    22,
+    23
+   ],
+   "strip": true
+  }
+ ],
+ "flow-definition-return": [
+  {
+   "file": "flow-definition-return/cdkd-talk-strip.png",
+   "deck": "jawsug-cdk-tokyo-cdkd-talk",
+   "pages": [
+    3,
+    7,
+    12,
+    17,
+    21
+   ],
+   "strip": true
+  }
+ ],
+ "theme-verification": [
+  {
+   "file": "theme-verification/failed-ecs-strip.png",
+   "deck": "failed-ecs-log-cost-reduction",
+   "pages": [
+    3,
+    5,
+    6,
+    7,
+    13
+   ],
+   "strip": true
+  }
+ ],
+ "theme-explainer": [
+  {
+   "file": "theme-explainer/continuum-strip.png",
+   "deck": "cdk-custom-resource-continuum",
+   "pages": [
+    3,
+    4,
+    11,
+    12,
+    20,
+    21
+   ],
+   "strip": true
+  }
+ ],
+ "theme-intro": [
+  {
+   "file": "theme-intro/bgnr-93-strip.png",
+   "deck": "jawsug-bgnr-93",
+   "pages": [
+    5,
+    10,
+    11,
+    14,
+    30,
+    32
+   ],
+   "strip": true
+  }
+ ],
+ "theme-practice": [
+  {
+   "file": "theme-practice/cdk-day1-strip.png",
+   "deck": "cdk-day1-experiment",
+   "pages": [
+    10,
+    11,
+    12,
+    13
+   ],
+   "strip": true
+  }
+ ],
+ "theme-experience": [
+  {
+   "file": "theme-experience/jaws-sonic-2026-strip.png",
+   "deck": "jaws-sonic-2026",
+   "pages": [
+    4,
+    5,
+    6,
+    8,
+    34
+   ],
+   "strip": true
+  }
+ ]
+}
