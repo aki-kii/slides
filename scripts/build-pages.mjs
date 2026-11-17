@@ -185,7 +185,7 @@ function indexHtml(items) {
   </head>
   <body>
     <h1>Slides</h1>
-    <p class="ds"><a href="./design-system/">スライドのデザインシステム</a>（材料: 土台・コンポーネント・ページの型／話の型: 構成の型・テーマ）</p>
+    <p class="ds"><a href="./design-system/">スライドのデザインシステム</a>（土台・コンポーネント・ページの型／構成の型・テーマ）</p>
     <ul>
 ${list}
     </ul>
