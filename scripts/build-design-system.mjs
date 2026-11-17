@@ -29,8 +29,8 @@ import { join, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const srcDir = join(root, 'design-system');
 
-// 層。group 1 は置くもの（土台・コンポーネント・ページの型）、group 2 は選ぶ決め事（共通の骨組み・構成の型・全体の型）。
-// 目次ではまとまりごとに区切って並べ、まとまりに名前は付けない。body は項目ページの「中身」の欄の名前
+// 層。group 1 は置くもの（土台・コンポーネント・ページの型）、group 2 は選ぶ決め事（共通の骨組み・構成の型・全体の型）で「ストーリー」とまとめる。
+// 目次ではまとまりごとに区切って並べる。名前を付けるのは group 2（ストーリー）だけ。body は項目ページの「中身」の欄の名前
 const LAYERS = [
   { key: 'base', group: 1, body: '値' },
   { key: 'parts', group: 1, body: 'サイズ・値と実装' },
@@ -45,6 +45,9 @@ const LAYERS = [
   { key: 'flows', group: 2, body: '並びと使うページの型' },
   { key: 'themes', group: 2, body: 'デッキ・背骨・主役のページ' },
 ];
+
+// まとまりの名前。group 1 には付けない
+const GROUP_LABELS = { 2: 'ストーリー' };
 
 // 層の並びに入れない文書
 const DOCS = [
@@ -241,9 +244,12 @@ function parseItem(file, md, problems) {
 // 項目ページ: 名前 → 1行の定義 → 見本 → いつ使うか → 中身 → 関連する項目 → 気を付けること
 function itemHtml(it, { shots, related }) {
   const layer = it.layer;
-  const crumb = layer.single
-    ? esc(layer.title)
-    : `<a href="${layer.key}.html">${esc(layer.title)}</a>`;
+  const label = GROUP_LABELS[layer.group];
+  const crumb =
+    (label ? `${esc(label)} / ` : '') +
+    (layer.single
+      ? esc(layer.title)
+      : `<a href="${layer.key}.html">${esc(layer.title)}</a>`);
   const out = [
     `<p class="crumb">${crumb}</p>`,
     `<h1>${inline(it.name)} <code class="id">${esc(it.id)}</code></h1>`,
@@ -552,7 +558,7 @@ function esc(s) {
 }
 
 function layout({ title, body, current }) {
-  // 目次: はじめに → 置くものの層 → 選ぶ決め事の層 → その他の文書
+  // 目次: はじめに → 土台・コンポーネント・ページの型 → ストーリー → その他の文書
   const link = (href, label) =>
     `<li><a href="${href}"${href === current ? ' class="current"' : ''}>${esc(label)}</a></li>`;
   const groups = [];
@@ -564,7 +570,8 @@ function layout({ title, body, current }) {
           ? link(`${l.items[0].id}.html`, l.title)
           : link(`${l.key}.html`, l.title),
       );
-    groups.push(`<li class="group"><ol>${links.join('')}</ol></li>`);
+    const label = GROUP_LABELS[g] ? `<span>${esc(GROUP_LABELS[g])}</span>` : '';
+    groups.push(`<li class="group">${label}<ol>${links.join('')}</ol></li>`);
   }
   const others = DOCS.filter((d) => d.group).map((d) =>
     link(d.file.replace(/\.md$/, '.html'), d.nav),
