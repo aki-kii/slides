@@ -18,4 +18,4 @@ continuum p.21、ecr-sbom p.13、jaws-sonic-2026 p.34
 
 ## 中身
 
-- **部品**: [小声](@part-kogoe)（「まとめ」）、[強調](@part-strong)
+- **コンポーネント**: [小声](@part-kogoe)（「まとめ」）、[強調](@part-strong)

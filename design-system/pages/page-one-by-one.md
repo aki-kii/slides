@@ -18,7 +18,7 @@ bgnr-93 p.18
 
 ## 中身
 
-- **部品**: [小声](@part-kogoe)（前置き）、[「→」の1行](@part-arrow-conclusion)
+- **コンポーネント**: [小声](@part-kogoe)（前置き）、[「→」の1行](@part-arrow-conclusion)
 
 ## 気を付けること
 

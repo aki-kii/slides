@@ -18,4 +18,4 @@ cdkd-talk p.3、p.7、p.12、p.21
 
 ## 中身
 
-- **部品**: [Overlay](@part-overlay)、[出典のリンク](@part-bottomlink)
+- **コンポーネント**: [Overlay](@part-overlay)、[出典のリンク](@part-bottomlink)

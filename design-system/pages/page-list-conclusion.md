@@ -18,4 +18,4 @@ bgnr-93 p.10、continuum p.11
 
 ## 中身
 
-- **部品**: [小声](@part-kogoe)、[「→」の1行](@part-arrow-conclusion)
+- **コンポーネント**: [小声](@part-kogoe)、[「→」の1行](@part-arrow-conclusion)

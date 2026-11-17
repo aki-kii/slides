@@ -29,20 +29,21 @@ import { join, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const srcDir = join(root, 'design-system');
 
-// 層。グループは「材料（置くもの）」と「話の型（選ぶもの）」。body は項目ページの「中身」の欄の名前
+// 層。group 1 は置くもの（土台・コンポーネント・ページの型）、group 2 は選ぶ決め事（共通の骨組み・構成の型・全体の型）。
+// 目次ではまとまりごとに区切って並べ、まとまりに名前は付けない。body は項目ページの「中身」の欄の名前
 const LAYERS = [
-  { key: 'base', group: '材料', body: '値' },
-  { key: 'parts', group: '材料', body: 'サイズ・値と実装' },
-  { key: 'pages', group: '材料', body: '置く部品と並び' },
+  { key: 'base', group: 1, body: '値' },
+  { key: 'parts', group: 1, body: 'サイズ・値と実装' },
+  { key: 'pages', group: 1, body: '置くコンポーネントと並び' },
   {
     key: 'skeleton',
-    group: '話の型',
+    group: 2,
     body: '並びと使うページの型',
     title: '共通の骨組み',
     single: true,
   },
-  { key: 'flows', group: '話の型', body: '並びと使うページの型' },
-  { key: 'themes', group: '話の型', body: 'デッキ・背骨・主役のページ' },
+  { key: 'flows', group: 2, body: '並びと使うページの型' },
+  { key: 'themes', group: 2, body: 'デッキ・背骨・主役のページ' },
 ];
 
 // 層の並びに入れない文書
@@ -241,8 +242,8 @@ function parseItem(file, md, problems) {
 function itemHtml(it, { shots, related }) {
   const layer = it.layer;
   const crumb = layer.single
-    ? `${esc(layer.group)} / ${esc(layer.title)}`
-    : `${esc(layer.group)} / <a href="${layer.key}.html">${esc(layer.title)}</a>`;
+    ? esc(layer.title)
+    : `<a href="${layer.key}.html">${esc(layer.title)}</a>`;
   const out = [
     `<p class="crumb">${crumb}</p>`,
     `<h1>${inline(it.name)} <code class="id">${esc(it.id)}</code></h1>`,
@@ -551,11 +552,11 @@ function esc(s) {
 }
 
 function layout({ title, body, current }) {
-  // 目次: はじめに → 材料 → 話の型 → その他の文書
+  // 目次: はじめに → 置くものの層 → 選ぶ決め事の層 → その他の文書
   const link = (href, label) =>
     `<li><a href="${href}"${href === current ? ' class="current"' : ''}>${esc(label)}</a></li>`;
   const groups = [];
-  for (const g of ['材料', '話の型']) {
+  for (const g of [1, 2]) {
     const links = [...ctx.layers.values()]
       .filter((l) => l.group === g)
       .map((l) =>
@@ -563,9 +564,7 @@ function layout({ title, body, current }) {
           ? link(`${l.items[0].id}.html`, l.title)
           : link(`${l.key}.html`, l.title),
       );
-    groups.push(
-      `<li class="group"><span>${g}</span><ol>${links.join('')}</ol></li>`,
-    );
+    groups.push(`<li class="group"><ol>${links.join('')}</ol></li>`);
   }
   const others = DOCS.filter((d) => d.group).map((d) =>
     link(d.file.replace(/\.md$/, '.html'), d.nav),
@@ -592,7 +591,7 @@ function layout({ title, body, current }) {
       nav li a { display: block; padding: .4rem .7rem; border-radius: 6px; color: inherit; text-decoration: none; font-size: .95rem; }
       nav li a:hover { background: var(--tint); }
       nav li a.current { background: var(--tint); font-weight: 700; color: var(--brand-deep); }
-      nav li.group { margin-top: 1rem; }
+      nav li.group { margin-top: .75rem; padding-top: .75rem; border-top: 1px solid var(--line); }
       nav li.group > span { display: block; padding: 0 .7rem .2rem; font-size: .78rem; font-weight: 700; color: var(--ink-mute); letter-spacing: .05em; }
       nav li.group ol { position: static; }
       .crumb { font-size: .85rem; color: var(--ink-mute); margin: 0 0 .25rem; }

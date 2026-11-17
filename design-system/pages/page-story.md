@@ -18,4 +18,4 @@ bgnr-93 p.5〜7
 
 ## 中身
 
-- **部品**: [字幕帯](@part-subtitle-band)
+- **コンポーネント**: [字幕帯](@part-subtitle-band)

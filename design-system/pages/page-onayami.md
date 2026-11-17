@@ -18,4 +18,4 @@ cdk-day1 p.12、p.13
 
 ## 中身
 
-- **部品**: [小声](@part-kogoe)、[Overlay](@part-overlay)
+- **コンポーネント**: [小声](@part-kogoe)、[Overlay](@part-overlay)

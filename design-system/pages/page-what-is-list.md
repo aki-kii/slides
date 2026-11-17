@@ -18,4 +18,4 @@ ecr-sbom p.8、lt-40 p.6
 
 ## 中身
 
-- **部品**: [アイコン付きの見出し](@part-icon-heading)、[小声](@part-kogoe)、[出典のリンク](@part-bottomlink)
+- **コンポーネント**: [アイコン付きの見出し](@part-icon-heading)、[小声](@part-kogoe)、[出典のリンク](@part-bottomlink)
