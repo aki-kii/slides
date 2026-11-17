@@ -34,7 +34,7 @@ export const PAGES = [
   { file: 'decisions.md', nav: '決めたこと' },
 ];
 
-// 写真の説明に出すデッキの略し方（patterns-definition.md と同じ）
+// 写真の説明に出すデッキの略し方
 const SHORT = {
   'jawsug-container-31': 'container-31',
   'jawsug-bgnr-93': 'bgnr-93',

@@ -2,7 +2,7 @@
 
 本人のデッキで繰り返し使っている作り方に名前を付けて、次のデッキでも同じ形で使えるようにしたもの。中身（何を言うか）は毎回本人が決めるので、ここでは形だけを決める。
 
-状態: 2026-11-18 に定義案（リポジトリの `design-system/patterns-definition.md`）をもとに作った。本人評「すごいよい。全部がいいわけではないが、これで作ってみて」。定義案で本人に確かめたかったことは、止まらずに決めて [決めたこと](decisions.md) に残した。
+状態: 2026-11-18 に定義案をもとに作った。本人評「すごいよい。全部がいいわけではないが、これで作ってみて」。定義案で本人に確かめたかったことは、止まらずに決めて [決めたこと](decisions.md) に残した。
 
 ## 5つの層
 
@@ -56,7 +56,6 @@
 - life の `.claude/skills/slides/SKILL.md`（以下 SKILL.md）
 - life の `tasks/speaking/diagram-style.md`（以下 diagram-style.md）
 - life の `tasks/speaking/` の各回の README
-- 定義案 `design-system/patterns-definition.md`
 
 デッキの略し方: container-31 = jawsug-container-31（コンテナ支部）、bgnr-93 = jawsug-bgnr-93（初心者支部で登壇したスライド）、continuum = cdk-custom-resource-continuum（茨城 #17）、cdkd-talk = jawsug-cdk-tokyo-cdkd-talk（CDK 支部×東京支部）、lt-40 = jawsug-tokyo-lunch-lt-40（ランチタイム LT #40）、ecr-sbom = ecr-sbom-supply-chain-investigation、failed-ecs = failed-ecs-log-cost-reduction、zero-drift = zero-drift-cdk-ops、cdk-day1 = cdk-day1-experiment、aws-oss = aws-oss-perspective、cdk-3min = cdk-3min-cooking
 
