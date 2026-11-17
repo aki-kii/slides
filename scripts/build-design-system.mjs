@@ -26,15 +26,28 @@ import {
 } from 'node:fs';
 import { join, resolve } from 'node:path';
 
+const REPO = 'https://github.com/aki-kii/slides';
+const assetsDir = join(import.meta.dirname, 'design-system-site');
+
 const root = resolve(import.meta.dirname, '..');
 const srcDir = join(root, 'design-system');
 
 // 層。group 1 は置くもの（ファウンデーション・コンポーネント・テンプレート）、group 2 は選ぶ決め事（共通の骨組み・パターン・テーマ）で「ストーリー」とまとめる。
 // 目次ではまとまりごとに区切って並べる。名前を付けるのは group 2（ストーリー）だけ。body は項目ページの「中身」の欄の名前
 const LAYERS = [
-  { key: 'base', group: 1, body: '値' },
-  { key: 'parts', group: 1, body: 'サイズ・値と実装' },
-  { key: 'pages', group: 1, body: '置くコンポーネントと並び' },
+  { key: 'base', group: 1, body: '値', desc: '全ページに共通する値と決まり' },
+  {
+    key: 'parts',
+    group: 1,
+    body: 'サイズ・値と実装',
+    desc: 'ページの中に置く1つの要素',
+  },
+  {
+    key: 'pages',
+    group: 1,
+    body: '置くコンポーネントと並び',
+    desc: '1枚のページの組み方',
+  },
   {
     key: 'skeleton',
     group: 2,
@@ -118,7 +131,15 @@ export function buildDesignSystem({ outDir, base = '/slides/', decks = [] }) {
     const md = readFileSync(join(srcDir, doc.file), 'utf8');
     const title = md.match(/^# (.+)$/m)?.[1] ?? doc.nav;
     const current = doc.out ?? doc.file.replace(/\.md$/, '.html');
-    write(current, layout({ title, body: render(md, { shots }), current }));
+    write(
+      current,
+      layout({
+        title,
+        body: render(md, { shots }),
+        current,
+        src: `design-system/${doc.file}`,
+      }),
+    );
   }
 
   for (const layer of layers.values()) {
@@ -131,7 +152,12 @@ export function buildDesignSystem({ outDir, base = '/slides/', decks = [] }) {
     });
     write(
       `${layer.key}.html`,
-      layout({ title: layer.title, body, current: `${layer.key}.html` }),
+      layout({
+        title: layer.title,
+        body,
+        current: `${layer.key}.html`,
+        src: `design-system/${layer.key}/_index.md`,
+      }),
     );
   }
 
@@ -144,7 +170,8 @@ export function buildDesignSystem({ outDir, base = '/slides/', decks = [] }) {
       layout({
         title: it.name,
         body: itemHtml(it, { shots, related }),
-        current: it.layer.single ? `${it.id}.html` : `${it.layer.key}.html`,
+        current: `${it.id}.html`,
+        src: `design-system/${it.file}`,
       }),
     );
   }
@@ -153,6 +180,7 @@ export function buildDesignSystem({ outDir, base = '/slides/', decks = [] }) {
     if (!used.has(id))
       problems.push(`manifest の ${id} がどのページにも出てこない`);
   }
+  cpSync(assetsDir, join(outDir, 'assets'), { recursive: true });
   cpSync(join(srcDir, 'shots'), join(outDir, 'shots'), {
     recursive: true,
     filter: (p) => !p.endsWith('manifest.json'),
@@ -244,16 +272,9 @@ function parseItem(file, md, problems) {
 // 項目ページ: 名前 → 1行の定義 → 見本 → いつ使うか → 中身 → 関連する項目 → 気を付けること
 function itemHtml(it, { shots, related }) {
   const layer = it.layer;
-  const label = GROUP_LABELS[layer.group];
-  const crumb =
-    (label ? `${esc(label)} / ` : '') +
-    (layer.single
-      ? esc(layer.title)
-      : `<a href="${layer.key}.html">${esc(layer.title)}</a>`);
   const out = [
-    `<p class="crumb">${crumb}</p>`,
     `<h1>${inline(it.name)} <code class="id">${esc(it.id)}</code></h1>`,
-    `<p class="definition">${inline(it.definition)}</p>`,
+    `<p class="comp-lead">${inline(it.definition)}</p>`,
   ];
   const section = (title, html) => {
     if (!html) return;
@@ -308,7 +329,7 @@ function itemsTable(layer, manifest) {
     return `<tr><td class="t"><a href="${it.id}.html">${thumb}</a></td><td class="n"><a href="${it.id}.html">${inline(it.name)}</a><br><code class="id">${esc(it.id)}</code></td><td>${desc}</td></tr>`;
   };
   const tableOf = (list) =>
-    `<div class="table"><table class="items"><thead><tr><th>見本</th><th>名前</th><th>説明</th></tr></thead><tbody>${list.map(row).join('')}</tbody></table></div>`;
+    `<div class="table-wrap"><table class="items"><thead><tr><th>見本</th><th>名前</th><th>説明</th></tr></thead><tbody>${list.map(row).join('')}</tbody></table></div>`;
   if (layer.key !== 'pages') return tableOf(layer.items);
   const places = [];
   for (const it of layer.items) {
@@ -398,7 +419,7 @@ function render(md, { shots, items }) {
       while (i < lines.length && !lines[i].startsWith('```'))
         buf.push(lines[i++]);
       i++;
-      out.push(`<pre><code>${esc(buf.join('\n'))}</code></pre>`);
+      out.push(`<pre class="code"><code>${esc(buf.join('\n'))}</code></pre>`);
       continue;
     }
     const h = line.match(/^(#{1,4}) (.+)$/);
@@ -496,7 +517,7 @@ function table(rows) {
       .split('|')
       .map((c) => c.trim());
   const [head, , ...body] = rows;
-  return `<div class="table"><table><thead><tr>${cells(head)
+  return `<div class="table-wrap"><table><thead><tr>${cells(head)
     .map((c) => `<th>${inline(c)}</th>`)
     .join('')}</tr></thead><tbody>${body
     .map(
@@ -557,107 +578,154 @@ function esc(s) {
   );
 }
 
-function layout({ title, body, current }) {
-  // 目次: はじめに → ファウンデーション・コンポーネント・テンプレート → ストーリー → その他の文書
-  const link = (href, label) =>
-    `<li><a href="${href}"${href === current ? ' class="current"' : ''}>${esc(label)}</a></li>`;
-  const groups = [];
-  for (const g of [1, 2]) {
-    const links = [...ctx.layers.values()]
-      .filter((l) => l.group === g)
-      .map((l) =>
-        l.single
-          ? link(`${l.items[0].id}.html`, l.title)
-          : link(`${l.key}.html`, l.title),
-      );
-    const label = GROUP_LABELS[g] ? `<span>${esc(GROUP_LABELS[g])}</span>` : '';
-    groups.push(`<li class="group">${label}<ol>${links.join('')}</ol></li>`);
+// 目次の並び。グループごとに、開くページ（href）と、小見出し（sub）を並べる
+function navGroups() {
+  const groups = [
+    {
+      id: 'start',
+      title: 'はじめに',
+      entries: [{ href: 'index.html', label: 'はじめに' }],
+    },
+  ];
+  const itemEntries = (layer) =>
+    layer.items.map((it) => ({ href: `${it.id}.html`, label: it.name, layer }));
+  for (const layer of ctx.layers.values()) {
+    if (layer.group !== 1) continue;
+    groups.push({
+      id: layer.key,
+      title: layer.title,
+      desc: layer.desc,
+      entries: [
+        {
+          href: `${layer.key}.html`,
+          label: `${layer.title}の一覧`,
+          list: layer,
+        },
+        ...itemEntries(layer),
+      ],
+    });
   }
-  const others = DOCS.filter((d) => d.group).map((d) =>
-    link(d.file.replace(/\.md$/, '.html'), d.nav),
-  );
-  groups.push(
-    `<li class="group"><span>その他の文書</span><ol>${others.join('')}</ol></li>`,
-  );
-  const nav = [link('index.html', 'はじめに'), ...groups].join('\n        ');
+  const story = [...ctx.layers.values()].filter((l) => l.group === 2);
+  const storyEntries = [];
+  for (const layer of story) {
+    if (layer.single) {
+      storyEntries.push(...itemEntries(layer));
+      continue;
+    }
+    storyEntries.push(
+      { sub: layer.title },
+      { href: `${layer.key}.html`, label: `${layer.title}の一覧`, list: layer },
+      ...itemEntries(layer),
+    );
+  }
+  groups.push({
+    id: 'story',
+    title: GROUP_LABELS[2],
+    desc: story.map((l) => l.title).join('・'),
+    entries: storyEntries,
+  });
+  groups.push({
+    id: 'docs',
+    title: 'その他の文書',
+    entries: DOCS.filter((d) => d.group).map((d) => ({
+      href: d.file.replace(/\.md$/, '.html'),
+      label: d.nav,
+    })),
+  });
+  return groups;
+}
+
+const ICONS = {
+  menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+};
+
+// 外枠: 固定ヘッダー（ブランド・層へのピル）、左の目次、パンくず、白い本文、前後のページ、元の文書へのリンク
+function layout({ title, body, current, src }) {
+  const groups = navGroups();
+  const group = groups.find((g) => g.entries.some((e) => e.href === current));
+  const entry = group?.entries.find((e) => e.href === current);
+
+  const navItem = (e) =>
+    e.sub
+      ? `<li class="side-sub">${esc(e.sub)}</li>`
+      : `<li><a href="${e.href}"${e.href === current ? ' aria-current="page"' : ''}>${esc(e.label)}</a></li>`;
+  const side = groups
+    .map((g) => {
+      const cur = g === group;
+      return `<details class="side-group${cur ? ' is-current' : ''}"${cur ? ' open' : ''}><summary class="side-summary"><span class="side-title">${esc(g.title)}</span>${g.desc ? `<span class="side-desc">${esc(g.desc)}</span>` : ''}</summary><ul>${g.entries.map(navItem).join('')}</ul></details>`;
+    })
+    .join('');
+
+  const global = groups
+    .filter((g) => g.id !== 'start')
+    .map((g) => {
+      const top = g.entries.find((e) => e.href).href;
+      return `<li><a href="${top}"${g === group ? ' aria-current="true"' : ''}>${esc(g.title)}</a></li>`;
+    })
+    .join('');
+
+  // パンくず: トップ / （ストーリー） / 層の一覧 / このページ
+  const crumbs = [];
+  if (current !== 'index.html') {
+    crumbs.push('<li><a href="index.html">トップ</a></li>');
+    if (group?.id === 'story' || group?.id === 'docs')
+      crumbs.push(`<li>${esc(group.title)}</li>`);
+    const layer = entry?.layer;
+    if (layer && !layer.single)
+      crumbs.push(
+        `<li><a href="${layer.key}.html">${esc(layer.title)}</a></li>`,
+      );
+    const here = entry?.list ? entry.list.title : (entry?.label ?? title);
+    crumbs.push(`<li aria-current="page">${esc(here)}</li>`);
+  }
+
+  // 前後のページ: 同じグループの目次の並び
+  let pager = '';
+  const seq = group ? group.entries.filter((e) => e.href) : [];
+  const at = seq.findIndex((e) => e.href === current);
+  if (seq.length > 1 && at >= 0) {
+    const prev = seq[at - 1];
+    const next = seq[at + 1];
+    pager = `<nav class="pager" aria-label="前後のページ">${prev ? `<a class="pager-prev" href="${prev.href}"><span>前へ</span>${esc(prev.label)}</a>` : ''}${next ? `<a class="pager-next" href="${next.href}"><span>次へ</span>${esc(next.label)}</a>` : ''}</nav>`;
+  }
+
   return `<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${esc(title)} | スライドのデザインシステム</title>
-    <style>
-      :root { --ink: #2c3e50; --ink-mute: #5f6b76; --line: #dee2e6; --brand: #0283b2; --brand-deep: #015d7d; --accent: #c0392b; --tint: #f4f8fa; }
-      * { box-sizing: border-box; }
-      body { margin: 0; font-family: 'Noto Sans JP', system-ui, sans-serif; color: var(--ink); background: #fff; line-height: 1.75; }
-      header { background: linear-gradient(155deg, #015d7d 0%, #0283b2 60%, #1aa9d1 100%); color: #fff; padding: .9rem 1.25rem; }
-      header a { color: #fff; text-decoration: none; font-weight: 700; }
-      header small { opacity: .85; margin-left: .75rem; }
-      .wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
-      nav ol { list-style: none; padding: 0; margin: 0; position: sticky; top: 1rem; counter-reset: n; }
-      nav li a { display: block; padding: .4rem .7rem; border-radius: 6px; color: inherit; text-decoration: none; font-size: .95rem; }
-      nav li a:hover { background: var(--tint); }
-      nav li a.current { background: var(--tint); font-weight: 700; color: var(--brand-deep); }
-      nav li.group { margin-top: .75rem; padding-top: .75rem; border-top: 1px solid var(--line); }
-      nav li.group > span { display: block; padding: 0 .7rem .2rem; font-size: .78rem; font-weight: 700; color: var(--ink-mute); letter-spacing: .05em; }
-      nav li.group ol { position: static; }
-      .crumb { font-size: .85rem; color: var(--ink-mute); margin: 0 0 .25rem; }
-      code.id { font-size: .55em; vertical-align: middle; color: var(--ink-mute); }
-      td code.id { font-size: .75rem; }
-      .definition { font-size: 1.08rem; padding: .75rem 1rem; background: var(--tint); border-radius: 8px; }
-      ul.related { list-style: none; padding: 0; }
-      ul.related li { margin: .3rem 0; }
-      .rel-layer { display: inline-block; min-width: 9em; font-size: .85rem; color: var(--ink-mute); }
-      table.items td.t { width: 200px; }
-      table.items td.n { width: 13em; }
-      img.thumb { width: 180px; aspect-ratio: 16 / 9; object-fit: cover; object-position: left top; display: block; border: 1px solid var(--line); border-radius: 4px; }
-      .thumb.none { display: flex; width: 180px; aspect-ratio: 16 / 9; align-items: center; justify-content: center; font-size: .8rem; color: var(--ink-mute); border: 1px dashed var(--line); border-radius: 4px; }
-      .sub { font-size: .85rem; color: var(--ink-mute); }
-      main { min-width: 0; }
-      h1 { font-size: 1.8rem; margin: 0 0 1rem; }
-      h2 { font-size: 1.35rem; margin: 2.75rem 0 .75rem; padding-bottom: .3rem; border-bottom: 2px solid var(--line); }
-      h3 { font-size: 1.12rem; margin: 2.25rem 0 .5rem; }
-      h4 { font-size: 1rem; margin: 1.5rem 0 .4rem; }
-      .anchor { color: var(--line); text-decoration: none; font-weight: 400; margin-left: .25rem; }
-      h2:hover .anchor, h3:hover .anchor { color: var(--ink-mute); }
-      a { color: var(--brand-deep); }
-      strong { color: var(--ink); }
-      code { font-family: 'Fira Code', ui-monospace, monospace; font-size: .88em; background: var(--tint); padding: .05em .35em; border-radius: 4px; }
-      pre { background: var(--tint); padding: .9rem 1rem; border-radius: 8px; overflow-x: auto; }
-      pre code { background: none; padding: 0; }
-      blockquote { margin: 1rem 0; padding: .25rem 1rem; background: var(--tint); border-radius: 8px; }
-      hr { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
-      .table { overflow-x: auto; }
-      table { border-collapse: collapse; margin: 1rem 0; font-size: .92rem; }
-      th, td { border: 1px solid var(--line); padding: .45rem .7rem; text-align: left; vertical-align: top; }
-      th { background: var(--tint); }
-      .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0 1.5rem; }
-      .shots figure { margin: 0; }
-      .shots figure.strip { grid-column: 1 / -1; }
-      .shots img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 6px; }
-      .shots figure.strip a, .shots figure.strip > img { display: block; overflow-x: auto; }
-      figcaption { font-size: .82rem; color: var(--ink-mute); margin-top: .3rem; }
-      @media (max-width: 760px) {
-        .wrap { grid-template-columns: 1fr; gap: 1rem; padding: 1rem 16px 3rem; }
-        nav ol { position: static; display: flex; flex-wrap: wrap; gap: .25rem; }
-        nav li.group { margin-top: .25rem; width: 100%; }
-        table.items td.t { width: 112px; }
-        img.thumb, .thumb.none { width: 100px; }
-        nav li a { padding: .3rem .55rem; font-size: .85rem; }
-      }
-    </style>
-  </head>
-  <body>
-    <header><a href="index.html">スライドのデザインシステム</a><small><a href="../">スライド一覧へ</a></small></header>
-    <div class="wrap">
-      <nav><ol>
-        ${nav}
-      </ol></nav>
-      <main>
-${body}
-      </main>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${current === 'index.html' ? 'スライド用デザインシステム' : `${esc(title)} | スライド用デザインシステム`}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..900&family=Noto+Sans+JP:wght@400..900&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">スライド用デザインシステム</span></a>
+    <nav class="global-nav" aria-label="サイト全体"><ul>${global}</ul></nav>
+    <div class="header-tools">
+      <a class="header-link" href="../">スライド一覧へ</a>
+      <button class="tool-btn menu-btn" type="button" aria-expanded="false" aria-controls="side" aria-label="目次を開く" title="目次を開く" data-menu-toggle><span data-menu-icon="open">${ICONS.menu}</span><span data-menu-icon="close" hidden>${ICONS.x}</span></button>
     </div>
-  </body>
+  </div>
+</header>
+<div class="site-body">
+  <nav class="side" id="side" aria-label="目次"><p class="side-head">目次</p>${side}</nav>
+  <main id="main" class="main">
+    ${crumbs.length ? `<ol class="crumbs" aria-label="現在地">${crumbs.join('')}</ol>` : ''}
+    <article class="doc">
+${body}
+    </article>
+    ${pager}
+    <footer class="page-foot"><p><a href="${REPO}/blob/main/${src}" rel="noopener">GitHub で元の文書を見る（${esc(src)}）</a></p></footer>
+  </main>
+</div>
+<script src="assets/site.js" defer></script>
+</body>
 </html>
 `;
 }
