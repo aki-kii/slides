@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overlay | スライド用デザインシステム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..900&family=Noto+Sans+JP:wght@400..900&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">スライド用デザインシステム</span></a>
+    <nav class="global-nav" aria-label="サイト全体"><ul><li><a href="base.html">ファウンデーション</a></li><li><a href="parts.html" aria-current="true">コンポーネント</a></li><li><a href="pages.html">テンプレート</a></li><li><a href="flow-whole.html">ストーリー</a></li><li><a href="naming.html">その他の文書</a></li></ul></nav>
+    <div class="header-tools">
+      <a class="header-link" href="../">スライド一覧へ</a>
+      <button class="tool-btn menu-btn" type="button" aria-expanded="false" aria-controls="side" aria-label="目次を開く" title="目次を開く" data-menu-toggle><span data-menu-icon="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span data-menu-icon="close" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button>
+    </div>
+  </div>
+</header>
+<div class="site-body">
+  <nav class="side" id="side" aria-label="目次"><p class="side-head">目次</p><details class="side-group"><summary class="side-summary"><span class="side-title">はじめに</span></summary><ul><li><a href="index.html">はじめに</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">ファウンデーション</span><span class="side-desc">全ページに共通する値と決まり</span></summary><ul><li><a href="base.html">ファウンデーションの一覧</a></li><li><a href="base-color.html">色</a></li><li><a href="base-text.html">文の書き方</a></li><li><a href="base-diagram.html">図のスタイル</a></li><li><a href="base-size.html">サイズ</a></li></ul></details><details class="side-group is-current" open><summary class="side-summary"><span class="side-title">コンポーネント</span><span class="side-desc">ページの中に置く1つの要素</span></summary><ul><li><a href="parts.html">コンポーネントの一覧</a></li><li><a href="part-icon-heading.html">アイコン付きの見出し</a></li><li><a href="part-arrow-conclusion.html">「→」の1行</a></li><li><a href="part-strong.html">強調（赤の太字）</a></li><li><a href="part-underline.html">色分けした下線</a></li><li><a href="part-kogoe.html">小声（Kogoe）</a></li><li><a href="part-overlay.html" aria-current="page">Overlay</a></li><li><a href="part-bottomlink.html">出典のリンク（BottomLink）</a></li><li><a href="part-subtitle-band.html">字幕帯</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">テンプレート</span><span class="side-desc">1枚のページの組み方</span></summary><ul><li><a href="pages.html">テンプレートの一覧</a></li><li><a href="page-title.html">表紙</a></li><li><a href="page-profile.html">自己紹介</a></li><li><a href="page-kamishibai.html">紙芝居型</a></li><li><a href="page-story.html">ストーリー型</a></li><li><a href="page-chapter.html">章扉</a></li><li><a href="page-what-is-list.html">「〜とは？」（リストアップ型）</a></li><li><a href="page-what-is-figure.html">「〜とは？」（図示型）</a></li><li><a href="page-definition-reuse.html">定義の使い回し</a></li><li><a href="page-one-by-one.html">特徴・理由を1つずつ</a></li><li><a href="page-list-conclusion.html">箇条書き＋結論</a></li><li><a href="page-figure-conclusion.html">図＋結論</a></li><li><a href="page-compare.html">2つを並べて比べる</a></li><li><a href="page-onayami.html">お悩み → 解決</a></li><li><a href="page-qa.html">Q&amp;A</a></li><li><a href="page-summary-statement.html">まとめ（言い切り）</a></li><li><a href="page-summary-list.html">まとめ（箇条書き）</a></li><li><a href="page-promo.html">宣伝</a></li><li><a href="page-thanks.html">Thank You</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">ストーリー</span><span class="side-desc">共通の骨組み・パターン・テーマ</span></summary><ul><li><a href="flow-whole.html">全体の骨組み</a></li><li class="side-sub">パターン</li><li><a href="flows.html">パターンの一覧</a></li><li><a href="flow-analyze-improve-review.html">分析 → 改善 → 振り返り</a></li><li><a href="flow-trouble-solution.html">困りごと → 解決策</a></li><li><a href="flow-onayami.html">お悩みを1つずつ解決</a></li><li><a href="flow-part-intro.html">部の頭に導入の紙芝居</a></li><li><a href="flow-definition-return.html">定義に戻りながら進める</a></li><li><a href="flow-question-answer.html">疑問を湧かせてから解消する</a></li><li class="side-sub">テーマ</li><li><a href="themes.html">テーマの一覧</a></li><li><a href="theme-verification.html">検証してみた系</a></li><li><a href="theme-explainer.html">解説系</a></li><li><a href="theme-intro.html">入門・紹介系</a></li><li><a href="theme-practice.html">プラクティス紹介系</a></li><li><a href="theme-experience.html">体験談系</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">その他の文書</span></summary><ul><li><a href="naming.html">デッキの名前（提案）</a></li><li><a href="decisions.html">決めたこと</a></li><li><a href="research-sizes.html">サイズの調査メモ</a></li></ul></details></nav>
+  <main id="main" class="main">
+    <ol class="crumbs" aria-label="現在地"><li><a href="index.html">トップ</a></li><li><a href="parts.html">コンポーネント</a></li><li aria-current="page">Overlay</li></ol>
+    <article class="doc">
+<h1>Overlay <code class="id">part-overlay</code></h1>
+<p class="comp-lead">ページの上に灰色の帯で短い一言を重ねる</p>
+<h2 id="見本">見本 <a class="anchor" href="#見本">#</a></h2>
+<div class="shots">
+<figure class="shot"><a href="/slides/jawsug-cdk-tokyo-cdkd-talk/#/10"><img src="shots/part-overlay/cdkd-talk-p10.png" alt="cdkd-talk p.10" loading="lazy"></a><figcaption><a href="/slides/jawsug-cdk-tokyo-cdkd-talk/#/10">cdkd-talk p.10</a></figcaption></figure>
+<figure class="shot"><a href="/slides/cdk-day1-experiment/#/13"><img src="shots/part-overlay/cdk-day1-p13.png" alt="cdk-day1 p.13" loading="lazy"></a><figcaption><a href="/slides/cdk-day1-experiment/#/13">cdk-day1 p.13</a></figcaption></figure>
+<figure class="shot"><a href="/slides/failed-ecs-log-cost-reduction/#/4"><img src="shots/part-overlay/failed-ecs-p04.png" alt="failed-ecs p.4" loading="lazy"></a><figcaption><a href="/slides/failed-ecs-log-cost-reduction/#/4">failed-ecs p.4</a></figcaption></figure>
+</div>
+<p>cdk-day1 p.13、cdkd-talk p.10、failed-ecs p.4</p>
+<h2 id="いつ使うか">いつ使うか <a class="anchor" href="#いつ使うか">#</a></h2>
+<p>そのページのまとめか、次のページに進むための一言。長い箇条書きは載せない（茨城 #17「Overlay はそのページで書いた内容のまとめや、次のページに進むための簡潔な一言を示す補助の場所」2026-09-28）</p>
+<h2 id="サイズ値と実装">サイズ・値と実装 <a class="anchor" href="#サイズ値と実装">#</a></h2>
+<ul><li><strong>使うか</strong>: いつも</li><li><strong><code>@slides/ui</code></strong>: <code>Overlay</code></li></ul>
+<h2 id="関連する項目">関連する項目 <a class="anchor" href="#関連する項目">#</a></h2>
+<ul class="related"><li><span class="rel-layer">テンプレート</span><a href="page-definition-reuse.html">定義の使い回し</a>、<a href="page-onayami.html">お悩み → 解決</a></li></ul>
+    </article>
+    <nav class="pager" aria-label="前後のページ"><a class="pager-prev" href="part-kogoe.html"><span>前へ</span>小声（Kogoe）</a><a class="pager-next" href="part-bottomlink.html"><span>次へ</span>出典のリンク（BottomLink）</a></nav>
+    <footer class="page-foot"><p><a href="https://github.com/aki-kii/slides/blob/main/design-system/parts/part-overlay.md" rel="noopener">GitHub で元の文書を見る（design-system/parts/part-overlay.md）</a></p></footer>
+  </main>
+</div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

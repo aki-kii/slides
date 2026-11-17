@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スライド用デザインシステム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..900&family=Noto+Sans+JP:wght@400..900&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">スライド用デザインシステム</span></a>
+    <nav class="global-nav" aria-label="サイト全体"><ul><li><a href="base.html">ファウンデーション</a></li><li><a href="parts.html">コンポーネント</a></li><li><a href="pages.html">テンプレート</a></li><li><a href="flow-whole.html">ストーリー</a></li><li><a href="naming.html">その他の文書</a></li></ul></nav>
+    <div class="header-tools">
+      <a class="header-link" href="../">スライド一覧へ</a>
+      <button class="tool-btn menu-btn" type="button" aria-expanded="false" aria-controls="side" aria-label="目次を開く" title="目次を開く" data-menu-toggle><span data-menu-icon="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span><span data-menu-icon="close" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button>
+    </div>
+  </div>
+</header>
+<div class="site-body">
+  <nav class="side" id="side" aria-label="目次"><p class="side-head">目次</p><details class="side-group is-current" open><summary class="side-summary"><span class="side-title">はじめに</span></summary><ul><li><a href="index.html" aria-current="page">はじめに</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">ファウンデーション</span><span class="side-desc">全ページに共通する値と決まり</span></summary><ul><li><a href="base.html">ファウンデーションの一覧</a></li><li><a href="base-color.html">色</a></li><li><a href="base-text.html">文の書き方</a></li><li><a href="base-diagram.html">図のスタイル</a></li><li><a href="base-size.html">サイズ</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">コンポーネント</span><span class="side-desc">ページの中に置く1つの要素</span></summary><ul><li><a href="parts.html">コンポーネントの一覧</a></li><li><a href="part-icon-heading.html">アイコン付きの見出し</a></li><li><a href="part-arrow-conclusion.html">「→」の1行</a></li><li><a href="part-strong.html">強調（赤の太字）</a></li><li><a href="part-underline.html">色分けした下線</a></li><li><a href="part-kogoe.html">小声（Kogoe）</a></li><li><a href="part-overlay.html">Overlay</a></li><li><a href="part-bottomlink.html">出典のリンク（BottomLink）</a></li><li><a href="part-subtitle-band.html">字幕帯</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">テンプレート</span><span class="side-desc">1枚のページの組み方</span></summary><ul><li><a href="pages.html">テンプレートの一覧</a></li><li><a href="page-title.html">表紙</a></li><li><a href="page-profile.html">自己紹介</a></li><li><a href="page-kamishibai.html">紙芝居型</a></li><li><a href="page-story.html">ストーリー型</a></li><li><a href="page-chapter.html">章扉</a></li><li><a href="page-what-is-list.html">「〜とは？」（リストアップ型）</a></li><li><a href="page-what-is-figure.html">「〜とは？」（図示型）</a></li><li><a href="page-definition-reuse.html">定義の使い回し</a></li><li><a href="page-one-by-one.html">特徴・理由を1つずつ</a></li><li><a href="page-list-conclusion.html">箇条書き＋結論</a></li><li><a href="page-figure-conclusion.html">図＋結論</a></li><li><a href="page-compare.html">2つを並べて比べる</a></li><li><a href="page-onayami.html">お悩み → 解決</a></li><li><a href="page-qa.html">Q&amp;A</a></li><li><a href="page-summary-statement.html">まとめ（言い切り）</a></li><li><a href="page-summary-list.html">まとめ（箇条書き）</a></li><li><a href="page-promo.html">宣伝</a></li><li><a href="page-thanks.html">Thank You</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">ストーリー</span><span class="side-desc">共通の骨組み・パターン・テーマ</span></summary><ul><li><a href="flow-whole.html">全体の骨組み</a></li><li class="side-sub">パターン</li><li><a href="flows.html">パターンの一覧</a></li><li><a href="flow-analyze-improve-review.html">分析 → 改善 → 振り返り</a></li><li><a href="flow-trouble-solution.html">困りごと → 解決策</a></li><li><a href="flow-onayami.html">お悩みを1つずつ解決</a></li><li><a href="flow-part-intro.html">部の頭に導入の紙芝居</a></li><li><a href="flow-definition-return.html">定義に戻りながら進める</a></li><li><a href="flow-question-answer.html">疑問を湧かせてから解消する</a></li><li class="side-sub">テーマ</li><li><a href="themes.html">テーマの一覧</a></li><li><a href="theme-verification.html">検証してみた系</a></li><li><a href="theme-explainer.html">解説系</a></li><li><a href="theme-intro.html">入門・紹介系</a></li><li><a href="theme-practice.html">プラクティス紹介系</a></li><li><a href="theme-experience.html">体験談系</a></li></ul></details><details class="side-group"><summary class="side-summary"><span class="side-title">その他の文書</span></summary><ul><li><a href="naming.html">デッキの名前（提案）</a></li><li><a href="decisions.html">決めたこと</a></li><li><a href="research-sizes.html">サイズの調査メモ</a></li></ul></details></nav>
+  <main id="main" class="main">
+    
+    <article class="doc">
+<h1 id="スライドのデザインシステム">スライドのデザインシステム</h1>
+<p>本人のデッキで繰り返し使っている作り方に名前を付けて、次のデッキでも同じ形で使えるようにしたもの。中身（何を言うか）は毎回本人が決めるので、ここでは形だけを決める。</p>
+<p>ファウンデーション・コンポーネント・テンプレートは、ページに置くもの。小さいものから大きいものへ積み上がる。共通の骨組み・パターン・テーマは「ストーリー」にまとめる。ストーリーは、置くものの中から組み合わせを選ぶ決め事で、置くものとは別の軸にある。</p>
+<h2 id="使い方">使い方 <a class="anchor" href="#使い方">#</a></h2>
+<ol><li>話が決まったら、<a href="themes.html">テーマ</a> からテーマを選ぶ</li><li>テーマの背骨（<a href="flows.html">パターン</a>）に沿って、<a href="flow-whole.html">共通の骨組み</a> の上にページの並びを決める</li><li>各ページを <a href="pages.html">テンプレート</a> から選んで組む。主役のページはテーマに書いてあるもの</li><li>ページの中は <a href="parts.html">コンポーネント</a> で組み、<a href="base.html">ファウンデーション</a> の色・文・図・サイズの決まりに合わせる</li><li>新しいデッキの名前は <a href="naming.html">デッキの名前（提案）</a> に沿って付ける</li></ol>
+<h2 id="ファウンデーション">ファウンデーション <a class="anchor" href="#ファウンデーション">#</a></h2>
+<p>全ページに共通する値と決まり（色、文の書き方、図のスタイル、サイズ）。<a href="base.html">ファウンデーションの一覧</a></p>
+<h2 id="コンポーネント">コンポーネント <a class="anchor" href="#コンポーネント">#</a></h2>
+<p>ページの中に置く1つの要素。<a href="parts.html">コンポーネントの一覧</a></p>
+<h2 id="テンプレート">テンプレート <a class="anchor" href="#テンプレート">#</a></h2>
+<p>1枚のページの組み方。<a href="pages.html">テンプレートの一覧</a></p>
+<h2 id="ストーリー">ストーリー <a class="anchor" href="#ストーリー">#</a></h2>
+<h3 id="共通の骨組み">共通の骨組み <a class="anchor" href="#共通の骨組み">#</a></h3>
+<p>すべてのテーマが乗る流れ。表紙 → 自己紹介 → 導入 → 本編 → まとめ →（宣伝）→ Thank You。<a href="flow-whole.html">共通の骨組み</a></p>
+<h3 id="パターン">パターン <a class="anchor" href="#パターン">#</a></h3>
+<p>ページの並べ方（話の流れ）。<a href="flows.html">パターンの一覧</a></p>
+<h3 id="テーマ">テーマ <a class="anchor" href="#テーマ">#</a></h3>
+<p>デッキ全体がどんな話かの型。パターン（背骨）と主役のテンプレートを選ぶ。<a href="themes.html">テーマの一覧</a></p>
+<pre class="code"><code>テーマ ──選ぶ──▶ パターン（背骨）
+  │
+  └────選ぶ──▶ 主役のテンプレート</code></pre>
+<h2 id="その他の文書">その他の文書 <a class="anchor" href="#その他の文書">#</a></h2>
+<ul><li><a href="naming.html">デッキの名前（提案）</a></li><li><a href="decisions.html">決めたこと</a></li><li><a href="research-sizes.html">サイズの調査メモ</a></li></ul>
+<h2 id="写真について">写真について <a class="anchor" href="#写真について">#</a></h2>
+<ul><li>写真は <code>design-system/shots/&lt;項目のID&gt;/&lt;デッキ&gt;-p&lt;ページ番号&gt;.png</code>。フォルダ名が項目の ID。どの写真がどのページかは <code>shots/manifest.json</code></li><li>ページ番号は <code>slides.md</code> の並び（クリックを含めない番号）。写真はクリックをすべて出した状態。写真を押すと公開中のデッキのそのページが開く</li><li>共通の骨組み、パターン、テーマの写真は、ページを左から右に並べた1枚の帯</li><li>最近の2デッキ（jawsug-container-31、jiyugaoka-any-1）はまだ直す余地があるので、見本の写真にはできるだけ使わない。代わりのデッキが無い <a href="flow-analyze-improve-review.html">分析 → 改善 → 振り返り</a> だけ、jawsug-container-31 の帯を1枚使っている</li><li><code>@slides/ui</code> の InlineSvg の不具合で、図の中の AWS のアイコンが大きく崩れて写る写真がある。その写真には注記を付けた（<a href="decisions.html#見つけた不具合">決めたこと</a>）</li></ul>
+<h2 id="言葉の出典">言葉の出典 <a class="anchor" href="#言葉の出典">#</a></h2>
+<p>言葉は本人の記録から取り、創作しない。かっこ内の日付はその記録の日付。</p>
+<ul><li>life の <code>.claude/skills/slides/SKILL.md</code>（以下 SKILL.md）</li><li>life の <code>tasks/speaking/diagram-style.md</code>（以下 diagram-style.md）</li><li>life の <code>tasks/speaking/</code> の各回の README</li></ul>
+<p>デッキの略し方: container-31 = jawsug-container-31（コンテナ支部）、bgnr-93 = jawsug-bgnr-93（初心者支部で登壇したスライド）、continuum = cdk-custom-resource-continuum（茨城 #17）、cdkd-talk = jawsug-cdk-tokyo-cdkd-talk（CDK 支部×東京支部）、lt-40 = jawsug-tokyo-lunch-lt-40（ランチタイム LT #40）、ecr-sbom = ecr-sbom-supply-chain-investigation、failed-ecs = failed-ecs-log-cost-reduction、zero-drift = zero-drift-cdk-ops、cdk-day1 = cdk-day1-experiment、aws-oss = aws-oss-perspective、cdk-3min = cdk-3min-cooking</p>
+<h2 id="サイトの作り方">サイトの作り方 <a class="anchor" href="#サイトの作り方">#</a></h2>
+<ul><li>このフォルダの Markdown を <code>scripts/build-design-system.mjs</code> が HTML にする。<code>pnpm build:pages</code> でスライドと一緒に <code>dist/design-system/</code> に出る（GitHub Pages の <code>/slides/design-system/</code>）</li><li>これだけ作り直すときは <code>pnpm build:ds</code></li><li>項目は1つにつき1ファイル。層ごとのフォルダ（<code>base/</code>、<code>parts/</code>、<code>pages/</code>、<code>flows/</code>、<code>themes/</code>）と、共通の骨組みの <code>skeleton/</code> に置く。ファイル名は項目の ID</li><li>項目のファイルは、頭に <code>id</code> と <code>name</code>（テンプレートは骨組みの場所の <code>place</code> も）を書き、本文は「1行の定義 → <code>## 見本</code> → <code>## いつ使うか</code> → <code>## 中身</code> → <code>## 気を付けること</code>」の順に書く。「関連する項目」は項目どうしのリンクから作られる</li><li>層の一覧ページは各フォルダの <code>_index.md</code>。<code>order</code> に項目の並びを書き、<code>&lt;!-- items --&gt;</code> の所に一覧の表が入る</li><li>項目へのリンクは <code>[名前](@&lt;ID&gt;)</code>、一覧へのリンクは <code>[名前](@&lt;フォルダ名&gt;)</code> と書く</li><li>写真を差し込む所は <code>&lt;!-- shots:&lt;項目のID&gt; --&gt;</code> の1行で書く。manifest にある ID がどの項目にも出てこないとビルドが失敗する</li></ul>
+    </article>
+    
+    <footer class="page-foot"><p><a href="https://github.com/aki-kii/slides/blob/main/design-system/README.md" rel="noopener">GitHub で元の文書を見る（design-system/README.md）</a></p></footer>
+  </main>
+</div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

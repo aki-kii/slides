@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Claude Code">
+<!--
+  Claude Code を表すアイコン (カニ)。公式ブランドアセットではなく、
+  スライド上で「コーディングエージェントが主体」と示すための代替図形。
+  公式のものを使う場合はこのファイルを差し替えるだけでよい。
+-->
+<g stroke="#D97757" stroke-width="4.2" stroke-linecap="round" fill="none">
+  <!-- 脚 -->
+  <path d="M17 42 L8 39"/>
+  <path d="M16 47 L6 48"/>
+  <path d="M19 52 L12 58"/>
+  <path d="M47 42 L56 39"/>
+  <path d="M48 47 L58 48"/>
+  <path d="M45 52 L52 58"/>
+  <!-- ハサミの腕 -->
+  <path d="M21 33 L16 26"/>
+  <path d="M43 33 L48 26"/>
+</g>
+<g fill="#D97757">
+  <!-- ハサミ -->
+  <path d="M14 22 L8.0 18.5 A7,7 0 1 1 8.0 25.5 Z"/>
+  <path d="M50 22 L56.0 18.5 A7,7 0 1 0 56.0 25.5 Z"/>
+  <!-- 甲羅 -->
+  <ellipse cx="32" cy="42" rx="19" ry="13"/>
+</g>
+<g fill="#ffffff">
+  <!-- 目 -->
+  <circle cx="25.5" cy="38.5" r="3.4"/>
+  <circle cx="38.5" cy="38.5" r="3.4"/>
+</g>
+</svg>

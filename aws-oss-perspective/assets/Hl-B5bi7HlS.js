@@ -1,0 +1,1 @@
+import{o,e as t,i as s}from"./modules/vue-DoQ4JpIF.js";import{u as _}from"./slidev/context-CZCd3gM4.js";import{_ as n}from"./index-BqwkkENA.js";const r={class:"hl"},c={__name:"Hl",setup(a){return _(),(e,p)=>(o(),t("strong",r,[s(e.$slots,"default",{},void 0,!0)]))}},d=n(c,[["__scopeId","data-v-dc83ce0c"]]);export{d as _};
