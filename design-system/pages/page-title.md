@@ -18,4 +18,4 @@ continuum p.1、failed-ecs p.1、lt-40 p.1、zero-drift p.1
 
 ## 中身
 
-- **コンポーネント・土台**: [強調](@part-strong)（表紙のキーワードだけ黄色）、[色](@base-color)
+- **コンポーネント・ファウンデーション**: [強調](@part-strong)（表紙のキーワードだけ黄色）、[色](@base-color)

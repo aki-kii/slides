@@ -5,14 +5,14 @@
 //
 // 文書の置き方（design-system/）:
 //   - 項目は1つにつき1ファイル。層ごとのフォルダ（base/ parts/ pages/ flows/ themes/）と skeleton/ に置く
-//     頭に `---` で囲んだ id・name（ページの型は place も）を書く。本文は
+//     頭に `---` で囲んだ id・name（テンプレートは place も）を書く。本文は
 //     「1行の定義 → ## 見本 → ## いつ使うか → ## 中身 → ## 気を付けること」の順。関連する項目は自動で作る
 //   - 層の一覧ページは各フォルダの _index.md。頭の order に項目の並びを書き、`<!-- items -->` に一覧の表が入る
 //   - README.md（トップ）、naming.md、decisions.md、research-sizes.md はそのままの1ページ
 //
 // 書き方の決まり:
 //   - 見出し・段落・箇条書き（- / 1.）・表・コードブロック・**太字**・`コード`・[リンク](...)・![](画像) が使える
-//   - `<!-- shots:<パターンのID> -->` の1行は、shots/manifest.json のそのパターンの写真に置き換わる
+//   - `<!-- shots:<項目のID> -->` の1行は、shots/manifest.json のその項目の写真に置き換わる
 //   - `[名前](@<項目のID>)` は項目のページ、`[名前](@<フォルダ名>)` は層の一覧へのリンクになる
 //   - `xxx.md` へのリンクは `xxx.html` に書き換わる
 
@@ -29,7 +29,7 @@ import { join, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const srcDir = join(root, 'design-system');
 
-// 層。group 1 は置くもの（土台・コンポーネント・ページの型）、group 2 は選ぶ決め事（共通の骨組み・構成の型・全体の型）で「ストーリー」とまとめる。
+// 層。group 1 は置くもの（ファウンデーション・コンポーネント・テンプレート）、group 2 は選ぶ決め事（共通の骨組み・パターン・テーマ）で「ストーリー」とまとめる。
 // 目次ではまとまりごとに区切って並べる。名前を付けるのは group 2（ストーリー）だけ。body は項目ページの「中身」の欄の名前
 const LAYERS = [
   { key: 'base', group: 1, body: '値' },
@@ -38,11 +38,11 @@ const LAYERS = [
   {
     key: 'skeleton',
     group: 2,
-    body: '並びと使うページの型',
+    body: '並びと使うテンプレート',
     title: '共通の骨組み',
     single: true,
   },
-  { key: 'flows', group: 2, body: '並びと使うページの型' },
+  { key: 'flows', group: 2, body: '並びと使うテンプレート' },
   { key: 'themes', group: 2, body: 'デッキ・背骨・主役のページ' },
 ];
 
@@ -288,7 +288,7 @@ function relatedHtml(related) {
   return rows.length ? `<ul class="related">${rows.join('')}</ul>` : '';
 }
 
-// 層の一覧の表: 見本の写真1枚・名前・1行の説明。ページの型は骨組みの場所ごとに分ける
+// 層の一覧の表: 見本の写真1枚・名前・1行の説明。テンプレートは骨組みの場所ごとに分ける
 function itemsTable(layer, manifest) {
   const row = (it) => {
     const shot = manifest[it.id]?.[0];
@@ -558,7 +558,7 @@ function esc(s) {
 }
 
 function layout({ title, body, current }) {
-  // 目次: はじめに → 土台・コンポーネント・ページの型 → ストーリー → その他の文書
+  // 目次: はじめに → ファウンデーション・コンポーネント・テンプレート → ストーリー → その他の文書
   const link = (href, label) =>
     `<li><a href="${href}"${href === current ? ' class="current"' : ''}>${esc(label)}</a></li>`;
   const groups = [];

@@ -18,4 +18,4 @@ continuum p.3、zero-drift p.4
 
 ## 中身
 
-- **コンポーネント・土台**: [アイコン付きの見出し](@part-icon-heading)、[図のスタイル](@base-diagram)
+- **コンポーネント・ファウンデーション**: [アイコン付きの見出し](@part-icon-heading)、[図のスタイル](@base-diagram)

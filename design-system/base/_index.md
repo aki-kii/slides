@@ -1,5 +1,5 @@
 ---
-title: 土台
+title: ファウンデーション
 order: base-color base-text base-diagram base-size
 ---
 

@@ -18,4 +18,4 @@ failed-ecs p.5、p.7、lt-40 p.13
 
 ## 中身
 
-- **コンポーネント・土台**: [「→」の1行](@part-arrow-conclusion)、[図のスタイル](@base-diagram)
+- **コンポーネント・ファウンデーション**: [「→」の1行](@part-arrow-conclusion)、[図のスタイル](@base-diagram)

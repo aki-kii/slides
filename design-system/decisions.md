@@ -2,7 +2,7 @@
 
 デザインシステムの項目の扱いについて決めたこと（q1〜q6）と、見つけた不具合。
 
-## q1 好みでないパターンはどれか
+## q1 好みでない項目はどれか
 
 **決めたこと**: どれも外さずに載せる。
 
@@ -37,12 +37,12 @@
 - **理由**: cdk-day1 は、本人が好きな雰囲気として挙げたデッキ（SKILL.md「本人が好きな雰囲気: 『最初からCDKで検証』と JawsSonic の資料」）。プラクティス紹介系のテーマの背骨にもなっている
 - 載せた所: [お悩み → 解決](@page-onayami)、[お悩みを1つずつ解決](@flow-onayami)
 
-## q6 パターンの名前（ID と日本語名）はこれでよいか
+## q6 項目の名前（ID と日本語名）はこれでよいか
 
 **決めたこと**: 定義案の ID と日本語名をそのまま使う。
 
-- ID の頭は層を表す: `theme-`（全体の型）、`flow-`（構成の型）、`page-`（ページの型）、`part-`（コンポーネント）、`base-`（土台）。写真のフォルダ名と同じ
-- 変えたのは2つだけ: page-statement は紙芝居型に含めたので無くした（[q3](#q3)）。全体の型を足したので `theme-` の5つ（theme-verification、theme-explainer、theme-intro、theme-practice、theme-experience）を新しく付けた。サイズの決まりは base-size にした
+- ID の頭は層を表す: `theme-`（テーマ）、`flow-`（パターン）、`page-`（テンプレート）、`part-`（コンポーネント）、`base-`（ファウンデーション）。写真のフォルダ名と同じ
+- 変えたのは2つだけ: page-statement は紙芝居型に含めたので無くした（[q3](#q3)）。テーマを足したので `theme-` の5つ（theme-verification、theme-explainer、theme-intro、theme-practice、theme-experience）を新しく付けた。サイズの決まりは base-size にした
 
 ## 見つけた不具合
 
