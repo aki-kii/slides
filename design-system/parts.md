@@ -12,9 +12,6 @@
 | part-bottomlink | 出典のリンク | `BottomLink` | 引用したページ |
 | part-subtitle-band | 字幕帯 | — | ストーリー型だけ |
 | part-underline | 色分けした下線 | — | デッキごとに選ぶ |
-| part-chapterlabel | 章ラベル | `ChapterLabel` | デッキごとに選ぶ |
-| part-tag | タグ | `Tag` | お悩み → 解決のページ |
-| part-kari | 仮の札 | —（デッキの `style.css`） | 作っている途中だけ |
 
 ---
 
@@ -78,15 +75,6 @@
 
 <!-- shots:part-bottomlink -->
 
-## part-chapterlabel 章ラベル（ChapterLabel）
-
-- **何の型か**: 左上に薄く小さく、いまの章の名前
-- **いつ使うか**: 章の多いデッキで、いまどこの話かを示すとき。初心者支部では「デッキ全体で不要」（2026-10-29）だったので、使うかはデッキごとに選ぶ（[決めたこと](decisions.md#q4)）
-- **サイズ**: 出典のリンクと同じく、サイズの下限の例外
-- **写真**: cdkd-talk p.17、lt-40 p.9
-
-<!-- shots:part-chapterlabel -->
-
 ## part-subtitle-band 字幕帯
 
 - **何の型か**: 映画の字幕のように、一番下の帯に話し言葉を出す
@@ -94,16 +82,3 @@
 - **写真**: bgnr-93 p.6
 
 <!-- shots:part-subtitle-band -->
-
-## part-tag タグ（Tag）
-
-- **何の型か**: 色付きの小さな札。お悩みの種類などを見出しの上に添える
-- **いつ使うか**: [お悩み → 解決](pages.md#page-onayami) のお悩みのページ。cdk-day1 にしか無く、デッキから拾った部品（[決めたこと](decisions.md#q5)）
-- **写真**: cdk-day1 p.12
-
-<!-- shots:part-tag -->
-
-## part-kari 仮の札
-
-- **何の型か**: 本人が決めていない所の右上に「仮：〜は未定」の札（`<div class="kari">仮：〜は未定</div>`）。理由はノートに書く
-- **いつ使うか**: 作っている途中だけ。発表版には残らないので写真はない（SKILL.md）

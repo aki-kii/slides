@@ -124,7 +124,7 @@
 
 - **何の型か**: 1枚目に聞く人のお悩みを大きく書き「というお悩みを解決します」と小声で添え、2枚目に解決策を言い切る
 - **いつ使うか**: プラクティスや解決策を1つずつ紹介するとき（cdk-day1 の5つのプラクティス）。life に記録はなく、デッキから拾った型（[決めたこと](decisions.md#q5)）
-- **部品**: [タグ](parts.md#part-tag)、[小声](parts.md#part-kogoe)、[Overlay](parts.md#part-overlay)
+- **部品**: [小声](parts.md#part-kogoe)、[Overlay](parts.md#part-overlay)
 - **写真**: cdk-day1 p.12、p.13
 
 <!-- shots:page-onayami -->

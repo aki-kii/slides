@@ -127,30 +127,11 @@
    "page": 21
   }
  ],
- "part-chapterlabel": [
-  {
-   "file": "part-chapterlabel/lt-40-p09.png",
-   "deck": "jawsug-tokyo-lunch-lt-40",
-   "page": 9
-  },
-  {
-   "file": "part-chapterlabel/cdkd-talk-p17.png",
-   "deck": "jawsug-cdk-tokyo-cdkd-talk",
-   "page": 17
-  }
- ],
  "part-subtitle-band": [
   {
    "file": "part-subtitle-band/bgnr-93-p06.png",
    "deck": "jawsug-bgnr-93",
    "page": 6
-  }
- ],
- "part-tag": [
-  {
-   "file": "part-tag/cdk-day1-p12.png",
-   "deck": "cdk-day1-experiment",
-   "page": 12
   }
  ],
  "page-title": [
