@@ -60,7 +60,7 @@ layout: center
 <!-- slide-id: s-c09c833bf636d5b9 -->
 <h2 class="!m-0">Discord音声通話bot（自作）の仕組み</h2>
 
-<div class="lead"><strong>Claude Code</strong>と通話できるDiscord bot</div>
+<div class="lead"><strong>Claude Codeと通話</strong>できるDiscord bot</div>
 
 <InlineSvg src="bot-overview.svg" label="ユーザーがボイスチャンネルで話すと、botが文字起こししてテキストチャンネルに投稿する。Claude CodeはChannelsでテキストチャンネルに接続していて、返事をテキストチャンネルに返す。botがその返事をボイスチャンネルで読み上げる" class="mx-auto mt-2" style="width: 700px" />
 
