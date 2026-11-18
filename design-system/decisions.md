@@ -50,3 +50,11 @@
 
 - 直していない。公開済みのデッキの見た目が変わるので、本人の確認を待っている
 - 写真への影響: [特徴・理由を1つずつ](@page-one-by-one) の写真（bgnr-93 p.18）が崩れて写っている。注記を付けた。[疑問を湧かせてから解消する](@flow-question-answer) は前後のページが崩れるので帯にしていない
+
+`@slides/ui` の BottomLink（`packages/ui/components/BottomLink.vue`）は、画面の下から 0.85rem（17px）の所に置かれる。[サイズ](@base-size) の余白（上下 50px の内側）の外になる。
+
+- 直していない。公開済みのデッキの見た目が変わるため。container-31 だけ、デッキの `style.css` で下から 2.5rem（50px）に上書きした
+
+`@slides/ui` の ProfileItem（`packages/ui/components/ProfileItem.vue`）の小見出し（「推しサービス」など）は、既定が `text-sm`（15px）で、補足の下限 18px より小さい。
+
+- 直していない。container-31 は `title-size="text-[0.9rem]"` を渡して 18px にした
