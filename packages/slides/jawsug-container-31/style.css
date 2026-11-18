@@ -5,6 +5,8 @@
     --ink: #2c3e50;
     --ink-soft: #34495e;
     --ink-mute: #7f8c8d;
+    /* 補足の文字（小声・注記）。白地で 4.6:1（デザインシステムのサイズ: 補足は 4.5:1 以上） */
+    --ink-note: #6b7684;
     --paper: #ffffff;
     --line: #dee2e6;
     --brand: #3498db;
@@ -41,7 +43,7 @@
     h2 {
         color: var(--ink);
         font-weight: 600;
-        font-size: 2rem;
+        font-size: 1.8rem; /* 見出し・言い切り 36px */
         margin-bottom: 0.5rem;
         line-height: 1.3;
     }
@@ -56,7 +58,7 @@
 
     p {
         color: var(--ink);
-        line-height: 1.8;
+        line-height: 1.5;
         font-size: 1.3rem;
         margin-bottom: 1.5rem;
     }
@@ -88,7 +90,7 @@
     ul li {
         color: var(--ink);
         font-size: 1.3rem;
-        line-height: 1.6;
+        line-height: 1.5;
         margin-bottom: 0.4rem;
         &::marker {
             color: var(--brand);
@@ -196,6 +198,73 @@
 
 .slide-title .accent {
     color: var(--brand);
+}
+
+/* =====================================================
+   デザインシステムの部品（design-system/ のサイズ・色に合わせる）
+   1rem = 20px。本文 24px 以上、補足 18px 以上、見出し 36px
+   ===================================================== */
+
+/* アイコン付きの見出し: アイコンは見出しの文字の高さ＋少し（40px） */
+.icon-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    img {
+        height: 2rem;
+        width: 2rem;
+        flex-shrink: 0;
+    }
+    h2 {
+        margin: 0 !important;
+    }
+    margin-bottom: 0.4rem;
+}
+
+/* 本文が2行に折り返すときに、最後の行に1〜2文字だけ残らないようにし、
+   文節の切れ目で折り返す（auto-phrase は slides.md の htmlAttrs.lang: ja が要る） */
+.slidev-layout :is(.lead, .arrow-line, .note, li) {
+    text-wrap: balance;
+    word-break: auto-phrase;
+}
+
+/* 見出しの下のリード1文（本文） */
+.slidev-layout .lead,
+.slidev-layout .lead p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 「→」の1行（本文と同じ大きさ。補足の小さい文字にしない） */
+.slidev-layout .arrow-line,
+.slidev-layout .arrow-line p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 補足（注記・前置き）: 18px、コントラスト 4.5:1 以上 */
+.slidev-layout .note,
+.slidev-layout .note p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--ink-note);
+    margin: 0;
+}
+
+/* 紙芝居型の言い切り（36〜44px） */
+.slidev-layout .statement p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 出典のリンク: 画面の端から上下 50px の余白の内側に置く */
+.slidev-layout .bottom-link-wrapper.standalone {
+    bottom: 2.5rem !important;
 }
 
 /* =====================================================
